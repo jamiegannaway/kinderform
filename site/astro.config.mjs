@@ -10,5 +10,15 @@ export default defineConfig({
   output: "static",
   integrations: [react()],
   build: { inlineStylesheets: "never" },
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    // USWDS Sass packages import each other by name ("uswds-core" and so on).
+    css: {
+      preprocessorOptions: {
+        scss: { loadPaths: ["node_modules/@uswds/uswds/packages"], quietDeps: true },
+      },
+    },
+    // esbuild minifies CSS here because Lightning CSS rejects a media query in USWDS.
+    build: { cssMinify: "esbuild" },
+  },
 });

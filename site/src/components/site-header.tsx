@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 const TABS = [
   { href: "/", label: "Home" },
   { href: "/form-check", label: "Form check" },
+  { href: "/example-form", label: "Example form" },
 ]
 
 export function SiteHeader({ current }: { current: string }) {

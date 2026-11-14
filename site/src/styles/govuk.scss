@@ -1,0 +1,33 @@
+// GOV.UK Frontend without GOV.UK branding, for the UK reference form only.
+// Kinderform is not a government service: no crown, no GOV.UK logotype, no header or footer,
+// and no GDS Transport typeface. Only the components the form uses are included.
+// See https://www.gov.uk/service-manual/design/making-your-service-look-like-govuk
+// The brand colour is a placeholder from the enquiry standard draft.
+@forward "../../node_modules/govuk-frontend/dist/govuk/base" with (
+  $govuk-font-family: (Helvetica, Arial, sans-serif),
+  $govuk-functional-colours: (
+    brand: #1d5c63
+  )
+);
+
+@use "../../node_modules/govuk-frontend/dist/govuk/core";
+@use "../../node_modules/govuk-frontend/dist/govuk/objects";
+
+@use "../../node_modules/govuk-frontend/dist/govuk/components/back-link";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/button";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/checkboxes";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/details";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/error-message";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/error-summary";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/fieldset";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/hint";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/input";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/inset-text";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/label";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/panel";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/radios";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/summary-list";
+@use "../../node_modules/govuk-frontend/dist/govuk/components/warning-text";
+
+@use "../../node_modules/govuk-frontend/dist/govuk/utilities";
+@use "../../node_modules/govuk-frontend/dist/govuk/overrides";

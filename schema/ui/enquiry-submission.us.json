@@ -1,0 +1,322 @@
+{
+  "$comment": "Wording for the reference form. Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json.",
+  "locale": "en-US",
+  "design_system": "uswds",
+  "sections": [
+    "About you",
+    "Contact",
+    "Your questions",
+    "Review and send"
+  ],
+  "start": {
+    "title": "Ask about fostering or adoption",
+    "body": [
+      "Use this form to ask a question or set up a chat. It takes about 2 minutes.",
+      "You don't need to know yet whether fostering or adoption is right for you.",
+      "We won't ask about your health, your home, your money or your family at this stage.",
+      "A named person from your local foster care agency will reply within 1 business day."
+    ],
+    "button": "Start now"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "About you",
+      "title": "What is your name?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Full name",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Enter your full name",
+              "maxLength": "Full name must be 100 characters or fewer"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "What should we call you? (optional)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "For example, a shortened name or a name you prefer.",
+            "errors": {
+              "maxLength": "This name must be 50 characters or fewer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "About you",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "What would you like to find out about?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Fostering",
+              "adoption": "Adoption",
+              "not_sure": "I'm not sure yet"
+            },
+            "optionHints": {
+              "not_sure": "That's fine. We can talk you through both, and other ways to help."
+            },
+            "errors": {
+              "required": "Select what you would like to find out about"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "About you",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Are you asking about a child you already know?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "For example, a grandchild, niece, nephew or a family friend's child. This is often called kinship or relative care, and a different team helps with it. Don't tell us anything about the child here.",
+            "optionLabels": {
+              "true": "Yes",
+              "false": "No"
+            },
+            "errors": {
+              "required": "Select yes if you are asking about a child you already know"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Contact",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "How would you like us to contact you?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "Email",
+              "phone_call": "Phone call",
+              "text_message": "Text message"
+            },
+            "errors": {
+              "required": "Select how you would like us to contact you"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Contact",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "What is your email address?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "We'll only use this to reply to you.",
+            "errors": {
+              "required": "Enter your email address",
+              "pattern": "Enter an email address in the correct format, like name@example.org"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Contact",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "What is your phone number?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "For example, 202-555-0147.",
+            "errors": {
+              "required": "Enter your phone number",
+              "pattern": "Enter a phone number, like 202-555-0147"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Contact",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "When is a good time to call? (optional)",
+          "options": {
+            "asHeading": true,
+            "hint": "Select all that apply. We'll try to call at these times.",
+            "optionLabels": {
+              "weekday_morning": "Weekday mornings",
+              "weekday_afternoon": "Weekday afternoons",
+              "weekday_evening": "Weekday evenings",
+              "saturday": "Saturdays"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "zip",
+      "section": "Contact",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/zip_prefix",
+          "label": "What are the first 3 digits of your ZIP code? (optional)",
+          "options": {
+            "asHeading": true,
+            "inputmode": "numeric",
+            "inputWidth": 5,
+            "transform": "zip_prefix",
+            "hint": "For example, 123. We only need the first 3 digits to find your local agency. We won't ask for your address.",
+            "errors": {
+              "pattern": "Enter only the first 3 digits of your ZIP code, like 123"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Your questions",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "What would you like to talk about? (optional)",
+          "options": {
+            "asHeading": true,
+            "hint": "Select all that apply. You can also tell us when we talk. Please don't share personal details here.",
+            "optionLabels": {
+              "eligibility": "Whether I can foster or adopt",
+              "what_it_involves": "What it involves day to day",
+              "money_and_support": "Money and support",
+              "process_and_timescales": "The steps and how long they take",
+              "types_of_care": "Different types of care",
+              "something_else": "Something else"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Your questions",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "How did you hear about us? (optional)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "A friend or family member",
+              "social_media": "Social media",
+              "search": "An internet search",
+              "event": "An event",
+              "advert": "An advert",
+              "council_or_agency_website": "A state or agency website",
+              "other": "Somewhere else"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Your questions",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Would you like updates and invitations to events? (optional)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Yes, send me updates and event invitations",
+            "hint": "We'll only send these if you tick the box. You can stop them at any time."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Check your answers before sending",
+    "change": "Change",
+    "send_heading": "Now send your question",
+    "send_body": "By sending this, you agree that we can use these details to reply to you.",
+    "button": "Send"
+  },
+  "confirmation": {
+    "title": "Your question was sent",
+    "reference": "Your reference number",
+    "next_heading": "What happens next",
+    "team": "your local foster care agency",
+    "kinship_team": "the kinship care team",
+    "day_word": "business day",
+    "example_label": "Example message (not sent)",
+    "builders_heading": "For people building services",
+    "builders_body": "This is the record the service would receive. It is checked against the published schema before this page is shown.",
+    "restart": "Start again"
+  },
+  "progress": {
+    "question": "Question",
+    "of": "of",
+    "back": "Back",
+    "continue": "Continue",
+    "error_title": "There's a problem",
+    "error_prefix": "Error:"
+  },
+  "demo_notice": "This is an example form. Don't enter real details. Nothing you enter is sent or stored."
+}

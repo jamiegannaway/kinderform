@@ -1,4 +1,7 @@
-"""Check that the synthetic examples agree with the Enquiry schema.
+"""Check that the synthetic examples agree with their schemas.
+
+- schema/enquiry.schema.json            against schema/examples/{valid,invalid}
+- schema/enquiry-submission.schema.json against schema/examples/submission/{valid,invalid}
 
 Valid examples must pass and invalid examples must fail.
 Run from the repository root:  python tests/validate_examples.py
@@ -12,27 +15,30 @@ from pathlib import Path
 from jsonschema import Draft202012Validator, FormatChecker
 
 ROOT = Path(__file__).resolve().parent.parent
-SCHEMA_PATH = ROOT / "schema" / "enquiry.schema.json"
-EXAMPLES = ROOT / "schema" / "examples"
+PAIRS = (
+    (ROOT / "schema" / "enquiry.schema.json", ROOT / "schema" / "examples"),
+    (ROOT / "schema" / "enquiry-submission.schema.json", ROOT / "schema" / "examples" / "submission"),
+)
 
 
 def main() -> int:
-    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
-    Draft202012Validator.check_schema(schema)
-    validator = Draft202012Validator(schema, format_checker=FormatChecker())
-
     failures = 0
-    for kind, should_pass in (("valid", True), ("invalid", False)):
-        for path in sorted((EXAMPLES / kind).glob("*.json")):
-            record = json.loads(path.read_text(encoding="utf-8"))
-            errors = list(validator.iter_errors(record))
-            passed = not errors
-            ok = passed == should_pass
-            print(f"{'ok  ' if ok else 'FAIL'} {kind}/{path.name}")
-            if not ok:
-                failures += 1
-                for error in errors:
-                    print(f"       {error.message}")
+    for schema_path, examples in PAIRS:
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(schema)
+        validator = Draft202012Validator(schema, format_checker=FormatChecker())
+        print(f"{schema_path.name}")
+        for kind, should_pass in (("valid", True), ("invalid", False)):
+            for path in sorted((examples / kind).glob("*.json")):
+                record = json.loads(path.read_text(encoding="utf-8"))
+                errors = list(validator.iter_errors(record))
+                passed = not errors
+                ok = passed == should_pass
+                print(f"  {'ok  ' if ok else 'FAIL'} {kind}/{path.name}")
+                if not ok:
+                    failures += 1
+                    for error in errors:
+                        print(f"         {error.message}")
 
     if failures:
         print(f"\n{failures} example(s) did not behave as expected")
