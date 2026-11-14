@@ -29,9 +29,11 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - `schema/` Enquiry schema and synthetic examples
 - `register/` front-door register (CSV) and its column guide
 - `rubric/` audit rubric in Markdown and JSON
+- `census/` intake-form census: forms, questions, answer options, guidance (CSV)
 - `evidence/` evidence library
 - `docs/` roadmap and project notes
 - `tests/` validation scripts
+- `tools/` helper scripts (for example the census summary)
 
 ## Before finishing a task
 

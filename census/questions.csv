@@ -1,0 +1,325 @@
+question_id,form_id,order,section,label_paraphrased,category,topic,required,input_type,type_inferred,conditional_on,hint_paraphrased,observed,date_checked
+foster-with-us:q01,foster-with-us,1,,Name,contact_identity,name,unknown,text,yes,,,direct_fetch,2026-11-14
+foster-with-us:q02,foster-with-us,2,Address,Address line,contact_identity,address,unknown,text,yes,,,direct_fetch,2026-11-14
+foster-with-us:q03,foster-with-us,3,Address,Postcode,contact_identity,postcode,unknown,text,yes,,,direct_fetch,2026-11-14
+foster-with-us:q04,foster-with-us,4,,Contact number,contact_identity,phone,unknown,tel,yes,,,direct_fetch,2026-11-14
+foster-with-us:q05,foster-with-us,5,,Email address,contact_identity,email,unknown,email,yes,,,direct_fetch,2026-11-14
+foster-with-us:q06,foster-with-us,6,,How can we help you,intent,journey_stage,unknown,radio,yes,,,direct_fetch,2026-11-14
+foster-with-us:q07,foster-with-us,7,,What next step would you like,contact_preference,next_step,unknown,radio,yes,,,direct_fetch,2026-11-14
+foster-with-us:q08,foster-with-us,8,,Best days and times to contact you,contact_preference,time,unknown,text,yes,,Warns calls may last up to an hour; the team aims to ring in the chosen slots.,direct_fetch,2026-11-14
+foster-with-us:q09,foster-with-us,9,,Where did you hear about us,source,how_heard,yes,select,no,,,direct_fetch,2026-11-14
+foster-with-us:q10,foster-with-us,10,,What family or friends told you,source,how_heard_detail,unknown,text,yes,q09=Family or friends,,direct_fetch,2026-11-14
+foster-with-us:q11,foster-with-us,11,,Which social media,source,how_heard_detail,unknown,checkbox,yes,q09=Social media,,direct_fetch,2026-11-14
+foster-with-us:q12,foster-with-us,12,,Where you saw the advertising board,source,how_heard_detail,unknown,text,yes,q09=Advertising board,,direct_fetch,2026-11-14
+foster-with-us:q13,foster-with-us,13,,Where the QR code was,source,how_heard_detail,unknown,text,yes,q09=QR code,,direct_fetch,2026-11-14
+foster-with-us:q14,foster-with-us,14,,Which event you attended,source,how_heard_detail,unknown,text,yes,q09=Attended an event,,direct_fetch,2026-11-14
+foster-with-us:q15,foster-with-us,15,,Details of the referral scheme,source,how_heard_detail,unknown,text,yes,q09=Refer a friend scheme,,direct_fetch,2026-11-14
+foster-with-us:q16,foster-with-us,16,,Other source,source,how_heard_detail,unknown,text,yes,q09=Other,,direct_fetch,2026-11-14
+foster-with-us:q17,foster-with-us,17,,Which website you visited,source,how_heard_detail,yes,select,no,q09=Website,,direct_fetch,2026-11-14
+foster-with-us:q18,foster-with-us,18,,"Privacy terms read and understood, with a declaration that the details are correct and may be passed to the council for checks",consent,declaration_and_checks,unknown,checkbox,yes,,Required status not visible on the direct read; an earlier index snapshot showed it marked required.,direct_fetch,2026-11-14
+foster4:q01,foster4,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-14
+foster4:q02,foster4,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-14
+foster4:q03,foster4,3,,Your local authority,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-14
+foster4:q04,foster4,4,,What is your query about,interest,care_type,yes,unknown,yes,,,direct_fetch,2026-11-14
+foster4:q05,foster4,5,,What is your query about (second version),interest,care_type,yes,unknown,yes,,Same label as the previous question; probably shown for the councils that offer supported lodgings (inferred).,direct_fetch,2026-11-14
+foster4:q06,foster4,6,,How should we send your information pack,contact_preference,pack_delivery,yes,select,no,,,direct_fetch,2026-11-14
+foster4:q07,foster4,7,,Postal address,contact_identity,address,yes,text,yes,,,direct_fetch,2026-11-14
+foster4:q08,foster4,8,,Tell us a little about yourself,free_text,about_you,no,textarea,yes,,,direct_fetch,2026-11-14
+foster4:q09,foster4,9,,Telephone number,contact_identity,phone,no,tel,yes,,,direct_fetch,2026-11-14
+foster4:q10,foster4,10,,How did you hear about us,source,how_heard,no,select,no,,,direct_fetch,2026-11-14
+foster4:q11,foster4,11,,Confirm the hub may contact you about the services it offers,consent,contact,yes,checkbox,no,,Single required tick box. Wording could cover both replying to the enquiry and wider contact.,direct_fetch,2026-11-14
+local-community-fostering:q01,local-community-fostering,1,,How can we help you,intent,journey_stage,yes,select,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q02,local-community-fostering,2,Your details,First name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q03,local-community-fostering,3,Your details,Last name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q04,local-community-fostering,4,Your details,Telephone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q05,local-community-fostering,5,Your details,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q06,local-community-fostering,6,Your details,House number,contact_identity,address,yes,text,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q07,local-community-fostering,7,Your details,Postcode,contact_identity,postcode,yes,text,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q08,local-community-fostering,8,,Any particular questions about fostering,free_text,questions,no,textarea,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q09,local-community-fostering,9,,Happy to receive regular fostering news,consent,marketing,yes,radio,yes,,,direct_fetch,2026-11-14
+local-community-fostering:q10,local-community-fostering,10,,Consent to data use as set out in the privacy policy,consent,processing,yes,checkbox,yes,,,direct_fetch,2026-11-14
+east-sussex:q01,east-sussex,1,Your details,First name,contact_identity,name,unknown,text,yes,,,direct_fetch,2026-11-14
+east-sussex:q02,east-sussex,2,Your details,Last name,contact_identity,name,unknown,text,yes,,,direct_fetch,2026-11-14
+east-sussex:q03,east-sussex,3,Your details,Phone,contact_identity,phone,unknown,text,yes,,Enter as a number with no spaces.,direct_fetch,2026-11-14
+east-sussex:q04,east-sussex,4,Your details,Email,contact_identity,email,unknown,email,yes,,,direct_fetch,2026-11-14
+east-sussex:q05,east-sussex,5,Your details,Where are you on your fostering journey,intent,journey_stage,unknown,radio,yes,,Choose one.,direct_fetch,2026-11-14
+east-sussex:q06,east-sussex,6,Additional details,Your date of birth,contact_identity,date_of_birth,unknown,date,no,,Section introduced as extra information that would help the team.,direct_fetch,2026-11-14
+east-sussex:q07,east-sussex,7,Additional details,"Address (building and street, town, county)",contact_identity,address,unknown,text,yes,,Include your house number or name.,direct_fetch,2026-11-14
+east-sussex:q08,east-sussex,8,Additional details,Postcode,contact_identity,postcode,unknown,text,yes,,,direct_fetch,2026-11-14
+east-sussex:q09,east-sussex,9,Additional details,Any previous names,contact_identity,previous_names,unknown,text,yes,,Write 'None' if you have none.,direct_fetch,2026-11-14
+east-sussex:q10,east-sussex,10,Additional details,Do you have a partner living with you,household,partner,unknown,radio,yes,,,direct_fetch,2026-11-14
+east-sussex:q11,east-sussex,11,About your partner,Partner's first name,household,partner_details,unknown,text,yes,q10=Yes,,direct_fetch,2026-11-14
+east-sussex:q12,east-sussex,12,About your partner,Partner's last name,household,partner_details,unknown,text,yes,q10=Yes,,direct_fetch,2026-11-14
+east-sussex:q13,east-sussex,13,About your partner,Partner's previous names,household,partner_details,unknown,text,yes,q10=Yes,Write 'None' if none.,direct_fetch,2026-11-14
+east-sussex:q14,east-sussex,14,About your partner,Partner's date of birth,household,partner_date_of_birth,unknown,date,no,q10=Yes,,direct_fetch,2026-11-14
+east-sussex:q15,east-sussex,15,Additional comments,Any initial questions,free_text,questions,no,textarea,yes,,,direct_fetch,2026-11-14
+east-sussex:q16,east-sussex,16,Additional comments,Where did you hear about fostering with the council,source,how_heard,unknown,radio,yes,,,direct_fetch,2026-11-14
+foster-birmingham:q01,foster-birmingham,1,,First name,contact_identity,name,unknown,text,yes,,,direct_fetch,2026-11-14
+foster-birmingham:q02,foster-birmingham,2,,Last name,contact_identity,name,unknown,text,yes,,,direct_fetch,2026-11-14
+foster-birmingham:q03,foster-birmingham,3,,Email,contact_identity,email,unknown,text,yes,,,direct_fetch,2026-11-14
+foster-birmingham:q04,foster-birmingham,4,,Phone,contact_identity,phone,unknown,text,yes,,,direct_fetch,2026-11-14
+foster-birmingham:q05,foster-birmingham,5,,Tell us how we can help,free_text,questions,unknown,textarea,yes,,,direct_fetch,2026-11-14
+goss-fostering-hub-template:q01,goss-fostering-hub-template,1,Page 1,First name,contact_identity,name,unknown,text,yes,,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q02,goss-fostering-hub-template,2,Page 1,Last name,contact_identity,name,unknown,text,yes,,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q03,goss-fostering-hub-template,3,Page 1,Email address,contact_identity,email,unknown,text,yes,,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q04,goss-fostering-hub-template,4,Page 1,Phone number,contact_identity,phone,unknown,text,yes,,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q05,goss-fostering-hub-template,5,Page 2,Contact preference,contact_preference,method,no,unknown,yes,,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q06,goss-fostering-hub-template,6,Page 2,Preferred day and time to be contacted,contact_preference,time,no,unknown,yes,,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q07,goss-fostering-hub-template,7,Staff-assisted page,Date of the enquiry (staff only),staff_recorded,enquiry_date,unknown,date,yes,,Shown only when a staff member logs an enquiry for someone.,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q08,goss-fostering-hub-template,8,Staff-assisted page,Who is completing the form (staff only),staff_recorded,logged_by,unknown,text,yes,,Pre-filled from the staff member's profile.,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q09,goss-fostering-hub-template,9,Staff-assisted page,How the enquiry was received (staff only),staff_recorded,channel,unknown,select,yes,,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q10,goss-fostering-hub-template,10,Staff-assisted page,"Date referred (event route, staff only)",staff_recorded,referral_date,unknown,date,yes,event enquiry going straight to an initial visit,,vendor_documentation,2026-11-14
+goss-fostering-hub-template:q11,goss-fostering-hub-template,11,Staff-assisted page,Local authority that hosted the event (staff only),staff_recorded,event_local_authority,unknown,text,yes,event enquiry going straight to an initial visit,,vendor_documentation,2026-11-14
+ffgm-application:q01,ffgm-application,1,,Education and employment history,work,employment_history,unknown,unknown,yes,,,secondhand,2026-11
+ffgm-application:q02,ffgm-application,2,,Address history,contact_identity,address_history,unknown,unknown,yes,,,secondhand,2026-11
+ffgm-application:q03,ffgm-application,3,,Relationships,household,relationships,unknown,unknown,yes,,,secondhand,2026-11
+fsw-initial-referral:q01,fsw-initial-referral,1,,Number of people in the household,household,household_composition,unknown,unknown,yes,,,secondhand,2026-11
+fsw-initial-referral:q02,fsw-initial-referral,2,,Separate bedroom available,housing,spare_bedroom,unknown,unknown,yes,,,secondhand,2026-11
+fsw-initial-referral:q03,fsw-initial-referral,3,,Working hours,work,working_hours,unknown,unknown,yes,,,secondhand,2026-11
+hertfordshire-initial-enquiry:q01,hertfordshire-initial-enquiry,1,,Number of people in the household,household,household_composition,unknown,unknown,yes,,,secondhand,2026-11
+hertfordshire-initial-enquiry:q02,hertfordshire-initial-enquiry,2,,Separate bedroom for a fostered child,housing,spare_bedroom,unknown,unknown,yes,,,secondhand,2026-11
+hertfordshire-initial-enquiry:q03,hertfordshire-initial-enquiry,3,,Length of partnership,household,relationships,unknown,unknown,yes,,,secondhand,2026-11
+hertfordshire-initial-enquiry:q04,hertfordshire-initial-enquiry,4,,Working hours and availability,work,working_hours,unknown,unknown,yes,,,secondhand,2026-11
+hertfordshire-initial-enquiry:q05,hertfordshire-initial-enquiry,5,,Motivation to foster,free_text,motivation,unknown,unknown,yes,,,secondhand,2026-11
+hertfordshire-initial-enquiry:q06,hertfordshire-initial-enquiry,6,,Health,health,health,unknown,unknown,yes,,,secondhand,2026-11
+hertfordshire-initial-enquiry:q07,hertfordshire-initial-enquiry,7,,Previous childcare experience,experience,childcare_experience,unknown,unknown,yes,,,secondhand,2026-11
+nottinghamshire-enquiry:q01,nottinghamshire-enquiry,1,,Whether the household is known to the council's social care records (service check),staff_recorded,records_check,n/a,statement,no,,"A check the service makes, not a question. A separate public Ofsted form is used to ask whether someone is known to Ofsted.",secondhand,2026-11
+doncaster-initial-enquiry:q01,doncaster-initial-enquiry,1,,"Whether the household is known to council records, with referral to a manager if so (service check)",staff_recorded,records_check,n/a,statement,no,,,secondhand,2026-11
+fwwl-initial-enquiry:q01,fwwl-initial-enquiry,1,,Full name and contact details,contact_identity,name,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q02,fwwl-initial-enquiry,2,,Borough you live in,routing,local_authority,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q03,fwwl-initial-enquiry,3,,Preferred contact method and day or time,contact_preference,time,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q04,fwwl-initial-enquiry,4,,"How you heard about the hub, and source and type of enquiry",source,how_heard,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q05,fwwl-initial-enquiry,5,,Date of birth,contact_identity,date_of_birth,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q06,fwwl-initial-enquiry,6,,Gender,equality,gender,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q07,fwwl-initial-enquiry,7,,Ethnicity,equality,ethnicity,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q08,fwwl-initial-enquiry,8,,Disability,health,disability,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q09,fwwl-initial-enquiry,9,,Religion,equality,religion,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q10,fwwl-initial-enquiry,10,,Immigration status or right to remain,eligibility,residency,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q11,fwwl-initial-enquiry,11,,Full address and postcode,contact_identity,address,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q12,fwwl-initial-enquiry,12,,Household composition,household,household_composition,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q13,fwwl-initial-enquiry,13,,Council you want to foster for,routing,local_authority,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q14,fwwl-initial-enquiry,14,,Motivation to foster,free_text,motivation,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q15,fwwl-initial-enquiry,15,,Occupation,work,occupation,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q16,fwwl-initial-enquiry,16,,Childcare experience,experience,childcare_experience,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q17,fwwl-initial-enquiry,17,,Pets,household,pets,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q18,fwwl-initial-enquiry,18,,Smoking or vaping,housing,smoking,unknown,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q19,fwwl-initial-enquiry,19,,"Basic health, including emotional or mental health (may be given voluntarily)",health,health,no,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q20,fwwl-initial-enquiry,20,,Previous criminal involvement (may be given voluntarily),criminal_record,criminal_record,no,unknown,yes,,,secondhand,2026-11-14
+fwwl-initial-enquiry:q21,fwwl-initial-enquiry,21,,Previous social services involvement (may be given voluntarily),prior_involvement,social_services,no,unknown,yes,,,secondhand,2026-11-14
+north-london-consortium-legacy-a:q01,north-london-consortium-legacy-a,1,,Full name,contact_identity,name,yes,text,no,,,index_snapshot,2026-11
+north-london-consortium-legacy-a:q02,north-london-consortium-legacy-a,2,,Email,contact_identity,email,yes,email,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-a:q03,north-london-consortium-legacy-a,3,,Phone,contact_identity,phone,yes,text,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-a:q04,north-london-consortium-legacy-a,4,,Postal address,contact_identity,address,yes,text,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-a:q05,north-london-consortium-legacy-a,5,,Postcode,contact_identity,postcode,yes,text,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-a:q06,north-london-consortium-legacy-a,6,,Scheme of interest,interest,care_type,no,select,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-a:q07,north-london-consortium-legacy-a,7,,Questions or comments,free_text,questions,no,textarea,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q01,north-london-consortium-legacy-b,1,,How heard about the consortium,source,how_heard,yes,select,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q02,north-london-consortium-legacy-b,2,,Full name,contact_identity,name,yes,text,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q03,north-london-consortium-legacy-b,3,,Email,contact_identity,email,yes,email,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q04,north-london-consortium-legacy-b,4,,Phone,contact_identity,phone,no,text,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q05,north-london-consortium-legacy-b,5,,Postal address,contact_identity,address,no,text,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q06,north-london-consortium-legacy-b,6,,Postcode,contact_identity,postcode,yes,text,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q07,north-london-consortium-legacy-b,7,,Scheme of interest,interest,care_type,yes,select,yes,,,index_snapshot,2026-11
+north-london-consortium-legacy-b:q08,north-london-consortium-legacy-b,8,,Questions or comments,free_text,questions,no,textarea,yes,,,index_snapshot,2026-11
+you-can-foster-north-west:q01,you-can-foster-north-west,1,,Council you pay council tax to,routing,local_authority,yes,select,yes,,,index_snapshot,2026-11
+you-can-foster-north-west:q02,you-can-foster-north-west,2,,Full name,contact_identity,name,yes,text,yes,,,index_snapshot,2026-11
+you-can-foster-north-west:q03,you-can-foster-north-west,3,,Phone,contact_identity,phone,yes,text,yes,,,index_snapshot,2026-11
+you-can-foster-north-west:q04,you-can-foster-north-west,4,,Email,contact_identity,email,yes,email,yes,,,index_snapshot,2026-11
+you-can-foster-north-west:q05,you-can-foster-north-west,5,,First line of address,contact_identity,address,yes,text,yes,,,index_snapshot,2026-11
+you-can-foster-north-west:q06,you-can-foster-north-west,6,,How heard,source,how_heard,no,select,yes,,,index_snapshot,2026-11
+foster-wales-cardiff:q01,foster-wales-cardiff,1,,First name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-cardiff:q02,foster-wales-cardiff,2,,Last name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-cardiff:q03,foster-wales-cardiff,3,,Phone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-cardiff:q04,foster-wales-cardiff,4,,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-cardiff:q05,foster-wales-cardiff,5,,Preferred language,contact_preference,language,no,select,yes,,,direct_fetch,2026-11-14
+foster-wales-cardiff:q06,foster-wales-cardiff,6,,Happy to receive fostering news,consent,marketing,no,radio,yes,,,direct_fetch,2026-11-14
+foster-wales-cardiff:q07,foster-wales-cardiff,7,,How did you find out about us,source,how_heard,unknown,select,yes,,Required marker unclear on the read.,direct_fetch,2026-11-14
+foster-wales-cardiff:q08,foster-wales-cardiff,8,,Tell us how we can help you,free_text,questions,yes,textarea,yes,,,direct_fetch,2026-11-14
+foster-wales-cardiff:q09,foster-wales-cardiff,9,,Booking calendar,contact_preference,booking,unknown,calendar,yes,,A scheduling widget with no visible label.,direct_fetch,2026-11-14
+foster-wales-bridgend:q01,foster-wales-bridgend,1,,Local authority,routing,local_authority,no,unknown,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q02,foster-wales-bridgend,2,,First name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q03,foster-wales-bridgend,3,,Last name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q04,foster-wales-bridgend,4,,Phone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q05,foster-wales-bridgend,5,,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q06,foster-wales-bridgend,6,,Preferred language,contact_preference,language,no,select,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q07,foster-wales-bridgend,7,,How did you find out about us,source,how_heard,yes,select,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q08,foster-wales-bridgend,8,,Happy to receive fostering news,consent,marketing,no,radio,yes,,,direct_fetch,2026-11-14
+foster-wales-bridgend:q09,foster-wales-bridgend,9,,Tell us how we can help you,free_text,questions,yes,textarea,yes,,,direct_fetch,2026-11-14
+foster-wales-newport-enquiry-record:q01,foster-wales-newport-enquiry-record,1,,Name,contact_identity,name,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-newport-enquiry-record:q02,foster-wales-newport-enquiry-record,2,,Date of birth,contact_identity,date_of_birth,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-newport-enquiry-record:q03,foster-wales-newport-enquiry-record,3,,Address and contact details,contact_identity,address,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-newport-enquiry-record:q04,foster-wales-newport-enquiry-record,4,,Employment,work,employment_status,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-newport-enquiry-record:q05,foster-wales-newport-enquiry-record,5,,Family and relationships,household,relationships,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-newport-enquiry-record:q06,foster-wales-newport-enquiry-record,6,,Previous partners,household,previous_partners,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-caerphilly-enquiry-record:q01,foster-wales-caerphilly-enquiry-record,1,,Name,contact_identity,name,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-caerphilly-enquiry-record:q02,foster-wales-caerphilly-enquiry-record,2,,Date of birth,contact_identity,date_of_birth,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-caerphilly-enquiry-record:q03,foster-wales-caerphilly-enquiry-record,3,,Address and contact details,contact_identity,address,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-caerphilly-enquiry-record:q04,foster-wales-caerphilly-enquiry-record,4,,Employment,work,employment_status,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-caerphilly-enquiry-record:q05,foster-wales-caerphilly-enquiry-record,5,,Family and relationships,household,relationships,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-caerphilly-enquiry-record:q06,foster-wales-caerphilly-enquiry-record,6,,Previous partners,household,previous_partners,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q01,foster-wales-torfaen-enquiry-record,1,,Name,contact_identity,name,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q02,foster-wales-torfaen-enquiry-record,2,,Date of birth,contact_identity,date_of_birth,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q03,foster-wales-torfaen-enquiry-record,3,,Gender,equality,gender,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q04,foster-wales-torfaen-enquiry-record,4,,Address and contact details,contact_identity,address,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q05,foster-wales-torfaen-enquiry-record,5,,Employment,work,employment_status,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q06,foster-wales-torfaen-enquiry-record,6,,Family and relationships,household,relationships,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q07,foster-wales-torfaen-enquiry-record,7,,Previous partners,household,previous_partners,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-torfaen-enquiry-record:q08,foster-wales-torfaen-enquiry-record,8,,"Name, date of birth and gender of everyone else living in the home",household,household_composition,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-rct-application:q01,foster-wales-rct-application,1,,Name,contact_identity,name,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-rct-application:q02,foster-wales-rct-application,2,,Date of birth,contact_identity,date_of_birth,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-rct-application:q03,foster-wales-rct-application,3,,Address and contact details,contact_identity,address,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-rct-application:q04,foster-wales-rct-application,4,,Employment,work,employment_status,unknown,unknown,yes,,,secondhand,2026-11
+foster-wales-rct-application:q05,foster-wales-rct-application,5,,Family relationships and previous partners,household,relationships,unknown,unknown,yes,,,secondhand,2026-11
+aberdeen-city:q01,aberdeen-city,1,,Adoption or fostering,interest,care_type,unknown,unknown,yes,,,index_snapshot,2026-11
+aberdeen-city:q02,aberdeen-city,2,,Purpose of enquiry,intent,journey_stage,unknown,unknown,yes,,,index_snapshot,2026-11
+aberdeen-city:q03,aberdeen-city,3,,Name,contact_identity,name,unknown,text,yes,,,index_snapshot,2026-11
+aberdeen-city:q04,aberdeen-city,4,,Postcode,contact_identity,postcode,unknown,text,yes,,,index_snapshot,2026-11
+aberdeen-city:q05,aberdeen-city,5,,Contact details,contact_identity,phone,unknown,text,yes,,,index_snapshot,2026-11
+aberdeen-city:q06,aberdeen-city,6,,British citizen or not,eligibility,citizenship,unknown,unknown,yes,,,index_snapshot,2026-11
+aberdeen-city:q07,aberdeen-city,7,,How heard,source,how_heard,unknown,unknown,yes,,,index_snapshot,2026-11
+scottish-borders:q01,scottish-borders,1,,Do you have a council online account,account,existing_account,unknown,unknown,yes,,First screen of the council's forms system.,search_snippet,2026-11-14
+hsc-ni:q01,hsc-ni,1,,What would you like to hear more about,interest,care_type,yes,unknown,yes,,,direct_fetch,2026-11-14
+hsc-ni:q02,hsc-ni,2,,Is the enquiry about a child-specific appeal,out_of_scope,child_specific,no,radio,yes,,,direct_fetch,2026-11-14
+hsc-ni:q03,hsc-ni,3,,Name of the child in the appeal,out_of_scope,child_specific,no,text,yes,q02=Yes,Child data; outside OUCM scope. Recorded only to show the question exists.,direct_fetch,2026-11-14
+hsc-ni:q04,hsc-ni,4,,Your full name,contact_identity,name,yes,text,no,,First and last name.,direct_fetch,2026-11-14
+hsc-ni:q05,hsc-ni,5,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-14
+hsc-ni:q06,hsc-ni,6,,Phone,contact_identity,phone,yes,tel,yes,,A phone or mobile number to reach you on.,direct_fetch,2026-11-14
+hsc-ni:q07,hsc-ni,7,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-14
+hsc-ni:q08,hsc-ni,8,,Your enquiry,free_text,questions,no,textarea,yes,,Some information about your enquiry.,direct_fetch,2026-11-14
+hsc-ni:q09,hsc-ni,9,,What prompted your enquiry (tick all that apply),source,how_heard,no,checkbox,no,,,direct_fetch,2026-11-14
+hsc-ni:q10,hsc-ni,10,,Other source,source,how_heard_detail,no,text,yes,q09=Other,,direct_fetch,2026-11-14
+hsc-ni:q11,hsc-ni,11,,Consent to be contacted with information about becoming a carer or adopter,consent,contact,yes,checkbox,no,,Must be ticked before submitting.,direct_fetch,2026-11-14
+hsc-ni:q12,hsc-ni,12,,Consent to processing of the form data under the privacy policy,consent,processing,yes,checkbox,no,,Must be ticked before submitting.,direct_fetch,2026-11-14
+coram-adoption:q01,coram-adoption,1,About you,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-14
+coram-adoption:q02,coram-adoption,2,About you,Surname,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-14
+coram-adoption:q03,coram-adoption,3,About you,Are you over 21,eligibility,age,yes,radio,yes,,,direct_fetch,2026-11-14
+coram-adoption:q04,coram-adoption,4,About you,Your ethnicity,equality,ethnicity,yes,select,yes,,,direct_fetch,2026-11-14
+coram-adoption:q05,coram-adoption,5,About you,Contact telephone number,contact_identity,phone,yes,text,yes,,Include the area code.,direct_fetch,2026-11-14
+coram-adoption:q06,coram-adoption,6,About you,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+coram-adoption:q07,coram-adoption,7,Your partner (if applicable),Partner's first name,household,partner_details,no,text,yes,,,direct_fetch,2026-11-14
+coram-adoption:q08,coram-adoption,8,Your partner (if applicable),Partner's surname,household,partner_details,no,text,yes,,,direct_fetch,2026-11-14
+coram-adoption:q09,coram-adoption,9,Your partner (if applicable),Partner's ethnicity,equality,ethnicity,no,select,yes,,Same list as the applicant's ethnicity.,direct_fetch,2026-11-14
+coram-adoption:q10,coram-adoption,10,Your household,Postcode,contact_identity,postcode,yes,text,yes,,,direct_fetch,2026-11-14
+coram-adoption:q11,coram-adoption,11,Your household,Local authority where you live,routing,local_authority,yes,select,yes,,Could be your county council or unitary authority.,direct_fetch,2026-11-14
+coram-adoption:q12,coram-adoption,12,Your household,Any children currently living in your household,household,children_in_household,yes,radio,yes,,,direct_fetch,2026-11-14
+coram-adoption:q13,coram-adoption,13,Your household,Spare bedroom for an adoptive child,housing,spare_bedroom,yes,radio,yes,,,direct_fetch,2026-11-14
+coram-adoption:q14,coram-adoption,14,Adoption information meetings,Which information meeting dates you would like to attend,information_event,event_dates,yes,textarea,yes,,Give two dates you can attend.,direct_fetch,2026-11-14
+coram-adoption:q15,coram-adoption,15,Adoption information meetings,Any specific questions to discuss,free_text,questions,no,textarea,yes,,,direct_fetch,2026-11-14
+coram-adoption:q16,coram-adoption,16,How did you hear about us,Where did you hear about the agency,source,how_heard,yes,select,yes,,Choose the most relevant option.,direct_fetch,2026-11-14
+coram-adoption:q17,coram-adoption,17,How did you hear about us,"More detail, such as the search terms you used",source,how_heard_detail,no,textarea,yes,,,direct_fetch,2026-11-14
+coram-adoption:q18,coram-adoption,18,Consent,Consent to record this information for adoption enquiry and monitoring,consent,processing,yes,checkbox,yes,,,direct_fetch,2026-11-14
+adoption-matters:q01,adoption-matters,1,Applicant 1,"First name(s), applicant 1",contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+adoption-matters:q02,adoption-matters,2,Applicant 1,"Surname, applicant 1",contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+adoption-matters:q03,adoption-matters,3,Applicant 1,"Date of birth, applicant 1",contact_identity,date_of_birth,yes,date,yes,,"Day, month, year.",direct_fetch,2026-11-14
+adoption-matters:q04,adoption-matters,4,Applicant 1,"Email, applicant 1",contact_identity,email,no,email,yes,,,direct_fetch,2026-11-14
+adoption-matters:q05,adoption-matters,5,Applicant 2 (if applicable),"First name(s), applicant 2",household,partner_details,no,text,yes,,,direct_fetch,2026-11-14
+adoption-matters:q06,adoption-matters,6,Applicant 2 (if applicable),"Surname, applicant 2",household,partner_details,no,text,yes,,,direct_fetch,2026-11-14
+adoption-matters:q07,adoption-matters,7,Applicant 2 (if applicable),"Date of birth, applicant 2",household,partner_date_of_birth,no,date,yes,,,direct_fetch,2026-11-14
+adoption-matters:q08,adoption-matters,8,Applicant 2 (if applicable),"Email, applicant 2",household,partner_details,no,email,yes,,,direct_fetch,2026-11-14
+adoption-matters:q09,adoption-matters,9,Address and contact,House number or name,contact_identity,address,yes,text,yes,,,direct_fetch,2026-11-14
+adoption-matters:q10,adoption-matters,10,Address and contact,Postcode,contact_identity,postcode,yes,text,yes,,,direct_fetch,2026-11-14
+adoption-matters:q11,adoption-matters,11,Address and contact,Email,contact_identity,email,yes,email,yes,,May duplicate the applicant 1 email field; the page marks a hidden field near it.,direct_fetch,2026-11-14
+adoption-matters:q12,adoption-matters,12,Referral source,How did you hear about us (choose any),source,how_heard,yes,checkbox,yes,,,direct_fetch,2026-11-14
+adoption-matters:q13,adoption-matters,13,Referral source,Which other organisation,source,how_heard_detail,unknown,select,yes,trigger not shown,,direct_fetch,2026-11-14
+adoption-matters:q14,adoption-matters,14,Referral source,Through your employer,source,how_heard_detail,unknown,text,yes,trigger not shown,,direct_fetch,2026-11-14
+adoption-matters:q15,adoption-matters,15,Referral source,Why you chose this agency from search results,source,how_heard_detail,unknown,text,yes,q12=Google,,direct_fetch,2026-11-14
+adoption-matters:q16,adoption-matters,16,Referral source,Other source,source,how_heard_detail,yes,text,yes,q12=Other,,direct_fetch,2026-11-14
+adoption-matters:q17,adoption-matters,17,Enquiry follow-up,"Contact number, enquirer 1",contact_identity,phone,yes,tel,yes,,Section is for people who want the enquiry team to call.,direct_fetch,2026-11-14
+adoption-matters:q18,adoption-matters,18,Enquiry follow-up,"Contact number, enquirer 2",household,partner_details,no,tel,yes,,,direct_fetch,2026-11-14
+adoption-matters:q19,adoption-matters,19,Enquiry follow-up,Have you thought about early permanence,interest,early_permanence,yes,radio,yes,,,direct_fetch,2026-11-14
+adoption-matters:q20,adoption-matters,20,Enquiry follow-up,Best time to contact you,contact_preference,time,no,select,yes,,,direct_fetch,2026-11-14
+adoption-matters:q21,adoption-matters,21,Consent,Join the mailing list,consent,marketing,no,checkbox,no,,Tick to receive updates about the agency's work and events. Shown unticked.,direct_fetch,2026-11-14
+adoption-matters:q22,adoption-matters,22,Consent,Accept terms and conditions,consent,terms,unknown,checkbox,yes,,,direct_fetch,2026-11-14
+pact-adoption:q01,pact-adoption,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-14
+pact-adoption:q02,pact-adoption,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-14
+pact-adoption:q03,pact-adoption,3,,Phone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+pact-adoption:q04,pact-adoption,4,,Mobile number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+pact-adoption:q05,pact-adoption,5,,Date of birth,contact_identity,date_of_birth,yes,date,no,,"Day, month and year dropdowns.",direct_fetch,2026-11-14
+pact-adoption:q06,pact-adoption,6,,Are you over 21,eligibility,age,yes,radio,no,,,direct_fetch,2026-11-14
+pact-adoption:q07,pact-adoption,7,,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+pact-adoption:q08,pact-adoption,8,,Your ethnicity,equality,ethnicity,yes,select,no,,Searchable dropdown.,direct_fetch,2026-11-14
+pact-adoption:q09,pact-adoption,9,,Partner's first name (if applicable),household,partner_details,no,text,yes,,,direct_fetch,2026-11-14
+pact-adoption:q10,pact-adoption,10,,Partner's last name,household,partner_details,no,text,yes,,,direct_fetch,2026-11-14
+pact-adoption:q11,pact-adoption,11,,Partner's ethnicity,equality,ethnicity,unknown,select,no,,Required status unclear.,direct_fetch,2026-11-14
+pact-adoption:q12,pact-adoption,12,,Local authority where you live,routing,local_authority,yes,select,no,,Could be your county or unitary council; links to a council finder and the agency's area map.,direct_fetch,2026-11-14
+pact-adoption:q13,pact-adoption,13,,Any children living in your household,household,children_in_household,yes,radio,no,,Prefers an age gap: says children already at home should ideally be at least five.,direct_fetch,2026-11-14
+pact-adoption:q14,pact-adoption,14,,Spare bedroom for an adopted child,housing,spare_bedroom,yes,radio,no,,You need at least one spare bedroom so an adopted child has their own space.,direct_fetch,2026-11-14
+pact-adoption:q15,pact-adoption,15,,Where did you hear about the agency,source,how_heard,yes,select,yes,,Nested list; sub-options shown as 'Parent > Option'.,direct_fetch,2026-11-14
+pact-adoption:q16,pact-adoption,16,,When it would suit you to be contacted (choose all that apply),contact_preference,time,yes,checkbox,no,,"Evening and weekend call-backs are limited, so choosing only those may mean a longer wait.",direct_fetch,2026-11-14
+pact-adoption:q17,pact-adoption,17,,Access needs or anything else to discuss,free_text,access_needs,no,textarea,yes,,Also asks people enquiring about particular children to mention them here.,direct_fetch,2026-11-14
+pact-adoption:q18,pact-adoption,18,,Submitting means consenting to the information being recorded for adoption enquiry monitoring,consent,processing,n/a,statement,no,,Statement only; no tick box.,direct_fetch,2026-11-14
+adopt-london:q01,adopt-london,1,,Select your nearest borough,routing,local_authority,unknown,select,yes,,Shows contact details for the regional adoption agency; not an enquiry form.,direct_fetch,2026-11-14
+fca-scotland:q01,fca-scotland,1,,Do you have a spare room,housing,spare_bedroom,yes,select,yes,,"Sets out the room rule: free at all times for the fostered child, never shared, and fits a bed, wardrobe and drawers.",direct_fetch,2026-11-14
+fca-scotland:q02,fca-scotland,2,,Which of these applies to you (citizenship or immigration status),eligibility,residency,yes,radio,yes,,Says you must be a British citizen or have the legal right to remain without restrictions that would prevent fostering.,direct_fetch,2026-11-14
+fca-scotland:q03,fca-scotland,3,,How can we help with your enquiry,intent,journey_stage,yes,select,yes,,,direct_fetch,2026-11-14
+fca-scotland:q04,fca-scotland,4,Experience with children,Have you had children of your own,experience,own_children,yes,select,yes,,Section note: these questions help the agency understand your experience; experience is not required and training is given.,direct_fetch,2026-11-14
+fca-scotland:q05,fca-scotland,5,Experience with children,Professional experience of working with children,experience,professional_childcare,yes,select,yes,,,direct_fetch,2026-11-14
+fca-scotland:q06,fca-scotland,6,Experience with children,"Any prior experience of fostering, as a carer or growing up in a fostering family",experience,prior_fostering,yes,select,yes,,,direct_fetch,2026-11-14
+fca-scotland:q07,fca-scotland,7,Experience with children,Have you ever adopted a child,experience,prior_adoption,yes,select,yes,,,direct_fetch,2026-11-14
+fca-scotland:q08,fca-scotland,8,,Happy to receive regular fostering news,consent,marketing,yes,radio,yes,,,direct_fetch,2026-11-14
+fca-scotland:q09,fca-scotland,9,,First name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+fca-scotland:q10,fca-scotland,10,,Last name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+fca-scotland:q11,fca-scotland,11,,Phone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+fca-scotland:q12,fca-scotland,12,,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+fca-scotland:q13,fca-scotland,13,,Postcode,contact_identity,postcode,yes,text,yes,,,direct_fetch,2026-11-14
+fca-scotland:q14,fca-scotland,14,,Comments,free_text,questions,no,textarea,yes,,,direct_fetch,2026-11-14
+team-fostering:q01,team-fostering,1,,First name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+team-fostering:q02,team-fostering,2,,Surname,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+team-fostering:q03,team-fostering,3,,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+team-fostering:q04,team-fostering,4,,Phone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+team-fostering:q05,team-fostering,5,,Postcode,contact_identity,postcode,yes,text,yes,,,direct_fetch,2026-11-14
+team-fostering:q06,team-fostering,6,,Are you currently a foster carer,transfer,current_carer,yes,select,no,,,direct_fetch,2026-11-14
+team-fostering:q07,team-fostering,7,,Best time to call you back,contact_preference,time,yes,select,no,,,direct_fetch,2026-11-14
+team-fostering:q08,team-fostering,8,,Where did you hear about us,source,how_heard,yes,select,no,,,direct_fetch,2026-11-14
+team-fostering:q09,team-fostering,9,,Do you have a spare room,housing,spare_bedroom,yes,select,no,,,direct_fetch,2026-11-14
+team-fostering:q10,team-fostering,10,,Are you aged over 21,eligibility,age,yes,select,no,,,direct_fetch,2026-11-14
+compass-enquiry:q01,compass-enquiry,1,Your contact details,First name,contact_identity,name,yes,text,yes,,Section note says contact details are used only for fostering contact.,direct_fetch,2026-11-14
+compass-enquiry:q02,compass-enquiry,2,Your contact details,Last name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+compass-enquiry:q03,compass-enquiry,3,Your contact details,Email address,contact_identity,email,yes,email,yes,,,direct_fetch,2026-11-14
+compass-enquiry:q04,compass-enquiry,4,Your contact details,Phone number,contact_identity,phone,yes,tel,yes,,,direct_fetch,2026-11-14
+compass-enquiry:q05,compass-enquiry,5,Your contact details,Postcode,contact_identity,postcode,yes,text,yes,,Helps link you to your local team.,direct_fetch,2026-11-14
+compass-enquiry:q06,compass-enquiry,6,Your contact details,Do you have a spare bedroom,housing,spare_bedroom,yes,radio,no,,,direct_fetch,2026-11-14
+compass-enquiry:q07,compass-enquiry,7,Your contact details,How did you hear about us,source,how_heard,no,select,no,,,direct_fetch,2026-11-14
+compass-enquiry:q08,compass-enquiry,8,Your contact details,Confirm you have read the privacy policy,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-14
+compass-enquiry:q09,compass-enquiry,9,A little about you,Your living situation,housing,tenure,yes,radio,no,,Section note: fostering is open to people from all walks of life.,direct_fetch,2026-11-14
+compass-enquiry:q10,compass-enquiry,10,A little about you,Other living situation,housing,tenure,no,text,yes,q09=Other,,direct_fetch,2026-11-14
+compass-enquiry:q11,compass-enquiry,11,A little about you,Do you have a spare bedroom (asked again),housing,spare_bedroom,yes,radio,no,,,direct_fetch,2026-11-14
+compass-enquiry:q12,compass-enquiry,12,A little about you,Employment status,work,employment_status,yes,select,no,,,direct_fetch,2026-11-14
+compass-enquiry:q13,compass-enquiry,13,A little about you,Do you have children at home (choose all that apply),household,children_in_household,yes,checkbox,no,,,direct_fetch,2026-11-14
+compass-enquiry:q14,compass-enquiry,14,A little about you,Type of fostering you are interested in (choose all that apply),interest,care_type,yes,checkbox,no,,,direct_fetch,2026-11-14
+compass-enquiry:q15,compass-enquiry,15,A little about you,Anything you would like us to know or answer when we call,free_text,questions,no,textarea,yes,,,direct_fetch,2026-11-14
+compass-enquiry:q16,compass-enquiry,16,Choose a call time,Happy to be called any time,contact_preference,time,no,checkbox,no,,Ticking this hides the booking calendar.,direct_fetch,2026-11-14
+compass-enquiry:q17,compass-enquiry,17,Choose a call time,Book a call slot,contact_preference,booking,unknown,calendar,no,q16 unticked,Calendly booking; press Submit after booking.,direct_fetch,2026-11-14
+compass-brochure:q01,compass-brochure,1,,First name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+compass-brochure:q02,compass-brochure,2,,Last name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+compass-brochure:q03,compass-brochure,3,,Phone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+compass-brochure:q04,compass-brochure,4,,Email,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+compass-brochure:q05,compass-brochure,5,,Address,contact_identity,address,yes,text,yes,,,direct_fetch,2026-11-14
+compass-brochure:q06,compass-brochure,6,,Postcode,contact_identity,postcode,yes,text,yes,,,direct_fetch,2026-11-14
+compass-brochure:q07,compass-brochure,7,,Fostering as a couple or an individual,household,applicant_type,yes,radio,no,,,direct_fetch,2026-11-14
+compass-brochure:q08,compass-brochure,8,,Confirm you have a spare room,housing,spare_bedroom,yes,checkbox,no,,"A single required tick box, so the form cannot be sent without confirming a spare room.",direct_fetch,2026-11-14
+compass-brochure:q09,compass-brochure,9,,Accept the privacy policy,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-14
+national-fostering-group:q01,national-fostering-group,1,,How can we help,intent,journey_stage,no,unknown,yes,,,direct_fetch,2026-11-14
+national-fostering-group:q02,national-fostering-group,2,,First name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+national-fostering-group:q03,national-fostering-group,3,,Last name,contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+national-fostering-group:q04,national-fostering-group,4,,Phone number,contact_identity,phone,yes,text,yes,,,direct_fetch,2026-11-14
+national-fostering-group:q05,national-fostering-group,5,,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+national-fostering-group:q06,national-fostering-group,6,,Postcode,contact_identity,postcode,yes,text,yes,,Label explains it is used to find your local agency.,direct_fetch,2026-11-14
+national-fostering-group:q07,national-fostering-group,7,,Do you have a preferred agency,routing,preferred_agency,yes,unknown,yes,,,direct_fetch,2026-11-14
+national-fostering-group:q08,national-fostering-group,8,,Do you have a spare room,housing,spare_bedroom,yes,unknown,yes,,Explains that a room kept only for the fostered child is required; links to the room rules.,direct_fetch,2026-11-14
+national-fostering-group:q09,national-fostering-group,9,,"Want to stay in touch (news by post, email or text)",consent,marketing,yes,unknown,yes,,,direct_fetch,2026-11-14
+tact-fostering:q01,tact-fostering,1,,Name (first and last),contact_identity,name,yes,text,yes,,,direct_fetch,2026-11-14
+tact-fostering:q02,tact-fostering,2,,Do you have a spare bedroom,housing,spare_bedroom,no,radio,no,,States that fostering needs a spare bedroom.,direct_fetch,2026-11-14
+tact-fostering:q03,tact-fostering,3,,Phone number,contact_identity,phone,yes,text,yes,,Start with +44 instead of the first 0.,direct_fetch,2026-11-14
+tact-fostering:q04,tact-fostering,4,,Email address,contact_identity,email,yes,text,yes,,,direct_fetch,2026-11-14
+tact-fostering:q05,tact-fostering,5,,Postcode,contact_identity,postcode,yes,text,yes,,,direct_fetch,2026-11-14
+tact-fostering:q06,tact-fostering,6,,Do you have a spare bedroom (asked again),housing,spare_bedroom,yes,radio,no,,,direct_fetch,2026-11-14
+tact-fostering:q07,tact-fostering,7,,How can we help you,intent,journey_stage,yes,select,no,,,direct_fetch,2026-11-14
+tact-fostering:q08,tact-fostering,8,,How did you hear about us,source,how_heard,yes,select,no,,,direct_fetch,2026-11-14
+tact-fostering:q09,tact-fostering,9,,Consent to data use as set out in the privacy policy,consent,processing,yes,checkbox,no,,,direct_fetch,2026-11-14
+tact-fostering:q10,tact-fostering,10,,Happy to receive email and text updates,consent,marketing,no,checkbox,no,,,direct_fetch,2026-11-14
+foster-care-link:q01,foster-care-link,1,,Nearest agency office,routing,nearest_office,yes,select,yes,,,index_snapshot,2026-11
+foster-care-link:q02,foster-care-link,2,,Does either enquirer have a criminal conviction,criminal_record,criminal_record,yes,select,yes,,,index_snapshot,2026-11
+foster-care-link:q03,foster-care-link,3,,Number of spare bedrooms,housing,spare_bedroom,yes,select,yes,,,index_snapshot,2026-11
+foster-care-link:q04,foster-care-link,4,,Full UK driving licence,work,driving_licence,yes,select,yes,,,index_snapshot,2026-11
+foster-care-link:q05,foster-care-link,5,,Occupation terms,work,employment_status,yes,select,yes,,,index_snapshot,2026-11
