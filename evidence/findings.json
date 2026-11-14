@@ -1,0 +1,170 @@
+{
+  "updated": "2026-11-14",
+  "about": "What we know so far about the first step, from someone getting in touch to their application. Shown at kinderform.org/research. Each source says whether a person has checked the claim against the original, when, and against what. Use null for 'not yet checked'. Edit by pull request; tests/validate_findings.py checks the format.",
+  "findings": [
+    {
+      "id": "speed-alone",
+      "stage": "First contact",
+      "title": "Quicker first visits helped, but did not on their own lead to more approvals",
+      "summary": "In the North East of England, a regional hub raised the share of people who had an initial visit within 5 days from 29% in 2024 to 50% in 2025. A comparison with similar areas found no statistically significant gain in applications or approvals. In the hub's first year, the measured effects were negative. Quick replies still matter, but they are not enough on their own.",
+      "sources": [
+        {
+          "title": "Evaluation of Foster with North East Pathfinder Hub: year 3 report",
+          "by": "Ipsos and CEI for the Department for Education",
+          "year": "2026",
+          "url": "https://assets.publishing.service.gov.uk/media/6aa8195b1a63d2d2be90460e/Evaluation_of_Foster_with_North_East_Pathfinder_Hub_year_3_report.pdf",
+          "checked": { "date": "2026-11-14", "against": "full text", "note": "Executive summary and impact results, about pages 12, 42 and 50." }
+        }
+      ]
+    },
+    {
+      "id": "hand-offs",
+      "stage": "Hand-offs",
+      "title": "Hand-offs between organisations are where some people are lost",
+      "summary": "In the same evaluation, the hand-over from the regional hub to the council was a friction point. Some people who withdrew said communication stopped or dropped off, and it was unclear who should answer their questions. The Department for Education now expects hubs that run the whole journey to give each person a named \"journey guide\" from enquiry to approval.",
+      "sources": [
+        {
+          "title": "Evaluation of Foster with North East Pathfinder Hub: year 3 report",
+          "by": "Ipsos and CEI for the Department for Education",
+          "year": "2026",
+          "url": "https://assets.publishing.service.gov.uk/media/6aa8195b1a63d2d2be90460e/Evaluation_of_Foster_with_North_East_Pathfinder_Hub_year_3_report.pdf",
+          "checked": { "date": "2026-11-14", "against": "full text", "note": "Executive summary, about page 12." }
+        },
+        {
+          "title": "Fostering Recruitment and Retention Programme: end-to-end programme booklet",
+          "by": "Department for Education",
+          "year": "2026",
+          "url": "https://assets.publishing.service.gov.uk/media/69c407bdb66ff902f45441d9/Fostering_Recruitment_and_Retention_Programme_end-to-end_programme_booklet.pdf",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "withdrawals",
+      "stage": "Application",
+      "title": "Most fostering applications that finish end in withdrawal, not approval",
+      "summary": "In England in 2024 to 2025, fostering services received 8,290 applications. Of the 5,370 completed in the year, 2,050 were approved and 3,290 were withdrawn. That is 61% of completed applications, not of all those received. Where the applicant withdrew, 20% said the process was not what they expected.",
+      "sources": [
+        {
+          "title": "Main findings: fostering in England 1 April 2024 to 31 March 2025",
+          "by": "Ofsted",
+          "year": "2025",
+          "url": "https://www.gov.uk/government/statistics/fostering-in-england-1-april-2024-to-31-march-2025/main-findings-fostering-in-england-1-april-2024-to-31-march-2025",
+          "checked": { "date": "2026-11-14", "against": "full text", "note": "Published 26 November 2025." }
+        }
+      ]
+    },
+    {
+      "id": "first-contact-feeling",
+      "stage": "First contact",
+      "title": "How the first contact feels is what people remember",
+      "summary": "In research for the Department for Education, people mentioned how their first contact felt more than anything else. Many saw getting in touch as the start of an application, and worried about asking \"the wrong question\". In an online experiment, every redesigned message did better than typical recruitment wording. That experiment measured what people said they would do, not what they did.",
+      "sources": [
+        {
+          "title": "Applying behavioural insights to fostering and adoption in England",
+          "by": "Kantar Public for the Department for Education",
+          "year": "2022",
+          "url": "https://assets.publishing.service.gov.uk/media/639b0743d3bf7f7f88f10fa8/Applying_behavioural_insights_to_fostering_and_adoption_in_England.pdf",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "named-messages",
+      "stage": "First contact",
+      "title": "A named, personal message can change what people do",
+      "summary": "In a trial at a jobcentre in Bedford, 1,224 jobseekers were invited to a recruitment event by text. Attendance was 26.8% when the message named their adviser and said a place had been booked for them, against 10.5% for the plainest message. This trial is not about fostering, so it needs testing in fostering and adoption before anyone relies on it.",
+      "sources": [
+        {
+          "title": "Update report 2013–2015 (Bedford Jobcentre trial)",
+          "by": "Behavioural Insights Team",
+          "year": "2015",
+          "url": "https://www.bi.team/wp-content/uploads/2015/08/BIT_Update-Report-Final-2013-2015.pdf",
+          "checked": { "date": "2026-11-14", "against": "full text", "note": "Figure 1.4, page 9. Which rate belongs to which message is read from the chart." }
+        }
+      ]
+    },
+    {
+      "id": "being-asked",
+      "stage": "Before getting in touch",
+      "title": "Knowing a carer, or simply being asked, starts many people thinking",
+      "summary": "A review of international research found that meeting or knowing other foster carers is what most often leads people to consider fostering. In an Australian survey of 756 adults, almost one-third said they had never considered fostering because no one had ever asked them.",
+      "sources": [
+        {
+          "title": "Why do people become foster carers? An international literature review on the motivation to foster",
+          "by": "Sebba, Rees Centre, University of Oxford",
+          "year": "2012",
+          "url": "https://www.education.ox.ac.uk/wp-content/uploads/2019/06/Why-Do-People-Become-Foster-Carers-An-International-Literature-Review-on-the-Motivation-to-Foster.pdf",
+          "checked": null
+        },
+        {
+          "title": "The science of attracting foster carers",
+          "by": "Randle, Miller, Dolnicar and Ciarrochi, Child & Family Social Work",
+          "year": "2014",
+          "url": "https://doi.org/10.1111/j.1365-2206.2012.00881.x",
+          "checked": { "date": "2026-11-14", "against": "abstract" }
+        }
+      ]
+    },
+    {
+      "id": "put-off",
+      "stage": "First contact",
+      "title": "Some people who go no further say the response put them off",
+      "summary": "An Australian study followed up 91 people who had asked about fostering. Only 4% had become carers. The rest were split roughly evenly between changes in their own lives and being put off by how the agency responded. The study is old and small, so treat it as a pointer. In the United States, 300 families hoping to adopt from foster care most often reported process logistics, agency communication and responsiveness, and emotional support as barriers.",
+      "sources": [
+        {
+          "title": "Why don't they become foster carers? A study of people who inquire about foster care",
+          "by": "Keogh and others, Children Australia",
+          "year": "1999",
+          "url": "https://consensus.app/papers/details/w:31e6ebdc-13ba-46f2-ba3c-c881b781c1aa/",
+          "checked": null
+        },
+        {
+          "title": "Agency-related barriers experienced by families seeking to adopt from foster care",
+          "by": "Madden and others, Adoption Quarterly",
+          "year": "2017",
+          "url": "https://doi.org/10.1080/10926755.2015.1121187",
+          "checked": { "date": "2026-11-14", "against": "abstract" }
+        }
+      ]
+    },
+    {
+      "id": "relationship",
+      "stage": "Staying",
+      "title": "The relationship with the service shapes whether carers stay",
+      "summary": "A review of 49 studies found that the relationship with the agency and professional support stand out among the reasons carers continue. In a Scottish study of carers who had stopped, almost three-fifths did so because they were unhappy with some part of the fostering service. This is why we treat the first reply as the start of support, not a separate task.",
+      "sources": [
+        {
+          "title": "Foster families: a systematic review of intention and retention factors",
+          "by": "Gouveia and others, Journal of Child and Family Studies",
+          "year": "2021",
+          "url": "https://consensus.app/papers/details/w:cb06a59d-9e41-4892-85a7-5b6ca9aaa0fb/",
+          "checked": null
+        },
+        {
+          "title": "Foster carers who cease to foster",
+          "by": "Triseliotis, Borland and Hill, Adoption & Fostering",
+          "year": "1998",
+          "url": "https://consensus.app/papers/details/w:9fc07a41-6f34-44c8-804c-4c82d0337a73/",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "no-trials",
+      "stage": "Gap",
+      "title": "No one has yet tested follow-up with real people who enquire",
+      "summary": "We found no experiment, in any country, that tests response times, contact attempts, follow-up rhythm, contact with experienced carers or hand-offs with real people asking about fostering or adoption. The closest is the 2022 online test of message wording, which measured intentions only. This is a gap Kinderform hopes to help close, openly and with services' agreement.",
+      "sources": [
+        {
+          "title": "Fostering and adoption intake interactions: what the evidence says works",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-intake-interactions",
+          "checked": null,
+          "note": "This is about what our search did not find, in November 2026."
+        }
+      ]
+    }
+  ]
+}

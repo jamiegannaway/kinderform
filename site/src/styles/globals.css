@@ -124,3 +124,80 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 }
+
+/* Long-form text on the research pages (Markdown from evidence/).
+   These are the shadcn/ui typography styles (ui.shadcn.com/docs/components/typography),
+   applied to plain HTML because Markdown cannot carry class names. */
+@layer components {
+  .kf-prose {
+    @apply max-w-3xl text-base leading-7;
+  }
+  .kf-prose h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance;
+  }
+  .kf-prose h2 {
+    @apply mt-12 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  }
+  .kf-prose h3 {
+    @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+  .kf-prose h4 {
+    @apply mt-6 scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+  .kf-prose p:not(:first-child) {
+    @apply mt-6;
+  }
+  .kf-prose a {
+    @apply font-medium text-primary underline underline-offset-4 break-words;
+  }
+  .kf-prose blockquote {
+    @apply mt-6 border-l-2 pl-6 text-muted-foreground;
+  }
+  .kf-prose blockquote p:not(:first-child) {
+    @apply mt-3;
+  }
+  .kf-prose ul {
+    @apply my-6 ml-6 list-disc [&>li]:mt-2;
+  }
+  .kf-prose ol {
+    @apply my-6 ml-6 list-decimal [&>li]:mt-2;
+  }
+  .kf-prose li > ul,
+  .kf-prose li > ol {
+    @apply my-2;
+  }
+  .kf-prose code {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+  .kf-prose pre {
+    @apply my-6 overflow-x-auto rounded-lg border bg-muted p-4 text-sm;
+  }
+  .kf-prose pre code {
+    @apply bg-transparent p-0 font-normal;
+  }
+  .kf-prose hr {
+    @apply my-10;
+  }
+  .kf-prose .kf-table {
+    @apply my-6 w-full overflow-x-auto;
+  }
+  .kf-prose table {
+    @apply w-full text-sm;
+  }
+  /* Tables with four or more columns keep readable columns and scroll sideways on a phone. */
+  .kf-prose table:has(th:nth-child(4)) {
+    @apply min-w-[44rem];
+  }
+  .kf-prose tr {
+    @apply m-0 border-t p-0 even:bg-muted;
+  }
+  .kf-prose th {
+    @apply border px-4 py-2 text-left align-top font-bold;
+  }
+  .kf-prose td {
+    @apply border px-4 py-2 text-left align-top;
+  }
+  .kf-prose strong {
+    @apply font-semibold;
+  }
+}

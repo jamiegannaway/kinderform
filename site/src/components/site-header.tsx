@@ -4,6 +4,7 @@ const TABS = [
   { href: "/", label: "Home" },
   { href: "/form-check", label: "Form check" },
   { href: "/example-form", label: "Example form" },
+  { href: "/research", label: "Research" },
 ]
 
 export function SiteHeader({ current }: { current: string }) {
@@ -20,7 +21,7 @@ export function SiteHeader({ current }: { current: string }) {
           kinderform
         </a>
         <nav aria-label="Main">
-          <ul className="flex items-center gap-1">
+          <ul className="flex flex-wrap items-center gap-1">
             {TABS.map((t) => {
               const active = t.href === current
               return (

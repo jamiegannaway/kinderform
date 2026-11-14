@@ -16,7 +16,7 @@ It starts in England, where almost 150,000 fostering enquiries in 2024–25 led 
 | [`register/`](register/) | A register of UK fostering front doors: who runs each one and where it lives | Seed, unverified |
 | [`rubric/`](rubric/) | A 100-point rubric for assessing a front door, published for comment before it is used | v0.1 draft |
 | [`census/`](census/) | An inventory of UK fostering and adoption intake forms: every question, answer option and piece of guidance recorded so far | v0.1 draft, unverified |
-| [`evidence/`](evidence/) | A living library of research and policy on carer recruitment and retention | Seeded |
+| [`evidence/`](evidence/) | A living library of research and policy on carer recruitment and retention, published at [kinderform.org/research](https://www.kinderform.org/research) | Seeded |
 | [`site/`](site/) | The public site for [kinderform.org](https://www.kinderform.org): Astro and shadcn/ui, built and deployed by Vercel using `vercel.json`. Includes a working example of the reference enquiry form at `/example-form` | Draft |
 | [`docs/`](docs/) | Roadmap, principles and working notes | Draft |
 
