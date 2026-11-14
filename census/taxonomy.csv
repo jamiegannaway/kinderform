@@ -1,0 +1,75 @@
+category,topic,description,sensitivity,england_fostering_stage_draft,oucm_enquiry_field,note
+account,existing_account,Whether the person has a council online account,none,service_operation,,
+consent,contact,Consent to be contacted about the enquiry,none,service_operation,lawful_basis,"Record the lawful basis, not the tick."
+consent,declaration_and_checks,Declaration of accuracy and permission for checks,none,stage_1,lawful_basis,Consent to checks is normally a Stage 1 step.
+consent,marketing,Newsletter or marketing consent,none,service_operation,marketing_consent,"True only for a separate, unticked opt-in."
+consent,privacy_acknowledgement,Confirm the privacy policy has been read,none,service_operation,lawful_basis,
+consent,processing,Consent or acknowledgement for processing,none,service_operation,lawful_basis,"Record the lawful basis, not the tick."
+consent,terms,Accept terms and conditions,none,service_operation,,
+contact_identity,address,Full or part postal address,personal_identifier,stage_1,kept_out_identifier,Needed earlier only if something is posted.
+contact_identity,address_history,Previous addresses,personal_identifier,stage_1,kept_out_identifier,Used for checks.
+contact_identity,date_of_birth,Date of birth,personal_identifier,stage_1,kept_out_identifier,Schedule 3 Part 1 item.
+contact_identity,email,Email address,personal_identifier,enquiry,kept_out_identifier,
+contact_identity,name,Name of the person enquiring,personal_identifier,enquiry,kept_out_identifier,Ofsted counts an enquiry as actionable once it has names and contact details.
+contact_identity,phone,Phone number,personal_identifier,enquiry,kept_out_identifier,
+contact_identity,postcode,Postcode,personal_identifier,enquiry,postcode_outward,Only the outward part is kept in the schema.
+contact_identity,previous_names,Previous names,personal_identifier,stage_1,kept_out_identifier,Used for checks.
+contact_preference,booking,Booking a call slot on the form,none,service_operation,,
+contact_preference,language,Preferred language,none,service_operation,,Not in schema v0.1.
+contact_preference,method,Preferred contact method,none,service_operation,,Not in schema v0.1.
+contact_preference,next_step,Call or information pack,none,service_operation,,Not in schema v0.1.
+contact_preference,pack_delivery,How to send the information pack,none,service_operation,,
+contact_preference,time,Preferred days or times to be contacted,none,service_operation,preferred_contact_window,
+criminal_record,criminal_record,Criminal convictions or involvement,criminal_offence,stage_1,kept_out_later_slice,Stage 1 includes an enhanced DBS check.
+eligibility,age,Whether the enquirer is over 21,eligibility_gate,not_in_schedule_3,kept_out_later_slice,Statutory minimum age for adoption; a common service rule for fostering.
+eligibility,citizenship,Whether the enquirer is a British citizen,immigration,not_in_schedule_3,kept_out_later_slice,
+eligibility,residency,Immigration status or right to remain,immigration,not_in_schedule_3,kept_out_later_slice,
+equality,ethnicity,Ethnicity,special_category,stage_2,kept_out_later_slice,"Adoption England guidance: only ask for monitoring, say why, and allow it to be left blank."
+equality,gender,Gender,equality_monitoring,not_in_schedule_3,kept_out_later_slice,
+equality,religion,Religion,special_category,stage_2,kept_out_later_slice,
+experience,childcare_experience,Experience of caring for children,none,stage_2,kept_out_later_slice,
+experience,own_children,Whether the enquirer has had children,none,stage_2,kept_out_later_slice,
+experience,prior_adoption,Whether the enquirer has adopted,none,stage_1,kept_out_later_slice,Previous applications and their outcome are Stage 1 items.
+experience,prior_fostering,Previous fostering experience,none,stage_1,kept_out_later_slice,Previous applications and their outcome are Stage 1 items.
+experience,professional_childcare,Paid work with children,none,stage_2,kept_out_later_slice,
+free_text,about_you,Open box: tell us about yourself,free_text,service_operation,kept_out_free_text,
+free_text,access_needs,Access needs or anything else,free_text,service_operation,kept_out_free_text,
+free_text,motivation,Why the person wants to foster,free_text,stage_2,kept_out_free_text,
+free_text,questions,Open box for questions or comments,free_text,service_operation,kept_out_free_text,Free text can hold anything; best not exported.
+health,disability,Disability,special_category,stage_1,kept_out_later_slice,Often asked as equality monitoring.
+health,health,"Health, including mental health",special_category,stage_1,kept_out_later_slice,Stage 1 includes a medical report.
+household,applicant_type,Applying as a couple or an individual,none,stage_1,kept_out_later_slice,Light-touch version of household particulars.
+household,children_in_household,"Whether children live in the home, sometimes by age band",household_third_party,stage_1,kept_out_later_slice,Questions about the enquirer's own children; OUCM records the topic only.
+household,household_composition,Who else lives in the home,household_third_party,stage_1,kept_out_later_slice,May include children; OUCM records the topic only.
+household,partner,Whether a partner lives with the enquirer,household_third_party,stage_1,kept_out_later_slice,
+household,partner_date_of_birth,Partner's date of birth,household_third_party,stage_1,kept_out_identifier,
+household,partner_details,Partner's name or contact details,household_third_party,stage_1,kept_out_identifier,
+household,pets,Pets in the home,none,not_in_schedule_3,kept_out_later_slice,Usually covered by the home safety check.
+household,previous_partners,Previous partners,household_third_party,stage_1,kept_out_later_slice,
+household,relationships,Current relationship and its length,household_third_party,stage_1,kept_out_later_slice,
+housing,smoking,Smoking or vaping,health_related,not_in_schedule_3,kept_out_later_slice,Usually a local policy.
+housing,spare_bedroom,Whether there is a spare bedroom,eligibility_gate,stage_1,kept_out_later_slice,Accommodation is a Schedule 3 Part 1 item. Often a local or agency rule.
+housing,tenure,Owning or renting,none,stage_1,kept_out_later_slice,
+information_event,event_dates,Information meeting dates the person can attend,none,service_operation,,
+intent,journey_stage,"What the person wants now: information, a chat, to apply",none,service_operation,intent_tier,
+interest,care_type,Type of fostering or scheme of interest,none,service_operation,fostering_interests,
+interest,early_permanence,Interest in early permanence (adoption),none,service_operation,,No adoption field in schema v0.1.
+out_of_scope,child_specific,Questions about a particular child,child_data,out_of_scope,,Outside OUCM scope.
+prior_involvement,social_services,Previous involvement with social services,sensitive,stage_1,kept_out_later_slice,Stage 1 includes local authority checks.
+routing,local_authority,Which council the person lives in or wants,none,service_operation,la_gss_code,Can be derived from the postcode.
+routing,nearest_office,Nearest agency office,none,service_operation,,
+routing,preferred_agency,Whether the person has a preferred agency,none,service_operation,,
+source,how_heard,How the person heard about the service,none,service_operation,source,
+source,how_heard_detail,Follow-up detail on how they heard,none,service_operation,source,
+staff_recorded,channel,How the enquiry arrived,none,service_operation,channel,
+staff_recorded,enquiry_date,"Date of enquiry, logged by staff",none,service_operation,received_at,
+staff_recorded,event_local_authority,Council that hosted the event,none,service_operation,,
+staff_recorded,logged_by,Staff member logging the enquiry,staff_identifier,service_operation,,Never publish.
+staff_recorded,records_check,Service checks its own records,sensitive,stage_1,,"A check, not a question."
+staff_recorded,referral_date,Date referred from an event,none,service_operation,,
+transfer,current_carer,Whether the person already fosters,none,service_operation,intent_tier,Maps to intent_tier = transfer.
+work,driving_licence,Whether the enquirer holds a driving licence,none,not_in_schedule_3,kept_out_later_slice,
+work,employment_history,Education and employment history,none,stage_2,kept_out_later_slice,
+work,employment_status,Employment status or terms,none,stage_2,kept_out_later_slice,
+work,occupation,Occupation,none,stage_2,kept_out_later_slice,
+work,working_hours,Working hours and availability,none,stage_2,kept_out_later_slice,
