@@ -7,6 +7,7 @@
 - [x] Front-door register seeded (unverified)
 - [x] Rubric v0.1 draft for comment
 - [x] Evidence library seeded
+- [x] Landing page for kinderform.org (`site/`, deployed by Vercel)
 - [x] Review of intake interactions after the first enquiry, fostering and adoption (November 2026; most figures still to be checked against the originals)
 - [ ] Verify every register row against the live page
 - [ ] Add ONS local authority codes to the register
@@ -16,6 +17,9 @@
 
 - [ ] Eight to ten conversations with carers, care-experienced adults, a hub manager and sector bodies
 - [ ] Publish the rubric for comment and revise it
+- [x] Intake-form census v0.1: fostering and adoption forms, questions, answer options and guidance (`census/`, unverified)
+- [ ] Check census rows by hand in a browser, starting with the forms that would not render
+- [ ] Share each service's census rows with it privately before any named analysis
 - [ ] Polite crawler that reads public front-door pages and extracts form fields, consent wording and response-time promises
 - [ ] Extend the register to Scottish councils and English councils outside hubs
 - [ ] Baseline report on patterns and good examples

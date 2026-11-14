@@ -24,14 +24,23 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - British English, plain words, short sentences.
 - Code is MIT; everything else is CC BY 4.0.
 
+## Design
+
+- **Everything uses the [shadcn/ui](https://ui.shadcn.com) design system**: its components, the new-york style, the neutral theme tokens and its typography. Add components from the shadcn registry or its GitHub source into `site/src/components/ui/`. Do not restyle them by hand or mix in another design system.
+- **One exception: the questionnaire** (the reference enquiry form) uses [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) components and patterns, as set out in Decision 0001. It carries no GOV.UK branding: no crown, no GOV.UK logotype and no GDS Transport typeface. Kinderform is not a government service and must not look like one.
+- Public pages ship no tracking, set no cookies and load nothing from other sites. Fonts are self-hosted.
+
 ## Layout
 
 - `schema/` Enquiry schema and synthetic examples
 - `register/` front-door register (CSV) and its column guide
 - `rubric/` audit rubric in Markdown and JSON
+- `census/` intake-form census: forms, questions, answer options, guidance (CSV)
 - `evidence/` evidence library
 - `docs/` roadmap and project notes
+- `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript); `vercel.json` builds it
 - `tests/` validation scripts
+- `tools/` helper scripts (for example the census summary)
 
 ## Before finishing a task
 
