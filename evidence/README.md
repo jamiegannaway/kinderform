@@ -2,6 +2,10 @@
 
 `library.md` is the project's evidence base. It exists so that anyone working on carer recruitment can find the research in one place, and so that this project's claims stay honest.
 
+`reports/` holds longer reviews that draw on many sources, such as the [November 2026 review of intake interactions](reports/2026-11-intake-interactions.md). Each report says how it was made and what has been checked. Its key sources are also added to `library.md` as single entries.
+
+`digests/` holds a short monthly note on what was added and why it matters.
+
 ## Rules for entries
 
 1. One entry per source, with authors, year, title, journal or publisher and a working link.

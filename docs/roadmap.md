@@ -7,6 +7,7 @@
 - [x] Front-door register seeded (unverified)
 - [x] Rubric v0.1 draft for comment
 - [x] Evidence library seeded
+- [x] Review of intake interactions after the first enquiry, fostering and adoption (November 2026; most figures still to be checked against the originals)
 - [ ] Verify every register row against the live page
 - [ ] Add ONS local authority codes to the register
 - [ ] Map `closure_reason_code` to Ofsted's fostering return categories
@@ -18,6 +19,7 @@
 - [ ] Polite crawler that reads public front-door pages and extracts form fields, consent wording and response-time promises
 - [ ] Extend the register to Scottish councils and English councils outside hubs
 - [ ] Baseline report on patterns and good examples
+- [ ] Discuss the first-contact standard and the draft `Interaction` record proposed in the intake interactions review, then decide what goes into the schema
 
 ## Later: adopt
 
