@@ -1,0 +1,26 @@
+{
+  "rubric_version": "0.1-draft",
+  "status": "draft for consultation; not yet applied to any named service",
+  "scale": { "min": 0, "max": 3 },
+  "total_points": 100,
+  "domains": [
+    { "id": "findability", "name": "Findability and routing", "weight": 10 },
+    { "id": "ease", "name": "Ease of enquiring", "weight": 15 },
+    { "id": "minimisation", "name": "Data minimisation and consent", "weight": 15 },
+    { "id": "accessibility", "name": "Accessibility", "weight": 10 },
+    { "id": "expectations", "name": "Setting expectations", "weight": 15 },
+    { "id": "responsiveness", "name": "Responsiveness", "weight": 15 },
+    { "id": "channels", "name": "Other ways to get in touch", "weight": 5 },
+    { "id": "inclusion", "name": "Inclusion and openness", "weight": 5 },
+    { "id": "data_quality", "name": "Data quality", "weight": 10 }
+  ],
+  "caps": {
+    "max_total_if_any": 50,
+    "conditions": [
+      "sensitive_questions_at_first_contact",
+      "marketing_consent_required",
+      "conflicting_phone_numbers",
+      "legacy_form_still_live"
+    ]
+  }
+}

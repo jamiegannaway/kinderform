@@ -1,0 +1,18 @@
+front_door_id,name,type,nation,coverage,website,form_url,stated_response_time,form_fields_observed,date_checked,verification,notes
+foster-with-north-east,Foster with North East,regional_hub,England,12 North East councils,https://www.fosterwithnortheast.org.uk,,,no,2026-11,unverified,Pathfinder hub launched September 2023
+foster-for-east-midlands,Foster for East Midlands,regional_hub,England,"Derby, Derbyshire, Nottingham, Nottinghamshire",https://fosterforeastmidlands.org.uk,https://fosterforeastmidlands.org.uk/become-foster-carer/apply-now/,,no,2026-11,unverified,
+foster-for-greater-manchester,Foster for Greater Manchester,regional_hub,England,10 Greater Manchester councils,https://fosterforgm.com,,within one working day,no,2026-11,unverified,
+foster4,Foster4,regional_hub,England,9 Cheshire and Merseyside councils,https://www.foster4.co.uk,https://www.foster4.co.uk/enquire/,,yes,2026-11,unverified,
+foster-with-us,Foster with us,regional_hub,England,5 North West authorities,https://fosterwithus.org.uk,https://fosterwithus.org.uk/form/enquiry-form,,yes,2026-11,unverified,
+foster-east,Foster East,regional_hub,England,11 East of England authorities,https://www.fostereast.org.uk,,,yes,2026-11,unverified,Separate form page per council
+local-community-fostering,Local Community Fostering,regional_hub,England,North East London boroughs,https://localcommunityfostering.co.uk,,,yes,2026-11,unverified,Member count differs between pages; confirm
+foster-with-west-london,Foster with West London,regional_hub,England,8 West London boroughs,https://www.fosterwithwestlondon.org.uk,,,yes,2026-11,unverified,
+fostering-south-west,Fostering South West,regional_hub,England,15 South West councils,https://www.fosterwithyourlocalcouncil.org.uk,,within two working days; aim for one,no,2026-11,unverified,
+la-fostering-south-east,Local Authority Fostering South East,regional_hub,England,20 South East councils,https://www.lafosteringse.org.uk,,,no,2026-11,unverified,
+foster-north-london,Foster North London,regional_hub,England,"Barnet, Camden, Enfield, Hackney, Haringey, Islington",,,,no,2026-11,unverified,Reported live from 1 October 2026; website to confirm
+black-country-hub,Black Country fostering hub,regional_hub,England,"Wolverhampton, Walsall, Dudley, Sandwell",,,,no,2026-11,unverified,Announced 2026; name and website to confirm
+south-east-london-hub,South East London fostering hub,regional_hub,England,To confirm,,,,no,2026-11,unverified,Announced 2026; membership to confirm
+south-west-london-hub,South West London fostering hub,regional_hub,England,To confirm,,,,no,2026-11,unverified,Announced 2026; membership to confirm
+foster-birmingham,Foster Birmingham,single_authority,England,Birmingham,https://fosterbirmingham.co.uk,https://fosterbirmingham.co.uk/contact-us/,within one working day,no,2026-11,unverified,Run by Birmingham Children's Trust
+foster-wales,Foster Wales,national_brand,Wales,22 Welsh local authorities,https://fosterwales.gov.wales,,,yes,2026-11,unverified,One national template with local authority teams; response-time wording varies by authority
+hsc-ni,HSC NI Adoption and Foster Care,regional_service,Northern Ireland,5 HSC Trusts,https://adoptionandfostercare.hscni.net,https://adoptionandfostercare.hscni.net/getintouch/,,yes,2026-11,unverified,

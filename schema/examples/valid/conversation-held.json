@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-000002",
+  "received_at": "2026-11-03T09:05:00+00:00",
+  "channel": "phone",
+  "intent_tier": "ready_to_apply",
+  "fostering_interests": ["short_term", "short_breaks"],
+  "postcode_outward": "NE1",
+  "front_door_id": "synthetic-hub",
+  "lawful_basis": "public_task",
+  "first_contact_attempt_at": "2026-11-03T09:05:00+00:00",
+  "first_contact_made_at": "2026-11-03T09:05:00+00:00",
+  "status": "conversation_held",
+  "status_updated_at": "2026-11-03T09:25:00+00:00"
+}

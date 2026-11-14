@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-900002",
+  "received_at": "2026-10-12T12:00:00+01:00",
+  "channel": "web_form",
+  "intent_tier": "conversation",
+  "status": "received",
+  "first_name": "Synthetic",
+  "email": "nobody@example.org",
+  "postcode_outward": "M14 5XX"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-000001",
+  "received_at": "2026-11-02T19:42:00+00:00",
+  "channel": "web_form",
+  "source": "synthetic-campaign-autumn",
+  "intent_tier": "conversation",
+  "fostering_interests": ["not_sure"],
+  "postcode_outward": "M14",
+  "la_gss_code": "E08000003",
+  "front_door_id": "synthetic-hub",
+  "preferred_contact_window": "evening",
+  "lawful_basis": "public_task",
+  "marketing_consent": { "given": false },
+  "acknowledged_at": "2026-11-02T19:42:30+00:00",
+  "status": "received",
+  "status_updated_at": "2026-11-02T19:42:00+00:00"
+}

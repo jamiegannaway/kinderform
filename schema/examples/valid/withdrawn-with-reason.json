@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-000003",
+  "received_at": "2026-10-12T12:00:00+01:00",
+  "channel": "event",
+  "intent_tier": "information",
+  "postcode_outward": "B15",
+  "lawful_basis": "public_task",
+  "first_contact_attempt_at": "2026-10-13T10:00:00+01:00",
+  "first_contact_made_at": "2026-10-13T10:00:00+01:00",
+  "status": "withdrawn",
+  "status_updated_at": "2026-10-20T15:30:00+01:00",
+  "closure_reason_code": "timing_not_right",
+  "recontact_after": "2027-04-01"
+}
