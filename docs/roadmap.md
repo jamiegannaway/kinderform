@@ -11,6 +11,17 @@
 - [ ] Add ONS local authority codes to the register
 - [ ] Map `closure_reason_code` to Ofsted's fostering return categories
 
+## Now: US survey (first pass)
+
+See [us-survey-plan.md](us-survey-plan.md).
+
+- [x] US register structure, column guide, question topics and validation test
+- [x] 50 states and DC: administration model, lead agency and main pages (unverified)
+- [x] Public front doors: state, contracted regional, county or city, and tribal (unverified, from search results)
+- [ ] Open each front-door page and form; record questions and published response promises
+- [ ] Private licensed agencies, starting from each state's licensing list
+- [ ] Second-person verification and invitation to agencies to correct their rows
+
 ## Next: listen, then measure
 
 - [ ] Eight to ten conversations with carers, care-experienced adults, a hub manager and sector bodies
@@ -25,7 +36,7 @@
 - [ ] Browser-only funnel tool that reads an export in the schema format; no data leaves the service
 - [ ] One pilot hub maps its export to the schema; publish the mapping guide as v0.2
 - [ ] Pipeline slices beyond enquiry: application, assessment, approval, leaving
-- [ ] Adaptation for a second country
+- [ ] Adaptation for a second country (US survey under way, see above)
 
 ## Not on the roadmap
 

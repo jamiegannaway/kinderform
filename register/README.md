@@ -6,6 +6,8 @@
 
 The register holds neutral facts only. It contains no scores or judgements.
 
+The United States register is in [`us/`](us/), with its own column guide.
+
 ## Columns
 
 | Column | Meaning |

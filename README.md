@@ -14,6 +14,7 @@ It starts in England, where almost 150,000 fostering enquiries in 2024–25 led 
 |---|---|---|
 | [`schema/`](schema/) | The Enquiry record: a vendor-neutral JSON Schema for a fostering enquiry, with synthetic examples | v0.1 draft |
 | [`register/`](register/) | A register of UK fostering front doors: who runs each one and where it lives | Seed, unverified |
+| [`register/us/`](register/us/) | A register of US fostering and adoption front doors: states, DC, counties and tribal nations | First pass, unverified |
 | [`rubric/`](rubric/) | A 100-point rubric for assessing a front door, published for comment before it is used | v0.1 draft |
 | [`evidence/`](evidence/) | A living library of research and policy on carer recruitment and retention | Seeded |
 | [`docs/`](docs/) | Roadmap, principles and working notes | Draft |
