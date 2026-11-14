@@ -35,10 +35,12 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - `schema/` Enquiry schema and synthetic examples
 - `register/` front-door register (CSV) and its column guide
 - `rubric/` audit rubric in Markdown and JSON
+- `census/` intake-form census: forms, questions, answer options, guidance (CSV)
 - `evidence/` evidence library
 - `docs/` roadmap and project notes
 - `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript); `vercel.json` builds it
 - `tests/` validation scripts
+- `tools/` helper scripts (for example the census summary)
 
 ## Before finishing a task
 
