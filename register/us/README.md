@@ -13,7 +13,7 @@ The method is in [`docs/us-survey-plan.md`](../../docs/us-survey-plan.md).
 | File | One row per | Status |
 |---|---|---|
 | `states.csv` | State, DC | First pass |
-| `front-doors.csv` | Public place to enquire: a state, county, city, contracted regional or tribal front door | First pass for state and regional rows; county and tribal rows in progress |
+| `front-doors.csv` | Public place to enquire: a state, county, city, contracted regional or tribal front door | First pass |
 | `form-questions.csv` | Question on a front door's first-contact form | Header only |
 | `response-promises.csv` | Published promise about when or how an enquirer will hear back | Header only |
 | `question-topics.md` | The topic codes used in `form-questions.csv` | Draft |
