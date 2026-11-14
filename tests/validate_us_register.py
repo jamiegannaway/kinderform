@@ -38,6 +38,22 @@ HEADERS = {
         "front_door_id", "promise_quote", "stage", "channel", "stated_hours",
         "source_url", "date_checked", "evidence_level", "verification",
     ],
+    "application-forms.csv": [
+        "form_id", "state_code", "front_door_id", "issuing_body", "form_name",
+        "form_number", "step", "services", "format", "licensed_instrument", "url",
+        "source_url", "date_checked", "evidence_level", "verification", "notes",
+    ],
+    "application-questions.csv": [
+        "form_id", "question_order", "section", "question_paraphrase", "topic",
+        "required", "answer_type", "source_url", "date_checked", "evidence_level",
+        "verification",
+    ],
+    "policies.csv": [
+        "policy_id", "state_code", "front_door_id", "applies_to", "topic",
+        "rule_summary", "value", "unit", "legal_citation", "source_type",
+        "effective_date", "source_url", "date_checked", "evidence_level",
+        "verification", "notes",
+    ],
 }
 
 ENUMS = {
@@ -57,6 +73,14 @@ ENUMS = {
     },
     "stage": {"acknowledgement", "first_contact", "info_session", "application", "other"},
     "channel": {"phone", "email", "letter", "any", "unknown"},
+    "step": {"application", "background_check", "medical", "references", "financial",
+             "home_safety", "home_study", "training", "agreement", "other"},
+    "format": {"pdf", "web_form", "online_portal", "document", "unknown"},
+    "licensed_instrument": {"yes", "no"},
+    "applies_to": {"fostering", "adoption", "both"},
+    "unit": {"years", "months", "days", "hours", "children", "bedrooms", "square_feet",
+             "usd_per_month", "other"},
+    "source_type": {"statute", "regulation", "policy_manual", "agency_page", "other"},
 }
 
 REQUIRED = {
@@ -72,21 +96,33 @@ REQUIRED = {
     "response-promises.csv": ["front_door_id", "promise_quote", "stage", "channel",
                               "source_url", "date_checked", "evidence_level",
                               "verification"],
+    "application-forms.csv": ["form_id", "state_code", "issuing_body", "form_name",
+                              "step", "services", "format", "licensed_instrument",
+                              "source_url", "date_checked", "evidence_level",
+                              "verification"],
+    "application-questions.csv": ["form_id", "question_order", "question_paraphrase",
+                                  "topic", "required", "answer_type", "source_url",
+                                  "date_checked", "evidence_level", "verification"],
+    "policies.csv": ["policy_id", "state_code", "applies_to", "topic", "rule_summary",
+                     "source_type", "source_url", "date_checked", "evidence_level",
+                     "verification"],
 }
 
 URL_COLUMNS = {"lead_agency_website", "foster_info_url", "adoption_info_url",
-               "licensing_lookup_url", "source_url", "website", "form_url"}
+               "licensing_lookup_url", "source_url", "website", "form_url", "url"}
 
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 URL = re.compile(r"^https?://[^\s/]+\.[^\s]+$")
 FRONT_DOOR_ID = re.compile(r"^us-[a-z]{2}-[a-z0-9]+(-[a-z0-9]+)*$")
+FORM_ID = re.compile(r"^us-[a-z]{2}-form-[a-z0-9]+(-[a-z0-9]+)*$")
+POLICY_ID = re.compile(r"^us-[a-z]{2}-policy-[a-z0-9]+(-[a-z0-9]+)*$")
 # Personal-data guards: no email addresses or phone numbers anywhere in the register.
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<!\d)(\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\d)")
 
 
-def topic_codes() -> set[str]:
-    text = (US / "question-topics.md").read_text(encoding="utf-8")
+def topic_codes(name: str = "question-topics.md") -> set[str]:
+    text = (US / name).read_text(encoding="utf-8")
     return set(re.findall(r"^\| `([a-z_]+)` \|", text, flags=re.M))
 
 
@@ -126,6 +162,8 @@ def main() -> int:
                     errors.append(f"{where}: {column} looks like it holds a phone number")
                 if value != value.strip():
                     errors.append(f"{where}: {column} has leading or trailing spaces")
+            if row.get("effective_date") and not DATE.match(row["effective_date"]):
+                errors.append(f"{where}: effective_date must be YYYY-MM-DD")
             if row.get("date_checked") and not DATE.match(row["date_checked"]):
                 errors.append(f"{where}: date_checked must be YYYY-MM-DD")
             if "state_code" in row and row["state_code"] not in STATE_CODES:
@@ -188,6 +226,61 @@ def main() -> int:
         if row["stated_hours"] and not row["stated_hours"].replace(".", "", 1).isdigit():
             errors.append(f"response-promises.csv: stated_hours must be a number")
 
+    # application-forms.csv
+    forms = tables["application-forms.csv"]
+    form_ids = [row["form_id"] for row in forms]
+    for form_id in sorted({i for i in form_ids if form_ids.count(i) > 1}):
+        errors.append(f"application-forms.csv: {form_id} appears more than once")
+    licensed = set()
+    for row in forms:
+        fid = row["form_id"]
+        if not FORM_ID.match(fid):
+            errors.append(f"application-forms.csv: bad form_id '{fid}'")
+        elif fid[3:5] != row["state_code"].lower():
+            errors.append(f"application-forms.csv: {fid} does not start with its state code")
+        if row["front_door_id"] and row["front_door_id"] not in known:
+            errors.append(f"application-forms.csv: unknown front_door_id {row['front_door_id']}")
+        if row["licensed_instrument"] == "yes":
+            licensed.add(fid)
+
+    # application-questions.csv
+    for row in tables["application-questions.csv"]:
+        fid = row["form_id"]
+        if fid not in set(form_ids):
+            errors.append(f"application-questions.csv: unknown form_id {fid}")
+        if fid in licensed:
+            errors.append(f"application-questions.csv: {fid} is a licensed instrument; its questions must not be recorded")
+        if row["topic"] not in topics:
+            errors.append(f"application-questions.csv: unknown topic '{row['topic']}'")
+        if len(row["question_paraphrase"]) > 120:
+            errors.append(f"application-questions.csv: paraphrase over 120 characters for {fid}")
+        if row["evidence_level"] != "form_read":
+            errors.append(f"application-questions.csv: {fid} evidence_level must be form_read")
+        if not row["question_order"].isdigit():
+            errors.append("application-questions.csv: question_order must be a whole number")
+
+    # policies.csv
+    policy_topics = topic_codes("policy-topics.md")
+    policy_ids = [row["policy_id"] for row in tables["policies.csv"]]
+    for policy_id in sorted({i for i in policy_ids if policy_ids.count(i) > 1}):
+        errors.append(f"policies.csv: {policy_id} appears more than once")
+    for row in tables["policies.csv"]:
+        pid = row["policy_id"]
+        if not POLICY_ID.match(pid):
+            errors.append(f"policies.csv: bad policy_id '{pid}'")
+        elif pid[3:5] != row["state_code"].lower():
+            errors.append(f"policies.csv: {pid} does not start with its state code")
+        if row["front_door_id"] and row["front_door_id"] not in known:
+            errors.append(f"policies.csv: unknown front_door_id {row['front_door_id']}")
+        if row["topic"] not in policy_topics:
+            errors.append(f"policies.csv: unknown topic '{row['topic']}'")
+        if len(row["rule_summary"]) > 240:
+            errors.append(f"policies.csv: rule_summary over 240 characters for {pid}")
+        if row["value"] and not re.fullmatch(r"\d+(\.\d+)?", row["value"]):
+            errors.append(f"policies.csv: value must be a number for {pid}")
+        if bool(row["value"]) != bool(row["unit"]):
+            errors.append(f"policies.csv: value and unit go together for {pid}")
+
     by_level: dict[str, int] = {}
     for row in doors:
         by_level[row["level"]] = by_level.get(row["level"], 0) + 1
@@ -195,6 +288,8 @@ def main() -> int:
     print(f"front-doors.csv: {len(doors)} rows " + str(dict(sorted(by_level.items()))))
     print(f"form-questions.csv: {len(tables['form-questions.csv'])} rows")
     print(f"response-promises.csv: {len(tables['response-promises.csv'])} rows")
+    for name in ("application-forms.csv", "application-questions.csv", "policies.csv"):
+        print(f"{name}: {len(tables[name])} rows")
 
     if errors:
         for error in errors:

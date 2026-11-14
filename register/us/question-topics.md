@@ -1,6 +1,6 @@
 # Question topics (draft)
 
-Every question in `form-questions.csv` gets one topic code from this list. The codes let us compare first-contact forms across front doors without copying any form.
+Every question in `form-questions.csv` (first contact) and `application-questions.csv` (full application) gets one topic code from this list. The codes let us compare first-contact forms across front doors without copying any form.
 
 Where a topic matches a field in the Enquiry schema (`schema/enquiry.schema.json`), the field is named. Topics marked **sensitive** are ones the rubric (`rubric/rubric.md`, domain 3) says should not be asked at first contact.
 
@@ -51,6 +51,25 @@ This list is a draft. Add a code when a question fits none of these, and say why
 | `child_protection_history` | Earlier child abuse or neglect reports (**sensitive** at first contact) | none |
 | `health` | Physical or mental health (**sensitive** at first contact) | none |
 | `eligibility_other` | Any other screening question, such as citizenship or driving licence | none |
+
+## Application stage
+
+These topics usually appear in the full application, home study or check forms (`application-questions.csv`), not at first contact. Sensitive topics are expected at this stage; the codes still mark them so the summary can say what is asked and when.
+
+| Code | Covers | Schema field |
+|---|---|---|
+| `motivation` | Why the person wants to foster or adopt | none |
+| `parenting_history` | Own children, earlier parenting or caring roles | none |
+| `parenting_approach` | Views on discipline, routines and supporting a child | none |
+| `relationship_history` | Earlier marriages or partnerships (**sensitive**) | none |
+| `education` | Schooling and qualifications | none |
+| `references` | Names of referees (records the question only, never answers) | none |
+| `support_network` | Family, friends and childcare support | none |
+| `home_safety` | Checklist items about the home | none |
+| `transport` | Driving licence, vehicle and insurance | none |
+| `substance_use` | Alcohol or drug use (**sensitive**) | none |
+| `background_check_consent` | Consent to criminal record, fingerprint or registry checks | none |
+| `household_adults_checks` | Details of other adults in the home for checks | none |
 
 ## Consent and admin
 

@@ -1,6 +1,6 @@
 # US survey plan
 
-A survey of where people in the United States can ask about fostering or adopting, what each first-contact form asks, and what reply each front door promises. It is the project's first adaptation outside England (see "Later: adopt" in the [roadmap](roadmap.md)).
+A survey of where people in the United States can ask about fostering or adopting, what each first-contact form asks, what reply each front door promises, what the full application asks, and what the rules for becoming a foster or adoptive parent are in each state. It is the project's first adaptation outside England (see "Later: adopt" in the [roadmap](roadmap.md)).
 
 Data lives in [`register/us/`](../register/us/). Column definitions are in its [README](../register/us/README.md).
 
@@ -8,6 +8,7 @@ Data lives in [`register/us/`](../register/us/). Column definitions are in its [
 
 - **In:** the 50 states, the District of Columbia and tribal nations.
 - **Front doors:** every public place to enquire: the state agency, county or city agencies where they run services, private organisations contracted by a state to recruit or license families for it, and tribal child welfare programmes.
+- **Applications and policies:** the forms that make up a foster or adoption application after the first enquiry, and each state's published rules on who can foster or adopt and what licensing involves.
 - **Later phase:** private licensed child-placing agencies that are not contracted front doors.
 - **Out:** territories (for now), any child-level data, any scoring or ranking of named agencies.
 
@@ -34,9 +35,11 @@ Each row's `notes` says which rule selected it. The list is not complete. Many t
 | 2 | `states.csv`: 50 states and DC, administration model, lead agency, main pages | First pass |
 | 3 | `front-doors.csv`: state, regional contracted, county or city, and tribal front doors | First pass |
 | 4 | Open each front-door page and form; fill `form-questions.csv` and `response-promises.csv` | Not started |
-| 5 | Private licensed agencies, starting from each state's licensing list | Not started |
-| 6 | Neutral patterns summary (counts across front doors, no names ranked) | Not started |
-| 7 | Verification by a second person, and an invitation to agencies to correct their rows | Not started |
+| 5 | Application forms: list each state's (and each local or tribal agency's own) application forms in `application-forms.csv`; record their questions in `application-questions.csv` | Structure ready |
+| 6 | Policies: each state's published rules for fostering and adopting in `policies.csv`, with the legal citation | Structure ready |
+| 7 | Private licensed agencies, starting from each state's licensing list | Not started |
+| 8 | Neutral patterns summary (counts across front doors and states, no names ranked) | Not started |
+| 9 | Verification by a second person, and an invitation to agencies to correct their rows | Not started |
 
 ## Method
 
@@ -59,7 +62,33 @@ Questions are paraphrased in a few words and tagged with a topic from [`question
 
 "SLA" here means **only what a front door publishes**: for example "a recruiter will call you within 48 hours". The survey does not measure whether agencies keep those promises. That would need their own data, and would come later and only by agreement.
 
-### Phase 5: private agencies
+### Phase 5: application forms
+
+An application is usually a packet, not one form: an application, then forms for background checks, a medical statement, references, finances, a home safety check and a home study. Phase 5 records them in two steps.
+
+1. **Find the forms.** For each state, list the forms in the state's licensing or adoption application packet in [`application-forms.csv`](../register/us/application-forms.csv): name, form number, issuing body, which step it belongs to, format and link. In county-run states, list the state's standard forms first, then any local agency that publishes its own. Tribal agencies that publish their own forms are listed too. This step can be done from search results.
+2. **Record the questions.** Open each form and record each question in [`application-questions.csv`](../register/us/application-questions.csv), paraphrased in a few words and tagged with a topic from [`question-topics.md`](../register/us/question-topics.md). This step needs the form opened (`evidence_level` `form_read`).
+
+Rules for this phase:
+
+- **Describe, do not copy.** Forms are paraphrased question by question and never republished, even where a state form is in the public domain.
+- **Licensed instruments stay out.** Several states use licensed home study and training models, for example the SAFE home study, PRIDE and the National Training and Development Curriculum (NTDC). Record that a state uses one, with a link to the publisher. Do not record their questions or content. This follows the rule on CoramBAAF's Form F in England.
+- **Sensitive questions are expected here.** A full application properly asks about criminal history, health and finances. The rubric's first-contact rule on sensitive questions does not apply to this stage. The topic codes still mark these questions, so the summary can say what is asked and when.
+- **No applicant data.** Blank forms only. Never a completed form, an example answer or anything an applicant has written.
+
+### Phase 6: policies
+
+[`policies.csv`](../register/us/policies.csv) holds one row per rule, per state: for example the minimum age to foster, whether renting is allowed, bedroom and space rules, training hours, background checks, the home study, licence length, and the stated time from application to licence. Topics are listed in [`policy-topics.md`](../register/us/policy-topics.md).
+
+- **Primary source first.** Each rule should cite the statute or regulation (for example a section of the state administrative code) where one exists, then the agency page that explains it. `source_type` says which.
+- **Plain paraphrase.** `rule_summary` says the rule in plain words. A machine-readable `value` and `unit` are added where the rule is a number, such as `21` `years`.
+- **Fostering and adoption kept apart.** Rules often differ, so `applies_to` says which.
+- **Rules, not judgements.** The register records what a state's rule is. It does not say whether a rule is good or bad, and it does not assess any person against the rules.
+- **Dates matter.** Rules change. `effective_date` is recorded when the source gives one.
+
+Policies can be found through search results, but the wording of a regulation should be checked against the code itself before a row is marked `page_read`.
+
+### Phase 7: private agencies
 
 Start from each state's public list of licensed child-placing agencies (`licensing_lookup_url` in `states.csv`). First take a sample per state, chosen by a written rule such as the first ten alphabetically within each region. Then widen.
 
@@ -70,7 +99,7 @@ These come from [`CLAUDE.md`](../CLAUDE.md):
 - No personal data. No staff names, phone numbers or email addresses. The test checks for phone numbers and email addresses.
 - Neutral facts only. No scores for named agencies until the rubric has been consulted on and each agency has had a right of reply.
 - Every row has a source link and a date checked.
-- Licensed forms are not reproduced.
+- Licensed forms and licensed assessment or training models are not reproduced.
 
 ## Checks
 
