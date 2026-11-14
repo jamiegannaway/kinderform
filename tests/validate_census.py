@@ -16,7 +16,7 @@ CENSUS = ROOT / "census"
 REGISTER = ROOT / "register" / "front-doors.csv"
 
 COLUMNS = {
-    "forms.csv": ["form_id", "front_door_id", "name", "operator_type", "service_type", "nation", "form_stage",
+    "forms.csv": ["form_id", "front_door_id", "name", "operator_type", "service_type", "country", "region", "form_stage",
                   "access_route", "form_url", "platform", "template_group", "fields_observed", "observed",
                   "date_checked", "source_url", "notes"],
     "questions.csv": ["question_id", "form_id", "order", "section", "label_paraphrased", "category", "topic",
@@ -32,9 +32,10 @@ COLUMNS = {
 ALLOWED = {
     ("forms.csv", "operator_type"): {"regional_hub", "single_authority", "council", "council_consortium",
                                      "national_brand_council", "regional_service", "regional_adoption_agency",
-                                     "voluntary_adoption_agency", "independent_fostering_agency", "platform_vendor"},
+                                     "voluntary_adoption_agency", "independent_fostering_agency", "platform_vendor",
+                                     "state_agency", "county_agency", "private_agency"},
     ("forms.csv", "service_type"): {"fostering", "adoption", "fostering_and_adoption"},
-    ("forms.csv", "nation"): {"England", "Wales", "Scotland", "Northern Ireland", "UK"},
+    ("forms.csv", "country"): {"UK", "US"},
     ("forms.csv", "form_stage"): {"primary", "secondary"},
     ("forms.csv", "access_route"): {"online_form", "downloadable_form", "phone_conversation", "sent_after_first_contact",
                                     "email_only", "signposting_only", "described_not_public", "council_portal"},
@@ -113,6 +114,20 @@ for r in options:
 for r in guidance:
     if r["form_id"] not in form_ids:
         err(f"guidance.csv {r['guidance_id']}: unknown form_id {r['form_id']}")
+
+# Region must fit the country: a UK nation, or a US state or DC
+UK_REGIONS = {"England", "Wales", "Scotland", "Northern Ireland", "UK"}
+US_REGIONS = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+              "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+              "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
+              "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey",
+              "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
+              "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah",
+              "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"}
+for r in forms:
+    allowed = UK_REGIONS if r["country"] == "UK" else US_REGIONS
+    if r["region"] not in allowed:
+        err(f"forms.csv {r['form_id']}: region '{r['region']}' does not fit country {r['country']}")
 
 # Coded values, dates and URLs
 for (name, col), allowed in ALLOWED.items():

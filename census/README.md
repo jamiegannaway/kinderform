@@ -1,6 +1,6 @@
 # Intake-form census (v0.1, November 2026)
 
-A list of UK fostering and adoption intake forms: what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
+A list of fostering and adoption intake forms, starting with the UK: what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
 
 > **Status: draft for analysis. Every row is unverified.** The data describes public pages and processes. It is not a score, and nothing here should be published as a named comparison until the method has been consulted on and each service has seen its own rows privately, with a right of reply.
 
@@ -26,7 +26,9 @@ IDs link the files: `questions.form_id` → `forms.form_id`, `answer_options.que
 |---|---|
 | `form_id` | Short ID, unique in this file |
 | `front_door_id` | Register ID, if the front door is in the register |
-| `operator_type` | `regional_hub`, `single_authority`, `council`, `council_consortium`, `national_brand_council`, `regional_service`, `regional_adoption_agency`, `voluntary_adoption_agency`, `independent_fostering_agency`, `platform_vendor` |
+| `operator_type` | UK: `regional_hub`, `single_authority`, `council`, `council_consortium`, `national_brand_council`, `regional_service`, `regional_adoption_agency`, `voluntary_adoption_agency`, `independent_fostering_agency`. US: `state_agency`, `county_agency`, `private_agency`. Either: `platform_vendor` |
+| `country` | `UK` or `US` |
+| `region` | A UK nation (`England`, `Wales`, `Scotland`, `Northern Ireland`), or a US state or `District of Columbia` |
 | `service_type` | `fostering`, `adoption` or `fostering_and_adoption` |
 | `form_stage` | `primary` (first contact) or `secondary` (after first contact, before assessment) |
 | `access_route` | `online_form`, `downloadable_form`, `phone_conversation`, `sent_after_first_contact`, `email_only`, `signposting_only`, `described_not_public`, `council_portal` |
@@ -91,6 +93,10 @@ No forms were submitted. No test enquiries were made. Where a site's robots.txt 
 Labels, hints and guidance are paraphrased, to keep the dataset short and to avoid copying services' wording wholesale.
 
 ## Coverage and gaps
+
+**United States.** The files are ready for US forms: set `country` to `US`, `region` to the state, and use `state_agency`, `county_agency` or `private_agency`. In states where counties run child welfare, record each county's form as its own row and name the county in `name`. No US data has been collected yet.
+
+**UK.**
 
 This is a first pass, not a full census. See [`summary.md`](summary.md) for counts.
 

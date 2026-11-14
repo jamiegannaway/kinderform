@@ -1,0 +1,20 @@
+---
+import Base from "@/layouts/Base.astro";
+import FormCheckPublic from "@/components/form-check-public";
+import { loadCensus } from "@/lib/census";
+import { coverage, patterns } from "@/lib/form-check";
+import { isProduction } from "@/lib/build-env";
+
+const census = loadCensus();
+---
+<Base
+  title="Form check: how fostering and adoption enquiry forms treat people | Kinderform"
+  description="Form check looks at fostering and adoption enquiry forms from the side of the person enquiring: how much they ask, whether they say when you will hear back, and how they handle your details."
+>
+  <FormCheckPublic
+    patterns={patterns(census)}
+    coverage={coverage(census)}
+    checked="November 2026"
+    privatePreview={!isProduction}
+  />
+</Base>

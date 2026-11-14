@@ -65,19 +65,20 @@ lines = ["# Intake-form census: summary counts", "",
 
 # Coverage
 lines += ["## Coverage", "",
-          "| Nation | Service | Primary forms | Secondary forms | Primary forms with questions recorded |",
-          "|---|---|---|---|---|"]
+          "| Country | Region | Service | Primary forms | Secondary forms | Primary forms with questions recorded |",
+          "|---|---|---|---|---|---|"]
 cov = Counter()
 for f in forms.values():
     if f["operator_type"] == "platform_vendor":
         continue
-    key = (f["nation"], f["service_type"])
+    key = (f["country"], f["region"], f["service_type"])
     cov[key + (f["form_stage"],)] += 1
     if f["form_stage"] == "primary" and analysable(f["form_id"]):
         cov[key + ("q",)] += 1
-for nation, service in sorted({(k[0], k[1]) for k in cov}):
-    lines.append(f"| {nation} | {service.replace('_', ' ')} | {cov[(nation, service, 'primary')]} | "
-                 f"{cov[(nation, service, 'secondary')]} | {cov[(nation, service, 'q')]} |")
+for country, region, service in sorted({(k[0], k[1], k[2]) for k in cov}):
+    key = (country, region, service)
+    lines.append(f"| {country} | {region} | {service.replace('_', ' ')} | {cov[key + ('primary',)]} | "
+                 f"{cov[key + ('secondary',)]} | {cov[key + ('q',)]} |")
 obs = Counter(f["observed"] for f in forms.values())
 lines += ["", "How forms were seen: " + ", ".join(f"{k.replace('_', ' ')} {v}" for k, v in sorted(obs.items())) + ".", ""]
 

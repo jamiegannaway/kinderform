@@ -38,7 +38,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - `census/` intake-form census: forms, questions, answer options, guidance (CSV)
 - `evidence/` evidence library
 - `docs/` roadmap and project notes
-- `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript); `vercel.json` builds it
+- `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript); `vercel.json` builds it. `/form-check` shows the method and patterns without names. `/form-check/named` (named draft scores) is built only when `VERCEL_ENV` is not `production`, so it exists only in private previews; scores are computed at build time and never committed
 - `tests/` validation scripts
 - `tools/` helper scripts (for example the census summary)
 
