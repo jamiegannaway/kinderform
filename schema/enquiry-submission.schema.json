@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.kinderform.org/schema/enquiry-submission/0.1.json",
+  "title": "Enquiry submission",
+  "description": "What a person tells a fostering or adoption service when they first get in touch. It holds only what the service needs to reply. Nothing about health, the household, the home, money, work, convictions, ethnicity, religion, sexuality, gender identity, date of birth or full address. Fields it does not define are rejected.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["full_name", "interest", "knows_child", "contact_method"],
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "One field, so the reply can be personal."
+    },
+    "preferred_name": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "What the person would like to be called."
+    },
+    "interest": {
+      "type": "string",
+      "enum": ["fostering", "adoption", "not_sure"],
+      "description": "'not_sure' is a real answer: the service talks through both."
+    },
+    "knows_child": {
+      "type": "boolean",
+      "description": "True routes the enquiry to the kinship team. Nothing about the child is recorded."
+    },
+    "contact_method": {
+      "type": "string",
+      "enum": ["email", "phone_call", "text_message"]
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 254,
+      "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    },
+    "phone": {
+      "type": "string",
+      "pattern": "^\\+?[0-9()\\-\\s]{7,20}$"
+    },
+    "best_times": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["weekday_morning", "weekday_afternoon", "weekday_evening", "saturday"] },
+      "description": "Only asked when the person chose a phone call. Evening and Saturday are always offered."
+    },
+    "postcode_area": {
+      "type": "string",
+      "pattern": "^[A-Z]{1,2}[0-9][0-9A-Z]?$",
+      "description": "UK only. The outward part of the postcode, enough to find the local team."
+    },
+    "zip_prefix": {
+      "type": "string",
+      "pattern": "^[0-9]{3}$",
+      "description": "US only. The first three digits of the ZIP code, enough to find the local agency."
+    },
+    "topics": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["eligibility", "what_it_involves", "money_and_support", "process_and_timescales", "types_of_care", "something_else"]
+      },
+      "description": "Coded, never free text, so nobody shares sensitive details by accident."
+    },
+    "heard_from": {
+      "type": "string",
+      "enum": ["friend_or_family", "social_media", "search", "event", "advert", "council_or_agency_website", "other"]
+    },
+    "updates_opt_in": {
+      "type": "boolean",
+      "default": false,
+      "description": "Opt-in only. Never pre-ticked."
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "contact_method": { "const": "email" } }, "required": ["contact_method"] },
+      "then": { "required": ["email"] }
+    },
+    {
+      "if": { "properties": { "contact_method": { "enum": ["phone_call", "text_message"] } }, "required": ["contact_method"] },
+      "then": { "required": ["phone"] }
+    },
+    {
+      "not": { "required": ["postcode_area", "zip_prefix"] }
+    }
+  ]
+}

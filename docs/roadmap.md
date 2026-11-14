@@ -29,7 +29,9 @@
 
 ## Later: adopt
 
-- [ ] Model enquiry form (plain HTML) with a "what happens next" sequence
+- [x] Reference enquiry form on the site (`/example-form`): GOV.UK Frontend for the UK and USWDS for the US, both without government branding, driven by `schema/enquiry-submission.schema.json` and per-country wording in `schema/ui/`
+- [ ] A version of the reference form that works without JavaScript, for services whose platforms cannot run it
+- [ ] Test the reference form with people who have enquired, and with screen reader users
 - [ ] Browser-only funnel tool that reads an export in the schema format; no data leaves the service
 - [ ] One pilot hub maps its export to the schema; publish the mapping guide as v0.2
 - [ ] Pipeline slices beyond enquiry: application, assessment, approval, leaving
