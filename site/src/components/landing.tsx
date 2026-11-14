@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { SiteFooter, SiteHeader } from "@/components/site-header"
 
 const SOURCE_URL =
   "https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf"
@@ -131,21 +132,7 @@ function Exchange() {
 export default function Landing() {
   return (
     <>
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground"
-      >
-        Skip to content
-      </a>
-
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <a href="/" className="text-lg font-semibold tracking-tight" aria-label="Kinderform home">
-          kinderform
-        </a>
-        <Button asChild variant="ghost" size="sm">
-          <a href="#get-involved">Get in touch</a>
-        </Button>
-      </header>
+      <SiteHeader current="/" />
 
       <main id="main">
         <section
@@ -298,27 +285,7 @@ export default function Landing() {
         </div>
       </main>
 
-      <footer className="border-t">
-        <div className="mx-auto max-w-6xl space-y-2 px-6 py-8 text-sm text-muted-foreground">
-          <p>
-            Kinderform. Code is MIT licensed. Writing and data are{" "}
-            <a
-              href="https://creativecommons.org/licenses/by/4.0/"
-              className="font-medium text-foreground underline underline-offset-4"
-            >
-              CC BY 4.0
-            </a>
-            .
-          </p>
-          <p>
-            Built with the{" "}
-            <a href="https://ui.shadcn.com" className="font-medium text-foreground underline underline-offset-4">
-              shadcn/ui
-            </a>{" "}
-            design system. This site sets no cookies, has no tracking and loads nothing from other sites.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   )
 }
