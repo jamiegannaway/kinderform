@@ -6,6 +6,14 @@
 
 `digests/` holds a short monthly note on what was added and why it matters.
 
+`findings.json` holds "What we know so far": short findings in plain words, each with its sources and whether a person has checked them against the original (the date, and whether against the full text, the abstract, the key findings or a chart). Use `null` for "not yet checked". Run `python tests/validate_findings.py` after editing it.
+
+## The research page
+
+Everything in this folder except this README is published at [kinderform.org/research](https://www.kinderform.org/research). The site is built from these files, so a merged change here updates the page. Links between evidence files become links between pages. Links to other files in the repository become plain text while the repository is private.
+
+Before merging, check that nothing here names a service in a way that reports our own findings about it. Services see their own results privately first.
+
 ## Rules for entries
 
 1. One entry per source, with authors, year, title, journal or publisher and a working link.

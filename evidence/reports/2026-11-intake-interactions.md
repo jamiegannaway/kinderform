@@ -358,9 +358,9 @@ The legitimate speed gain from AI is in the *first five minutes and the first wo
 | Derby (Foster for East Midlands) | Information pack same day; mentor and information session offered at first call; one month of multi-channel contact |
 | National Fostering Group Wales | Screening call within 2 days |
 | Florida (USA) adoption customer-service protocol | Inquiries answered within 3 business days |
-| Fostering South West, Foster for Greater Manchester, Foster Birmingham | One to two working days (from the earlier OUCM front-door audit; not re-verified here) |
-
 Procedure manuals say what a service intends. They may not reflect actual performance.
+
+*Editing note, 14 November 2026: a row naming three services' reply times from our own earlier front-door audit has been removed. Services see our findings about them privately before anything is published.*
 
 **Strong design features worth reusing:**
 
