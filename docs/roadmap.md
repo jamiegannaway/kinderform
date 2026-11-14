@@ -17,7 +17,9 @@ See [us-survey-plan.md](us-survey-plan.md).
 
 - [x] US register structure, column guide, question topics and validation test
 - [x] 50 states and DC: administration model, lead agency and main pages (unverified)
-- [x] Public front doors: state, contracted regional, county or city, and tribal (unverified, from search results)
+- [x] State-level and contracted regional front doors (unverified, from search results)
+- [ ] County and city front doors in county-run states (CA, CO, MN, NV, NY, NC, ND, OH, PA, VA, WI) and Maryland's 24 local departments
+- [ ] Tribal front doors: complete the Title IV-E list and the state-by-state search (16 rows so far)
 - [ ] Open each front-door page and form; record questions and published response promises
 - [ ] Private licensed agencies, starting from each state's licensing list
 - [ ] Second-person verification and invitation to agencies to correct their rows

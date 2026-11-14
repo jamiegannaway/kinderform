@@ -13,10 +13,11 @@ The method is in [`docs/us-survey-plan.md`](../../docs/us-survey-plan.md).
 | File | One row per | Status |
 |---|---|---|
 | `states.csv` | State, DC | First pass |
-| `front-doors.csv` | Public place to enquire: a state, county, city, contracted regional or tribal front door | First pass |
+| `front-doors.csv` | Public place to enquire: a state, county, city, contracted regional or tribal front door | First pass for state and regional rows; county and tribal rows in progress |
 | `form-questions.csv` | Question on a front door's first-contact form | Header only |
 | `response-promises.csv` | Published promise about when or how an enquirer will hear back | Header only |
 | `question-topics.md` | The topic codes used in `form-questions.csv` | Draft |
+| `notes/` | Search notes from each research pass | Working notes |
 
 Private licensed agencies (non-profit and for-profit child-placing agencies) are a later phase. They will go in `front-doors.csv` with the matching `sector` value.
 

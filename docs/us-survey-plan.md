@@ -32,7 +32,7 @@ Each row's `notes` says which rule selected it. The list is not complete. Many t
 |---|---|---|
 | 1 | Structure: folders, column guide, topic codes, validation test | Done |
 | 2 | `states.csv`: 50 states and DC, administration model, lead agency, main pages | First pass |
-| 3 | `front-doors.csv`: state, regional contracted, county or city, and tribal front doors | First pass |
+| 3 | `front-doors.csv`: state, regional contracted, county or city, and tribal front doors | State and regional rows first pass; county and tribal in progress |
 | 4 | Open each front-door page and form; fill `form-questions.csv` and `response-promises.csv` | Not started |
 | 5 | Private licensed agencies, starting from each state's licensing list | Not started |
 | 6 | Neutral patterns summary (counts across front doors, no names ranked) | Not started |
@@ -79,6 +79,17 @@ python tests/validate_us_register.py
 ```
 
 The test checks headers, allowed values, required cells, URL shape, dates, unique IDs, links between files, and the personal-data guards.
+
+## Progress log
+
+**2026-11-14, wave 1.** Five state batches and a tribal batch. Result: 51 rows in `states.csv`, 120 in `front-doors.csv` (71 state, 32 regional, 1 county, 16 tribal). The session allows 200 web searches per turn, shared by all agents, and that ran out part way through. So:
+
+- several lead-agency home pages and most licensing lookups are blank
+- many `administration` values for state-administered states rest on the Child Welfare Information Gateway factsheet without the state map being visible; the row notes say so
+- the five county batches started after the budget was spent and wrote nothing; they will rerun one or two at a time
+- the tribal batch finished the Title IV-E pass (10 of about 22 approved tribes identified) but not the state-by-state search; see [`register/us/notes/tribal-search-2026-11-14.md`](../register/us/notes/tribal-search-2026-11-14.md)
+
+Points to check in the next pass include Maryland (its 2025–2029 plan calls it state-supervised and state-administered, with 24 local departments), Ohio's agency count (85 against 88 counties), Minnesota's (79 agencies for 87 counties) and North Dakota (19 human service zones, licensing moved to the state in 2022).
 
 ## Known limits of the first pass
 
