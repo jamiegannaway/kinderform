@@ -7,6 +7,7 @@
 - [x] Front-door register seeded (unverified)
 - [x] Rubric v0.1 draft for comment
 - [x] Evidence library seeded
+- [x] Landing page for kinderform.org (`site/`, deployed by Vercel)
 - [ ] Verify every register row against the live page
 - [ ] Add ONS local authority codes to the register
 - [ ] Map `closure_reason_code` to Ofsted's fostering return categories
