@@ -19,7 +19,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] 50 states and DC: administration model, lead agency and main pages (unverified)
 - [x] State-level and contracted regional front doors (unverified, from search results)
 - [x] County and city front doors in county-run states (CA, CO, MN, NV, NY, NC, ND, OH, PA, VA, WI) and Maryland's 24 local departments (unverified)
-- [x] Tribal front doors, first pass: 89 rows across 30 states (unverified)
+- [x] Tribal front doors, first pass: 89 rows across 26 states (unverified)
 - [ ] Identify the remaining tribes with approved Title IV-E plans (about 10 of 22 still unnamed)
 - [ ] Open each front-door page and form; record questions and published response promises
 - [ ] Private licensed agencies, starting from each state's licensing list
