@@ -22,6 +22,7 @@
 - [x] Intake-form census v0.1: fostering and adoption forms, questions, answer options and guidance (`census/`, unverified)
 - [ ] Check census rows by hand in a browser, starting with the forms that would not render
 - [x] Form check tab on the site: public method and patterns without names; named draft scores in private previews only
+- [x] Census as evidence on the research page (`/research#how-forms-differ`): forms read from the live page, no names, each measure shown on its own so no form can be traced across them
 - [ ] US census pass: state agencies first, then counties where counties run child welfare
 - [ ] Share each service's census rows with it privately before any named analysis
 - [ ] Polite crawler that reads public front-door pages and extracts form fields, consent wording and response-time promises

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14",
+  "updated": "2026-11-15",
   "about": "What we know so far about the first step, from someone getting in touch to their application. Shown at kinderform.org/research. Each source says whether a person has checked the claim against the original, when, and against what. Use null for 'not yet checked'. Edit by pull request; tests/validate_findings.py checks the format.",
   "findings": [
     {
@@ -66,6 +66,22 @@
           "year": "2022",
           "url": "https://assets.publishing.service.gov.uk/media/639b0743d3bf7f7f88f10fa8/Applying_behavioural_insights_to_fostering_and_adoption_in_England.pdf",
           "checked": null
+        }
+      ]
+    },
+    {
+      "id": "forms-differ",
+      "stage": "First contact",
+      "title": "First-contact forms differ a lot in what they ask and what they promise",
+      "summary": "In November 2026 we read 17 first-contact forms from councils, regional hubs, independent fostering agencies and adoption agencies across the UK. The shortest asked 5 questions and the longest 17. All 6 independent agency forms asked about a spare room, and none of the 8 council and hub forms did. Only 4 of the 16 forms we checked said when the person would hear back.",
+      "sources": [
+        {
+          "title": "How first-contact forms differ (Kinderform intake-form census, first pass)",
+          "by": "Kinderform",
+          "year": "2026",
+          "url": "/research#how-forms-differ",
+          "checked": null,
+          "note": "Our own reading of public pages, not published research. Read by an automated reader on 14 November 2026 and not yet checked by a person in a browser. Services are not named."
         }
       ]
     },

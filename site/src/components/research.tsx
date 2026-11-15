@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
+import FormsDiffer from "@/components/forms-differ"
+import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 
 export type Checked = { date: string; against: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
@@ -73,12 +75,14 @@ export default function ResearchIndex({
   updates,
   reports,
   library,
+  formsDiffer,
 }: {
   updated: string
   findings: Finding[]
   updates: Doc[]
   reports: Doc[]
   library: Doc
+  formsDiffer?: FormsDifferData
 }) {
   const sources = findings.flatMap((f) => f.sources)
   const checkedCount = sources.filter((s) => s.checked).length
@@ -120,6 +124,8 @@ export default function ResearchIndex({
             ))}
           </div>
         </section>
+
+        {formsDiffer && formsDiffer.read > 0 && <FormsDiffer data={formsDiffer} />}
 
         <section aria-labelledby="deeper" className="space-y-6">
           <H2 id="deeper">Read more</H2>

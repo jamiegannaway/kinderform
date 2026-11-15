@@ -40,7 +40,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - `census/` intake-form census: forms, questions, answer options, guidance (CSV)
 - `evidence/` evidence library; `findings.json` is "What we know so far". Everything here except the README is published at `/research` on the site, so a merge updates the public page
 - `docs/` roadmap and project notes
-- `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript, except the reference form at `/example-form`, which runs its own script from the same site; `vercel.json` allows script only on those pages); `vercel.json` builds it. `/research` is built from `evidence/`. `/form-check` shows the method and patterns without names. `/form-check/named` (named draft scores) is built only when `VERCEL_ENV` is not `production`, so it exists only in private previews; scores are computed at build time and never committed
+- `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript, except the reference form at `/example-form`, which runs its own script from the same site; `vercel.json` allows script only on those pages); `vercel.json` builds it. `/research` is built from `evidence/`, plus the census as unnamed patterns (`site/src/lib/forms-differ.ts`). `/form-check` shows the method and patterns without names. `/form-check/named` (named draft scores) is built only when `VERCEL_ENV` is not `production`, so it exists only in private previews; scores are computed at build time and never committed
 - `tests/` validation scripts
 - `tools/` helper scripts (for example the census summary)
 
