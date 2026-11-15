@@ -125,7 +125,8 @@ The best next step is a browser-based pass by a person on the forms that would n
 1. Edit the CSV directly. Keep IDs stable; add new questions at the end of a form's list or renumber that form only.
 2. Set `observed` and `date_checked` to how and when you checked it.
 3. Run `python tests/validate_census.py`, then `python tools/census_summary.py` to refresh the counts.
-4. Open a pull request with the source link in the description. Services are warmly invited to correct their own rows.
+4. Build the site. The research page shows these files as unnamed patterns, and the "forms-differ" finding in `evidence/findings.json` quotes some of the figures. If a change alters those figures, the build stops and says what the finding should now say.
+5. Open a pull request with the source link in the description. Services are warmly invited to correct their own rows.
 
 ## Starting the analysis
 

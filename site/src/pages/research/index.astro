@@ -4,6 +4,8 @@ import ResearchIndex, { longDate } from "@/components/research";
 import { getCollection } from "astro:content";
 import { evidenceEntries, hrefOf, libraryUpdated, monthOf, titleOf } from "@/lib/research";
 import findingsFile from "../../../../evidence/findings.json";
+import { loadCensus } from "@/lib/census";
+import { formsDiffer } from "@/lib/forms-differ";
 
 // Keep the order of findings.json: it is the order we want people to read them in.
 const order = findingsFile.findings.map((f) => f.id);
@@ -12,6 +14,31 @@ const findings = (await getCollection("findings"))
   .sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 const { library, reports, updates } = await evidenceEntries();
 const libUpdated = libraryUpdated(library?.body);
+// The intake-form census, as unnamed patterns (see src/lib/forms-differ.ts).
+const differ = formsDiffer(loadCensus());
+
+// The "forms-differ" card in findings.json is written by hand. Stop the build if its
+// figures no longer match the census, so the card and the section cannot disagree.
+const card = findings.find((f) => f.id === "forms-differ");
+if (card) {
+  const qs = differ.questions.flatMap((r) => r.values).sort((a, b) => a - b);
+  const m = (id: string) => differ.measures.find((x) => x.id === id)!.rows;
+  const sum = (rows: { yes: number; of: number }[], k: "yes" | "of") => rows.reduce((n, r) => n + r[k], 0);
+  const spare = m("spare-room");
+  const ifa = spare.find((r) => r.group === "Independent agencies");
+  const pub = spare.find((r) => r.group === "Councils and hubs");
+  const expected = [
+    `read ${differ.read} first-contact forms`,
+    `shortest asked ${qs[0]} questions and the longest ${qs.at(-1)}`,
+    `All ${ifa?.of} independent agency forms asked about a spare room`,
+    `none of the ${pub?.of} council and hub forms`,
+    `${sum(m("reply-time"), "yes")} of the ${sum(m("reply-time"), "of")} forms we checked`,
+  ];
+  const stale = expected.filter((e) => !card.summary.includes(e));
+  if (ifa?.yes !== ifa?.of || pub?.yes !== 0) stale.push("the spare-room pattern itself has changed");
+  if (stale.length)
+    throw new Error(`evidence/findings.json "forms-differ" no longer matches the census. Update it to say: ${stale.join("; ")}`);
+}
 ---
 <Base
   title="Research: what we know about the first step | Kinderform"
@@ -33,5 +60,6 @@ const libUpdated = libraryUpdated(library?.body);
       blurb: "A desk review of what happens after someone gets in touch, made with an AI-assisted research tool. Most figures are not yet checked by a person.",
     }))}
     updates={updates.map((u) => ({ href: hrefOf(u.id), title: titleOf(u.body), when: monthOf(u.id) }))}
+    formsDiffer={differ}
   />
 </Base>
