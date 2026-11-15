@@ -35,8 +35,8 @@ Each row's `notes` says which rule selected it. The list is not complete. Many t
 | 2 | `states.csv`: 50 states and DC, administration model, lead agency, main pages | First pass |
 | 3 | `front-doors.csv`: state, regional contracted, county or city, and tribal front doors | First pass |
 | 4 | Open each front-door page and form; fill `form-questions.csv` and `response-promises.csv` | Not started |
-| 5 | Application forms: list each state's (and each local or tribal agency's own) application forms in `application-forms.csv`; record their questions in `application-questions.csv` | Structure ready |
-| 6 | Policies: each state's published rules for fostering and adopting in `policies.csv`, with the legal citation | Structure ready |
+| 5 | Application forms: list each state's (and each local or tribal agency's own) application forms in `application-forms.csv`; record their questions in `application-questions.csv` | Forms listed (first pass); questions not started |
+| 6 | Policies: each state's published rules for fostering and adopting in `policies.csv`, with the legal citation | First pass |
 | 7 | Private licensed agencies, starting from each state's licensing list | Not started |
 | 8 | Neutral patterns summary (counts across front doors and states, no names ranked) | Not started |
 | 9 | Verification by a second person, and an invitation to agencies to correct their rows | Not started |
@@ -133,6 +133,14 @@ Every county-run state now has a row for each local agency the sources list: CA 
 Tribal rows: 10 selected from the Title IV-E list and 79 from search. About 10 approved Title IV-E tribes are still unnamed because the Children's Bureau list never showed its names in search results; opening that page by hand is the quickest fix. Notes: [`register/us/notes/tribal-search-2026-11-14-pass-2.md`](../register/us/notes/tribal-search-2026-11-14-pass-2.md).
 
 Points raised by the county batches, recorded in row notes: several counties route foster enquiries to private partner agencies (for example Franklin OH, Allegheny PA, Westchester NY, Boulder CO, Kenosha WI); Burke County NC moved to a single contractor in 2025–26; North Dakota moved foster licensing from zones to the state in 2022; some Virginia joint departments are unclear.
+
+**2026-11-15, wave 3: policies and application forms.** Five policy batches and three form-listing batches, each agent capped at 60 to 90 searches.
+
+*Policies* (`policies.csv`): 663 rows covering all 51 jurisdictions, 9 to 18 per state. 373 rows carry a statute or regulation citation. Best covered: minimum age, pre-service and ongoing training, capacity, board rates, background checks and bedroom rules. Thinly covered: time from application to licence (6 rows), fees (6), renting (19), and smoking, firearms and pets (almost none). Sources often disagree, above all on training hours and capacity; where they clash no `value` is recorded and the notes give each figure. Rules have recently changed or are pending in at least ten states (for example WA, WI, MD, CO, OK, NJ, IA), and rows that may be out of date say so. In county-run states only statewide rules were recorded.
+
+*Application forms* (`application-forms.csv`): 235 forms across all 51 jurisdictions. 84 have a direct link to the blank form; the rest are known by title and number from manuals and policy text. 14 rows are online portals (for example New Jersey, Rhode Island, Hawaii, Utah, Washington). 12 rows are local, regional or tribal agencies' own forms. 6 rows are licensed models (SAFE home study, NTDC, PS-MAPP), listed with no link or content. Several states have no single state application because local offices or contracted agencies issue their own (for example Maryland, Nebraska, Wisconsin), and few states have a separate adoption application. Forms that could not be tied to a page naming them were left out. No form questions have been recorded: that needs the forms opened.
+
+The validator's phone-number guard was tuned during this wave: Oregon and Washington administrative rule numbers (OAR 413-200-0348, WAC 110-148-1365) share a phone number's shape, so a number written after "OAR" or "WAC" is not treated as a phone number. Policies gained a `usd_per_day` unit for states that publish daily board rates.
 
 Points to check in the next pass include Maryland (its 2025–2029 plan calls it state-supervised and state-administered, with 24 local departments), Ohio's agency count (85 against 88 counties), Minnesota's (79 agencies for 87 counties) and North Dakota (19 human service zones, licensing moved to the state in 2022).
 

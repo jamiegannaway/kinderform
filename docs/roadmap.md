@@ -22,8 +22,9 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] Tribal front doors, first pass: 89 rows across 26 states (unverified)
 - [ ] Identify the remaining tribes with approved Title IV-E plans (about 10 of 22 still unnamed)
 - [ ] Open each front-door page and form; record questions and published response promises
-- [ ] Application forms: list each state's application packet, then record each form's questions
-- [ ] Policies: each state's published rules for fostering and adopting, with legal citations
+- [x] Application forms: list each state's application packet (235 forms, unverified)
+- [ ] Application forms: record each form's questions (needs the forms opened)
+- [x] Policies: each state's published rules for fostering and adopting, with legal citations (663 rules, unverified)
 - [ ] Private licensed agencies, starting from each state's licensing list
 - [ ] Second-person verification and invitation to agencies to correct their rows
 

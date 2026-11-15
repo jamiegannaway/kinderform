@@ -16,9 +16,9 @@ The method is in [`docs/us-survey-plan.md`](../../docs/us-survey-plan.md).
 | `front-doors.csv` | Public place to enquire: a state, county, city, contracted regional or tribal front door | First pass |
 | `form-questions.csv` | Question on a front door's first-contact form | Header only |
 | `response-promises.csv` | Published promise about when or how an enquirer will hear back | Header only |
-| `application-forms.csv` | Form in a state's or agency's foster or adoption application packet | Header only |
+| `application-forms.csv` | Form in a state's or agency's foster or adoption application packet | First pass |
 | `application-questions.csv` | Question on an application form | Header only |
-| `policies.csv` | Published rule on who can foster or adopt and what licensing involves, per state | Header only |
+| `policies.csv` | Published rule on who can foster or adopt and what licensing involves, per state | First pass |
 | `question-topics.md` | The topic codes used in `form-questions.csv` and `application-questions.csv` | Draft |
 | `policy-topics.md` | The topic codes used in `policies.csv` | Draft |
 | `notes/` | Search notes from each research pass | Working notes |
