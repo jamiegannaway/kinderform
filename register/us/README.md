@@ -167,7 +167,7 @@ One row per published rule. The register records what the rule says, not whether
 | `topic` | Topic code from `policy-topics.md` |
 | `rule_summary` | The rule in plain words, 240 characters or fewer |
 | `value` | The rule as a number, where it is one, for example `21` |
-| `unit` | The unit for `value`: `years`, `months`, `days`, `hours`, `children`, `bedrooms`, `square_feet`, `usd_per_month` or `other` |
+| `unit` | The unit for `value`: `years`, `months`, `days`, `hours`, `children`, `bedrooms`, `square_feet`, `usd_per_month`, `usd_per_day` or `other` |
 | `legal_citation` | The statute or regulation, for example a section of the state administrative code, if the source gives one |
 | `source_type` | `statute`, `regulation`, `policy_manual`, `agency_page` or `other` |
 | `effective_date` | `YYYY-MM-DD`, if the source gives one |

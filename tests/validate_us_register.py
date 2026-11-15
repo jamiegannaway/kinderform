@@ -79,7 +79,7 @@ ENUMS = {
     "licensed_instrument": {"yes", "no"},
     "applies_to": {"fostering", "adoption", "both"},
     "unit": {"years", "months", "days", "hours", "children", "bedrooms", "square_feet",
-             "usd_per_month", "other"},
+             "usd_per_month", "usd_per_day", "other"},
     "source_type": {"statute", "regulation", "policy_manual", "agency_page", "other"},
 }
 
@@ -119,9 +119,10 @@ POLICY_ID = re.compile(r"^us-[a-z]{2}-policy-[a-z0-9]+(-[a-z0-9]+)*$")
 # Personal-data guards: no email addresses or phone numbers anywhere in the register.
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<!\d)(\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\d)")
-# Oregon Administrative Rules are numbered like phone numbers (OAR 413-200-0348).
-# A rule number written after "OAR" is not treated as a phone number.
-OAR_CITATION = re.compile(r"\bOAR\s+\d{3}-\d{3}-\d{4}\b")
+# Oregon and Washington administrative rules are numbered like phone numbers
+# (OAR 413-200-0348, WAC 110-148-1365). A rule number written after "OAR" or
+# "WAC" is not treated as a phone number.
+OAR_CITATION = re.compile(r"\b(?:OAR|WAC)\s+\d{3}-\d{3}-\d{4}\b")
 
 
 def topic_codes(name: str = "question-topics.md") -> set[str]:
