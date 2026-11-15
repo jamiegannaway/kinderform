@@ -119,6 +119,9 @@ POLICY_ID = re.compile(r"^us-[a-z]{2}-policy-[a-z0-9]+(-[a-z0-9]+)*$")
 # Personal-data guards: no email addresses or phone numbers anywhere in the register.
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<!\d)(\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\d)")
+# Oregon Administrative Rules are numbered like phone numbers (OAR 413-200-0348).
+# A rule number written after "OAR" is not treated as a phone number.
+OAR_CITATION = re.compile(r"\bOAR\s+\d{3}-\d{3}-\d{4}\b")
 
 
 def topic_codes(name: str = "question-topics.md") -> set[str]:
@@ -158,7 +161,7 @@ def main() -> int:
                     errors.append(f"{where}: {column} is not a URL: {value}")
                 if EMAIL.search(value):
                     errors.append(f"{where}: {column} looks like it holds an email address")
-                if column not in URL_COLUMNS and PHONE.search(value):
+                if column not in URL_COLUMNS and PHONE.search(OAR_CITATION.sub("", value)):
                     errors.append(f"{where}: {column} looks like it holds a phone number")
                 if value != value.strip():
                     errors.append(f"{where}: {column} has leading or trailing spaces")
