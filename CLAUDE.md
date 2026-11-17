@@ -31,6 +31,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - `rubric/` audit rubric in Markdown and JSON
 - `evidence/` evidence library
 - `docs/` roadmap and project notes
+- `tools/` scripts that build summaries from the register
 - `tests/` validation scripts
 
 ## Before finishing a task

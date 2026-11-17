@@ -295,6 +295,16 @@ def main() -> int:
     for name in ("application-forms.csv", "application-questions.csv", "policies.csv"):
         print(f"{name}: {len(tables[name])} rows")
 
+    # The visual summary in docs/us-survey-plan.md must match the data.
+    sys.path.insert(0, str(ROOT / "tools"))
+    import us_summary
+    page = us_summary.PAGE.read_text(encoding="utf-8")
+    current = page.split(us_summary.START)[1].split(us_summary.END)[0] if us_summary.START in page else ""
+    fresh = us_summary.build().split(us_summary.START)[1].split(us_summary.END)[0]
+    drop_date = lambda text: [l for l in text.splitlines() if not l.startswith("*Counted from")]
+    if drop_date(current) != drop_date(fresh):
+        errors.append("docs/us-survey-plan.md: summary is out of date; run python tools/us_summary.py")
+
     if errors:
         for error in errors:
             print(f"FAIL {error}")
