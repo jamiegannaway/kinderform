@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from crawl_to_register import TOPIC_RULES  # noqa: E402
+from crawl_to_register import EMAIL, PHONE, TOPIC_RULES  # noqa: E402
 
 from pypdf import PdfReader  # noqa: E402
 
@@ -46,7 +46,13 @@ APPLICATION_RULES = [
     ("home_safety", r"smoke detector|fire extinguisher|firearm|weapon|pool|medication storage"),
 ]
 
-GENERIC = re.compile(r"^(?:text|check ?box|checkbox|field|untitled|button|group|radio|combo ?box|list ?box)\s*\d*$", re.I)
+GENERIC = re.compile(r"^(?:text|check ?box|checkbox|field|untitled|button|group|radio|combo ?box|list ?box)\s*\d*$|"
+                     r"^(?:delete|new|add|cb|check one|reset|print|clear|submit|save|page \d+)\b", re.I)
+
+# Only forms the applicant fills in are read automatically. Home studies,
+# inspection checklists and agreements are completed or led by agency staff,
+# so they go on the list for reading by hand.
+APPLICANT_STEPS = {"application", "background_check", "references", "financial", "medical"}
 
 
 def topic_of(label: str) -> str:
@@ -71,6 +77,24 @@ def clean(name: str) -> str:
     return " ".join(name.split())
 
 
+PREFERENCE = re.compile(r"^(?:unacceptable|will consider|acceptable|prefer(?:red)?)\W+(?:\d+\.\s*)?", re.I)
+
+
+def normalise(label: str) -> tuple[str, bool]:
+    """Strip table-row and person numbering so repeated rows become one question."""
+    label = re.sub(r"\s*\(?\bformat\b\s*:.*$", "", label, flags=re.I)  # input hints such as "Format: (000) 000-0000"
+    label = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", label)
+    label = re.sub(r"[_\s]*(?<![A-Za-z])(?:row|line)[_\s]*\d+(?!\d)", "", label, flags=re.I)
+    label = re.sub(r"\s*\[\d+\]", "", label)
+    label = re.sub(r"\b(?:applicant|person|member|adult|child|parent|reference|relationship|marriage)\s*#?\s*\d+\b",
+                   lambda m: re.sub(r"\s*#?\s*\d+", "", m.group(0)), label, flags=re.I)
+    label = re.sub(r"(?<=[A-Za-z])\d+$", "", label)
+    label = re.sub(r"[_]+", " ", label)
+    preference = bool(PREFERENCE.match(label))
+    label = PREFERENCE.sub("", label)
+    return " ".join(label.split()).strip(" :-#"), preference
+
+
 def fields_of(path: str):
     reader = PdfReader(path)
     fields = reader.get_fields() or {}
@@ -80,11 +104,13 @@ def fields_of(path: str):
         if ftype not in ("/Tx", "/Btn", "/Ch"):
             continue
         label = str(field.get("/TU") or "").strip() or clean(name)
-        label = " ".join(label.split())
-        if not label or GENERIC.match(label) or len(label) < 3:
+        label, preference = normalise(" ".join(label.split()))
+        # Labels holding a phone number or email address (often an agency's
+        # contact details or a filled-in default) are dropped, never stored.
+        if not label or GENERIC.match(label) or len(label) < 3 or EMAIL.search(label) or PHONE.search(label):
             continue
         kind = {"/Tx": "free_text", "/Btn": "yes_no", "/Ch": "single_choice"}[ftype]
-        out.append((label[:120], kind))
+        out.append((label[:120].strip(), kind, preference))
     return out
 
 
@@ -108,6 +134,9 @@ def main() -> int:
         form = forms.get(form_id)
         if not form or form["licensed_instrument"] == "yes" or not record.get("saved_pdf"):
             continue
+        if form["step"] not in APPLICANT_STEPS:
+            manual.append(f"{form_id}: {form['step']} form, completed with agency staff; read by hand")
+            continue
         try:
             found = fields_of(record["saved_pdf"])
         except Exception as error:  # damaged or encrypted PDF
@@ -119,14 +148,15 @@ def main() -> int:
         touched.add(form_id)
         seen = set()
         order = 0
-        for label, kind in found:
+        for label, kind, preference in found:
             if label.lower() in seen:
                 continue
             seen.add(label.lower())
             order += 1
             new.append({
                 "form_id": form_id, "question_order": str(order), "section": "",
-                "question_paraphrase": label, "topic": topic_of(label), "required": "unknown",
+                "question_paraphrase": label,
+                "topic": "child_preferences" if preference else topic_of(label), "required": "unknown",
                 "answer_type": kind, "source_url": record.get("final_url") or record["url"],
                 "date_checked": args.date or record.get("fetched_at", ""),
                 "evidence_level": "form_read", "verification": "unverified",

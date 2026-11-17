@@ -21,9 +21,10 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] County and city front doors in county-run states (CA, CO, MN, NV, NY, NC, ND, OH, PA, VA, WI) and Maryland's 24 local departments (unverified)
 - [x] Tribal front doors, first pass: 89 rows across 26 states (unverified)
 - [ ] Identify the remaining tribes with approved Title IV-E plans (about 10 of 22 still unnamed)
-- [ ] Open each front-door page and form; record questions and published response promises
+- [x] Open each front-door page and form; record questions and published response promises (crawler first pass)
+- [ ] Review machine-tagged questions; read blocked sites and non-fillable forms by hand
 - [x] Application forms: list each state's application packet (235 forms, unverified)
-- [ ] Application forms: record each form's questions (needs the forms opened)
+- [x] Application forms: record questions from fillable PDF forms (17 forms, first pass)
 - [x] Policies: each state's published rules for fostering and adopting, with legal citations (663 rules, unverified)
 - [x] Private licensed agencies, first sample of up to 10 per state (322 agencies, unverified)
 - [ ] Private licensed agencies: complete lists from each state's licensing database
@@ -33,7 +34,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 
 - [ ] Eight to ten conversations with carers, care-experienced adults, a hub manager and sector bodies
 - [ ] Publish the rubric for comment and revise it
-- [ ] Polite crawler that reads public front-door pages and extracts form fields, consent wording and response-time promises
+- [x] Polite crawler that reads public front-door pages and extracts form fields, consent wording and response-time promises (`tools/polite_fetch.py`)
 - [ ] Extend the register to Scottish councils and English councils outside hubs
 - [ ] Baseline report on patterns and good examples
 

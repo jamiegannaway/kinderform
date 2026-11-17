@@ -12,8 +12,8 @@ Data lives in [`register/us/`](../register/us/). Column definitions are in its [
 
 | 🗺️ Jurisdictions | 🚪 Front doors | 🏢 Private agencies | 📜 Policy rules | 📝 Application forms | ✅ Verified rows |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| **51** | **1257** | **322** | **663** | **235** | **0 of 2206** |
-| 50 states and DC | 516 with their own page | phase 7 | 51 jurisdictions | 84 with a direct link | 0 rows from an opened page |
+| **51** | **1257** | **322** | **663** | **235** | **0 of 4161** |
+| 50 states and DC | 516 with their own page | phase 7 | 51 jurisdictions | 84 with a direct link | 2404 rows from an opened page |
 
 ### Progress
 
@@ -22,7 +22,7 @@ flowchart LR
     P1["1 Structure"]:::done
     P2["2 States"]:::partial
     P3["3 Front doors"]:::partial
-    P4["4 First-contact forms<br>and reply promises"]:::todo
+    P4["4 First-contact forms<br>and reply promises"]:::partial
     P5["5 Application forms"]:::partial
     P6["6 Policies"]:::partial
     P7["7 Private agencies"]:::partial
@@ -96,9 +96,9 @@ How many of the 51 jurisdictions have at least one rule recorded on each topic.
 
 | Evidence | Rows | |
 |---|---:|---|
-| 🔎 Search result only | 2206 | `████████████████████` |
-| 📄 Page opened | 0 | `░░░░░░░░░░░░░░░░░░░░` |
-| 📝 Form opened | 0 | `░░░░░░░░░░░░░░░░░░░░` |
+| 🔎 Search result only | 1757 | `████████░░░░░░░░░░░░` |
+| 📄 Page opened | 417 | `██░░░░░░░░░░░░░░░░░░` |
+| 📝 Form opened | 1987 | `██████████░░░░░░░░░░` |
 | ✅ Verified by a second person | 0 | `░░░░░░░░░░░░░░░░░░░░` |
 
 <!-- summary:end -->
@@ -133,8 +133,8 @@ Each row's `notes` says which rule selected it. The list is not complete. Many t
 | 1 | Structure: folders, column guide, topic codes, validation test | Done |
 | 2 | `states.csv`: 50 states and DC, administration model, lead agency, main pages | First pass |
 | 3 | `front-doors.csv`: state, regional contracted, county or city, and tribal front doors | First pass |
-| 4 | Open each front-door page and form; fill `form-questions.csv` and `response-promises.csv` | Not started |
-| 5 | Application forms: list each state's (and each local or tribal agency's own) application forms in `application-forms.csv`; record their questions in `application-questions.csv` | Forms listed (first pass); questions not started |
+| 4 | Open each front-door page and form; fill `form-questions.csv` and `response-promises.csv` | First pass (crawler) |
+| 5 | Application forms: list each state's (and each local or tribal agency's own) application forms in `application-forms.csv`; record their questions in `application-questions.csv` | Forms listed; questions read from 17 fillable PDFs (first pass) |
 | 6 | Policies: each state's published rules for fostering and adopting in `policies.csv`, with the legal citation | First pass |
 | 7 | Private licensed agencies, starting from each state's licensing list | First pass (sample of up to 10 per state) |
 | 8 | Neutral patterns summary (counts across front doors and states, no names ranked) | Not started |
@@ -249,6 +249,16 @@ The validator's phone-number guard was tuned during this wave: Oregon and Washin
 Many state lists are old (for example Missouri 2009, DC about 2011, Alabama 2018) or only partly visible in search results. Many private agencies recruit or license families under a state, county or city contract (for example Rhode Island's foster care agencies, New York City and Philadelphia providers, Kentucky and Maine treatment foster care). Those rows keep `contracted` as `no`, as the sample rule set, and say so in notes; deciding which are really contracted front doors is a verification task.
 
 The page now opens with an "At a glance" summary built by `tools/us_summary.py` from the CSVs.
+
+**2026-11-17, wave 5: pages opened.** With full network access, `tools/polite_fetch.py` fetched every front-door website and form link (539) and every application form with a direct link (84), politely: robots.txt respected, the crawler identified itself, at least 5 seconds between requests to a site, GET only, nothing submitted. Results:
+
+- 398 front doors moved to `page_read` or `form_read` (the page loaded and names the front door). 36 dead links are noted on their rows.
+- `form-questions.csv`: 225 questions from 29 enquiry forms. `response-promises.csv`: 14 published reply promises, from 24 hours to two weeks.
+- `application-questions.csv`: 1,716 questions from 17 fillable PDF forms that applicants complete. Forms with no fillable fields, and forms completed with agency staff, are listed for reading by hand.
+- 50 front-door links and 8 form links were blocked (403), and 26 were refused by robots.txt. None was retried or worked around.
+- The Children's Bureau Title IV-E list is behind a bot challenge and still needs opening by hand.
+
+Details: [`register/us/notes/crawl-2026-11-17.md`](../register/us/notes/crawl-2026-11-17.md). Topic tags come from keyword rules; a person should review both question files before analysis.
 
 Points to check in the next pass include Maryland (its 2025–2029 plan calls it state-supervised and state-administered, with 24 local departments), Ohio's agency count (85 against 88 counties), Minnesota's (79 agencies for 87 counties) and North Dakota (19 human service zones, licensing moved to the state in 2022).
 
