@@ -12,8 +12,8 @@ Data lives in [`register/us/`](../register/us/). Column definitions are in its [
 
 | 🗺️ Jurisdictions | 🚪 Front doors | 🏢 Private agencies | 📜 Policy rules | 📝 Application forms | ✅ Verified rows |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| **51** | **1118** | **183** | **663** | **235** | **0 of 2067** |
-| 50 states and DC | 475 with their own page | phase 7 | 51 jurisdictions | 84 with a direct link | 0 rows from an opened page |
+| **51** | **1257** | **322** | **663** | **235** | **0 of 2206** |
+| 50 states and DC | 516 with their own page | phase 7 | 51 jurisdictions | 84 with a direct link | 0 rows from an opened page |
 
 ### Progress
 
@@ -43,22 +43,22 @@ flowchart LR
 | | | | | | | | | | | |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |🟦 **AK**<br>11| | | | | | | | | |🟦 **ME**<br>11|
-| | | | | | | | | |🟦 **VT**<br>1|🟦 **NH**<br>4|
-|🟦 **WA**<br>10|🟦 **ID**<br>9|🟦 **MT**<br>9|🟧 **ND**<br>24|🟧 **MN**<br>91|🟦 **IL**<br>6|🟪 **WI**<br>78|🟦 **MI**<br>20|🟧 **NY**<br>60|🟦 **RI**<br>1|🟦 **MA**<br>9|
-|🟦 **OR**<br>4|🟪 **NV**<br>10|🟦 **WY**<br>2|🟦 **SD**<br>6|🟦 **IA**<br>7|🟦 **IN**<br>12|🟧 **OH**<br>86|🟧 **PA**<br>68|🟦 **NJ**<br>2|🟦 **CT**<br>9| |
-|🟧 **CA**<br>68|🟦 **UT**<br>3|🟧 **CO**<br>67|🟦 **NE**<br>13|🟦 **MO**<br>7|🟦 **KY**<br>7|🟦 **WV**<br>3|🟧 **VA**<br>121|🟦 **MD**<br>33|🟦 **DE**<br>5| |
-| |🟦 **AZ**<br>16|🟦 **NM**<br>4|🟦 **KS**<br>15|🟦 **AR**<br>1|🟦 **TN**<br>1|🟧 **NC**<br>102|🟦 **SC**<br>2|🟦 **DC**<br>5| | |
-| | | |🟦 **OK**<br>17|🟦 **LA**<br>11|🟦 **MS**<br>10|🟦 **AL**<br>6|🟦 **GA**<br>7| | | |
-|🟦 **HI**<br>5| | |🟦 **TX**<br>10| | | | |🟦 **FL**<br>29| | |
+| | | | | | | | | |🟦 **VT**<br>7|🟦 **NH**<br>4|
+|🟦 **WA**<br>18|🟦 **ID**<br>9|🟦 **MT**<br>9|🟧 **ND**<br>28|🟧 **MN**<br>91|🟦 **IL**<br>6|🟪 **WI**<br>83|🟦 **MI**<br>20|🟧 **NY**<br>70|🟦 **RI**<br>10|🟦 **MA**<br>9|
+|🟦 **OR**<br>8|🟪 **NV**<br>10|🟦 **WY**<br>6|🟦 **SD**<br>16|🟦 **IA**<br>7|🟦 **IN**<br>12|🟧 **OH**<br>94|🟧 **PA**<br>76|🟦 **NJ**<br>6|🟦 **CT**<br>9| |
+|🟧 **CA**<br>68|🟦 **UT**<br>6|🟧 **CO**<br>67|🟦 **NE**<br>13|🟦 **MO**<br>7|🟦 **KY**<br>7|🟦 **WV**<br>8|🟧 **VA**<br>127|🟦 **MD**<br>33|🟦 **DE**<br>5| |
+| |🟦 **AZ**<br>16|🟦 **NM**<br>9|🟦 **KS**<br>15|🟦 **AR**<br>1|🟦 **TN**<br>7|🟧 **NC**<br>112|🟦 **SC**<br>9|🟦 **DC**<br>5| | |
+| | | |🟦 **OK**<br>27|🟦 **LA**<br>11|🟦 **MS**<br>10|🟦 **AL**<br>6|🟦 **GA**<br>7| | | |
+|🟦 **HI**<br>5| | |🟦 **TX**<br>17| | | | |🟦 **FL**<br>29| | |
 
 ### Front doors
 
 ```mermaid
 pie showData title Front doors by level
-    "State" : 103
-    "Regional" : 211
-    "County" : 677
-    "City" : 38
+    "State" : 129
+    "Regional" : 316
+    "County" : 678
+    "City" : 45
     "Tribal" : 89
 ```
 
@@ -66,8 +66,8 @@ pie showData title Front doors by level
 pie showData title Front doors by who runs them
     "Public" : 800
     "Tribal" : 89
-    "Private non-profit" : 223
-    "Private for-profit" : 6
+    "Private non-profit" : 360
+    "Private for-profit" : 8
 ```
 
 ### Policy rules found, by topic
@@ -96,7 +96,7 @@ How many of the 51 jurisdictions have at least one rule recorded on each topic.
 
 | Evidence | Rows | |
 |---|---:|---|
-| 🔎 Search result only | 2067 | `████████████████████` |
+| 🔎 Search result only | 2206 | `████████████████████` |
 | 📄 Page opened | 0 | `░░░░░░░░░░░░░░░░░░░░` |
 | 📝 Form opened | 0 | `░░░░░░░░░░░░░░░░░░░░` |
 | ✅ Verified by a second person | 0 | `░░░░░░░░░░░░░░░░░░░░` |
