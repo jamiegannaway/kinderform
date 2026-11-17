@@ -23,7 +23,7 @@ The method is in [`docs/us-survey-plan.md`](../../docs/us-survey-plan.md).
 | `policy-topics.md` | The topic codes used in `policies.csv` | Draft |
 | `notes/` | Search notes from each research pass | Working notes |
 
-Private licensed agencies (non-profit and for-profit child-placing agencies) are a later phase. They will go in `front-doors.csv` with the matching `sector` value.
+Private licensed agencies (non-profit and for-profit child-placing agencies) are in `front-doors.csv` with `sector` `private_nonprofit` or `private_for_profit` and `contracted` `no`. The first pass is a sample of up to 10 per state; each row's `notes` says how it was selected.
 
 ## Shared conventions
 

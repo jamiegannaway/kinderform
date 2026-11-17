@@ -136,7 +136,7 @@ Each row's `notes` says which rule selected it. The list is not complete. Many t
 | 4 | Open each front-door page and form; fill `form-questions.csv` and `response-promises.csv` | Not started |
 | 5 | Application forms: list each state's (and each local or tribal agency's own) application forms in `application-forms.csv`; record their questions in `application-questions.csv` | Forms listed (first pass); questions not started |
 | 6 | Policies: each state's published rules for fostering and adopting in `policies.csv`, with the legal citation | First pass |
-| 7 | Private licensed agencies, starting from each state's licensing list | Not started |
+| 7 | Private licensed agencies, starting from each state's licensing list | First pass (sample of up to 10 per state) |
 | 8 | Neutral patterns summary (counts across front doors and states, no names ranked) | Not started |
 | 9 | Verification by a second person, and an invitation to agencies to correct their rows | Not started |
 
@@ -243,6 +243,12 @@ Points raised by the county batches, recorded in row notes: several counties rou
 *Application forms* (`application-forms.csv`): 235 forms across all 51 jurisdictions. 84 have a direct link to the blank form; the rest are known by title and number from manuals and policy text. 14 rows are online portals (for example New Jersey, Rhode Island, Hawaii, Utah, Washington). 12 rows are local, regional or tribal agencies' own forms. 6 rows are licensed models (SAFE home study, NTDC, PS-MAPP), listed with no link or content. Several states have no single state application because local offices or contracted agencies issue their own (for example Maryland, Nebraska, Wisconsin), and few states have a separate adoption application. Forms that could not be tied to a page naming them were left out. No form questions have been recorded: that needs the forms opened.
 
 The validator's phone-number guard was tuned during this wave: Oregon and Washington administrative rule numbers (OAR 413-200-0348, WAC 110-148-1365) share a phone number's shape, so a number written after "OAR" or "WAC" is not treated as a phone number. Policies gained a `usd_per_day` unit for states that publish daily board rates.
+
+**2026-11-17, wave 4: private agencies.** Five batches, each capped at 45 to 50 searches. Result: 322 private licensed child-placing agencies in `front-doors.csv` across 50 jurisdictions (none found for Arkansas, where the state partners with private agencies through Every Child Arkansas but no names surfaced). Up to 10 per state, chosen first from a state list in the order the source gives (131 rows, `selection: state-list`), then from search. 101 have their own website. Sector is assumed non-profit unless a source said otherwise, and each row says so; 8 are marked for-profit.
+
+Many state lists are old (for example Missouri 2009, DC about 2011, Alabama 2018) or only partly visible in search results. Many private agencies recruit or license families under a state, county or city contract (for example Rhode Island's foster care agencies, New York City and Philadelphia providers, Kentucky and Maine treatment foster care). Those rows keep `contracted` as `no`, as the sample rule set, and say so in notes; deciding which are really contracted front doors is a verification task.
+
+The page now opens with an "At a glance" summary built by `tools/us_summary.py` from the CSVs.
 
 Points to check in the next pass include Maryland (its 2025–2029 plan calls it state-supervised and state-administered, with 24 local departments), Ohio's agency count (85 against 88 counties), Minnesota's (79 agencies for 87 counties) and North Dakota (19 human service zones, licensing moved to the state in 2022).
 

@@ -25,7 +25,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] Application forms: list each state's application packet (235 forms, unverified)
 - [ ] Application forms: record each form's questions (needs the forms opened)
 - [x] Policies: each state's published rules for fostering and adopting, with legal citations (663 rules, unverified)
-- [ ] Private licensed agencies, starting from each state's licensing list
+- [x] Private licensed agencies, first sample of up to 10 per state (322 agencies, unverified)
+- [ ] Private licensed agencies: complete lists from each state's licensing database
 - [ ] Second-person verification and invitation to agencies to correct their rows
 
 ## Next: listen, then measure
