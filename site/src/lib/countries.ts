@@ -80,8 +80,10 @@ const median = (xs: number[]) => {
   return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2)
 }
 
+const WORDS: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 }
 const hours = (v: string) => {
-  const n = Number(v.match(/\d+/)?.[0] ?? (/\bone\b/i.test(v) ? 1 : /\btwo\b/i.test(v) ? 2 : NaN))
+  const word = v.toLowerCase().match(/\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/)?.[1]
+  const n = Number(v.match(/\d+/)?.[0] ?? (word ? WORDS[word] : NaN))
   if (/hour/.test(v)) return n
   if (/week/.test(v)) return n * 168
   return n * (/working|business/.test(v) ? 34 : 24)

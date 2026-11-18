@@ -41,42 +41,50 @@ MARK = "Read by the polite crawler"
 
 # (category, topic, pattern), first match wins. English and French.
 RULES = [
-    ("consent", "marketing", r"newsletter|subscribe|mailing list|marketing|e-?news|updates (?:by|via)|infolettre|bulletin"),
+    ("consent", "marketing", r"newsletter|subscribe|mailing list|marketing|e-?news|updates (?:by|via)|stay connected|keep in touch|infolettre|bulletin"),
     ("consent", "privacy_acknowledgement", r"privacy|confidentialit|collection notice"),
     ("consent", "terms", r"terms and conditions|terms of use"),
-    ("consent", "contact", r"(?:consent|agree|happy) .*contact|permission to contact|text messages?|\bsms\b"),
+    ("consent", "contact", r"(?:consent|agree|happy) .*contact|permission to contact|text messages?|\bsms\b|contact me"),
     ("consent", "processing", r"consent|i agree|i understand|i accept|j.accepte|consens|declar"),
     ("contact_identity", "email", r"e-?mail|courriel"),
-    ("contact_identity", "date_of_birth", r"date of birth|birth ?date|\bdob\b|date de naissance"),
+    ("contact_identity", "date_of_birth", r"date of birth|birth ?date|birthday|\bdob\b|date de naissance"),
     ("eligibility", "age", r"\bage\b|\bâge\b|over 1[89]|over 2[15]|years old"),
     ("contact_identity", "phone", r"phone|mobile|\bcell|telephone|t[ée]l[ée]phone|\bfax\b|contact number"),
     ("contact_identity", "postcode", r"post ?code|zip|postal code|code postal"),
     ("routing", "local_authority", r"\bcounty\b|council|borough|local authority|\bregion\b|\bstate\b|province|territor|municipalit|r[ée]gion"),
-    ("routing", "nearest_office", r"nearest|office|branch|location you|site you"),
+    ("eligibility", "residency", r"(?:currently|do you) live in|reside in|live in (?:the )?state"),
+    ("routing", "nearest_office", r"nearest|office|branch|location"),
     ("contact_identity", "address", r"address|street|suburb|\bcity\b|\btown\b|apartment|\bapt\b|\bsuite\b|adresse|ville|rue"),
-    ("contact_identity", "name", r"name|^first$|^last$|^middle|^title$|^prefix|surname|\bnom\b|pr[ée]nom"),
-    ("source", "how_heard", r"hear about|heard about|how did you (?:find|hear)|where did you|referr|source|comment avez-vous"),
-    ("contact_preference", "time", r"best time|time to (?:call|contact)|when (?:is it|can we|should we)|availability|moment"),
-    ("contact_preference", "method", r"prefer.*contact|contact method|how .*contact you|preferred method"),
+    ("contact_identity", "name", r"name|^(?:first|last|middle|title|prefix|suffix)\b|surname|\bnom\b|pr[ée]nom"),
+    ("source", "how_heard", r"hear about|heard about|how did you (?:find|hear)|where did you|referr|source|social media|"
+                            r"facebook|instagram|billboard|radio|\btv\b|movie|newspaper|friend|website|comment avez-vous"),
+    ("contact_preference", "time", r"best time|time to (?:call|contact)|when (?:is it|can we|should we)|availability|"
+                                   r"monday|tuesday|wednesday|thursday|friday|saturday|sunday|morning|afternoon|evening|noon|moment"),
+    ("contact_preference", "method", r"prefer.*contact|contact method|how .*contact(?:ed)? you|be contacted|\btext\b|\bmail\b|"
+                                     r"leave .*(?:message|msg)|preferred method"),
     ("contact_preference", "language", r"language|langue|interpreter"),
     ("information_event", "event_dates", r"information (?:session|evening|event)|info session|webinar|event|s[ée]ance"),
     ("transfer", "current_carer", r"transfer|another agency|currently (?:a )?(?:approved|registered|licensed|foster)"),
     ("experience", "prior_fostering", r"(?:previous|prior|before|ever).*(?:foster|adopt)|(?:foster|adopt)ed before|licensed"),
     ("experience", "childcare_experience", r"experience|worked with children|childcare"),
-    ("household", "children_in_household", r"children (?:in|at|living)|own children|your children|kids|vos enfants|enfants"),
+    ("interest", "child_preferences", r"age of (?:the )?child|ages? range|sibling|children you (?:could|would|can)|special needs|"
+                                     r"youth|adolescen|teen|infant|toddler|their ages"),
+    ("household", "children_in_household", r"children (?:in|at|living)|own children|your children|^children\b|kids|vos enfants|enfants"),
     ("household", "partner", r"partner|spouse|husband|wife|conjoint"),
     ("household", "applicant_type", r"single|couple|applying (?:as|alone|with)|joint applic"),
     ("household", "relationships", r"marital|married|relationship status|[ée]tat civil"),
-    ("household", "household_composition", r"household|live with you|people (?:in|living)|occupants|who lives"),
+    ("household", "household_composition", r"household|live with you|people (?:in|living)|occupants|who lives|other adults"),
     ("household", "pets", r"\bpets?\b|\bdogs?\b|animal"),
     ("housing", "spare_bedroom", r"bedroom|spare room|chambre"),
     ("housing", "tenure", r"\brent\b|\brenting\b|own your home|homeowner|tenure|mortgage|propri[ée]taire|locataire"),
     ("housing", "smoking", r"smok|vap"),
     ("work", "income", r"income|salary|financ|revenu"),
     ("work", "driving_licence", r"driv|licen[cs]e to drive|vehicle|\bcar\b"),
+    ("work", "employment_history", r"education|school|degree"),
     ("work", "occupation", r"occupation|job title|profession"),
     ("work", "employment_status", r"employ|\bwork|emploi"),
-    ("equality", "ethnicity", r"ethnic|\brace\b|aboriginal|torres strait|indigenous|first nations|m[ée]tis|inuit|cultural|origin|autochtone"),
+    ("equality", "ethnicity", r"ethnic|\brace\b|aboriginal|torres strait|indigenous|first nations|m[ée]tis|inuit|cultural|origin|"
+                              r"autochtone|\basian\b|\bwhite\b|hispanic|latino|\bblack\b|caucasian|pacific islander|native american"),
     ("equality", "gender", r"gender|\bsex\b|pronoun|\bgenre\b"),
     ("equality", "religion", r"relig|faith"),
     ("health", "disability", r"disab|handicap"),
@@ -85,19 +93,22 @@ RULES = [
     ("eligibility", "citizenship", r"citizen|citoyen"),
     ("eligibility", "residency", r"residen|visa|immigration|permanent"),
     ("prior_involvement", "social_services", r"social services|child protection|\bcps\b|involvement with"),
-    ("interest", "child_preferences", r"age of (?:the )?child|ages? range|sibling|children you (?:could|would|can)|special needs"),
-    ("interest", "care_type", r"foster|adopt|respite|kinship|emergency|short.?term|long.?term|type of care|interested in|program|famille d.accueil|accueil"),
-    ("intent", "journey_stage", r"how soon|ready to|stage|timeline|when (?:would|do) you (?:like|want) to start|next step"),
+    ("interest", "care_type", r"foster|adopt|respite|kinship|emergency|short.?term|long.?term|type of care|interest|program|"
+                              r"treatment|famille d.accueil|accueil"),
+    ("intent", "journey_stage", r"how soon|ready to|stage|timeline|when (?:would|do) you (?:like|want) to start|next step|subject|"
+                                r"topic|reason|need help|help you with|how can we help|why are you contacting|how involved"),
     ("free_text", "motivation", r"\bwhy\b|motivat|pourquoi"),
     ("free_text", "about_you", r"about (?:you|yourself)|tell us"),
-    ("free_text", "questions", r"message|comment|question|anything else|additional|enquiry|inquiry|details|demande|pr[ée]cis"),
+    ("free_text", "questions", r"message|comment|question|anything else|additional|enquiry|inquiry|details|like us to know|"
+                               r"demande|pr[ée]cis"),
 ]
 RULES = [(c, t, re.compile(p, re.I)) for c, t, p in RULES]
 
 JUNK = re.compile(
     r"^(?:item meta|fields?|input|wpforms|ninja|gform|nf|tfa|formid|track id|accepted by|search|recherche)\b|\bvalue$|"
     r"^\d+$|^[^A-Za-zÀ-ÿ]*$|if you are human|leave this field (?:blank|empty)|honeypot|hidden|[0-9a-f]{12,}|"
-    r"captcha|recaptcha|not a robot|g-recaptcha", re.I)
+    r"captcha|recaptcha|not a robot|g-recaptcha|ak[ _]?hp|wpcf7|empty\d|characters shown|code (?:above|is in the image|in the image)|prevent spam|"
+    r"form handle|form fields field|^(?:website|url|x/twitter|twitter|to)$|^[a-z0-9]{10,}$", re.I)
 PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*)\b", re.I)
 NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|job|resume|career|password|log ?in|sign ?in|"
                          r"upload|type your signature|newsletter only|search", re.I)
@@ -107,7 +118,8 @@ INPUT = {"text": "text", "email": "email", "tel": "tel", "textarea": "textarea",
 
 
 def plain(text):
-    return " ".join(str(text).split()).strip(" *:")
+    text = re.sub(r"\((?:required|requis|obligatoire)\)|\*", "", str(text), flags=re.I)
+    return " ".join(text.split()).strip(" *:")
 
 
 def label_of(field):
@@ -155,6 +167,26 @@ def questions_of(form):
             key = ("field", id(field))
             groups[key] = {"field": field, "options": [], "checked": False}
             order.append(key)
+    items = list(_items(groups, order))
+    # Single tick boxes in a run (three or more, or two short ones) are one multiple-choice question.
+    merged, run = [], []
+    for item in items + [None]:
+        if item is not None and item["input_type"] == "checkbox" and not item["options"] and len(item["label"]) <= 40:
+            run.append(item)
+            continue
+        if len(run) >= 3 or (len(run) == 2 and all(len(r["label"]) <= 25 for r in run)):
+            labels = [r["label"] for r in run]
+            merged.append({"label": "Choice of: " + ", ".join(labels), "text": " ".join(labels), "input_type": "checkbox",
+                           "required": any(r["required"] for r in run), "options": labels, "checked": False})
+        else:
+            merged.extend(run)
+        run = []
+        if item is not None:
+            merged.append(item)
+    yield from merged
+
+
+def _items(groups, order):
     for key in order:
         g = groups[key]
         field = g["field"]

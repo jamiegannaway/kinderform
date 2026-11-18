@@ -236,15 +236,15 @@ export function DotStrips({ rows, axisLabel }: { rows: { label: string; values: 
             <div
               role="img"
               aria-label={`${r.label}: ${r.note ?? r.values.join(", ")}`}
-              className="grid h-14 grid-cols-[repeat(31,minmax(0,1fr))] border-b border-border"
+              className="grid h-24 grid-cols-[repeat(31,minmax(0,1fr))] border-b border-border"
             >
               {counts.map((n, i) => (
                 <div key={i} className="flex flex-col-reverse items-center gap-0.5 pb-0.5">
-                  {Array.from({ length: Math.min(n, 6) }, (_, j) => (
+                  {Array.from({ length: Math.min(n, 12) }, (_, j) => (
                     <span
                       key={j}
-                      title={`${i === STRIP_MAX ? `${i} or more` : i} questions`}
-                      className="size-1.5 rounded-full bg-chart-2 ring-1 ring-card sm:size-2"
+                      title={`${n} ${n === 1 ? "form" : "forms"} with ${i === STRIP_MAX ? `${i} or more` : i} questions`}
+                      className="size-1.5 rounded-full bg-chart-2 ring-1 ring-card"
                     />
                   ))}
                 </div>
@@ -276,7 +276,7 @@ export function HeatGrid({
 }) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[32rem] border-separate border-spacing-1 text-sm">
+      <table className="w-full min-w-[18rem] border-separate border-spacing-1 text-sm">
         <thead>
           <tr>
             <th scope="col" className="text-left font-medium text-muted-foreground">

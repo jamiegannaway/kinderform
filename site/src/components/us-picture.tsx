@@ -93,9 +93,6 @@ function TileMap({ data }: { data: Data }) {
 }
 
 export default function UsPicture({ data }: { data: Data }) {
-  const share = (label: string) => data.enquiry.topics.find((t) => t.label === label)
-  const phone = share("Phone number")
-  const dob = share("Date of birth or age")
   const commonAge = [...data.minAge].sort((a, b) => b.value - a.value)[0]
   return (
     <section aria-labelledby="us-picture" className="space-y-8">
@@ -159,26 +156,7 @@ export default function UsPicture({ data }: { data: Data }) {
         </ChartCard>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <ChartCard
-          title="What first-contact forms ask"
-          description={`Share of the ${data.enquiry.of} enquiry forms read`}
-          footer={
-            phone
-              ? {
-                  lead: `${pct(phone.yes, phone.of)}% ask for a phone number`,
-                  note: dob ? `${pct(dob.yes, dob.of)}% ask for a date of birth or age.` : "Topics are tagged by keyword rules and need review.",
-                }
-              : undefined
-          }
-        >
-          <HorizontalBars data={shareBars(data.enquiry.topics)} max={100} labelWidth="sm:grid-cols-[14rem_minmax(0,1fr)]" />
-          <TableView
-            title="enquiry form topics"
-            head={["Topic", "Forms", "Share"]}
-            rows={data.enquiry.topics.map((t) => [t.label, `${t.yes} of ${t.of}`, `${pct(t.yes, t.of)}%`])}
-          />
-        </ChartCard>
+      <div className="grid gap-6">
         <ChartCard
           title="What application forms ask"
           description={`Beyond contact details. Share of the ${data.application.of} fillable application forms read`}

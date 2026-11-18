@@ -7,6 +7,8 @@ import { ChartCard, DotStrips, HeatGrid, HorizontalBars, StackedBars } from "@/c
 import { ANSWER_KINDS, type CountriesData } from "@/lib/countries"
 
 const pct = (yes: number, of: number) => (of ? Math.round((100 * yes) / of) : 0)
+const NUMBER_WORDS: Record<number, string> = { 1: "one", 2: "two", 3: "three", 4: "four" }
+const listNames = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`)
 
 // "1 in 5" reads better than "21%" for small shares; large shares stay as a percentage.
 export function oneIn(yes: number, of: number): string {
@@ -175,9 +177,10 @@ export default function Countries({ data }: { data: CountriesData }) {
   return (
     <section aria-labelledby="countries" className="space-y-8">
       <div className="max-w-3xl space-y-4">
-        <Badge variant="secondary">United Kingdom, United States, Canada and Australia</Badge>
+        <Badge variant="secondary">{listNames(data.countries.map((c) => c.name))}</Badge>
         <h2 id="countries" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          What the first form asks, in four countries
+          What the first form asks, in {NUMBER_WORDS[data.countries.length] ?? data.countries.length}{" "}
+          {data.countries.length === 1 ? "country" : "countries"}
         </h2>
         <p className="leading-7">
           The first form someone fills in is often the first thing a service learns about them. We read{" "}
