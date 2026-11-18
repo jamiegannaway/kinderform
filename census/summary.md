@@ -153,4 +153,4 @@ Concrete response times found on 7 primary forms or their pages: 1 working day (
 
 ## Totals
 
-72 forms, 324 questions, 409 answer options, 147 guidance rows, 74 taxonomy topics.
+72 forms, 324 questions, 409 answer options, 147 guidance rows, 77 taxonomy topics.

@@ -8,6 +8,7 @@
    blocks inline styles. Generate every whole-percent width and height. */
 @source inline("w-[{0..100}%]");
 @source inline("h-[{0..100}%]");
+@source inline("bg-primary/{0..100..10}");
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 

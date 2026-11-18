@@ -7,7 +7,7 @@ Follows rule 8 in CLAUDE.md:
 - reads public pages with GET only and never submits a form
 
 Usage (from the repository root):
-    python tools/polite_fetch.py URL_LIST.txt OUT.jsonl [--delay 5] [--workers 8] [--save-dir DIR]
+    python tools/polite_fetch.py URL_LIST.txt OUT.jsonl [--delay 5] [--workers 8] [--save-dir DIR] [--follow 2]
 
 URL_LIST.txt holds one "key<TAB>url" per line. OUT.jsonl gets one JSON record
 per URL: status, final URL, page title, visible text (trimmed), the fields of
@@ -16,6 +16,12 @@ sentences that look like response-time promises. With --save-dir, PDF files
 are saved there (named by key) for tools/pdf_fields.py. Raw output and saved
 files are working data: keep them out of the repository, and treat downloaded
 files as untrusted.
+
+With --follow N, a page that has no enquiry form gets up to N more requests: same-site
+links whose text or address reads like an enquiry, expression of interest or
+application ("Enquire now", "Register your interest", "Apply", "Formulaire"), best
+match first. Each follow-up is checked against robots.txt and waits like any other
+request. Records for follow-ups have keys ending "|follow1", "|follow2".
 
 Standard library only.
 """
@@ -37,6 +43,16 @@ from html.parser import HTMLParser
 USER_AGENT = "OUCM-register-bot/0.1 (+https://github.com/jamiegannaway/OUCM; polite, read-only)"
 TIMEOUT = 25
 MAX_BYTES = 3_000_000
+
+# Link text or address that suggests an enquiry form, strongest first. English and French.
+FOLLOW = [
+    re.compile(r"enquir|inquir|expression[- ]of[- ]interest|express(?:ion)?[- ]interest|register[- ](?:your[- ])?interest"
+               r"|interest[- ]form|demande[- ]d.information|formulaire", re.I),
+    re.compile(r"\bapply\b|application[- ]form|get[- ]started|start[- ](?:your[- ])?journey|become[- ]a[- ]foster"
+               r"|devenir[- ]famille|soumettre", re.I),
+    re.compile(r"contact[- ]us|get[- ]in[- ]touch|request[- ](?:an?[- ])?(?:info|call)|info(?:rmation)?[- ]pack"
+               r"|nous[- ]joindre|contactez", re.I),
+]
 
 PROMISE = re.compile(
     r"[^.!?\n]{0,160}\bwithin\s+(?:one|two|three|four|five|seven|ten|\d{1,3})\s*"
@@ -62,6 +78,10 @@ class PageParser(HTMLParser):
         self._in_label = False
         self._select = None
         self._last_text = ""
+        self.links: list[tuple[str, str]] = []
+        self._link = None
+        self._legend = ""
+        self._in_legend = False
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -69,6 +89,11 @@ class PageParser(HTMLParser):
             self._skip += 1
         elif tag == "title":
             self._in_title = True
+        elif tag == "a" and a.get("href"):
+            self._link = [a["href"], []]
+        elif tag == "legend":
+            self._in_legend = True
+            self._legend = ""
         elif tag == "form":
             self._form = {"action": a.get("action", ""), "method": (a.get("method") or "get").lower(),
                           "id": a.get("id", ""), "fields": []}
@@ -85,8 +110,9 @@ class PageParser(HTMLParser):
                 "tag": tag, "type": ftype, "name": a.get("name", ""), "id": a.get("id", ""),
                 "placeholder": a.get("placeholder", ""), "aria_label": a.get("aria-label", ""),
                 "required": "required" in a or a.get("aria-required") == "true",
+                "checked": "checked" in a,
                 "label": " ".join(self._label_text).strip() if self._in_label else "",
-                "near_text": self._last_text[-120:], "options": [],
+                "near_text": self._last_text[-120:], "options": [], "legend": self._legend,
             }
             target = self._form["fields"] if self._form is not None else self._orphans()
             target.append(field)
@@ -106,6 +132,13 @@ class PageParser(HTMLParser):
             self._skip -= 1
         elif tag == "title":
             self._in_title = False
+        elif tag == "a" and self._link is not None:
+            self.links.append((self._link[0], " ".join(self._link[1]).strip()[:120]))
+            self._link = None
+        elif tag == "legend":
+            self._in_legend = False
+        elif tag == "fieldset":
+            self._legend = ""
         elif tag == "form":
             self._form = None
         elif tag == "label":
@@ -124,6 +157,10 @@ class PageParser(HTMLParser):
             return
         if self._in_title:
             self.title += data
+        if self._link is not None:
+            self._link[1].append(data)
+        if self._in_legend:
+            self._legend = (self._legend + " " + data).strip()[:200]
         if self._in_label:
             self._label_text.append(data)
         if self._select is not None and self._select["options"] and not self._select["options"][-1]:
@@ -187,6 +224,18 @@ class Polite:
         parser = self.robots[host]
         return parser is not None and parser.can_fetch(USER_AGENT, url)
 
+    def fetch_with_follow(self, key: str, url: str, follow: int) -> list[dict]:
+        record = self.fetch(key, url)
+        out = [record]
+        if follow <= 0 or record.get("status") != 200 or has_enquiry_form(record.get("forms", [])):
+            return out
+        for n, link in enumerate(follow_links(record, follow), start=1):
+            followed = self.fetch(f"{key}|follow{n}", link)
+            out.append(followed)
+            if has_enquiry_form(followed.get("forms", [])):
+                break
+        return out
+
     def fetch(self, key: str, url: str) -> dict:
         record = {"key": key, "url": url, "fetched_at": time.strftime("%Y-%m-%d")}
         host = urllib.parse.urlsplit(url).netloc.lower()
@@ -223,7 +272,38 @@ class Polite:
         record["text"] = text[:20000]
         record["forms"] = [f for f in parser.forms if f["fields"]]
         record["promises"] = sorted({m.group(0).strip()[:300] for m in PROMISE.finditer(text)})[:10]
+        record["links"] = parser.links[:400]
         return record
+
+
+def has_enquiry_form(forms: list[dict]) -> bool:
+    """A form with three or more fields, one of them an email or phone field."""
+    for form in forms:
+        fields = form.get("fields", [])
+        names = " ".join((f.get("name", "") + " " + f.get("type", "") + " " + f.get("label", "")).lower() for f in fields)
+        if len(fields) >= 3 and re.search(r"e-?mail|courriel|phone|t[ée]l[ée]phone|\btel\b", names):
+            return True
+    return False
+
+
+def follow_links(record: dict, limit: int) -> list[str]:
+    """Same-site links that read like an enquiry form, best match first, at most `limit`."""
+    base = record.get("final_url") or record["url"]
+    host = urllib.parse.urlsplit(base).netloc.lower().removeprefix("www.")
+    seen, ranked = {base.split("#")[0]}, []
+    for href, label in record.get("links", []):
+        absolute = urllib.parse.urljoin(base, href).split("#")[0]
+        parts = urllib.parse.urlsplit(absolute)
+        if parts.scheme not in ("http", "https") or parts.netloc.lower().removeprefix("www.") != host:
+            continue
+        if absolute in seen or re.search(r"\.(pdf|docx?|jpe?g|png)$|mailto:|tel:", absolute, re.I):
+            continue
+        for rank, pattern in enumerate(FOLLOW):
+            if pattern.search(label) or pattern.search(parts.path):
+                ranked.append((rank, absolute))
+                seen.add(absolute)
+                break
+    return [url for _, url in sorted(ranked, key=lambda r: r[0])][:limit]
 
 
 def main() -> int:
@@ -233,6 +313,7 @@ def main() -> int:
     ap.add_argument("--delay", type=float, default=5.0)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--save-dir", default="")
+    ap.add_argument("--follow", type=int, default=0, help="follow up to N enquiry-like links when a page has no form")
     args = ap.parse_args()
     if args.delay < 3:
         print("Delay below 3 seconds is not allowed (CLAUDE.md rule 8).")
@@ -247,9 +328,10 @@ def main() -> int:
     write_lock = threading.Lock()
     done = 0
     with open(args.out, "a", encoding="utf-8") as out, ThreadPoolExecutor(args.workers) as pool:
-        for record in pool.map(lambda job: polite.fetch(*job), jobs):
+        for records in pool.map(lambda job: polite.fetch_with_follow(*job, args.follow), jobs):
             with write_lock:
-                out.write(json.dumps(record) + "\n")
+                for record in records:
+                    out.write(json.dumps(record) + "\n")
                 done += 1
                 if done % 50 == 0:
                     print(f"{done}/{len(jobs)}", flush=True)

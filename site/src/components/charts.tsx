@@ -58,14 +58,17 @@ export function HorizontalBars({
   data,
   max,
   labelWidth = "sm:grid-cols-[11rem_minmax(0,1fr)]",
+  compact = false,
 }: {
   data: BarDatum[]
   max?: number
   labelWidth?: string
+  compact?: boolean // smaller bars and text, for cards in a row
 }) {
   const top = max ?? Math.max(1, ...data.map((d) => d.value))
+  const barHeight = compact ? "h-4" : "h-7"
   return (
-    <ul className="space-y-2" role="list">
+    <ul className={compact ? "space-y-1.5" : "space-y-2"} role="list">
       {data.map((d) => {
         const shown = d.display ?? d.value.toLocaleString("en-GB")
         return (
@@ -74,10 +77,12 @@ export function HorizontalBars({
               {d.label}
             </span>
             <span className="flex items-center gap-2" role="img" aria-label={`${d.label}: ${shown}`}>
-              <span className="relative h-7 flex-1">
+              <span className={`relative flex-1 ${barHeight}`}>
                 <span className={`absolute inset-y-0 left-0 rounded-r-[4px] bg-chart-2 ${W((100 * d.value) / top)} ${d.value ? "min-w-1" : ""}`} />
               </span>
-              <span className="w-24 shrink-0 text-xs font-medium tabular-nums text-foreground">{shown}</span>
+              <span className={`shrink-0 text-xs font-medium tabular-nums text-foreground ${compact ? "w-10" : "w-24"}`}>
+                {shown}
+              </span>
             </span>
           </li>
         )
@@ -209,5 +214,108 @@ export function StatCard({
         </CardFooter>
       )}
     </Card>
+  )
+}
+
+// Dot strip: one row per group, a column per number of questions, a dot per form,
+// stacked where forms tie (shadcn scatter look). Values above the axis go in the last column.
+const STRIP_MAX = 30
+export function DotStrips({ rows, axisLabel }: { rows: { label: string; values: number[]; note?: string }[]; axisLabel: string }) {
+  return (
+    <div className="space-y-5">
+      {rows.map((r) => {
+        const counts = Array.from({ length: STRIP_MAX + 1 }, (_, n) =>
+          r.values.filter((v) => (n === STRIP_MAX ? v >= n : v === n)).length,
+        )
+        return (
+          <div key={r.label} className="space-y-1.5">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 text-sm">
+              <span className="font-medium">{r.label}</span>
+              {r.note && <span className="text-xs tabular-nums text-muted-foreground">{r.note}</span>}
+            </div>
+            <div
+              role="img"
+              aria-label={`${r.label}: ${r.note ?? r.values.join(", ")}`}
+              className="grid h-14 grid-cols-[repeat(31,minmax(0,1fr))] border-b border-border"
+            >
+              {counts.map((n, i) => (
+                <div key={i} className="flex flex-col-reverse items-center gap-0.5 pb-0.5">
+                  {Array.from({ length: Math.min(n, 6) }, (_, j) => (
+                    <span
+                      key={j}
+                      title={`${i === STRIP_MAX ? `${i} or more` : i} questions`}
+                      className="size-1.5 rounded-full bg-chart-2 ring-1 ring-card sm:size-2"
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      })}
+      <div aria-hidden="true" className="grid grid-cols-[repeat(31,minmax(0,1fr))] text-xs text-muted-foreground tabular-nums">
+        <span className="col-start-1 text-center">0</span>
+        <span className="col-start-11 text-center">10</span>
+        <span className="col-start-21 text-center">20</span>
+        <span className="col-start-31 text-center">30+</span>
+      </div>
+      <p className="text-center text-xs text-muted-foreground">{axisLabel}</p>
+    </div>
+  )
+}
+
+// Heat grid: rows are topics, columns are groups, each cell the share of forms that ask.
+// Shade comes from the primary token at fixed opacity steps; the figure is always shown.
+const SHADE = (p: number) => `bg-primary/${Math.round(p / 10) * 10}`
+export function HeatGrid({
+  columns,
+  rows,
+}: {
+  columns: { key: string; label: string; n: number }[]
+  rows: { label: string; note?: string; cells: Record<string, { yes: number; of: number }> }[]
+}) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[32rem] border-separate border-spacing-1 text-sm">
+        <thead>
+          <tr>
+            <th scope="col" className="text-left font-medium text-muted-foreground">
+              <span className="sr-only">Topic</span>
+            </th>
+            {columns.map((c) => (
+              <th key={c.key} scope="col" className="px-1 pb-1 text-center text-xs font-medium">
+                {c.label}
+                <span className="block font-normal text-muted-foreground tabular-nums">{c.n} forms</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.label}>
+              <th scope="row" className="pr-2 text-left font-normal">
+                {r.label}
+                {r.note && <span className="ml-1 text-xs text-muted-foreground">{r.note}</span>}
+              </th>
+              {columns.map((c) => {
+                const cell = r.cells[c.key]
+                const p = cell && cell.of ? Math.round((100 * cell.yes) / cell.of) : 0
+                return (
+                  <td
+                    key={c.key}
+                    title={cell ? `${cell.yes} of ${cell.of} forms` : "No forms"}
+                    className={`h-9 rounded-[4px] text-center text-xs font-medium tabular-nums ring-1 ring-inset ring-border ${SHADE(p)} ${
+                      p >= 60 ? "text-primary-foreground" : "text-foreground"
+                    }`}
+                  >
+                    {cell && cell.of ? `${p}%` : "–"}
+                  </td>
+                )
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }

@@ -1,6 +1,6 @@
 # Intake-form census (v0.1, November 2026)
 
-A list of fostering and adoption intake forms, starting with the UK: what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
+A list of fostering and adoption intake forms in the UK, the United States, Canada and Australia: what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
 
 > **Status: draft for analysis. Every row is unverified.** The data describes public pages and processes. It is not a score, and nothing here should be published as a named comparison until the method has been consulted on and each service has seen its own rows privately, with a right of reply.
 
@@ -26,9 +26,9 @@ IDs link the files: `questions.form_id` → `forms.form_id`, `answer_options.que
 |---|---|
 | `form_id` | Short ID, unique in this file |
 | `front_door_id` | Register ID, if the front door is in the register |
-| `operator_type` | UK: `regional_hub`, `single_authority`, `council`, `council_consortium`, `national_brand_council`, `regional_service`, `regional_adoption_agency`, `voluntary_adoption_agency`, `independent_fostering_agency`. US: `state_agency`, `county_agency`, `private_agency`. Either: `platform_vendor` |
-| `country` | `UK` or `US` |
-| `region` | A UK nation (`England`, `Wales`, `Scotland`, `Northern Ireland`), or a US state or `District of Columbia` |
+| `operator_type` | UK: `regional_hub`, `single_authority`, `council`, `council_consortium`, `national_brand_council`, `regional_service`, `regional_adoption_agency`, `voluntary_adoption_agency`, `independent_fostering_agency`. US, Canada and Australia: `state_agency` (state, provincial or territorial government), `county_agency` (US counties and cities), `child_welfare_agency` (a mandated or delegated body that runs statutory child welfare, such as an Ontario Children's Aid Society), `indigenous_agency` (tribal, First Nations, Métis, Inuit or Aboriginal community-controlled), `private_agency` (licensed or accredited non-government agency). Any: `platform_vendor` |
+| `country` | `UK`, `US`, `CA` (Canada) or `AU` (Australia) |
+| `region` | A UK nation (`England`, `Wales`, `Scotland`, `Northern Ireland`), a US state or `District of Columbia`, a Canadian province or territory, or an Australian state or territory, written out in full |
 | `service_type` | `fostering`, `adoption` or `fostering_and_adoption` |
 | `form_stage` | `primary` (first contact) or `secondary` (after first contact, before assessment) |
 | `access_route` | `online_form`, `downloadable_form`, `phone_conversation`, `sent_after_first_contact`, `email_only`, `signposting_only`, `described_not_public`, `council_portal` |
@@ -68,7 +68,7 @@ Very long lists (for example every UK council) are recorded as one summary row.
 | `guidance_type` | `response_time`, `later_step_time`, `what_happens_next`, `not_an_application`, `eligibility`, `privacy_notice_link`, `data_controller`, `lawful_basis`, `data_sharing`, `retention`, `records_check`, `marketing_consent`, `declaration`, `alternative_contact`, `opening_hours`, `accessibility_statement`, `language_option`, `technical_requirement`, `information_pack`, `information_event`, `geographic_scope`, `acknowledgement`, `other` |
 | `present` | `yes` found, `no` looked for and not found, `unknown` |
 | `summary_paraphrased` | What the guidance says, in plain words |
-| `value` | A short coded value where useful: a response time such as `1 working day`, or a marketing consent pattern such as `separate_unticked`, `required_choice`, `bundled_on_submit`, `separate_form`, `none` |
+| `value` | A short coded value where useful: a response time such as `1 working day`, or a marketing consent pattern such as `separate_unticked`, `pre_ticked`, `required_choice`, `required_checkbox_ambiguous`, `bundled_on_submit`, `separate_form`, `none` |
 
 A form with no row for a guidance type was not checked for it. That is different from `present = no`.
 
@@ -82,6 +82,7 @@ A form with no row for a guidance type was not checked for it. That is different
 
 ## How the data was gathered
 
+- **Crawler reads (`direct_fetch`, from 17 November 2026).** `tools/polite_fetch.py` read each front door's page and, where there was no form, followed up to two links that read like an enquiry form. `tools/crawl_to_census.py` then wrote the form, its questions, choices and guidance. Labels and choices are taken from the page and shortened where long; `required` is `yes` only where the page marks it; each question's topic comes from keyword rules in English and French, and questions the rules cannot place are tagged `other`/`unclassified` for a person to tag. These rows carry a note starting "Read by the polite crawler", and re-running the tool replaces them without touching rows a person recorded.
 - **Direct reads (`direct_fetch`, 14 November 2026).** Public pages were fetched by an automated reader that turns the page into text and lists the form fields. Nobody has yet checked these visually in a browser. Required markers and input types are often not visible in page text. Where a type was guessed from the layout, `type_inferred` says so.
 - **Index snapshots (`index_snapshot`, November 2026).** Rows from the census report, which saw some forms through a search engine's copy of the page. They may be out of date.
 - **Search snippets (`search_snippet`).** A short extract shown by a search engine. Weakest evidence.
@@ -94,7 +95,7 @@ Labels, hints and guidance are paraphrased, to keep the dataset short and to avo
 
 ## Coverage and gaps
 
-**United States.** The files are ready for US forms: set `country` to `US`, `region` to the state, and use `state_agency`, `county_agency` or `private_agency`. In states where counties run child welfare, record each county's form as its own row and name the county in `name`. No US data has been collected yet.
+**United States, Canada and Australia.** Forms come from the crawler, starting from the front-door registers in [`register/us/`](../register/us/), [`register/ca/`](../register/ca/) and [`register/au/`](../register/au/). Only forms that load as ordinary web pages can be read: forms that load in the browser with JavaScript, sit behind a portal or a bot check, or are PDFs are not yet recorded. Coverage is therefore uneven, and every crawler row is unverified.
 
 **UK.**
 

@@ -6,7 +6,8 @@ import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import FormsDiffer from "@/components/forms-differ"
 import UsPicture from "@/components/us-picture"
-import { Progress, StatCard } from "@/components/charts"
+import Countries, { InsightCards, type Withdrawals } from "@/components/countries"
+import type { CountriesData } from "@/lib/countries"
 import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 import type { UsPicture as UsPictureData } from "@/lib/us-register"
 
@@ -114,6 +115,8 @@ export default function ResearchIndex({
   library,
   formsDiffer,
   us,
+  world,
+  withdrawals,
 }: {
   updated: string
   findings: Finding[]
@@ -122,6 +125,8 @@ export default function ResearchIndex({
   library: Doc
   formsDiffer?: FormsDifferData
   us?: UsPictureData
+  world?: CountriesData
+  withdrawals?: Withdrawals
 }) {
   const sources = findings.flatMap((f) => f.sources)
   const checkedCount = sources.filter((s) => s.checked).length
@@ -145,18 +150,7 @@ export default function ResearchIndex({
           <h2 id="glance" className="sr-only">
             At a glance
           </h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            <StatCard label="Things we know so far" value={String(findings.length)} note="Each with its sources" />
-            <StatCard label="Sources checked by a person" value={`${checkedCount} of ${sources.length}`}>
-              <Progress value={checkedCount} max={sources.length} label={`${checkedCount} of ${sources.length} sources checked`} />
-            </StatCard>
-            {formsDiffer && formsDiffer.read > 0 && (
-              <StatCard label="UK enquiry forms read" value={String(formsDiffer.read)} note="From the live page" />
-            )}
-            {us && us.doors > 0 && (
-              <StatCard label="US front doors mapped" value={us.doors.toLocaleString("en-GB")} note="All 50 states and DC" />
-            )}
-          </div>
+          {world && world.allForms > 0 && <InsightCards data={world} withdrawals={withdrawals} />}
           <Stages findings={findings} />
         </section>
 
@@ -184,6 +178,8 @@ export default function ResearchIndex({
         </section>
 
         {formsDiffer && formsDiffer.read > 0 && <FormsDiffer data={formsDiffer} />}
+
+        {world && world.allForms > 0 && <Countries data={world} />}
 
         {us && us.doors > 0 && <UsPicture data={us} />}
 

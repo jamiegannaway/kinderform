@@ -76,6 +76,8 @@ const PUBLIC = new Set([
   "regional_service",
   "state_agency",
   "county_agency",
+  "child_welfare_agency",
+  "indigenous_agency",
 ])
 
 export type Group = "Councils and hubs" | "Independent agencies" | "Adoption agencies"

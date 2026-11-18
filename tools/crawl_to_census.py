@@ -1,0 +1,358 @@
+"""Turn polite_fetch.py output into census rows for any country.
+
+Usage (from the repository root):
+    python tools/crawl_to_census.py CRAWL.jsonl FRONT_DOORS.csv [--date YYYY-MM-DD]
+
+FRONT_DOORS.csv has one row per front door, with at least these columns:
+    front_door_id, name, country, region, operator_type, service_type
+and optionally register_id (the ID in a register file, to link the census form to it).
+Crawl keys must start with the front_door_id ("id|website", "id|form_url|follow1"...).
+
+For each front door whose pages (including followed links) hold an enquiry form on a
+page about fostering or adoption, this writes:
+- forms.csv: one primary form, observed "direct_fetch"
+- questions.csv: one row per question. Radio buttons and tick boxes that share a name
+  are one question, labelled by their legend. Each is tagged with a census topic by
+  keyword rules (English and French). Questions the rules cannot place are tagged
+  other/unclassified for a person to tag.
+- answer_options.csv: the choices offered by select boxes, radio buttons and tick boxes
+- guidance.csv: whether a reply time is stated on the page, whether a privacy notice is
+  linked, and how a marketing opt-in is handled, where the page shows it
+
+Rows this tool wrote before (form IDs ending "-enquiry" and notes starting "Read by the
+polite crawler") are replaced. Rows a person recorded are never touched, and a front
+door that already has a person-recorded form with fields is skipped.
+Standard library only.
+"""
+
+import argparse
+import csv
+import json
+import re
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from crawl_to_register import EMAIL, PHONE, clean_promise, stated_hours  # noqa: E402
+
+ROOT = Path(__file__).resolve().parent.parent
+C = ROOT / "census"
+MARK = "Read by the polite crawler"
+
+# (category, topic, pattern), first match wins. English and French.
+RULES = [
+    ("consent", "marketing", r"newsletter|subscribe|mailing list|marketing|e-?news|updates (?:by|via)|infolettre|bulletin"),
+    ("consent", "privacy_acknowledgement", r"privacy|confidentialit|collection notice"),
+    ("consent", "terms", r"terms and conditions|terms of use"),
+    ("consent", "contact", r"(?:consent|agree|happy) .*contact|permission to contact|text messages?|\bsms\b"),
+    ("consent", "processing", r"consent|i agree|i understand|i accept|j.accepte|consens|declar"),
+    ("contact_identity", "email", r"e-?mail|courriel"),
+    ("contact_identity", "date_of_birth", r"date of birth|birth ?date|\bdob\b|date de naissance"),
+    ("eligibility", "age", r"\bage\b|\bâge\b|over 1[89]|over 2[15]|years old"),
+    ("contact_identity", "phone", r"phone|mobile|\bcell|telephone|t[ée]l[ée]phone|\bfax\b|contact number"),
+    ("contact_identity", "postcode", r"post ?code|zip|postal code|code postal"),
+    ("routing", "local_authority", r"\bcounty\b|council|borough|local authority|\bregion\b|\bstate\b|province|territor|municipalit|r[ée]gion"),
+    ("routing", "nearest_office", r"nearest|office|branch|location you|site you"),
+    ("contact_identity", "address", r"address|street|suburb|\bcity\b|\btown\b|apartment|\bapt\b|\bsuite\b|adresse|ville|rue"),
+    ("contact_identity", "name", r"name|^first$|^last$|^middle|^title$|^prefix|surname|\bnom\b|pr[ée]nom"),
+    ("source", "how_heard", r"hear about|heard about|how did you (?:find|hear)|where did you|referr|source|comment avez-vous"),
+    ("contact_preference", "time", r"best time|time to (?:call|contact)|when (?:is it|can we|should we)|availability|moment"),
+    ("contact_preference", "method", r"prefer.*contact|contact method|how .*contact you|preferred method"),
+    ("contact_preference", "language", r"language|langue|interpreter"),
+    ("information_event", "event_dates", r"information (?:session|evening|event)|info session|webinar|event|s[ée]ance"),
+    ("transfer", "current_carer", r"transfer|another agency|currently (?:a )?(?:approved|registered|licensed|foster)"),
+    ("experience", "prior_fostering", r"(?:previous|prior|before|ever).*(?:foster|adopt)|(?:foster|adopt)ed before|licensed"),
+    ("experience", "childcare_experience", r"experience|worked with children|childcare"),
+    ("household", "children_in_household", r"children (?:in|at|living)|own children|your children|kids|vos enfants|enfants"),
+    ("household", "partner", r"partner|spouse|husband|wife|conjoint"),
+    ("household", "applicant_type", r"single|couple|applying (?:as|alone|with)|joint applic"),
+    ("household", "relationships", r"marital|married|relationship status|[ée]tat civil"),
+    ("household", "household_composition", r"household|live with you|people (?:in|living)|occupants|who lives"),
+    ("household", "pets", r"\bpets?\b|\bdogs?\b|animal"),
+    ("housing", "spare_bedroom", r"bedroom|spare room|chambre"),
+    ("housing", "tenure", r"\brent\b|\brenting\b|own your home|homeowner|tenure|mortgage|propri[ée]taire|locataire"),
+    ("housing", "smoking", r"smok|vap"),
+    ("work", "income", r"income|salary|financ|revenu"),
+    ("work", "driving_licence", r"driv|licen[cs]e to drive|vehicle|\bcar\b"),
+    ("work", "occupation", r"occupation|job title|profession"),
+    ("work", "employment_status", r"employ|\bwork|emploi"),
+    ("equality", "ethnicity", r"ethnic|\brace\b|aboriginal|torres strait|indigenous|first nations|m[ée]tis|inuit|cultural|origin|autochtone"),
+    ("equality", "gender", r"gender|\bsex\b|pronoun|\bgenre\b"),
+    ("equality", "religion", r"relig|faith"),
+    ("health", "disability", r"disab|handicap"),
+    ("health", "health", r"health|medical|sant[ée]"),
+    ("criminal_record", "criminal_record", r"criminal|convict|offen[cs]e|police check|record check|ant[ée]c[ée]dents"),
+    ("eligibility", "citizenship", r"citizen|citoyen"),
+    ("eligibility", "residency", r"residen|visa|immigration|permanent"),
+    ("prior_involvement", "social_services", r"social services|child protection|\bcps\b|involvement with"),
+    ("interest", "child_preferences", r"age of (?:the )?child|ages? range|sibling|children you (?:could|would|can)|special needs"),
+    ("interest", "care_type", r"foster|adopt|respite|kinship|emergency|short.?term|long.?term|type of care|interested in|program|famille d.accueil|accueil"),
+    ("intent", "journey_stage", r"how soon|ready to|stage|timeline|when (?:would|do) you (?:like|want) to start|next step"),
+    ("free_text", "motivation", r"\bwhy\b|motivat|pourquoi"),
+    ("free_text", "about_you", r"about (?:you|yourself)|tell us"),
+    ("free_text", "questions", r"message|comment|question|anything else|additional|enquiry|inquiry|details|demande|pr[ée]cis"),
+]
+RULES = [(c, t, re.compile(p, re.I)) for c, t, p in RULES]
+
+JUNK = re.compile(
+    r"^(?:item meta|fields?|input|wpforms|ninja|gform|nf|tfa|formid|track id|accepted by|search|recherche)\b|\bvalue$|"
+    r"^\d+$|^[^A-Za-zÀ-ÿ]*$|if you are human|leave this field (?:blank|empty)|honeypot|hidden|[0-9a-f]{12,}|"
+    r"captcha|recaptcha|not a robot|g-recaptcha", re.I)
+PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*)\b", re.I)
+NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|job|resume|career|password|log ?in|sign ?in|"
+                         r"upload|type your signature|newsletter only|search", re.I)
+TOPIC_PAGE = re.compile(r"foster|adopt|carer|famille d.accueil|famille d.adoption|accueil|out-of-home care|kinship", re.I)
+INPUT = {"text": "text", "email": "email", "tel": "tel", "textarea": "textarea", "select": "select",
+         "radio": "radio", "checkbox": "checkbox", "date": "date", "number": "text", "url": "text"}
+
+
+def plain(text):
+    return " ".join(str(text).split()).strip(" *:")
+
+
+def label_of(field):
+    for key in ("label", "aria_label", "placeholder"):
+        text = plain(field.get(key, ""))
+        if text and not JUNK.search(text):
+            return text
+    name = re.sub(r"[_\-\[\]\.]+", " ", field.get("name", ""))
+    name = plain(re.sub(r"(?<=[a-z])(?=[A-Z])", " ", name))
+    return "" if not name or JUNK.search(name) or re.fullmatch(r"[a-z]{1,2} ?\d*", name, re.I) else name
+
+
+def shorten(text, limit=110):
+    text = plain(text)
+    if len(text) <= limit:
+        return text
+    cut = re.split(r"(?<=[.?!])\s", text)[0]
+    if len(cut) <= limit:
+        return cut
+    return text[:limit].rsplit(" ", 1)[0].rstrip(",;:") + "…"
+
+
+def topic_of(text):
+    for category, topic, pattern in RULES:
+        if pattern.search(text):
+            return category, topic
+    return "other", "unclassified"
+
+
+def questions_of(form):
+    """Yield dicts: label, topic text, input_type, required, options, checked (for single tick boxes)."""
+    groups, order = {}, []
+    for field in form["fields"]:
+        kind = field["type"]
+        if kind in ("radio", "checkbox") and field.get("name"):
+            key = ("group", field["name"])
+            if key not in groups:
+                groups[key] = {"field": field, "options": [], "checked": False}
+                order.append(key)
+            option = plain(field.get("label", ""))
+            if option and not JUNK.search(option):
+                groups[key]["options"].append(option[:60])
+            groups[key]["checked"] |= bool(field.get("checked"))
+        else:
+            key = ("field", id(field))
+            groups[key] = {"field": field, "options": [], "checked": False}
+            order.append(key)
+    for key in order:
+        g = groups[key]
+        field = g["field"]
+        kind = INPUT.get(field["type"], "unknown")
+        if key[0] == "group":
+            options = g["options"]
+            legend = plain(field.get("legend", ""))
+            if len(options) <= 1:
+                label = options[0] if options else (legend or label_of(field))
+                options = []
+            else:
+                name = label_of({"name": field.get("name", "")})
+                label = legend or plain(field.get("near_text", "")) or name or "Choice"
+                if label in options:
+                    label = name or "Choice"
+            if not label or JUNK.search(label):
+                continue
+            yield {"label": label, "text": label + " " + " ".join(options), "input_type": kind,
+                   "required": field.get("required"), "options": options, "checked": g["checked"]}
+        else:
+            label = label_of(field)
+            if not label:
+                continue
+            options = [o for o in field.get("options", []) if not PLACEHOLDER.search(o)]
+            yield {"label": label, "text": label + " " + field.get("name", ""), "input_type": kind,
+                   "required": field.get("required"), "options": options, "checked": False}
+
+
+def is_enquiry(form, page_text):
+    fields = form.get("fields", [])
+    labels = " ".join((label_of(f) + " " + f.get("name", "") + " " + f.get("type", "")).lower() for f in fields)
+    if len(fields) < 3 or NOT_ENQUIRY.search(labels):
+        return False
+    if not re.search(r"name|\bnom\b|pr[ée]nom", labels) or not re.search(r"e-?mail|courriel|phone|t[ée]l", labels):
+        return False
+    return bool(TOPIC_PAGE.search(page_text))
+
+
+def reply_value(sentence):
+    m = re.search(r"within\s+(\w+)\s*(?:-\s*\w+\s*)?(business\s+|working\s+)?(hours?|days?|weeks?)", sentence, re.I)
+    if not m:
+        return ""
+    return f"{m.group(1)} {(m.group(2) or '').strip() + ' ' if m.group(2) else ''}{m.group(3).lower()}".replace("  ", " ")
+
+
+def load(name):
+    with open(C / name, newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh)
+        return reader.fieldnames, list(reader)
+
+
+def write(name, header, rows):
+    with open(C / name, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=header, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("crawl")
+    ap.add_argument("front_doors")
+    ap.add_argument("--date", default="")
+    args = ap.parse_args()
+
+    doors = list(csv.DictReader(open(args.front_doors, encoding="utf-8", newline="")))
+    records = {}
+    for line in open(args.crawl, encoding="utf-8"):
+        r = json.loads(line)
+        records.setdefault(r["key"].split("|")[0], []).append(r)
+
+    fh, forms = load("forms.csv")
+    qh, questions = load("questions.csv")
+    oh, options = load("answer_options.csv")
+    gh, guidance = load("guidance.csv")
+    taxonomy = {(r["category"], r["topic"]) for r in load("taxonomy.csv")[1]}
+
+    # Person-recorded forms with fields: keep, and skip their front doors and URLs.
+    human = [f for f in forms if not f["notes"].startswith(MARK)]
+    human_doors = {f["front_door_id"] for f in human if f["front_door_id"] and f["fields_observed"] != "no"}
+    human_urls = {f["form_url"].rstrip("/") for f in human if f["form_url"] and f["fields_observed"] != "no"}
+
+    new_ids = set()
+    new_forms, new_q, new_o, new_g = [], [], [], []
+    for door in doors:
+        recs = records.get(door["front_door_id"], [])
+        register_id = door.get("register_id", "")
+        if register_id in human_doors:
+            continue
+        best, best_rec = None, None
+        for r in recs:
+            if r.get("status") != 200:
+                continue
+            page = (r.get("title", "") or "") + " " + (r.get("text", "") or "")
+            for f in r.get("forms", []):
+                if is_enquiry(f, page) and (best is None or len(f["fields"]) > len(best["fields"])):
+                    best, best_rec = f, r
+        if best is None:
+            continue
+        url = best_rec.get("final_url") or best_rec["url"]
+        if url.rstrip("/") in human_urls or not url.startswith("https://"):
+            continue
+        form_id = re.sub(r"[^a-z0-9-]+", "-", door["front_door_id"].lower()).strip("-") + "-enquiry"
+        if form_id in new_ids:
+            continue
+        new_ids.add(form_id)
+        date = args.date or best_rec.get("fetched_at", "")
+        text = (best_rec.get("text", "") or "").lower()
+        platform = next((p for p in ("binti", "hubspot", "jotform", "formstack", "gravity", "wpforms", "salesforce",
+                                     "microsoft forms", "typeform", "cognito") if p in text or p in url.lower()), "")
+        new_forms.append({
+            "form_id": form_id, "front_door_id": register_id, "name": door["name"],
+            "operator_type": door["operator_type"], "service_type": door["service_type"], "country": door["country"],
+            "region": door["region"], "form_stage": "primary", "access_route": "online_form", "form_url": url,
+            "platform": platform, "template_group": "", "fields_observed": "yes", "observed": "direct_fetch",
+            "date_checked": date, "source_url": url,
+            "notes": f"{MARK}: labels and choices from the page; required only where the page marks it; "
+                     "topics tagged by keyword rules. Not yet checked by a person.",
+        })
+        n, seen = 0, set()
+        marketing = None
+        for q in questions_of(best):
+            label = shorten(q["label"])
+            if label.lower() in seen or EMAIL.search(label) or PHONE.search(label):
+                continue
+            seen.add(label.lower())
+            category, topic = topic_of(q["text"])
+            if (category, topic) not in taxonomy:
+                category, topic = "other", "unclassified"
+            n += 1
+            qid = f"{form_id}:q{n:02d}"
+            new_q.append({
+                "question_id": qid, "form_id": form_id, "order": str(n), "section": "", "label_paraphrased": label,
+                "category": category, "topic": topic, "required": "yes" if q["required"] else "unknown",
+                "input_type": q["input_type"], "type_inferred": "no", "conditional_on": "", "hint_paraphrased": "",
+                "observed": "direct_fetch", "date_checked": date,
+            })
+            for k, option in enumerate(q["options"][:20], start=1):
+                if EMAIL.search(option) or PHONE.search(option):
+                    continue
+                new_o.append({"option_id": f"{qid}:o{k:02d}", "question_id": qid, "order": str(k),
+                              "option_label": option, "option_guidance": ""})
+            if (category, topic) == ("consent", "marketing"):
+                if q["required"]:
+                    marketing = "required_checkbox_ambiguous" if q["input_type"] == "checkbox" else "required_choice"
+                elif q["checked"]:
+                    marketing = "pre_ticked"
+                else:
+                    marketing = "separate_unticked"
+        g = 0
+
+        def add(kind, present, summary, value=""):
+            nonlocal g
+            g += 1
+            new_g.append({"guidance_id": f"{form_id}:g{g:02d}", "form_id": form_id, "guidance_type": kind,
+                          "present": present, "summary_paraphrased": summary, "value": value, "source_url": url,
+                          "observed": "direct_fetch", "date_checked": date})
+
+        promise = ""
+        for r in [best_rec] + [x for x in recs if x is not best_rec and x.get("status") == 200]:
+            for raw in r.get("promises", []):
+                sentence = clean_promise(raw)
+                if sentence and not EMAIL.search(sentence) and not PHONE.search(sentence):
+                    promise = sentence
+                    break
+            if promise:
+                break
+        if promise and reply_value(promise):
+            add("response_time", "yes", f"Says it will make contact within {reply_value(promise)}.", reply_value(promise))
+        else:
+            add("response_time", "no", "No reply time found on the form page or the front-door page.")
+        links = " ".join(f"{h} {t}" for h, t in best_rec.get("links", [])).lower()
+        privacy = bool(re.search(r"privacy|confidentialit|collection notice", links))
+        add("privacy_notice_link", "yes" if privacy else "no",
+            "Links to a privacy notice." if privacy else "No privacy notice link found on the form page.")
+        if marketing:
+            add("marketing_consent", "yes", "The form has a newsletter or marketing opt-in.", marketing)
+        else:
+            add("marketing_consent", "no", "No newsletter or marketing opt-in found on the form.", "none")
+
+    # Replace only this run's crawler rows, so one country's run leaves the others alone.
+    run_ids = {re.sub(r"[^a-z0-9-]+", "-", d["front_door_id"].lower()).strip("-") + "-enquiry" for d in doors}
+    old_crawler = {f["form_id"] for f in forms if f["notes"].startswith(MARK) and f["form_id"] in run_ids}
+    forms = [f for f in forms if f["form_id"] not in old_crawler | new_ids] + new_forms
+    questions = [q for q in questions if q["form_id"] not in old_crawler | new_ids] + new_q
+    kept_q = {q["question_id"] for q in questions}
+    options = [o for o in options if o["question_id"] in kept_q and o not in new_o] + new_o
+    options = list({o["option_id"]: o for o in options}.values())
+    guidance = [x for x in guidance if x["form_id"] not in old_crawler | new_ids] + new_g
+    write("forms.csv", fh, forms)
+    write("questions.csv", qh, questions)
+    write("answer_options.csv", oh, options)
+    write("guidance.csv", gh, guidance)
+    print(f"forms: {len(new_forms)}, questions: {len(new_q)}, options: {len(new_o)}, guidance: {len(new_g)}")
+    unclassified = sum(q["topic"] == "unclassified" for q in new_q)
+    print(f"unclassified questions: {unclassified} of {len(new_q)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

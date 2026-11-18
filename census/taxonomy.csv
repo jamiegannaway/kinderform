@@ -73,3 +73,6 @@ work,employment_history,Education and employment history,none,stage_2,kept_out_l
 work,employment_status,Employment status or terms,none,stage_2,kept_out_later_slice,
 work,occupation,Occupation,none,stage_2,kept_out_later_slice,
 work,working_hours,Working hours and availability,none,stage_2,kept_out_later_slice,
+interest,child_preferences,"Ages, needs or number of children the person could care for",none,service_operation,fostering_interests,"Added for forms outside England; records the question only, never answers."
+work,income,Income or household finances,sensitive,,kept_out_later_slice,Added for forms outside England. Stage not yet read against Schedule 3.
+other,unclassified,A question the keyword rules could not place; needs a person to tag it,none,,,Used only by tools/crawl_to_census.py. Re-tag by hand.
