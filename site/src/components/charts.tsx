@@ -270,22 +270,36 @@ const SHADE = (p: number) => `bg-primary/${Math.round(p / 10) * 10}`
 export function HeatGrid({
   columns,
   rows,
+  unit = "forms",
 }: {
-  columns: { key: string; label: string; n: number }[]
+  unit?: string
+  columns: { key: string; label: string; short?: string; n: number }[]
   rows: { label: string; note?: string; cells: Record<string, { yes: number; of: number }> }[]
 }) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[18rem] border-separate border-spacing-1 text-sm">
+      <table className="w-full min-w-[18rem] table-fixed border-separate border-spacing-1 text-sm">
         <thead>
           <tr>
-            <th scope="col" className="text-left font-medium text-muted-foreground">
+            <th scope="col" className="w-[36%] text-left font-medium text-muted-foreground">
               <span className="sr-only">Topic</span>
             </th>
             {columns.map((c) => (
-              <th key={c.key} scope="col" className="px-1 pb-1 text-center text-xs font-medium">
-                {c.label}
-                <span className="block font-normal text-muted-foreground tabular-nums">{c.n} forms</span>
+              <th key={c.key} scope="col" className="px-1 pb-1 text-center align-bottom text-xs font-medium">
+                {c.short ? (
+                  <>
+                    <abbr title={c.label} className="no-underline sm:hidden">
+                      {c.short}
+                    </abbr>
+                    <span className="hidden sm:inline">{c.label}</span>
+                  </>
+                ) : (
+                  c.label
+                )}
+                <span className="block font-normal text-muted-foreground tabular-nums">
+                  {c.n}
+                  <span className="hidden sm:inline"> {unit}</span>
+                </span>
               </th>
             ))}
           </tr>
@@ -303,7 +317,7 @@ export function HeatGrid({
                 return (
                   <td
                     key={c.key}
-                    title={cell ? `${cell.yes} of ${cell.of} forms` : "No forms"}
+                    title={cell ? `${cell.yes} of ${cell.of} ${unit}` : `No ${unit}`}
                     className={`h-9 rounded-[4px] text-center text-xs font-medium tabular-nums ring-1 ring-inset ring-border ${SHADE(p)} ${
                       p >= 60 ? "text-primary-foreground" : "text-foreground"
                     }`}

@@ -30,6 +30,7 @@ import csv
 import json
 import re
 import sys
+import urllib.parse
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -41,39 +42,50 @@ MARK = "Read by the polite crawler"
 
 # (category, topic, pattern), first match wins. English and French.
 RULES = [
-    ("consent", "marketing", r"newsletter|subscribe|mailing list|marketing|e-?news|updates (?:by|via)|stay connected|keep in touch|infolettre|bulletin"),
+    ("consent", "marketing", r"newsletter|subscribe|mailing list|marketing|e-?news|updates (?:by|via)|stay connected|keep in touch|stay up to date|"
+                                    r"updates|opt out|products and services|infolettre|bulletin"),
     ("consent", "privacy_acknowledgement", r"privacy|confidentialit|collection notice"),
     ("consent", "terms", r"terms and conditions|terms of use"),
     ("consent", "contact", r"(?:consent|agree|happy) .*contact|permission to contact|text messages?|\bsms\b|contact me"),
-    ("consent", "processing", r"consent|i agree|i understand|i accept|j.accepte|consens|declar"),
+    ("consent", "declaration_and_checks", r"certify|i verify|correct and complete|read and agree|acknowledge|declar"),
+    ("consent", "processing", r"consent|i agree|i understand|i accept|data protection|permission to store|process my data|"
+                              r"j.accepte|consens"),
     ("contact_identity", "email", r"e-?mail|courriel"),
     ("contact_identity", "date_of_birth", r"date of birth|birth ?date|birthday|\bdob\b|date de naissance"),
-    ("eligibility", "age", r"\bage\b|\bâge\b|over 1[89]|over 2[15]|years old"),
-    ("contact_identity", "phone", r"phone|mobile|\bcell|telephone|t[ée]l[ée]phone|\bfax\b|contact number"),
+    ("eligibility", "age", r"\bage\b|\bâge\b|over 1[89]|over 2[15]|years old|\b(?:18|21|25) (?:years|or)"),
+    ("contact_identity", "phone", r"phone|mobile|\bcell|telephone|t[ée]l[ée]phone|\bfax\b|\btel\b|contact (?:number|no)"),
     ("contact_identity", "postcode", r"post ?code|zip|postal code|code postal"),
     ("routing", "local_authority", r"\bcounty\b|council|borough|local authority|\bregion\b|\bstate\b|province|territor|municipalit|r[ée]gion"),
-    ("eligibility", "residency", r"(?:currently|do you) live in|reside in|live in (?:the )?state"),
+    ("eligibility", "citizenship", r"place of birth|born in|country of birth"),
+    ("eligibility", "residency", r"(?:currently|do you) live in|reside in|live in (?:the )?state|based in|living (?:in|within)|relocate"),
+    ("routing", "local_authority", r"where do you live|\brcm\b|\bmrc\b"),
     ("routing", "nearest_office", r"nearest|office|branch|location"),
-    ("contact_identity", "address", r"address|street|suburb|\bcity\b|\btown\b|apartment|\bapt\b|\bsuite\b|adresse|ville|rue"),
+    ("contact_identity", "address", r"address|street|suburb|\bcity\b|\btown\b|apartment|\bapt\b|\bsuite\b|po box|^line \d|"
+                                    r"^country$|adresse|ville|rue"),
     ("contact_identity", "name", r"name|^(?:first|last|middle|title|prefix|suffix)\b|surname|\bnom\b|pr[ée]nom"),
-    ("source", "how_heard", r"hear about|heard about|how did you (?:find|hear)|where did you|referr|source|social media|"
-                            r"facebook|instagram|billboard|radio|\btv\b|movie|newspaper|friend|website|comment avez-vous"),
+    ("source", "how_heard", r"hear about|heard about|how did you (?:find|hear)|where did you|\breferr|referred|source|social media|"
+                            r"facebook|instagram|billboard|radio|\btv\b|movie|newspaper|friend|website|poster|pamphlet|handout|^hear\b|"
+                            r"comment avez-vous"),
     ("contact_preference", "time", r"best time|time to (?:call|contact)|when (?:is it|can we|should we)|availability|"
                                    r"monday|tuesday|wednesday|thursday|friday|saturday|sunday|morning|afternoon|evening|noon|moment"),
     ("contact_preference", "method", r"prefer.*contact|contact method|how .*contact(?:ed)? you|be contacted|\btext\b|\bmail\b|"
                                      r"leave .*(?:message|msg)|preferred method"),
     ("contact_preference", "language", r"language|langue|interpreter"),
     ("information_event", "event_dates", r"information (?:session|evening|event)|info session|webinar|event|s[ée]ance"),
+    ("prior_involvement", "social_services", r"children.s aid|involved with|involvement with|social services|child protection"),
+    ("experience", "own_children", r"children of your own|had children|have children"),
     ("transfer", "current_carer", r"transfer|another agency|currently (?:a )?(?:approved|registered|licensed|foster)"),
-    ("experience", "prior_fostering", r"(?:previous|prior|before|ever).*(?:foster|adopt)|(?:foster|adopt)ed before|licensed"),
+    ("experience", "prior_fostering", r"(?:previous|prior|before|ever).*(?:foster|adopt)|(?:foster|adopt)ed before|licensed|"
+                                      r"home ?study|assessment"),
     ("experience", "childcare_experience", r"experience|worked with children|childcare"),
     ("interest", "child_preferences", r"age of (?:the )?child|ages? range|sibling|children you (?:could|would|can)|special needs|"
                                      r"youth|adolescen|teen|infant|toddler|their ages"),
     ("household", "children_in_household", r"children (?:in|at|living)|own children|your children|^children\b|kids|vos enfants|enfants"),
     ("household", "partner", r"partner|spouse|husband|wife|conjoint"),
-    ("household", "applicant_type", r"single|couple|applying (?:as|alone|with)|joint applic"),
-    ("household", "relationships", r"marital|married|relationship status|[ée]tat civil"),
-    ("household", "household_composition", r"household|live with you|people (?:in|living)|occupants|who lives|other adults"),
+    ("household", "applicant_type", r"single|couple|applying (?:as|alone|with)|joint applic|second applicant"),
+    ("household", "relationships", r"marital|married|relationship status|in a relationship|[ée]tat civil"),
+    ("household", "household_composition", r"household|live with you|people (?:in|living)|occupants|who lives|other adults?|"
+                                            r"family unit|child (?:one|two|three|four)|lives with"),
     ("household", "pets", r"\bpets?\b|\bdogs?\b|animal"),
     ("housing", "spare_bedroom", r"bedroom|spare room|chambre"),
     ("housing", "tenure", r"\brent\b|\brenting\b|own your home|homeowner|tenure|mortgage|propri[ée]taire|locataire"),
@@ -93,14 +105,16 @@ RULES = [
     ("eligibility", "citizenship", r"citizen|citoyen"),
     ("eligibility", "residency", r"residen|visa|immigration|permanent"),
     ("prior_involvement", "social_services", r"social services|child protection|\bcps\b|involvement with"),
-    ("interest", "care_type", r"foster|adopt|respite|kinship|emergency|short.?term|long.?term|type of care|interest|program|"
+    ("intent", "journey_stage", r"how long have you been|thinking about|considering"),
+    ("interest", "care_type", r"foster|adopt|respite|kinship|emergency|short.?term|long.?term|type of care|type of service|"
+                              r"^service$|interest|program|"
                               r"treatment|famille d.accueil|accueil"),
-    ("intent", "journey_stage", r"how soon|ready to|stage|timeline|when (?:would|do) you (?:like|want) to start|next step|subject|"
+    ("intent", "journey_stage", r"how soon|ready to|stage|timeline|when (?:would|do) you (?:like|want) to start|next step|subject|applies to you|"
                                 r"topic|reason|need help|help you with|how can we help|why are you contacting|how involved"),
     ("free_text", "motivation", r"\bwhy\b|motivat|pourquoi"),
     ("free_text", "about_you", r"about (?:you|yourself)|tell us"),
     ("free_text", "questions", r"message|comment|question|anything else|additional|enquiry|inquiry|details|like us to know|"
-                               r"demande|pr[ée]cis"),
+                               r"specifics|notes|demande|pr[ée]cis"),
 ]
 RULES = [(c, t, re.compile(p, re.I)) for c, t, p in RULES]
 
@@ -108,10 +122,16 @@ JUNK = re.compile(
     r"^(?:item meta|fields?|input|wpforms|ninja|gform|nf|tfa|formid|track id|accepted by|search|recherche)\b|\bvalue$|"
     r"^\d+$|^[^A-Za-zÀ-ÿ]*$|if you are human|leave this field (?:blank|empty)|honeypot|hidden|[0-9a-f]{12,}|"
     r"captcha|recaptcha|not a robot|g-recaptcha|ak[ _]?hp|wpcf7|empty\d|characters shown|code (?:above|is in the image|in the image)|prevent spam|"
-    r"form handle|form fields field|^(?:website|url|x/twitter|twitter|to)$|^[a-z0-9]{10,}$", re.I)
+    r"form handle|form fields field|^(?:website|url|x/twitter|twitter|linkedin|to)$|^[a-z0-9]{10,}$|utm_|gclid|msclkid|"
+    r"[gw]braid|fbclid|referr?er|entry ?page|page ?url|form ?type|nelio|sendmail|^project$|^fuction$|quiz|^ad |"
+    r"feedback|was this page helpful", re.I)
 PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*)\b", re.I)
 NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|job|resume|career|password|log ?in|sign ?in|"
-                         r"upload|type your signature|newsletter only|search", re.I)
+                         r"upload|type your signature|newsletter only|search|access record|subject access|records request", re.I)
+# A page whose address names an application holds the full application, not a first-contact form.
+# The census covers first contact only; application forms belong in register/us/application-forms.csv.
+APPLICATION_PAGE = re.compile(r"application|how-to-apply|apply-now|/apply/?$", re.I)
+NOT_APPLICATION = re.compile(r"process|enquir|inquir", re.I)  # "the application process" pages often carry an enquiry form
 TOPIC_PAGE = re.compile(r"foster|adopt|carer|famille d.accueil|famille d.adoption|accueil|out-of-home care|kinship", re.I)
 INPUT = {"text": "text", "email": "email", "tel": "tel", "textarea": "textarea", "select": "select",
          "radio": "radio", "checkbox": "checkbox", "date": "date", "number": "text", "url": "text"}
@@ -268,6 +288,8 @@ def main():
     human = [f for f in forms if not f["notes"].startswith(MARK)]
     human_doors = {f["front_door_id"] for f in human if f["front_door_id"] and f["fields_observed"] != "no"}
     human_urls = {f["form_url"].rstrip("/") for f in human if f["form_url"] and f["fields_observed"] != "no"}
+    site = lambda u: urllib.parse.urlsplit(u).netloc.lower().removeprefix("www.")
+    human_sites = {site(u) for f in human if f["fields_observed"] != "no" for u in (f["form_url"], f["source_url"]) if u}
 
     new_ids = set()
     new_forms, new_q, new_o, new_g = [], [], [], []
@@ -280,6 +302,10 @@ def main():
         for r in recs:
             if r.get("status") != 200:
                 continue
+            path = urllib.parse.urlsplit(r.get("final_url") or r["url"]).path
+            if APPLICATION_PAGE.search(path) and not NOT_APPLICATION.search(path):
+                print("left out, an application page:", door["front_door_id"], r.get("final_url") or r["url"])
+                continue
             page = (r.get("title", "") or "") + " " + (r.get("text", "") or "")
             for f in r.get("forms", []):
                 if is_enquiry(f, page) and (best is None or len(f["fields"]) > len(best["fields"])):
@@ -287,7 +313,7 @@ def main():
         if best is None:
             continue
         url = best_rec.get("final_url") or best_rec["url"]
-        if url.rstrip("/") in human_urls or not url.startswith("https://"):
+        if url.rstrip("/") in human_urls or site(url) in human_sites or not url.startswith("https://"):
             continue
         form_id = re.sub(r"[^a-z0-9-]+", "-", door["front_door_id"].lower()).strip("-") + "-enquiry"
         if form_id in new_ids:

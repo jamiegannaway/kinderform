@@ -595,18 +595,12 @@ us-nm-pull-together-enquiry:q03,us-nm-pull-together-enquiry,3,,Email,contact_ide
 us-nm-pull-together-enquiry:q04,us-nm-pull-together-enquiry,4,,Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
 us-nm-all-ages-adoption-plus-enquiry:q01,us-nm-all-ages-adoption-plus-enquiry,1,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
 us-nm-all-ages-adoption-plus-enquiry:q02,us-nm-all-ages-adoption-plus-enquiry,2,,Zipcode inquiring about services in,contact_identity,postcode,unknown,select,no,,,direct_fetch,2026-11-18
-us-nm-all-ages-adoption-plus-enquiry:q03,us-nm-all-ages-adoption-plus-enquiry,3,,feedback Phone,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
-us-nm-all-ages-adoption-plus-enquiry:q04,us-nm-all-ages-adoption-plus-enquiry,4,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
-us-nm-all-ages-adoption-plus-enquiry:q05,us-nm-all-ages-adoption-plus-enquiry,5,,feedback race id,equality,ethnicity,unknown,select,no,,,direct_fetch,2026-11-18
-us-nm-all-ages-adoption-plus-enquiry:q06,us-nm-all-ages-adoption-plus-enquiry,6,,feedback Zip,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
-us-nm-all-ages-adoption-plus-enquiry:q07,us-nm-all-ages-adoption-plus-enquiry,7,,Inquiry,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+us-nm-all-ages-adoption-plus-enquiry:q03,us-nm-all-ages-adoption-plus-enquiry,3,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+us-nm-all-ages-adoption-plus-enquiry:q04,us-nm-all-ages-adoption-plus-enquiry,4,,Inquiry,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
 us-nm-open-skies-healthcare-enquiry:q01,us-nm-open-skies-healthcare-enquiry,1,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
 us-nm-open-skies-healthcare-enquiry:q02,us-nm-open-skies-healthcare-enquiry,2,,Zipcode inquiring about services in,contact_identity,postcode,unknown,select,no,,,direct_fetch,2026-11-18
-us-nm-open-skies-healthcare-enquiry:q03,us-nm-open-skies-healthcare-enquiry,3,,feedback Phone,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
-us-nm-open-skies-healthcare-enquiry:q04,us-nm-open-skies-healthcare-enquiry,4,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
-us-nm-open-skies-healthcare-enquiry:q05,us-nm-open-skies-healthcare-enquiry,5,,feedback race id,equality,ethnicity,unknown,select,no,,,direct_fetch,2026-11-18
-us-nm-open-skies-healthcare-enquiry:q06,us-nm-open-skies-healthcare-enquiry,6,,feedback Zip,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
-us-nm-open-skies-healthcare-enquiry:q07,us-nm-open-skies-healthcare-enquiry,7,,Inquiry,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+us-nm-open-skies-healthcare-enquiry:q03,us-nm-open-skies-healthcare-enquiry,3,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+us-nm-open-skies-healthcare-enquiry:q04,us-nm-open-skies-healthcare-enquiry,4,,Inquiry,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
 us-ny-cattaraugus-county-enquiry:q01,us-ny-cattaraugus-county-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
 us-ny-cattaraugus-county-enquiry:q02,us-ny-cattaraugus-county-enquiry,2,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
 us-ny-cattaraugus-county-enquiry:q03,us-ny-cattaraugus-county-enquiry,3,,Phone Number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
@@ -729,3 +723,637 @@ us-wi-waukesha-county-enquiry:q02,us-wi-waukesha-county-enquiry,2,,Address,conta
 us-wi-waukesha-county-enquiry:q03,us-wi-waukesha-county-enquiry,3,,Phone Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
 us-wi-waukesha-county-enquiry:q04,us-wi-waukesha-county-enquiry,4,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
 us-wi-waukesha-county-enquiry:q05,us-wi-waukesha-county-enquiry,5,,Comments,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-on-centralized-adoption-intake-enquiry:q01,ca-on-centralized-adoption-intake-enquiry,1,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-centralized-adoption-intake-enquiry:q02,ca-on-centralized-adoption-intake-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-on-centralized-adoption-intake-enquiry:q03,ca-on-centralized-adoption-intake-enquiry,3,,Postal code,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-centralized-adoption-intake-enquiry:q04,ca-on-centralized-adoption-intake-enquiry,4,,How did you hear about us?,source,how_heard,yes,select,no,,,direct_fetch,2026-11-18
+ca-on-centralized-adoption-intake-enquiry:q05,ca-on-centralized-adoption-intake-enquiry,5,,Which Children's Aid Society referred you?,source,how_heard,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-centralized-adoption-intake-enquiry:q06,ca-on-centralized-adoption-intake-enquiry,6,,Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-on-centralized-adoption-intake-enquiry:q07,ca-on-centralized-adoption-intake-enquiry,7,,apbct__label_id__gravity_form,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q01,ca-on-adoptontario-enquiry,1,,Comments,free_text,questions,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q02,ca-on-adoptontario-enquiry,2,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q03,ca-on-adoptontario-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q04,ca-on-adoptontario-enquiry,4,,Postal code,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q05,ca-on-adoptontario-enquiry,5,,How did you hear about us?,source,how_heard,yes,select,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q06,ca-on-adoptontario-enquiry,6,,Which Children's Aid Society referred you?,source,how_heard,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q07,ca-on-adoptontario-enquiry,7,,Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-on-adoptontario-enquiry:q08,ca-on-adoptontario-enquiry,8,,apbct__label_id__gravity_form,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-ccas-toronto-enquiry:q01,ca-on-ccas-toronto-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-ccas-toronto-enquiry:q02,ca-on-ccas-toronto-enquiry,2,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-ccas-toronto-enquiry:q03,ca-on-ccas-toronto-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-on-ccas-toronto-enquiry:q04,ca-on-ccas-toronto-enquiry,4,,Phone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+ca-on-ccas-toronto-enquiry:q05,ca-on-ccas-toronto-enquiry,5,,I have read the Privacy policy policy and agree to all appli,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-18
+ca-on-jfcs-toronto-enquiry:q01,ca-on-jfcs-toronto-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-jfcs-toronto-enquiry:q02,ca-on-jfcs-toronto-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-on-jfcs-toronto-enquiry:q03,ca-on-jfcs-toronto-enquiry,3,,Subject,intent,journey_stage,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-jfcs-toronto-enquiry:q04,ca-on-jfcs-toronto-enquiry,4,,Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q01,ca-on-york-cas-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q02,ca-on-york-cas-enquiry,2,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q03,ca-on-york-cas-enquiry,3,,Pronouns,equality,gender,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q04,ca-on-york-cas-enquiry,4,,"Choice of: Email, Home Phone Number, Cell Phone Number",contact_identity,email,unknown,checkbox,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q05,ca-on-york-cas-enquiry,5,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q06,ca-on-york-cas-enquiry,6,,Home Phone Number,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q07,ca-on-york-cas-enquiry,7,,Cell Phone Number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q08,ca-on-york-cas-enquiry,8,,When is the best time to contact you?,contact_preference,time,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q09,ca-on-york-cas-enquiry,9,,"To assist us with our recruitment efforts, it would be helpful for us to know the various ways in which you…",source,how_heard,yes,select,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q10,ca-on-york-cas-enquiry,10,,Please specify which organization you saw a poster ad for YRCAS,source,how_heard,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-york-cas-enquiry:q11,ca-on-york-cas-enquiry,11,,I acknowledge and understand that I have read and understand,consent,declaration_and_checks,unknown,checkbox,no,,,direct_fetch,2026-11-18
+ca-on-cas-sdg-enquiry:q01,ca-on-cas-sdg-enquiry,1,,Your Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-cas-sdg-enquiry:q02,ca-on-cas-sdg-enquiry,2,,Your Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-on-cas-sdg-enquiry:q03,ca-on-cas-sdg-enquiry,3,,Your Phone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+ca-on-cas-sdg-enquiry:q04,ca-on-cas-sdg-enquiry,4,,Subject,intent,journey_stage,unknown,select,no,,,direct_fetch,2026-11-18
+ca-on-cas-sdg-enquiry:q05,ca-on-cas-sdg-enquiry,5,,Your Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+ca-on-facs-fla-enquiry:q01,ca-on-facs-fla-enquiry,1,,Your name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-facs-fla-enquiry:q02,ca-on-facs-fla-enquiry,2,,Your Email,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-facs-fla-enquiry:q03,ca-on-facs-fla-enquiry,3,,Your Phone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-facs-fla-enquiry:q04,ca-on-facs-fla-enquiry,4,,Your Mailing Address,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-facs-fla-enquiry:q05,ca-on-facs-fla-enquiry,5,,radio 438,source,how_heard,unknown,radio,no,,,direct_fetch,2026-11-18
+ca-on-facs-fla-enquiry:q06,ca-on-facs-fla-enquiry,6,,Your Comment (optional),free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-on-tikinagan-enquiry:q01,ca-on-tikinagan-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-on-tikinagan-enquiry:q02,ca-on-tikinagan-enquiry,2,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+ca-on-tikinagan-enquiry:q03,ca-on-tikinagan-enquiry,3,,Phone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+ca-on-tikinagan-enquiry:q04,ca-on-tikinagan-enquiry,4,,Location,routing,nearest_office,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-tikinagan-enquiry:q05,ca-on-tikinagan-enquiry,5,,How did you hear about us?,source,how_heard,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-tikinagan-enquiry:q06,ca-on-tikinagan-enquiry,6,,Questions? Need more information? How can we help? Let us know.,intent,journey_stage,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-on-mnaasged-enquiry:q01,ca-on-mnaasged-enquiry,1,,First Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-mnaasged-enquiry:q02,ca-on-mnaasged-enquiry,2,,Last Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-on-mnaasged-enquiry:q03,ca-on-mnaasged-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-on-mnaasged-enquiry:q04,ca-on-mnaasged-enquiry,4,,Phone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+ca-on-mnaasged-enquiry:q05,ca-on-mnaasged-enquiry,5,,Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-lanaudiere-enquiry:q01,ca-qc-cisss-lanaudiere-enquiry,1,,Nom et prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-lanaudiere-enquiry:q02,ca-qc-cisss-lanaudiere-enquiry,2,,Nom et prénom du partenaire (S'il y a lieu),contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-lanaudiere-enquiry:q03,ca-qc-cisss-lanaudiere-enquiry,3,,Numéro de téléphone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-lanaudiere-enquiry:q04,ca-qc-cisss-lanaudiere-enquiry,4,,Adresse courriel,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-lanaudiere-enquiry:q05,ca-qc-cisss-lanaudiere-enquiry,5,,Date des prochaines séances d'information,information_event,event_dates,unknown,checkbox,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-cote-nord-enquiry:q01,ca-qc-cisss-cote-nord-enquiry,1,,Nom et prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-cote-nord-enquiry:q02,ca-qc-cisss-cote-nord-enquiry,2,,Numéro de téléphone,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-cote-nord-enquiry:q03,ca-qc-cisss-cote-nord-enquiry,3,,Adresse courriel,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-cote-nord-enquiry:q04,ca-qc-cisss-cote-nord-enquiry,4,,Intérêt à devenir famille d'accueil,interest,care_type,unknown,checkbox,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-cote-nord-enquiry:q05,ca-qc-cisss-cote-nord-enquiry,5,,Indiquez votre lieu de résidence (ville),contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-bsl-enquiry:q01,ca-qc-cisss-bsl-enquiry,1,,"Choice of: RCM of Kamouraska, RCM of Rivière-du-Loup, RCM of Témiscouata, RCM of des Basques, RCM of…",routing,local_authority,unknown,checkbox,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-bsl-enquiry:q02,ca-qc-cisss-bsl-enquiry,2,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-bsl-enquiry:q03,ca-qc-cisss-bsl-enquiry,3,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-bsl-enquiry:q04,ca-qc-cisss-bsl-enquiry,4,,Phone (Daytime),contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-bsl-enquiry:q05,ca-qc-cisss-bsl-enquiry,5,,Phone (Evening),contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-bsl-enquiry:q06,ca-qc-cisss-bsl-enquiry,6,,Phone (Mobile),contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+ca-qc-cisss-bsl-enquiry:q07,ca-qc-cisss-bsl-enquiry,7,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-bc-vacfss-enquiry:q01,ca-bc-vacfss-enquiry,1,,First name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-bc-vacfss-enquiry:q02,ca-bc-vacfss-enquiry,2,,Last name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-bc-vacfss-enquiry:q03,ca-bc-vacfss-enquiry,3,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q01,ca-ab-cfs-fostering-enquiry,1,,Subject,intent,journey_stage,unknown,text,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q02,ca-ab-cfs-fostering-enquiry,2,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q03,ca-ab-cfs-fostering-enquiry,3,,Email: ?,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q04,ca-ab-cfs-fostering-enquiry,4,,Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q05,ca-ab-cfs-fostering-enquiry,5,,City,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q06,ca-ab-cfs-fostering-enquiry,6,,Province,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q07,ca-ab-cfs-fostering-enquiry,7,,Postal code: ?,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q08,ca-ab-cfs-fostering-enquiry,8,,Country,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q09,ca-ab-cfs-fostering-enquiry,9,,Phone: ?,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+ca-ab-cfs-fostering-enquiry:q10,ca-ab-cfs-fostering-enquiry,10,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+ca-mb-jewish-cfs-enquiry:q01,ca-mb-jewish-cfs-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-mb-jewish-cfs-enquiry:q02,ca-mb-jewish-cfs-enquiry,2,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-mb-jewish-cfs-enquiry:q03,ca-mb-jewish-cfs-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-mb-jewish-cfs-enquiry:q04,ca-mb-jewish-cfs-enquiry,4,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+ca-mb-cree-nation-cfca-enquiry:q01,ca-mb-cree-nation-cfca-enquiry,1,,Write a Comment...,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-mb-cree-nation-cfca-enquiry:q02,ca-mb-cree-nation-cfca-enquiry,2,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+ca-mb-cree-nation-cfca-enquiry:q03,ca-mb-cree-nation-cfca-enquiry,3,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-sk-kanaweyimik-cfs-enquiry:q01,ca-sk-kanaweyimik-cfs-enquiry,1,,Full Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-sk-kanaweyimik-cfs-enquiry:q02,ca-sk-kanaweyimik-cfs-enquiry,2,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-sk-kanaweyimik-cfs-enquiry:q03,ca-sk-kanaweyimik-cfs-enquiry,3,,Type of Service,interest,care_type,yes,select,no,,,direct_fetch,2026-11-18
+ca-sk-kanaweyimik-cfs-enquiry:q04,ca-sk-kanaweyimik-cfs-enquiry,4,,Phone number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+ca-sk-kanaweyimik-cfs-enquiry:q05,ca-sk-kanaweyimik-cfs-enquiry,5,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+ca-nb-social-development-adoption-enquiry:q01,ca-nb-social-development-adoption-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+ca-nb-social-development-adoption-enquiry:q02,ca-nb-social-development-adoption-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+ca-nb-social-development-adoption-enquiry:q03,ca-nb-social-development-adoption-enquiry,3,,Comments,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+ca-nb-social-development-adoption-enquiry:q04,ca-nb-social-development-adoption-enquiry,4,,Address,contact_identity,address,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-nb-social-development-adoption-enquiry:q05,ca-nb-social-development-adoption-enquiry,5,,Phone Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+ca-nb-social-development-adoption-enquiry:q06,ca-nb-social-development-adoption-enquiry,6,,Fax Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+ca-bc-xyolhemeylh-enquiry:q01,ca-bc-xyolhemeylh-enquiry,1,,Email Address,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+ca-bc-xyolhemeylh-enquiry:q02,ca-bc-xyolhemeylh-enquiry,2,,First Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-bc-xyolhemeylh-enquiry:q03,ca-bc-xyolhemeylh-enquiry,3,,Last Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+ca-sk-lac-la-ronge-icfs-enquiry:q01,ca-sk-lac-la-ronge-icfs-enquiry,1,,Write a Comment...,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+ca-sk-lac-la-ronge-icfs-enquiry:q02,ca-sk-lac-la-ronge-icfs-enquiry,2,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+ca-sk-lac-la-ronge-icfs-enquiry:q03,ca-sk-lac-la-ronge-icfs-enquiry,3,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q01,au-nsw-mackillop-family-services-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q02,au-nsw-mackillop-family-services-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q03,au-nsw-mackillop-family-services-enquiry,3,,Suburb,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q04,au-nsw-mackillop-family-services-enquiry,4,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q05,au-nsw-mackillop-family-services-enquiry,5,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q06,au-nsw-mackillop-family-services-enquiry,6,,Phone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q07,au-nsw-mackillop-family-services-enquiry,7,,Date of birth,contact_identity,date_of_birth,yes,text,no,,,direct_fetch,2026-11-18
+au-nsw-mackillop-family-services-enquiry:q08,au-nsw-mackillop-family-services-enquiry,8,,Stay up to date with MacKillop's latest stories.,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-nsw-pathfinders-enquiry:q01,au-nsw-pathfinders-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-nsw-pathfinders-enquiry:q02,au-nsw-pathfinders-enquiry,2,,Phone Number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+au-nsw-pathfinders-enquiry:q03,au-nsw-pathfinders-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-nsw-pathfinders-enquiry:q04,au-nsw-pathfinders-enquiry,4,,Phone Number Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+au-nsw-pathfinders-enquiry:q05,au-nsw-pathfinders-enquiry,5,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-fostering-connections-enquiry:q01,au-vic-fostering-connections-enquiry,1,,Your name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-fostering-connections-enquiry:q02,au-vic-fostering-connections-enquiry,2,,Your email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-vic-fostering-connections-enquiry:q03,au-vic-fostering-connections-enquiry,3,,Subject,intent,journey_stage,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-fostering-connections-enquiry:q04,au-vic-fostering-connections-enquiry,4,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-vic-anglicare-victoria-enquiry:q01,au-vic-anglicare-victoria-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-anglicare-victoria-enquiry:q02,au-vic-anglicare-victoria-enquiry,2,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-anglicare-victoria-enquiry:q03,au-vic-anglicare-victoria-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q01,au-vic-berry-street-enquiry,1,,First name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q02,au-vic-berry-street-enquiry,2,,Last name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q03,au-vic-berry-street-enquiry,3,,Are you 21 years or older?,eligibility,age,unknown,radio,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q04,au-vic-berry-street-enquiry,4,,Date of birth,contact_identity,date_of_birth,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q05,au-vic-berry-street-enquiry,5,,Street address,contact_identity,address,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q06,au-vic-berry-street-enquiry,6,,Suburb / Town,contact_identity,address,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q07,au-vic-berry-street-enquiry,7,,State,routing,local_authority,unknown,select,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q08,au-vic-berry-street-enquiry,8,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q09,au-vic-berry-street-enquiry,9,,Phone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q10,au-vic-berry-street-enquiry,10,,Are you of Aboriginal or Torres Strait Islander origin?,equality,ethnicity,unknown,select,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q11,au-vic-berry-street-enquiry,11,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q12,au-vic-berry-street-enquiry,12,,Would you like to attend an online information session?,information_event,event_dates,unknown,select,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q13,au-vic-berry-street-enquiry,13,,How did you discover Berry Street foster care?,contact_identity,address,unknown,select,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q14,au-vic-berry-street-enquiry,14,,"If other, please specify",other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-berry-street-enquiry:q15,au-vic-berry-street-enquiry,15,,"If community event, please specify",information_event,event_dates,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-lighthouse-foundation-enquiry:q01,au-vic-lighthouse-foundation-enquiry,1,,First Name,contact_identity,name,unknown,unknown,no,,,direct_fetch,2026-11-18
+au-vic-lighthouse-foundation-enquiry:q02,au-vic-lighthouse-foundation-enquiry,2,,Last Name,contact_identity,name,unknown,unknown,no,,,direct_fetch,2026-11-18
+au-vic-lighthouse-foundation-enquiry:q03,au-vic-lighthouse-foundation-enquiry,3,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q01,au-vic-mackillop-family-services-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q02,au-vic-mackillop-family-services-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q03,au-vic-mackillop-family-services-enquiry,3,,Suburb,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q04,au-vic-mackillop-family-services-enquiry,4,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q05,au-vic-mackillop-family-services-enquiry,5,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q06,au-vic-mackillop-family-services-enquiry,6,,Phone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q07,au-vic-mackillop-family-services-enquiry,7,,Date of birth,contact_identity,date_of_birth,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-mackillop-family-services-enquiry:q08,au-vic-mackillop-family-services-enquiry,8,,Stay up to date with MacKillop's latest stories.,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q01,au-vic-meli-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q02,au-vic-meli-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q03,au-vic-meli-enquiry,3,,Yes,other,unclassified,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q04,au-vic-meli-enquiry,4,,Day,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q05,au-vic-meli-enquiry,5,,Month,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q06,au-vic-meli-enquiry,6,,Year,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q07,au-vic-meli-enquiry,7,,Phone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q08,au-vic-meli-enquiry,8,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q09,au-vic-meli-enquiry,9,,Enquiry,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q10,au-vic-meli-enquiry,10,,Where did you hear about Meli’s Foster Care program?,source,how_heard,yes,select,no,,,direct_fetch,2026-11-18
+au-vic-meli-enquiry:q11,au-vic-meli-enquiry,11,,If 'other' please specify,other,unclassified,yes,textarea,no,,,direct_fetch,2026-11-18
+au-act-key-assets-enquiry:q01,au-act-key-assets-enquiry,1,,enquiry Type,free_text,questions,yes,select,no,,,direct_fetch,2026-11-18
+au-act-key-assets-enquiry:q02,au-act-key-assets-enquiry,2,,region,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-18
+au-act-key-assets-enquiry:q03,au-act-key-assets-enquiry,3,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-act-key-assets-enquiry:q04,au-act-key-assets-enquiry,4,,Email,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-18
+au-act-key-assets-enquiry:q05,au-act-key-assets-enquiry,5,,Phone (optional),contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-act-key-assets-enquiry:q06,au-act-key-assets-enquiry,6,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+au-act-key-assets-enquiry:q07,au-act-key-assets-enquiry,7,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-qld-churches-of-christ-enquiry:q01,au-qld-churches-of-christ-enquiry,1,,First name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-churches-of-christ-enquiry:q02,au-qld-churches-of-christ-enquiry,2,,Last name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-churches-of-christ-enquiry:q03,au-qld-churches-of-christ-enquiry,3,,Email address,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-churches-of-christ-enquiry:q04,au-qld-churches-of-christ-enquiry,4,,Phone number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-churches-of-christ-enquiry:q05,au-qld-churches-of-christ-enquiry,5,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-churches-of-christ-enquiry:q06,au-qld-churches-of-christ-enquiry,6,,Suburb,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-churches-of-christ-enquiry:q07,au-qld-churches-of-christ-enquiry,7,,Opt out from helpful articles and important updates.,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-qld-kyabra-enquiry:q01,au-qld-kyabra-enquiry,1,,Your Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-kyabra-enquiry:q02,au-qld-kyabra-enquiry,2,,Your Phone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+au-qld-kyabra-enquiry:q03,au-qld-kyabra-enquiry,3,,Suburb,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-kyabra-enquiry:q04,au-qld-kyabra-enquiry,4,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-kyabra-enquiry:q05,au-qld-kyabra-enquiry,5,,Your Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+au-qld-kyabra-enquiry:q06,au-qld-kyabra-enquiry,6,,Your Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q01,au-qld-foundations-care-enquiry,1,,Full name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q02,au-qld-foundations-care-enquiry,2,,Mobile,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q03,au-qld-foundations-care-enquiry,3,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q04,au-qld-foundations-care-enquiry,4,,question1,free_text,questions,unknown,radio,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q05,au-qld-foundations-care-enquiry,5,,question2,free_text,questions,unknown,radio,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q06,au-qld-foundations-care-enquiry,6,,question3,free_text,questions,unknown,radio,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q07,au-qld-foundations-care-enquiry,7,,question4,free_text,questions,unknown,radio,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q08,au-qld-foundations-care-enquiry,8,,question5,free_text,questions,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q09,au-qld-foundations-care-enquiry,9,,question6,free_text,questions,unknown,radio,no,,,direct_fetch,2026-11-18
+au-qld-foundations-care-enquiry:q10,au-qld-foundations-care-enquiry,10,,question7,free_text,questions,unknown,radio,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q01,au-qld-taihs-enquiry,1,,General Details,free_text,questions,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q02,au-qld-taihs-enquiry,2,,"Have you previously enquired about becoming, or been, a foster carer?",experience,prior_fostering,yes,select,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q03,au-qld-taihs-enquiry,3,,What was the outcome?,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q04,au-qld-taihs-enquiry,4,,Type of care you are looking at?,interest,care_type,yes,checkbox,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q05,au-qld-taihs-enquiry,5,,How did you hear about becoming a foster carer?,source,how_heard,yes,checkbox,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q06,au-qld-taihs-enquiry,6,,"If other, please specify",other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q07,au-qld-taihs-enquiry,7,,Do you live with a partner?,household,partner,yes,select,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q08,au-qld-taihs-enquiry,8,,Are other languages (other than English) spoken at home?,contact_preference,language,yes,select,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q09,au-qld-taihs-enquiry,9,,"If yes, please specify (copy)",other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q10,au-qld-taihs-enquiry,10,,Do you practice/follow any religion or belief in your household?,household,household_composition,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q11,au-qld-taihs-enquiry,11,,About the Enquirer,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q12,au-qld-taihs-enquiry,12,,Title,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q13,au-qld-taihs-enquiry,13,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q14,au-qld-taihs-enquiry,14,,Middle Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q15,au-qld-taihs-enquiry,15,,Family Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q16,au-qld-taihs-enquiry,16,,Maiden Name/Other Names known by,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q17,au-qld-taihs-enquiry,17,,Preferred Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q18,au-qld-taihs-enquiry,18,,Gender,equality,gender,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q19,au-qld-taihs-enquiry,19,,DOB,contact_identity,date_of_birth,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q20,au-qld-taihs-enquiry,20,,Do you identify as being...,equality,ethnicity,yes,checkbox,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q21,au-qld-taihs-enquiry,21,,"Ethnic/Cultural Identification (eg. Australian, South Sea Islander etc)",equality,ethnicity,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q22,au-qld-taihs-enquiry,22,,Which country were you born in?,eligibility,citizenship,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q23,au-qld-taihs-enquiry,23,,Phone your Preferred,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q24,au-qld-taihs-enquiry,24,,Home Phone No.,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q25,au-qld-taihs-enquiry,25,,Mobile Phone No.,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q26,au-qld-taihs-enquiry,26,,Work Phone No.,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q27,au-qld-taihs-enquiry,27,,Other Contact No.,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q28,au-qld-taihs-enquiry,28,,Best time to contact?,contact_preference,time,unknown,select,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q29,au-qld-taihs-enquiry,29,,Contact Notes,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q30,au-qld-taihs-enquiry,30,,Email Address,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q31,au-qld-taihs-enquiry,31,,About the Enquirer's Partner,household,partner,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q32,au-qld-taihs-enquiry,32,,Residential Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q33,au-qld-taihs-enquiry,33,,Address Line 1,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q34,au-qld-taihs-enquiry,34,,Address Line 2,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q35,au-qld-taihs-enquiry,35,,Suburb,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q36,au-qld-taihs-enquiry,36,,State,routing,local_authority,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q37,au-qld-taihs-enquiry,37,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q38,au-qld-taihs-enquiry,38,,Postal Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-taihs-enquiry:q39,au-qld-taihs-enquiry,39,,Is your Postal Address the same as your Residential Address?,contact_identity,address,yes,select,no,,,direct_fetch,2026-11-18
+au-qld-wuchopperen-enquiry:q01,au-qld-wuchopperen-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-wuchopperen-enquiry:q02,au-qld-wuchopperen-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-qld-wuchopperen-enquiry:q03,au-qld-wuchopperen-enquiry,3,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-qld-moonaboola-enquiry:q01,au-qld-moonaboola-enquiry,1,,YOUR FIRST NAME,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-qld-moonaboola-enquiry:q02,au-qld-moonaboola-enquiry,2,,YOUR LAST NAME,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-moonaboola-enquiry:q03,au-qld-moonaboola-enquiry,3,,YOUR EMAIL,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-qld-moonaboola-enquiry:q04,au-qld-moonaboola-enquiry,4,,YOUR PHONE NUMBER,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+au-qld-moonaboola-enquiry:q05,au-qld-moonaboola-enquiry,5,,I AM INTERESTED IN,interest,care_type,yes,select,no,,,direct_fetch,2026-11-18
+au-qld-moonaboola-enquiry:q06,au-qld-moonaboola-enquiry,6,,OTHER COMMENTS: (Optional),free_text,questions,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-nhulundu-enquiry:q01,au-qld-nhulundu-enquiry,1,,your message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-qld-nhulundu-enquiry:q02,au-qld-nhulundu-enquiry,2,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-nhulundu-enquiry:q03,au-qld-nhulundu-enquiry,3,,Phone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+au-qld-nhulundu-enquiry:q04,au-qld-nhulundu-enquiry,4,,Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-qld-nhulundu-enquiry:q05,au-qld-nhulundu-enquiry,5,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q01,au-sa-dcp-foster-care-services-enquiry,1,,Given name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q02,au-sa-dcp-foster-care-services-enquiry,2,,Family name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q03,au-sa-dcp-foster-care-services-enquiry,3,,Age,eligibility,age,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q04,au-sa-dcp-foster-care-services-enquiry,4,,How long have you been thinking about fostering?,intent,journey_stage,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q05,au-sa-dcp-foster-care-services-enquiry,5,,Email address,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q06,au-sa-dcp-foster-care-services-enquiry,6,,Daytime telephone number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q07,au-sa-dcp-foster-care-services-enquiry,7,,Street address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q08,au-sa-dcp-foster-care-services-enquiry,8,,Suburb/Town,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q09,au-sa-dcp-foster-care-services-enquiry,9,,State,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q10,au-sa-dcp-foster-care-services-enquiry,10,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q11,au-sa-dcp-foster-care-services-enquiry,11,,Postal address,contact_identity,address,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q12,au-sa-dcp-foster-care-services-enquiry,12,,Preferred method of follow-up contact,contact_identity,email,unknown,radio,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q13,au-sa-dcp-foster-care-services-enquiry,13,,I know someone who has fostered a child - they are,interest,care_type,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q14,au-sa-dcp-foster-care-services-enquiry,14,,I have seen advertising about foster care - it was,contact_identity,phone,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q15,au-sa-dcp-foster-care-services-enquiry,15,,I have seen a promotion about foster care in the community - it was,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-sa-dcp-foster-care-services-enquiry:q16,au-sa-dcp-foster-care-services-enquiry,16,,I have seen something about foster care in the media - it was,source,how_heard,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q01,au-sa-ac-care-enquiry,1,,Instagram,source,how_heard,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q02,au-sa-ac-care-enquiry,2,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q03,au-sa-ac-care-enquiry,3,,Surname,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q04,au-sa-ac-care-enquiry,4,,Phone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q05,au-sa-ac-care-enquiry,5,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q06,au-sa-ac-care-enquiry,6,,Region,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q07,au-sa-ac-care-enquiry,7,,Service,other,unclassified,yes,select,no,,,direct_fetch,2026-11-18
+au-sa-ac-care-enquiry:q08,au-sa-ac-care-enquiry,8,,Comment,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-sa-junction-enquiry:q01,au-sa-junction-enquiry,1,,Date,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-junction-enquiry:q02,au-sa-junction-enquiry,2,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-sa-junction-enquiry:q03,au-sa-junction-enquiry,3,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-sa-junction-enquiry:q04,au-sa-junction-enquiry,4,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q01,au-sa-uniting-communities-enquiry,1,,Type of enquiry This field is required,free_text,questions,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q02,au-sa-uniting-communities-enquiry,2,,Preferred pronouns,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q03,au-sa-uniting-communities-enquiry,3,,First name This field is required,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q04,au-sa-uniting-communities-enquiry,4,,Last name This field is required,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q05,au-sa-uniting-communities-enquiry,5,,Email This field is required,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q06,au-sa-uniting-communities-enquiry,6,,Contact number This field is required,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q07,au-sa-uniting-communities-enquiry,7,,Suburb This field is required,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q08,au-sa-uniting-communities-enquiry,8,,State This field is required,routing,local_authority,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q09,au-sa-uniting-communities-enquiry,9,,Do you identify as Aboriginal or Torres Straight Islander?,equality,ethnicity,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q10,au-sa-uniting-communities-enquiry,10,,Do you have a spare bedroom specifically for a child to sleep in overnight? This field is required,housing,spare_bedroom,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q11,au-sa-uniting-communities-enquiry,11,,What language do you speak at home?,contact_preference,language,unknown,text,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q12,au-sa-uniting-communities-enquiry,12,,Are you willing to complete screening checks?,prior_involvement,social_services,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q13,au-sa-uniting-communities-enquiry,13,,How did you hear about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+au-sa-uniting-communities-enquiry:q14,au-sa-uniting-communities-enquiry,14,,"I consent to Uniting Communities Foster Care to collect, use, and store the information I submit for the…",consent,contact,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-tas-baptcare-enquiry:q01,au-tas-baptcare-enquiry,1,,Your first name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-tas-baptcare-enquiry:q02,au-tas-baptcare-enquiry,2,,Your last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-tas-baptcare-enquiry:q03,au-tas-baptcare-enquiry,3,,Best daytime phone number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+au-tas-baptcare-enquiry:q04,au-tas-baptcare-enquiry,4,,Your email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-tas-baptcare-enquiry:q05,au-tas-baptcare-enquiry,5,,Location,routing,nearest_office,unknown,select,no,,,direct_fetch,2026-11-18
+au-tas-baptcare-enquiry:q06,au-tas-baptcare-enquiry,6,,Write your message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-tas-baptcare-enquiry:q07,au-tas-baptcare-enquiry,7,,I would like to receive information about products and servi,other,unclassified,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-tas-glenhaven-enquiry:q01,au-tas-glenhaven-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-tas-glenhaven-enquiry:q02,au-tas-glenhaven-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-tas-glenhaven-enquiry:q03,au-tas-glenhaven-enquiry,3,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-tas-key-assets-enquiry:q01,au-tas-key-assets-enquiry,1,,enquiry Type,free_text,questions,yes,select,no,,,direct_fetch,2026-11-18
+au-tas-key-assets-enquiry:q02,au-tas-key-assets-enquiry,2,,region,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-18
+au-tas-key-assets-enquiry:q03,au-tas-key-assets-enquiry,3,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-tas-key-assets-enquiry:q04,au-tas-key-assets-enquiry,4,,Email,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-18
+au-tas-key-assets-enquiry:q05,au-tas-key-assets-enquiry,5,,Phone (optional),contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-tas-key-assets-enquiry:q06,au-tas-key-assets-enquiry,6,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+au-tas-key-assets-enquiry:q07,au-tas-key-assets-enquiry,7,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-wa-lifestyle-solutions-enquiry:q01,au-wa-lifestyle-solutions-enquiry,1,,Select all that apply.,eligibility,age,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-wa-lifestyle-solutions-enquiry:q02,au-wa-lifestyle-solutions-enquiry,2,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-lifestyle-solutions-enquiry:q03,au-wa-lifestyle-solutions-enquiry,3,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-lifestyle-solutions-enquiry:q04,au-wa-lifestyle-solutions-enquiry,4,,Contact Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-lifestyle-solutions-enquiry:q05,au-wa-lifestyle-solutions-enquiry,5,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q01,au-wa-mackillop-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q02,au-wa-mackillop-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q03,au-wa-mackillop-enquiry,3,,Suburb,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q04,au-wa-mackillop-enquiry,4,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q05,au-wa-mackillop-enquiry,5,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q06,au-wa-mackillop-enquiry,6,,Phone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q07,au-wa-mackillop-enquiry,7,,Date of birth,contact_identity,date_of_birth,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-mackillop-enquiry:q08,au-wa-mackillop-enquiry,8,,Stay up to date with MacKillop's latest stories.,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+au-wa-karla-kuliny-enquiry:q01,au-wa-karla-kuliny-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-karla-kuliny-enquiry:q02,au-wa-karla-kuliny-enquiry,2,,Enter your Phone,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-wa-karla-kuliny-enquiry:q03,au-wa-karla-kuliny-enquiry,3,,Phone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+au-wa-karla-kuliny-enquiry:q04,au-wa-karla-kuliny-enquiry,4,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-wa-kinship-connections-enquiry:q01,au-wa-kinship-connections-enquiry,1,,Your name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-kinship-connections-enquiry:q02,au-wa-kinship-connections-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-wa-kinship-connections-enquiry:q03,au-wa-kinship-connections-enquiry,3,,Phone number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+au-wa-kinship-connections-enquiry:q04,au-wa-kinship-connections-enquiry,4,,Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-wa-wungening-enquiry:q01,au-wa-wungening-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-wungening-enquiry:q02,au-wa-wungening-enquiry,2,,Last Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-wungening-enquiry:q03,au-wa-wungening-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-wa-wungening-enquiry:q04,au-wa-wungening-enquiry,4,,Phone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-wungening-enquiry:q05,au-wa-wungening-enquiry,5,,everest forms form fields ZKKFOCo M0p 4,contact_identity,email,yes,checkbox,no,,,direct_fetch,2026-11-18
+au-wa-wungening-enquiry:q06,au-wa-wungening-enquiry,6,,Area of Enquiry,free_text,questions,yes,select,no,,,direct_fetch,2026-11-18
+au-wa-wungening-enquiry:q07,au-wa-wungening-enquiry,7,,Your enquiry or message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+au-wa-australian-childhood-foundation-enquiry:q01,au-wa-australian-childhood-foundation-enquiry,1,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-australian-childhood-foundation-enquiry:q02,au-wa-australian-childhood-foundation-enquiry,2,,Last name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-australian-childhood-foundation-enquiry:q03,au-wa-australian-childhood-foundation-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q01,au-wa-wanslea-enquiry,1,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q02,au-wa-wanslea-enquiry,2,,Are you currently based in the Perth metropolitan area?,eligibility,residency,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q03,au-wa-wanslea-enquiry,3,,Are you planning to relocate to the Perth metropolitan area?,eligibility,residency,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q04,au-wa-wanslea-enquiry,4,,Do you have a spare bedroom?,housing,spare_bedroom,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q05,au-wa-wanslea-enquiry,5,,Are you aged over 21?,eligibility,age,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q06,au-wa-wanslea-enquiry,6,,Are you an Australian Citizen or Permanent Resident?,eligibility,citizenship,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q07,au-wa-wanslea-enquiry,7,,Do you have a valid driver’s licence and your own vehicle?,work,driving_licence,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q08,au-wa-wanslea-enquiry,8,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q09,au-wa-wanslea-enquiry,9,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q10,au-wa-wanslea-enquiry,10,,Date of Birth,contact_identity,date_of_birth,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q11,au-wa-wanslea-enquiry,11,,Contact number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q12,au-wa-wanslea-enquiry,12,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q13,au-wa-wanslea-enquiry,13,,Home Address,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q14,au-wa-wanslea-enquiry,14,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q15,au-wa-wanslea-enquiry,15,,Are you a single applicant or couple?,household,applicant_type,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q16,au-wa-wanslea-enquiry,16,,"If you're applying as a couple, please provide your partner's Name, D.O.B, Phone number, Email and Home…",contact_identity,email,unknown,textarea,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q17,au-wa-wanslea-enquiry,17,,How did you hear about us?,source,how_heard,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q18,au-wa-wanslea-enquiry,18,,"Other Choice, please specify",other,unclassified,unknown,text,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q19,au-wa-wanslea-enquiry,19,,Next step,information_event,event_dates,unknown,radio,no,,,direct_fetch,2026-11-18
+au-wa-wanslea-enquiry:q20,au-wa-wanslea-enquiry,20,,By selecting this you agree to our Privacy Policy .,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-18
+uk-sco-dundee-enquiry:q01,uk-sco-dundee-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-sco-dundee-enquiry:q02,uk-sco-dundee-enquiry,2,,Address,contact_identity,address,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-sco-dundee-enquiry:q03,uk-sco-dundee-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-sco-dundee-enquiry:q04,uk-sco-dundee-enquiry,4,,Phone Number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-sco-dundee-enquiry:q05,uk-sco-dundee-enquiry,5,,What are you interested in?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-sco-moray-enquiry:q01,uk-sco-moray-enquiry,1,,"Yes, I give permission to store and process my data",consent,processing,yes,checkbox,no,,,direct_fetch,2026-11-18
+uk-sco-moray-enquiry:q02,uk-sco-moray-enquiry,2,,Reason,routing,local_authority,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-sco-moray-enquiry:q03,uk-sco-moray-enquiry,3,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-moray-enquiry:q04,uk-sco-moray-enquiry,4,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q01,uk-sco-west-lothian-enquiry,1,,Please advise,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q02,uk-sco-west-lothian-enquiry,2,,Please select which services you are interested in?,interest,care_type,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q03,uk-sco-west-lothian-enquiry,3,,Full Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q04,uk-sco-west-lothian-enquiry,4,,Date of Birth,contact_identity,date_of_birth,unknown,date,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q05,uk-sco-west-lothian-enquiry,5,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q06,uk-sco-west-lothian-enquiry,6,,Address,contact_identity,address,unknown,select,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q07,uk-sco-west-lothian-enquiry,7,,Contact Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q08,uk-sco-west-lothian-enquiry,8,,Email Address,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q09,uk-sco-west-lothian-enquiry,9,,"If you are employed, how many hours a week on average do you work?",work,employment_status,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q10,uk-sco-west-lothian-enquiry,10,,What is your preferred method of contact?,contact_identity,email,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q11,uk-sco-west-lothian-enquiry,11,,Is this a joint enquiry?,free_text,questions,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q12,uk-sco-west-lothian-enquiry,12,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q13,uk-sco-west-lothian-enquiry,13,,Does anyone in the household smoke?,household,household_composition,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q14,uk-sco-west-lothian-enquiry,14,,If you are living with a partner have you been residing together for over two years?,household,partner,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q15,uk-sco-west-lothian-enquiry,15,,Why do you think you would like to become an adoptive/foster/short breaks/supported care carer?,interest,care_type,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q16,uk-sco-west-lothian-enquiry,16,,Do you have children living at home?,experience,own_children,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q17,uk-sco-west-lothian-enquiry,17,,Day,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q18,uk-sco-west-lothian-enquiry,18,,Month,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q19,uk-sco-west-lothian-enquiry,19,,Year,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q20,uk-sco-west-lothian-enquiry,20,,Do you consent to us undertaking initial checks of our socia,consent,processing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q01,uk-sco-foster-plus-enquiry,1,,Do you have a spare room?,housing,spare_bedroom,yes,select,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q02,uk-sco-foster-plus-enquiry,2,,Which of the following applies to you?,intent,journey_stage,yes,select,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q03,uk-sco-foster-plus-enquiry,3,,How can we help you?,intent,journey_stage,yes,select,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q04,uk-sco-foster-plus-enquiry,4,,Have you had children of your own?,experience,own_children,yes,select,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q05,uk-sco-foster-plus-enquiry,5,,Do you have professional experience of working with children?,experience,childcare_experience,yes,select,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q06,uk-sco-foster-plus-enquiry,6,,"Have you had any prior experience of fostering, such as being a foster parent or growing up in a fostering…",experience,prior_fostering,yes,select,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q07,uk-sco-foster-plus-enquiry,7,,Have you ever adopted a child?,experience,prior_fostering,yes,select,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q08,uk-sco-foster-plus-enquiry,8,,Are you happy to receive regular fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q09,uk-sco-foster-plus-enquiry,9,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q10,uk-sco-foster-plus-enquiry,10,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q11,uk-sco-foster-plus-enquiry,11,,Phone Number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q12,uk-sco-foster-plus-enquiry,12,,Email Address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q13,uk-sco-foster-plus-enquiry,13,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q14,uk-sco-foster-plus-enquiry,14,,Comments,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-sco-foster-plus-enquiry:q15,uk-sco-foster-plus-enquiry,15,,Meta Event ID,information_event,event_dates,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q01,uk-wal-blaenau-gwent-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q02,uk-wal-blaenau-gwent-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q03,uk-wal-blaenau-gwent-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q04,uk-wal-blaenau-gwent-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q05,uk-wal-blaenau-gwent-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q06,uk-wal-blaenau-gwent-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q07,uk-wal-blaenau-gwent-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-blaenau-gwent-enquiry:q08,uk-wal-blaenau-gwent-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q01,uk-wal-caerphilly-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q02,uk-wal-caerphilly-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q03,uk-wal-caerphilly-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q04,uk-wal-caerphilly-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q05,uk-wal-caerphilly-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q06,uk-wal-caerphilly-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q07,uk-wal-caerphilly-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-caerphilly-enquiry:q08,uk-wal-caerphilly-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-carmarthenshire-enquiry:q01,uk-wal-carmarthenshire-enquiry,1,,Tell us more...,free_text,about_you,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-carmarthenshire-enquiry:q02,uk-wal-carmarthenshire-enquiry,2,,E-mail,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-carmarthenshire-enquiry:q03,uk-wal-carmarthenshire-enquiry,3,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q01,uk-wal-denbighshire-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q02,uk-wal-denbighshire-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q03,uk-wal-denbighshire-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q04,uk-wal-denbighshire-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q05,uk-wal-denbighshire-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q06,uk-wal-denbighshire-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q07,uk-wal-denbighshire-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q08,uk-wal-denbighshire-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q09,uk-wal-denbighshire-enquiry,9,,Would you like to choose a day and time that suits you for a call?,consent,contact,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-denbighshire-enquiry:q10,uk-wal-denbighshire-enquiry,10,,What type of call would you like?,contact_identity,phone,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q01,uk-wal-flintshire-enquiry,1,,First Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q02,uk-wal-flintshire-enquiry,2,,Last Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q03,uk-wal-flintshire-enquiry,3,,Phone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q04,uk-wal-flintshire-enquiry,4,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q05,uk-wal-flintshire-enquiry,5,,Your prefered language,contact_preference,language,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q06,uk-wal-flintshire-enquiry,6,,Please tell us where you heard about Foster Wales Flintshire,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q07,uk-wal-flintshire-enquiry,7,,Tell us how we can help you,free_text,about_you,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-flintshire-enquiry:q08,uk-wal-flintshire-enquiry,8,,"Choice of: Email, Phone Call, WhatsApp",contact_identity,email,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q01,uk-wal-gwynedd-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q02,uk-wal-gwynedd-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q03,uk-wal-gwynedd-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q04,uk-wal-gwynedd-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q05,uk-wal-gwynedd-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q06,uk-wal-gwynedd-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q07,uk-wal-gwynedd-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q08,uk-wal-gwynedd-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q09,uk-wal-gwynedd-enquiry,9,,Would you like to choose a day and time that suits you for a call?,consent,contact,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-gwynedd-enquiry:q10,uk-wal-gwynedd-enquiry,10,,What type of call would you like?,contact_identity,phone,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q01,uk-wal-merthyr-tydfil-enquiry,1,,Local Authority,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q02,uk-wal-merthyr-tydfil-enquiry,2,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q03,uk-wal-merthyr-tydfil-enquiry,3,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q04,uk-wal-merthyr-tydfil-enquiry,4,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q05,uk-wal-merthyr-tydfil-enquiry,5,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q06,uk-wal-merthyr-tydfil-enquiry,6,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q07,uk-wal-merthyr-tydfil-enquiry,7,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q08,uk-wal-merthyr-tydfil-enquiry,8,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-merthyr-tydfil-enquiry:q09,uk-wal-merthyr-tydfil-enquiry,9,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q01,uk-wal-monmouthshire-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q02,uk-wal-monmouthshire-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q03,uk-wal-monmouthshire-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q04,uk-wal-monmouthshire-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q05,uk-wal-monmouthshire-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q06,uk-wal-monmouthshire-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q07,uk-wal-monmouthshire-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-monmouthshire-enquiry:q08,uk-wal-monmouthshire-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q01,uk-wal-newport-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q02,uk-wal-newport-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q03,uk-wal-newport-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q04,uk-wal-newport-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q05,uk-wal-newport-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q06,uk-wal-newport-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q07,uk-wal-newport-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-newport-enquiry:q08,uk-wal-newport-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q01,uk-wal-pembrokeshire-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q02,uk-wal-pembrokeshire-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q03,uk-wal-pembrokeshire-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q04,uk-wal-pembrokeshire-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q05,uk-wal-pembrokeshire-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q06,uk-wal-pembrokeshire-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q07,uk-wal-pembrokeshire-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-pembrokeshire-enquiry:q08,uk-wal-pembrokeshire-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q01,uk-wal-powys-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q02,uk-wal-powys-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q03,uk-wal-powys-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q04,uk-wal-powys-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q05,uk-wal-powys-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q06,uk-wal-powys-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q07,uk-wal-powys-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-powys-enquiry:q08,uk-wal-powys-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q01,uk-wal-rhondda-cynon-taf-enquiry,1,,Local Authority,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q02,uk-wal-rhondda-cynon-taf-enquiry,2,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q03,uk-wal-rhondda-cynon-taf-enquiry,3,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q04,uk-wal-rhondda-cynon-taf-enquiry,4,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q05,uk-wal-rhondda-cynon-taf-enquiry,5,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q06,uk-wal-rhondda-cynon-taf-enquiry,6,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q07,uk-wal-rhondda-cynon-taf-enquiry,7,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q08,uk-wal-rhondda-cynon-taf-enquiry,8,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-rhondda-cynon-taf-enquiry:q09,uk-wal-rhondda-cynon-taf-enquiry,9,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q01,uk-wal-torfaen-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q02,uk-wal-torfaen-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q03,uk-wal-torfaen-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q04,uk-wal-torfaen-enquiry,4,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q05,uk-wal-torfaen-enquiry,5,,Your preferred language,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q06,uk-wal-torfaen-enquiry,6,,How did you find out about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q07,uk-wal-torfaen-enquiry,7,,Are you happy to receive fostering news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-wal-torfaen-enquiry:q08,uk-wal-torfaen-enquiry,8,,Tell us how we can help you,free_text,about_you,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-adoption-mid-west-wales-enquiry:q01,uk-wal-adoption-mid-west-wales-enquiry,1,,Tell us more...,free_text,about_you,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-adoption-mid-west-wales-enquiry:q02,uk-wal-adoption-mid-west-wales-enquiry,2,,E-mail,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-adoption-mid-west-wales-enquiry:q03,uk-wal-adoption-mid-west-wales-enquiry,3,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-western-bay-adoption-enquiry:q01,uk-wal-western-bay-adoption-enquiry,1,,Your Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-western-bay-adoption-enquiry:q02,uk-wal-western-bay-adoption-enquiry,2,,Email Address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-wal-western-bay-adoption-enquiry:q03,uk-wal-western-bay-adoption-enquiry,3,,Phone Number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-wal-western-bay-adoption-enquiry:q04,uk-wal-western-bay-adoption-enquiry,4,,Location,routing,nearest_office,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-western-bay-adoption-enquiry:q05,uk-wal-western-bay-adoption-enquiry,5,,Subject,contact_preference,method,unknown,text,no,,,direct_fetch,2026-11-18
+uk-wal-western-bay-adoption-enquiry:q06,uk-wal-western-bay-adoption-enquiry,6,,Message or Enquiry Details,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-wal-western-bay-adoption-enquiry:q07,uk-wal-western-bay-adoption-enquiry,7,,GDPR Consent,consent,processing,yes,checkbox,no,,,direct_fetch,2026-11-18
+uk-ni-western-trust-enquiry:q01,uk-ni-western-trust-enquiry,1,,Comments,free_text,questions,unknown,text,no,,,direct_fetch,2026-11-18
+uk-ni-western-trust-enquiry:q02,uk-ni-western-trust-enquiry,2,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-ni-western-trust-enquiry:q03,uk-ni-western-trust-enquiry,3,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-ni-western-trust-enquiry:q04,uk-ni-western-trust-enquiry,4,,Enter Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-ni-western-trust-enquiry:q05,uk-ni-western-trust-enquiry,5,,Confirm Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-ni-western-trust-enquiry:q06,uk-ni-western-trust-enquiry,6,,Subject you are enquiring about,intent,journey_stage,unknown,text,no,,,direct_fetch,2026-11-18
+uk-ni-western-trust-enquiry:q07,uk-ni-western-trust-enquiry,7,,Your enquiry,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q01,uk-eng-foster-north-london-enquiry,1,,First name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q02,uk-eng-foster-north-london-enquiry,2,,Last name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q03,uk-eng-foster-north-london-enquiry,3,,Phone number,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q04,uk-eng-foster-north-london-enquiry,4,,Email address,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q05,uk-eng-foster-north-london-enquiry,5,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q06,uk-eng-foster-north-london-enquiry,6,,What stage are you at in your fostering journey,interest,care_type,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q07,uk-eng-foster-north-london-enquiry,7,,Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-foster-north-london-enquiry:q08,uk-eng-foster-north-london-enquiry,8,,I'm happy to be contacted by Foster North London,consent,contact,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q01,uk-eng-adopters-for-adoption-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q02,uk-eng-adopters-for-adoption-enquiry,2,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q03,uk-eng-adopters-for-adoption-enquiry,3,,Phone Number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q04,uk-eng-adopters-for-adoption-enquiry,4,,Email Address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q05,uk-eng-adopters-for-adoption-enquiry,5,,City,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q06,uk-eng-adopters-for-adoption-enquiry,6,,ZIP / Postal Code,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q07,uk-eng-adopters-for-adoption-enquiry,7,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q08,uk-eng-adopters-for-adoption-enquiry,8,,Are you 21 or over?,eligibility,age,yes,select,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q09,uk-eng-adopters-for-adoption-enquiry,9,,Do you have a spare room?,housing,spare_bedroom,yes,select,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q10,uk-eng-adopters-for-adoption-enquiry,10,,How did you hear about us?,source,how_heard,yes,select,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q11,uk-eng-adopters-for-adoption-enquiry,11,,Would you like to attend our online information event?,information_event,event_dates,yes,select,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q12,uk-eng-adopters-for-adoption-enquiry,12,,Comments,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q13,uk-eng-adopters-for-adoption-enquiry,13,,Are you happy to receive regular adoption news from us?,interest,care_type,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-eng-adopters-for-adoption-enquiry:q14,uk-eng-adopters-for-adoption-enquiry,14,,Meta Event ID,information_event,event_dates,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-family-adoption-links-enquiry:q01,uk-eng-family-adoption-links-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-family-adoption-links-enquiry:q02,uk-eng-family-adoption-links-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-eng-family-adoption-links-enquiry:q03,uk-eng-family-adoption-links-enquiry,3,,Phone (optional),contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-family-adoption-links-enquiry:q04,uk-eng-family-adoption-links-enquiry,4,,Choose your local authority,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-18
+uk-eng-family-adoption-links-enquiry:q05,uk-eng-family-adoption-links-enquiry,5,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q01,uk-eng-adoption-tees-valley-enquiry,1,,Title,contact_identity,name,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q02,uk-eng-adoption-tees-valley-enquiry,2,,First Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q03,uk-eng-adoption-tees-valley-enquiry,3,,Surname,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q04,uk-eng-adoption-tees-valley-enquiry,4,,Line 1,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q05,uk-eng-adoption-tees-valley-enquiry,5,,Line 2,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q06,uk-eng-adoption-tees-valley-enquiry,6,,Line 3,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q07,uk-eng-adoption-tees-valley-enquiry,7,,Town,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q08,uk-eng-adoption-tees-valley-enquiry,8,,County,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q09,uk-eng-adoption-tees-valley-enquiry,9,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q10,uk-eng-adoption-tees-valley-enquiry,10,,Home \ Mobile Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q11,uk-eng-adoption-tees-valley-enquiry,11,,Mobile Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q12,uk-eng-adoption-tees-valley-enquiry,12,,Email Address,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q13,uk-eng-adoption-tees-valley-enquiry,13,,Choice,contact_identity,email,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q14,uk-eng-adoption-tees-valley-enquiry,14,,Please let us know a preferred time & day to call,source,how_heard,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-adoption-tees-valley-enquiry:q15,uk-eng-adoption-tees-valley-enquiry,15,,How did you hear about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q01,uk-eng-together-4-children-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q02,uk-eng-together-4-children-enquiry,2,,Surname,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q03,uk-eng-together-4-children-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q04,uk-eng-together-4-children-enquiry,4,,Tel,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q05,uk-eng-together-4-children-enquiry,5,,Post Code,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q06,uk-eng-together-4-children-enquiry,6,,Any Questions Or Comments,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q07,uk-eng-together-4-children-enquiry,7,,What would you like us to do next?,information_event,event_dates,yes,radio,no,,,direct_fetch,2026-11-18
+uk-eng-together-4-children-enquiry:q08,uk-eng-together-4-children-enquiry,8,,I accept the terms of Together4Children’s privacy policy and,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q01,uk-eng-bradford-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q02,uk-eng-bradford-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q03,uk-eng-bradford-enquiry,3,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q04,uk-eng-bradford-enquiry,4,,Mobile telephone number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q05,uk-eng-bradford-enquiry,5,,Preferred method of contact,source,how_heard,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q06,uk-eng-bradford-enquiry,6,,How can we help you?,intent,journey_stage,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q07,uk-eng-bradford-enquiry,7,,Your message or comment,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q08,uk-eng-bradford-enquiry,8,,hear,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-bradford-enquiry:q09,uk-eng-bradford-enquiry,9,,"Choice of: acceptance news, acceptance consent",consent,processing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+uk-eng-barnsley-enquiry:q01,uk-eng-barnsley-enquiry,1,,Dropdown,other,unclassified,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-barnsley-enquiry:q02,uk-eng-barnsley-enquiry,2,,First name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-barnsley-enquiry:q03,uk-eng-barnsley-enquiry,3,,Last name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-barnsley-enquiry:q04,uk-eng-barnsley-enquiry,4,,Email address,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+uk-eng-barnsley-enquiry:q05,uk-eng-barnsley-enquiry,5,,Phone number,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+uk-eng-barnsley-enquiry:q06,uk-eng-barnsley-enquiry,6,,Please tell us your enquiry,free_text,about_you,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-barnsley-enquiry:q07,uk-eng-barnsley-enquiry,7,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q01,uk-eng-bromley-enquiry,1,,Full name Required,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q02,uk-eng-bromley-enquiry,2,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q03,uk-eng-bromley-enquiry,3,,House name/number,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q04,uk-eng-bromley-enquiry,4,,Address line 1,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q05,uk-eng-bromley-enquiry,5,,Address line 2,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q06,uk-eng-bromley-enquiry,6,,Town,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q07,uk-eng-bromley-enquiry,7,,Phone number Required,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q08,uk-eng-bromley-enquiry,8,,Email address Required,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q09,uk-eng-bromley-enquiry,9,,Where did you hear about Fostering for Bromley? Required,source,how_heard,yes,select,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q10,uk-eng-bromley-enquiry,10,,"If other, please tell us where",free_text,about_you,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-bromley-enquiry:q11,uk-eng-bromley-enquiry,11,,I confirm I have read the above Data Protection statement,consent,processing,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-eng-uk-fostering-enquiry:q01,uk-eng-uk-fostering-enquiry,1,,Enter your full name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-uk-fostering-enquiry:q02,uk-eng-uk-fostering-enquiry,2,,Enter your email address,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-uk-fostering-enquiry:q03,uk-eng-uk-fostering-enquiry,3,,How can we help you?,intent,journey_stage,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-uk-fostering-enquiry:q04,uk-eng-uk-fostering-enquiry,4,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-uk-fostering-enquiry:q05,uk-eng-uk-fostering-enquiry,5,,Phone Number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-uk-fostering-enquiry:q06,uk-eng-uk-fostering-enquiry,6,,Comments,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-capstone-foster-care-enquiry:q01,uk-eng-capstone-foster-care-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-capstone-foster-care-enquiry:q02,uk-eng-capstone-foster-care-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-capstone-foster-care-enquiry:q03,uk-eng-capstone-foster-care-enquiry,3,,Please select an option,other,unclassified,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-capstone-foster-care-enquiry:q04,uk-eng-capstone-foster-care-enquiry,4,,Telephone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+uk-eng-capstone-foster-care-enquiry:q05,uk-eng-capstone-foster-care-enquiry,5,,Email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-eng-capstone-foster-care-enquiry:q06,uk-eng-capstone-foster-care-enquiry,6,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-capstone-foster-care-enquiry:q07,uk-eng-capstone-foster-care-enquiry,7,,newsletter signup,consent,marketing,yes,radio,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q01,uk-eng-nexus-fostering-enquiry,1,,First name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q02,uk-eng-nexus-fostering-enquiry,2,,Surname,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q03,uk-eng-nexus-fostering-enquiry,3,,Telephone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q04,uk-eng-nexus-fostering-enquiry,4,,Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q05,uk-eng-nexus-fostering-enquiry,5,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q06,uk-eng-nexus-fostering-enquiry,6,,Do you have a spare bedroom to foster?,housing,spare_bedroom,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q07,uk-eng-nexus-fostering-enquiry,7,,Fostering Experience,transfer,current_carer,unknown,radio,no,,,direct_fetch,2026-11-18
+uk-eng-nexus-fostering-enquiry:q08,uk-eng-nexus-fostering-enquiry,8,,Where did you hear about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q01,uk-eng-five-rivers-enquiry,1,,Full Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q02,uk-eng-five-rivers-enquiry,2,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q03,uk-eng-five-rivers-enquiry,3,,Phone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q04,uk-eng-five-rivers-enquiry,4,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q05,uk-eng-five-rivers-enquiry,5,,Enquiry,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q06,uk-eng-five-rivers-enquiry,6,,Best time to call?,contact_preference,time,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q07,uk-eng-five-rivers-enquiry,7,,Preferred day of call,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q08,uk-eng-five-rivers-enquiry,8,,What do you want to talk about?,intent,journey_stage,yes,select,no,,,direct_fetch,2026-11-18
+uk-eng-five-rivers-enquiry:q09,uk-eng-five-rivers-enquiry,9,,mc4wp subscribe contact form 7,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-18

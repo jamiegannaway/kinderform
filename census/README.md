@@ -82,7 +82,7 @@ A form with no row for a guidance type was not checked for it. That is different
 
 ## How the data was gathered
 
-- **Crawler reads (`direct_fetch`, from 17 November 2026).** `tools/polite_fetch.py` read each front door's page and, where there was no form, followed up to two links that read like an enquiry form. `tools/crawl_to_census.py` then wrote the form, its questions, choices and guidance. Labels and choices are taken from the page and shortened where long; `required` is `yes` only where the page marks it; each question's topic comes from keyword rules in English and French, and questions the rules cannot place are tagged `other`/`unclassified` for a person to tag. These rows carry a note starting "Read by the polite crawler", and re-running the tool replaces them without touching rows a person recorded.
+- **Crawler reads (`direct_fetch`, from 17 November 2026).** `tools/polite_fetch.py` read each front door's page and, where there was no form, followed up to two links that read like an enquiry form. `tools/crawl_to_census.py` then wrote the form, its questions, choices and guidance. Labels and choices are taken from the page and shortened where long; `required` is `yes` only where the page marks it; each question's topic comes from keyword rules in English and French, and questions the rules cannot place are tagged `other`/`unclassified` for a person to tag. These rows carry a note starting "Read by the polite crawler", and re-running the tool replaces them without touching rows a person recorded. The tool skips a front door, or a site, where a person has already recorded the form. It also leaves out pages whose address names an application (for example `foster-application` or `how-to-apply`), because those hold the full application rather than a first-contact form; pages about "the application process" and "inquiry" pages are kept.
 - **Direct reads (`direct_fetch`, 14 November 2026).** Public pages were fetched by an automated reader that turns the page into text and lists the form fields. Nobody has yet checked these visually in a browser. Required markers and input types are often not visible in page text. Where a type was guessed from the layout, `type_inferred` says so.
 - **Index snapshots (`index_snapshot`, November 2026).** Rows from the census report, which saw some forms through a search engine's copy of the page. They may be out of date.
 - **Search snippets (`search_snippet`).** A short extract shown by a search engine. Weakest evidence.
@@ -97,7 +97,7 @@ Labels, hints and guidance are paraphrased, to keep the dataset short and to avo
 
 **United States, Canada and Australia.** Forms come from the crawler, starting from the front-door registers in [`register/us/`](../register/us/), [`register/ca/`](../register/ca/) and [`register/au/`](../register/au/). Only forms that load as ordinary web pages can be read: forms that load in the browser with JavaScript, sit behind a portal or a bot check, or are PDFs are not yet recorded. Coverage is therefore uneven, and every crawler row is unverified.
 
-**UK.**
+**UK.** Most UK rows were recorded by a person from 14 November 2026. On 18 November the crawler added 32 more forms from front doors new to the register: 15 in Wales (mostly Foster Wales local authorities), 4 in Scotland, 1 in Northern Ireland and 12 in England. On the site, "How first-contact forms differ", the form check and the rubric use only the rows a person recorded, because the published findings were written from those. The comparison across four countries on `/research` uses the crawler's forms as well.
 
 This is a first pass, not a full census. See [`summary.md`](summary.md) for counts.
 
@@ -105,7 +105,7 @@ Not yet covered, or covered by guidance only:
 
 - English hub forms that load in the browser: Foster for Greater Manchester, Fostering South West, LA Fostering South East, Foster for East Midlands, Foster with North East, Foster East, Foster with West London and Foster North London
 - The Black Country, South East London and South West London hubs, and most English councils outside hubs
-- Most of Scotland's 32 councils, and Welsh, Scottish and Northern Irish adoption services
+- Most of Scotland's 32 councils (the crawler read 3), and most Scottish and Northern Irish adoption services
 - Most regional adoption agency enquiry forms, which load in the browser or sit in council portals
 - Per-agency topics for adoption registration of interest forms. These are described only in total in the report
 - Any blank secondary fostering form: none was found published

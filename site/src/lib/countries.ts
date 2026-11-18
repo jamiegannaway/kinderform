@@ -91,7 +91,7 @@ const hours = (v: string) => {
 
 export function countries(c: Census): CountriesData {
   const asked = askedBy(c)
-  const facts = factsFor(c, COUNTRIES.map((x) => x.code)).filter((f) => f.form.observed === "direct_fetch")
+  const facts = factsFor(c, COUNTRIES.map((x) => x.code), true).filter((f) => f.form.observed === "direct_fetch")
   const stats: CountryStats[] = []
   for (const { code, name } of COUNTRIES) {
     const mine: FormFacts[] = facts.filter((f) => f.form.country === code)

@@ -151,20 +151,20 @@ function TableView({ title, head, rows }: { title: string; head: string[]; rows:
 }
 
 export default function Countries({ data }: { data: CountriesData }) {
-  const cols = data.countries.map((c) => ({ key: c.code, label: c.name, n: c.forms }))
-  const kindClass: Record<string, string> = {
-    typed: "bg-chart-5",
-    pick: "bg-chart-3",
-    tick: "bg-chart-2",
-    date: "bg-chart-1",
-    unknown: "bg-muted-foreground/30",
-  }
+  const cols = data.countries.map((c) => ({ key: c.code, label: c.name, short: c.code, n: c.forms }))
   const topicRows = data.countries[0]?.topics.map((t, i) => ({
     label: t.label,
     note: t.sensitive ? "sensitive" : undefined,
     cells: Object.fromEntries(data.countries.map((c) => [c.code, { yes: c.topics[i].yes, of: c.topics[i].of }])),
   }))
   const sensitiveRows = topicRows?.filter((r) => r.note)
+  // Answer kinds as a heat grid too: five kinds are too many for the grey chart tokens to keep
+  // apart in a stacked bar, in both themes.
+  const kindRows = ANSWER_KINDS.map((k) => ({
+    label: k.label,
+    cells: Object.fromEntries(data.countries.map((c) => [c.code, { yes: c.answerKinds[k.key], of: c.totalQuestions }])),
+  }))
+  const kindCols = data.countries.map((c) => ({ key: c.code, label: c.name, short: c.code, n: c.totalQuestions }))
   const sum = (f: (c: CountriesData["countries"][number]) => number) => data.countries.reduce((n, c) => n + f(c), 0)
   const totalQs = sum((c) => c.totalQuestions)
   const typed = sum((c) => c.answerKinds.typed)
@@ -224,24 +224,16 @@ export default function Countries({ data }: { data: CountriesData }) {
         </ChartCard>
       )}
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 *:min-w-0 lg:grid-cols-2">
         <ChartCard
           title="What kind of answer"
-          description="All questions on the forms read, by the kind of answer they ask for"
+          description="Share of questions in each country, by the kind of answer they ask for"
           footer={{
             lead: `${pct(typed, totalQs)}% of ${totalQs.toLocaleString("en-GB")} questions ask for a typed answer`,
-            note: "Pick one: a drop-down or a set of radio buttons.",
+            note: "Pick one is a drop-down or a set of radio buttons. Not shown: the page did not say.",
           }}
         >
-          <StackedBars
-            segments={ANSWER_KINDS.map((k) => ({ key: k.key, label: k.label, className: kindClass[k.key] }))}
-            rows={data.countries.map((c) => ({
-              label: c.name,
-              total: c.totalQuestions,
-              parts: c.answerKinds,
-              note: `${c.totalQuestions} questions`,
-            }))}
-          />
+          <HeatGrid columns={kindCols} rows={kindRows} unit="questions" />
         </ChartCard>
         <ChartCard
           title="Questions you must answer"
@@ -261,7 +253,7 @@ export default function Countries({ data }: { data: CountriesData }) {
         </ChartCard>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 *:min-w-0 lg:grid-cols-2">
         {sensitiveRows && (
           <ChartCard
             title="Sensitive questions at first contact"
