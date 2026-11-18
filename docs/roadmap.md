@@ -33,6 +33,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] Private licensed agencies, first sample of up to 10 per state (322 agencies, unverified)
 - [ ] Private licensed agencies: complete lists from each state's licensing database
 - [x] Visual research page and first neutral patterns summary (`tools/us_summary.py`, `tools/us_charts.py`)
+- [x] US register on the site's research page (`/research#us-picture`): counts, no names, with a table view for each chart
 - [ ] Second-person verification and invitation to agencies to correct their rows
 
 ## Next: listen, then measure
