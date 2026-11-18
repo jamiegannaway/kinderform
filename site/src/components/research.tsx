@@ -5,7 +5,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import FormsDiffer from "@/components/forms-differ"
+import UsPicture from "@/components/us-picture"
+import { Progress, StatCard } from "@/components/charts"
 import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
+import type { UsPicture as UsPictureData } from "@/lib/us-register"
 
 export type Checked = { date: string; against: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
@@ -69,6 +72,40 @@ function FindingCard({ f }: { f: Finding }) {
   )
 }
 
+// The stages findings belong to, in reading order, each linking to its first finding.
+function Stages({ findings }: { findings: Finding[] }) {
+  const stages: { stage: string; first: string; count: number }[] = []
+  for (const f of findings) {
+    const s = stages.find((x) => x.stage === f.stage)
+    if (s) s.count++
+    else stages.push({ stage: f.stage, first: f.id, count: 1 })
+  }
+  return (
+    <nav aria-label="Findings by stage">
+      <ol className="grid gap-3 sm:grid-cols-2 lg:grid-flow-col lg:auto-cols-fr lg:grid-cols-none">
+        {stages.map((s, i) => (
+          <li key={s.stage}>
+            <a
+              href={`#${s.first}`}
+              className="flex h-full items-center gap-3 rounded-lg border bg-card p-3 text-sm transition-colors hover:bg-muted"
+            >
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground tabular-nums">
+                {i + 1}
+              </span>
+              <span>
+                <span className="block font-medium">{s.stage}</span>
+                <span className="block text-muted-foreground">
+                  {s.count} {s.count === 1 ? "finding" : "findings"}
+                </span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
 export default function ResearchIndex({
   updated,
   findings,
@@ -76,6 +113,7 @@ export default function ResearchIndex({
   reports,
   library,
   formsDiffer,
+  us,
 }: {
   updated: string
   findings: Finding[]
@@ -83,6 +121,7 @@ export default function ResearchIndex({
   reports: Doc[]
   library: Doc
   formsDiffer?: FormsDifferData
+  us?: UsPictureData
 }) {
   const sources = findings.flatMap((f) => f.sources)
   const checkedCount = sources.filter((s) => s.checked).length
@@ -100,6 +139,25 @@ export default function ResearchIndex({
             application. We add to this as we learn more, and we say which claims a person has checked against the
             original source.
           </p>
+        </section>
+
+        <section aria-labelledby="glance" className="space-y-5">
+          <h2 id="glance" className="sr-only">
+            At a glance
+          </h2>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <StatCard label="Things we know so far" value={String(findings.length)} note="Each with its sources" />
+            <StatCard label="Sources checked by a person" value={`${checkedCount} of ${sources.length}`}>
+              <Progress value={checkedCount} max={sources.length} label={`${checkedCount} of ${sources.length} sources checked`} />
+            </StatCard>
+            {formsDiffer && formsDiffer.read > 0 && (
+              <StatCard label="UK enquiry forms read" value={String(formsDiffer.read)} note="From the live page" />
+            )}
+            {us && us.doors > 0 && (
+              <StatCard label="US front doors mapped" value={us.doors.toLocaleString("en-GB")} note="All 50 states and DC" />
+            )}
+          </div>
+          <Stages findings={findings} />
         </section>
 
         <Alert className="max-w-3xl">
@@ -126,6 +184,8 @@ export default function ResearchIndex({
         </section>
 
         {formsDiffer && formsDiffer.read > 0 && <FormsDiffer data={formsDiffer} />}
+
+        {us && us.doors > 0 && <UsPicture data={us} />}
 
         <section aria-labelledby="deeper" className="space-y-6">
           <H2 id="deeper">Read more</H2>

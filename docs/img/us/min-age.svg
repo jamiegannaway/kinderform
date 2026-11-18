@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 228" width="760" height="228" role="img" aria-label="Minimum age to foster"><style>
+.card{fill:#ffffff;stroke:#e5e5e5}.t1{fill:#0a0a0a}.t2{fill:#737373}.grid{stroke:#e5e5e5}.base{stroke:#e5e5e5}
+.s1{fill:#737373}.st{fill:#171717}.stx{fill:#fafafa}.co{fill:#737373}.cox{fill:#ffffff}
+.hy{fill:#f5f5f5;stroke:#737373}.hyx{fill:#0a0a0a}
+.o1{fill:#d4d4d4}.o2{fill:#737373}.o4{fill:#171717}.ox{fill:#fafafa}
+text{font-family:"Geist","Geist Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+@media (prefers-color-scheme:dark){
+.card{fill:#171717;stroke:#2e2e2e}.t1{fill:#fafafa}.t2{fill:#a1a1a1}.grid{stroke:#2e2e2e}.base{stroke:#2e2e2e}
+.st{fill:#e5e5e5}.stx{fill:#171717}.hy{fill:#262626;stroke:#a1a1a1}.hyx{fill:#fafafa}
+.o1{fill:#404040}.o4{fill:#e5e5e5}.ox{fill:#171717}}
+</style><rect class="card" x="0.5" y="0.5" width="759" height="227" rx="12" stroke-width="1"/><text x="24" y="34" class="t1" font-size="16" text-anchor="start" font-weight="600">Minimum age to foster</text><text x="24" y="56" class="t2" font-size="13" text-anchor="start" font-weight="400">Number of jurisdictions by the minimum age recorded (48 with a figure).</text><text x="108" y="95" class="t2" font-size="12" text-anchor="end" font-weight="400">18 years</text><path class="s1" d="M120,80 h81.8 a4,4 0 0 1 4,4 v16.0 a4,4 0 0 1 -4,4 h-81.8 z"/><text x="213.75" y="96" class="t1" font-size="12" text-anchor="start" font-weight="500">7 jurisdictions</text><text x="108" y="129" class="t2" font-size="12" text-anchor="end" font-weight="400">19 years</text><path class="s1" d="M120,114 h8.2 a4,4 0 0 1 4,4 v16.0 a4,4 0 0 1 -4,4 h-8.2 z"/><text x="140.25" y="130" class="t1" font-size="12" text-anchor="start" font-weight="500">1 jurisdiction</text><text x="108" y="163" class="t2" font-size="12" text-anchor="end" font-weight="400">21 years</text><path class="s1" d="M120,148 h486.0 a4,4 0 0 1 4,4 v16.0 a4,4 0 0 1 -4,4 h-486.0 z"/><text x="618.0" y="164" class="t1" font-size="12" text-anchor="start" font-weight="500">40 jurisdictions</text><text x="24" y="200" class="t1" font-size="13" text-anchor="start" font-weight="600">21 years is most common</text></svg>
