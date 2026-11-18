@@ -1,0 +1,85 @@
+// U.S. Web Design System for the US reference form only, without federal branding.
+// Kinderform is not a government service: no "official website" banner, no identifier
+// and no .gov look. Only the components the form uses are included, and no USWDS
+// utility classes, because their names (bg-primary, text-secondary and so on) clash
+// with the Tailwind classes used by the rest of the site.
+// See https://designsystem.digital.gov/components/banner/ (banner is for .gov and .mil only).
+@use "uswds-core" as * with (
+  $theme-show-notifications: false,
+  $theme-show-compile-warnings: false,
+  $theme-font-path: "../../node_modules/@uswds/uswds/dist/fonts",
+  $theme-image-path: "../../node_modules/@uswds/uswds/dist/img"
+);
+
+@forward "uswds-fonts";
+@forward "uswds-helpers";
+@forward "usa-accordion";
+@forward "usa-alert";
+@forward "usa-button";
+@forward "usa-checkbox";
+@forward "usa-error-message";
+@forward "usa-fieldset";
+@forward "usa-form-group";
+@forward "usa-hint";
+@forward "usa-input";
+@forward "usa-label";
+@forward "usa-legend";
+@forward "usa-link";
+@forward "usa-list";
+@forward "usa-process-list";
+@forward "usa-prose";
+@forward "usa-radio";
+@forward "usa-step-indicator";
+@forward "usa-summary-box";
+@forward "usa-table";
+
+// Base type for the form, in place of USWDS global element styles.
+.kf-us {
+  @include typeset("sans", "sm", 5);
+  color: color("ink");
+
+  // :where() keeps these below the USWDS component classes.
+  :where(p) {
+    margin-top: 0;
+    margin-bottom: units(2);
+    max-width: measure(4);
+  }
+
+  :where(a:not(.usa-button)) {
+    @include typeset-link;
+  }
+}
+
+// The few spacing and type roles the form needs, from USWDS tokens.
+.kf-us-title {
+  @include typeset("heading", "xl", 2);
+  margin-top: 0;
+  margin-bottom: units(2);
+}
+.kf-us-start-title {
+  @include typeset("heading", "2xl", 2);
+  margin-top: 0;
+  margin-bottom: units(3);
+}
+.kf-us-h2 {
+  @include typeset("heading", "lg", 2);
+  margin-top: units(5);
+  margin-bottom: units(2);
+}
+.kf-us-small {
+  @include typeset("sans", "xs", 4);
+  color: color("base-dark");
+  margin-top: units(2);
+  margin-bottom: units(1);
+}
+.kf-us-block { margin-top: units(3); margin-bottom: units(3); }
+.kf-us-flush { margin-top: 0; }
+.kf-us-continue { margin-top: units(4); }
+.kf-us-after { margin-top: units(3); }
+.kf-us-send { margin-top: units(1); }
+.kf-us-table { width: 100%; }
+
+// Room between the step bar and the "1 of 4" heading under it.
+.kf-us .usa-step-indicator__header {
+  margin-top: units(2);
+}

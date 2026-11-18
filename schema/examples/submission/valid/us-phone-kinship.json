@@ -1,0 +1,9 @@
+{
+  "full_name": "Alex Sample",
+  "interest": "fostering",
+  "knows_child": true,
+  "contact_method": "phone_call",
+  "phone": "202-555-0147",
+  "best_times": ["weekday_evening", "saturday"],
+  "zip_prefix": "000"
+}

@@ -24,15 +24,25 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - British English, plain words, short sentences.
 - Code is MIT; everything else is CC BY 4.0.
 
+## Design
+
+- **Everything uses the [shadcn/ui](https://ui.shadcn.com) design system**: its components, the new-york style, the neutral theme tokens and its typography. Add components from the shadcn registry or its GitHub source into `site/src/components/ui/`. Do not restyle them by hand or mix in another design system.
+- **One exception: the questionnaire** (the reference enquiry form) uses [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) components and patterns, as set out in Decision 0001. It carries no GOV.UK branding: no crown, no GOV.UK logotype and no GDS Transport typeface. Kinderform is not a government service and must not look like one.
+- **The US version of the questionnaire** uses the [U.S. Web Design System](https://designsystem.digital.gov/) (USWDS) components, built from its Sass packages in `site/src/styles/uswds.scss`. It carries no federal branding: no "official website of the United States government" banner and no identifier, which are for .gov and .mil sites only. Do not load USWDS utility classes; their names clash with Tailwind.
+- Both questionnaire styles stay inside the form. Everything around the form (header, intro, footer) stays shadcn/ui.
+- Public pages ship no tracking, set no cookies and load nothing from other sites. Fonts are self-hosted.
+
 ## Layout
 
-- `schema/` Enquiry schema and synthetic examples
+- `schema/` Enquiry schema and synthetic examples; `enquiry-submission.schema.json` is what a person fills in, and `schema/ui/` holds the wording for each country's reference form
 - `register/` front-door register (CSV) and its column guide
 - `rubric/` audit rubric in Markdown and JSON
-- `evidence/` evidence library
+- `census/` intake-form census: forms, questions, answer options, guidance (CSV)
+- `evidence/` evidence library; `findings.json` is "What we know so far". Everything here except the README is published at `/research` on the site, so a merge updates the public page
 - `docs/` roadmap and project notes
-- `tools/` scripts that build summaries from the register
+- `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript, except the reference form at `/example-form`, which runs its own script from the same site; `vercel.json` allows script only on those pages); `vercel.json` builds it. `/research` is built from `evidence/`, plus the census as unnamed patterns (`site/src/lib/forms-differ.ts`). `/form-check` shows the method and patterns without names. `/form-check/named` (named draft scores) is built only when `VERCEL_ENV` is not `production`, so it exists only in private previews; scores are computed at build time and never committed
 - `tests/` validation scripts
+- `tools/` helper scripts: the census summary, the US register summary and charts, and the polite crawler
 
 ## Before finishing a task
 

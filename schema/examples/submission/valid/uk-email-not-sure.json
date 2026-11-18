@@ -1,0 +1,12 @@
+{
+  "full_name": "Sam Example",
+  "preferred_name": "Sam",
+  "interest": "not_sure",
+  "knows_child": false,
+  "contact_method": "email",
+  "email": "sam@example.org",
+  "postcode_area": "ZZ99",
+  "topics": ["eligibility", "money_and_support"],
+  "heard_from": "friend_or_family",
+  "updates_opt_in": false
+}

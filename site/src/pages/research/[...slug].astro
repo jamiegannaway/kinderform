@@ -1,0 +1,46 @@
+---
+// One page for each Markdown file in evidence/: the library, each report and each monthly update.
+import Base from "@/layouts/Base.astro";
+import { SiteFooter, SiteHeader } from "@/components/site-header";
+import { render } from "astro:content";
+import { evidenceEntries, monthOf, slugOf, titleOf, type EvidenceEntry } from "@/lib/research";
+
+export async function getStaticPaths() {
+  const { all } = await evidenceEntries();
+  return all.map((entry) => ({ params: { slug: slugOf(entry.id) }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: EvidenceEntry };
+const { Content, headings } = await render(entry);
+const title = titleOf(entry.body);
+const kind = entry.id === "library" ? "Evidence library" : entry.id.startsWith("reports/") ? `Report, ${monthOf(entry.id)}` : `Update, ${monthOf(entry.id)}`;
+const contents = headings.filter((h) => h.depth === 2);
+---
+<Base title={`${title} | Kinderform`} description={`${kind}. Part of the Kinderform research pages on the first step towards fostering and adoption.`}>
+  <SiteHeader current="/research" />
+  <main id="main" class="mx-auto max-w-6xl px-6 pt-6 pb-20 md:pt-10">
+    <p class="mb-8 text-sm text-muted-foreground">
+      <a href="/research" class="font-medium text-foreground underline underline-offset-4">Research</a>
+      <span aria-hidden="true"> / </span>
+      <span>{kind}</span>
+    </p>
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_15rem]">
+      <article class="kf-prose min-w-0">
+        <Content />
+      </article>
+      {contents.length > 2 && (
+        <nav aria-label="On this page" class="order-first text-sm lg:order-last">
+          <div class="rounded-lg border p-4 lg:sticky lg:top-6">
+            <p class="mb-3 font-medium">On this page</p>
+            <ul class="space-y-2">
+              {contents.map((h) => (
+                <li><a href={`#${h.slug}`} class="text-muted-foreground hover:text-foreground hover:underline">{h.text}</a></li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+      )}
+    </div>
+  </main>
+  <SiteFooter />
+</Base>
