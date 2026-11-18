@@ -8,12 +8,21 @@ Data lives in [`register/us/`](../register/us/). Column definitions are in its [
 
 ## At a glance
 
-*Counted from the files in [`register/us/`](../register/us/) on 2026-11-17. Every row is a lead to check until it is verified.*
+*Counted from the files in [`register/us/`](../register/us/) on 2026-11-18. Every row is a lead to check until a person has verified it. Charts follow your light or dark theme; each has a table view.*
 
-| 🗺️ Jurisdictions | 🚪 Front doors | 🏢 Private agencies | 📜 Policy rules | 📝 Application forms | ✅ Verified rows |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| **51** | **1257** | **322** | **663** | **235** | **0 of 4161** |
-| 50 states and DC | 516 with their own page | phase 7 | 51 jurisdictions | 84 with a direct link | 2404 rows from an opened page |
+<p align="center"><img src="img/us/headline.svg" alt="Headline numbers for the US survey" width="760"></p>
+
+<p align="center"><img src="img/us/map.svg" alt="Tile map of US states coloured by who runs child welfare, with front doors per state" width="760"></p>
+
+<details><summary>Table view: who runs child welfare</summary>
+
+| Model | Jurisdictions | Which |
+|---|---:|---:|
+| County-run | 9 | CA, CO, MN, NC, ND, NY, OH, PA, VA |
+| Mixed | 2 | NV, WI |
+| State-run | 40 | AK, AL, AR, AZ, CT, DC, DE, FL, GA, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MO, MS, MT, NE, NH, NJ, NM, OK, OR, RI, SC, SD, TN, TX, UT, VT, WA, WV, WY |
+
+</details>
 
 ### Progress
 
@@ -22,84 +31,177 @@ flowchart LR
     P1["1 Structure"]:::done
     P2["2 States"]:::partial
     P3["3 Front doors"]:::partial
-    P4["4 First-contact forms<br>and reply promises"]:::partial
+    P4["4 Enquiry forms<br>and reply promises"]:::partial
     P5["5 Application forms"]:::partial
     P6["6 Policies"]:::partial
     P7["7 Private agencies"]:::partial
-    P8["8 Patterns summary"]:::todo
+    P8["8 Patterns summary"]:::partial
     P9["9 Verification"]:::todo
     P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8 --> P9
-    classDef done fill:#2e7d32,stroke:#1b5e20,color:#ffffff
-    classDef partial fill:#f9a825,stroke:#f57f17,color:#000000
+    classDef done fill:#008300,stroke:#005c00,color:#ffffff
+    classDef partial fill:#eda100,stroke:#b37a00,color:#0b0b0b
     classDef todo fill:#eceff1,stroke:#90a4ae,color:#37474f
 ```
 
-🟩 done · 🟨 first pass, unverified · ⬜ not started
+Green: done. Amber: first pass, unverified. Grey: not started.
 
-### Who runs child welfare, and front doors found per state
+<p align="center"><img src="img/us/evidence.svg" alt="How far each data set has been checked" width="760"></p>
 
-🟦 state-administered · 🟧 county-administered · 🟪 hybrid. The number is front doors in the register.
+<details><summary>Table view: how far each data set has been checked</summary>
 
-| | | | | | | | | | | |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|🟦 **AK**<br>11| | | | | | | | | |🟦 **ME**<br>11|
-| | | | | | | | | |🟦 **VT**<br>7|🟦 **NH**<br>4|
-|🟦 **WA**<br>18|🟦 **ID**<br>9|🟦 **MT**<br>9|🟧 **ND**<br>28|🟧 **MN**<br>91|🟦 **IL**<br>6|🟪 **WI**<br>83|🟦 **MI**<br>20|🟧 **NY**<br>70|🟦 **RI**<br>10|🟦 **MA**<br>9|
-|🟦 **OR**<br>8|🟪 **NV**<br>10|🟦 **WY**<br>6|🟦 **SD**<br>16|🟦 **IA**<br>7|🟦 **IN**<br>12|🟧 **OH**<br>94|🟧 **PA**<br>76|🟦 **NJ**<br>6|🟦 **CT**<br>9| |
-|🟧 **CA**<br>68|🟦 **UT**<br>6|🟧 **CO**<br>67|🟦 **NE**<br>13|🟦 **MO**<br>7|🟦 **KY**<br>7|🟦 **WV**<br>8|🟧 **VA**<br>127|🟦 **MD**<br>33|🟦 **DE**<br>5| |
-| |🟦 **AZ**<br>16|🟦 **NM**<br>9|🟦 **KS**<br>15|🟦 **AR**<br>1|🟦 **TN**<br>7|🟧 **NC**<br>112|🟦 **SC**<br>9|🟦 **DC**<br>5| | |
-| | | |🟦 **OK**<br>27|🟦 **LA**<br>11|🟦 **MS**<br>10|🟦 **AL**<br>6|🟦 **GA**<br>7| | | |
-|🟦 **HI**<br>5| | |🟦 **TX**<br>17| | | | |🟦 **FL**<br>29| | |
+| Data set | Rows | Page or form opened | Verified |
+|---|---:|---:|---:|
+| States | 51 | 0 | 0 |
+| Front doors | 1257 | 398 | 0 |
+| Policy rules | 663 | 0 | 0 |
+| Application forms | 235 | 51 | 0 |
+| Enquiry questions | 225 | 225 | 0 |
+| Application questions | 1716 | 1716 | 0 |
+| Reply promises | 14 | 14 | 0 |
 
-### Front doors
+</details>
 
-```mermaid
-pie showData title Front doors by level
-    "State" : 129
-    "Regional" : 316
-    "County" : 678
-    "City" : 45
-    "Tribal" : 89
-```
+## Who the front doors are
 
-```mermaid
-pie showData title Front doors by who runs them
-    "Public" : 800
-    "Tribal" : 89
-    "Private non-profit" : 360
-    "Private for-profit" : 8
-```
+<p align="center"><img src="img/us/levels.svg" alt="Front doors by level" width="760"></p>
 
-### Policy rules found, by topic
+<p align="center"><img src="img/us/sectors.svg" alt="Front doors by who runs them" width="760"></p>
 
-How many of the 51 jurisdictions have at least one rule recorded on each topic.
+<details><summary>Table view: front doors by level and by who runs them</summary>
 
-| Topic | Jurisdictions | |
-|---|---:|---|
-| `min_age` | 51 | `████████████████████` |
-| `training_preservice` | 51 | `████████████████████` |
-| `background_checks` | 46 | `██████████████████░░` |
-| `board_rate` | 46 | `██████████████████░░` |
-| `training_ongoing` | 46 | `██████████████████░░` |
-| `capacity` | 45 | `██████████████████░░` |
-| `bedroom_space` | 44 | `█████████████████░░░` |
-| `adoption_assistance` | 40 | `████████████████░░░░` |
-| `licence_term` | 33 | `█████████████░░░░░░░` |
-| `relationship_status` | 32 | `█████████████░░░░░░░` |
-| `home_study` | 31 | `████████████░░░░░░░░` |
-| `income` | 23 | `█████████░░░░░░░░░░░` |
-| `housing_tenure` | 19 | `███████░░░░░░░░░░░░░` |
-| `kinship` | 15 | `██████░░░░░░░░░░░░░░` |
-| `residency` | 15 | `██████░░░░░░░░░░░░░░` |
+| Group | Front doors |
+|---|---:|
+| County | 678 |
+| Regional | 316 |
+| State | 129 |
+| Tribal | 89 |
+| City | 45 |
+| Public | 800 |
+| Private non-profit | 360 |
+| Tribal | 89 |
+| Private for-profit | 8 |
 
-### How far each row has been checked
+</details>
 
-| Evidence | Rows | |
-|---|---:|---|
-| 🔎 Search result only | 1757 | `████████░░░░░░░░░░░░` |
-| 📄 Page opened | 417 | `██░░░░░░░░░░░░░░░░░░` |
-| 📝 Form opened | 1987 | `██████████░░░░░░░░░░` |
-| ✅ Verified by a second person | 0 | `░░░░░░░░░░░░░░░░░░░░` |
+## What the data shows so far
+
+Neutral counts across front doors and states. No front door is scored or ranked, and every figure rests on unverified rows, so read these as early patterns to check, not findings.
+
+- **Enquiry forms mostly ask for contact details.** All 29 first-contact forms read ask for a name and an email address. 66% ask for a phone number, 28% for a street address and 14% for a date of birth or age.
+- **Few front doors publish a reply time.** 14 of the 398 front-door pages opened state one, from 1 to 14 days.
+- **The usual minimum age is 21.** 40 of 48 jurisdictions with a recorded figure set it; the others set 18 or 19.
+- **Most states ask for 20 to 39 hours of training before licensing** (27 of 37 with a figure).
+- **Application forms ask far more than enquiry forms.** 88% of the 17 fillable forms read ask for a date of birth, and most ask about relationships, work, education and who lives in the home.
+
+### What people are asked
+
+<p align="center"><img src="img/us/enquiry-topics.svg" alt="What first-contact enquiry forms ask" width="760"></p>
+
+<details><summary>Table view: what enquiry forms ask</summary>
+
+| Topic | Share of forms (%) |
+|---|---:|
+| Email address | 100 |
+| Name | 100 |
+| Phone number | 66 |
+| Open comment box | 52 |
+| ZIP, county or city | 48 |
+| Street address | 28 |
+| How they heard of us | 21 |
+| Fostering or adopting | 17 |
+| Race, gender or faith | 17 |
+| Best time or way to contact | 14 |
+| Date of birth or age | 14 |
+| Housing | 7 |
+
+</details>
+
+<p align="center"><img src="img/us/application-topics.svg" alt="What application forms ask beyond contact details" width="760"></p>
+
+<details><summary>Table view: what application forms ask</summary>
+
+| Topic | Share of forms (%) |
+|---|---:|
+| Date of birth or age | 88 |
+| Race, gender or faith | 65 |
+| Relationship status | 65 |
+| Work | 65 |
+| Fostering or adopting | 59 |
+| Education | 53 |
+| Open comment box | 41 |
+| Who lives in the home | 41 |
+| Children they could care for | 35 |
+| Driving and vehicle | 35 |
+| Earlier marriages | 35 |
+| Consent to contact | 29 |
+
+</details>
+
+### What front doors promise
+
+<p align="center"><img src="img/us/promises.svg" alt="Published reply promises in days" width="760"></p>
+
+<details><summary>Table view: published reply promises</summary>
+
+| Front door | Days |
+|---|---:|
+| Nexus-PATH foster care (ND) | 1 |
+| Wellpoint Care Network foster… (WI) | 1 |
+| Alabama MENTOR therapeutic foster… (AL) | 2 |
+| Alexandria DCHS foster care and… (VA) | 2 |
+| Lutheran Social Services of… (IL) | 2 |
+| Massachusetts MENTOR foster care (MA) | 2 |
+| Mentor Maryland (MD) | 2 |
+| Norfolk Department of Human… (VA) | 2 |
+| ODHS Foster Care: become a… (OR) | 2 |
+| Virginia Beach Human Services… (VA) | 2 |
+| Massachusetts DCF: become a… (MA) | 5 |
+| Pitt County DSS Under Our Wings… (NC) | 10 |
+| Anoka County foster care and… (MN) | 14 |
+| Washington County foster care and… (MN) | 14 |
+
+</details>
+
+### Rules across states
+
+<p align="center"><img src="img/us/min-age.svg" alt="Minimum age to foster" width="760"></p>
+
+<details><summary>Table view: minimum age to foster</summary>
+
+| Minimum age | Jurisdictions |
+|---|---:|
+| 18 | 7 |
+| 19 | 1 |
+| 21 | 40 |
+
+</details>
+
+<p align="center"><img src="img/us/training.svg" alt="Training before licensing" width="760"></p>
+
+<details><summary>Table view: training before licensing</summary>
+
+| Hours | Jurisdictions |
+|---|---:|
+| 0-9 hours | 3 |
+| 10-19 hours | 7 |
+| 20-29 hours | 14 |
+| 30-39 hours | 13 |
+| 40+ hours | 0 |
+
+</details>
+
+<p align="center"><img src="img/us/licence-term.svg" alt="How long a foster licence lasts" width="760"></p>
+
+<details><summary>Table view: how long a foster licence lasts</summary>
+
+| Licence term | Jurisdictions |
+|---|---:|
+| 1 year | 5 |
+| 2 years | 17 |
+| 3 years | 4 |
+| 4 years | 1 |
+
+</details>
 
 <!-- summary:end -->
 
@@ -137,7 +239,7 @@ Each row's `notes` says which rule selected it. The list is not complete. Many t
 | 5 | Application forms: list each state's (and each local or tribal agency's own) application forms in `application-forms.csv`; record their questions in `application-questions.csv` | Forms listed; questions read from 17 fillable PDFs (first pass) |
 | 6 | Policies: each state's published rules for fostering and adopting in `policies.csv`, with the legal citation | First pass |
 | 7 | Private licensed agencies, starting from each state's licensing list | First pass (sample of up to 10 per state) |
-| 8 | Neutral patterns summary (counts across front doors and states, no names ranked) | Not started |
+| 8 | Neutral patterns summary (counts across front doors and states, no names ranked) | First pass ("What the data shows so far", above) |
 | 9 | Verification by a second person, and an invitation to agencies to correct their rows | Not started |
 
 ## Method

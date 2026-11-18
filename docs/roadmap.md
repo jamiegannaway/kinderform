@@ -28,6 +28,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] Policies: each state's published rules for fostering and adopting, with legal citations (663 rules, unverified)
 - [x] Private licensed agencies, first sample of up to 10 per state (322 agencies, unverified)
 - [ ] Private licensed agencies: complete lists from each state's licensing database
+- [x] Visual research page and first neutral patterns summary (`tools/us_summary.py`, `tools/us_charts.py`)
 - [ ] Second-person verification and invitation to agencies to correct their rows
 
 ## Next: listen, then measure
