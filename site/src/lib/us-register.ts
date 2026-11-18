@@ -113,7 +113,7 @@ function shares(rows: Row[], key: string, skip: Set<string>): { of: number; topi
   const topics = [...by.entries()]
     .map(([t, s]) => ({ label: TOPICS[t] ?? t.replace(/_/g, " "), yes: s.size, of }))
     .sort((a, b) => b.yes - a.yes || a.label.localeCompare(b.label))
-    .slice(0, 10)
+    .slice(0, 12)
   return { of, topics }
 }
 

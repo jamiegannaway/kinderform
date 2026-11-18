@@ -38,12 +38,12 @@ flowchart LR
     P8["8 Patterns summary"]:::partial
     P9["9 Verification"]:::todo
     P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8 --> P9
-    classDef done fill:#008300,stroke:#005c00,color:#ffffff
-    classDef partial fill:#eda100,stroke:#b37a00,color:#0b0b0b
-    classDef todo fill:#eceff1,stroke:#90a4ae,color:#37474f
+    classDef done fill:#171717,stroke:#171717,color:#fafafa
+    classDef partial fill:#737373,stroke:#737373,color:#ffffff
+    classDef todo fill:#f5f5f5,stroke:#a1a1a1,color:#0a0a0a,stroke-dasharray:4 3
 ```
 
-Green: done. Amber: first pass, unverified. Grey: not started.
+Black: done. Grey: first pass, unverified. Light, dashed: not started.
 
 <p align="center"><img src="img/us/evidence.svg" alt="How far each data set has been checked" width="760"></p>
 
@@ -90,7 +90,7 @@ Neutral counts across front doors and states. No front door is scored or ranked,
 - **Enquiry forms mostly ask for contact details.** All 29 first-contact forms read ask for a name and an email address. 66% ask for a phone number, 28% for a street address and 14% for a date of birth or age.
 - **Few front doors publish a reply time.** 14 of the 398 front-door pages opened state one, from 1 to 14 days.
 - **The usual minimum age is 21.** 40 of 48 jurisdictions with a recorded figure set it; the others set 18 or 19.
-- **Most states ask for 20 to 39 hours of training before licensing** (27 of 37 with a figure).
+- **The most common pre-service training is 20-29 hours** (14 of 37 jurisdictions with a figure).
 - **Application forms ask far more than enquiry forms.** 88% of the 17 fillable forms read ask for a date of birth, and most ask about relationships, work, education and who lives in the home.
 
 ### What people are asked

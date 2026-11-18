@@ -2,89 +2,24 @@
 // Static HTML only. The site's Content-Security-Policy blocks inline styles, so every
 // size comes from a fixed class: bars are rows of equal segments, filled in proportion.
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  ChartCard,
+  ColumnBars,
+  HorizontalBars,
+  Legend,
+  StackedBars,
+  StatCard,
+  type BarDatum,
+} from "@/components/charts"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import type { Bar, Share, Tile, UsPicture as Data } from "@/lib/us-register"
+import type { Share, Tile, UsPicture as Data } from "@/lib/us-register"
 
 const fmt = (n: number) => n.toLocaleString("en-GB")
 const pct = (yes: number, of: number) => (of ? Math.round((100 * yes) / of) : 0)
+const states = (n: number) => `${n} ${n === 1 ? "state" : "states"}`
 
-// A bar made of `total` equal segments, `filled` of them dark. Proportions without inline styles.
-export function SegmentBar({ filled, total = 20, label }: { filled: number; total?: number; label: string }) {
-  return (
-    <span role="img" aria-label={label} title={label} className="flex h-2.5 w-full gap-0.5">
-      {Array.from({ length: total }, (_, i) => (
-        <span
-          key={i}
-          className={`flex-1 first:rounded-l-full last:rounded-r-full ${i < filled ? "bg-primary" : "bg-muted"}`}
-        />
-      ))}
-    </span>
-  )
-}
-
-export function Stat({ value, label, note }: { value: string; label: string; note?: string }) {
-  return (
-    <Card className="gap-1 py-5">
-      <CardContent className="space-y-1 px-5">
-        <p className="text-3xl font-bold tracking-tight tabular-nums md:text-4xl">{value}</p>
-        <p className="text-sm font-medium">{label}</p>
-        {note && <p className="text-xs text-muted-foreground">{note}</p>}
-      </CardContent>
-    </Card>
-  )
-}
-
-function BarList({
-  rows,
-  unit,
-  max,
-  stacked = false,
-}: {
-  rows: Bar[]
-  unit: (n: number) => string
-  max?: number
-  stacked?: boolean // label and figure above the bar, for narrow cards
-}) {
-  const top = max ?? Math.max(1, ...rows.map((r) => r.value))
-  const layout = stacked
-    ? "grid-cols-[minmax(0,1fr)_auto]"
-    : "grid-cols-[minmax(0,1fr)_auto] sm:grid-cols-[11rem_minmax(0,1fr)_7rem]"
-  return (
-    <ul className="space-y-3">
-      {rows.map((r) => (
-        <li key={r.label} className={`grid items-center gap-x-4 gap-y-1.5 text-sm ${layout}`}>
-          <span>{r.label}</span>
-          <span className={`text-right tabular-nums text-muted-foreground ${stacked ? "" : "sm:order-last"}`}>
-            {unit(r.value)}
-          </span>
-          <span className={stacked ? "col-span-2" : "col-span-2 sm:col-span-1"}>
-            <SegmentBar filled={Math.round((20 * r.value) / top)} label={`${r.label}: ${unit(r.value)}`} />
-          </span>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-function ShareList({ rows }: { rows: Share[] }) {
-  return (
-    <ul className="space-y-3">
-      {rows.map((r) => (
-        <li
-          key={r.label}
-          className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1.5 text-sm sm:grid-cols-[13rem_minmax(0,1fr)_3.5rem]"
-        >
-          <span>{r.label}</span>
-          <span className="text-right tabular-nums text-muted-foreground sm:order-last">{pct(r.yes, r.of)}%</span>
-          <span className="col-span-2 sm:col-span-1">
-            <SegmentBar filled={Math.round(pct(r.yes, r.of) / 5)} label={`${r.label}: ${r.yes} of ${r.of} forms`} />
-          </span>
-        </li>
-      ))}
-    </ul>
-  )
-}
+const shareBars = (rows: Share[]): BarDatum[] =>
+  rows.map((r) => ({ label: r.label, value: pct(r.yes, r.of), display: `${pct(r.yes, r.of)}%` }))
 
 function TableView({ title, head, rows }: { title: string; head: string[]; rows: (string | number)[][] }) {
   return (
@@ -150,88 +85,15 @@ function TileMap({ data }: { data: Data }) {
           ),
         )}
       </div>
-      <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-        {data.models.map((m) => (
-          <li key={m.model} className="flex items-center gap-2">
-            <span aria-hidden="true" className={`size-4 rounded ${TILE[m.model]}`} />
-            {m.label} ({m.count})
-          </li>
-        ))}
-      </ul>
+      <Legend
+        items={data.models.map((m) => ({ key: m.model, label: `${m.label} (${m.count})`, className: TILE[m.model] }))}
+      />
     </div>
-  )
-}
-
-// One column per day, a dot per front door that publishes a reply time.
-function DayStrip({ days }: { days: number[] }) {
-  const max = Math.max(14, ...days.map((d) => Math.ceil(d)))
-  const cols = Array.from({ length: max + 1 }, (_, d) => days.filter((x) => Math.round(x) === d).length)
-  return (
-    <div className="space-y-1">
-      <div
-        role="img"
-        aria-label={`${days.length} front doors publish a reply time, from ${days[0]} to ${days.at(-1)} days.`}
-        className="grid h-24 grid-cols-[repeat(15,minmax(0,1fr))] border-b border-border"
-      >
-        {cols.slice(0, 15).map((n, d) => (
-          <div key={d} className="flex flex-col-reverse items-center gap-0.5 pb-0.5">
-            {Array.from({ length: n }, (_, j) => (
-              <span key={j} title={`${d} ${d === 1 ? "day" : "days"}`} className="size-2.5 rounded-full bg-primary ring-2 ring-card" />
-            ))}
-          </div>
-        ))}
-      </div>
-      <div aria-hidden="true" className="grid grid-cols-[repeat(15,minmax(0,1fr))] text-xs text-muted-foreground tabular-nums">
-        {[0, 7, 14].map((t) => (
-          <span key={t} className={`row-start-1 text-center ${t === 0 ? "col-start-1" : t === 7 ? "col-start-8" : "col-start-15"}`}>
-            {t}
-          </span>
-        ))}
-      </div>
-      <p className="text-center text-xs text-muted-foreground">Days within which the front door says it will make contact</p>
-    </div>
-  )
-}
-
-function EvidenceRows({ rows }: { rows: Data["evidence"] }) {
-  return (
-    <ul className="space-y-4">
-      {rows.map((r) => {
-        const seg = 40
-        const opened = Math.round((seg * r.opened) / (r.rows || 1))
-        const verified = Math.round((seg * r.verified) / (r.rows || 1))
-        return (
-          <li key={r.label} className="space-y-1.5 text-sm">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-              <span className="font-medium">{r.label}</span>
-              <span className="tabular-nums text-muted-foreground">
-                {fmt(r.opened + r.verified)} of {fmt(r.rows)} opened, {fmt(r.verified)} verified
-              </span>
-            </div>
-            <span
-              role="img"
-              aria-label={`${r.label}: ${r.opened} rows opened, ${r.verified} verified, ${r.searchOnly} from search results only`}
-              className="flex h-2.5 gap-0.5"
-            >
-              {Array.from({ length: seg }, (_, i) => (
-                <span
-                  key={i}
-                  className={`flex-1 first:rounded-l-full last:rounded-r-full ${
-                    i < verified ? "bg-primary" : i < verified + opened ? "bg-chart-2" : "bg-muted"
-                  }`}
-                />
-              ))}
-            </span>
-          </li>
-        )
-      })}
-    </ul>
   )
 }
 
 export default function UsPicture({ data }: { data: Data }) {
-  const enquiry = data.enquiry
-  const share = (label: string) => enquiry.topics.find((t) => t.label === label)
+  const share = (label: string) => data.enquiry.topics.find((t) => t.label === label)
   const phone = share("Phone number")
   const dob = share("Date of birth or age")
   const commonAge = [...data.minAge].sort((a, b) => b.value - a.value)[0]
@@ -254,156 +116,174 @@ export default function UsPicture({ data }: { data: Data }) {
       </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <Stat value={fmt(data.jurisdictions)} label="States and DC" note="all covered" />
-        <Stat value={fmt(data.doors)} label="Front doors found" note={`${fmt(data.privateAgencies)} private, ${fmt(data.tribal)} tribal`} />
-        <Stat value={fmt(data.policies)} label="Published rules" note="age, training, licence and more" />
-        <Stat value={fmt(data.questions)} label="Form questions read" note={`from ${fmt(data.questionForms)} forms`} />
+        <StatCard label="States and DC" value={fmt(data.jurisdictions)} note="All covered" />
+        <StatCard label="Front doors found" value={fmt(data.doors)} note={`${fmt(data.privateAgencies)} private, ${fmt(data.tribal)} tribal`} />
+        <StatCard label="Published rules" value={fmt(data.policies)} note="Age, training, licence and more" />
+        <StatCard label="Form questions read" value={fmt(data.questions)} note={`From ${fmt(data.questionForms)} forms`} />
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Who runs child welfare, and front doors found in each state</CardTitle>
-          <CardDescription>
-            Each square is a state, placed roughly where it sits on the map. Where counties run child welfare, each county
-            has its own front door, so those states have many more.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <TileMap data={data} />
+      <ChartCard
+        title="Who runs child welfare, and front doors found in each state"
+        description="Each square is a state, placed roughly where it sits on the map. Where counties run child welfare, each county has its own front door."
+        footer={{
+          lead: `${data.models.find((m) => m.model === "county")?.count ?? 0} states run child welfare through their counties`,
+          note: "So those states have many more front doors.",
+        }}
+      >
+        <TileMap data={data} />
+        <TableView
+          title="front doors by state"
+          head={["State", "Who runs it", "Front doors"]}
+          rows={data.tiles
+            .flat()
+            .filter((t): t is Tile => !!t)
+            .sort((a, b) => a.code.localeCompare(b.code))
+            .map((t) => [t.code, data.models.find((m) => m.model === t.model)?.label ?? "Not recorded", t.doors])}
+        />
+      </ChartCard>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <ChartCard
+          title="Where the front door sits"
+          description="Front doors by level"
+          footer={{ lead: `${fmt(data.levels[0].value)} are county agencies`, note: `Of ${fmt(data.doors)} front doors found.` }}
+        >
+          <HorizontalBars data={data.levels} labelWidth="sm:grid-cols-[7rem_minmax(0,1fr)]" />
+        </ChartCard>
+        <ChartCard
+          title="Who runs it"
+          description="Includes private organisations a state pays to run its front door"
+          footer={{ lead: `${fmt(data.privateAgencies)} private licensed agencies so far`, note: "A first sample of up to 10 per state." }}
+        >
+          <HorizontalBars data={data.sectors} labelWidth="sm:grid-cols-[9rem_minmax(0,1fr)]" />
+        </ChartCard>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <ChartCard
+          title="What first-contact forms ask"
+          description={`Share of the ${data.enquiry.of} enquiry forms read`}
+          footer={
+            phone
+              ? {
+                  lead: `${pct(phone.yes, phone.of)}% ask for a phone number`,
+                  note: dob ? `${pct(dob.yes, dob.of)}% ask for a date of birth or age.` : "Topics are tagged by keyword rules and need review.",
+                }
+              : undefined
+          }
+        >
+          <HorizontalBars data={shareBars(data.enquiry.topics)} max={100} labelWidth="sm:grid-cols-[14rem_minmax(0,1fr)]" />
           <TableView
-            title="front doors by state"
-            head={["State", "Who runs it", "Front doors"]}
-            rows={data.tiles
-              .flat()
-              .filter((t): t is Tile => !!t)
-              .sort((a, b) => a.code.localeCompare(b.code))
-              .map((t) => [t.code, data.models.find((m) => m.model === t.model)?.label ?? "Not recorded", t.doors])}
+            title="enquiry form topics"
+            head={["Topic", "Forms", "Share"]}
+            rows={data.enquiry.topics.map((t) => [t.label, `${t.yes} of ${t.of}`, `${pct(t.yes, t.of)}%`])}
           />
-        </CardContent>
-      </Card>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Where the front door sits</CardTitle>
-            <CardDescription>Front doors by level.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarList rows={data.levels} unit={fmt} />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Who runs it</CardTitle>
-            <CardDescription>Includes private organisations a state pays to run its front door.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarList rows={data.sectors} unit={fmt} />
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">What first-contact forms ask</CardTitle>
-            <CardDescription>
-              Share of the {enquiry.of} enquiry forms read that ask about each topic.
-              {phone && dob && ` ${pct(phone.yes, phone.of)}% ask for a phone number and ${pct(dob.yes, dob.of)}% for a date of birth or age.`}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <ShareList rows={enquiry.topics} />
-            <TableView
-              title="enquiry form topics"
-              head={["Topic", "Forms", "Share"]}
-              rows={enquiry.topics.map((t) => [t.label, `${t.yes} of ${t.of}`, `${pct(t.yes, t.of)}%`])}
-            />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">What application forms ask, beyond contact details</CardTitle>
-            <CardDescription>
-              Share of the {data.application.of} fillable application forms read that ask about each topic. A full
-              application properly goes further than a first enquiry.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <ShareList rows={data.application.topics} />
-            <TableView
-              title="application form topics"
-              head={["Topic", "Forms", "Share"]}
-              rows={data.application.topics.map((t) => [t.label, `${t.yes} of ${t.of}`, `${pct(t.yes, t.of)}%`])}
-            />
-          </CardContent>
-        </Card>
+        </ChartCard>
+        <ChartCard
+          title="What application forms ask"
+          description={`Beyond contact details. Share of the ${data.application.of} fillable application forms read`}
+          footer={{ lead: "A full application asks much more than an enquiry", note: "Name, address and contact details are left out here." }}
+        >
+          <HorizontalBars data={shareBars(data.application.topics)} max={100} labelWidth="sm:grid-cols-[14rem_minmax(0,1fr)]" />
+          <TableView
+            title="application form topics"
+            head={["Topic", "Forms", "Share"]}
+            rows={data.application.topics.map((t) => [t.label, `${t.yes} of ${t.of}`, `${pct(t.yes, t.of)}%`])}
+          />
+        </ChartCard>
       </div>
 
       {data.replyDays.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">How quickly front doors say they will reply</CardTitle>
-            <CardDescription>
-              {data.replyDays.length} of the {fmt(data.pagesOpened)} front-door pages read publish a reply time. Each dot
-              is one front door.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <DayStrip days={data.replyDays} />
-            <TableView
-              title="reply times"
-              head={["Days", "Front doors"]}
-              rows={[...new Set(data.replyDays)].map((d) => [String(d), data.replyDays.filter((x) => x === d).length])}
-            />
-          </CardContent>
-        </Card>
+        <ChartCard
+          title="How quickly front doors say they will reply"
+          description="Front doors that publish a reply time, by the time they state"
+          footer={{
+            lead: `${data.replyDays.length} of ${fmt(data.pagesOpened)} front-door pages read publish a reply time`,
+            note: `From ${data.replyDays[0]} to ${data.replyDays.at(-1)} days.`,
+          }}
+        >
+          <ColumnBars
+            data={[
+              ["1 day", (d: number) => d <= 1],
+              ["2 days", (d: number) => d > 1 && d <= 2],
+              ["3 to 5 days", (d: number) => d > 2 && d <= 5],
+              ["6 to 10 days", (d: number) => d > 5 && d <= 10],
+              ["11 to 14 days", (d: number) => d > 10 && d <= 14],
+            ].map(([label, test]) => ({
+              label: label as string,
+              value: data.replyDays.filter(test as (d: number) => boolean).length,
+            }))}
+            axisLabel="Stated time to first contact"
+          />
+          <TableView
+            title="reply times"
+            head={["Days", "Front doors"]}
+            rows={[...new Set(data.replyDays)].map((d) => [String(d), data.replyDays.filter((x) => x === d).length])}
+          />
+        </ChartCard>
       )}
 
       <div className="grid gap-6 md:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Minimum age to foster</CardTitle>
-            <CardDescription>
-              {commonAge ? `${commonAge.label} in most states with a recorded figure.` : "States with a recorded figure."}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarList rows={data.minAge} unit={(n) => `${n} ${n === 1 ? "state" : "states"}`} stacked />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Training before licensing</CardTitle>
-            <CardDescription>Pre-service training hours, states with a recorded figure.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarList rows={data.training} unit={(n) => `${n} ${n === 1 ? "state" : "states"}`} stacked />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">How long a licence lasts</CardTitle>
-            <CardDescription>Licence term, states with a recorded figure.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <BarList rows={data.licenceTerm} unit={(n) => `${n} ${n === 1 ? "state" : "states"}`} stacked />
-          </CardContent>
-        </Card>
+        <ChartCard
+          title="Minimum age to foster"
+          description="States with a recorded figure"
+          footer={commonAge ? { lead: `${commonAge.label} in ${states(commonAge.value)}` } : undefined}
+        >
+          <HorizontalBars
+            data={data.minAge.map((b) => ({ ...b, display: states(b.value) }))}
+            labelWidth="sm:grid-cols-[4.5rem_minmax(0,1fr)]"
+          />
+        </ChartCard>
+        <ChartCard
+          title="Training before licensing"
+          description="Pre-service hours, states with a recorded figure"
+          footer={(() => {
+            const top = [...data.training].sort((a, b) => b.value - a.value)[0]
+            return top ? { lead: `${top.label} is most common` } : undefined
+          })()}
+        >
+          <HorizontalBars
+            data={data.training.map((b) => ({ ...b, display: states(b.value) }))}
+            labelWidth="sm:grid-cols-[7.5rem_minmax(0,1fr)]"
+          />
+        </ChartCard>
+        <ChartCard
+          title="How long a licence lasts"
+          description="Licence term, states with a recorded figure"
+          footer={(() => {
+            const top = [...data.licenceTerm].sort((a, b) => b.value - a.value)[0]
+            return top ? { lead: `${top.label} is most common` } : undefined
+          })()}
+        >
+          <HorizontalBars
+            data={data.licenceTerm.map((b) => ({ ...b, display: states(b.value) }))}
+            labelWidth="sm:grid-cols-[4.5rem_minmax(0,1fr)]"
+          />
+        </ChartCard>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">How far we have checked</CardTitle>
-          <CardDescription>
-            Dark: verified by a second person. Middle: the page or form was opened and read. Light: from a desk review only.
-            {` ${fmt(data.verified)} of ${fmt(data.totalRows)} rows are verified so far.`}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <EvidenceRows rows={data.evidence} />
-        </CardContent>
-      </Card>
+      <ChartCard
+        title="How far we have checked"
+        description="Rows by the closest look taken so far"
+        footer={{
+          lead: `${fmt(data.verified)} of ${fmt(data.totalRows)} rows verified by a second person`,
+          note: "Verification is the next phase.",
+        }}
+      >
+        <StackedBars
+          segments={[
+            { key: "verified", label: "Verified by a person", className: "bg-primary" },
+            { key: "opened", label: "Page or form opened", className: "bg-chart-2" },
+            { key: "search", label: "Desk review only", className: "bg-chart-1" },
+          ]}
+          rows={data.evidence.map((r) => ({
+            label: r.label,
+            total: r.rows,
+            parts: { verified: r.verified, opened: r.opened, search: r.searchOnly },
+            note: `${fmt(r.opened + r.verified)} of ${fmt(r.rows)} opened`,
+          }))}
+        />
+      </ChartCard>
 
       <p className="max-w-3xl text-sm text-muted-foreground">
         The data is open: the register, its column guide and the method are in the{" "}

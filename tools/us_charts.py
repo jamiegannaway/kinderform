@@ -20,14 +20,15 @@ US = ROOT / "register" / "us"
 IMG = ROOT / "docs" / "img" / "us"
 
 STYLE = """<style>
-.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.grid{stroke:#e2e1dc}.base{stroke:#b9b8b2}
-.s1{fill:#2a78d6}.s2{fill:#eb6834}.s3{fill:#1baf7a}.ink{fill:#0b0b0b}
-.o1{fill:#cde2fb}.o2{fill:#86b6ef}.o3{fill:#2a78d6}.o4{fill:#104281}
-text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+.card{fill:#ffffff;stroke:#e5e5e5}.t1{fill:#0a0a0a}.t2{fill:#737373}.grid{stroke:#e5e5e5}.base{stroke:#e5e5e5}
+.s1{fill:#737373}.st{fill:#171717}.stx{fill:#fafafa}.co{fill:#737373}.cox{fill:#ffffff}
+.hy{fill:#f5f5f5;stroke:#737373}.hyx{fill:#0a0a0a}
+.o1{fill:#d4d4d4}.o2{fill:#737373}.o4{fill:#171717}.ox{fill:#fafafa}
+text{font-family:"Geist","Geist Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
 @media (prefers-color-scheme:dark){
-.bg{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.grid{stroke:#34332f}.base{stroke:#5b5a55}
-.s1{fill:#3987e5}.s2{fill:#d95926}.s3{fill:#199e70}
-.o1{fill:#2b3a4f}.o2{fill:#256abf}.o3{fill:#5598e7}.o4{fill:#b7d3f6}}
+.card{fill:#171717;stroke:#2e2e2e}.t1{fill:#fafafa}.t2{fill:#a1a1a1}.grid{stroke:#2e2e2e}.base{stroke:#2e2e2e}
+.st{fill:#e5e5e5}.stx{fill:#171717}.hy{fill:#262626;stroke:#a1a1a1}.hyx{fill:#fafafa}
+.o1{fill:#404040}.o4{fill:#e5e5e5}.ox{fill:#171717}}
 </style>"""
 
 TILES = [
@@ -50,7 +51,7 @@ def read(name):
 def svg(width, height, body, title):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" '
             f'height="{height}" role="img" aria-label="{escape(title)}">{STYLE}'
-            f'<rect class="bg" width="{width}" height="{height}" rx="8"/>{body}</svg>\n')
+            f'<rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" stroke-width="1"/>{body}</svg>\n')
 
 
 def text(x, y, value, cls="t1", size=13, anchor="start", weight="400"):
@@ -67,23 +68,35 @@ def bar(x, y, w, h, cls):
             f'a{r},{r} 0 0 1 -{r},{r} h-{w - r:.1f} z"/>')
 
 
-def hbar_chart(title, subtitle, rows, unit="", width=760, label_w=230, value_fmt=str, max_value=None):
-    """rows: list of (label, value). One series, so no legend; the title names it."""
-    row_h, top = 30, 74
-    height = top + row_h * len(rows) + 20
+def footer_lines(body, y, footer):
+    """shadcn CardFooter: a medium-weight lead line and a muted note."""
+    if not footer:
+        return y
+    lead, note = footer
+    body.append(text(24, y + 20, lead, "t1", 13, weight="600"))
+    if note:
+        body.append(text(24, y + 40, note, "t2", 13))
+        return y + 52
+    return y + 32
+
+
+def hbar_chart(title, subtitle, rows, unit="", width=760, label_w=230, value_fmt=str, max_value=None, footer=None):
+    """shadcn "Bar Chart - Horizontal": muted category labels, rounded bars, value past the bar end."""
+    row_h, top = 34, 78
     plot_w = width - label_w - 150
     top_value = max_value or max((v for _, v in rows), default=1) or 1
-    body = [text(24, 32, title, size=17, weight="600"), text(24, 54, subtitle, "t2", 13)]
+    body = [text(24, 34, title, size=16, weight="600"), text(24, 56, subtitle, "t2", 13)]
     for i, (label, value) in enumerate(rows):
         y = top + i * row_h
         w = plot_w * value / top_value
-        body.append(text(label_w - 10, y + 15, label, "t1", 13, "end"))
-        body.append(f'<line class="base" x1="{label_w}" x2="{label_w}" y1="{y - 2}" y2="{y + 22}" stroke-width="1"/>')
-        body.append(bar(label_w, y + 2, max(w, 2), 16, "s1"))
+        body.append(text(label_w - 12, y + 17, label, "t2", 12, "end"))
+        body.append(bar(label_w, y + 2, max(w, 2), 24, "s1"))
         shown = value_fmt(value) + unit
         if value == 1:
             shown = shown.replace(" days", " day").replace(" jurisdictions", " jurisdiction")
-        body.append(text(label_w + max(w, 2) + 8, y + 15, shown, "t2", 12))
+        body.append(text(label_w + max(w, 2) + 8, y + 18, shown, "t1", 12, weight="500"))
+    y = top + row_h * len(rows)
+    height = footer_lines(body, y, footer) + 16
     return svg(width, height, "".join(body), title)
 
 
@@ -115,75 +128,94 @@ TOPIC_LABELS = {
 
 
 def headline(stats):
-    width, height = 760, 70 + 92 * ((len(stats) + 3) // 4)
-    body = [text(24, 32, "The US survey in numbers", size=17, weight="600")]
-    per_row = 4
-    cell_w = (width - 48) / per_row
+    """shadcn section cards: label, large figure, muted note, each in its own card."""
+    per_row, gap = 4, 12
+    cell_w = (760 - 48 - gap * (per_row - 1)) / per_row
+    rows = (len(stats) + per_row - 1) // per_row
+    width, height = 760, 60 + rows * 104
+    body = [text(24, 34, "The US survey in numbers", size=16, weight="600")]
     for i, (label, value, note) in enumerate(stats):
         col, row = i % per_row, i // per_row
-        x, y = 24 + col * cell_w, 52 + row * 92
-        body.append(text(x, y + 34, f"{value:,}", "t1", 34, weight="700"))
-        body.append(text(x, y + 56, label, "t1", 13, weight="600"))
-        body.append(text(x, y + 74, note, "t2", 12))
+        x, y = 24 + col * (cell_w + gap), 50 + row * 104
+        body.append(f'<rect class="card" x="{x:.1f}" y="{y}" width="{cell_w:.1f}" height="92" rx="10" stroke-width="1"/>')
+        body.append(text(x + 14, y + 24, label, "t2", 12))
+        body.append(text(x + 14, y + 56, f"{value:,}", "t1", 26, weight="600"))
+        body.append(text(x + 14, y + 78, note, "t2", 11))
     return svg(width, height, "".join(body), "The US survey in numbers")
 
 
 def tile_map(admin, counts):
-    size, gap, left, top = 60, 6, 24, 70
+    size, gap, left, top = 60, 6, 24, 74
     width = left * 2 + 11 * (size + gap)
-    height = top + 8 * (size + gap) + 40
-    cls = {"state_administered": "s1", "county_administered": "s2", "hybrid": "s3"}
-    names = {"s1": "State-run", "s2": "County-run", "s3": "Mixed state and county"}
-    body = [text(24, 32, "Who runs child welfare, and front doors found per state", size=17, weight="600"),
-            text(24, 54, "Each square is a state, placed roughly where it sits on the map. The number is front doors in the register.", "t2", 13)]
+    height = top + 8 * (size + gap) + 44
+    cls = {"state_administered": ("st", "stx"), "county_administered": ("co", "cox"), "hybrid": ("hy", "hyx")}
+    names = [("st", "State-run"), ("co", "County-run"), ("hy", "Mixed state and county")]
+    body = [text(24, 34, "Who runs child welfare, and front doors found per state", size=16, weight="600"),
+            text(24, 56, "Each square is a state, placed roughly where it sits on the map. The number is front doors in the register.", "t2", 13)]
     for r, row in enumerate(TILES):
         for c, code in enumerate(row):
             if not code:
                 continue
             x, y = left + c * (size + gap), top + r * (size + gap)
-            fill = cls.get(admin.get(code, ""), "t2")
-            body.append(f'<rect class="{fill}" x="{x}" y="{y}" width="{size}" height="{size}" rx="6"/>')
-            body.append(text(x + size / 2, y + 26, code, "ink", 15, "middle", "700"))
-            body.append(text(x + size / 2, y + 46, counts.get(code, 0), "ink", 13, "middle"))
-    ly = top + 8 * (size + gap) + 14
-    lx = left
-    for key in ("s1", "s2", "s3"):
-        body.append(f'<rect class="{key}" x="{lx}" y="{ly - 11}" width="14" height="14" rx="3"/>')
-        body.append(text(lx + 20, ly + 1, names[key], "t1", 13))
-        lx += 20 + len(names[key]) * 7.4 + 26
+            fill, ink = cls.get(admin.get(code, ""), ("hy", "hyx"))
+            dash = ' stroke-width="1.5" stroke-dasharray="4 3"' if fill == "hy" else ""
+            body.append(f'<rect class="{fill}" x="{x}" y="{y}" width="{size}" height="{size}" rx="8"{dash}/>')
+            body.append(text(x + size / 2, y + 27, code, ink, 15, "middle", "600"))
+            body.append(text(x + size / 2, y + 45, counts.get(code, 0), ink, 12, "middle"))
+    ly = top + 8 * (size + gap) + 20
+    total_w = sum(18 + len(n) * 6.6 + 18 for _, n in names)
+    lx = (width - total_w) / 2
+    for key, name in names:
+        dash = ' stroke-width="1" stroke-dasharray="2 2"' if key == "hy" else ""
+        body.append(f'<rect class="{key}" x="{lx:.1f}" y="{ly - 10}" width="10" height="10" rx="2"{dash}/>')
+        body.append(text(lx + 16, ly, name, "t1", 12))
+        lx += 18 + len(name) * 6.6 + 18
     return svg(width, height, "".join(body), "Tile map of US states by who runs child welfare")
 
 
 def evidence_chart(tables):
-    """One stacked bar per data set: how far its rows have been checked (ordinal blues)."""
-    steps = [("search_result", "Search result only", "o1"), ("page_read", "Page opened", "o2"),
-             ("form_read", "Form opened", "o3"), ("verified", "Verified by a person", "o4")]
-    width, label_w, top, row_h = 760, 230, 96, 34
+    """shadcn "Bar Chart - Stacked + Legend": one rounded stacked bar per data set."""
+    steps = [("search", "Desk review only", "o1", "t1"), ("opened", "Page or form opened", "o2", "cox"),
+             ("verified", "Verified by a person", "o4", "ox")]
+    width, label_w, top, row_h = 760, 230, 78, 36
     plot_w = width - label_w - 40
-    height = top + row_h * len(tables) + 24
-    body = [text(24, 32, "How far each data set has been checked", size=17, weight="600"),
-            text(24, 54, "Share of rows by the closest look taken so far. Nothing is verified by a second person yet.", "t2", 13)]
-    lx = 24
-    for _, name, c in steps:
-        body.append(f'<rect class="{c}" x="{lx}" y="66" width="14" height="14" rx="3"/>')
-        body.append(text(lx + 20, 78, name, "t1", 12))
-        lx += 20 + len(name) * 6.8 + 22
+    body = [text(24, 34, "How far each data set has been checked", size=16, weight="600"),
+            text(24, 56, "Rows by the closest look taken so far.", "t2", 13)]
     for i, (label, rows) in enumerate(tables):
         y = top + i * row_h
         total = len(rows) or 1
-        counts = Counter("verified" if r.get("verification") == "verified" else r.get("evidence_level", "") for r in rows)
-        body.append(text(label_w - 10, y + 16, f"{label} ({len(rows):,})", "t1", 13, "end"))
+        parts = Counter()
+        for r in rows:
+            if r.get("verification") == "verified":
+                parts["verified"] += 1
+            elif r.get("evidence_level") in ("page_read", "form_read"):
+                parts["opened"] += 1
+            else:
+                parts["search"] += 1
+        body.append(text(label_w - 12, y + 16, f"{label} ({len(rows):,})", "t2", 12, "end"))
+        body.append(f'<clipPath id="c{i}"><rect x="{label_w}" y="{y + 2}" width="{plot_w}" height="20" rx="4"/></clipPath>')
         x = label_w
-        for key, _, c in steps:
-            w = plot_w * counts.get(key, 0) / total
+        seg = []
+        for key, _, c, ink in steps:
+            w = plot_w * parts.get(key, 0) / total
             if w <= 0:
                 continue
-            body.append(f'<rect class="{c}" x="{x:.1f}" y="{y + 2}" width="{max(w - 2, 1):.1f}" height="18"/>')
+            seg.append(f'<rect class="{c}" x="{x:.1f}" y="{y + 2}" width="{w:.1f}" height="20"/>')
             if w > 44:
-                share = round(100 * counts[key] / total)
-                tc = "t1" if c in ("o1", "o2") else "bg"
-                body.append(text(x + 6, y + 15, f"{share}%", tc, 11, weight="600"))
+                seg.append(text(x + 8, y + 16, f"{round(100 * parts[key] / total)}%", ink, 11, weight="600"))
             x += w
+        body.append(f'<g clip-path="url(#c{i})">' + "".join(seg) + "</g>")
+    ly = top + row_h * len(tables) + 14
+    total_w = sum(18 + len(n) * 6.6 + 18 for _, n, _, _ in steps)
+    lx = (width - total_w) / 2
+    for _, name, c, _ in steps:
+        body.append(f'<rect class="{c}" x="{lx:.1f}" y="{ly - 10}" width="10" height="10" rx="2"/>')
+        body.append(text(lx + 16, ly, name, "t1", 12))
+        lx += 18 + len(name) * 6.6 + 18
+    verified = sum(r.get("verification") == "verified" for _, rows in tables for r in rows)
+    total_rows = sum(len(rows) for _, rows in tables)
+    height = footer_lines(body, ly + 8, (f"{verified:,} of {total_rows:,} rows verified by a second person",
+                                          "Verification is the next phase.")) + 16
     return svg(width, height, "".join(body), "How far each data set has been checked")
 
 
@@ -230,13 +262,15 @@ def build():
 
     levels = Counter(d["level"] for d in doors)
     level_rows = [(n.capitalize(), levels.get(n, 0)) for n in ("county", "regional", "state", "tribal", "city")]
-    charts["levels.svg"] = hbar_chart("Front doors by level", "Where the front door sits: a county, a region, the whole state, a tribe or a city.", level_rows)
+    charts["levels.svg"] = hbar_chart("Front doors by level", "Where the front door sits: a county, a region, the whole state, a tribe or a city.", level_rows,
+                                      footer=(f"{level_rows[0][1]:,} are county agencies", f"Of {len(doors):,} front doors found."))
     tables["levels"] = level_rows
 
     sectors = Counter(d["sector"] for d in doors)
     names = {"public": "Public", "private_nonprofit": "Private non-profit", "tribal": "Tribal", "private_for_profit": "Private for-profit"}
     sector_rows = [(names[k], sectors.get(k, 0)) for k in names]
-    charts["sectors.svg"] = hbar_chart("Front doors by who runs them", "Includes private organisations a state contracts to run its front door.", sector_rows)
+    charts["sectors.svg"] = hbar_chart("Front doors by who runs them", "Includes private organisations a state contracts to run its front door.", sector_rows,
+                                       footer=(f"{len(private):,} private licensed agencies so far", "A first sample of up to 10 per state."))
     tables["sectors"] = sector_rows
 
     data_sets = [("States", states), ("Front doors", doors), ("Policy rules", policies),
@@ -258,7 +292,8 @@ def build():
     if promise_rows:
         charts["promises.svg"] = hbar_chart(
             "Published reply promises", "Days within which a front door says it will make contact, as written on its page.",
-            promise_rows, " days", label_w=310, value_fmt=lambda v: f"{v:g}")
+            promise_rows, " days", label_w=310, value_fmt=lambda v: f"{v:g}",
+            footer=(f"{len(promise_rows)} front doors publish a reply time", "As written on the page; not measured."))
     tables["promises"] = promise_rows
 
     def share_by_topic(rows, key, skip):
@@ -276,14 +311,16 @@ def build():
     if enquiry_rows:
         charts["enquiry-topics.svg"] = hbar_chart(
             "What first-contact enquiry forms ask", f"Share of the {n_enquiry} enquiry forms read that ask about each topic.",
-            enquiry_rows, "%", max_value=100)
+            enquiry_rows, "%", max_value=100,
+            footer=(f"{enquiry_rows[0][0]} is asked on {enquiry_rows[0][1]}% of forms", "Topics are tagged by keyword rules and need review."))
     tables["enquiry"] = (enquiry_rows, n_enquiry)
 
     app_rows, n_app = share_by_topic(aq, "form_id", skip | {"name", "location", "postal_address", "contact_phone", "contact_email"})
     if app_rows:
         charts["application-topics.svg"] = hbar_chart(
             "What application forms ask, beyond contact details",
-            f"Share of the {n_app} fillable application forms read that ask about each topic.", app_rows, "%", max_value=100)
+            f"Share of the {n_app} fillable application forms read that ask about each topic.", app_rows, "%", max_value=100,
+            footer=("A full application asks much more than an enquiry", "Name, address and contact details are left out here."))
     tables["application"] = (app_rows, n_app)
 
     ages = first_value(policies, "min_age", {"years"})
@@ -291,7 +328,8 @@ def build():
     if age_rows:
         charts["min-age.svg"] = hbar_chart(
             "Minimum age to foster", f"Number of jurisdictions by the minimum age recorded ({len(ages)} with a figure).",
-            [(f"{a} years", n) for a, n in age_rows], " jurisdictions", label_w=120)
+            [(f"{a} years", n) for a, n in age_rows], " jurisdictions", label_w=120,
+            footer=(f"{max(age_rows, key=lambda r: r[1])[0]} years is most common", None))
     tables["min_age"] = age_rows
 
     training = first_value(policies, "training_preservice", {"hours"})
@@ -303,7 +341,8 @@ def build():
     if training:
         charts["training.svg"] = hbar_chart(
             "Training before licensing", f"Number of jurisdictions by pre-service training hours recorded ({len(training)} with a figure).",
-            train_rows, " jurisdictions", label_w=140)
+            train_rows, " jurisdictions", label_w=140,
+            footer=(f"{max(train_rows, key=lambda r: r[1])[0]} is most common", None))
     tables["training"] = train_rows
 
     terms = first_value(policies, "licence_term", {"years", "months"})
@@ -312,7 +351,8 @@ def build():
     if term_rows:
         charts["licence-term.svg"] = hbar_chart(
             "How long a foster licence lasts", f"Number of jurisdictions by licence term recorded ({len(terms)} with a figure).",
-            term_rows, " jurisdictions", label_w=120)
+            term_rows, " jurisdictions", label_w=120,
+            footer=(f"{max(term_rows, key=lambda r: r[1])[0]} is most common", None))
     tables["licence_term"] = term_rows
     return charts, tables
 

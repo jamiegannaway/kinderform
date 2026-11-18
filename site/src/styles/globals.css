@@ -4,6 +4,11 @@
 @import "tw-animate-css";
 @import "@fontsource-variable/geist";
 
+/* Chart bars are sized with fixed classes, because the Content-Security-Policy
+   blocks inline styles. Generate every whole-percent width and height. */
+@source inline("w-[{0..100}%]");
+@source inline("h-[{0..100}%]");
+
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
 @theme inline {

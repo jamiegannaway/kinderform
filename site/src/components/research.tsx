@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import FormsDiffer from "@/components/forms-differ"
-import UsPicture, { SegmentBar, Stat } from "@/components/us-picture"
+import UsPicture from "@/components/us-picture"
+import { Progress, StatCard } from "@/components/charts"
 import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 import type { UsPicture as UsPictureData } from "@/lib/us-register"
 
@@ -145,26 +146,15 @@ export default function ResearchIndex({
             At a glance
           </h2>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            <Stat value={String(findings.length)} label="Things we know so far" note="each with its sources" />
-            <Card className="gap-1 py-5">
-              <CardContent className="space-y-2 px-5">
-                <p className="text-3xl font-bold tracking-tight tabular-nums md:text-4xl">
-                  {checkedCount}
-                  <span className="text-lg font-medium text-muted-foreground"> of {sources.length}</span>
-                </p>
-                <p className="text-sm font-medium">Sources checked by a person</p>
-                <SegmentBar
-                  filled={checkedCount}
-                  total={sources.length}
-                  label={`${checkedCount} of ${sources.length} sources checked`}
-                />
-              </CardContent>
-            </Card>
+            <StatCard label="Things we know so far" value={String(findings.length)} note="Each with its sources" />
+            <StatCard label="Sources checked by a person" value={`${checkedCount} of ${sources.length}`}>
+              <Progress value={checkedCount} max={sources.length} label={`${checkedCount} of ${sources.length} sources checked`} />
+            </StatCard>
             {formsDiffer && formsDiffer.read > 0 && (
-              <Stat value={String(formsDiffer.read)} label="UK enquiry forms read" note="from the live page" />
+              <StatCard label="UK enquiry forms read" value={String(formsDiffer.read)} note="From the live page" />
             )}
             {us && us.doors > 0 && (
-              <Stat value={us.doors.toLocaleString("en-GB")} label="US front doors mapped" note="all 50 states and DC" />
+              <StatCard label="US front doors mapped" value={us.doors.toLocaleString("en-GB")} note="All 50 states and DC" />
             )}
           </div>
           <Stages findings={findings} />

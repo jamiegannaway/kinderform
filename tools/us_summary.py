@@ -92,12 +92,12 @@ def build() -> str:
     for key, label, state in phases:
         add(f'    {key}["{label}"]:::{state}')
     add("    " + " --> ".join(key for key, _, _ in phases))
-    add("    classDef done fill:#008300,stroke:#005c00,color:#ffffff")
-    add("    classDef partial fill:#eda100,stroke:#b37a00,color:#0b0b0b")
-    add("    classDef todo fill:#eceff1,stroke:#90a4ae,color:#37474f")
+    add("    classDef done fill:#171717,stroke:#171717,color:#fafafa")
+    add("    classDef partial fill:#737373,stroke:#737373,color:#ffffff")
+    add("    classDef todo fill:#f5f5f5,stroke:#a1a1a1,color:#0a0a0a,stroke-dasharray:4 3")
     add("```")
     add("")
-    add("Green: done. Amber: first pass, unverified. Grey: not started.")
+    add("Black: done. Grey: first pass, unverified. Light, dashed: not started.")
     add("")
     add(img("evidence.svg", "How far each data set has been checked"))
     add("")
@@ -136,8 +136,9 @@ def build() -> str:
             "with a recorded figure set it; the others set "
             + " or ".join(str(a) for a, _ in t["min_age"] if a != common[0]) + ".")
     if t["training"]:
-        add(f"- **Most states ask for 20 to 39 hours of training before licensing** "
-            f"({sum(n for l, n in t['training'] if l.startswith(('20', '30')))} of {sum(n for _, n in t['training'])} with a figure).")
+        common = max(t["training"], key=lambda r: r[1])
+        add(f"- **The most common pre-service training is {common[0]}** "
+            f"({common[1]} of {sum(n for _, n in t['training'])} jurisdictions with a figure).")
     if app_rows:
         add(f"- **Application forms ask far more than enquiry forms.** "
             f"{dict(app_rows).get('Date of birth or age', 0)}% of the {n_app} fillable forms read ask for a date of birth, "
