@@ -340,7 +340,10 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                   />
                 </HeadingRefContext.Provider>
               </PageContext.Provider>
-              <T.Continue label={ui.progress.continue} />
+              {/* On phones this bar stays at the bottom of the screen (kf-form.css). */}
+              <div className="kf-actions">
+                <T.Continue label={ui.progress.continue} />
+              </div>
             </form>
           </>
         )}

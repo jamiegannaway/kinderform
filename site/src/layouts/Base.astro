@@ -9,13 +9,15 @@ interface Props {
 const { title, description, noindex = false } = Astro.props;
 ---
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Light or dark theme: runs before the page is drawn. See public/theme.js. -->
+    <script is:inline src="/theme.js"></script>
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:title" content="Kinderform" />
     <meta property="og:description" content="Everyone who offers to care for a child deserves a quick, kind and considered reply." />

@@ -290,7 +290,7 @@ export const uswdsTheme: Theme = {
       <h1 className="kf-us-title" tabIndex={-1} ref={headingRef}>
         {ui.check.title}
       </h1>
-      <table className="usa-table usa-table--borderless usa-table--stacked kf-us-table">
+      <table className="usa-table usa-table--borderless usa-table--stacked-header kf-us-table">
         <caption className="usa-sr-only">Your answers</caption>
         <thead>
           <tr>
@@ -307,7 +307,7 @@ export const uswdsTheme: Theme = {
               <th scope="row" data-label="Question">
                 {r.label}
               </th>
-              <td data-label="Your answer">{r.value}</td>
+              <td>{r.value}</td>
               <td data-label="">
                 <a
                   className="usa-link"
