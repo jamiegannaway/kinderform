@@ -330,7 +330,7 @@ export const govukTheme: Theme = {
         <h2 className="govuk-heading-m">{ui.confirmation.next_heading}</h2>
         <ol className="govuk-list govuk-list--number govuk-list--spaced">
           <li>
-            <strong>Now.</strong> We have sent {ack} to confirm we have your message. It says who will contact you and when.
+            <strong>Now.</strong> We have sent you {ack} to confirm we have your message. It says who will contact you and when.
           </li>
           <li>
             <strong>By the end of {day}.</strong> A named person from {team} will {how}

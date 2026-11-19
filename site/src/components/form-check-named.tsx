@@ -13,21 +13,21 @@ import { GROUPS, type Group } from "@/lib/census"
 import type { Ranking, Scored } from "@/lib/form-check"
 
 const MARKETING: Record<string, string> = {
-  separate_unticked: "Separate, unticked",
+  separate_unticked: "Separate, not ticked",
   separate_optional: "Separate, optional",
   separate_form: "Separate sign-up",
   none: "None asked",
   required_choice: "Must answer yes or no",
-  required_checkbox_ambiguous: "Required tick, unclear wording",
+  required_checkbox_ambiguous: "Must tick, unclear wording",
   bundled_on_submit: "Signed up on sending",
   "not checked": "Not checked",
 }
 
 const OBSERVED: Record<string, string> = {
-  direct_fetch: "Read directly",
-  index_snapshot: "Search copy",
-  search_snippet: "Search extract",
-  secondhand: "Described",
+  direct_fetch: "Read on the live page",
+  index_snapshot: "Search engine copy",
+  search_snippet: "Search result text",
+  secondhand: "Described elsewhere",
 }
 
 function Yes({ v }: { v: boolean | "yes" | "no" | "not checked" | null }) {
@@ -44,8 +44,8 @@ function FormTable({ rows, ranked }: { rows: Scored[]; ranked: boolean }) {
             {ranked && <TableHead className="text-right">Draft score</TableHead>}
             <TableHead>Form</TableHead>
             <TableHead className="text-right">Questions</TableHead>
-            <TableHead>Sensitive at first contact</TableHead>
-            <TableHead>Reply promise</TableHead>
+            <TableHead>Sensitive questions</TableHead>
+            <TableHead>Reply time stated</TableHead>
             <TableHead>Newsletter consent</TableHead>
             <TableHead>Privacy notice</TableHead>
             <TableHead>Flags</TableHead>
@@ -95,7 +95,7 @@ function FormTable({ rows, ranked }: { rows: Scored[]; ranked: boolean }) {
                       {c}
                     </Badge>
                   ))}
-                  {r.spareRoom && <Badge variant="outline">Spare room gate</Badge>}
+                  {r.spareRoom && <Badge variant="outline">Asks about a spare room</Badge>}
                 </div>
               </TableCell>
             </TableRow>
@@ -116,8 +116,8 @@ function GroupSection({ group, r }: { group: Group; r: Ranking }) {
         <>
           <h3 className="mt-8 text-lg font-semibold">Not ranked yet</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            Seen only through a search copy or a description. These need checking on the live page before
-            they can be ranked.
+            We have seen these forms only through a search engine or a description elsewhere. Someone needs
+            to check them on the live page before we can rank them.
           </p>
           <FormTable rows={r.unranked} ranked={false} />
         </>
@@ -139,15 +139,25 @@ export default function FormCheckNamed({ groups, built }: { groups: Record<Group
           <Alert className="mt-8 max-w-4xl">
             <AlertTitle>A working view, not a finding</AlertTitle>
             <AlertDescription>
-              <p>
-                This page is built only for private Vercel previews. It is never built for kinderform.org.
-                Scores use the draft rubric (v0.1) on the areas a public page can show, scaled to 100; "on 55
-                of 100" means only 55 points' worth of the rubric could be judged. Reply times actually met,
-                findability and data quality are not scored. Only forms read directly from the live page are
-                ranked. Every row is unverified.
-              </p>
+              <p>We build this page only for private Vercel previews, never for kinderform.org.</p>
+              <ul className="mt-2 ml-5 list-disc space-y-2">
+                <li>
+                  Scores use the draft checklist (version 0.1) on only the areas a public page can show,
+                  scaled to 100.
+                </li>
+                <li>
+                  &ldquo;On 55 of 100&rdquo; means we could judge only 55 of the checklist&rsquo;s 100 points.
+                </li>
+                <li>
+                  We do not score 3 areas: how quickly people hear back, finding the form and the right
+                  service, and keeping good records.
+                </li>
+                <li>We rank only forms read directly from the live page.</li>
+                <li>No row has been checked by a person yet.</li>
+              </ul>
               <p className="mt-2">
-                Each service sees its own row privately before anything is published by name. Built {built}.
+                Each service sees its own row in private before we publish anything by name. Page built{" "}
+                {built}.
               </p>
             </AlertDescription>
           </Alert>
@@ -158,7 +168,7 @@ export default function FormCheckNamed({ groups, built }: { groups: Record<Group
         <section className="py-10">
           <h2 className="scroll-m-20 text-2xl font-semibold tracking-tight">United States</h2>
           <p className="mt-4 text-muted-foreground">
-            No US forms have been collected yet. When they are, they appear here by state and, where
+            No US forms have been collected yet. When they are, they will appear here by state and, where
             counties run child welfare, by county.
           </p>
         </section>

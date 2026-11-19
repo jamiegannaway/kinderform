@@ -29,7 +29,7 @@ const world = countries(loadCensus());
 const wf = findings.find((f) => f.id === "withdrawals");
 let withdrawals;
 if (wf) {
-  const m = wf.summary.match(/Of the ([\d,]+) completed[^,]*, ([\d,]+) were approved and ([\d,]+) were withdrawn.*?(\d+)%/);
+  const m = wf.summary.match(/Of the ([\d,]+) applications that finished[^,]*, services approved ([\d,]+) and ([\d,]+) ended in withdrawal.*?(\d+)%/);
   if (!m) throw new Error('evidence/findings.json "withdrawals": cannot find the completed, approved and withdrawn figures for the card at the top of /research.');
   const n = (s: string) => Number(s.replace(/,/g, ""));
   const src = wf.sources[0];
@@ -38,7 +38,7 @@ if (wf) {
     approved: n(m[2]),
     withdrawn: n(m[3]),
     share: n(m[4]),
-    source: `${src.by}, ${src.year}.${src.checked ? " Checked against the source." : " Not yet checked against the source."}`,
+    source: `${src.by}, ${src.year}.${src.checked ? " A person has checked this against the source." : " Not yet checked by a person."}`,
   };
 }
 
@@ -53,11 +53,11 @@ if (card) {
   const ifa = spare.find((r) => r.group === "Independent agencies");
   const pub = spare.find((r) => r.group === "Councils and hubs");
   const expected = [
-    `read ${differ.read} first-contact forms`,
-    `shortest asked ${qs[0]} questions and the longest ${qs.at(-1)}`,
+    `read ${differ.read} enquiry forms`,
+    `shortest asked ${qs[0]} questions and the longest asked ${qs.at(-1)}`,
     `All ${ifa?.of} independent agency forms asked about a spare room`,
     `none of the ${pub?.of} council and hub forms`,
-    `${sum(m("reply-time"), "yes")} of the ${sum(m("reply-time"), "of")} forms we checked`,
+    `${sum(m("reply-time"), "yes")} of the ${sum(m("reply-time"), "of")} forms where we looked for a reply time`,
   ];
   const stale = expected.filter((e) => !card.summary.includes(e));
   if (ifa?.yes !== ifa?.of || pub?.yes !== 0) stale.push("the spare-room pattern itself has changed");
@@ -67,7 +67,7 @@ if (card) {
 ---
 <Base
   title="Research: what we know about the first step | Kinderform"
-  description="What research says about the time between someone getting in touch about fostering or adoption and their application, with every claim marked as checked or not yet checked."
+  description="What research and our own reading of enquiry forms tell us about the first step into fostering and adoption. Each claim says whether a person has checked it."
 >
   <ResearchIndex
     updated={findingsFile.updated}
@@ -76,13 +76,13 @@ if (card) {
       href: "/research/library",
       title: "Evidence library",
       when: libUpdated ? `Updated ${longDate(libUpdated)}` : "Evidence library",
-      blurb: "Every source we have found on enquiries, assessment and why carers stay or leave, each summarised in our own words, with the gaps we know about.",
+      blurb: "Every source we have found on enquiries, assessment and why carers stay or leave. We sum up each one in our own words and note the gaps we know about.",
     }}
     reports={reports.map((r) => ({
       href: hrefOf(r.id),
       title: titleOf(r.body).replace(/,? and a refined OUCM open standard$/i, ""),
       when: monthOf(r.id),
-      blurb: "A desk review of what happens after someone gets in touch, made with an AI-assisted research tool. Most figures are not yet checked by a person.",
+      blurb: "A review of existing research on what happens after someone gets in touch. We made it with an AI-assisted research tool. Most figures are not yet checked by a person.",
     }))}
     updates={updates.map((u) => ({ href: hrefOf(u.id), title: titleOf(u.body), when: monthOf(u.id) }))}
     formsDiffer={differ}

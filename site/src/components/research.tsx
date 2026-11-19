@@ -10,6 +10,7 @@ import Countries, { InsightCards, type Withdrawals } from "@/components/countrie
 import type { CountriesData } from "@/lib/countries"
 import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 import type { UsPicture as UsPictureData } from "@/lib/us-register"
+import { Illustration } from "@/components/illustration"
 
 export type Checked = { date: string; against: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
@@ -28,7 +29,7 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 }
 
 function CheckBadge({ checked }: { checked: Checked }) {
-  if (!checked) return <Badge variant="secondary">Not yet checked</Badge>
+  if (!checked) return <Badge variant="secondary">Not yet checked by a person</Badge>
   return <Badge variant="outline">Checked {longDate(checked.date)}</Badge>
 }
 
@@ -134,36 +135,48 @@ export default function ResearchIndex({
     <>
       <SiteHeader current="/research" />
       <main id="main" className="mx-auto max-w-6xl space-y-16 px-6 pt-6 pb-20 md:pt-10">
-        <section className="max-w-3xl space-y-5">
+        <section className="grid items-center gap-8 md:grid-cols-[minmax(0,48rem)_14rem] md:justify-between">
+          <div className="space-y-5">
           <Badge variant="secondary">Updated {longDate(updated)}</Badge>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance md:text-5xl">
             What we know about the first step
           </h1>
           <p className="text-xl leading-8 text-muted-foreground">
-            What research says about the time between someone getting in touch about fostering or adoption and their
-            application. We add to this as we learn more, and we say which claims a person has checked against the
-            original source.
+            This page sets out what we know about the first step into fostering and adoption, from getting in touch to
+            applying. In England, most fostering applications that finish end in withdrawal, not approval. Quicker first
+            visits did not, on their own, lead to more approvals. And few enquiry forms say when you will hear back. For
+            each claim, we say whether a person has checked it against the original source.
           </p>
+          </div>
+          <Illustration name="examining" className="mx-auto hidden w-full md:block" />
         </section>
 
         <section aria-labelledby="glance" className="space-y-5">
           <h2 id="glance" className="sr-only">
-            At a glance
+            Main findings at a glance
           </h2>
           {world && world.allForms > 0 && <InsightCards data={world} withdrawals={withdrawals} />}
           <Stages findings={findings} />
         </section>
 
         <Alert className="max-w-3xl">
-          <AlertTitle>How to read this page</AlertTitle>
+          <AlertTitle>How sure we are</AlertTitle>
           <AlertDescription className="space-y-3">
             <p>
               <Badge variant="outline">Checked</Badge> means a person has compared the claim with the original source,
-              on the date shown. <Badge variant="secondary">Not yet checked</Badge> means the summary comes from an
-              abstract or from our AI-assisted review. Check the source before you quote it.
+              on the date shown. <Badge variant="secondary">Not yet checked by a person</Badge> means nobody has done
+              that yet. The summary comes from an abstract, from our AI-assisted review or from our own reading of
+              public pages. Check the source before you quote it.
             </p>
             <p>
-              So far, {checkedCount} of {sources.length} sources on this page have been checked.
+              So far, a person has checked {checkedCount} of the {sources.length} sources on this page.
+            </p>
+            <p>
+              We explain terms such as hub and independent agency in{" "}
+              <a href="#words" className="font-medium text-foreground underline underline-offset-4">
+                Words we use on this page
+              </a>
+              .
             </p>
           </AlertDescription>
         </Alert>
@@ -182,6 +195,68 @@ export default function ResearchIndex({
         {world && world.allForms > 0 && <Countries data={world} />}
 
         {us && us.doors > 0 && <UsPicture data={us} />}
+
+        <section aria-labelledby="words" className="max-w-3xl space-y-4">
+          <H2 id="words">Words we use on this page</H2>
+          <dl className="space-y-3 leading-7">
+            <div>
+              <dt className="font-medium">Enquiry</dt>
+              <dd className="text-muted-foreground">The first time someone gets in touch to ask about fostering or adopting.</dd>
+            </div>
+            <div>
+              <dt className="font-medium">Enquiry form</dt>
+              <dd className="text-muted-foreground">The form someone fills in to make an enquiry.</dd>
+            </div>
+            <div>
+              <dt className="font-medium">First reply</dt>
+              <dd className="text-muted-foreground">The first answer a person gets after they enquire.</dd>
+            </div>
+            <div>
+              <dt className="font-medium">Service</dt>
+              <dd className="text-muted-foreground">
+                A council, hub or agency that finds and approves foster carers or adopters.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium">Council</dt>
+              <dd className="text-muted-foreground">A local council that runs fostering or adoption itself.</dd>
+            </div>
+            <div>
+              <dt className="font-medium">Hub</dt>
+              <dd className="text-muted-foreground">
+                A group of councils that recruit foster carers together. Also called a regional hub.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium">Independent agency</dt>
+              <dd className="text-muted-foreground">A charity or company that finds and supports foster carers.</dd>
+            </div>
+            <div>
+              <dt className="font-medium">Adoption agency</dt>
+              <dd className="text-muted-foreground">
+                A service that finds and approves adopters. This includes regional adoption agencies, where councils
+                work together on adoption.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium">Place to get in touch</dt>
+              <dd className="text-muted-foreground">
+                The page, form, phone line or email address someone uses to enquire. Our data files call this a front
+                door.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium">Checklist</dt>
+              <dd className="text-muted-foreground">Our draft list of what a good enquiry form and first reply do.</dd>
+            </div>
+            <div>
+              <dt className="font-medium">Not yet checked by a person</dt>
+              <dd className="text-muted-foreground">
+                A computer program or one person collected it, and nobody has checked it since.
+              </dd>
+            </div>
+          </dl>
+        </section>
 
         <section aria-labelledby="deeper" className="space-y-6">
           <H2 id="deeper">Read more</H2>
@@ -244,9 +319,9 @@ export default function ResearchIndex({
         <section aria-labelledby="help" className="max-w-3xl space-y-4">
           <H2 id="help">Help us get this right</H2>
           <p className="leading-7">
-            If you know of research we have missed, or you find a claim here that does not match its source, please tell
-            us. Corrections are listed in the monthly update. We would especially like to hear about studies from
-            Scotland, Wales, Northern Ireland and beyond the UK.
+            Please tell us about research we have missed, or a claim here that does not match its source. We list
+            corrections in the monthly update. We would especially like to hear about studies from Scotland, Wales,
+            Northern Ireland and outside the UK.
           </p>
           <Button asChild>
             <a href="/#get-involved">Get in touch</a>

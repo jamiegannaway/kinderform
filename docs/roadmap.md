@@ -10,6 +10,8 @@
 - [x] Landing page for kinderform.org (`site/`, deployed by Vercel)
 - [x] Review of intake interactions after the first enquiry, fostering and adoption (November 2026; most figures still to be checked against the originals)
 - [x] Research page on the site (`/research`), built from `evidence/`, with each claim marked as checked or not yet checked
+- [x] Plain language: site text rewritten to ISO 24495-1, with a house guide (`docs/plain-language.md`) and a check (`tools/plain_check.py`)
+- [ ] Test the home, research and form check pages with readers from each group in the plain language guide
 - [ ] Check the remaining findings and the intake interactions review against their original sources
 - [ ] Verify every register row against the live page
 - [ ] Add ONS local authority codes to the register
@@ -67,6 +69,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 ## Later: adopt
 
 - [x] Reference enquiry form on the site (`/example-form`): GOV.UK Frontend for the UK and USWDS for the US, both without government branding, driven by `schema/enquiry-submission.schema.json` and per-country wording in `schema/ui/`
+- [x] Example forms for Canada (GC Design System) and Australia (Australian Government Design System), without government branding, opened from a world map on one screen
+- [ ] A French version of the Canadian example form
 - [ ] A version of the reference form that works without JavaScript, for services whose platforms cannot run it
 - [ ] Test the reference form with people who have enquired, and with screen reader users
 - [ ] Browser-only funnel tool that reads an export in the schema format; no data leaves the service

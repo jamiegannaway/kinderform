@@ -84,11 +84,11 @@ function QuestionsTable({ rows }: { rows: Data["questions"] }) {
   const seen = [...new Set(rows.flatMap((r) => r.values))].sort((a, b) => a - b)
   return (
     <details className="text-sm">
-      <summary className="cursor-pointer font-medium underline underline-offset-4">Show as a table</summary>
+      <summary className="cursor-pointer font-medium underline underline-offset-4">Show these numbers as a table</summary>
       <Table className="mt-3">
         <TableHeader>
           <TableRow>
-            <TableHead>Questions</TableHead>
+            <TableHead>Number of questions</TableHead>
             {rows.map((r) => (
               <TableHead key={r.group} className="text-right">
                 {r.group}
@@ -169,26 +169,28 @@ export default function FormsDiffer({ data }: { data: Data }) {
     <section aria-labelledby="how-forms-differ" className="scroll-m-20 space-y-6">
       <div className="max-w-3xl space-y-4">
         <h2 id="how-forms-differ" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          How first-contact forms differ
+          UK enquiry forms differ a lot in what they ask and what they promise
         </h2>
         <p className="leading-7">
-          We read {d.read} first-contact forms from fostering and adoption services across the UK, straight from their
-          live pages, on {longDate(d.checked)}. The shortest form asks {allQ[0]} questions and the longest asks{" "}
-          {allQ[allQ.length - 1]}. Of the {replyOf} forms we checked, {replyYes} say when you will hear back.
+          The shortest UK enquiry form asks {allQ[0]} questions and the longest asks {allQ[allQ.length - 1]}. Of the{" "}
+          {replyOf} forms where we looked for a reply time, {replyYes} say when you will hear back. We read{" "}
+          {d.read} forms from fostering and adoption services across the UK, straight from their live web pages, on{" "}
+          {longDate(d.checked)}.
         </p>
         <p className="leading-7 text-muted-foreground">
-          We do not name the services here, and each chart stands on its own, so a form cannot be traced from one chart
+          We do not name any service here. Each chart stands on its own, so nobody can follow one form from one chart
           to the next. Each service will see its own results privately first, with time to correct them.
         </p>
       </div>
 
       <Alert className="max-w-3xl">
-        <AlertTitle>First pass, not yet checked by a person</AlertTitle>
+        <AlertTitle>Early results, not yet checked by a person</AlertTitle>
         <AlertDescription>
           <p>
-            An automated reader turned each page into text. That does not always show which questions are required, so
-            some counts may be out by one or two. We left out {d.leftOut} more {formsWord(d.leftOut)} that we saw only
-            through a search engine&rsquo;s copy. The scoring method is on{" "}
+            A computer program that reads public web pages turned each page into text. That text does not always show
+            which questions are required, so some counts may be wrong by 1 or 2. We left out {d.leftOut} more{" "}
+            {formsWord(d.leftOut)} because we saw them only through a search engine&rsquo;s copy. You can read our
+            scoring method on{" "}
             <a href="/form-check" className="font-medium text-foreground underline underline-offset-4">
               Form check
             </a>
@@ -199,10 +201,10 @@ export default function FormsDiffer({ data }: { data: Data }) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg leading-snug">How many questions each form asks</CardTitle>
+          <CardTitle className="text-lg leading-snug">How many questions each UK enquiry form asks</CardTitle>
           <CardDescription>
-            Each dot is one form. Consent boxes, and questions that appear only after an earlier answer, are not
-            counted.
+            Forms ask from {allQ[0]} to {allQ[allQ.length - 1]} questions. Each dot is one form. We did not count consent
+            boxes, or questions that appear only after an earlier answer.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -222,9 +224,9 @@ export default function FormsDiffer({ data }: { data: Data }) {
 
       <p className="max-w-3xl text-sm text-muted-foreground">
         Councils and hubs includes regional services. Adoption agencies work under different regulations from fostering
-        services, so their forms are shown for comparison. Where a service has a form for an information pack and a
-        separate enquiry form, each is counted. The figures beside each bar count only the forms where we could tell; a form we
-        could not check for that question is left out of that bar.
+        services, so we show their forms for comparison. Some services have a form for an information pack and a
+        separate enquiry form, and we count each one. The figures beside each bar count only the forms where we could
+        tell. If we could not check a form for that question, we left it out of that bar.
       </p>
     </section>
   )

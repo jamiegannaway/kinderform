@@ -13,31 +13,31 @@ import {
 
 // Rubric v0.1 domains (rubric/rubric.md). `seen` says whether the census can see it.
 export const DOMAINS = [
-  { id: "findability", name: "Findability and routing", weight: 10, seen: false,
-    looks: "The form is easy to find, councils point to the right front door, and old forms are retired." },
-  { id: "ease", name: "Ease of enquiring", weight: 15, seen: true,
-    looks: "Six or fewer required questions, works on a phone, takes about two minutes." },
-  { id: "minimisation", name: "Data minimisation and consent", weight: 15, seen: true,
-    looks: "No health, criminal record, date of birth or other sensitive questions at first contact; newsletter opt-in separate and unticked; privacy notice at the form." },
+  { id: "findability", name: "Finding the form and the right service", weight: 10, seen: false,
+    looks: "The form is easy to find, and old forms are taken down. Councils point people to the right place to get in touch." },
+  { id: "ease", name: "Easy to enquire", weight: 15, seen: true,
+    looks: "The form has no more than 6 required questions, works on a phone and takes about 2 minutes." },
+  { id: "minimisation", name: "Personal details and consent", weight: 15, seen: true,
+    looks: "No questions about health, criminal record, date of birth or other sensitive matters when someone first enquires. Any newsletter sign-up is separate and not already ticked, and the form links to its privacy notice." },
   { id: "accessibility", name: "Accessibility", weight: 10, seen: true,
-    looks: "An accessibility statement, clear labels, plain English, language options and a non-digital route." },
-  { id: "expectations", name: "Setting expectations", weight: 15, seen: true,
-    looks: "A concrete reply time, who will be in touch, and what happens next." },
-  { id: "responsiveness", name: "Responsiveness", weight: 15, seen: false,
-    looks: "How quickly people actually hear back. This needs data from services; a web page cannot show it." },
+    looks: "An accessibility statement, clear labels, plain English, a choice of languages and a way to enquire without going online." },
+  { id: "expectations", name: "Saying what happens next", weight: 15, seen: true,
+    looks: "A specific time for the first reply, who will be in touch, and what happens next." },
+  { id: "responsiveness", name: "How quickly people hear back", weight: 15, seen: false,
+    looks: "How quickly people really get a first reply. This needs data from services, because a web page cannot show it." },
   { id: "channels", name: "Other ways to get in touch", weight: 5, seen: true,
-    looks: "Phone with stated hours, call-back, chat, information sessions, a chance to speak to a carer." },
+    looks: "A phone line with its opening hours, call-backs, chat, information sessions and a chance to talk to a carer." },
   { id: "inclusion", name: "Inclusion and openness", weight: 5, seen: true,
-    looks: "Clear, welcoming answers on renting, being single, LGBTQ+ carers, work, disability and faith." },
-  { id: "data_quality", name: "Data quality", weight: 10, seen: false,
-    looks: "The service records arrival time, source and routing, with one written definition of an enquiry." },
+    looks: "Clear, welcoming answers about renting, being single, LGBTQ+ carers, work, disability and faith." },
+  { id: "data_quality", name: "Keeping good records", weight: 10, seen: false,
+    looks: "The service records when each enquiry arrived, where it came from and where it was sent. It has one written definition of an enquiry." },
 ] as const
 
 export const CAPS = [
-  "Questions about criminal convictions, health or other sensitive matters at first contact",
-  "Newsletter or marketing consent made a condition of enquiring",
-  "Conflicting phone numbers for the same front door",
-  "An old form still live alongside the current one",
+  "Asking about criminal convictions, health or other sensitive matters when someone first enquires",
+  "Making people agree to a newsletter or marketing before they can enquire",
+  "Conflicting phone numbers for the same place to get in touch",
+  "An old form still online next to the current one",
 ]
 
 const SENSITIVE = new Set(["special_category", "criminal_offence", "immigration", "health_related"])
@@ -149,9 +149,9 @@ export function score(x: FormFacts): Scored {
   }
   let total = weight ? Math.round((got / weight) * 100) : 0
   const capped: string[] = []
-  if (x.sensitive.some((s) => /criminal|health|disability/i.test(s))) capped.push("Sensitive questions at first contact")
-  if (x.marketing === "bundled_on_submit") capped.push("Newsletter sign-up bundled into enquiring")
-  if (x.legacy) capped.push("Old form still live")
+  if (x.sensitive.some((s) => /criminal|health|disability/i.test(s))) capped.push("Asks sensitive questions")
+  if (x.marketing === "bundled_on_submit") capped.push("Enquiring signs you up to a newsletter")
+  if (x.legacy) capped.push("Old form still online")
   if (capped.length) total = Math.min(total, 50)
   return { ...x, score: total, capped, domains, assessedWeight: weight }
 }

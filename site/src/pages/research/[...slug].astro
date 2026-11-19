@@ -4,6 +4,7 @@ import Base from "@/layouts/Base.astro";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { render } from "astro:content";
 import { evidenceEntries, monthOf, slugOf, titleOf, type EvidenceEntry } from "@/lib/research";
+import { Illustration } from "@/components/illustration";
 
 export async function getStaticPaths() {
   const { all } = await evidenceEntries();
@@ -15,6 +16,8 @@ const { Content, headings } = await render(entry);
 const title = titleOf(entry.body);
 const kind = entry.id === "library" ? "Evidence library" : entry.id.startsWith("reports/") ? `Report, ${monthOf(entry.id)}` : `Update, ${monthOf(entry.id)}`;
 const contents = headings.filter((h) => h.depth === 2);
+// A drawing for each kind of page (decorative; Notioly, under licence).
+const art = entry.id === "library" ? "studying" : entry.id.startsWith("reports/") ? "analysing" : "notification";
 ---
 <Base title={`${title} | Kinderform`} description={`${kind}. Part of the Kinderform research pages on the first step towards fostering and adoption.`}>
   <SiteHeader current="/research" />
@@ -28,9 +31,11 @@ const contents = headings.filter((h) => h.depth === 2);
       <article class="kf-prose min-w-0">
         <Content />
       </article>
+      <div class="order-first lg:order-last">
+      <Illustration name={art} className="mx-auto mb-6 hidden w-48 lg:block" />
       {contents.length > 2 && (
-        <nav aria-label="On this page" class="order-first text-sm lg:order-last">
-          <div class="rounded-lg border p-4 lg:sticky lg:top-6">
+        <nav aria-label="On this page" class="text-sm lg:sticky lg:top-6">
+          <div class="rounded-lg border p-4">
             <p class="mb-3 font-medium">On this page</p>
             <ul class="space-y-2">
               {contents.map((h) => (
@@ -40,6 +45,7 @@ const contents = headings.filter((h) => h.depth === 2);
           </div>
         </nav>
       )}
+      </div>
     </div>
   </main>
   <SiteFooter />

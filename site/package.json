@@ -11,7 +11,10 @@
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.9",
     "@astrojs/react": "^7.1.9",
+    "@cdssnc/gcds-tokens": "^2.14.0",
     "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource/lato": "^5.3.0",
+    "@fontsource/noto-sans": "^5.3.0",
     "@jsonforms/core": "^3.8.0",
     "@jsonforms/react": "^3.8.0",
     "@tailwindcss/vite": "^4.3.5",

@@ -1,0 +1,921 @@
+// GC Design System (GCDS) for the Canadian reference form only, without government branding.
+// Kinderform is not a government service: no Canada wordmark, no flag symbol, no "Government of
+// Canada" signature, no header or footer, and no red bar under the page heading.
+//
+// The form uses plain HTML, not the gcds-* web components, because they add styles at runtime and
+// the Content-Security-Policy allows only stylesheets from this site. The rules below are the
+// component stylesheets of @cdssnc/gcds-components 0.47, with shadow DOM selectors rewritten to
+// classes (see site/src/components/reference-form/gcds.tsx). Every value comes from the official
+// tokens in @cdssnc/gcds-tokens. Everything, tokens included, sits under .gcds-form, so nothing
+// reaches the rest of the site (Tailwind and shadcn/ui).
+// See https://design-system.canada.ca/en/
+@use "sass:meta";
+
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/global/border" as global-border;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/global/color" as global-color;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/global/outline" as global-outline;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/global/spacing" as global-spacing;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/global/typography" as global-typography;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/button" as button;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/checkbox" as checkbox;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/details" as details;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/error-message" as error-message;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/error-summary" as error-summary;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/fieldset" as fieldset;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/heading" as heading;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/hint" as hint;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/input" as input;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/label" as label;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/link" as link;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/notice" as notice;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/radio" as radio;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/stepper" as stepper;
+@use "../../node_modules/@cdssnc/gcds-tokens/build/web/scss/components/text" as text;
+
+$token-modules: (
+  "global-border",
+  "global-color",
+  "global-outline",
+  "global-spacing",
+  "global-typography",
+  "button",
+  "checkbox",
+  "details",
+  "error-message",
+  "error-summary",
+  "fieldset",
+  "heading",
+  "hint",
+  "input",
+  "label",
+  "link",
+  "notice",
+  "radio",
+  "stepper",
+  "text"
+);
+
+// GCDS switches to its mobile type sizes below 48em, and makes buttons full width below 30rem.
+$mobile: "only screen and (width < 48em)";
+$narrow: "screen and (max-width: 30rem)";
+
+// ---- Fonts -------------------------------------------------------------------
+// Noto Sans for text and Lato for headings, self-hosted from @fontsource. Only the weights the form
+// uses. Paths are relative to this file, as in uswds.scss, so the build copies the files.
+$fontsource: "../../node_modules/@fontsource";
+$latin: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+  U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+$latin-ext: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+  U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+
+@mixin face($family, $id, $weight, $subset, $range) {
+  @font-face {
+    font-family: $family;
+    font-style: normal;
+    font-display: swap;
+    font-weight: $weight;
+    src: url("#{$fontsource}/#{$id}/files/#{$id}-#{$subset}-#{$weight}-normal.woff2") format("woff2");
+    unicode-range: $range;
+  }
+}
+@each $weight in (400, 500, 600, 700) {
+  @include face("Noto Sans", "noto-sans", $weight, "latin", $latin);
+}
+// Answers are shown in 400, so names with accents beyond basic Latin also use Noto Sans.
+@include face("Noto Sans", "noto-sans", 400, "latin-ext", $latin-ext);
+@include face("Lato", "lato", 700, "latin", $latin);
+
+// ---- Root: tokens, colours and type ------------------------------------------
+.gcds-form {
+  @each $module in $token-modules {
+    @each $name, $value in meta.module-variables($module) {
+      --#{$name}: #{meta.inspect($value)};
+    }
+  }
+
+  // The form sets its own colours, so it reads the same inside a page in dark mode.
+  color-scheme: light;
+  background-color: var(--gcds-bg-white);
+  color: var(--gcds-text-primary);
+  font: var(--gcds-font-text);
+  text-align: left;
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  // Plain elements start from nothing, whatever the page around the form does to them.
+  // :where() keeps these below the component classes.
+  :where(h1, h2, h3, p, ol, ul, dl, dd, fieldset, legend, pre, details, summary) {
+    margin: 0;
+    padding: 0;
+  }
+  :where(fieldset) {
+    border: 0;
+    min-inline-size: auto;
+  }
+  :where(strong) {
+    font-weight: var(--gcds-font-weights-bold);
+  }
+  :where(input, button) {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+  }
+}
+@media #{$mobile} {
+  .gcds-form {
+    font: var(--gcds-font-text-mobile);
+  }
+}
+
+// gcds-sr-only
+.gcds-form .gcds-sr-only {
+  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+// gcds-icon (inline SVG in place of the icon font)
+.gcds-form .gcds-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+// ---- gcds-text and gcds-heading -----------------------------------------------
+.gcds-form .gcds-text {
+  margin: 0 0 var(--gcds-text-spacing-300);
+  max-width: var(--gcds-text-character-limit);
+  color: var(--gcds-text-role-primary);
+}
+
+.gcds-form .gcds-heading {
+  color: var(--gcds-heading-default-text);
+  margin: 0 0 var(--gcds-heading-spacing-300);
+  text-wrap: balance;
+}
+// The start page heading uses the h1 size.
+.gcds-form .gcds-heading--start {
+  font: var(--gcds-heading-h1-desktop);
+  max-width: var(--gcds-heading-character-limit-h1);
+}
+// Each question is the page heading. In a dialog the h1 size would push the answers off a phone
+// screen, so it uses the gcds-fieldset h3 legend size.
+.gcds-form .gcds-heading--page {
+  font: var(--gcds-fieldset-legend-size-h3-desktop);
+  max-width: var(--gcds-heading-character-limit-h3);
+  margin-bottom: var(--gcds-heading-spacing-200);
+}
+// Headings inside a page, a step below the page heading.
+.gcds-form .gcds-heading--section {
+  font: var(--gcds-heading-h5-desktop);
+  max-width: var(--gcds-heading-character-limit-h5);
+  margin: var(--gcds-heading-spacing-500) 0 var(--gcds-heading-spacing-200);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-heading--start {
+    font: var(--gcds-heading-h1-mobile);
+  }
+  .gcds-form .gcds-heading--page {
+    font: var(--gcds-fieldset-legend-size-h3-mobile);
+  }
+  .gcds-form .gcds-heading--section {
+    font: var(--gcds-heading-h5-mobile);
+    margin-top: var(--gcds-heading-spacing-400);
+  }
+}
+
+// ---- gcds-link ------------------------------------------------------------------
+.gcds-form .gcds-link {
+  color: var(--gcds-link-default);
+  cursor: pointer;
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-style: solid;
+  text-decoration-thickness: var(--gcds-link-decoration-thickness);
+  text-underline-offset: var(--gcds-link-underline-offset);
+  transition: all 0.35s;
+}
+.gcds-form .gcds-link.link--small {
+  font: var(--gcds-link-font-small-desktop);
+}
+.gcds-form .gcds-link.link--regular {
+  font: var(--gcds-link-font-regular-desktop);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-link.link--small {
+    font: var(--gcds-link-font-small-mobile);
+  }
+  .gcds-form .gcds-link.link--regular {
+    font: var(--gcds-link-font-regular-mobile);
+  }
+}
+@media (hover: hover) {
+  .gcds-form .gcds-link:hover {
+    color: var(--gcds-link-hover);
+    text-decoration-thickness: var(--gcds-link-hover-decoration-thickness);
+  }
+}
+// Every link in the form acts on the page (Back, Change, error links), so none is ever "visited".
+.gcds-form .gcds-link:not([href^="#"]):visited {
+  color: var(--gcds-link-visited);
+}
+.gcds-form .gcds-link:focus {
+  background-color: var(--gcds-link-focus-background);
+  border-radius: var(--gcds-link-focus-border-radius);
+  box-shadow: var(--gcds-link-focus-box-shadow);
+  color: var(--gcds-link-focus-text);
+  outline: var(--gcds-link-focus-outline-width) solid var(--gcds-link-focus-background);
+  outline-offset: var(--gcds-link-focus-outline-offset);
+  text-decoration: none;
+}
+
+// Back link: a gcds-link with the chevron-left icon.
+.gcds-form .gcds-back {
+  margin: 0 0 var(--gcds-spacing-200);
+}
+.gcds-form .gcds-back__icon {
+  margin-right: var(--gcds-spacing-50);
+}
+
+// ---- gcds-stepper ---------------------------------------------------------------
+.gcds-form .gcds-stepper {
+  color: var(--gcds-heading-default-text);
+  font: var(--gcds-stepper-font-desktop);
+  margin: var(--gcds-stepper-margin-desktop);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-stepper {
+    font: var(--gcds-stepper-font-mobile);
+    margin: var(--gcds-stepper-margin-mobile);
+  }
+}
+
+// ---- gcds-button ------------------------------------------------------------------
+.gcds-form .gcds-button {
+  appearance: none;
+  border: var(--gcds-button-border-width) solid transparent;
+  border-radius: var(--gcds-button-border-radius);
+  cursor: pointer;
+  display: inline-block;
+  font: var(--gcds-button-font-desktop);
+  padding: var(--gcds-button-padding);
+  text-align: center;
+  text-decoration: none;
+  text-wrap: balance;
+  transition: all 0.15s ease-in-out;
+  width: var(--gcds-button-width);
+}
+.gcds-form .gcds-button.button--role-primary {
+  background-color: var(--gcds-button-primary-default-background);
+  color: var(--gcds-button-primary-default-text);
+}
+.gcds-form .gcds-button.button--role-start {
+  background-color: var(--gcds-button-start-default-background);
+  color: var(--gcds-button-start-default-text);
+  font: var(--gcds-button-start-font-desktop);
+  padding: var(--gcds-button-start-padding);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-button {
+    font: var(--gcds-button-font-mobile);
+  }
+  .gcds-form .gcds-button.button--role-start {
+    font: var(--gcds-button-start-font-mobile);
+  }
+}
+@media (hover: hover) {
+  .gcds-form .gcds-button.button--role-primary:hover {
+    background-color: var(--gcds-button-primary-hover-background);
+  }
+  .gcds-form .gcds-button.button--role-start:hover {
+    background-color: var(--gcds-button-start-hover-background);
+  }
+}
+.gcds-form .gcds-button:focus {
+  background-color: var(--gcds-button-shared-focus-background);
+  border-color: var(--gcds-button-shared-focus-background);
+  box-shadow: var(--gcds-button-shared-focus-box-shadow);
+  color: var(--gcds-button-shared-focus-text);
+  outline: var(--gcds-button-shared-focus-outline-width) solid var(--gcds-button-shared-focus-background);
+  outline-offset: var(--gcds-button-border-width);
+}
+.gcds-form .gcds-button:active {
+  background-color: var(--gcds-button-shared-active-background);
+  border-color: var(--gcds-button-shared-active-background);
+}
+@media #{$narrow} {
+  .gcds-form .gcds-button {
+    display: block;
+    margin: var(--gcds-button-mobile-margin);
+    width: var(--gcds-button-mobile-width);
+  }
+}
+
+// Room above the button that ends each page.
+.gcds-form .gcds-actions {
+  margin-top: var(--gcds-spacing-100);
+}
+
+// ---- gcds-label, gcds-hint, gcds-error-message -----------------------------------------
+.gcds-form .gcds-label {
+  color: var(--gcds-label-text);
+  cursor: pointer;
+  display: block;
+  font: var(--gcds-label-font-desktop);
+  margin: var(--gcds-label-margin);
+  max-width: 100%;
+}
+.gcds-form .gcds-label--heading {
+  font: inherit;
+  margin: 0;
+}
+@media #{$mobile} {
+  .gcds-form .gcds-label {
+    font: var(--gcds-label-font-mobile);
+  }
+  .gcds-form .gcds-label--heading {
+    font: inherit;
+  }
+}
+
+.gcds-form .gcds-hint {
+  color: var(--gcds-hint-text);
+  font: var(--gcds-text-size-body-desktop);
+  margin: var(--gcds-hint-margin);
+  max-width: var(--gcds-text-character-limit);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-hint {
+    font: var(--gcds-text-size-body-mobile);
+  }
+}
+
+.gcds-form .gcds-error-message {
+  color: var(--gcds-error-message-text-color);
+  font: var(--gcds-text-size-body-desktop);
+  margin: 0 0 var(--gcds-text-spacing-75);
+  max-width: var(--gcds-text-character-limit);
+}
+.gcds-form .gcds-error-message__icon {
+  margin-right: var(--gcds-spacing-50);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-error-message {
+    font: var(--gcds-text-size-body-mobile);
+  }
+}
+
+// ---- gcds-input -------------------------------------------------------------------
+.gcds-form .gcds-input-wrapper {
+  color: var(--gcds-input-default-text);
+  font: var(--gcds-input-font-desktop);
+  max-width: 75ch;
+  transition: color 0.15s ease-in-out;
+  width: 100%;
+}
+// When the label is the page heading, keep the same space below it as a legend heading.
+.gcds-form .gcds-input-wrapper > .gcds-heading--page {
+  margin-bottom: var(--gcds-heading-spacing-100);
+}
+.gcds-form .gcds-input-wrapper > .gcds-heading--page + .gcds-hint {
+  margin-top: 0;
+}
+@media #{$mobile} {
+  .gcds-form .gcds-input-wrapper {
+    font: var(--gcds-input-font-mobile);
+  }
+}
+.gcds-form .gcds-input {
+  background-color: var(--gcds-input-default-background);
+  background-image: none;
+  border: var(--gcds-input-border-width) solid;
+  border-radius: var(--gcds-input-border-radius);
+  color: var(--gcds-input-default-text);
+  display: block;
+  font: inherit;
+  height: auto;
+  margin: var(--gcds-input-margin);
+  max-width: 100%;
+  min-height: var(--gcds-input-min-width-and-height);
+  min-width: var(--gcds-input-min-width-and-height);
+  padding: var(--gcds-input-padding);
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out,
+    outline 0.15s ease-in-out;
+  width: 100%;
+}
+// The size attribute of gcds-input: room for about that many characters.
+@for $size from 1 through 30 {
+  .gcds-form .gcds-input--size-#{$size} {
+    max-width: calc(#{$size * 2}ch + 1.5rem);
+  }
+}
+.gcds-form .gcds-input.gcds-error:not(:focus) {
+  border-color: var(--gcds-input-danger-border);
+}
+.gcds-form .gcds-input:focus {
+  border-color: var(--gcds-input-focus-border);
+  box-shadow: var(--gcds-input-focus-box-shadow);
+  outline: var(--gcds-input-outline-width) solid var(--gcds-input-focus-border);
+  outline-offset: var(--gcds-input-border-width);
+}
+
+// ---- gcds-fieldset, gcds-radios and gcds-checkboxes (the group) ------------------------------
+.gcds-form .gcds-radios__fieldset,
+.gcds-form .gcds-checkboxes__fieldset {
+  border: 0;
+  color: var(--gcds-fieldset-default-text);
+  min-inline-size: auto;
+  padding: 0;
+}
+.gcds-form .gcds-checkboxes__fieldset {
+  margin: var(--gcds-checkbox-fieldset-margin);
+}
+.gcds-form .gcds-radios__legend,
+.gcds-form .gcds-checkboxes__legend {
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+.gcds-form .gcds-radios__legend {
+  font: var(--gcds-radio-legend-font-desktop);
+  margin: var(--gcds-radio-legend-margin);
+}
+.gcds-form .gcds-radios__legend--no-hint {
+  margin: var(--gcds-radio-legend-hint-margin);
+}
+.gcds-form .gcds-checkboxes__legend {
+  font: var(--gcds-checkbox-legend-font-desktop);
+  margin: var(--gcds-checkbox-legend-margin);
+}
+.gcds-form .gcds-checkboxes__legend--no-hint {
+  margin: var(--gcds-checkbox-legend-hint-margin);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-radios__legend {
+    font: var(--gcds-radio-legend-font-mobile);
+  }
+  .gcds-form .gcds-checkboxes__legend {
+    font: var(--gcds-checkbox-legend-font-mobile);
+  }
+}
+// When the legend is the page heading, the heading sets the type and the space below it.
+.gcds-form .gcds-legend--heading .gcds-heading--page {
+  margin-bottom: var(--gcds-heading-spacing-100);
+}
+.gcds-form .gcds-legend--heading.gcds-radios__legend--no-hint .gcds-heading--page,
+.gcds-form .gcds-legend--heading.gcds-checkboxes__legend--no-hint .gcds-heading--page {
+  margin-bottom: 0;
+}
+.gcds-form .gcds-radios__fieldset > .gcds-hint {
+  margin: var(--gcds-radio-hint-margin);
+}
+.gcds-form .gcds-checkboxes__fieldset > .gcds-hint {
+  margin: var(--gcds-checkbox-legend-hint-margin);
+}
+.gcds-form .gcds-radios__fieldset > .gcds-error-message {
+  margin: var(--gcds-radio-error-message-margin);
+}
+
+// ---- gcds-radio (one option) -------------------------------------------------------------
+.gcds-form .gcds-radio {
+  color: var(--gcds-radio-default-text);
+  font: var(--gcds-radio-font);
+  margin: var(--gcds-radio-margin);
+  max-width: var(--gcds-radio-max-width);
+  min-height: calc(var(--gcds-radio-input-height-and-width) - var(--gcds-radio-padding));
+  padding: var(--gcds-radio-padding) 0 0;
+  position: relative;
+  transition: color 0.15s ease-in-out;
+}
+.gcds-form .gcds-radio__input {
+  position: absolute;
+  height: var(--gcds-radio-input-height-and-width);
+  left: 0;
+  top: 0;
+  width: var(--gcds-radio-input-height-and-width);
+  opacity: 0;
+}
+.gcds-form .gcds-radio__label {
+  font: var(--gcds-radio-label-font-desktop);
+  padding: var(--gcds-radio-label-padding);
+  width: fit-content;
+}
+.gcds-form .gcds-radio__hint {
+  margin: 0;
+  padding: var(--gcds-radio-label-padding);
+}
+.gcds-form .gcds-radio__label::before,
+.gcds-form .gcds-radio__label::after {
+  border-radius: var(--gcds-radio-border-radius);
+  box-sizing: border-box;
+  content: "";
+  cursor: pointer;
+  position: absolute;
+}
+.gcds-form .gcds-radio__label::before {
+  background-color: var(--gcds-radio-default-background);
+  border: var(--gcds-radio-input-border-width) solid;
+  height: var(--gcds-radio-input-height-and-width);
+  left: 0;
+  top: 0;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out,
+    outline 0.15s ease-in-out;
+  width: var(--gcds-radio-input-height-and-width);
+}
+// GCDS draws the dot in the system ButtonText colour so it also shows in high contrast modes.
+.gcds-form .gcds-radio__label::after {
+  background-color: ButtonText;
+  height: var(--gcds-radio-check-height-and-width);
+  left: var(--gcds-radio-check-left);
+  opacity: 0;
+  top: var(--gcds-radio-check-top);
+  width: var(--gcds-radio-check-height-and-width);
+}
+.gcds-form .gcds-radio__input:checked + .gcds-radio__label::after {
+  opacity: 1;
+}
+.gcds-form .gcds-radio--error:not(:focus-within) .gcds-radio__label::before {
+  border-color: var(--gcds-radio-danger-border);
+}
+.gcds-form .gcds-radio__input:focus + .gcds-radio__label::before {
+  background: var(--gcds-radio-focus-background);
+  box-shadow: var(--gcds-radio-focus-box-shadow);
+  color: var(--gcds-radio-focus-color);
+  outline: var(--gcds-radio-focus-outline-width) solid currentcolor;
+  outline-offset: var(--gcds-radio-input-border-width);
+}
+.gcds-form .gcds-radio__input:focus + .gcds-radio__label::after {
+  box-shadow: inset 0 0 2rem var(--gcds-radio-focus-color);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-radio__label {
+    font: var(--gcds-radio-label-font-mobile);
+  }
+}
+
+// ---- gcds-checkbox (one option) ----------------------------------------------------------
+.gcds-form .gcds-checkbox {
+  color: var(--gcds-checkbox-default-text);
+  font: var(--gcds-checkbox-font);
+  margin: var(--gcds-checkbox-margin);
+  max-width: var(--gcds-checkbox-max-width);
+  min-height: calc(var(--gcds-checkbox-input-height-and-width) - var(--gcds-checkbox-padding));
+  padding: var(--gcds-checkbox-padding) 0 0;
+  position: relative;
+  transition: color 0.15s ease-in-out;
+}
+.gcds-form .gcds-checkbox__input {
+  position: absolute;
+  height: var(--gcds-checkbox-input-height-and-width);
+  left: 0;
+  top: 0;
+  width: var(--gcds-checkbox-input-height-and-width);
+  opacity: 0;
+}
+.gcds-form .gcds-checkbox__label {
+  font: var(--gcds-checkbox-label-font-desktop);
+  padding: var(--gcds-checkbox-label-padding);
+  width: fit-content;
+}
+.gcds-form .gcds-checkbox__label::before,
+.gcds-form .gcds-checkbox__label::after {
+  box-sizing: border-box;
+  content: "";
+  cursor: pointer;
+  position: absolute;
+}
+.gcds-form .gcds-checkbox__label::before {
+  background-color: var(--gcds-checkbox-default-background);
+  border: var(--gcds-checkbox-input-border-width) solid;
+  border-radius: var(--gcds-checkbox-input-border-radius);
+  height: var(--gcds-checkbox-input-height-and-width);
+  left: 0;
+  top: 0;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out,
+    outline 0.15s ease-in-out;
+  width: var(--gcds-checkbox-input-height-and-width);
+}
+.gcds-form .gcds-checkbox__label::after {
+  border: var(--gcds-checkbox-check-border-width) solid;
+  border-block-start: 0;
+  border-inline-start: 0;
+  height: var(--gcds-checkbox-check-height);
+  left: var(--gcds-checkbox-check-left);
+  opacity: 0;
+  top: var(--gcds-checkbox-check-top);
+  transform: rotate(40deg);
+  width: var(--gcds-checkbox-check-width);
+}
+.gcds-form .gcds-checkbox__input:checked + .gcds-checkbox__label::after {
+  opacity: 1;
+}
+.gcds-form .gcds-checkbox--error:not(:focus-within) .gcds-checkbox__label::before {
+  border-color: var(--gcds-checkbox-danger-border);
+}
+.gcds-form .gcds-checkbox--error:not(:focus-within) .gcds-checkbox__label::after {
+  color: var(--gcds-checkbox-danger-border);
+}
+.gcds-form .gcds-checkbox__input:focus + .gcds-checkbox__label::before {
+  background: var(--gcds-checkbox-focus-background);
+  box-shadow: var(--gcds-checkbox-focus-box-shadow);
+  color: var(--gcds-checkbox-focus-color);
+  outline: var(--gcds-checkbox-focus-outline-width) solid currentcolor;
+  outline-offset: var(--gcds-checkbox-input-border-width);
+}
+.gcds-form .gcds-checkbox__input:focus + .gcds-checkbox__label::after {
+  color: var(--gcds-checkbox-focus-color);
+}
+@media #{$mobile} {
+  .gcds-form .gcds-checkbox__label {
+    font: var(--gcds-checkbox-label-font-mobile);
+  }
+}
+
+// ---- gcds-error-summary ------------------------------------------------------------------
+.gcds-form .gcds-error-summary-wrapper {
+  container: summary / inline-size;
+  margin-top: var(--gcds-spacing-150);
+}
+.gcds-form .gcds-error-summary {
+  border: var(--gcds-error-summary-border-width) solid var(--gcds-error-summary-border-color);
+  color: var(--gcds-error-summary-text);
+  margin: var(--gcds-error-summary-margin);
+  padding: var(--gcds-error-summary-padding);
+  transition:
+    background 0.15s ease-in-out,
+    border 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+}
+.gcds-form .gcds-error-summary__heading {
+  font: var(--gcds-heading-h5-desktop);
+  margin: 0 0 var(--gcds-heading-spacing-225);
+}
+.gcds-form .summary__errorlist {
+  list-style: decimal;
+  margin: var(--gcds-error-summary-list-margin);
+  padding: 0;
+}
+.gcds-form .summary__listitem {
+  max-width: var(--gcds-error-summary-max-width);
+}
+.gcds-form .summary__listitem:not(:last-child) {
+  padding: var(--gcds-error-summary-list-item-padding);
+}
+.gcds-form .summary__listitem .gcds-link:not(:focus) {
+  color: var(--gcds-error-summary-link-color);
+}
+@container summary (width < 24em) {
+  .gcds-form .gcds-error-summary {
+    padding: var(--gcds-error-summary-mobile-padding);
+  }
+}
+@media #{$mobile} {
+  .gcds-form .gcds-error-summary__heading {
+    font: var(--gcds-heading-h5-mobile);
+  }
+}
+
+// ---- gcds-notice -------------------------------------------------------------------------
+.gcds-form .gcds-notice {
+  color: var(--gcds-notice-text);
+  display: grid;
+  gap: var(--gcds-notice-icon-gap);
+  grid-template-columns: var(--gcds-notice-icon-width) auto;
+  margin: 0 0 var(--gcds-spacing-300);
+  text-align: left;
+}
+.gcds-form .notice__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--gcds-notice-icon-margin);
+}
+.gcds-form .notice__icon::before,
+.gcds-form .notice__icon::after {
+  background-color: currentColor;
+  content: "";
+  display: block;
+  flex-shrink: 0;
+  width: var(--gcds-notice-border-width);
+}
+.gcds-form .notice__icon::before {
+  height: var(--gcds-notice-icon-before-height);
+}
+.gcds-form .notice__icon::after {
+  height: var(--gcds-notice-icon-after-height);
+}
+// gcds-icon size h4
+.gcds-form .notice__glyph {
+  font-size: var(--gcds-font-sizes-h4);
+  vertical-align: 0;
+}
+.gcds-form .notice__heading {
+  color: var(--gcds-heading-default-text);
+  font: var(--gcds-notice-content-heading-font-desktop);
+  margin: var(--gcds-notice-content-heading-margin-block-start-desktop) 0 var(--gcds-heading-spacing-100);
+  text-wrap: balance;
+}
+.gcds-form .notice__content > :not(.notice__heading) {
+  font: var(--gcds-notice-content-slotted-font-desktop);
+  margin-block: 0 var(--gcds-notice-content-slotted-margin);
+  max-width: var(--gcds-text-character-limit);
+}
+.gcds-form .notice__content > :last-child {
+  margin-block-end: 0;
+}
+.gcds-form .notice--type-info .notice__icon {
+  color: var(--gcds-notice-info-text);
+}
+.gcds-form .notice--type-success .notice__icon {
+  color: var(--gcds-notice-success-text);
+}
+.gcds-form .notice--type-warning .notice__icon {
+  color: var(--gcds-notice-warning-text);
+}
+@media #{$mobile} {
+  .gcds-form .notice__heading {
+    font: var(--gcds-notice-content-heading-font-mobile);
+    margin-top: var(--gcds-notice-content-heading-margin-block-start-mobile);
+  }
+  .gcds-form .notice__content > :not(.notice__heading) {
+    font: var(--gcds-notice-content-slotted-font-mobile);
+  }
+}
+
+// ---- gcds-details ------------------------------------------------------------------------
+.gcds-form .gcds-details {
+  margin: 0 0 var(--gcds-spacing-300);
+}
+.gcds-form .details__summary {
+  background-color: transparent;
+  border: var(--gcds-details-summary-border-width) solid transparent;
+  color: var(--gcds-details-default-text);
+  cursor: pointer;
+  display: block;
+  font: var(--gcds-details-font-desktop);
+  padding: var(--gcds-details-summary-padding);
+  position: relative;
+  text-align: left;
+  text-decoration-color: currentColor;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: var(--gcds-details-default-decoration-thickness);
+  text-underline-offset: 0.2em;
+  transition:
+    background-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+}
+.gcds-form .details__summary::before {
+  border-block-end: var(--gcds-details-summary-arrow-border-top-bottom) solid transparent;
+  border-block-start: var(--gcds-details-summary-arrow-border-top-bottom) solid transparent;
+  border-inline-start: var(--gcds-details-summary-arrow-border-left) solid currentColor;
+  content: "";
+  height: 0;
+  left: var(--gcds-details-summary-arrow-left);
+  position: absolute;
+  top: var(--gcds-details-summary-arrow-top);
+  transition: transform 0.15s ease-in-out;
+  width: 0;
+}
+.gcds-form .details__summary[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+.gcds-form .details__summary[aria-expanded="false"] + .details__panel {
+  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+.gcds-form .details__panel {
+  margin: var(--gcds-details-panel-margin);
+  padding: var(--gcds-details-panel-padding);
+  position: relative;
+}
+.gcds-form .details__panel > summary {
+  display: none;
+}
+.gcds-form .details__panel::before {
+  background-color: var(--gcds-details-panel-border-color);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: var(--gcds-details-panel-border-width);
+}
+.gcds-form .details__panel > :not(summary) {
+  font: var(--gcds-details-font-desktop);
+  margin-block: 0;
+}
+.gcds-form .details__panel > :not(summary, :last-child) {
+  margin-block-end: var(--gcds-details-panel-slotted-margin);
+}
+@media #{$mobile} {
+  .gcds-form .details__summary,
+  .gcds-form .details__panel > :not(summary) {
+    font: var(--gcds-details-font-mobile);
+  }
+}
+@media (hover: hover) {
+  .gcds-form .details__summary:hover:not(:focus) {
+    color: var(--gcds-details-hover-text);
+    text-decoration-thickness: var(--gcds-details-hover-decoration-thickness);
+  }
+}
+.gcds-form .details__summary:focus {
+  background-color: var(--gcds-details-focus-background);
+  border-radius: var(--gcds-details-focus-border-radius);
+  box-shadow: var(--gcds-details-focus-box-shadow);
+  color: var(--gcds-details-focus-text);
+  outline: var(--gcds-details-focus-outline);
+  outline-offset: var(--gcds-details-focus-outline-offset);
+  text-decoration: none;
+}
+
+// The record shown to people who build forms.
+.gcds-form .details__panel > .kf-code {
+  background: var(--gcds-bg-light);
+  font: 400 var(--gcds-font-sizes-text-small-mobile) / 1.5 var(--gcds-font-families-monospace);
+  padding: var(--gcds-spacing-150);
+}
+
+// ---- Check your answers: a summary list from GCDS tokens ---------------------------------------
+// GCDS has no summary list component. Rows stack on narrow screens and line up in columns on wide ones.
+.gcds-form .gcds-summary-list {
+  container-type: inline-size;
+  margin: 0 0 var(--gcds-spacing-300);
+}
+.gcds-form .gcds-summary-list__row {
+  border-bottom: var(--gcds-border-width-sm) solid var(--gcds-border-default);
+  display: grid;
+  gap: 0 var(--gcds-spacing-200);
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: var(--gcds-spacing-150) 0;
+}
+.gcds-form .gcds-summary-list__key {
+  font-weight: var(--gcds-font-weights-semibold);
+  grid-column: 1;
+  grid-row: 1;
+  overflow-wrap: anywhere;
+}
+.gcds-form .gcds-summary-list__value {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  overflow-wrap: anywhere;
+}
+.gcds-form .gcds-summary-list__actions {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+}
+@container (width >= 40em) {
+  .gcds-form .gcds-summary-list__row {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto;
+  }
+  .gcds-form .gcds-summary-list__value {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .gcds-form .gcds-summary-list__actions {
+    grid-column: 3;
+  }
+}
+
+// ---- Lists and spacing on the last page ------------------------------------------------------
+.gcds-form .gcds-list {
+  list-style: decimal;
+  margin: 0 0 var(--gcds-spacing-300);
+  max-width: var(--gcds-text-character-limit);
+  padding-left: var(--gcds-notice-content-slotted-list-margin);
+}
+.gcds-form .gcds-list > li {
+  margin-bottom: var(--gcds-spacing-150);
+}
+.gcds-form .gcds-after {
+  margin-top: var(--gcds-spacing-300);
+}
+.gcds-form .gcds-reference {
+  white-space: nowrap;
+}

@@ -56,6 +56,21 @@
       "pattern": "^[0-9]{3}$",
       "description": "US only. The first three digits of the ZIP code, enough to find the local agency."
     },
+    "postal_code_fsa": {
+      "type": "string",
+      "pattern": "^[ABCEGHJ-NPRSTVXY][0-9][ABCEGHJ-NPRSTV-Z]$",
+      "description": "Canada only. The first three characters of the postal code (the forward sortation area), enough to find the local agency."
+    },
+    "au_postcode": {
+      "type": "string",
+      "pattern": "^[0-9]{4}$",
+      "description": "Australia only. The four-digit postcode, which covers a suburb or town, enough to find the local agency."
+    },
+    "contact_language": {
+      "type": "string",
+      "enum": ["english", "french"],
+      "description": "Canada only. The official language the person would like the reply in."
+    },
     "topics": {
       "type": "array",
       "uniqueItems": true,
@@ -84,7 +99,17 @@
       "then": { "required": ["phone"] }
     },
     {
-      "not": { "required": ["postcode_area", "zip_prefix"] }
+      "$comment": "At most one location field: each belongs to one country.",
+      "not": {
+        "anyOf": [
+          { "required": ["postcode_area", "zip_prefix"] },
+          { "required": ["postcode_area", "postal_code_fsa"] },
+          { "required": ["postcode_area", "au_postcode"] },
+          { "required": ["zip_prefix", "postal_code_fsa"] },
+          { "required": ["zip_prefix", "au_postcode"] },
+          { "required": ["postal_code_fsa", "au_postcode"] }
+        ]
+      }
     }
   ]
 }

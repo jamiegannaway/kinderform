@@ -230,8 +230,8 @@ export function usPicture(): UsPicture {
       .sort((a, b) => a[0] - b[0])
       .map(([y, n]) => ({ label: `${y} ${plural(y, "year")}`, value: n })),
     evidence: [
-      evidenceRow("Front doors", doors),
-      evidenceRow("Policy rules", policies),
+      evidenceRow("Places to get in touch", doors),
+      evidenceRow("State rules", policies),
       evidenceRow("Application forms", forms),
       evidenceRow("Form questions", [...fq, ...aq]),
     ],

@@ -1,0 +1,16 @@
+{
+  "full_name": "Robin Exemple",
+  "interest": "fostering",
+  "knows_child": false,
+  "contact_method": "phone_call",
+  "phone": "613-555-0199",
+  "best_times": [
+    "weekday_evening"
+  ],
+  "postal_code_fsa": "H0H",
+  "contact_language": "french",
+  "topics": [
+    "what_it_involves"
+  ],
+  "updates_opt_in": false
+}

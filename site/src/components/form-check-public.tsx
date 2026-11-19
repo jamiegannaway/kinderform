@@ -14,6 +14,7 @@ import {
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import type { Group } from "@/lib/census"
 import { CAPS, DOMAINS } from "@/lib/form-check"
+import { Illustration } from "@/components/illustration"
 
 type Patterns = {
   readable: number
@@ -60,22 +61,41 @@ export default function FormCheckPublic({
     <>
       <SiteHeader current="/form-check" />
       <main id="main" className="mx-auto max-w-6xl px-6">
-        <section aria-labelledby="fc-title" className="pt-8 pb-12 md:pt-14">
-          <Badge variant="secondary">Draft method, shared for comment</Badge>
+        <section aria-labelledby="fc-title" className="relative pt-8 pb-12 md:pt-14">
+          <Illustration name="details" className="absolute top-8 right-0 hidden w-56 lg:block xl:w-64" />
+          <Badge variant="secondary">Draft for comment</Badge>
           <h1 id="fc-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Form check
           </h1>
           <p className="mt-6 max-w-2xl text-xl text-muted-foreground">
-            How do fostering and adoption enquiry forms treat the people who fill them in? Form check
-            looks at each form from the side of the person enquiring: how much it asks, whether it says
-            when you will hear back, and how it handles your details.
+            Form check looks at how fostering and adoption enquiry forms treat the people who fill them
+            in. We look at each form from the side of the person enquiring. That means how much it asks,
+            whether it says when you will hear back, and how it handles your details.
           </p>
+          <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
+            Form check is for recruitment teams and managers in councils, regional hubs and agencies, and
+            for sector bodies. It looks at pages and processes, never at staff. The method is a draft, and we
+            are sharing it so you can comment on it.
+          </p>
+          <p className="mt-4 max-w-2xl leading-7 font-medium">What we found so far:</p>
+          <ul className="mt-2 ml-5 max-w-2xl list-disc space-y-2 leading-7">
+            <li>
+              {p.sensitive} of {p.readable} UK enquiry forms we could read ask sensitive questions, such as
+              date of birth or health.
+            </li>
+            <li>
+              {p.spareRoom} of {p.readable} ask about a spare room.
+            </li>
+            <li>
+              {p.replyStated} of {p.replyChecked} forms we checked say when you will hear back.
+            </li>
+          </ul>
           <Alert className="mt-8 max-w-3xl">
             <AlertTitle>No service is named or scored here yet</AlertTitle>
             <AlertDescription>
-              Each service will see its own results privately, with time to correct them, before anything
-              is published by name. The counts below come from a first pass, read by an automated reader
-              and not yet checked by hand.
+              Each service will see its own results in private, with time to correct them, before we
+              publish anything by name. The counts on this page come from a first look by a computer
+              program that reads public web pages. They are not yet checked by a person.
             </AlertDescription>
           </Alert>
           {privatePreview && (
@@ -88,28 +108,29 @@ export default function FormCheckPublic({
         </section>
 
         <section aria-labelledby="fc-patterns" className="py-12">
-          <H2 id="fc-patterns">What the first pass found</H2>
+          <H2 id="fc-patterns">What our first look at enquiry forms found</H2>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            First-contact forms in the UK whose questions we could read. Checked {checked}.
+            We could read the questions on {p.readable} enquiry forms in the UK, and looked at them in{" "}
+            {checked}.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Stat value={String(p.readable)} label="Forms read" />
+            <Stat value={String(p.readable)} label="Enquiry forms read" />
             <Stat value={`${p.replyStated} of ${p.replyChecked}`} label="Say when you will hear back" />
-            <Stat value={`${p.sensitive} of ${p.readable}`} label="Ask sensitive questions at first contact" />
-            <Stat value={`${p.spareRoom} of ${p.readable}`} label="Ask about a spare room at first contact" />
+            <Stat value={`${p.sensitive} of ${p.readable}`} label="Ask sensitive questions on the enquiry form" />
+            <Stat value={`${p.spareRoom} of ${p.readable}`} label="Ask about a spare room on the enquiry form" />
           </div>
           <Table className="mt-8">
             <TableCaption>
-              Sensitive questions means date of birth, ethnicity, health, criminal record or immigration
-              status. Councils and hubs includes regional services.
+              Sensitive questions are about things such as date of birth, ethnicity, health, criminal record
+              or immigration status. Councils and hubs includes regional services.
             </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead>Who runs the form</TableHead>
                 <TableHead className="text-right">Forms read</TableHead>
                 <TableHead className="text-right">Typical number of questions</TableHead>
-                <TableHead className="text-right">Sensitive questions</TableHead>
-                <TableHead className="text-right">Spare room question</TableHead>
+                <TableHead className="text-right">Ask sensitive questions</TableHead>
+                <TableHead className="text-right">Ask about a spare room</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -132,17 +153,18 @@ export default function FormCheckPublic({
         <Separator />
 
         <section aria-labelledby="fc-method" className="py-12">
-          <H2 id="fc-method">What we look at</H2>
+          <H2 id="fc-method">Our draft checklist looks at 9 areas</H2>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            Nine areas, weighted to 100 points. Some can be judged from a web page. Others need
-            information from the service itself, so a page alone cannot score them.
+            The checklist is our draft list of what a good enquiry form and first reply do. It has 9
+            areas, worth 100 points in total. We can judge some areas from a public web page. Others need
+            information from the service itself, because a page alone cannot show them.
           </p>
           <Table className="mt-6">
             <TableHeader>
               <TableRow>
                 <TableHead>Area</TableHead>
                 <TableHead>What we look for</TableHead>
-                <TableHead className="text-right">Weight</TableHead>
+                <TableHead className="text-right">Points</TableHead>
                 <TableHead>Judged from</TableHead>
               </TableRow>
             </TableHeader>
@@ -153,7 +175,7 @@ export default function FormCheckPublic({
                   <TableCell className="min-w-64 whitespace-normal text-muted-foreground">{d.looks}</TableCell>
                   <TableCell className="text-right tabular-nums">{d.weight}</TableCell>
                   <TableCell>
-                    <Badge variant="outline">{d.seen ? "The public page" : "The service's own data"}</Badge>
+                    <Badge variant="outline">{d.seen ? "The public web page" : "The service's own data"}</Badge>
                   </TableCell>
                 </TableRow>
               ))}
@@ -163,8 +185,8 @@ export default function FormCheckPublic({
             <CardHeader>
               <CardTitle>Things that need fixing first</CardTitle>
               <CardDescription>
-                Any one of these limits a form to half marks, because each can stop someone at the door
-                or break their trust.
+                Any one of these means a form can score no more than 50 out of 100. Each one can stop
+                someone from enquiring, or break their trust.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -180,14 +202,18 @@ export default function FormCheckPublic({
         <Separator />
 
         <section aria-labelledby="fc-coverage" className="py-12">
-          <H2 id="fc-coverage">Where we have looked</H2>
+          <H2 id="fc-coverage">Where we have looked for enquiry forms</H2>
+          <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
+            This table shows how many enquiry forms we found in each place, and how many of those we could
+            read.
+          </p>
           <Table className="mt-6">
             <TableHeader>
               <TableRow>
                 <TableHead>Country</TableHead>
-                <TableHead>Nation or state</TableHead>
-                <TableHead className="text-right">First-contact forms found</TableHead>
-                <TableHead className="text-right">Questions read</TableHead>
+                <TableHead>Part of the country</TableHead>
+                <TableHead className="text-right">Enquiry forms found</TableHead>
+                <TableHead className="text-right">Forms we could read</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -211,7 +237,7 @@ export default function FormCheckPublic({
             </TableBody>
           </Table>
           <p className="mt-4 max-w-2xl text-sm text-muted-foreground">
-            In the United States, foster care runs through state agencies, and in some states through
+            In the United States, foster care runs through state agencies and, in some states, through
             counties and private agencies. Form check is built to cover each state and, where needed, each
             county.
           </p>
@@ -220,12 +246,13 @@ export default function FormCheckPublic({
         <Separator />
 
         <section aria-labelledby="fc-results" className="py-12">
-          <H2 id="fc-results">How results will be shared</H2>
+          <H2 id="fc-results">Services will see their own results before we publish any names</H2>
+          <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">We will share results in 4 steps.</p>
           <ol className="mt-6 ml-5 max-w-2xl list-decimal space-y-3 leading-7">
-            <li>We publish this method and invite comment from carers, services and sector bodies.</li>
-            <li>Each service gets its own results privately, with time to correct errors and make changes.</li>
-            <li>Public reporting starts with patterns across the sector and named examples of good practice.</li>
-            <li>Named results for every service come last, always about the page and process, never the staff.</li>
+            <li>We publish this draft method and ask carers, services and sector bodies to comment on it.</li>
+            <li>Each service gets its own results in private, with time to correct errors and make changes.</li>
+            <li>We start public reporting with patterns across the sector and named examples of good practice.</li>
+            <li>Named results for every service come last, and always look at the page and process, never at staff.</li>
           </ol>
         </section>
       </main>

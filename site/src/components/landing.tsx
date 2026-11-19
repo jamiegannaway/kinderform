@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
+import { Illustration, type IllustrationName } from "@/components/illustration"
 
 const SOURCE_URL =
   "https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf"
@@ -31,44 +32,52 @@ const making = [
   {
     title: "An open standard for enquiries",
     status: "Draft 0.1",
-    body: "A shared description of what an enquiry record holds, so any council, hub or agency can see how quickly people hear back. It holds no names and nothing about children, and it works with whatever form or case system a service already uses.",
+    body: "A shared way to describe what an enquiry record holds. It lets any service see how quickly people hear back. It holds no names and nothing about children. It works with any form or case system a service already uses.",
   },
   {
-    title: "A picture of fostering front doors",
+    title: "A picture of where people get in touch",
     status: "Method in draft",
-    body: "A register of where people enquire across the UK, and a record of what each form asks and promises. It looks at pages and processes from the side of the person enquiring. Each service sees its own results first.",
+    body: "A register of where people get in touch about fostering across the UK. It also records what each enquiry form asks and promises. It looks at pages and processes as the person enquiring sees them. Each service sees its own results first.",
   },
   {
-    title: "The evidence",
+    title: "A library of research",
     status: "Growing",
-    body: "A living library of research on how people come to foster and adopt, why some stop along the way, and why carers stay.",
+    body: "Research on how people come to foster and adopt, why some stop along the way, and why carers stay. We keep adding to it.",
   },
 ]
 
 const principles = [
-  ["About adults who offer to care.", "Never children's records, and never decisions about children."],
+  ["About adults who offer to care.", "Nothing here holds children's records or makes decisions about children."],
   ["No real personal data.", "Every example is made up."],
-  ["Nothing scores people.", "No tool here ranks, screens or predicts anyone who enquires."],
+  ["Nothing scores people.", "No tool here ranks, screens or makes predictions about anyone who enquires."],
   ["Pages and processes, not staff.", "Recruitment teams are small and stretched, and they are not the problem."],
-  ["Method first, then findings.", "Each service sees its own results privately, with time to reply, before anything is named."],
-  ["Free and open.", "Everything is openly licensed, so anyone can use it without asking."],
+  ["Method first, then findings.", "Each service sees its own results privately, with time to reply, before we name anything."],
+  ["Free and open.", "Our code, writing and data are openly licensed, so anyone can use them without asking."],
 ]
 
 function Section({
   id,
   title,
+  art,
   children,
 }: {
   id: string
   title: string
+  art?: IllustrationName
   children: React.ReactNode
 }) {
   return (
-    <section aria-labelledby={id} className="py-12 md:py-16">
-      <h2 id={id} className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-        {title}
-      </h2>
-      <div className="mt-6">{children}</div>
+    <section
+      aria-labelledby={id}
+      className={`py-12 md:py-16 ${art ? "grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_14rem] lg:grid-cols-[minmax(0,1fr)_16rem]" : ""}`}
+    >
+      <div className="min-w-0">
+        <h2 id={id} className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
+          {title}
+        </h2>
+        <div className="mt-6">{children}</div>
+      </div>
+      {art && <Illustration name={art} className="mx-auto w-40 md:w-full" />}
     </section>
   )
 }
@@ -121,9 +130,9 @@ function Exchange() {
         </Card>
       </div>
       <figcaption id="exchange-caption" className="mt-4 text-sm text-muted-foreground">
-        An example of a quick, kind and considered reply: Sam enquires on Tuesday evening and hears
-        back the next morning, with a call at the time Sam asked for. Sam and Ali are made up, and
-        this is not a real form.
+        An example of a quick, kind and considered reply. Sam enquires on Tuesday evening and hears
+        back the next morning. The reply sets up a call at the time Sam asked for. Sam and Ali are
+        made up, and this is not a real form.
       </figcaption>
     </figure>
   )
@@ -149,8 +158,9 @@ export default function Landing() {
             </h1>
             <p className="mt-6 max-w-xl text-xl text-muted-foreground">
               Kinderform is a free, open project to make the first step of fostering and adoption
-              kinder. It gives councils, hubs and agencies shared tools to reply well to the people
-              who enquire.
+              kinder. It gives services shared tools to reply well to people who enquire. By
+              services, we mean the councils, hubs and agencies that find and approve foster carers
+              and adopters.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -169,8 +179,8 @@ export default function Landing() {
             <AlertTitle>Thinking of fostering or adopting?</AlertTitle>
             <AlertDescription>
               <p>
-                Kinderform is not a fostering or adoption service and cannot take enquiries. Please
-                contact your local council.
+                Kinderform is not a fostering or adoption service, so we cannot take your enquiry.
+                Please contact your local council.
               </p>
               <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
                 {nations.map((n) => (
@@ -190,19 +200,21 @@ export default function Landing() {
         </div>
 
         <div className="mx-auto max-w-6xl px-6">
-          <Section id="why-title" title="Interest is not the problem">
+          <Section id="why-title" title="Interest is not the problem" art="clock-is-ticking">
             <div className="max-w-2xl space-y-4 leading-7">
               <p>
-                In England in 2024–25 there were almost 150,000 enquiries about fostering, and 7,365
-                newly approved foster carers. Some people enquire more than once, and services count
-                enquiries in different ways, so the gap is not exact. But the government's own plan
-                for fostering says plainly that interest is not the problem. People who offer to help
-                can wait weeks or months for a reply.
+                The government's own plan for fostering says plainly that interest is not the
+                problem. People who offer to help can wait weeks or months for a reply.
               </p>
               <p>
-                Nobody designs it that way. Recruitment teams are small and stretched, systems differ
-                from place to place, and there is no shared way to see how long people wait. That
-                part can be fixed, and it is the part Kinderform works on.
+                In England in 2024–25, there were almost 150,000 enquiries about fostering and 7,365
+                newly approved foster carers. The gap between these numbers is not exact. Some people
+                enquire more than once, and services count enquiries in different ways.
+              </p>
+              <p>
+                Nobody designs it that way. Recruitment teams are small and stretched, and systems
+                differ from place to place. There is also no shared way to see how long people wait.
+                That part can be fixed, and it is the part Kinderform works on.
               </p>
               <p className="text-sm text-muted-foreground">
                 Source: Department for Education,{" "}
@@ -234,7 +246,7 @@ export default function Landing() {
 
           <Separator />
 
-          <Section id="how-title" title="How we work">
+          <Section id="how-title" title="How we work" art="peace">
             <ul className="grid max-w-4xl gap-x-10 gap-y-5 md:grid-cols-2">
               {principles.map(([head, body]) => (
                 <li key={head} className="border-l-2 pl-4">
@@ -247,31 +259,38 @@ export default function Landing() {
 
           <Separator />
 
-          <Section id="who-title" title="Who is behind this">
+          <Section id="who-title" title="Who is behind Kinderform" art="plant-seed">
             <div className="max-w-2xl space-y-4 leading-7">
               <p>
-                Kinderform was started by Jamie Gannaway, co-founder of Deployed, which builds intake
+                Jamie Gannaway, a co-founder of Deployed, started Kinderform. Deployed builds intake
                 and routing systems for large organisations. This project gives that experience to the
                 fostering and adoption sector for free.
               </p>
-              <p>It is not a Deployed product, it is not commercial, and it will never be a sales channel.</p>
+              <p>Kinderform is not a Deployed product and is not commercial. It will never be a sales channel.</p>
             </div>
           </Section>
 
           <Separator />
 
           <section id="get-involved" aria-labelledby="involve-title" className="py-12 md:py-16">
-            <Card className="max-w-3xl">
+            <Card className="max-w-4xl md:grid md:grid-cols-[minmax(0,1fr)_13rem] md:items-center">
+              <div className="grid gap-6">
               <CardHeader>
                 <CardTitle id="involve-title" className="text-2xl">
                   Get involved
                 </CardTitle>
                 <CardDescription className="text-base">
-                  We would especially like to hear from foster carers and adopters about their first
-                  contact, from people who have been in care, from recruitment teams in councils, hubs
-                  and agencies, and from developers who build public-service forms.
+                  We would especially like to hear from:
                 </CardDescription>
               </CardHeader>
+              <CardContent>
+                <ul className="ml-5 list-disc space-y-2 leading-7">
+                  <li>foster carers and adopters, about when they first got in touch</li>
+                  <li>people who have been in care</li>
+                  <li>recruitment teams in councils, hubs and agencies</li>
+                  <li>developers who build forms for public services</li>
+                </ul>
+              </CardContent>
               <CardFooter>
                 <Button asChild>
                   <a href="mailto:hello@kinderform.org">
@@ -280,6 +299,8 @@ export default function Landing() {
                   </a>
                 </Button>
               </CardFooter>
+              </div>
+              <Illustration name="paper-airplane" className="mx-auto hidden w-48 md:block" />
             </Card>
           </section>
         </div>
