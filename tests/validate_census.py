@@ -13,7 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CENSUS = ROOT / "census"
-REGISTER = ROOT / "register" / "front-doors.csv"
+# Front doors can come from any country's register.
+REGISTERS = [ROOT / "register" / "front-doors.csv", ROOT / "register" / "us" / "front-doors.csv",
+             ROOT / "register" / "ca" / "front-doors.csv", ROOT / "register" / "au" / "front-doors.csv"]
 
 COLUMNS = {
     "forms.csv": ["form_id", "front_door_id", "name", "operator_type", "service_type", "country", "region", "form_stage",
@@ -33,9 +35,10 @@ ALLOWED = {
     ("forms.csv", "operator_type"): {"regional_hub", "single_authority", "council", "council_consortium",
                                      "national_brand_council", "regional_service", "regional_adoption_agency",
                                      "voluntary_adoption_agency", "independent_fostering_agency", "platform_vendor",
-                                     "state_agency", "county_agency", "private_agency"},
+                                     "state_agency", "county_agency", "private_agency", "child_welfare_agency",
+                                     "indigenous_agency"},
     ("forms.csv", "service_type"): {"fostering", "adoption", "fostering_and_adoption"},
-    ("forms.csv", "country"): {"UK", "US"},
+    ("forms.csv", "country"): {"UK", "US", "CA", "AU"},
     ("forms.csv", "form_stage"): {"primary", "secondary"},
     ("forms.csv", "access_route"): {"online_form", "downloadable_form", "phone_conversation", "sent_after_first_contact",
                                     "email_only", "signposting_only", "described_not_public", "council_portal"},
@@ -56,7 +59,10 @@ ALLOWED = {
 OBSERVED = {"direct_fetch", "index_snapshot", "search_snippet", "secondhand", "vendor_documentation"}
 DATE = re.compile(r"^\d{4}-\d{2}(-\d{2})?$")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
-PHONE = re.compile(r"(?<![\d/])(?:\+44\s?|0)\d{2,4}[\s-]?\d{3,4}[\s-]?\d{3,4}(?!\d)")
+PHONE = re.compile(
+    r"(?<![\d/])(?:\+44\s?|0)\d{2,4}[\s-]?\d{3,4}[\s-]?\d{3,4}(?!\d)"  # UK and Australian landlines
+    r"|(?<![\d/])(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\d)"  # US and Canada
+    r"|\b1[38]00[\s-]?\d{3}[\s-]?\d{3}\b")  # Australian 1300 and 1800 numbers
 MARKET = re.compile(r"\b(supply|demand|leads?|conversion|funnel)\b", re.IGNORECASE)
 
 errors = []
@@ -96,8 +102,11 @@ form_ids = {r["form_id"] for r in forms}
 question_ids = {r["question_id"] for r in questions}
 tax_keys = {(r["category"], r["topic"]) for r in taxonomy}
 
-with open(REGISTER, newline="", encoding="utf-8") as fh:
-    register_ids = {r["front_door_id"] for r in csv.DictReader(fh)}
+register_ids = set()
+for path in REGISTERS:
+    if path.exists():
+        with open(path, newline="", encoding="utf-8") as fh:
+            register_ids |= {r["front_door_id"] for r in csv.DictReader(fh)}
 
 # Links
 for r in forms:
@@ -115,7 +124,8 @@ for r in guidance:
     if r["form_id"] not in form_ids:
         err(f"guidance.csv {r['guidance_id']}: unknown form_id {r['form_id']}")
 
-# Region must fit the country: a UK nation, or a US state or DC
+# Region must fit the country: a UK nation, a US state or DC, a Canadian province or territory,
+# or an Australian state or territory
 UK_REGIONS = {"England", "Wales", "Scotland", "Northern Ireland", "UK"}
 US_REGIONS = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
               "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
@@ -124,8 +134,14 @@ US_REGIONS = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorad
               "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
               "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah",
               "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"}
+CA_REGIONS = {"Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Saskatchewan", "Nova Scotia",
+              "New Brunswick", "Newfoundland and Labrador", "Prince Edward Island", "Yukon", "Northwest Territories",
+              "Nunavut", "Canada"}
+AU_REGIONS = {"New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania",
+              "Australian Capital Territory", "Northern Territory", "Australia"}
+REGIONS = {"UK": UK_REGIONS, "US": US_REGIONS, "CA": CA_REGIONS, "AU": AU_REGIONS}
 for r in forms:
-    allowed = UK_REGIONS if r["country"] == "UK" else US_REGIONS
+    allowed = REGIONS.get(r["country"], set())
     if r["region"] not in allowed:
         err(f"forms.csv {r['form_id']}: region '{r['region']}' does not fit country {r['country']}")
 

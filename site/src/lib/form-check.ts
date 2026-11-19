@@ -62,13 +62,20 @@ export type FormFacts = {
   legacy: boolean
 }
 
-export function factsFor(c: Census): FormFacts[] {
+// Forms written by tools/crawl_to_census.py carry this note.
+export const CRAWLER_NOTE = "Read by the polite crawler"
+
+// UK only, and the forms already in the census before the crawler, by default: the rubric,
+// the named draft scores and the hand-written "forms-differ" finding were written from those.
+// The comparison across countries on /research passes all four countries and the crawler's forms.
+export function factsFor(c: Census, countries: string[] = ["UK"], includeCrawler = false): FormFacts[] {
   const asked = askedBy(c)
   const tax = new Map(c.taxonomy.map((t) => [`${t.category}/${t.topic}`, t]))
   const out: FormFacts[] = []
   for (const f of c.forms) {
     const group = groupOf(f)
-    if (!group || f.form_stage !== "primary" || !isReadable(f, asked)) continue
+    if (!group || f.form_stage !== "primary" || !countries.includes(f.country) || !isReadable(f, asked)) continue
+    if (!includeCrawler && f.notes.startsWith(CRAWLER_NOTE)) continue
     const qs = (asked.get(f.form_id) ?? []).filter((q) => !q.conditional_on && q.category !== "consent")
     const all = asked.get(f.form_id) ?? []
     const g = guidanceFor(c, f.form_id)

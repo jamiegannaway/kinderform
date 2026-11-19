@@ -26,7 +26,13 @@ PUBLIC = {"regional_hub", "single_authority", "council", "council_consortium", "
           "regional_service"}
 
 
+COUNTRY_NAMES = {"US": "United States", "CA": "Canada", "AU": "Australia"}
+
+
 def group(f):
+    # UK forms keep their service groups; each other country is one column.
+    if f["country"] in COUNTRY_NAMES:
+        return COUNTRY_NAMES[f["country"]]
     if f["operator_type"] == "independent_fostering_agency":
         return "Independent fostering agencies"
     if f["operator_type"] in ("regional_adoption_agency", "voluntary_adoption_agency"):
@@ -39,7 +45,7 @@ def group(f):
 
 
 GROUPS = ["Public fostering services", "Independent fostering agencies", "Adoption agencies",
-          "Council adoption services"]
+          "Council adoption services", "United States", "Canada", "Australia"]
 
 # Forms that ask questions of the enquirer (not staff-only, not signposting, not vendor templates)
 asked = defaultdict(list)

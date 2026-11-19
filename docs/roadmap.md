@@ -36,6 +36,18 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] US register on the site's research page (`/research#us-picture`): counts, no names, with a table view for each chart
 - [ ] Second-person verification and invitation to agencies to correct their rows
 
+## Now: four countries (first pass)
+
+- [x] Census extended to Canada and Australia: operator types, regions and validation
+- [x] Canada register: 153 front doors, from provincial agencies to Children's Aid Societies and Indigenous agencies (unverified; 40 still need a website)
+- [x] Australia register: 151 front doors, state agencies, accredited agencies and Aboriginal community-controlled organisations (unverified; 58 still need a website)
+- [x] UK register: Scottish councils, Foster Wales local authorities, Northern Ireland trusts, more English councils and regional adoption agencies (154 front doors in all, unverified)
+- [x] Crawler follows enquiry links; `tools/crawl_to_census.py` writes its reads into the census (136 forms across the four countries, unverified)
+- [x] Comparison on `/research` across four countries: questions per form, topics, kinds of answer, required questions, sensitive questions and reply times, with no names
+- [ ] Review the machine-tagged topics, country by country
+- [ ] Read by hand the forms the crawler cannot reach: forms that load in the browser, portals, bot checks and PDFs
+- [ ] Find the missing websites in the Canada and Australia registers
+
 ## Next: listen, then measure
 
 - [ ] Eight to ten conversations with carers, care-experienced adults, a hub manager and sector bodies
@@ -44,10 +56,11 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Check census rows by hand in a browser, starting with the forms that would not render
 - [x] Form check tab on the site: public method and patterns without names; named draft scores in private previews only
 - [x] Census as evidence on the research page (`/research#how-forms-differ`): forms read from the live page, no names, each measure shown on its own so no form can be traced across them
-- [ ] US census pass: state agencies first, then counties where counties run child welfare
+- [x] US census first pass from the crawler: 54 enquiry forms (unverified)
+- [ ] US census: forms the crawler could not read, state agencies first, then counties where counties run child welfare
 - [ ] Share each service's census rows with it privately before any named analysis
 - [x] Polite crawler that reads public front-door pages and extracts form fields, consent wording and response-time promises (`tools/polite_fetch.py`)
-- [ ] Extend the register to Scottish councils and English councils outside hubs
+- [ ] Extend the register to the remaining English councils outside hubs (Scottish councils added November 2026)
 - [ ] Baseline report on patterns and good examples
 - [ ] Discuss the first-contact standard and the draft `Interaction` record proposed in the intake interactions review, then decide what goes into the schema
 
