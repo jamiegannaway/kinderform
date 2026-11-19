@@ -21,7 +21,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - JSON Schema draft 2020-12. Field names in `snake_case`.
 - Every schema change needs a valid and an invalid example in `schema/examples/` and must pass `python tests/validate_examples.py`.
 - Python 3.11+, standard library where possible. Keep dependencies few.
-- British English, plain words, short sentences.
+- British English, plain words, short sentences. Everything on the public site follows ISO 24495-1 plain language as set out in `docs/plain-language.md`, including its word list. After building, run `python tools/plain_check.py site/dist`.
 - Code is MIT; everything else is CC BY 4.0.
 
 ## Design
@@ -43,7 +43,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - `docs/` roadmap and project notes
 - `site/` public site for kinderform.org: Astro with shadcn/ui components rendered to static HTML (no client JavaScript, except the reference form at `/example-form`, which runs its own script from the same site; `vercel.json` allows script only on those pages); `vercel.json` builds it. `/research` is built from `evidence/`, plus the census as unnamed patterns (`site/src/lib/forms-differ.ts`) the US register as counts with no names (`site/src/lib/us-register.ts`), and the comparison of first-contact forms across the UK, the US, Canada and Australia (`site/src/lib/countries.ts`). UK-only sections use only census rows a person recorded; the comparison across countries also uses the crawler's. `/form-check` shows the method and patterns without names. `/form-check/named` (named draft scores) is built only when `VERCEL_ENV` is not `production`, so it exists only in private previews; scores are computed at build time and never committed
 - `tests/` validation scripts
-- `tools/` helper scripts: the census summary, the US register summary and charts, the polite crawler, and `crawl_to_census.py`, which turns crawler reads into census rows
+- `tools/` helper scripts: the census summary, the US register summary and charts, the polite crawler, and `crawl_to_census.py`, which turns crawler reads into census rows, and `plain_check.py`, which checks site text against the plain language rules
 
 ## Before finishing a task
 

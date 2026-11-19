@@ -10,6 +10,8 @@
 - [x] Landing page for kinderform.org (`site/`, deployed by Vercel)
 - [x] Review of intake interactions after the first enquiry, fostering and adoption (November 2026; most figures still to be checked against the originals)
 - [x] Research page on the site (`/research`), built from `evidence/`, with each claim marked as checked or not yet checked
+- [x] Plain language: site text rewritten to ISO 24495-1, with a house guide (`docs/plain-language.md`) and a check (`tools/plain_check.py`)
+- [ ] Test the home, research and form check pages with readers from each group in the plain language guide
 - [ ] Check the remaining findings and the intake interactions review against their original sources
 - [ ] Verify every register row against the live page
 - [ ] Add ONS local authority codes to the register
