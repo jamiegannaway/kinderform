@@ -28,7 +28,7 @@ export type Control = {
     inputmode?: string
     spellcheck?: boolean
     inputWidth?: number
-    transform?: "postcode_area" | "zip_prefix"
+    transform?: "postcode_area" | "zip_prefix" | "postal_code_fsa" | "au_postcode"
   }
 }
 export type Page = {
@@ -40,7 +40,7 @@ export type Page = {
 }
 export type UiConfig = {
   locale: string
-  design_system: "govuk" | "uswds"
+  design_system: "govuk" | "uswds" | "gcds" | "agds"
   sections: string[]
   start: { title: string; body: string[]; button: string }
   pages: Page[]
@@ -146,6 +146,12 @@ export function transform(kind: string | undefined, value: string): string {
     const digits = v.replace(/\D/g, "")
     return digits.length >= 3 ? digits.slice(0, 3) : digits
   }
+  if (kind === "postal_code_fsa") {
+    // A full postal code, like K1A 0B1, keeps only its first 3 characters.
+    const up = v.toUpperCase().replace(/\s+/g, "")
+    return up.length === 6 ? up.slice(0, 3) : up
+  }
+  if (kind === "au_postcode") return v.replace(/\s+/g, "")
   return v
 }
 
@@ -390,11 +396,12 @@ export function formatDay(d: Date, locale: string) {
 export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
   const name = (record.preferred_name as string) || (record.full_name as string)
   const day = formatDay(due, ui.locale)
-  const us = ui.locale === "en-US"
+  // Made-up staff names for the example reply, one for each country version.
+  const sender: Record<string, string> = { "en-US": "Maria", "en-CA": "Chantal", "en-AU": "Mia" }
   const how =
     record.contact_method === "email" ? "email you" : record.contact_method === "text_message" ? "text you" : "call you"
   if (record.knows_child)
     return `Hi ${name}, thank you for getting in touch. Because you're asking about a child you already know, we've passed your message to Sam in ${ui.confirmation.kinship_team}. Sam will ${how} by the end of ${day}. Nothing you ask counts against you.`
   const times = record.best_times && (record.best_times as string[]).length ? ", at one of the times you chose" : ""
-  return `Hi ${name}, thank you for getting in touch. I'm ${us ? "Maria" : "Priya"} from ${ui.confirmation.team}. I'll ${how} by the end of ${day}${times}. There are no wrong questions, and nothing you ask counts against you.`
+  return `Hi ${name}, thank you for getting in touch. I'm ${sender[ui.locale] ?? "Priya"} from ${ui.confirmation.team}. I'll ${how} by the end of ${day}${times}. There are no wrong questions, and nothing you ask counts against you.`
 }
