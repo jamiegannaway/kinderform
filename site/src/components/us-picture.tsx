@@ -65,7 +65,7 @@ function TileMap({ data }: { data: Data }) {
     <div className="space-y-4">
       <div
         role="img"
-        aria-label={`Map of US states. ${data.models.map((m) => `${m.label}: ${m.count}`).join(". ")}. Each square shows the number of front doors found.`}
+        aria-label={`Map of US states. ${data.models.map((m) => `${m.label}: ${m.count}`).join(". ")}. The number on each square is how many places to get in touch we found there.`}
         className="mx-auto grid max-w-3xl grid-cols-11 gap-1 sm:gap-1.5"
       >
         {data.tiles.flatMap((row, r) =>
@@ -73,7 +73,7 @@ function TileMap({ data }: { data: Data }) {
             t ? (
               <div
                 key={t.code}
-                title={`${t.code}: ${t.doors} front ${t.doors === 1 ? "door" : "doors"}`}
+                title={`${t.code}: ${t.doors} ${t.doors === 1 ? "place" : "places"} to get in touch`}
                 className={`flex aspect-square flex-col items-center justify-center rounded-md ${TILE[t.model]}`}
               >
                 <span className="text-[0.6rem] font-bold leading-none sm:text-sm">{t.code}</span>
@@ -97,40 +97,53 @@ export default function UsPicture({ data }: { data: Data }) {
   return (
     <section aria-labelledby="us-picture" className="space-y-8">
       <div className="max-w-3xl space-y-4">
-        <Badge variant="secondary">United States, first pass</Badge>
+        <Badge variant="secondary">United States, early results</Badge>
         <h2 id="us-picture" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          The US picture
+          What we have found so far in the United States
         </h2>
         <p className="leading-7">
-          We are mapping every public place in the United States where someone can ask about fostering or adoption: state
-          agencies, county agencies where counties run child welfare, tribal programmes and a first sample of private
-          licensed agencies. We record what their forms ask, what they promise and each state's published rules.
+          We have found {fmt(data.doors)} places to get in touch about fostering or adoption in the United States. In
+          states where counties run child welfare, each county has its own. Of the pages we have read, few say when
+          they will reply.
+        </p>
+        <p className="leading-7">
+          We are mapping every public place in the United States where someone can ask about fostering or adoption. This
+          includes:
+        </p>
+        <ul className="ml-5 list-disc space-y-2 leading-7">
+          <li>state agencies</li>
+          <li>county agencies, where counties run child welfare</li>
+          <li>tribal programmes</li>
+          <li>a first sample of private licensed agencies.</li>
+        </ul>
+        <p className="leading-7">
+          We also record what their forms ask, what they promise and each state's published rules.
         </p>
         <p className="leading-7 text-muted-foreground">
-          These are counts, with no service named. Nearly every row comes from a desk review or a first automated read of
-          the public page, and none has yet been checked by a second person, so treat them as early patterns.
+          These are counts, and we name no service. Nearly every row comes from search results or a first read of the
+          public page by a computer program. None has yet been checked by a person, so treat them as early patterns.
         </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatCard label="States and DC" value={fmt(data.jurisdictions)} note="All covered" />
-        <StatCard label="Front doors found" value={fmt(data.doors)} note={`${fmt(data.privateAgencies)} private, ${fmt(data.tribal)} tribal`} />
-        <StatCard label="Published rules" value={fmt(data.policies)} note="Age, training, licence and more" />
+        <StatCard label="States and Washington, DC" value={fmt(data.jurisdictions)} note="All included" />
+        <StatCard label="Places to get in touch" value={fmt(data.doors)} note={`${fmt(data.privateAgencies)} private agencies, ${fmt(data.tribal)} tribal programmes`} />
+        <StatCard label="Published state rules" value={fmt(data.policies)} note="On age, training, licences and more" />
         <StatCard label="Form questions read" value={fmt(data.questions)} note={`From ${fmt(data.questionForms)} forms`} />
       </div>
 
       <ChartCard
-        title="Who runs child welfare, and front doors found in each state"
-        description="Each square is a state, placed roughly where it sits on the map. Where counties run child welfare, each county has its own front door."
+        title="Who runs child welfare in each state, and how many places to get in touch we found"
+        description="Each square is a state, placed roughly where it sits on the map. Where counties run child welfare, each county has its own place to get in touch."
         footer={{
           lead: `${data.models.find((m) => m.model === "county")?.count ?? 0} states run child welfare through their counties`,
-          note: "So those states have many more front doors.",
+          note: "So those states have many more places to get in touch.",
         }}
       >
         <TileMap data={data} />
         <TableView
-          title="front doors by state"
-          head={["State", "Who runs it", "Front doors"]}
+          title="places to get in touch by state"
+          head={["State", "Who runs child welfare", "Places to get in touch"]}
           rows={data.tiles
             .flat()
             .filter((t): t is Tile => !!t)
@@ -141,16 +154,16 @@ export default function UsPicture({ data }: { data: Data }) {
 
       <div className="grid gap-6 md:grid-cols-2">
         <ChartCard
-          title="Where the front door sits"
-          description="Front doors by level"
-          footer={{ lead: `${fmt(data.levels[0].value)} are county agencies`, note: `Of ${fmt(data.doors)} front doors found.` }}
+          title="Places to get in touch, by level"
+          description="Whether each one works for a county, a region, a whole state, a tribe or a city"
+          footer={{ lead: `${fmt(data.levels[0].value)} are county agencies`, note: `Out of ${fmt(data.doors)} places to get in touch we found.` }}
         >
           <HorizontalBars data={data.levels} labelWidth="sm:grid-cols-[7rem_minmax(0,1fr)]" />
         </ChartCard>
         <ChartCard
-          title="Who runs it"
-          description="Includes private organisations a state pays to run its front door"
-          footer={{ lead: `${fmt(data.privateAgencies)} private licensed agencies so far`, note: "A first sample of up to 10 per state." }}
+          title="Who runs each place to get in touch"
+          description="Includes private organisations that a state pays to run its place to get in touch"
+          footer={{ lead: `${fmt(data.privateAgencies)} private licensed agencies so far`, note: "We have added a first sample of up to 10 per state." }}
         >
           <HorizontalBars data={data.sectors} labelWidth="sm:grid-cols-[9rem_minmax(0,1fr)]" />
         </ChartCard>
@@ -158,9 +171,9 @@ export default function UsPicture({ data }: { data: Data }) {
 
       <div className="grid gap-6">
         <ChartCard
-          title="What application forms ask"
-          description={`Beyond contact details. Share of the ${data.application.of} fillable application forms read`}
-          footer={{ lead: "A full application asks much more than an enquiry", note: "Name, address and contact details are left out here." }}
+          title="What US application forms ask, beyond contact details"
+          description={`The share of the ${data.application.of} fillable application forms we read that ask about each topic`}
+          footer={{ lead: "A full application asks much more than an enquiry form", note: "We left out name, address and contact details." }}
         >
           <HorizontalBars data={shareBars(data.application.topics)} max={100} labelWidth="sm:grid-cols-[14rem_minmax(0,1fr)]" />
           <TableView
@@ -173,11 +186,11 @@ export default function UsPicture({ data }: { data: Data }) {
 
       {data.replyDays.length > 0 && (
         <ChartCard
-          title="How quickly front doors say they will reply"
-          description="Front doors that publish a reply time, by the time they state"
+          title="How quickly places to get in touch say they will reply"
+          description="Places that publish a reply time, by the time they give"
           footer={{
-            lead: `${data.replyDays.length} of ${fmt(data.pagesOpened)} front-door pages read publish a reply time`,
-            note: `From ${data.replyDays[0]} to ${data.replyDays.at(-1)} days.`,
+            lead: `${data.replyDays.length} of the ${fmt(data.pagesOpened)} pages we read publish a reply time`,
+            note: `The times range from ${data.replyDays[0]} to ${data.replyDays.at(-1)} days.`,
           }}
         >
           <ColumnBars
@@ -191,11 +204,11 @@ export default function UsPicture({ data }: { data: Data }) {
               label: label as string,
               value: data.replyDays.filter(test as (d: number) => boolean).length,
             }))}
-            axisLabel="Stated time to first contact"
+            axisLabel="Time to first reply, as stated on the page"
           />
           <TableView
             title="reply times"
-            head={["Days", "Front doors"]}
+            head={["Days", "Places to get in touch"]}
             rows={[...new Set(data.replyDays)].map((d) => [String(d), data.replyDays.filter((x) => x === d).length])}
           />
         </ChartCard>
@@ -203,9 +216,9 @@ export default function UsPicture({ data }: { data: Data }) {
 
       <div className="grid gap-6 md:grid-cols-3">
         <ChartCard
-          title="Minimum age to foster"
-          description="States with a recorded figure"
-          footer={commonAge ? { lead: `${commonAge.label} in ${states(commonAge.value)}` } : undefined}
+          title="How many states set each minimum age to foster"
+          description="Only states where we recorded a figure"
+          footer={commonAge ? { lead: `The minimum age is ${commonAge.label} in ${states(commonAge.value)}` } : undefined}
         >
           <HorizontalBars
             data={data.minAge.map((b) => ({ ...b, display: states(b.value) }))}
@@ -213,11 +226,11 @@ export default function UsPicture({ data }: { data: Data }) {
           />
         </ChartCard>
         <ChartCard
-          title="Training before licensing"
-          description="Pre-service hours, states with a recorded figure"
+          title="Hours of training needed before a licence"
+          description="Only states where we recorded a figure"
           footer={(() => {
             const top = [...data.training].sort((a, b) => b.value - a.value)[0]
-            return top ? { lead: `${top.label} is most common` } : undefined
+            return top ? { lead: `${top.label} is the most common` } : undefined
           })()}
         >
           <HorizontalBars
@@ -226,11 +239,11 @@ export default function UsPicture({ data }: { data: Data }) {
           />
         </ChartCard>
         <ChartCard
-          title="How long a licence lasts"
-          description="Licence term, states with a recorded figure"
+          title="How long a foster care licence lasts"
+          description="Only states where we recorded a figure"
           footer={(() => {
             const top = [...data.licenceTerm].sort((a, b) => b.value - a.value)[0]
-            return top ? { lead: `${top.label} is most common` } : undefined
+            return top ? { lead: `${top.label} is the most common` } : undefined
           })()}
         >
           <HorizontalBars
@@ -241,18 +254,18 @@ export default function UsPicture({ data }: { data: Data }) {
       </div>
 
       <ChartCard
-        title="How far we have checked"
-        description="Rows by the closest look taken so far"
+        title="How closely we have looked at the US data"
+        description="Rows in each part of our data, by the closest look we have taken so far"
         footer={{
-          lead: `${fmt(data.verified)} of ${fmt(data.totalRows)} rows verified by a second person`,
-          note: "Verification is the next phase.",
+          lead: `${fmt(data.verified)} of ${fmt(data.totalRows)} rows checked by a person so far`,
+          note: "Checking by a person comes next.",
         }}
       >
         <StackedBars
           segments={[
-            { key: "verified", label: "Verified by a person", className: "bg-primary" },
+            { key: "verified", label: "Checked by a person", className: "bg-primary" },
             { key: "opened", label: "Page or form opened", className: "bg-chart-2" },
-            { key: "search", label: "Desk review only", className: "bg-chart-1" },
+            { key: "search", label: "Search results only", className: "bg-chart-1" },
           ]}
           rows={data.evidence.map((r) => ({
             label: r.label,
@@ -264,11 +277,11 @@ export default function UsPicture({ data }: { data: Data }) {
       </ChartCard>
 
       <p className="max-w-3xl text-sm text-muted-foreground">
-        The data is open: the register, its column guide and the method are in the{" "}
+        The data is open. You can find the register, its column guide and the method in the{" "}
         <a href="https://github.com/jamiegannaway/OUCM/tree/main/register/us" className="underline underline-offset-4">
           project repository
         </a>
-        . Agencies are welcome to correct their own rows.
+        . There, each place to get in touch is called a front door. Agencies are welcome to correct their own rows.
       </p>
     </section>
   )

@@ -12,9 +12,9 @@
     "title": "Ask about fostering or adoption",
     "body": [
       "Use this form to ask a question or set up a chat. It takes about 2 minutes.",
+      "A named person from the fostering team will reply within 1 working day.",
       "You do not need to know yet whether fostering or adoption is right for you.",
-      "We will not ask about your health, your home, your money or your family at this stage.",
-      "A named person from the fostering team will reply within 1 working day."
+      "We will not ask about your health, your home, your money or your family at this stage."
     ],
     "button": "Start now"
   },
@@ -46,7 +46,7 @@
             "inputWidth": 20,
             "hint": "For example, a shortened name or a name you prefer.",
             "errors": {
-              "maxLength": "This name must be 50 characters or fewer"
+              "maxLength": "The name we should call you must be 50 characters or fewer"
             }
           }
         }
@@ -89,7 +89,7 @@
           "options": {
             "asHeading": true,
             "format": "radio",
-            "hint": "For example, a grandchild, niece, nephew or a friend's child. This is called kinship care, and a different team helps with it. Do not tell us anything about the child here.",
+            "hint": "For example, a grandchild, niece, nephew or a friend's child. This is called kinship care. A different team helps with it. Do not tell us anything about the child here.",
             "optionLabels": {
               "true": "Yes",
               "false": "No"
@@ -173,7 +173,7 @@
             "hint": "For example, 07700 900 982.",
             "errors": {
               "required": "Enter your phone number",
-              "pattern": "Enter a phone number, like 07700 900 982"
+              "pattern": "Enter a phone number in the correct format, like 07700 900 982"
             }
           }
         }
@@ -237,7 +237,7 @@
           "label": "What would you like to talk about? (optional)",
           "options": {
             "asHeading": true,
-            "hint": "Select all that apply. You can also tell us when we talk. Please don't share personal details here.",
+            "hint": "Select all that apply. You can also tell us when we talk. Do not share personal details here.",
             "optionLabels": {
               "eligibility": "Whether I can foster or adopt",
               "what_it_involves": "What it involves day to day",
@@ -306,9 +306,9 @@
     "team": "the fostering team",
     "kinship_team": "the kinship team",
     "day_word": "working day",
-    "example_label": "Example message (not sent)",
-    "builders_heading": "For people building services",
-    "builders_body": "This is the record the service would receive. It is checked against the published schema before this page is shown.",
+    "example_label": "Example first reply (not sent)",
+    "builders_heading": "For people who build enquiry forms",
+    "builders_body": "This is the record the service would receive. The form checked it against the published schema before showing this page.",
     "restart": "Start again"
   },
   "progress": {

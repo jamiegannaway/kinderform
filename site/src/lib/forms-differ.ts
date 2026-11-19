@@ -64,10 +64,10 @@ export function formsDiffer(c: Census): FormsDiffer {
   )
   const replyNote =
     replies.length > 1
-      ? `Where a time was given, it ranged from ${replies[0]} to ${replies[replies.length - 1]}.`
+      ? `Where a form gave a time, it ranged from ${replies[0]} to ${replies[replies.length - 1]}.`
       : replies.length === 1
-        ? `Where a time was given, it was ${replies[0]}.`
-        : "None of the forms we checked gave a time."
+        ? `Where a form gave a time, it was ${replies[0]}.`
+        : "None of the forms we looked at gave a time."
 
   return {
     read: facts.length,
@@ -77,13 +77,13 @@ export function formsDiffer(c: Census): FormsDiffer {
     measures: [
       {
         id: "spare-room",
-        label: "Ask about a spare room",
-        note: "Asked before anyone from the service has spoken to the person.",
+        label: "Forms that ask about a spare room",
+        note: "They ask before anyone from the service has spoken to the person.",
         rows: meter((x) => x.spareRoom),
       },
       {
         id: "sensitive",
-        label: "Ask a sensitive question",
+        label: "Forms that ask a sensitive question",
         note: sensitiveTopics.length
           ? `The questions were about ${list(sensitiveTopics.map(short))}.`
           : "None of these forms asked one.",
@@ -91,14 +91,14 @@ export function formsDiffer(c: Census): FormsDiffer {
       },
       {
         id: "reply-time",
-        label: "Say when you will hear back",
+        label: "Forms that say when you will hear back",
         note: replyNote,
         rows: meter((x) => (x.replyChecked ? x.replyPromise !== null : null)),
       },
       {
         id: "newsletter",
-        label: "Ask about newsletters in a way you cannot skip",
-        note: "A required yes or no, a required tick box, or a sign-up that comes with sending the form.",
+        label: "Forms that ask about newsletters in a way you cannot skip",
+        note: "This means a required yes or no, a required tick box, or a sign-up that comes with sending the form.",
         rows: meter((x) => (x.marketing === "not checked" ? null : CANNOT_SKIP.has(x.marketing))),
       },
     ],

@@ -12,9 +12,9 @@
     "title": "Ask about fostering or adoption",
     "body": [
       "Use this form to ask a question or set up a chat. It takes about 2 minutes.",
+      "A named person from your local foster care agency will reply within 1 business day.",
       "You don't need to know yet whether fostering or adoption is right for you.",
-      "We won't ask about your health, your home, your money or your family at this stage.",
-      "A named person from your local foster care agency will reply within 1 business day."
+      "We won't ask about your health, your home, your money or your family at this stage."
     ],
     "button": "Start now"
   },
@@ -46,7 +46,7 @@
             "inputWidth": 20,
             "hint": "For example, a shortened name or a name you prefer.",
             "errors": {
-              "maxLength": "This name must be 50 characters or fewer"
+              "maxLength": "The name we should call you must be 50 characters or fewer"
             }
           }
         }
@@ -89,7 +89,7 @@
           "options": {
             "asHeading": true,
             "format": "radio",
-            "hint": "For example, a grandchild, niece, nephew or a family friend's child. This is often called kinship or relative care, and a different team helps with it. Don't tell us anything about the child here.",
+            "hint": "For example, a grandchild, niece, nephew or a family friend's child. This is often called kinship or relative care. A different team helps with it. Don't tell us anything about the child here.",
             "optionLabels": {
               "true": "Yes",
               "false": "No"
@@ -173,7 +173,7 @@
             "hint": "For example, 202-555-0147.",
             "errors": {
               "required": "Enter your phone number",
-              "pattern": "Enter a phone number, like 202-555-0147"
+              "pattern": "Enter a phone number in the correct format, like 202-555-0147"
             }
           }
         }
@@ -265,7 +265,7 @@
               "social_media": "Social media",
               "search": "An internet search",
               "event": "An event",
-              "advert": "An advert",
+              "advert": "An ad",
               "council_or_agency_website": "A state or agency website",
               "other": "Somewhere else"
             }
@@ -285,14 +285,14 @@
             "asHeading": true,
             "format": "checkbox",
             "checkboxLabel": "Yes, send me updates and event invitations",
-            "hint": "We'll only send these if you tick the box. You can stop them at any time."
+            "hint": "We'll only send these if you check the box. You can stop them at any time."
           }
         }
       ]
     }
   ],
   "check": {
-    "title": "Check your answers before sending",
+    "title": "Review your answers before sending",
     "change": "Change",
     "send_heading": "Now send your question",
     "send_body": "By sending this, you agree that we can use these details to reply to you.",
@@ -305,10 +305,10 @@
     "team": "your local foster care agency",
     "kinship_team": "the kinship care team",
     "day_word": "business day",
-    "example_label": "Example message (not sent)",
-    "builders_heading": "For people building services",
-    "builders_body": "This is the record the service would receive. It is checked against the published schema before this page is shown.",
-    "restart": "Start again"
+    "example_label": "Example first reply (not sent)",
+    "builders_heading": "For people who build forms like this",
+    "builders_body": "This is the record the agency would receive. The form checked it against the published schema before showing this page.",
+    "restart": "Start over"
   },
   "progress": {
     "question": "Question",

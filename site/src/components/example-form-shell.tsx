@@ -6,8 +6,8 @@ import { SiteFooter, SiteHeader } from "@/components/site-header"
 type Variant = "uk" | "us"
 
 const VERSIONS: { v: Variant; href: string; label: string; system: string }[] = [
-  { v: "uk", href: "/example-form", label: "UK version", system: "GOV.UK Design System patterns" },
-  { v: "us", href: "/example-form/us", label: "US version", system: "U.S. Web Design System" },
+  { v: "uk", href: "/example-form", label: "UK version", system: "patterns from the GOV.UK Design System" },
+  { v: "us", href: "/example-form/us", label: "US version", system: "the U.S. Web Design System" },
 ]
 
 export function ExampleIntro({ variant }: { variant: Variant }) {
@@ -21,8 +21,8 @@ export function ExampleIntro({ variant }: { variant: Variant }) {
           Example enquiry form
         </h1>
         <p className="mt-6 max-w-2xl text-xl text-muted-foreground">
-          The enquiry standard, working. It asks only what a fostering or adoption service needs to reply
-          quickly and kindly, and nothing about health, home, money or family.
+          This form shows our open standard for enquiries in use. It asks only what a fostering or adoption
+          service needs to reply quickly and kindly. It asks nothing about health, home, money or family.
         </p>
         <nav aria-label="Form versions" className="mt-8">
           <ul className="flex flex-wrap gap-2">
@@ -38,9 +38,9 @@ export function ExampleIntro({ variant }: { variant: Variant }) {
           </ul>
         </nav>
         <Alert className="mt-6 max-w-3xl">
-          <AlertTitle>Not a real form</AlertTitle>
+          <AlertTitle>This is not a real form</AlertTitle>
           <AlertDescription>
-            Nothing you enter is sent or stored. This version uses the {current.system}. It carries no
+            Nothing you enter is sent or stored. This version uses {current.system}. It carries no
             government branding, because Kinderform is not a government service.
           </AlertDescription>
         </Alert>
@@ -54,16 +54,22 @@ export function ExampleOutro() {
     <>
       <section aria-labelledby="ef-how" className="mx-auto max-w-6xl px-6 py-12">
         <h2 id="ef-how" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          How it is built
+          How the form is built
         </h2>
         <ul className="mt-6 ml-5 max-w-2xl list-disc space-y-3 leading-7">
-          <li>The questions and rules come from one schema. The same schema checks the record before the last page.</li>
-          <li>The wording lives in a separate file for each country, so a service can change it without touching code.</li>
           <li>
-            Moving between questions is clear: every page says where you are, the new question slides in, keyboard and
-            screen reader focus moves to it, and there is always a way back.
+            The questions and rules come from one schema: a file that describes what the record holds. The same schema
+            checks the record before the last page.
           </li>
-          <li>There is one question per page, a page to check your answers, and a clear error message at the top when something needs fixing.</li>
+          <li>The wording is in a separate file for each country. A service can change it without changing any code.</li>
+          <li>
+            You can always tell when you move to a new question. Every page says where you are, and the new question
+            slides in. Keyboard and screen reader focus moves to it. There is always a way back.
+          </li>
+          <li>
+            Each page asks one question. At the end, a page lets you check your answers. When something needs fixing, a
+            clear error message appears at the top.
+          </li>
         </ul>
       </section>
       <SiteFooter />

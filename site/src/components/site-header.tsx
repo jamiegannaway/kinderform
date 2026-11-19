@@ -50,22 +50,20 @@ export function SiteFooter() {
   return (
     <footer className="border-t">
       <div className="mx-auto max-w-6xl space-y-2 px-6 py-8 text-sm text-muted-foreground">
+        <p>This site sets no cookies, does not track you and loads nothing from other sites.</p>
         <p>
-          Kinderform. Code is MIT licensed. Writing and data are{" "}
+          Our code is under the MIT licence. Our writing and data are under{" "}
           <a
             href="https://creativecommons.org/licenses/by/4.0/"
             className="font-medium text-foreground underline underline-offset-4"
           >
             CC BY 4.0
           </a>
-          .
-        </p>
-        <p>
-          Built with the{" "}
+          . We built the site with the{" "}
           <a href="https://ui.shadcn.com" className="font-medium text-foreground underline underline-offset-4">
             shadcn/ui
           </a>{" "}
-          design system. This site sets no cookies, has no tracking and loads nothing from other sites.
+          design system.
         </p>
       </div>
     </footer>
