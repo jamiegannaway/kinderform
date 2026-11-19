@@ -1,0 +1,303 @@
+{
+ "updated": "2026-11-19",
+ "about": "A log of each piece of research the project has done, and what it could mean for our work. Every idea here is for discussion until we decide it in the open.",
+ "entries": [
+  {
+   "id": "intake-interactions",
+   "date": "2026-11-14",
+   "title": "What happens after someone gets in touch",
+   "report": "reports/2026-11-intake-interactions.md",
+   "question": "What does research say about each contact between a service and a person, from the enquiry to a formal application?",
+   "looked_at": [
+    "Fostering in England",
+    "Adoption in England",
+    "Wales, Scotland and Northern Ireland",
+    "Other countries"
+   ],
+   "how": "A desk review made with an AI-assisted research tool.",
+   "checked": "A person checked 3 sources on 14 November 2026. The rest are not yet checked by a person.",
+   "learned": [
+    "Speed alone is not enough. A hub in the North East of England made first visits much quicker, but approvals did not rise. (Ipsos and CEI for the Department for Education, 2026.)",
+    "People are lost when contact lapses, or when one team passes them on to another.",
+    "We found no trial of any single step after an enquiry in fostering or adoption."
+   ]
+  },
+  {
+   "id": "reminders",
+   "date": "2026-11-19",
+   "title": "Reminders, first replies and missed appointments in other fields",
+   "report": "reports/2026-11-reminders-and-missed-appointments.md",
+   "question": "What do other fields know about first replies, reminders and what to do when someone misses an appointment?",
+   "looked_at": [
+    "Doctor and hospital appointments",
+    "Courts",
+    "Jobcentres",
+    "Education",
+    "Talking therapies",
+    "Volunteering"
+   ],
+   "how": "A desk review made with an AI-assisted research tool. None of the evidence is about fostering.",
+   "checked": "Not yet checked by a person. Many sources were read from a summary only.",
+   "learned": [
+    "No study in any field tests our time limits: 5 minutes, 1 working day or 2 working days.",
+    "What the first message says, and who it is from, has better evidence than how fast it arrives.",
+    "Reminders help a little. Government teams in the United States ran 126 trials, and the average gain was 1.4 percentage points (DellaVigna and Linos, 2022).",
+    "The wording that works best uses guilt, cost, penalty or a sense of debt. We should not copy it."
+   ]
+  },
+  {
+   "id": "giving",
+   "date": "2026-11-19",
+   "title": "What giving blood, stem cells and kidneys can teach us",
+   "report": "reports/2026-11-high-commitment-giving.md",
+   "question": "What do fields where people make a large, generous offer know about long waits, 'not now' and being turned away?",
+   "looked_at": [
+    "Blood donation",
+    "Stem cell registers",
+    "People who offer to donate a kidney"
+   ],
+   "how": "A desk review made with an AI-assisted research tool. None of the evidence is about fostering.",
+   "checked": "Not yet checked by a person. Most blood donation figures were read from a summary only.",
+   "learned": [
+    "Being asked to wait puts most new people off for good, unless the service gets back in touch itself.",
+    "Long silences go with losing touch. Most people a stem cell register loses could not be reached; few had changed their minds.",
+    "The biggest loss comes straight after the first form, when nobody manages to speak to the person.",
+    "Plain, factual messages did as well as urgent or emotional ones, or better."
+   ]
+  }
+ ],
+ "meanings": [
+  {
+   "id": "time-limits",
+   "part": "First reply",
+   "kind": "keep",
+   "idea": "Keep the 5-minute acknowledgement and the first reply from a person within 1 working day. Call them promises we make out of respect, not limits that research has proved.",
+   "why": "No study in any field we looked at tests either limit. Nothing we found supports a longer wait.",
+   "from": [
+    "reminders",
+    "giving",
+    "intake-interactions"
+   ]
+  },
+  {
+   "id": "ack-content",
+   "part": "First reply",
+   "kind": "tighten",
+   "idea": "Say what the acknowledgement must contain: what it is, who will be in touch and when, and what happens next. It also says every step is the person's choice.",
+   "why": "A plainer court form in New York cut missed dates. A named sender and a clear next step have the best support.",
+   "from": [
+    "reminders"
+   ]
+  },
+  {
+   "id": "two-clocks",
+   "part": "First reply",
+   "kind": "tighten",
+   "idea": "Measure two things apart: when a person first tried to reach someone, and when they first spoke.",
+   "why": "Our drafts use both meanings for the 1-working-day rule. A person who is never reached is the biggest early loss.",
+   "from": [
+    "reminders",
+    "giving"
+   ]
+  },
+  {
+   "id": "bounce",
+   "part": "First reply",
+   "kind": "add",
+   "idea": "When an acknowledgement does not arrive, the service tries another way to reach the person within 1 working day.",
+   "why": "In one English court trial, most of the phone numbers on file did not work.",
+   "from": [
+    "reminders"
+   ]
+  },
+  {
+   "id": "not-reached",
+   "part": "Enquiry record",
+   "kind": "add",
+   "idea": "Record 'not yet reached' and 'paused' as their own outcomes. Keep them apart from the person's decision and the service's decision.",
+   "why": "Kidney and stem cell studies mix these up, so nobody can see where people really leave.",
+   "from": [
+    "giving"
+   ]
+  },
+  {
+   "id": "event-reminders",
+   "part": "Information events and visits",
+   "kind": "add",
+   "idea": "Send a confirmation, a reminder about a week before and one the day before. Each has an easy way to change the date or say 'not now'.",
+   "why": "Reminders help a little where none were sent before. Expect a few percentage points at most.",
+   "from": [
+    "reminders"
+   ]
+  },
+  {
+   "id": "missed-event",
+   "part": "Information events and visits",
+   "kind": "tighten",
+   "idea": "After a missed event, call within 2 working days and assume a slip. Offer another date, a one-to-one talk, or 'not for now' as equal choices.",
+   "why": "Guidance and interviews back prompt, kind follow-up. No trial has tested any follow-up or any time limit.",
+   "from": [
+    "reminders"
+   ]
+  },
+  {
+   "id": "no-closure",
+   "part": "Information events and visits",
+   "kind": "add",
+   "idea": "Never close an enquiry after one missed event. Never ask people to confirm their interest to stay on the books.",
+   "why": "One health service that asked people to opt in saw fewer of them in the end.",
+   "from": [
+    "reminders"
+   ]
+  },
+  {
+   "id": "not-now",
+   "part": "'Not now'",
+   "kind": "tighten",
+   "idea": "Agree the pause in a conversation and let the person pick any date. The service gets in touch about a week before, in plain words.",
+   "why": "In blood donation trials, a talk at the time and a plain reminder both helped. An email on its own did not.",
+   "from": [
+    "giving"
+   ]
+  },
+  {
+   "id": "check-ins",
+   "part": "Keeping in touch",
+   "kind": "add",
+   "idea": "For anyone paused for more than 6 months, check in at least once a year. Offer 'pause' and 'remove me' as equal choices.",
+   "why": "On the NHS stem cell register, people with no recent contact were much harder to reach when asked.",
+   "from": [
+    "giving"
+   ]
+  },
+  {
+   "id": "rhythm",
+   "part": "Keeping in touch",
+   "kind": "change",
+   "idea": "Replace 'at least every 2 weeks' with a rhythm agreed with the person. Keep 2 weeks as the longest silence unless they choose otherwise.",
+   "why": "Silence goes with losing people, but no study supports 2 weeks over any other gap.",
+   "from": [
+    "giving",
+    "intake-interactions"
+   ]
+  },
+  {
+   "id": "guide",
+   "part": "Named guide",
+   "kind": "tighten",
+   "idea": "Define the named guide by duties, not a job title. One duty is to support the person's decision either way.",
+   "why": "Kidney donor services that named a role without defining it ended up with very uneven practice.",
+   "from": [
+    "giving",
+    "intake-interactions"
+   ]
+  },
+  {
+   "id": "turned-away",
+   "part": "Being turned away",
+   "kind": "add",
+   "idea": "Set a minimum for a decent 'no'. Say early that it can happen, and tell the person by voice. Give the real reason, offer a review, and call again later.",
+   "why": "People turned down as kidney donors said the handling hurt more than the decision. No trial has tested this.",
+   "from": [
+    "giving"
+   ]
+  },
+  {
+   "id": "right-to-stop",
+   "part": "Withdrawal",
+   "kind": "add",
+   "idea": "Say at every stage that the person can stop at any time, without giving a reason, and that stopping is not a failure.",
+   "why": "UK guidance for people who offer a kidney already says this in plain words.",
+   "from": [
+    "giving"
+   ]
+  },
+  {
+   "id": "reciprocity",
+   "part": "What the standard rests on",
+   "kind": "change",
+   "idea": "Stop giving 'I have done something for you' messages as a reason for our contact rules. Keep the honest parts: a real named person and a clear next step.",
+   "why": "Those messages work by making people feel they owe something. Our first review listed them as a strength, and the newer review disagrees.",
+   "from": [
+    "reminders",
+    "intake-interactions"
+   ]
+  },
+  {
+   "id": "no-pressure",
+   "part": "What we will not use",
+   "kind": "avoid",
+   "idea": "No wording that uses guilt, cost, penalty, urgency or 'most people attend'. No gifts or rewards for enquiring. No early pledges.",
+   "why": "These raise attendance by pressure, and several failed or backfired when tested. Our aim is a well-informed choice.",
+   "from": [
+    "reminders",
+    "giving"
+   ]
+  },
+  {
+   "id": "no-scoring",
+   "part": "What we will not use",
+   "kind": "avoid",
+   "idea": "Never measure doubt, or predict who will attend or withdraw, to score or rank people. Doubt may only prompt a talk the person controls.",
+   "why": "Registers and health services do build such scores. Our rules forbid scoring people who enquire.",
+   "from": [
+    "reminders",
+    "giving"
+   ]
+  },
+  {
+   "id": "equity",
+   "part": "Fairness",
+   "kind": "add",
+   "idea": "Fix the main page, the form and the first message before adding texts. Give a reason for each early question, or drop it.",
+   "why": "Texts only reach people whose details are right. Questions asked with no reason put off some groups more than others.",
+   "from": [
+    "reminders",
+    "giving"
+   ]
+  },
+  {
+   "id": "success",
+   "part": "How we measure",
+   "kind": "change",
+   "idea": "Count attended, rearranged, 'not now' and no reply apart. Treat a well-informed 'not now' as a good result.",
+   "why": "Nearly every trial counts only attendance. None asked people whether they felt respected.",
+   "from": [
+    "reminders",
+    "giving"
+   ]
+  },
+  {
+   "id": "claims",
+   "part": "How we talk about evidence",
+   "kind": "add",
+   "idea": "When we say what a reminder or message might gain, say a few percentage points at most and that local results vary.",
+   "why": "Published effects were about six times larger than the effects government teams saw at scale.",
+   "from": [
+    "reminders"
+   ]
+  },
+  {
+   "id": "independent-voice",
+   "part": "Open questions",
+   "kind": "test",
+   "idea": "Ask whether people who enquire would want someone independent of the service to talk to, and when.",
+   "why": "People who offer a kidney get an independent person whose only job is to protect their interests.",
+   "from": [
+    "giving"
+   ]
+  },
+  {
+   "id": "trials",
+   "part": "Open questions",
+   "kind": "test",
+   "idea": "Test our own rules in the open with services that volunteer. Start with the named acknowledgement, the follow-up after a missed event, and the 'not now' reminder.",
+   "why": "All three reviews found no trial of these steps in fostering or adoption.",
+   "from": [
+    "intake-interactions",
+    "reminders",
+    "giving"
+   ]
+  }
+ ]
+}

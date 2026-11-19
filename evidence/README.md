@@ -2,7 +2,9 @@
 
 `library.md` is the project's evidence base. It exists so that anyone working on carer recruitment can find the research in one place, and so that this project's claims stay honest.
 
-`reports/` holds longer reviews that draw on many sources, such as the [November 2026 review of intake interactions](reports/2026-11-intake-interactions.md). Each report says how it was made and what has been checked. Its key sources are also added to `library.md` as single entries.
+`reports/` holds longer reviews that draw on many sources, such as the [November 2026 review of intake interactions](reports/2026-11-intake-interactions.md). Two more reviews from November 2026 look at other fields: [reminders and missed appointments](reports/2026-11-reminders-and-missed-appointments.md) and [giving blood, stem cells and kidneys](reports/2026-11-high-commitment-giving.md). Each report says how it was made and what has been checked. Its key sources are also added to `library.md` as single entries.
+
+`research-log.json` is the research log: one entry for each report, and a list of what the research could mean for the project. Each idea says which research it comes from and stays "for discussion" until we decide it in the open. Every report in `reports/` needs an entry. Run `python tests/validate_research_log.py` after editing it. The site shows it as two tables at [kinderform.org/research/log](https://www.kinderform.org/research/log), linked from the footer of every page.
 
 `digests/` holds a short monthly note on what was added and why it matters.
 

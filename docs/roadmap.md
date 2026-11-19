@@ -11,6 +11,10 @@
 - [x] Review of intake interactions after the first enquiry, fostering and adoption (November 2026; most figures still to be checked against the originals)
 - [x] Research page on the site (`/research`), built from `evidence/`, with each claim marked as checked or not yet checked
 - [x] Plain language: site text rewritten to ISO 24495-1, with a house guide (`docs/plain-language.md`) and a check (`tools/plain_check.py`)
+- [x] Reviews of other fields (November 2026): reminders and missed appointments, and giving blood, stem cells and kidneys (not yet checked by a person)
+- [x] Research log on the site (`/research/log`, linked from the footer), built from `evidence/research-log.json`: each review and what it could mean for the project, as tables
+- [ ] Rewrite the two reviews of other fields in plain language, work through their "Check before public use" lists, and add their key sources to the library
+- [ ] Decide each idea in the research log in the open, starting with the time limits, reciprocity and the 2-week keeping-in-touch rule
 - [ ] Test the home, research and form check pages with readers from each group in the plain language guide
 - [ ] Check the remaining findings and the intake interactions review against their original sources
 - [ ] Verify every register row against the live page

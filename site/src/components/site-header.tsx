@@ -86,6 +86,12 @@ export function SiteFooter() {
     <footer className="border-t">
       <div className="mx-auto max-w-6xl space-y-2 px-6 py-8 text-sm text-muted-foreground">
         <p>
+          <a href="/research/log" className="font-medium text-foreground underline underline-offset-4">
+            Research log
+          </a>
+          : each piece of research we have done, and what it could mean for the project.
+        </p>
+        <p>
           This site sets no cookies, does not track you and loads nothing from other sites. If you choose dark mode,
           your browser remembers it on this device only.
         </p>
