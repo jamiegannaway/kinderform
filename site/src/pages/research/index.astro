@@ -55,12 +55,11 @@ if (card) {
   const expected = [
     `read ${differ.read} enquiry forms`,
     `shortest asked ${qs[0]} questions and the longest asked ${qs.at(-1)}`,
-    `All ${ifa?.of} independent agency forms asked about a spare room`,
-    `none of the ${pub?.of} council and hub forms`,
+    `${ifa?.yes === ifa?.of ? "All" : ifa?.yes + " of the"} ${ifa?.of} independent agency forms asked about a spare room`,
+    `${pub?.yes ? pub.yes + " of the" : "none of the"} ${pub?.of} council and hub forms`,
     `${sum(m("reply-time"), "yes")} of the ${sum(m("reply-time"), "of")} forms where we looked for a reply time`,
   ];
   const stale = expected.filter((e) => !card.summary.includes(e));
-  if (ifa?.yes !== ifa?.of || pub?.yes !== 0) stale.push("the spare-room pattern itself has changed");
   if (stale.length)
     throw new Error(`evidence/findings.json "forms-differ" no longer matches the census. Update it to say: ${stale.join("; ")}`);
 }

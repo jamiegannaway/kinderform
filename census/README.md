@@ -97,7 +97,7 @@ Labels, hints and guidance are paraphrased, to keep the dataset short and to avo
 
 **United States, Canada and Australia.** Forms come from the crawler, starting from the front-door registers in [`register/us/`](../register/us/), [`register/ca/`](../register/ca/) and [`register/au/`](../register/au/). Only forms that load as ordinary web pages can be read: forms that load in the browser with JavaScript, sit behind a portal or a bot check, or are PDFs are not yet recorded. Coverage is therefore uneven, and every crawler row is unverified.
 
-**UK.** Most UK rows were recorded by a person from 14 November 2026. On 18 November the crawler added 32 more forms from front doors new to the register: 15 in Wales (mostly Foster Wales local authorities), 4 in Scotland, 1 in Northern Ireland and 12 in England. On the site, "How first-contact forms differ", the form check and the rubric use only the rows a person recorded, because the published findings were written from those. The comparison across four countries on `/research` uses the crawler's forms as well.
+**UK.** Most UK rows were recorded by a person from 14 November 2026. On 18 November the crawler added 32 more forms from front doors new to the register: 15 in Wales (mostly Foster Wales local authorities), 4 in Scotland, 1 in Northern Ireland and 12 in England. On the site, the form check and the rubric use only the rows a person recorded. "How UK enquiry forms differ" and the comparison across four countries on `/research` use the crawler's forms as well.
 
 This is a first pass, not a full census. See [`summary.md`](summary.md) for counts.
 

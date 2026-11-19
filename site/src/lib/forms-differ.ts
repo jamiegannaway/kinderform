@@ -45,7 +45,8 @@ function daysOf(v: string): number {
 }
 
 export function formsDiffer(c: Census): FormsDiffer {
-  const all = factsFor(c)
+  // UK forms a person recorded and UK forms the crawler read, both read from the live page.
+  const all = factsFor(c, ["UK"], true)
   const facts = all.filter((x) => x.form.observed === "direct_fetch")
   const by = (g: Group) => facts.filter((x) => x.group === g)
   const groups = GROUPS.filter((g) => by(g).length > 0)
