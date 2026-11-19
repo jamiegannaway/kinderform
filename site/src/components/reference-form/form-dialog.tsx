@@ -91,7 +91,9 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
                 Built with the {meta.system}, without government branding. Nothing you enter is sent or stored.
               </DialogDescription>
             </DialogHeader>
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-white text-black">
+            {/* relative: the forms' visually hidden text is absolutely positioned and must stay inside
+                this scroll area, or scrolling the form into view shifts the whole dialog. */}
+            <div className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain bg-white text-black">
               <div className={`p-5 md:p-8 ${form?.rootClass ?? ""}`}>
                 {form ? (
                   <ReferenceForm key={country} ui={form.ui} theme={form.theme} />

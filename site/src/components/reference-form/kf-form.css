@@ -12,6 +12,9 @@
   .kf-step { animation: none; }
 }
 
+/* Each move scrolls the form's top into view; keep the padding above it visible. */
+.kf-form { scroll-margin-top: 2rem; }
+
 /* Headings receive focus after each move so screen readers announce the new question. */
 .kf-form [tabindex="-1"]:focus { outline: none; }
 

@@ -1,0 +1,819 @@
+// Australian Government Design System (AGDS) for the Australian reference form only,
+// without government branding: no Commonwealth Coat of Arms, no "Australian Government"
+// lockup, no header and no footer. Kinderform is not a government service.
+//
+// Ported by hand from the Emotion style objects in @ag.ds-next/react 1.36.0 (MIT licence),
+// because the React components inject their styles at run time and the site's
+// Content-Security-Policy is style-src 'self'. Everything is scoped under .agds-form, so
+// nothing leaks into the Tailwind and shadcn/ui styles of the rest of the site, and it is all
+// unlayered, so Tailwind's preflight (in @layer base) cannot undo it.
+//
+// Tokens used, by their AGDS names:
+//   core/tokens.ts     unit 4 (px); rem 16; font.body (system font stack, so no font files);
+//                      font.monospace; fontSize xs and sm scales (sm applies from
+//                      breakpoint.sm, 576px); lineHeight nospace 1, heading 1.25, default 1.5,
+//                      snapped to the 4px grid as fontGrid() does; borderWidth sm 1, md 2, lg 3,
+//                      xl 4; borderRadius 4 (= unit); maxWidth.bodyText 42em; maxWidth.field
+//                      xs 5rem, sm 8rem, md 13rem, lg 18rem, xl 24rem; transition 250ms ease
+//   core/goldTheme.ts  lightForegroundText #313131, lightForegroundAction #00698f,
+//                      lightForegroundFocus #9263de, lightForegroundMuted #626262,
+//                      lightBackgroundBody #ffffff, lightBackgroundShade #f5f5f5,
+//                      lightBorder #808080, lightBorderMuted #d3d3d3, lightSelected #00698f,
+//                      lightSystemError #d60000 / Muted #fdf2f2,
+//                      lightSystemSuccess #0b996c / Muted #f3faf8,
+//                      lightSystemWarning #f69900 / Muted #fffaf2
+//   core/packs.ts      control.md (2rem, borderWidth lg); input.md (3rem high, sm/default type);
+//                      outline (3px solid foregroundFocus, offset 2px); underline
+// Components: field, text-input, control-group, radio, checkbox, button, direction-link,
+// page-alert, callout, details, summary-list, divider, heading, text, text-link, list, prose,
+// a11y (VisuallyHidden). Spacing between blocks follows Stack and FormStack gaps, tightened
+// from the templates' 3rem to 2rem so a question fits a phone screen inside a dialog.
+@use "sass:map";
+@use "sass:math";
+
+// ---- Tokens ------------------------------------------------------------------
+
+$unit: 4;
+$rem: 16;
+$font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol";
+$font-monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$breakpoint-sm: 576px;
+$font-size: (
+  xs: (xs: 0.875, sm: 1, md: 1.25, lg: 1.5, xl: 1.75, xxl: 2, xxxl: 2.5),
+  sm: (xs: 0.875, sm: 1, md: 1.25, lg: 1.5, xl: 2, xxl: 2.5, xxxl: 3),
+);
+$line-height: (nospace: 1, heading: 1.25, default: 1.5);
+$field-max-width: (xs: 5rem, sm: 8rem, md: 13rem, lg: 18rem, xl: 24rem);
+$border-sm: 1px;
+$border-lg: 3px;
+$border-xl: 4px;
+$radius: 4px;
+$transition: 250ms ease;
+
+// fontGrid(): the line height that puts each line on the 4px grid.
+@function grid-line-height($size, $lh) {
+  $px: $size * $rem;
+  @return math.div(math.round(math.div($px * map.get($line-height, $lh), $unit)) * $unit, $px);
+}
+
+@mixin font-grid($scale) {
+  @each $name, $size in map.get($font-size, $scale) {
+    --typography-#{$name}: #{$size}rem;
+    @each $lh, $value in $line-height {
+      --typography-#{$name}-#{$lh}: #{grid-line-height($size, $lh)};
+    }
+  }
+}
+
+@mixin type($size, $lh: default) {
+  font-size: var(--typography-#{$size});
+  line-height: var(--typography-#{$size}-#{$lh});
+}
+
+// packs.outline, with focusRingFor "all" and "keyboard" from box/styles.ts.
+@mixin outline {
+  outline: 3px solid var(--agds-foreground-focus);
+  outline-offset: 2px;
+}
+@mixin focus-all {
+  &:focus {
+    @include outline;
+  }
+}
+@mixin focus-keyboard {
+  &:focus {
+    @include outline;
+  }
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+  &:focus-visible {
+    @include outline;
+  }
+}
+
+// linkStyles from box/styles.ts.
+@mixin link {
+  color: var(--agds-foreground-action);
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+  cursor: pointer;
+  &:hover {
+    color: var(--agds-foreground-text);
+    text-decoration: none;
+  }
+}
+
+@mixin sm-up {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+// ---- Root --------------------------------------------------------------------
+
+.agds-form {
+  // goldTheme, light palette, under the boxPalette custom property names.
+  --agds-palette: light;
+  --agds-foreground-text: #313131;
+  --agds-foreground-action: #00698f;
+  --agds-foreground-focus: #9263de;
+  --agds-foreground-muted: #626262;
+  --agds-background-body: #ffffff;
+  --agds-background-shade: #f5f5f5;
+  --agds-background-body-alt: #ebebeb;
+  --agds-background-shade-alt: #e0e0e0;
+  --agds-border: #808080;
+  --agds-border-muted: #d3d3d3;
+  --agds-selected: #00698f;
+  --agds-system-error: #d60000;
+  --agds-system-error-muted: #fdf2f2;
+  --agds-system-success: #0b996c;
+  --agds-system-success-muted: #f3faf8;
+  --agds-system-warning: #f69900;
+  --agds-system-warning-muted: #fffaf2;
+  --agds-system-info: #00bfe9;
+  --agds-system-info-muted: #f2fcfe;
+  @include font-grid(xs);
+  @include sm-up {
+    @include font-grid(sm);
+  }
+
+  // The form brings its own light surface, text colour and font, so it reads the same
+  // inside a dark-mode page. It sets no padding or margin: the dialog or page around it
+  // does, and an unlayered padding here would override Tailwind's p-* utilities.
+  color-scheme: light;
+  box-sizing: border-box;
+  // Contains the visually hidden (position: absolute) text. Without it, inside a fixed
+  // dialog that text would overflow the dialog box and scrollIntoView would shift the dialog.
+  position: relative;
+  background: var(--agds-background-body);
+  color: var(--agds-foreground-text);
+  font-family: $font-body;
+  font-weight: normal;
+  @include type(sm);
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+
+  // Box's reset (box-sizing, no margin, no padding), applied the way AGDS elements get it.
+  // :where() keeps these below the component classes.
+  :where(*, *::before, *::after) {
+    box-sizing: border-box;
+  }
+  :where(h1, h2, h3, p, ul, ol, dl, dd, pre, figure, hr) {
+    margin: 0;
+  }
+  :where(fieldset) {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  :where(legend) {
+    padding: 0;
+  }
+  :where(p) {
+    max-width: 42em;
+  }
+  :where(strong, b) {
+    font-weight: bold;
+  }
+  :where(a:not([class])) {
+    @include link;
+    @include focus-keyboard;
+  }
+  ::selection {
+    color: var(--agds-background-body);
+    background-color: var(--agds-foreground-action);
+  }
+
+  // ---- Layout: Stack, FormStack and the form step template ----------------------
+
+  .agds-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .agds-stack--sm {
+    gap: 1rem;
+  }
+  .agds-stack--md {
+    gap: 1.5rem;
+  }
+  .agds-stack--lg {
+    gap: 2rem;
+  }
+
+  // ---- Type: Heading, Text, Prose -----------------------------------------------------
+
+  .agds-h1,
+  .agds-h2,
+  .agds-h3 {
+    margin: 0;
+    color: var(--agds-foreground-text);
+    font-family: $font-body;
+    font-weight: bold;
+  }
+  .agds-h1 {
+    @include type(xxl, heading);
+  }
+  .agds-h2 {
+    @include type(xl, heading);
+  }
+  .agds-h3 {
+    @include type(lg, heading);
+  }
+
+  .agds-prose {
+    @include type(sm);
+    > * {
+      margin: 0;
+    }
+    > * + p,
+    > * + ul,
+    > * + ol {
+      margin-top: 1.5rem;
+    }
+    > * + h2 {
+      margin-top: 3rem;
+    }
+    h2 {
+      font-weight: bold;
+      @include type(xl, heading);
+    }
+    p,
+    li {
+      max-width: 42em;
+    }
+    ul,
+    ol {
+      padding-left: 2.5rem;
+    }
+    ul {
+      list-style-type: disc;
+    }
+    ol {
+      list-style-type: decimal;
+    }
+    li + li {
+      margin-top: 0.5rem;
+    }
+  }
+
+  // UnorderedList and ListItem.
+  .agds-list {
+    margin: 0;
+    padding-left: 2.5rem;
+    list-style-type: disc;
+    > li {
+      @include type(sm);
+      list-style: unset;
+    }
+    > li + li {
+      margin-top: 0.5rem;
+    }
+  }
+
+  // VisuallyHidden.
+  .agds-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  // TextLink.
+  .agds-text-link {
+    @include link;
+    @include focus-keyboard;
+  }
+
+  // ---- Icon -----------------------------------------------------------------------
+
+  .agds-icon {
+    display: block;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+  .agds-icon--sm {
+    width: 1rem;
+    height: 1rem;
+  }
+  .agds-icon--md {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .agds-icon--bold {
+    stroke-width: 3;
+  }
+  .agds-icon--sm.agds-icon--bold {
+    stroke-width: 4;
+  }
+
+  // ---- Field: label, hint, message and the invalid bar ------------------------------
+
+  .agds-field {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .agds-field--invalid {
+    padding-left: 1rem;
+    border-left: $border-xl solid var(--agds-system-error);
+  }
+  .agds-field__label {
+    color: var(--agds-foreground-text);
+    @include type(sm);
+  }
+  .agds-field__label-text {
+    font-weight: bold;
+  }
+  // FieldLabel's secondary label is a Text: muted, normal weight and always sm, even when
+  // the label is the page heading.
+  .agds-field__secondary {
+    color: var(--agds-foreground-muted);
+    font-weight: normal;
+    @include type(sm);
+  }
+  // The label (or legend) as the page heading keeps the H1 type.
+  .agds-field__heading {
+    margin-bottom: 0.25rem;
+    .agds-field__label {
+      display: block;
+      font: inherit;
+    }
+  }
+  .agds-field__hint {
+    display: block;
+    color: var(--agds-foreground-muted);
+    @include type(sm);
+  }
+  .agds-field__message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--agds-system-error);
+  }
+  .agds-field__message-text {
+    display: block;
+    color: var(--agds-system-error);
+    font-weight: bold;
+    @include type(sm);
+  }
+
+  // ---- TextInput ---------------------------------------------------------------------
+
+  .agds-text-input {
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 3rem;
+    margin: 0;
+    padding: 0 1rem;
+    border: $border-lg solid var(--agds-border);
+    border-radius: $radius;
+    background: var(--agds-background-body);
+    color: var(--agds-foreground-text);
+    font-family: $font-body;
+    font-weight: normal;
+    @include type(sm);
+    @include focus-all;
+    &[aria-invalid="true"] {
+      border-color: var(--agds-system-error);
+      background-color: var(--agds-system-error-muted);
+    }
+  }
+  @each $name, $width in $field-max-width {
+    .agds-text-input--#{$name} {
+      max-width: $width;
+    }
+  }
+
+  // ---- ControlGroup, Radio, Checkbox ----------------------------------------------
+
+  .agds-control-group__legend {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  .agds-control-group__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  // A heading legend gets the Fieldset hint spacing (0.75rem).
+  .agds-control-group__legend--heading + .agds-control-group__body {
+    margin-top: 0.75rem;
+  }
+  // block: one option per line.
+  .agds-control-group__options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding-top: 0.5rem;
+  }
+
+  .agds-control-option {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .agds-control {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: var(--agds-foreground-text);
+    cursor: pointer;
+  }
+  .agds-control__box {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+  }
+  .agds-control__input {
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    opacity: 0;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .agds-control__indicator {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: $border-lg solid var(--agds-border);
+    border-radius: $radius;
+    background-color: var(--agds-background-body);
+    color: var(--agds-foreground-text);
+    pointer-events: none;
+  }
+  .agds-control--radio .agds-control__indicator {
+    border-radius: 100%;
+  }
+  .agds-control__dot {
+    display: block;
+    width: calc(100% - 0.5rem);
+    height: calc(100% - 0.5rem);
+    border-radius: 100%;
+    background-color: var(--agds-foreground-text);
+    outline: 1px solid transparent;
+    @media (forced-colors: active) {
+      background-color: MenuText;
+    }
+  }
+  .agds-control__input ~ .agds-control__indicator > * {
+    opacity: 0;
+  }
+  .agds-control__input:checked ~ .agds-control__indicator > * {
+    opacity: 1;
+  }
+  .agds-control__input:focus ~ .agds-control__indicator {
+    @include outline;
+  }
+  .agds-control__input[aria-invalid="true"] ~ .agds-control__indicator {
+    border-color: var(--agds-system-error);
+    background-color: var(--agds-system-error-muted);
+  }
+  .agds-control__label {
+    flex-grow: 1;
+    padding-top: 0.2rem;
+    color: var(--agds-foreground-text);
+    @include type(sm);
+  }
+  // A hint under one option (not in AGDS): lined up with the option label.
+  .agds-control__hint {
+    display: block;
+    padding-left: 2.5rem;
+    color: var(--agds-foreground-muted);
+    @include type(sm);
+  }
+
+  // ---- Button, ButtonLink, ButtonGroup, DirectionButton --------------------------
+
+  .agds-button {
+    appearance: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    margin: 0;
+    padding: 0 1.5rem;
+    border-width: $border-lg;
+    border-style: solid;
+    border-radius: $radius;
+    font-family: $font-body;
+    font-weight: normal;
+    @include type(sm);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    @include focus-keyboard;
+  }
+  .agds-button--primary {
+    border-color: var(--agds-foreground-action);
+    background: var(--agds-foreground-action);
+    color: var(--agds-background-body);
+    &:hover {
+      border-color: var(--agds-foreground-text);
+      background: var(--agds-foreground-text);
+      color: var(--agds-background-body);
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+    }
+  }
+  .agds-button--secondary {
+    border-color: var(--agds-foreground-action);
+    background: var(--agds-background-body);
+    color: var(--agds-foreground-action);
+    @media (forced-colors: active) {
+      border-color: Highlight;
+    }
+    &:hover {
+      border-color: var(--agds-foreground-text);
+      background: var(--agds-background-body);
+      color: var(--agds-foreground-text);
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+    }
+  }
+  .agds-button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    @include sm-up {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .agds-direction-link {
+    appearance: none;
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: $font-body;
+    font-weight: normal;
+    @include type(sm);
+    text-align: left;
+    @include link;
+    @include focus-keyboard;
+    .agds-icon {
+      transition: transform $transition;
+    }
+    &:hover .agds-icon {
+      transform: scale(1.125);
+    }
+  }
+
+  // ---- Divider ------------------------------------------------------------------------
+
+  .agds-divider {
+    box-sizing: content-box;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    overflow: visible;
+    border: none;
+    border-top: $border-sm solid var(--agds-border-muted);
+  }
+
+  // ---- PageAlert ------------------------------------------------------------------------
+
+  .agds-page-alert {
+    position: relative;
+    display: flex;
+    border-radius: $radius;
+    outline: 1px solid transparent;
+    @include focus-all;
+  }
+  .agds-page-alert__icon {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+    color: var(--agds-background-body);
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .agds-page-alert__content {
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    gap: 1rem;
+    min-width: 0;
+    padding: 1.5rem;
+  }
+  .agds-page-alert__body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: flex-start;
+    gap: 1rem;
+    min-width: 0;
+  }
+  .agds-page-alert__title {
+    margin: 0;
+    color: var(--agds-foreground-text);
+    font-weight: bold;
+    @include type(lg, heading);
+  }
+  @each $tone in (error, success, warning) {
+    .agds-page-alert--#{$tone} {
+      background-color: var(--agds-system-#{$tone}-muted);
+      .agds-page-alert__icon {
+        background-color: var(--agds-system-#{$tone});
+      }
+    }
+  }
+  // The engine moves focus here after a failed Continue. Keep the AGDS ring, which the
+  // shared .kf-form [tabindex="-1"]:focus rule would otherwise remove.
+  .agds-page-alert[tabindex="-1"]:focus {
+    @include outline;
+  }
+
+  // ---- Callout (neutral, regular) ---------------------------------------------------
+
+  .agds-callout {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border-left: $border-xl solid var(--agds-border);
+    border-radius: $radius;
+    background: var(--agds-background-shade);
+    outline: 1px solid transparent;
+  }
+  .agds-callout__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .agds-callout__title {
+    margin: 0;
+    font-weight: bold;
+    @include type(md, heading);
+  }
+
+  // ---- Details -------------------------------------------------------------------------
+
+  .agds-details__summary {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.5rem 0;
+    border-radius: $radius;
+    font-weight: bold;
+    list-style: none;
+    @include link;
+    @include focus-keyboard;
+    &::marker,
+    &::-webkit-details-marker {
+      display: none;
+    }
+    .agds-icon {
+      margin-left: 0.25rem;
+      transition: transform $transition;
+    }
+    &:hover .agds-icon {
+      transform: scale(1.0833);
+    }
+  }
+  .agds-details[open] .agds-details__summary .agds-icon {
+    transform: rotate(180deg);
+  }
+  .agds-details[open] .agds-details__summary:hover .agds-icon {
+    transform: rotate(180deg) scale(1.0833);
+  }
+  .agds-details__body {
+    padding: 1.5rem;
+    border-left: $border-xl solid var(--agds-border);
+    background: var(--agds-background-shade);
+    outline: 1px solid transparent;
+  }
+
+  // The record in Details, in the AGDS monospace font on the body colour.
+  .kf-code {
+    border-radius: $radius;
+    background: var(--agds-background-body);
+    color: var(--agds-foreground-text);
+    font-family: $font-monospace;
+    @include type(xs);
+  }
+
+  // ---- SummaryList ---------------------------------------------------------------------
+
+  .agds-summary-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    border-top: $border-sm solid var(--agds-border-muted);
+  }
+  .agds-summary-list__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    border-bottom: $border-sm solid var(--agds-border-muted);
+    @include sm-up {
+      flex-direction: row;
+    }
+  }
+  .agds-summary-list__term {
+    display: flex;
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 200px;
+    color: var(--agds-foreground-text);
+    font-weight: bold;
+    @include type(sm);
+    @include sm-up {
+      width: 30%;
+    }
+  }
+  .agds-summary-list__description {
+    display: flex;
+    flex-grow: 1;
+    margin: 0;
+    color: var(--agds-foreground-text);
+    overflow-wrap: anywhere;
+    @include type(sm);
+  }
+  .agds-summary-list__action {
+    display: flex;
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  // ---- The form step template ----------------------------------------------------------
+  // Last, so these placements win over the component rules above.
+
+  // The engine scrolls .kf-form to the top on each step. Leave room for the padding of the
+  // dialog or card around it, which would otherwise scroll out of view.
+  .kf-form {
+    scroll-margin-top: 2rem;
+  }
+  // Back, pretext, error alert and the form sit side by side in the engine's step.
+  .agds-form__back {
+    display: flex;
+    width: fit-content;
+    margin-bottom: 1.5rem;
+  }
+  .agds-form__pretext {
+    margin-bottom: 0.25rem;
+    color: var(--agds-foreground-muted);
+    font-weight: bold;
+    @include type(sm, heading);
+  }
+  .agds-form__pretext-count,
+  .agds-form__reference {
+    white-space: nowrap;
+  }
+  .agds-form__error {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  // FormStack: 2rem between fields, then the Divider and ButtonGroup.
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .agds-form__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  // PageTitle introduction: muted, md.
+  .agds-form__intro {
+    color: var(--agds-foreground-muted);
+    @include type(md);
+  }
+}
