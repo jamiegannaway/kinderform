@@ -239,13 +239,15 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
     setStep(s)
   }
 
+  // Tidy a postcode as the person leaves the field. Read the latest data (a functional update):
+  // the typed value can reach state a moment after the blur, and must not be lost.
   const onBlurField = (field: string) => {
     const c = page?.elements.find((e) => fieldOf(e.scope) === field)
     const kind = c?.options?.transform
-    if (kind && typeof data[field] === "string") {
-      const t = transform(kind, data[field] as string)
-      setData({ ...data, [field]: t || undefined })
-    }
+    if (!kind) return
+    setData((d) =>
+      typeof d[field] === "string" ? { ...d, [field]: transform(kind, d[field] as string) || undefined } : d,
+    )
   }
 
   const onContinue = (ev: React.FormEvent) => {

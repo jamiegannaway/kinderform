@@ -69,6 +69,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 ## Later: adopt
 
 - [x] Reference enquiry form on the site (`/example-form`): GOV.UK Frontend for the UK and USWDS for the US, both without government branding, driven by `schema/enquiry-submission.schema.json` and per-country wording in `schema/ui/`
+- [x] Example forms for Canada (GC Design System) and Australia (Australian Government Design System), without government branding, opened from a world map on one screen
+- [ ] A French version of the Canadian example form
 - [ ] A version of the reference form that works without JavaScript, for services whose platforms cannot run it
 - [ ] Test the reference form with people who have enquired, and with screen reader users
 - [ ] Browser-only funnel tool that reads an export in the schema format; no data leaves the service
