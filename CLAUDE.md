@@ -32,6 +32,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 - **Charts use the shadcn/ui chart look**: Card with title, description and the two-line muted footer, the theme's `--chart-*` and `--primary` tokens, 4px rounded bar ends, shadcn-style legends and Progress. On the site, build them from `site/src/components/charts.tsx` (plain HTML sized with the `w-[n%]` and `h-[n%]` classes that `globals.css` generates), not the shadcn `ChartContainer`: it relies on inline styles, which the Content-Security-Policy blocks, and on client JavaScript. The SVG charts for GitHub pages (`tools/us_charts.py`) use the same neutral tokens.
 - Both questionnaire styles stay inside the form. Everything around the form (header, intro, footer) stays shadcn/ui.
 - Public pages ship no tracking, set no cookies and load nothing from other sites. Fonts are self-hosted.
+- **Illustrations** are Notioly line drawings in `site/public/illustrations/`, used under a paid licence: they are not open, so keep only the ones the site shows and keep `LICENCE.md` beside them. Show them with `site/src/components/illustration.tsx` (decorative, empty alt, inverted in dark mode). Prepare new ones with SVGO so colours are attributes, not styles (the Content-Security-Policy blocks styles inside SVG files too). Never use drawings of children.
 
 ## Layout
 

@@ -14,6 +14,7 @@ import {
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import type { Group } from "@/lib/census"
 import { CAPS, DOMAINS } from "@/lib/form-check"
+import { Illustration } from "@/components/illustration"
 
 type Patterns = {
   readable: number
@@ -60,7 +61,8 @@ export default function FormCheckPublic({
     <>
       <SiteHeader current="/form-check" />
       <main id="main" className="mx-auto max-w-6xl px-6">
-        <section aria-labelledby="fc-title" className="pt-8 pb-12 md:pt-14">
+        <section aria-labelledby="fc-title" className="relative pt-8 pb-12 md:pt-14">
+          <Illustration name="details" className="absolute top-8 right-0 hidden w-56 lg:block xl:w-64" />
           <Badge variant="secondary">Draft for comment</Badge>
           <h1 id="fc-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Form check

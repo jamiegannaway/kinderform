@@ -10,6 +10,7 @@ import Countries, { InsightCards, type Withdrawals } from "@/components/countrie
 import type { CountriesData } from "@/lib/countries"
 import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 import type { UsPicture as UsPictureData } from "@/lib/us-register"
+import { Illustration } from "@/components/illustration"
 
 export type Checked = { date: string; against: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
@@ -134,7 +135,8 @@ export default function ResearchIndex({
     <>
       <SiteHeader current="/research" />
       <main id="main" className="mx-auto max-w-6xl space-y-16 px-6 pt-6 pb-20 md:pt-10">
-        <section className="max-w-3xl space-y-5">
+        <section className="grid items-center gap-8 md:grid-cols-[minmax(0,48rem)_14rem] md:justify-between">
+          <div className="space-y-5">
           <Badge variant="secondary">Updated {longDate(updated)}</Badge>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance md:text-5xl">
             What we know about the first step
@@ -145,6 +147,8 @@ export default function ResearchIndex({
             visits did not, on their own, lead to more approvals. And few enquiry forms say when you will hear back. For
             each claim, we say whether a person has checked it against the original source.
           </p>
+          </div>
+          <Illustration name="examining" className="mx-auto hidden w-full md:block" />
         </section>
 
         <section aria-labelledby="glance" className="space-y-5">

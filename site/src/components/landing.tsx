@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
+import { Illustration, type IllustrationName } from "@/components/illustration"
 
 const SOURCE_URL =
   "https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf"
@@ -51,24 +52,32 @@ const principles = [
   ["Nothing scores people.", "No tool here ranks, screens or makes predictions about anyone who enquires."],
   ["Pages and processes, not staff.", "Recruitment teams are small and stretched, and they are not the problem."],
   ["Method first, then findings.", "Each service sees its own results privately, with time to reply, before we name anything."],
-  ["Free and open.", "Everything is openly licensed, so anyone can use it without asking."],
+  ["Free and open.", "Our code, writing and data are openly licensed, so anyone can use them without asking."],
 ]
 
 function Section({
   id,
   title,
+  art,
   children,
 }: {
   id: string
   title: string
+  art?: IllustrationName
   children: React.ReactNode
 }) {
   return (
-    <section aria-labelledby={id} className="py-12 md:py-16">
-      <h2 id={id} className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-        {title}
-      </h2>
-      <div className="mt-6">{children}</div>
+    <section
+      aria-labelledby={id}
+      className={`py-12 md:py-16 ${art ? "grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_14rem] lg:grid-cols-[minmax(0,1fr)_16rem]" : ""}`}
+    >
+      <div className="min-w-0">
+        <h2 id={id} className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
+          {title}
+        </h2>
+        <div className="mt-6">{children}</div>
+      </div>
+      {art && <Illustration name={art} className="mx-auto w-40 md:w-full" />}
     </section>
   )
 }
@@ -191,7 +200,7 @@ export default function Landing() {
         </div>
 
         <div className="mx-auto max-w-6xl px-6">
-          <Section id="why-title" title="Interest is not the problem">
+          <Section id="why-title" title="Interest is not the problem" art="clock-is-ticking">
             <div className="max-w-2xl space-y-4 leading-7">
               <p>
                 The government's own plan for fostering says plainly that interest is not the
@@ -237,7 +246,7 @@ export default function Landing() {
 
           <Separator />
 
-          <Section id="how-title" title="How we work">
+          <Section id="how-title" title="How we work" art="peace">
             <ul className="grid max-w-4xl gap-x-10 gap-y-5 md:grid-cols-2">
               {principles.map(([head, body]) => (
                 <li key={head} className="border-l-2 pl-4">
@@ -250,7 +259,7 @@ export default function Landing() {
 
           <Separator />
 
-          <Section id="who-title" title="Who is behind Kinderform">
+          <Section id="who-title" title="Who is behind Kinderform" art="plant-seed">
             <div className="max-w-2xl space-y-4 leading-7">
               <p>
                 Jamie Gannaway, a co-founder of Deployed, started Kinderform. Deployed builds intake
@@ -264,7 +273,8 @@ export default function Landing() {
           <Separator />
 
           <section id="get-involved" aria-labelledby="involve-title" className="py-12 md:py-16">
-            <Card className="max-w-3xl">
+            <Card className="max-w-4xl md:grid md:grid-cols-[minmax(0,1fr)_13rem] md:items-center">
+              <div className="grid gap-6">
               <CardHeader>
                 <CardTitle id="involve-title" className="text-2xl">
                   Get involved
@@ -289,6 +299,8 @@ export default function Landing() {
                   </a>
                 </Button>
               </CardFooter>
+              </div>
+              <Illustration name="paper-airplane" className="mx-auto hidden w-48 md:block" />
             </Card>
           </section>
         </div>

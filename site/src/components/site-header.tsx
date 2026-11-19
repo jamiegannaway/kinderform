@@ -65,6 +65,10 @@ export function SiteFooter() {
           </a>{" "}
           design system.
         </p>
+        <p>
+          The drawings are by Notioly. We use them under a paid licence, so they are not openly licensed
+          and you cannot reuse them.
+        </p>
       </div>
     </footer>
   )
