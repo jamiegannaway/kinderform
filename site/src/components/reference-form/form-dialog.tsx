@@ -13,10 +13,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 import { countryOf, isFormCountry, type FormCountry } from "./countries"
 import { ReferenceForm, type Theme, type UiConfig } from "./engine"
 
-type Loaded = { ui: UiConfig; theme: Theme; rootClass: string }
+// A country can offer its form in more than one language (Canada: English and French).
+type Language = { code: string; label: string; ui: UiConfig }
+type Loaded = { ui: UiConfig; theme: Theme; rootClass: string; languages?: Language[] }
 
 const LOADERS: Record<FormCountry, () => Promise<{ default: Loaded }>> = {
   uk: () => import("./load-uk"),
@@ -26,6 +29,7 @@ const LOADERS: Record<FormCountry, () => Promise<{ default: Loaded }>> = {
 }
 
 const BASE = "/example-form"
+const langFromUrl = () => new URLSearchParams(location.search).get("lang") ?? "en"
 const countryFromPath = (path: string): FormCountry | null => {
   const code = path.replace(/\/+$/, "").split("/").pop()
   return isFormCountry(code) ? code : null
@@ -36,6 +40,7 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
   const [about, setAbout] = useState(false)
   const [loaded, setLoaded] = useState<Partial<Record<FormCountry, Loaded>>>({})
   const [failed, setFailed] = useState(false)
+  const [lang, setLang] = useState(langFromUrl)
 
   // Open from any link on the page, and follow the browser's back and forward buttons.
   useEffect(() => {
@@ -50,7 +55,10 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
       history.pushState({ country: code }, "", `${BASE}/${code}`)
       setCountry(code)
     }
-    const onPop = () => setCountry(countryFromPath(location.pathname))
+    const onPop = () => {
+      setCountry(countryFromPath(location.pathname))
+      setLang(langFromUrl())
+    }
     document.addEventListener("click", onClick)
     window.addEventListener("popstate", onPop)
     return () => {
@@ -79,6 +87,20 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
 
   const meta = country ? countryOf(country) : null
   const form = country ? loaded[country] : undefined
+  const languages = form?.languages
+  const current = languages?.find((l) => l.code === lang) ?? languages?.[0]
+  const ui = current?.ui ?? form?.ui
+  const other = languages?.find((l) => l !== current)
+
+  // Keep ?lang= in the address while a form with several languages is open, so a link to the
+  // French form opens in French.
+  useEffect(() => {
+    if (!country || !languages) return
+    const url = new URL(location.href)
+    if (current && current !== languages[0]) url.searchParams.set("lang", current.code)
+    else url.searchParams.delete("lang")
+    if (url.href !== location.href) history.replaceState(history.state, "", url)
+  }, [country, languages, current])
 
   return (
     <>
@@ -86,18 +108,26 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
         {/* Phones: the whole screen, with a slim header. Larger screens: a centred card. */}
         {meta && (
           <DialogContent className="top-0 left-0 flex h-dvh max-h-dvh max-w-none translate-x-0 translate-y-0 flex-col gap-0 overflow-hidden rounded-none border-0 p-0 sm:top-[50%] sm:left-[50%] sm:h-auto sm:max-h-[calc(100dvh-2rem)] sm:max-w-2xl sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-lg sm:border">
-            <DialogHeader className="shrink-0 gap-1 border-b px-5 py-3 pr-12 text-left sm:gap-2 sm:px-6 sm:py-4">
-              <DialogTitle className="text-base sm:text-lg">{meta.name}: example enquiry form</DialogTitle>
-              <DialogDescription className="sr-only sm:not-sr-only">
-                Built with the {meta.system}, without government branding. Nothing you enter is sent or stored.
-              </DialogDescription>
+            <DialogHeader className="shrink-0 flex-row items-start gap-3 border-b py-3 pr-12 pl-5 text-left sm:py-4 sm:pr-14 sm:pl-6">
+              <div className="grid min-w-0 flex-1 gap-1 sm:gap-2">
+                <DialogTitle className="text-base sm:text-lg">{meta.name}: example enquiry form</DialogTitle>
+                <DialogDescription className="sr-only sm:not-sr-only">
+                  Built with the {meta.system}, without government branding. Nothing you enter is sent or stored.
+                </DialogDescription>
+              </div>
+              {other && (
+                // Switching language keeps your answers: the form stays the same, only its wording changes.
+                <Button variant="outline" size="sm" lang={other.code} onClick={() => setLang(other.code)}>
+                  {other.label}
+                </Button>
+              )}
             </DialogHeader>
             {/* relative: the forms' visually hidden text is absolutely positioned and must stay inside
                 this scroll area, or scrolling the form into view shifts the whole dialog. */}
             <div className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain bg-white text-black">
               <div className={`p-5 md:p-8 ${form?.rootClass ?? ""}`}>
-                {form ? (
-                  <ReferenceForm key={country} ui={form.ui} theme={form.theme} />
+                {form && ui ? (
+                  <ReferenceForm key={country} ui={ui} theme={form.theme} />
                 ) : failed ? (
                   <p>The form did not load. Check your connection and try again.</p>
                 ) : (

@@ -72,7 +72,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] Example forms for Canada (GC Design System) and Australia (Australian Government Design System), without government branding, opened from a world map on one screen
 - [x] Example forms work on phones: full screen, with Continue kept in reach on every question
 - [x] Light by default, with a Light/Dark switch in the header (the choice stays on the reader's device)
-- [ ] A French version of the Canadian example form
+- [x] A French version of the Canadian example form (switch between English and French in the form's dialog; answers are kept)
 - [ ] A version of the reference form that works without JavaScript, for services whose platforms cannot run it
 - [ ] Test the reference form with people who have enquired, and with screen reader users
 - [ ] Browser-only funnel tool that reads an export in the schema format; no data leaves the service
