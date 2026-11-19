@@ -65,9 +65,9 @@ export type FormFacts = {
 // Forms written by tools/crawl_to_census.py carry this note.
 export const CRAWLER_NOTE = "Read by the polite crawler"
 
-// UK only, and the forms already in the census before the crawler, by default: the rubric,
-// the named draft scores and the hand-written "forms-differ" finding were written from those.
-// The comparison across countries on /research passes all four countries and the crawler's forms.
+// UK only, and the forms a person recorded, by default: the rubric and the named draft scores
+// were written from those. "How UK enquiry forms differ" also passes the crawler's UK forms,
+// and the comparison across countries passes all four countries and the crawler's forms.
 export function factsFor(c: Census, countries: string[] = ["UK"], includeCrawler = false): FormFacts[] {
   const asked = askedBy(c)
   const tax = new Map(c.taxonomy.map((t) => [`${t.category}/${t.topic}`, t]))

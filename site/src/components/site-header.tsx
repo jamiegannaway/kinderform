@@ -1,3 +1,5 @@
+import { Moon, Sun } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 
 const TABS = [
@@ -6,6 +8,38 @@ const TABS = [
   { href: "/example-form", label: "Example form" },
   { href: "/research", label: "Research" },
 ]
+
+// Light or dark, in the shadcn/ui toggle group look. public/theme.js does the switching and
+// sets aria-pressed. Which button looks selected comes from <html data-theme>, which that
+// script sets before the page is drawn, so the control never shows the wrong state. It stays
+// hidden when JavaScript is off (<html data-js> is missing), because it could not work.
+const THEMES = [
+  { value: "light", label: "Light", Icon: Sun, on: "bg-primary text-primary-foreground dark:bg-transparent dark:text-muted-foreground" },
+  { value: "dark", label: "Dark", Icon: Moon, on: "dark:bg-primary dark:text-primary-foreground" },
+] as const
+
+export function ThemeSwitch({ className = "" }: { className?: string }) {
+  return (
+    <div
+      role="group"
+      aria-label="Colour theme"
+      className={`hidden items-center gap-0.5 rounded-md border bg-background p-0.5 shadow-xs [html[data-js]_&]:inline-flex ${className}`}
+    >
+      {THEMES.map(({ value, label, Icon, on }) => (
+        <button
+          key={value}
+          type="button"
+          data-theme-choice={value}
+          aria-pressed={value === "light"}
+          className={`inline-flex h-7 items-center gap-1.5 rounded-sm px-2.5 text-sm font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 ${on}`}
+        >
+          <Icon className="size-4" aria-hidden="true" />
+          {label}
+        </button>
+      ))}
+    </div>
+  )
+}
 
 export function SiteHeader({ current }: { current: string }) {
   return (
@@ -20,7 +54,8 @@ export function SiteHeader({ current }: { current: string }) {
         <a href="/" className="text-lg font-semibold tracking-tight" aria-label="Kinderform home">
           kinderform
         </a>
-        <nav aria-label="Main">
+        <ThemeSwitch className="md:order-last" />
+        <nav aria-label="Main" className="w-full md:ml-auto md:w-auto">
           <ul className="flex flex-wrap items-center gap-1">
             {TABS.map((t) => {
               const active = t.href === current
@@ -50,7 +85,10 @@ export function SiteFooter() {
   return (
     <footer className="border-t">
       <div className="mx-auto max-w-6xl space-y-2 px-6 py-8 text-sm text-muted-foreground">
-        <p>This site sets no cookies, does not track you and loads nothing from other sites.</p>
+        <p>
+          This site sets no cookies, does not track you and loads nothing from other sites. If you choose dark mode,
+          your browser remembers it on this device only.
+        </p>
         <p>
           Our code is under the MIT licence. Our writing and data are under{" "}
           <a

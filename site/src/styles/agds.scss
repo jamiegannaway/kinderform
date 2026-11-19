@@ -99,9 +99,12 @@ $transition: 250ms ease;
   text-decoration: underline;
   text-decoration-skip-ink: auto;
   cursor: pointer;
-  &:hover {
-    color: var(--agds-foreground-text);
-    text-decoration: none;
+  // Hover only where there is a pointer: on touch screens :hover sticks after a tap.
+  @media (hover: hover) {
+    &:hover {
+      color: var(--agds-foreground-text);
+      text-decoration: none;
+    }
   }
 }
 
@@ -534,12 +537,15 @@ $transition: 250ms ease;
     border-color: var(--agds-foreground-action);
     background: var(--agds-foreground-action);
     color: var(--agds-background-body);
-    &:hover {
-      border-color: var(--agds-foreground-text);
-      background: var(--agds-foreground-text);
-      color: var(--agds-background-body);
-      text-decoration: underline;
-      text-decoration-skip-ink: auto;
+    // Hover only where there is a pointer: on touch screens :hover sticks after a tap.
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--agds-foreground-text);
+        background: var(--agds-foreground-text);
+        color: var(--agds-background-body);
+        text-decoration: underline;
+        text-decoration-skip-ink: auto;
+      }
     }
   }
   .agds-button--secondary {
@@ -549,12 +555,15 @@ $transition: 250ms ease;
     @media (forced-colors: active) {
       border-color: Highlight;
     }
-    &:hover {
-      border-color: var(--agds-foreground-text);
-      background: var(--agds-background-body);
-      color: var(--agds-foreground-text);
-      text-decoration: underline;
-      text-decoration-skip-ink: auto;
+    // Hover only where there is a pointer: on touch screens :hover sticks after a tap.
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--agds-foreground-text);
+        background: var(--agds-background-body);
+        color: var(--agds-foreground-text);
+        text-decoration: underline;
+        text-decoration-skip-ink: auto;
+      }
     }
   }
   .agds-button-group {
@@ -587,8 +596,11 @@ $transition: 250ms ease;
     .agds-icon {
       transition: transform $transition;
     }
-    &:hover .agds-icon {
-      transform: scale(1.125);
+    // Hover only where there is a pointer: on touch screens :hover sticks after a tap.
+    @media (hover: hover) {
+      &:hover .agds-icon {
+        transform: scale(1.125);
+      }
     }
   }
 
@@ -701,15 +713,21 @@ $transition: 250ms ease;
       margin-left: 0.25rem;
       transition: transform $transition;
     }
-    &:hover .agds-icon {
-      transform: scale(1.0833);
+    // Hover only where there is a pointer: on touch screens :hover sticks after a tap.
+    @media (hover: hover) {
+      &:hover .agds-icon {
+        transform: scale(1.0833);
+      }
     }
   }
   .agds-details[open] .agds-details__summary .agds-icon {
     transform: rotate(180deg);
   }
-  .agds-details[open] .agds-details__summary:hover .agds-icon {
-    transform: rotate(180deg) scale(1.0833);
+  // Hover only where there is a pointer: on touch screens :hover sticks after a tap.
+  @media (hover: hover) {
+    .agds-details[open] .agds-details__summary:hover .agds-icon {
+      transform: rotate(180deg) scale(1.0833);
+    }
   }
   .agds-details__body {
     padding: 1.5rem;

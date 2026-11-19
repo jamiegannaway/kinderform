@@ -70,6 +70,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 
 - [x] Reference enquiry form on the site (`/example-form`): GOV.UK Frontend for the UK and USWDS for the US, both without government branding, driven by `schema/enquiry-submission.schema.json` and per-country wording in `schema/ui/`
 - [x] Example forms for Canada (GC Design System) and Australia (Australian Government Design System), without government branding, opened from a world map on one screen
+- [x] Example forms work on phones: full screen, with Continue kept in reach on every question
+- [x] Light by default, with a Light/Dark switch in the header (the choice stays on the reader's device)
 - [ ] A French version of the Canadian example form
 - [ ] A version of the reference form that works without JavaScript, for services whose platforms cannot run it
 - [ ] Test the reference form with people who have enquired, and with screen reader users

@@ -83,11 +83,12 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
   return (
     <>
       <Dialog open={!!country} onOpenChange={(open) => !open && close()}>
+        {/* Phones: the whole screen, with a slim header. Larger screens: a centred card. */}
         {meta && (
-          <DialogContent className="flex max-h-[calc(100dvh-2rem)] flex-col gap-0 overflow-hidden p-0 sm:max-w-2xl">
-            <DialogHeader className="shrink-0 border-b px-6 py-4 pr-12 text-left">
-              <DialogTitle>{meta.name}: example enquiry form</DialogTitle>
-              <DialogDescription>
+          <DialogContent className="top-0 left-0 flex h-dvh max-h-dvh max-w-none translate-x-0 translate-y-0 flex-col gap-0 overflow-hidden rounded-none border-0 p-0 sm:top-[50%] sm:left-[50%] sm:h-auto sm:max-h-[calc(100dvh-2rem)] sm:max-w-2xl sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-lg sm:border">
+            <DialogHeader className="shrink-0 gap-1 border-b px-5 py-3 pr-12 text-left sm:gap-2 sm:px-6 sm:py-4">
+              <DialogTitle className="text-base sm:text-lg">{meta.name}: example enquiry form</DialogTitle>
+              <DialogDescription className="sr-only sm:not-sr-only">
                 Built with the {meta.system}, without government branding. Nothing you enter is sent or stored.
               </DialogDescription>
             </DialogHeader>
