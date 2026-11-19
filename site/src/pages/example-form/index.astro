@@ -1,25 +1,13 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { ExampleIntro, ExampleOutro } from "@/components/example-form-shell";
-import "@/styles/govuk.scss";
-import "@/components/reference-form/kf-form.css";
+import { ExampleFormPicker } from "@/components/example-form-picker";
 ---
 <Base
-  title="Example enquiry form (UK) | Kinderform"
-  description="An example of a short, kind enquiry form for people asking about fostering or adoption. It shows the Kinderform enquiry standard in use."
+  title="Example enquiry forms | Kinderform"
+  description="Try a short, kind enquiry form for fostering or adoption in the UK, the US, Canada or Australia, each in that country's government design system, without government branding."
 >
-  <ExampleIntro variant="uk" />
-  <main id="main" class="mx-auto max-w-6xl px-6">
-    <div class="max-w-2xl rounded-xl border bg-white p-6 text-black md:p-10">
-      <div id="kf-form">
-        <noscript>
-          <p>This example needs JavaScript. A real form built to the Kinderform standard should work without it.</p>
-        </noscript>
-      </div>
-    </div>
-  </main>
-  <ExampleOutro />
+  <ExampleFormPicker open={null} />
   <script>
-    import "@/components/reference-form/mount-uk";
+    import "@/components/reference-form/mount-picker";
   </script>
 </Base>

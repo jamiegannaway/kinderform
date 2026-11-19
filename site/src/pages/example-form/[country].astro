@@ -1,0 +1,21 @@
+---
+// The same map page, with one country's form open. Lets a form be linked to directly.
+import Base from "@/layouts/Base.astro";
+import { ExampleFormPicker } from "@/components/example-form-picker";
+import { FORM_COUNTRIES, type FormCountry } from "@/components/reference-form/countries";
+
+export function getStaticPaths() {
+  return FORM_COUNTRIES.map((c) => ({ params: { country: c.code }, props: { code: c.code } }));
+}
+const { code } = Astro.props as { code: FormCountry };
+const country = FORM_COUNTRIES.find((c) => c.code === code)!;
+---
+<Base
+  title={`${country.name}: example enquiry form | Kinderform`}
+  description={`An example of a short, kind enquiry form for fostering or adoption in ${country.name}, built with the ${country.system} without government branding.`}
+>
+  <ExampleFormPicker open={code} />
+  <script>
+    import "@/components/reference-form/mount-picker";
+  </script>
+</Base>
