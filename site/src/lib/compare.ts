@@ -24,6 +24,13 @@ export const COUNTRY_NAMES: Record<string, string> = {
 }
 export const COUNTRY_ORDER = ["UK", "US", "CA", "AU", "DE", "FR", "ES"]
 
+// "the UK, the US, Canada and Germany": the countries given, in the usual order.
+export function countryList(codes: Iterable<string>): string {
+  const have = new Set(codes)
+  const names = COUNTRY_ORDER.filter((c) => have.has(c)).map((c) => (c === "UK" || c === "US" ? `the ${c}` : COUNTRY_NAMES[c]))
+  return names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`
+}
+
 // Place codes in the rules files, by country. Codes repeat across countries (NT is the Northwest
 // Territories in Canada and the Northern Territory in Australia), so each country has its own list.
 // US states come from register/us/states.csv.

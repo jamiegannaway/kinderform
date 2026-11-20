@@ -1,4 +1,4 @@
-// "Across four countries" on /research, and the insight cards at the top of the page.
+// "Across countries" on /research, and the insight cards at the top of the page.
 // Counts only, no services named. Static HTML; shadcn chart look from charts.tsx.
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"

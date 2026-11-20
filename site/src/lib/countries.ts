@@ -1,5 +1,6 @@
-// "Across four countries" on /research: first-contact forms in the UK, the US, Canada and
-// Australia, measured the same way, with no names.
+// "Across countries" on /research: first-contact forms in the UK, the US, Canada, Australia,
+// Germany, France and Spain, measured the same way, with no names. A country shows only once
+// the census holds forms for it.
 //
 // What leaves this file is numbers, country names and topic labels only. No form,
 // service or URL is passed to the page. Only forms read straight from the live page
@@ -13,6 +14,9 @@ export const COUNTRIES = [
   { code: "US", name: "United States" },
   { code: "CA", name: "Canada" },
   { code: "AU", name: "Australia" },
+  { code: "DE", name: "Germany" },
+  { code: "FR", name: "France" },
+  { code: "ES", name: "Spain" },
 ] as const
 export type CountryCode = (typeof COUNTRIES)[number]["code"]
 
