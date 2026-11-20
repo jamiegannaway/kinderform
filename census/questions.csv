@@ -1357,3 +1357,146 @@ uk-eng-five-rivers-enquiry:q06,uk-eng-five-rivers-enquiry,6,,Best time to call?,
 uk-eng-five-rivers-enquiry:q07,uk-eng-five-rivers-enquiry,7,,Preferred day of call,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-18
 uk-eng-five-rivers-enquiry:q08,uk-eng-five-rivers-enquiry,8,,What do you want to talk about?,intent,journey_stage,yes,select,no,,,direct_fetch,2026-11-18
 uk-eng-five-rivers-enquiry:q09,uk-eng-five-rivers-enquiry,9,,mc4wp subscribe contact form 7,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-18
+fr-ara-haute-savoie-assistant-familial-enquiry:q01,fr-ara-haute-savoie-assistant-familial-enquiry,1,,Votre demande concerne,free_text,questions,yes,select,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q02,fr-ara-haute-savoie-assistant-familial-enquiry,2,,Nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q03,fr-ara-haute-savoie-assistant-familial-enquiry,3,,Prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q04,fr-ara-haute-savoie-assistant-familial-enquiry,4,,Courriel,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q05,fr-ara-haute-savoie-assistant-familial-enquiry,5,,Téléphone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q06,fr-ara-haute-savoie-assistant-familial-enquiry,6,,Adresse,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q07,fr-ara-haute-savoie-assistant-familial-enquiry,7,,Code postal,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q08,fr-ara-haute-savoie-assistant-familial-enquiry,8,,Ville,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q09,fr-ara-haute-savoie-assistant-familial-enquiry,9,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+fr-ara-haute-savoie-assistant-familial-enquiry:q10,fr-ara-haute-savoie-assistant-familial-enquiry,10,,Pièce jointe,other,unclassified,unknown,unknown,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q01,fr-bfc-yonne-adoption-enquiry,1,,civilite,contact_identity,name,unknown,radio,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q02,fr-bfc-yonne-adoption-enquiry,2,,Votre nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q03,fr-bfc-yonne-adoption-enquiry,3,,Votre prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q04,fr-bfc-yonne-adoption-enquiry,4,,Votre e-mail,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q05,fr-bfc-yonne-adoption-enquiry,5,,Votre téléphone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q06,fr-bfc-yonne-adoption-enquiry,6,,Votre adresse,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q07,fr-bfc-yonne-adoption-enquiry,7,,Votre code postal,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q08,fr-bfc-yonne-adoption-enquiry,8,,Votre ville,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q09,fr-bfc-yonne-adoption-enquiry,9,,Objet,intent,journey_stage,yes,text,no,,,direct_fetch,2026-11-20
+fr-bfc-yonne-adoption-enquiry:q10,fr-bfc-yonne-adoption-enquiry,10,,your message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q01,fr-nor-eure-adoption-enquiry,1,,Situation de l'adoptant,interest,care_type,unknown,select,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q02,fr-nor-eure-adoption-enquiry,2,,Prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q03,fr-nor-eure-adoption-enquiry,3,,Nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q04,fr-nor-eure-adoption-enquiry,4,,Ville de résidence (Nécessaire),contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q05,fr-nor-eure-adoption-enquiry,5,,Code postal (Nécessaire),contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q06,fr-nor-eure-adoption-enquiry,6,,Saisissez un e-mail,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q07,fr-nor-eure-adoption-enquiry,7,,Confirmez l’e-mail,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+fr-nor-eure-adoption-enquiry:q08,fr-nor-eure-adoption-enquiry,8,,Téléphone (Nécessaire),contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-20
+fr-nor-orne-assistant-familial-enquiry:q01,fr-nor-orne-assistant-familial-enquiry,1,,Votre nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-nor-orne-assistant-familial-enquiry:q02,fr-nor-orne-assistant-familial-enquiry,2,,Objet de votre message,intent,journey_stage,yes,text,no,,,direct_fetch,2026-11-20
+fr-nor-orne-assistant-familial-enquiry:q03,fr-nor-orne-assistant-familial-enquiry,3,,Votre message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q01,fr-naq-correze-assistant-familial-enquiry,1,,Choice,other,unclassified,yes,radio,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q02,fr-naq-correze-assistant-familial-enquiry,2,,Votre nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q03,fr-naq-correze-assistant-familial-enquiry,3,,Votre prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q04,fr-naq-correze-assistant-familial-enquiry,4,,Votre adresse postale,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q05,fr-naq-correze-assistant-familial-enquiry,5,,Commune,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q06,fr-naq-correze-assistant-familial-enquiry,6,,Votre adresse électronique,contact_identity,address,yes,email,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q07,fr-naq-correze-assistant-familial-enquiry,7,,Téléphone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-20
+fr-naq-correze-assistant-familial-enquiry:q08,fr-naq-correze-assistant-familial-enquiry,8,,Votre demande,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q01,fr-occ-hautes-pyrenees-assistant-familial-enquiry,1,,Réunions d'information - choisissez votre date,information_event,event_dates,unknown,select,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q02,fr-occ-hautes-pyrenees-assistant-familial-enquiry,2,,Prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q03,fr-occ-hautes-pyrenees-assistant-familial-enquiry,3,,Nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q04,fr-occ-hautes-pyrenees-assistant-familial-enquiry,4,,Date de naissance,contact_identity,date_of_birth,yes,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q05,fr-occ-hautes-pyrenees-assistant-familial-enquiry,5,,Adresse ligne 1,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q06,fr-occ-hautes-pyrenees-assistant-familial-enquiry,6,,Ville,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q07,fr-occ-hautes-pyrenees-assistant-familial-enquiry,7,,État / Province / Région,routing,local_authority,yes,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q08,fr-occ-hautes-pyrenees-assistant-familial-enquiry,8,,Code postal,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q09,fr-occ-hautes-pyrenees-assistant-familial-enquiry,9,,Pays,contact_identity,address,yes,select,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q10,fr-occ-hautes-pyrenees-assistant-familial-enquiry,10,,Téléphone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q11,fr-occ-hautes-pyrenees-assistant-familial-enquiry,11,,Adresse votre,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q12,fr-occ-hautes-pyrenees-assistant-familial-enquiry,12,,E-mail,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q13,fr-occ-hautes-pyrenees-assistant-familial-enquiry,13,,Je consens à ce que le Département des Hautes-Pyrénées colle,consent,processing,yes,checkbox,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q14,fr-occ-hautes-pyrenees-assistant-familial-enquiry,14,,Date,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-20
+fr-occ-hautes-pyrenees-assistant-familial-enquiry:q15,fr-occ-hautes-pyrenees-assistant-familial-enquiry,15,,Heure,contact_preference,time,unknown,text,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q01,fr-pdl-sarthe-assistant-familial-enquiry,1,,Prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q02,fr-pdl-sarthe-assistant-familial-enquiry,2,,Nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q03,fr-pdl-sarthe-assistant-familial-enquiry,3,,Adresse,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q04,fr-pdl-sarthe-assistant-familial-enquiry,4,,Complément d'adresse,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q05,fr-pdl-sarthe-assistant-familial-enquiry,5,,Ville,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q06,fr-pdl-sarthe-assistant-familial-enquiry,6,,Code Postal,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q07,fr-pdl-sarthe-assistant-familial-enquiry,7,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q08,fr-pdl-sarthe-assistant-familial-enquiry,8,,Téléphone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q09,fr-pdl-sarthe-assistant-familial-enquiry,9,,Thématique,intent,journey_stage,yes,select,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q10,fr-pdl-sarthe-assistant-familial-enquiry,10,,Sujet,intent,journey_stage,unknown,select,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q11,fr-pdl-sarthe-assistant-familial-enquiry,11,,Votre message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q12,fr-pdl-sarthe-assistant-familial-enquiry,12,,Joindre un document,other,unclassified,unknown,unknown,no,,,direct_fetch,2026-11-20
+fr-pdl-sarthe-assistant-familial-enquiry:q13,fr-pdl-sarthe-assistant-familial-enquiry,13,,J'accepte que les informations saisies soient utilisées pour,consent,processing,yes,checkbox,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q01,fr-pac-alpes-maritimes-assistant-familial-enquiry,1,,Nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q02,fr-pac-alpes-maritimes-assistant-familial-enquiry,2,,Prénom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q03,fr-pac-alpes-maritimes-assistant-familial-enquiry,3,,Courriel,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q04,fr-pac-alpes-maritimes-assistant-familial-enquiry,4,,Téléphone,contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q05,fr-pac-alpes-maritimes-assistant-familial-enquiry,5,,Code postal,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q06,fr-pac-alpes-maritimes-assistant-familial-enquiry,6,,Ville,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q07,fr-pac-alpes-maritimes-assistant-familial-enquiry,7,,message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q08,fr-pac-alpes-maritimes-assistant-familial-enquiry,8,,Je serai accompagné de mon conjoint,household,partner,unknown,radio,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q09,fr-pac-alpes-maritimes-assistant-familial-enquiry,9,,"Choice of: Employé(e), En recherche d’emploi, Retraité(e), Mardi 26 janvier 2027, Mardi 9 février 2027, Mardi…",work,employment_status,unknown,checkbox,no,,,direct_fetch,2026-11-20
+fr-pac-alpes-maritimes-assistant-familial-enquiry:q10,fr-pac-alpes-maritimes-assistant-familial-enquiry,10,,Je reconnais avoir pris connaissance de la politique du site,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-20
+es-ct-icif-adis-enquiry:q01,es-ct-icif-adis-enquiry,1,,Amb qui vols contactar? (),routing,nearest_office,unknown,select,no,,,direct_fetch,2026-11-20
+es-ct-icif-adis-enquiry:q02,es-ct-icif-adis-enquiry,2,,El teu nom (),contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-adis-enquiry:q03,es-ct-icif-adis-enquiry,3,,El teu correu (),contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+es-ct-icif-adis-enquiry:q04,es-ct-icif-adis-enquiry,4,,El teu telèfon (),contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-20
+es-ct-icif-adis-enquiry:q05,es-ct-icif-adis-enquiry,5,,Assumpte,intent,journey_stage,unknown,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-adis-enquiry:q06,es-ct-icif-adis-enquiry,6,,El teu missatge,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-20
+es-ct-icif-adis-enquiry:q07,es-ct-icif-adis-enquiry,7,,"Choice of: acceptance politica, info comercial",consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q01,es-ct-icif-infancia-familia-enquiry,1,,Nom i Cognoms,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q02,es-ct-icif-infancia-familia-enquiry,2,,Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q03,es-ct-icif-infancia-familia-enquiry,3,,Telèfon,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q04,es-ct-icif-infancia-familia-enquiry,4,,Escull Provincia,routing,local_authority,unknown,select,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q05,es-ct-icif-infancia-familia-enquiry,5,,Localitat,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q06,es-ct-icif-infancia-familia-enquiry,6,,Com has conegut Infància i família?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q07,es-ct-icif-infancia-familia-enquiry,7,,Missatge,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-20
+es-ct-icif-infancia-familia-enquiry:q08,es-ct-icif-infancia-familia-enquiry,8,,Accepto la llei de Protecció de Dades,consent,processing,unknown,checkbox,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q01,es-ct-icif-suara-enquiry,1,,Nom,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q02,es-ct-icif-suara-enquiry,2,,Cognoms,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q03,es-ct-icif-suara-enquiry,3,,Telèfon,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q04,es-ct-icif-suara-enquiry,4,,E-mail,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q05,es-ct-icif-suara-enquiry,5,,Província,routing,local_authority,unknown,select,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q06,es-ct-icif-suara-enquiry,6,,Missatge,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q07,es-ct-icif-suara-enquiry,7,,Accepto la política de privacitat,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-20
+es-ct-icif-suara-enquiry:q08,es-ct-icif-suara-enquiry,8,,edit email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-20
+es-md-familias-para-la-acogida-enquiry:q01,es-md-familias-para-la-acogida-enquiry,1,,Nombre,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+es-md-familias-para-la-acogida-enquiry:q02,es-md-familias-para-la-acogida-enquiry,2,,E-mail,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+es-md-familias-para-la-acogida-enquiry:q03,es-md-familias-para-la-acogida-enquiry,3,,Mensaje,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+es-md-familias-para-la-acogida-enquiry:q04,es-md-familias-para-la-acogida-enquiry,4,,politica privacidad,consent,privacy_acknowledgement,unknown,checkbox,no,,,direct_fetch,2026-11-20
+de-by-rummelsberger-pkd-enquiry:q01,de-by-rummelsberger-pkd-enquiry,1,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-20
+de-by-rummelsberger-pkd-enquiry:q02,de-by-rummelsberger-pkd-enquiry,2,,Vorname,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-20
+de-by-rummelsberger-pkd-enquiry:q03,de-by-rummelsberger-pkd-enquiry,3,,E-Mail,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-20
+de-by-rummelsberger-pkd-enquiry:q04,de-by-rummelsberger-pkd-enquiry,4,,Anliegen,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+de-by-rummelsberger-pkd-enquiry:q05,de-by-rummelsberger-pkd-enquiry,5,,data privacy,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-20
+de-by-rummelsberger-pkd-enquiry:q06,de-by-rummelsberger-pkd-enquiry,6,,Mathematische Frage (2 + 7 =),free_text,questions,yes,text,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q01,de-be-familien-fuer-kinder-enquiry,1,,Ich melde mich zu folgendem Termin an,information_event,event_dates,unknown,select,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q02,de-be-familien-fuer-kinder-enquiry,2,,p1 gender,equality,gender,unknown,radio,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q03,de-be-familien-fuer-kinder-enquiry,3,,"Name, Vorname",contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q04,de-be-familien-fuer-kinder-enquiry,4,,p2 gender,equality,gender,unknown,radio,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q05,de-be-familien-fuer-kinder-enquiry,5,,"Name, Vorname 2. Person",contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q06,de-be-familien-fuer-kinder-enquiry,6,,Ich möchte ein verwandtes oder bekanntes Kind aufnehmen.,interest,care_type,unknown,checkbox,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q07,de-be-familien-fuer-kinder-enquiry,7,,Anzahl Personen,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q08,de-be-familien-fuer-kinder-enquiry,8,,PLZ,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q09,de-be-familien-fuer-kinder-enquiry,9,,Bezirk,routing,local_authority,unknown,select,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q10,de-be-familien-fuer-kinder-enquiry,10,,"Bitte beschreiben Sie, wie Sie auf uns aufmerksam gewortden sind (optional).",contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q11,de-be-familien-fuer-kinder-enquiry,11,,Telefon,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q12,de-be-familien-fuer-kinder-enquiry,12,,Wie sind Sie auf uns aufmerksam geworden?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q13,de-be-familien-fuer-kinder-enquiry,13,,aufmerksam sonstige,source,how_heard,unknown,text,no,,,direct_fetch,2026-11-20
+de-be-familien-fuer-kinder-enquiry:q14,de-be-familien-fuer-kinder-enquiry,14,,Ich habe die Informationen zum Datenschutz gelesen und erken,consent,processing,unknown,checkbox,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q01,de-mv-vorpommern-greifswald-pkd-enquiry,1,,Anrede,contact_identity,name,unknown,select,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q02,de-mv-vorpommern-greifswald-pkd-enquiry,2,,Vorname/n,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q03,de-mv-vorpommern-greifswald-pkd-enquiry,3,,Nachname,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q04,de-mv-vorpommern-greifswald-pkd-enquiry,4,,"Straße, Haus-Nr.",contact_identity,address,yes,text,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q05,de-mv-vorpommern-greifswald-pkd-enquiry,5,,"PLZ, Wohnort",contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q06,de-mv-vorpommern-greifswald-pkd-enquiry,6,,Telefon,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q07,de-mv-vorpommern-greifswald-pkd-enquiry,7,,Mobil,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q08,de-mv-vorpommern-greifswald-pkd-enquiry,8,,E-Mail-Adresse,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q09,de-mv-vorpommern-greifswald-pkd-enquiry,9,,Wann sind Sie am besten erreichbar?,contact_preference,time,unknown,select,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q10,de-mv-vorpommern-greifswald-pkd-enquiry,10,,Wie möchten Sie von uns kontaktiert werden?,contact_preference,method,yes,select,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q11,de-mv-vorpommern-greifswald-pkd-enquiry,11,,Ich interessiere mich für...,interest,care_type,unknown,checkbox,no,,,direct_fetch,2026-11-20
+de-mv-vorpommern-greifswald-pkd-enquiry:q12,de-mv-vorpommern-greifswald-pkd-enquiry,12,,Gerne können Sie uns auch eine Nachricht hinterlassen,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-20
+de-st-magdeburg-pkd-enquiry:q01,de-st-magdeburg-pkd-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-20
+de-st-magdeburg-pkd-enquiry:q02,de-st-magdeburg-pkd-enquiry,2,,Anschrift,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-20
+de-st-magdeburg-pkd-enquiry:q03,de-st-magdeburg-pkd-enquiry,3,,Telefon,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-20
+de-st-magdeburg-pkd-enquiry:q04,de-st-magdeburg-pkd-enquiry,4,,E-Mail-Adresse,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-20
+de-st-magdeburg-pkd-enquiry:q05,de-st-magdeburg-pkd-enquiry,5,,Nachricht,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-20
+de-st-magdeburg-pkd-enquiry:q06,de-st-magdeburg-pkd-enquiry,6,,Datei,other,unclassified,unknown,unknown,no,,,direct_fetch,2026-11-20
+de-st-magdeburg-pkd-enquiry:q07,de-st-magdeburg-pkd-enquiry,7,,Ich habe die Datenschutzerklärung gelesen und bin damit einv,consent,privacy_acknowledgement,unknown,checkbox,no,,,direct_fetch,2026-11-20

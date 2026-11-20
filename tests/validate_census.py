@@ -15,7 +15,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CENSUS = ROOT / "census"
 # Front doors can come from any country's register.
 REGISTERS = [ROOT / "register" / "front-doors.csv", ROOT / "register" / "us" / "front-doors.csv",
-             ROOT / "register" / "ca" / "front-doors.csv", ROOT / "register" / "au" / "front-doors.csv"]
+             ROOT / "register" / "ca" / "front-doors.csv", ROOT / "register" / "au" / "front-doors.csv",
+             ROOT / "register" / "de" / "front-doors.csv", ROOT / "register" / "fr" / "front-doors.csv",
+             ROOT / "register" / "es" / "front-doors.csv"]
 
 COLUMNS = {
     "forms.csv": ["form_id", "front_door_id", "name", "operator_type", "service_type", "country", "region", "form_stage",
