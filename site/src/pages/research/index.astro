@@ -8,6 +8,7 @@ import { loadCensus } from "@/lib/census";
 import { formsDiffer } from "@/lib/forms-differ";
 import { usPicture } from "@/lib/us-register";
 import { countries } from "@/lib/countries";
+import { blurbFor } from "@/lib/research-log";
 
 // Keep the order of findings.json: it is the order we want people to read them in.
 const order = findingsFile.findings.map((f) => f.id);
@@ -81,7 +82,8 @@ if (card) {
       href: hrefOf(r.id),
       title: titleOf(r.body).replace(/,? and a refined OUCM open standard$/i, ""),
       when: monthOf(r.id),
-      blurb: "A review of existing research on what happens after someone gets in touch. We made it with an AI-assisted research tool. Most figures are not yet checked by a person.",
+      // Each report's card text comes from its entry in the research log.
+      blurb: blurbFor(r.id) ?? "A review of existing research. We made it with an AI-assisted research tool. Most figures are not yet checked by a person.",
     }))}
     updates={updates.map((u) => ({ href: hrefOf(u.id), title: titleOf(u.body), when: monthOf(u.id) }))}
     formsDiffer={differ}

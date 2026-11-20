@@ -1,0 +1,15 @@
+---
+// The research log: every review in evidence/reports/, and what each could mean for the
+// project. Built from evidence/research-log.json.
+import Base from "@/layouts/Base.astro";
+import ResearchLog from "@/components/research-log";
+import { researchLog } from "@/lib/research-log";
+
+const log = researchLog();
+---
+<Base
+  title="Research log: what we have looked at and what it could mean | Kinderform"
+  description="Each piece of research Kinderform has done on the first step into fostering, and what it could mean for our draft standard. All ideas are for discussion."
+>
+  <ResearchLog updated={log.updated} entries={log.entries} meanings={log.meanings} />
+</Base>

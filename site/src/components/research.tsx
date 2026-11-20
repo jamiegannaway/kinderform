@@ -260,6 +260,13 @@ export default function ResearchIndex({
 
         <section aria-labelledby="deeper" className="space-y-6">
           <H2 id="deeper">Read more</H2>
+          <p className="max-w-3xl leading-7">
+            The{" "}
+            <a href="/research/log" className="font-medium underline underline-offset-4">
+              research log
+            </a>{" "}
+            lists each review as a table, with what it could mean for the project.
+          </p>
           <div className="grid gap-6 md:grid-cols-3">
             <Card>
               <CardHeader>

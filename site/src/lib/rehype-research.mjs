@@ -8,6 +8,7 @@ import path from "node:path"
 const PAGES = [
   [/^library\.md$/, () => "/research/library"],
   [/^findings\.json$/, () => "/research"],
+  [/^research-log\.json$/, () => "/research/log"],
   [/^reports\/(.+)\.md$/, (m) => `/research/reports/${m[1]}`],
   [/^digests\/(.+)\.md$/, (m) => `/research/updates/${m[1]}`],
 ]
