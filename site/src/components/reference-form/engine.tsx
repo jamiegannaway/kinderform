@@ -28,7 +28,14 @@ export type Control = {
     inputmode?: string
     spellcheck?: boolean
     inputWidth?: number
-    transform?: "postcode_area" | "zip_prefix" | "postal_code_fsa" | "au_postcode"
+    transform?:
+      | "postcode_area"
+      | "zip_prefix"
+      | "postal_code_fsa"
+      | "au_postcode"
+      | "de_postcode"
+      | "fr_postcode"
+      | "es_postcode"
   }
 }
 export type Page = {
@@ -40,7 +47,7 @@ export type Page = {
 }
 export type UiConfig = {
   locale: string
-  design_system: "govuk" | "uswds" | "gcds" | "agds"
+  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy"
   sections: string[]
   start: { title: string; body: string[]; button: string }
   pages: Page[]
@@ -94,7 +101,7 @@ export type Theme = {
 
 // ---- Shared state for renderers -----------------------------------------------
 
-type PageCtx = { errors: Errors; headingField: string | null; onBlurField: (field: string) => void }
+type PageCtx = { errors: Errors; headingField: string | null; onBlurField: (field: string, value?: string) => void }
 export const PageContext = createContext<PageCtx>({ errors: {}, headingField: null, onBlurField: () => {} })
 export const usePage = () => useContext(PageContext)
 
@@ -243,15 +250,17 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
     setStep(s)
   }
 
-  // Tidy a postcode as the person leaves the field. Read the latest data (a functional update):
-  // the typed value can reach state a moment after the blur, and must not be lost.
-  const onBlurField = (field: string) => {
+  // Tidy a postcode as the person leaves the field. Use the value the field holds at that moment:
+  // the form library reports a change a moment after the event, so state may still hold the old
+  // value. Without one, fall back to the latest state (a functional update).
+  const onBlurField = (field: string, value?: string) => {
     const c = page?.elements.find((e) => fieldOf(e.scope) === field)
     const kind = c?.options?.transform
     if (!kind) return
-    setData((d) =>
-      typeof d[field] === "string" ? { ...d, [field]: transform(kind, d[field] as string) || undefined } : d,
-    )
+    setData((d) => {
+      const current = typeof value === "string" ? value : d[field]
+      return typeof current === "string" ? { ...d, [field]: transform(kind, current) || undefined } : d
+    })
   }
 
   const onContinue = (ev: React.FormEvent) => {
@@ -363,7 +372,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                 rows={visible.flatMap((p, pageIndex) =>
                   p.elements.map((c) => ({
                     key: fieldOf(c.scope),
-                    label: c.label.replace(/\s*\((optional|facultatif)\)$/, ""),
+                    label: c.label.replace(/\s*\((optional|facultatif|opcional)\)$/i, ""),
                     value: displayValue(c, data[fieldOf(c.scope)], ui.locale),
                     pageIndex,
                   })),

@@ -85,6 +85,7 @@ export function useControl(props: ControlProps) {
     set,
     setFromString,
     toggle,
-    onBlur: () => onBlurField(field),
+    // Pass the value the field holds now: the form library reports changes a moment later.
+    onBlur: (e?: React.FocusEvent<HTMLInputElement>) => onBlurField(field, e?.currentTarget?.value),
   }
 }
