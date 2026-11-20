@@ -26,6 +26,9 @@ const LOADERS: Record<FormCountry, () => Promise<{ default: Loaded }>> = {
   us: () => import("./load-us"),
   ca: () => import("./load-ca"),
   au: () => import("./load-au"),
+  de: () => import("./load-de"),
+  fr: () => import("./load-fr"),
+  es: () => import("./load-es"),
 }
 
 const BASE = "/example-form"
@@ -143,7 +146,7 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
         <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-xl">
           <DialogHeader className="text-left">
             <DialogTitle>How the forms are built</DialogTitle>
-            <DialogDescription>The same short form, in four countries' design systems.</DialogDescription>
+            <DialogDescription>The same short form, in each country's public-sector design system.</DialogDescription>
           </DialogHeader>
           <ul className="ml-5 list-disc space-y-3 text-sm leading-6">
             <li>
@@ -154,10 +157,15 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
               The wording is in a separate file for each country. A service can change it without changing any code.
             </li>
             <li>
-              Each country's form uses that country's government design system: GOV.UK, the U.S. Web Design System,
-              the GC Design System and the Australian Government Design System. None carries government branding,
-              because Kinderform is not a government service.
+              Each country's form uses a public-sector design system from that country: GOV.UK, the U.S. Web Design
+              System, the GC Design System, the Australian Government Design System and, in Germany, KERN UX.
             </li>
+            <li>
+              France's State design system may only be used by State services. So the French form uses Cunningham,
+              an open design system from the French State's digital office. Spain's central system is not open, so the
+              Spanish form uses DESY, the open design system of the Government of Aragon.
+            </li>
+            <li>None of the forms carries government branding, because Kinderform is not a government service.</li>
             <li>
               Each page asks one question and says where you are. Focus moves to the new question, and there is always
               a way back. At the end, you can check your answers. When something needs fixing, an error message

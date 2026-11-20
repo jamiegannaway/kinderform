@@ -66,6 +66,21 @@
       "pattern": "^[0-9]{4}$",
       "description": "Australia only. The four-digit postcode, which covers a suburb or town, enough to find the local agency."
     },
+    "de_postcode": {
+      "type": "string",
+      "pattern": "^[0-9]{5}$",
+      "description": "Germany only. The five-digit postcode (Postleitzahl). Where a person lives decides which youth welfare office (Jugendamt) handles their enquiry."
+    },
+    "fr_postcode": {
+      "type": "string",
+      "pattern": "^(?:0[1-9]|[1-8][0-9]|9[0-8])[0-9]{3}$",
+      "description": "France only. The five-digit postcode (code postal). Its first digits give the département, whose council handles fostering and adoption."
+    },
+    "es_postcode": {
+      "type": "string",
+      "pattern": "^(?:0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$",
+      "description": "Spain only. The five-digit postcode (código postal). Its first two digits give the province, which shows the autonomous community that handles foster care and adoption."
+    },
     "contact_language": {
       "type": "string",
       "enum": ["english", "french"],
@@ -105,9 +120,24 @@
           { "required": ["postcode_area", "zip_prefix"] },
           { "required": ["postcode_area", "postal_code_fsa"] },
           { "required": ["postcode_area", "au_postcode"] },
+          { "required": ["postcode_area", "de_postcode"] },
+          { "required": ["postcode_area", "fr_postcode"] },
+          { "required": ["postcode_area", "es_postcode"] },
           { "required": ["zip_prefix", "postal_code_fsa"] },
           { "required": ["zip_prefix", "au_postcode"] },
-          { "required": ["postal_code_fsa", "au_postcode"] }
+          { "required": ["zip_prefix", "de_postcode"] },
+          { "required": ["zip_prefix", "fr_postcode"] },
+          { "required": ["zip_prefix", "es_postcode"] },
+          { "required": ["postal_code_fsa", "au_postcode"] },
+          { "required": ["postal_code_fsa", "de_postcode"] },
+          { "required": ["postal_code_fsa", "fr_postcode"] },
+          { "required": ["postal_code_fsa", "es_postcode"] },
+          { "required": ["au_postcode", "de_postcode"] },
+          { "required": ["au_postcode", "fr_postcode"] },
+          { "required": ["au_postcode", "es_postcode"] },
+          { "required": ["de_postcode", "fr_postcode"] },
+          { "required": ["de_postcode", "es_postcode"] },
+          { "required": ["fr_postcode", "es_postcode"] }
         ]
       }
     }

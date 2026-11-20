@@ -1,4 +1,4 @@
-// /example-form: a world map with the four countries that have an example form. Picking a
+// /example-form: a world map with the countries that have an example form. Picking a
 // country opens its form in a dialog (see reference-form/form-dialog.tsx), so the page itself
 // never needs to scroll. Rendered at build time; the links work without JavaScript too.
 import { Badge } from "@/components/ui/badge"
@@ -8,10 +8,18 @@ import { LAND, MAP, MAP_COUNTRIES } from "@/lib/world-map"
 
 const href = (code: string) => `/example-form/${code}`
 
-// Labels are centred on each country, except the UK's, which starts just to its right so the
-// small highlighted shape stays visible.
+// Large countries carry their label in the middle. The European countries are too small, so
+// their labels sit out at sea, joined to the country by a thin line (see tools/world_map.mjs).
 const LABEL_ALIGN: Record<string, string> = {
-  uk: "translate-x-3 -translate-y-1/2",
+  center: "-translate-x-1/2 -translate-y-1/2",
+  right: "-translate-x-full -translate-y-1/2",
+  left: "-translate-y-1/2",
+}
+// "The United Kingdom, the United States, Canada and Spain": country names in a sentence.
+function names(list: readonly { name: string }[]) {
+  const named = list.map((c) => (c.name.startsWith("United") ? `the ${c.name}` : c.name))
+  const text = named.length < 2 ? named.join("") : `${named.slice(0, -1).join(", ")} and ${named.at(-1)}`
+  return text.charAt(0).toUpperCase() + text.slice(1)
 }
 
 function WorldMap() {
@@ -24,9 +32,24 @@ function WorldMap() {
           viewBox={`0 0 ${MAP.width} ${MAP.height}`}
           className="size-full"
           role="img"
-          aria-label="World map. The United Kingdom, the United States, Canada and Australia are highlighted."
+          aria-label={`World map. ${names(FORM_COUNTRIES)} are highlighted.`}
         >
           <path d={LAND} className="fill-muted stroke-background" strokeWidth={0.6} />
+          {MAP_COUNTRIES.map((c) =>
+            c.line ? (
+              <line
+                key={`line-${c.code}`}
+                x1={c.line[0]}
+                y1={c.line[1]}
+                x2={c.line[2]}
+                y2={c.line[3]}
+                className="stroke-muted-foreground"
+                strokeWidth={0.8}
+                vectorEffect="non-scaling-stroke"
+                aria-hidden="true"
+              />
+            ) : null,
+          )}
           {MAP_COUNTRIES.map((c) => (
             <a key={c.code} href={href(c.code)} data-country={c.code} tabIndex={-1} aria-hidden="true" className="group">
               <path
@@ -44,7 +67,7 @@ function WorldMap() {
             data-country={c.code}
             tabIndex={-1}
             aria-hidden="true"
-            className={`absolute ${c.pos} ${LABEL_ALIGN[c.code] ?? "-translate-x-1/2 -translate-y-1/2"} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground sm:block md:px-3 md:py-1 md:text-sm`}
+            className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground sm:block md:px-3 md:py-1 md:text-sm`}
           >
             {c.name}
           </a>
@@ -69,15 +92,15 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
           </div>
           <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight md:text-4xl">Example enquiry forms</h1>
           <p className="max-w-3xl text-muted-foreground md:text-lg">
-            Pick a country to try its example form. Each asks the same few questions, in that country's government
-            design system, without government branding. Nothing you enter is sent or stored.
+            Pick a country to try its example form. Each asks the same few questions, in a public-sector design
+            system from that country, without government branding. Nothing you enter is sent or stored.
           </p>
         </div>
 
         <WorldMap />
 
         <nav aria-label="Example forms by country" className="shrink-0">
-          <ul className="grid grid-cols-2 gap-2 md:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
             {FORM_COUNTRIES.map((c) => (
               <li key={c.code}>
                 <a
