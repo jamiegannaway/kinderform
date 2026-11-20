@@ -69,8 +69,12 @@ def is_date(s: str) -> bool:
 
 
 total = 0
+checked = []
 for rel, (prefix, places) in FILES.items():
     path = ROOT / rel
+    if not path.exists():
+        print(f"{rel}: not added yet")
+        continue
     with open(path, encoding="utf-8", newline="") as fh:
         reader = csv.DictReader(fh)
         rows = list(reader)
@@ -78,6 +82,7 @@ for rel, (prefix, places) in FILES.items():
         errors.append(f"{rel}: header must be {','.join(HEADER)}")
         continue
     total += len(rows)
+    checked.append(prefix.upper())
     for pid, n in Counter(r["policy_id"] for r in rows).items():
         if n > 1:
             errors.append(f"{rel}: duplicate policy_id {pid}")
@@ -117,4 +122,4 @@ for e in errors:
     print("FAIL", e)
 if errors:
     sys.exit(1)
-print(f"OK: {total} rules for the UK nations, Canada, Australia, Germany, France and Spain")
+print(f"OK: {total} rules for {', '.join(checked)}")

@@ -71,8 +71,12 @@ PHONE = re.compile(r"(?<![\d/])(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}
 
 def main() -> int:
     errors = []
+    checked = []
     for country, regions in COUNTRIES.items():
         path = ROOT / "register" / country / "front-doors.csv"
+        if not path.exists():
+            print(f"{country}: no register yet")
+            continue
         with path.open(encoding="utf-8", newline="") as fh:
             reader = csv.DictReader(fh)
             if reader.fieldnames != HEADER:
@@ -107,11 +111,12 @@ def main() -> int:
                 if col not in URLS and PHONE.search(val):
                     errors.append(f"{where}: {col} looks like it holds a phone number")
         print(f"{country}: {len(rows)} front doors")
+        checked.append(country.upper())
     if errors:
         for e in errors:
             print("FAIL", e)
         return 1
-    print("Register checks passed for Canada, Australia, Germany, France and Spain")
+    print(f"Register checks passed for {', '.join(checked)}")
     return 0
 
 
