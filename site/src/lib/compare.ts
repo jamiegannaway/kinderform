@@ -110,7 +110,12 @@ const SERVICE_TYPES: Record<string, string> = {
   private_agency: "Private or non-profit agency",
   child_welfare_agency: "Child welfare agency",
   indigenous_agency: "Indigenous agency",
+  local_authority: "Council or youth welfare office",
+  voluntary_agency: "Non-profit agency",
 }
+
+// 1203 -> "1,203"; 11.66 stays "11.66"
+const withCommas = (v: string) => v.replace(/^\d{4,}/, (n) => Number(n).toLocaleString("en-GB"))
 
 const READ_FROM: Record<string, string> = {
   direct_fetch: "Read from the live page",
@@ -276,7 +281,7 @@ function valueText(v: string, unit: string): string {
   if (!v) return ""
   const u = unit.toLowerCase()
   const money = MONEY[u]
-  if (money) return `${money[0]}${v} ${money[1]}`.trim()
+  if (money) return `${money[0]}${withCommas(v)} ${money[1]}`.trim()
   return `${v} ${UNIT_WORDS[u] ?? u.replace(/_/g, " ")}`.trim()
 }
 

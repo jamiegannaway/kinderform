@@ -78,6 +78,7 @@ const PUBLIC = new Set([
   "county_agency",
   "child_welfare_agency",
   "indigenous_agency",
+  "local_authority",
 ])
 
 export type Group = "Councils and hubs" | "Independent agencies" | "Adoption agencies"
@@ -88,6 +89,9 @@ export function groupOf(f: Row): Group | null {
     return "Independent agencies"
   if (f.operator_type === "regional_adoption_agency" || f.operator_type === "voluntary_adoption_agency")
     return "Adoption agencies"
+  // Non-profit providers in Germany, France and Spain (freie Träger, associations, entidades colaboradoras)
+  if (f.operator_type === "voluntary_agency")
+    return f.service_type === "adoption" ? "Adoption agencies" : "Independent agencies"
   if (PUBLIC.has(f.operator_type)) return f.service_type === "adoption" ? "Adoption agencies" : "Councils and hubs"
   return null
 }

@@ -173,10 +173,14 @@ export default function Countries({ data }: { data: CountriesData }) {
     const yes = sum((c) => c.topics.find((x) => x.label === label)?.yes ?? 0)
     return pct(yes, data.allForms)
   }
+  // Side by side, two heat grids fit four countries. With more, each card takes the full width.
+  const pairs = data.countries.length > 4 ? "grid gap-6 *:min-w-0" : "grid gap-6 *:min-w-0 lg:grid-cols-2"
   return (
     <section aria-labelledby="countries" className="space-y-8">
       <div className="max-w-3xl space-y-4">
-        <Badge variant="secondary">{listNames(data.countries.map((c) => c.name))}</Badge>
+        <Badge variant="secondary" className="whitespace-normal">
+          {listNames(data.countries.map((c) => c.name))}
+        </Badge>
         <h2 id="countries" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
           What enquiry forms ask in {data.countries.length}{" "}
           {data.countries.length === 1 ? "country" : "countries"}
@@ -235,7 +239,7 @@ export default function Countries({ data }: { data: CountriesData }) {
         </ChartCard>
       )}
 
-      <div className="grid gap-6 *:min-w-0 lg:grid-cols-2">
+      <div className={pairs}>
         <ChartCard
           title="What kind of answer each question asks for"
           description="The share of questions in each country that ask for each kind of answer"
@@ -264,7 +268,7 @@ export default function Countries({ data }: { data: CountriesData }) {
         </ChartCard>
       </div>
 
-      <div className="grid gap-6 *:min-w-0 lg:grid-cols-2">
+      <div className={pairs}>
         {sensitiveRows && (
           <ChartCard
             title="Which sensitive questions enquiry forms ask, by country"

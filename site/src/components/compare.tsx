@@ -172,7 +172,7 @@ export function CompareIndex({
       href: "/compare/rules",
       title: "Rules on who can foster",
       figure: `${rules} rules`,
-      body: `Published rules from ${rulePlaces} countries and regions in ${ruleCountries}, grouped into ${topics} topics such as minimum age, bedrooms, checks, training and allowances.`,
+      body: `Published rules from ${rulePlaces} countries and regions in ${ruleCountries}. They are grouped into ${topics} topics, such as minimum age, bedrooms, checks, training and allowances.`,
     },
     {
       href: "/compare/applications",
