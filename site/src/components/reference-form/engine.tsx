@@ -186,8 +186,9 @@ function reference(): string {
 
 export function displayValue(c: Control, value: unknown, locale: string): string {
   const labels = c.options?.optionLabels ?? {}
-  if (value === undefined || value === "" || (Array.isArray(value) && !value.length)) return "Not given"
-  if (c.options?.format === "checkbox") return value ? "Yes" : "No"
+  const fr = isFrench(locale)
+  if (value === undefined || value === "" || (Array.isArray(value) && !value.length)) return fr ? "Non fourni" : "Not given"
+  if (c.options?.format === "checkbox") return value ? (fr ? "Oui" : "Yes") : fr ? "Non" : "No"
   if (Array.isArray(value)) return value.map((v) => labels[String(v)] ?? String(v)).join(", ")
   return labels[String(value)] ?? String(value)
 }
@@ -231,7 +232,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
           : step.kind === "done"
             ? ui.confirmation.title
             : base
-    document.title = `${hasErrors ? ui.progress.error_prefix + " " : ""}${label} | Kinderform example`
+    document.title = `${hasErrors ? ui.progress.error_prefix + " " : ""}${label} | ${isFrench(ui.locale) ? "Exemple Kinderform" : "Kinderform example"}`
   }, [step, errors])
 
   const go = (s: Step) => {
@@ -359,7 +360,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                 rows={visible.flatMap((p, pageIndex) =>
                   p.elements.map((c) => ({
                     key: fieldOf(c.scope),
-                    label: c.label.replace(" (optional)", ""),
+                    label: c.label.replace(/\s*\((optional|facultatif)\)$/, ""),
                     value: displayValue(c, data[fieldOf(c.scope)], ui.locale),
                     pageIndex,
                   })),
@@ -398,9 +399,24 @@ export function formatDay(d: Date, locale: string) {
   return new Intl.DateTimeFormat(locale, { weekday: "long", day: "numeric", month: "long" }).format(d)
 }
 
+// The Canadian form also comes in French (fr-CA): the few phrases that live in code follow it.
+export const isFrench = (locale: string) => locale.toLowerCase().startsWith("fr")
+
 export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
   const name = (record.preferred_name as string) || (record.full_name as string)
   const day = formatDay(due, ui.locale)
+  if (isFrench(ui.locale)) {
+    const how =
+      record.contact_method === "email"
+        ? "vous écrire par courriel"
+        : record.contact_method === "text_message"
+          ? "vous envoyer un message texte"
+          : "vous appeler"
+    if (record.knows_child)
+      return `Bonjour ${name}, merci d'avoir communiqué avec nous. Comme votre demande concerne un enfant que vous connaissez déjà, nous l'avons transmise à Sam, de ${ui.confirmation.kinship_team}. Sam va ${how} d'ici la fin de la journée du ${day}. Aucune de vos questions ne sera retenue contre vous.`
+    const times = record.best_times && (record.best_times as string[]).length ? ", à l'un des moments que vous avez choisis" : ""
+    return `Bonjour ${name}, merci d'avoir communiqué avec nous. Je m'appelle Chantal et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times}. Il n'y a pas de mauvaises questions, et aucune de vos questions ne sera retenue contre vous.`
+  }
   // Made-up staff names for the example reply, one for each country version.
   const sender: Record<string, string> = { "en-US": "Maria", "en-CA": "Chantal", "en-AU": "Mia" }
   const how =

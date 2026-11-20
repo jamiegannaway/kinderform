@@ -8,7 +8,7 @@ import { useState } from "react"
 import type { ControlProps } from "@jsonforms/core"
 import { withJsonFormsControlProps } from "@jsonforms/react"
 
-import { exampleMessage, formatDay, type Theme, type UiConfig } from "./engine"
+import { exampleMessage, formatDay, isFrench, type Theme, type UiConfig } from "./engine"
 import { Layout, testers, useControl } from "./shared"
 
 // Put this class on the element that holds the form. Every GCDS style is scoped to it.
@@ -19,7 +19,43 @@ const I18N = {
   en: { step: "Step", success: "Success: ", info: "Information: ", warning: "Warning: " },
   fr: { step: "Étape", success: "Succès : ", info: "Information : ", warning: "Avertissement : " },
 }
+
+// The fixed sentences on the confirmation page, in English and French (as in the other themes,
+// they live in code rather than in the wording files).
+const DONE = {
+  en: {
+    ack: { email: "an email", text: "a text message" },
+    now: "Now.",
+    nowBody: (ack: string) => `We have sent you ${ack} to confirm we have your enquiry. It says who will contact you and when.`,
+    by: (day: string) => `By the end of ${day}.`,
+    how: { email: "email you", text_message: "text you", phone_call: "call you" } as Record<string, string>,
+    who: (team: string, how: string) => `A named person from ${team} will ${how}`,
+    times: ", at one of the times you chose",
+    talk: "When you talk.",
+    talkBody: "Ask anything. There are no wrong questions, and nothing you ask counts against you.",
+    notSure: " We will talk you through fostering, adoption and other ways to help.",
+    plans: "If your plans change, that's fine. You can tell us at any time.",
+    record: "Show the record",
+  },
+  fr: {
+    ack: { email: "un courriel", text: "un message texte" },
+    now: "Maintenant.",
+    nowBody: (ack: string) =>
+      `Nous vous avons envoyé ${ack} pour confirmer que nous avons reçu votre demande. Il indique qui communiquera avec vous et quand.`,
+    by: (day: string) => `D'ici la fin de la journée du ${day}.`,
+    how: { email: "vous écrire par courriel", text_message: "vous envoyer un message texte", phone_call: "vous appeler" } as Record<string, string>,
+    who: (team: string, how: string) => `Une personne de ${team} va ${how}`,
+    times: ", à l'un des moments que vous avez choisis",
+    talk: "Pendant la conversation.",
+    talkBody: "Posez toutes vos questions. Il n'y a pas de mauvaises questions, et aucune de vos questions ne sera retenue contre vous.",
+    notSure: " Nous vous parlerons de la famille d'accueil, de l'adoption et d'autres façons d'aider.",
+    plans: "Si vos projets changent, ce n'est pas grave. Vous pouvez nous le dire en tout temps.",
+    record: "Afficher le dossier",
+  },
+}
 const words = (ui: UiConfig) => I18N[ui.locale.toLowerCase().startsWith("fr") ? "fr" : "en"]
+// French puts a non-breaking space before a colon.
+const colon = (ui: UiConfig) => (isFrench(ui.locale) ? "\u00a0:" : ":")
 
 // ---- Icons ----------------------------------------------------------------
 // GCDS draws icons with its own icon font. These inline SVGs stand in for the same glyphs.
@@ -329,7 +365,8 @@ export const gcdsTheme: Theme = {
   Progress: ({ ui, sectionIndex, section }) => (
     <p className="gcds-stepper">
       <span className="gcds-stepper__steps">
-        {words(ui).step} {sectionIndex + 1} {ui.progress.of} {ui.sections.length}:
+        {words(ui).step} {sectionIndex + 1} {ui.progress.of} {ui.sections.length}
+        {colon(ui)}
       </span>{" "}
       {section}
     </p>
@@ -408,38 +445,38 @@ export const gcdsTheme: Theme = {
   Done: ({ ui, step, headingRef, onRestart }) => {
     const r = step.record
     const day = formatDay(step.due, ui.locale)
-    const ack = r.contact_method === "email" ? "an email" : "a text message"
-    const how = r.contact_method === "email" ? "email you" : r.contact_method === "text_message" ? "text you" : "call you"
+    const d = DONE[isFrench(ui.locale) ? "fr" : "en"]
+    const ack = r.contact_method === "email" ? d.ack.email : d.ack.text
+    const how = d.how[String(r.contact_method)] ?? d.how.phone_call
     const team = r.knows_child ? ui.confirmation.kinship_team : ui.confirmation.team
     return (
       <>
         <Notice ui={ui} type="success" title={ui.confirmation.title} tag="h1" headingRef={headingRef}>
           <p>
-            {ui.confirmation.reference}: <strong className="gcds-reference">{step.reference}</strong>
+            {ui.confirmation.reference}
+            {colon(ui)} <strong className="gcds-reference">{step.reference}</strong>
           </p>
         </Notice>
         <h2 className="gcds-heading gcds-heading--section">{ui.confirmation.next_heading}</h2>
         <ol className="gcds-list">
           <li>
-            <strong>Now.</strong> We have sent you {ack} to confirm we have your enquiry. It says who will contact you and
-            when.
+            <strong>{d.now}</strong> {d.nowBody(ack)}
           </li>
           <li>
-            <strong>By the end of {day}.</strong> A named person from {team} will {how}
-            {r.best_times ? ", at one of the times you chose" : ""}.
+            <strong>{d.by(day)}</strong> {d.who(team, how)}
+            {r.best_times ? d.times : ""}.
           </li>
           <li>
-            <strong>When you talk.</strong> Ask anything. There are no wrong questions, and nothing you ask counts against
-            you.
-            {r.interest === "not_sure" && !r.knows_child ? " We will talk you through fostering, adoption and other ways to help." : ""}
+            <strong>{d.talk}</strong> {d.talkBody}
+            {r.interest === "not_sure" && !r.knows_child ? d.notSure : ""}
           </li>
         </ol>
-        <p className="gcds-text">If your plans change, that's fine. You can tell us at any time.</p>
+        <p className="gcds-text">{d.plans}</p>
         <Notice ui={ui} type="info" title={ui.confirmation.example_label} tag="h3">
           <p>{exampleMessage(ui, r, step.due)}</p>
         </Notice>
         <h2 className="gcds-heading gcds-heading--section">{ui.confirmation.builders_heading}</h2>
-        <Details id="kf-record" title="Show the record">
+        <Details id="kf-record" title={d.record}>
           <p>{ui.confirmation.builders_body}</p>
           <pre className="kf-code">{JSON.stringify(r, null, 2)}</pre>
         </Details>

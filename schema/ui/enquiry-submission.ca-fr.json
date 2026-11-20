@@ -1,0 +1,343 @@
+{
+  "$comment": "Wording for the Canadian reference form in Canadian French (fr-CA). Same pages, fields and options as enquiry-submission.ca.json; tests/validate_ui.py checks they stay in step. Field rules live in ../enquiry-submission.schema.json.",
+  "locale": "fr-CA",
+  "design_system": "gcds",
+  "sections": [
+    "À propos de vous",
+    "Comment vous joindre",
+    "Ce dont vous aimeriez parler",
+    "Vérifier et envoyer"
+  ],
+  "start": {
+    "title": "Se renseigner sur la famille d'accueil ou l'adoption",
+    "body": [
+      "Utilisez ce formulaire pour poser une question ou demander à discuter. Cela prend environ 2 minutes.",
+      "Une personne de l'équipe des familles d'accueil vous répondra d'ici 1 jour ouvrable et vous dira son nom.",
+      "Vous n'avez pas besoin de savoir déjà si la famille d'accueil ou l'adoption vous convient.",
+      "À cette étape, nous ne vous poserons aucune question sur votre santé, votre logement, vos finances ou votre famille."
+    ],
+    "button": "Commencer"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "À propos de vous",
+      "title": "Quel est votre nom?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Nom complet",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Entrez votre nom complet",
+              "maxLength": "Votre nom complet doit compter 100 caractères ou moins"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "Comment devrions-nous vous appeler? (facultatif)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "Par exemple, un diminutif ou un nom que vous préférez.",
+            "errors": {
+              "maxLength": "Le nom à utiliser doit compter 50 caractères ou moins"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "À propos de vous",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "Sur quoi aimeriez-vous vous renseigner?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Devenir famille d'accueil",
+              "adoption": "L'adoption",
+              "not_sure": "Je ne sais pas encore"
+            },
+            "optionHints": {
+              "not_sure": "Pas de problème. Nous pouvons vous parler des deux, et d'autres façons d'aider."
+            },
+            "errors": {
+              "required": "Choisissez ce sur quoi vous aimeriez vous renseigner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "À propos de vous",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Votre demande concerne-t-elle un enfant que vous connaissez déjà?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "Par exemple, un petit-enfant, une nièce, un neveu ou l'enfant d'une amie ou d'un ami. On parle alors de prise en charge par un proche. Une autre équipe s'en occupe. Ne nous donnez ici aucun renseignement sur l'enfant.",
+            "optionLabels": {
+              "true": "Oui",
+              "false": "Non"
+            },
+            "errors": {
+              "required": "Choisissez « Oui » si votre demande concerne un enfant que vous connaissez déjà"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Comment vous joindre",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "Comment aimeriez-vous que nous communiquions avec vous?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "Par courriel",
+              "phone_call": "Par téléphone",
+              "text_message": "Par message texte"
+            },
+            "errors": {
+              "required": "Choisissez comment vous aimeriez que nous communiquions avec vous"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Comment vous joindre",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "Quelle est votre adresse courriel?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "Nous l'utiliserons seulement pour vous répondre.",
+            "errors": {
+              "required": "Entrez votre adresse courriel",
+              "pattern": "Entrez une adresse courriel valide, comme nom@example.org"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Comment vous joindre",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "Quel est votre numéro de téléphone?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "Par exemple, 613-555-0199.",
+            "errors": {
+              "required": "Entrez votre numéro de téléphone",
+              "pattern": "Entrez un numéro de téléphone valide, comme 613-555-0199"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Comment vous joindre",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "Quel est le meilleur moment pour vous appeler? (facultatif)",
+          "options": {
+            "asHeading": true,
+            "hint": "Choisissez tout ce qui s'applique. Nous essaierons d'appeler à ces moments.",
+            "optionLabels": {
+              "weekday_morning": "En semaine, le matin",
+              "weekday_afternoon": "En semaine, l'après-midi",
+              "weekday_evening": "En semaine, le soir",
+              "saturday": "Le samedi"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_language",
+      "section": "Comment vous joindre",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_language",
+          "label": "Dans quelle langue officielle voulez-vous que nous vous répondions? (facultatif)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "Nous pouvons vous répondre en français ou en anglais.",
+            "optionLabels": {
+              "english": "Anglais (English)",
+              "french": "Français"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "Comment vous joindre",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/postal_code_fsa",
+          "label": "Quels sont les 3 premiers caractères de votre code postal? (facultatif)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "off",
+            "inputWidth": 4,
+            "transform": "postal_code_fsa",
+            "spellcheck": false,
+            "hint": "Par exemple, H0H ou K1A. Nous avons seulement besoin de la première partie pour trouver l'agence de votre région. Nous ne vous demanderons pas votre adresse.",
+            "errors": {
+              "pattern": "Entrez seulement les 3 premiers caractères de votre code postal, comme K1A"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Ce dont vous aimeriez parler",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "De quoi aimeriez-vous parler? (facultatif)",
+          "options": {
+            "asHeading": true,
+            "hint": "Choisissez tout ce qui s'applique. Vous pourrez aussi nous en parler pendant la conversation. Ne donnez pas de renseignements personnels ici.",
+            "optionLabels": {
+              "eligibility": "Si je peux devenir famille d'accueil ou adopter",
+              "what_it_involves": "Ce que cela représente au quotidien",
+              "money_and_support": "L'aide financière et le soutien",
+              "process_and_timescales": "Les étapes et leur durée",
+              "types_of_care": "Les différents types de placement",
+              "something_else": "Autre chose"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Ce dont vous aimeriez parler",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "Comment avez-vous entendu parler de nous? (facultatif)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Par une amie, un ami ou un membre de ma famille",
+              "social_media": "Par les médias sociaux",
+              "search": "Par une recherche sur Internet",
+              "event": "Lors d'un événement",
+              "advert": "Par une publicité",
+              "council_or_agency_website": "Par le site Web d'une agence ou d'un gouvernement",
+              "other": "Ailleurs"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Ce dont vous aimeriez parler",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Aimeriez-vous recevoir des nouvelles et des invitations à des événements? (facultatif)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Oui, envoyez-moi des nouvelles et des invitations",
+            "hint": "Nous vous en enverrons seulement si vous cochez la case. Vous pourrez vous désabonner en tout temps."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Vérifiez vos réponses avant d'envoyer",
+    "change": "Modifier",
+    "send_heading": "Envoyez maintenant votre demande",
+    "send_body": "En envoyant cette demande, vous acceptez que nous utilisions ces renseignements pour vous répondre.",
+    "button": "Envoyer"
+  },
+  "confirmation": {
+    "title": "Demande envoyée",
+    "reference": "Votre numéro de référence",
+    "next_heading": "Prochaines étapes",
+    "team": "l'équipe des familles d'accueil",
+    "kinship_team": "l'équipe de la prise en charge par un proche",
+    "day_word": "jour ouvrable",
+    "example_label": "Exemple de première réponse (non envoyée)",
+    "builders_heading": "Pour les personnes qui conçoivent des formulaires de demande",
+    "builders_body": "Voici le dossier que le service recevrait. Le formulaire l'a vérifié par rapport au schéma publié avant d'afficher cette page.",
+    "restart": "Recommencer"
+  },
+  "progress": {
+    "question": "Question",
+    "of": "sur",
+    "back": "Retour",
+    "continue": "Continuer",
+    "error_title": "Il y a eu un problème",
+    "error_prefix": "Erreur :"
+  },
+  "demo_notice": "Ceci est un exemple de formulaire. N'entrez pas de vrais renseignements. Rien de ce que vous entrez n'est envoyé ni conservé."
+}

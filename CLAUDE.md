@@ -39,7 +39,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 
 ## Layout
 
-- `schema/` Enquiry schema and synthetic examples; `enquiry-submission.schema.json` is what a person fills in, and `schema/ui/` holds the wording for each country's reference form
+- `schema/` Enquiry schema and synthetic examples; `enquiry-submission.schema.json` is what a person fills in, and `schema/ui/` holds the wording for each country's reference form (Canada also in French, `enquiry-submission.ca-fr.json`; `tests/validate_ui.py` keeps a translation in step with its main file)
 - `register/` front-door registers (CSV) and column guides: the UK in `front-doors.csv`, then `us/`, `ca/` and `au/`
 - `rubric/` audit rubric in Markdown and JSON
 - `census/` intake-form census: forms, questions, answer options, guidance (CSV)
