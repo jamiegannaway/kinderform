@@ -156,7 +156,7 @@ export default function FormCheckNamed({ groups, built }: { groups: Record<Group
                 <li>No row has been checked by a person yet.</li>
               </ul>
               <p className="mt-2">
-                Each service sees its own row in private before we publish anything by name. Page built{" "}
+                Each service sees its own scores in private before we publish any score by name. Page built{" "}
                 {built}.
               </p>
             </AlertDescription>

@@ -50,6 +50,16 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Read by hand the forms the crawler cannot reach: forms that load in the browser, portals, bot checks and PDFs
 - [ ] Find the missing websites in the Canada and Australia registers
 
+## Now: compare tables for services
+
+- [x] Rules registers for the UK nations, Canada's provinces and territories and Australia's states and territories, with the same topics as the US (unverified)
+- [x] The date each source page gives for its last update, read by the polite crawler (`register/page-dates.csv`)
+- [x] `/compare`: enquiry forms, rules by topic and US application forms, each with the link and two dates, plus CSV downloads; facts only, no scores
+- [x] Each enquiry form shows what it asks beyond the Kinderform enquiry standard
+- [ ] Check a sample of the computer's topic tags by hand, and say how accurate they are
+- [ ] Re-read the sources every few months, and flag links that stop working
+- [ ] Invite services to correct their rows
+
 ## Next: listen, then measure
 
 - [ ] Eight to ten conversations with carers, care-experienced adults, a hub manager and sector bodies

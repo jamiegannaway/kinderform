@@ -1,0 +1,21 @@
+---
+import Base from "@/layouts/Base.astro";
+import { CompareRulesIndex } from "@/components/compare";
+import { loadTopics, ruleRows } from "@/lib/compare";
+
+const rules = ruleRows();
+const topics = loadTopics()
+  .map((t) => {
+    const mine = rules.filter((r) => r.topic === t.code);
+    const byCountry: Record<string, number> = {};
+    for (const r of mine) byCountry[r.country] = (byCountry[r.country] ?? 0) + 1;
+    return { ...t, rules: mine.length, places: new Set(mine.map((r) => `${r.country}-${r.place}`)).size, byCountry };
+  })
+  .filter((t) => t.rules > 0);
+---
+<Base
+  title="Rules on who can foster, compared | Kinderform"
+  description="Published rules on who can foster and what approval involves, by topic, across the UK nations, US states, Canadian provinces and Australian states."
+>
+  <CompareRulesIndex topics={topics} rules={rules.length} places={new Set(rules.map((r) => `${r.country}-${r.place}`)).size} />
+</Base>

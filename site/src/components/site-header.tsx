@@ -7,6 +7,7 @@ const TABS = [
   { href: "/form-check", label: "Form check" },
   { href: "/example-form", label: "Example form" },
   { href: "/research", label: "Research" },
+  { href: "/compare", label: "Compare" },
 ]
 
 // Light or dark, in the shadcn/ui toggle group look. public/theme.js does the switching and
