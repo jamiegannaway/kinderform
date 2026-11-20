@@ -195,7 +195,11 @@ export default function Countries({ data }: { data: CountriesData }) {
           <li>whether the form says when you will hear back.</li>
         </ul>
         <p className="leading-7 text-muted-foreground">
-          We do not name any service. A computer program read the forms and sorted each question into a topic. These
+          This section does not name any service: the{" "}
+          <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
+            compare page
+          </a>{" "}
+          lists each form. A computer program read the forms and sorted each question into a topic. These
           results are not yet checked by a person, so treat them as early patterns.
         </p>
       </div>

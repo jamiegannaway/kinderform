@@ -1,0 +1,11 @@
+---
+import Base from "@/layouts/Base.astro";
+import { CompareApplications } from "@/components/compare";
+import { applicationRows } from "@/lib/compare";
+---
+<Base
+  title="US application forms compared | Kinderform"
+  description="The forms in each US state's fostering and adoption application packet, with the link and two dates."
+>
+  <CompareApplications rows={applicationRows()} />
+</Base>

@@ -99,7 +99,9 @@ def sentences(blocks: list[str]) -> list[str]:
     out = []
     for b in blocks:
         for s in re.split(r"(?<=[.!?])\s+(?=[A-Z0-9“\"'(])", b):
-            if len(s.split()) >= 3 and not is_citation(s):
+            # A table cell listing items ("Name, Email address, Phone number, ...") is a list, not a sentence.
+            is_list = s.count(",") >= 4 and not re.search(r"[.!?]$", s.strip())
+            if len(s.split()) >= 3 and not is_citation(s) and not is_list:
                 out.append(s)
     return out
 

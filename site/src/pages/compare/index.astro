@@ -1,0 +1,23 @@
+---
+import Base from "@/layouts/Base.astro";
+import { CompareIndex } from "@/components/compare";
+import { loadCensus } from "@/lib/census";
+import { applicationRows, formRows, loadTopics, ruleRows } from "@/lib/compare";
+
+const forms = formRows(loadCensus());
+const rules = ruleRows();
+const used = new Set(rules.map((r) => r.topic));
+---
+<Base
+  title="Compare forms and rules | Kinderform"
+  description="Tables for fostering and adoption services: enquiry forms and the rules on who can foster across the UK, the US, Canada and Australia, each with its source and the date checked."
+>
+  <CompareIndex
+    forms={forms.length}
+    formServices={new Set(forms.map((f) => f.service)).size}
+    rules={rules.length}
+    rulePlaces={new Set(rules.map((r) => `${r.country}-${r.place}`)).size}
+    topics={loadTopics().filter((t) => used.has(t.code)).length}
+    applications={applicationRows().length}
+  />
+</Base>

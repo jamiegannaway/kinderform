@@ -1,0 +1,21 @@
+---
+// One page per rules topic: every place side by side.
+import Base from "@/layouts/Base.astro";
+import { CompareTopic } from "@/components/compare";
+import { loadTopics, ruleRows, type TopicInfo } from "@/lib/compare";
+
+export function getStaticPaths() {
+  const rules = ruleRows();
+  return loadTopics()
+    .filter((t) => rules.some((r) => r.topic === t.code))
+    .map((t) => ({ params: { topic: t.code }, props: { topic: t } }));
+}
+const { topic } = Astro.props as { topic: TopicInfo };
+const rows = ruleRows().filter((r) => r.topic === topic.code);
+---
+<Base
+  title={`${topic.label}: rules compared | Kinderform`}
+  description={`${topic.label}: the published rules across the UK, the US, Canada and Australia, with sources and dates.`}
+>
+  <CompareTopic topic={topic} rows={rows} />
+</Base>

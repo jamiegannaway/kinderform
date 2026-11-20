@@ -51,7 +51,7 @@ const principles = [
   ["No real personal data.", "Every example is made up."],
   ["Nothing scores people.", "No tool here ranks, screens or makes predictions about anyone who enquires."],
   ["Pages and processes, not staff.", "Recruitment teams are small and stretched, and they are not the problem."],
-  ["Method first, then findings.", "Each service sees its own results privately, with time to reply, before we name anything."],
+  ["Facts in public, scores only after a reply.", "We publish facts about forms and rules, with their sources. We will not publish a score for any service before it has had time to reply."],
   ["Free and open.", "Our code, writing and data are openly licensed, so anyone can use them without asking."],
 ]
 

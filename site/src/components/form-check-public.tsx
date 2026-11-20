@@ -94,7 +94,11 @@ export default function FormCheckPublic({
             <AlertTitle>No service is named or scored here yet</AlertTitle>
             <AlertDescription>
               Each service will see its own results in private, with time to correct them, before we
-              publish anything by name. The counts on this page come from a first look by a computer
+              publish any score by name. The facts about each form are public on the{" "}
+              <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
+                compare page
+              </a>
+              . The counts on this page come from a first look by a computer
               program that reads public web pages. They are not yet checked by a person.
             </AlertDescription>
           </Alert>
