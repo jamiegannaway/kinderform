@@ -1,4 +1,4 @@
-import { ArrowUpRight, Mail } from "lucide-react"
+import { ArrowUpRight, Code, FileText, Mail } from "lucide-react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
@@ -82,57 +82,112 @@ function Section({
   )
 }
 
-/* A made-up enquiry and the reply it deserves. It is an illustration:
-   inert, so it cannot be focused or filled in, and described by its caption. */
-function Exchange() {
-  return (
-    <figure aria-labelledby="exchange-caption" className="w-full max-w-md justify-self-center md:justify-self-end">
-      <div inert aria-hidden="true" className="grid gap-3">
-        <Card className="gap-4">
-          <CardHeader>
-            <CardTitle>Ask about fostering</CardTitle>
-            <CardDescription>Sent Tuesday, 7.42pm</CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="ex-name">Your name</Label>
-              <Input id="ex-name" defaultValue="Sam Example" readOnly tabIndex={-1} />
-            </div>
-            <div className="grid gap-2">
-              <Label>What would help most?</Label>
-              <div className="flex items-center gap-2 text-sm">
-                <span className="grid size-4 place-items-center rounded-full border border-primary">
-                  <span className="size-2 rounded-full bg-primary" />
-                </span>
-                A chat first
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span className="size-4 rounded-full border border-input" />
-                I'm ready to apply
-              </div>
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="ex-time">Best time to call</Label>
-              <Input id="ex-time" defaultValue="Weekday evenings" readOnly tabIndex={-1} />
-            </div>
-          </CardContent>
-        </Card>
+/* The hero: a made-up enquiry form, and the same enquiry as code (the record the Kinderform
+   enquiry standard defines). Readers switch views with two radio buttons styled as shadcn
+   Tabs: the stylesheet shows the chosen view, so it needs no JavaScript and works under the
+   Content-Security-Policy. The form is an illustration: inert, so it cannot be filled in. */
+const RECORD = `{
+  "full_name": "Sam Example",
+  "interest": "not_sure",
+  "knows_child": false,
+  "contact_method": "email",
+  "email": "sam@example.org",
+  "postcode_area": "ZZ99"
+}`
 
-        <Card className="ml-8 gap-3 border-transparent bg-primary py-5 text-primary-foreground md:ml-12">
-          <CardHeader>
-            <CardDescription className="text-primary-foreground/70">Reply Wednesday, 9.10am</CardDescription>
-          </CardHeader>
-          <CardContent className="text-sm leading-relaxed">
-            Hi Sam, thanks for getting in touch. You said evenings suit you, so I'll ring tomorrow
-            between 6 and 7pm. There's nothing to prepare. It's just a chat.
-          </CardContent>
-          <CardFooter className="text-sm text-primary-foreground/70">Ali, fostering team</CardFooter>
-        </Card>
-      </div>
-      <figcaption id="exchange-caption" className="mt-4 text-sm text-muted-foreground">
-        An example of a quick, kind and considered reply. Sam enquires on Tuesday evening and hears
-        back the next morning. The reply sets up a call at the time Sam asked for. Sam and Ali are
-        made up, and this is not a real form.
+const VIEW_TAB =
+  "inline-flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-3 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] has-[:checked]:bg-background has-[:checked]:text-foreground has-[:checked]:shadow-sm has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/50 dark:has-[:checked]:border-input dark:has-[:checked]:bg-input/30"
+
+function Choice({ label, checked = false }: { label: string; checked?: boolean }) {
+  return (
+    <div className={`flex items-center gap-2 text-sm ${checked ? "" : "text-muted-foreground"}`}>
+      {checked ? (
+        <span className="grid size-4 place-items-center rounded-full border border-primary">
+          <span className="size-2 rounded-full bg-primary" />
+        </span>
+      ) : (
+        <span className="size-4 rounded-full border border-input" />
+      )}
+      {label}
+    </div>
+  )
+}
+
+function FormOrCode() {
+  return (
+    <figure aria-labelledby="hero-example-caption" className="group/view w-full max-w-md justify-self-center md:justify-self-end">
+      <fieldset className="mb-3 inline-flex h-9 w-fit items-center rounded-lg bg-muted p-[3px] text-muted-foreground">
+        <legend className="sr-only">Show the example as</legend>
+        <label className={VIEW_TAB}>
+          <input type="radio" name="hero-view" value="form" defaultChecked className="sr-only" />
+          <FileText aria-hidden="true" className="size-4" />
+          Form
+        </label>
+        <label className={VIEW_TAB}>
+          <input type="radio" name="hero-view" value="code" id="hero-view-code" className="sr-only" />
+          <Code aria-hidden="true" className="size-4" />
+          Code
+        </label>
+      </fieldset>
+
+      <Card inert aria-hidden="true" className="gap-4 group-has-[#hero-view-code:checked]/view:hidden">
+        <CardHeader>
+          <CardTitle>Ask about fostering or adoption</CardTitle>
+          <CardDescription>It takes about 2 minutes</CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="ex-name">Full name</Label>
+            <Input id="ex-name" defaultValue="Sam Example" readOnly tabIndex={-1} />
+          </div>
+          <div className="grid gap-2">
+            <Label>What would you like to find out about?</Label>
+            <Choice label="Fostering" />
+            <Choice label="Adoption" />
+            <Choice label="I'm not sure yet" checked />
+          </div>
+          <div className="grid gap-2">
+            <Label>Are you asking about a child you already know?</Label>
+            <div className="flex gap-6">
+              <Choice label="Yes" />
+              <Choice label="No" checked />
+            </div>
+          </div>
+          <div className="grid gap-2">
+            <Label>How should we contact you?</Label>
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              <Choice label="Email" checked />
+              <Choice label="Phone call" />
+              <Choice label="Text message" />
+            </div>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="ex-email">Email address</Label>
+            <Input id="ex-email" defaultValue="sam@example.org" readOnly tabIndex={-1} />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="ex-postcode">First part of your postcode</Label>
+            <Input id="ex-postcode" defaultValue="ZZ99" readOnly tabIndex={-1} className="w-28" />
+          </div>
+          <Button tabIndex={-1} className="w-fit">
+            Send enquiry
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card className="hidden gap-0 overflow-hidden py-0 group-has-[#hero-view-code:checked]/view:flex">
+        <div className="flex items-center justify-between border-b px-4 py-2 text-xs text-muted-foreground">
+          <span className="font-mono">enquiry.json</span>
+          <span>Kinderform enquiry standard, draft 0.1</span>
+        </div>
+        <pre className="overflow-x-auto bg-muted/50 p-4 font-mono text-sm leading-6">
+          <code>{RECORD}</code>
+        </pre>
+      </Card>
+
+      <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
+        A made-up enquiry form, and the same enquiry as a record in our open standard. It asks only what a service
+        needs to reply. Sam is made up, and this is not a real form.
       </figcaption>
     </figure>
   )
@@ -171,7 +226,7 @@ export default function Landing() {
               </Button>
             </div>
           </div>
-          <Exchange />
+          <FormOrCode />
         </section>
 
         <div className="mx-auto max-w-6xl px-6">
