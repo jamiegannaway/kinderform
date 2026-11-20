@@ -101,8 +101,18 @@ export type Theme = {
 
 // ---- Shared state for renderers -----------------------------------------------
 
-type PageCtx = { errors: Errors; headingField: string | null; onBlurField: (field: string, value?: string) => void }
-export const PageContext = createContext<PageCtx>({ errors: {}, headingField: null, onBlurField: () => {} })
+type PageCtx = {
+  errors: Errors
+  headingField: string | null
+  onBlurField: (field: string, value?: string) => void
+  onValue: (field: string, value: unknown) => void
+}
+export const PageContext = createContext<PageCtx>({
+  errors: {},
+  headingField: null,
+  onBlurField: () => {},
+  onValue: () => {},
+})
 export const usePage = () => useContext(PageContext)
 
 export const fieldOf = (scope: string) => scope.split("/").pop() as string
@@ -212,6 +222,18 @@ export { JsonFormsDispatch } from "@jsonforms/react"
 
 export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
   const [data, setData] = useState<Data>({})
+  // The latest answers, updated the moment the form library reports a change. Handlers read this,
+  // not the last rendered copy: a change reported just before Continue or a blur has not been
+  // rendered yet, and saving the rendered copy would overwrite it.
+  const latest = useRef<Data>({})
+  const put = (d: Data) => {
+    latest.current = d
+    setData(d)
+  }
+  // Each field reports its new value here as it is set, before the form library passes it on.
+  const onValue = (field: string, value: unknown) => {
+    latest.current = { ...latest.current, [field]: value }
+  }
   const [step, setStep] = useState<Step>({ kind: "start" })
   const [errors, setErrors] = useState<Errors>({})
   const [returnToCheck, setReturnToCheck] = useState(false)
@@ -252,29 +274,28 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
 
   // Tidy a postcode as the person leaves the field. Use the value the field holds at that moment:
   // the form library reports a change a moment after the event, so state may still hold the old
-  // value. Without one, fall back to the latest state (a functional update).
+  // value. Without one, fall back to the latest answers.
   const onBlurField = (field: string, value?: string) => {
     const c = page?.elements.find((e) => fieldOf(e.scope) === field)
     const kind = c?.options?.transform
     if (!kind) return
-    setData((d) => {
-      const current = typeof value === "string" ? value : d[field]
-      return typeof current === "string" ? { ...d, [field]: transform(kind, current) || undefined } : d
-    })
+    const d = latest.current
+    const current = typeof value === "string" ? value : d[field]
+    if (typeof current === "string") put({ ...d, [field]: transform(kind, current) || undefined })
   }
 
   const onContinue = (ev: React.FormEvent) => {
     ev.preventDefault()
     if (!page || step.kind !== "page") return
     // Apply any tidy-up (postcode, ZIP) before checking.
-    const next = { ...data }
+    const next = { ...latest.current }
     for (const c of page.elements) {
       const f = fieldOf(c.scope)
       if (c.options?.transform && typeof next[f] === "string") next[f] = transform(c.options.transform, next[f] as string) || undefined
       if (next[f] === "") delete next[f]
     }
     const errs = errorsFor(page, clean(next, ui.pages), ui.locale)
-    setData(next)
+    put(next)
     if (Object.keys(errs).length) {
       setErrors(errs)
       return
@@ -339,7 +360,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
             <form noValidate onSubmit={onContinue}>
               {page.title && <T.PageHeading text={page.title} headingRef={headingRef} />}
               <PageContext.Provider
-                value={{ errors, headingField: page.title ? null : fieldOf(page.elements[0].scope), onBlurField }}
+                value={{ errors, headingField: page.title ? null : fieldOf(page.elements[0].scope), onBlurField, onValue }}
               >
                 <HeadingRefContext.Provider value={page.title ? null : headingRef}>
                   <JsonForms
@@ -349,7 +370,9 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                     renderers={T.renderers}
                     cells={[]}
                     validationMode="NoValidation"
-                    onChange={({ data: d }) => setData(d as Data)}
+                    // Every field reports to onValue as it is set, so latest is always the newest copy.
+                    // The library's own copy can lag a change behind, so it is not saved back.
+                    onChange={() => put(latest.current)}
                   />
                 </HeadingRefContext.Provider>
               </PageContext.Provider>
@@ -392,7 +415,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
             step={step}
             headingRef={headingRef}
             onRestart={() => {
-              setData({})
+              put({})
               setReturnToCheck(false)
               go({ kind: "start" })
             }}

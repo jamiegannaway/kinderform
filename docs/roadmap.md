@@ -61,7 +61,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] Rules registers: Germany 129, France 79, Spain 136, with the same topics as the other countries (unverified)
 - [x] The polite crawler and the question tagger read German, Spanish and Catalan; 16 enquiry forms added to the census
 - [x] The compare tables and the comparison across countries include all three
-- [ ] Example forms: Germany in KERN UX, France in Cunningham, Spain in DESY (Aragon), without government branding
+- [x] Example forms: Germany in KERN UX, France in Cunningham, Spain in DESY (Aragon), without government branding, on the map
+- [ ] Have native speakers review the German, French and Spanish wording
 - [ ] Fill the gaps: foster payment rates for most German Länder and Spanish communities, Ceuta and Melilla, and the sites that refused automated reading
 - [ ] Read Legifrance and the BOE directly; both refused the research tools
 

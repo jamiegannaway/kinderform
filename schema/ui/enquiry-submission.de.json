@@ -1,0 +1,324 @@
+{
+  "$comment": "Wording for the reference form (Germany, in German). Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json.",
+  "locale": "de-DE",
+  "design_system": "kern",
+  "sections": [
+    "Über Sie",
+    "So erreichen wir Sie",
+    "Worüber Sie sprechen möchten",
+    "Prüfen und senden"
+  ],
+  "start": {
+    "title": "Fragen zu Pflegefamilien und Adoption stellen",
+    "body": [
+      "Mit diesem Formular können Sie eine Frage stellen oder um ein Gespräch bitten. Das dauert etwa 2 Minuten.",
+      "Eine feste Ansprechperson aus dem Pflegekinderdienst antwortet Ihnen spätestens am nächsten Arbeitstag.",
+      "Sie müssen noch nicht wissen, ob ein Pflegekind oder eine Adoption das Richtige für Sie ist.",
+      "Wir fragen jetzt noch nicht nach Ihrer Gesundheit, Ihrer Wohnung, Ihrem Geld oder Ihrer Familie."
+    ],
+    "button": "Jetzt starten"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "Über Sie",
+      "title": "Wie heißen Sie?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Vor- und Nachname",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Geben Sie Ihren Vor- und Nachnamen ein",
+              "maxLength": "Ihr Name darf höchstens 100 Zeichen lang sein"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "Wie sollen wir Sie nennen? (optional)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "Zum Beispiel eine Kurzform oder ein Name, der Ihnen lieber ist.",
+            "errors": {
+              "maxLength": "Dieser Name darf höchstens 50 Zeichen lang sein"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "Über Sie",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "Worüber möchten Sie mehr erfahren?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Ein Pflegekind aufnehmen",
+              "adoption": "Ein Kind adoptieren",
+              "not_sure": "Ich weiß es noch nicht"
+            },
+            "optionHints": {
+              "not_sure": "Das ist in Ordnung. Wir erklären Ihnen beides und auch andere Wege, wie Sie helfen können."
+            },
+            "errors": {
+              "required": "Wählen Sie aus, worüber Sie mehr erfahren möchten"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "Über Sie",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Fragen Sie nach einem Kind, das Sie schon kennen?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "Zum Beispiel ein Enkelkind, eine Nichte, ein Neffe oder das Kind von Freunden. Das nennt man Verwandtenpflege. Dabei hilft ein anderes Team. Schreiben Sie hier nichts über das Kind.",
+            "optionLabels": {
+              "true": "Ja",
+              "false": "Nein"
+            },
+            "errors": {
+              "required": "Wählen Sie „Ja“, wenn Sie nach einem Kind fragen, das Sie schon kennen"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "So erreichen wir Sie",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "Wie sollen wir uns bei Ihnen melden?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "Per E-Mail",
+              "phone_call": "Per Anruf",
+              "text_message": "Per SMS"
+            },
+            "errors": {
+              "required": "Wählen Sie aus, wie wir uns bei Ihnen melden sollen"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "So erreichen wir Sie",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "Wie lautet Ihre E-Mail-Adresse?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "Wir nutzen sie nur, um Ihnen zu antworten.",
+            "errors": {
+              "required": "Geben Sie Ihre E-Mail-Adresse ein",
+              "pattern": "Geben Sie eine E-Mail-Adresse im richtigen Format ein, zum Beispiel name@example.org"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "So erreichen wir Sie",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "Wie lautet Ihre Telefonnummer?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "Zum Beispiel 0123 4567890.",
+            "errors": {
+              "required": "Geben Sie Ihre Telefonnummer ein",
+              "pattern": "Geben Sie eine Telefonnummer im richtigen Format ein, zum Beispiel 0123 4567890"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "So erreichen wir Sie",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "Wann können wir Sie gut anrufen? (optional)",
+          "options": {
+            "asHeading": true,
+            "hint": "Wählen Sie alle passenden Zeiten aus. Wir versuchen, Sie zu diesen Zeiten anzurufen.",
+            "optionLabels": {
+              "weekday_morning": "Montag bis Freitag, vormittags",
+              "weekday_afternoon": "Montag bis Freitag, nachmittags",
+              "weekday_evening": "Montag bis Freitag, abends",
+              "saturday": "Samstags"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "So erreichen wir Sie",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/de_postcode",
+          "label": "Wie lautet Ihre Postleitzahl? (optional)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "postal-code",
+            "inputmode": "numeric",
+            "inputWidth": 5,
+            "transform": "de_postcode",
+            "spellcheck": false,
+            "hint": "Zum Beispiel 12345. Ihr Wohnort entscheidet, welches Jugendamt Ihnen antwortet. Nach Ihrer Adresse fragen wir nicht.",
+            "errors": {
+              "pattern": "Geben Sie eine Postleitzahl mit 5 Ziffern ein, zum Beispiel 12345"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Worüber Sie sprechen möchten",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "Worüber möchten Sie sprechen? (optional)",
+          "options": {
+            "asHeading": true,
+            "hint": "Wählen Sie alles Passende aus. Sie können es uns auch im Gespräch sagen. Schreiben Sie hier nichts Persönliches.",
+            "optionLabels": {
+              "eligibility": "Ob ich ein Pflegekind aufnehmen oder ein Kind adoptieren kann",
+              "what_it_involves": "Wie der Alltag aussieht",
+              "money_and_support": "Geld und Unterstützung",
+              "process_and_timescales": "Die einzelnen Schritte und wie lange sie dauern",
+              "types_of_care": "Verschiedene Formen der Pflege",
+              "something_else": "Etwas anderes"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Worüber Sie sprechen möchten",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "Wie haben Sie von uns erfahren? (optional)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Über Freunde oder Familie",
+              "social_media": "Über soziale Medien",
+              "search": "Über eine Suche im Internet",
+              "event": "Bei einer Veranstaltung",
+              "advert": "Durch Werbung",
+              "council_or_agency_website": "Über die Website meiner Stadt oder meines Landkreises",
+              "other": "Auf anderem Weg"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Worüber Sie sprechen möchten",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Möchten Sie Neuigkeiten und Einladungen zu Veranstaltungen bekommen? (optional)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Ja, schicken Sie mir Neuigkeiten und Einladungen",
+            "hint": "Wir schicken sie Ihnen nur, wenn Sie das Kästchen ankreuzen. Sie können sie jederzeit abbestellen."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Prüfen Sie Ihre Angaben",
+    "change": "Ändern",
+    "send_heading": "Jetzt Ihre Anfrage senden",
+    "send_body": "Mit dem Senden sind Sie einverstanden, dass wir diese Angaben nutzen, um Ihnen zu antworten.",
+    "button": "Senden"
+  },
+  "confirmation": {
+    "title": "Anfrage gesendet",
+    "reference": "Ihre Vorgangsnummer",
+    "next_heading": "So geht es weiter",
+    "team": "unserem Pflegekinderdienst",
+    "kinship_team": "unserem Team für Verwandtenpflege",
+    "day_word": "Arbeitstag",
+    "example_label": "Beispiel für eine erste Antwort (nicht gesendet)",
+    "builders_heading": "Für alle, die Anfrageformulare bauen",
+    "builders_body": "So sieht der Datensatz aus, den das Jugendamt bekommen würde. Das Formular hat ihn vor dieser Seite mit dem veröffentlichten Schema geprüft.",
+    "restart": "Neu beginnen"
+  },
+  "progress": {
+    "question": "Frage",
+    "of": "von",
+    "back": "Zurück",
+    "continue": "Weiter",
+    "error_title": "Es gibt ein Problem",
+    "error_prefix": "Fehler:"
+  },
+  "demo_notice": "Dies ist ein Beispielformular. Geben Sie keine echten Daten ein. Nichts, was Sie eingeben, wird gesendet oder gespeichert."
+}

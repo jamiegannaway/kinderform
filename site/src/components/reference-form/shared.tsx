@@ -38,7 +38,7 @@ export function useControl(props: ControlProps) {
   const ui = props.uischema as unknown as Control
   const field = fieldOf(ui.scope)
   const id = idFor(field)
-  const { errors, headingField, onBlurField } = usePage()
+  const { errors, headingField, onBlurField, onValue } = usePage()
   const headingRef = useHeadingRef()
   const o = ui.options ?? {}
   const error = errors[field]
@@ -55,7 +55,10 @@ export function useControl(props: ControlProps) {
     hint: o.optionHints?.[v],
   }))
 
-  const set = (value: unknown) => props.handleChange(props.path, value)
+  const set = (value: unknown) => {
+    onValue(field, value)
+    props.handleChange(props.path, value)
+  }
   const setFromString = (v: string) => {
     if (s.type === "boolean") set(v === "true")
     else set(v === "" ? undefined : v)
