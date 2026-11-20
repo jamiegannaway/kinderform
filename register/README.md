@@ -6,7 +6,30 @@
 
 The register holds neutral facts only. It contains no scores or judgements.
 
-The United States register is in [`us/`](us/), with its own column guide.
+The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/) and Australia's in [`au/`](au/); their front-door columns are checked by `tests/validate_world_register.py`.
+
+## Rules: `policies.csv`
+
+The published rules on who can foster and what approval involves, so services can compare their own rules with other places. `policies.csv` here covers the four UK nations; [`ca/policies.csv`](ca/policies.csv) covers Canada's 13 provinces and territories and [`au/policies.csv`](au/policies.csv) Australia's 8 states and territories. The US rules are in [`us/policies.csv`](us/policies.csv). One row per rule. A row records what the rule says, where it is written and when we checked it. It never judges the rule.
+
+| Column | Meaning |
+| --- | --- |
+| `policy_id` | `<country>-<place>-<topic>-<n>`, for example `uk-eng-min_age-1` or `ca-on-board_rate-1` |
+| `jurisdiction` | `ENG`, `WLS`, `SCT`, `NIR`; a Canadian province or territory code; or an Australian state or territory code |
+| `applies_to` | `fostering`, `adoption` or `both` |
+| `topic` | A code from [`us/policy-topics.md`](us/policy-topics.md), shared by all four countries |
+| `rule_summary` | What the rule says, in one or two plain sentences |
+| `value`, `unit` | A number and its unit where the rule has one (for example `21`, `years`; `208`, `GBP_per_week`) |
+| `legal_citation` | The act, regulation or standard and section; blank for guidance |
+| `source_type` | `legislation`, `statutory_guidance`, `standards`, `government_page`, `agency_page` or `sector_body` |
+| `effective_date` | When the rule or rate took effect, where stated |
+| `source_url` | The page the rule was read from |
+| `date_checked` | When we read it |
+| `evidence_level` | `page_read` or `search_result` |
+| `verification` | `unverified` until a person has checked the row against the source |
+| `notes` | Anything a reader needs, for example where practice differs from the rule |
+
+`tests/validate_policies.py` checks these three files. Every row is unverified until a person has checked it.
 
 ## Columns
 

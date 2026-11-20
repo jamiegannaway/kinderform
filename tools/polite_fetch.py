@@ -61,6 +61,79 @@ PROMISE = re.compile(
 )
 
 
+MONTHS = {m: i for i, m in enumerate(
+    "january february march april may june july august september october november december".split(), 1)}
+MONTHS.update({m[:3]: i for m, i in list(MONTHS.items())})
+MONTHS.update({"sept": 9})
+MOIS = {m: i for i, m in enumerate(
+    "janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split(), 1)}
+_MONTH = r"(?:%s)" % "|".join(sorted(list(MONTHS) + list(MOIS), key=len, reverse=True))
+_DATE = (
+    r"(?P<iso>\d{4}-\d{2}-\d{2})"
+    r"|(?P<dmy>\d{1,2})(?:st|nd|rd|th|er)?\.?\s+(?P<dmy_m>" + _MONTH + r")\.?,?\s+(?P<dmy_y>\d{4})"
+    r"|(?P<mdy_m>" + _MONTH + r")\.?\s+(?P<mdy>\d{1,2})(?:st|nd|rd|th)?,?\s+(?P<mdy_y>\d{4})"
+    r"|(?P<my_m>" + _MONTH + r")\.?\s+(?P<my_y>\d{4})"
+    r"|(?P<num_a>\d{1,2})/(?P<num_b>\d{1,2})/(?P<num_y>\d{4})"
+)
+# Phrases a page uses to tell readers when it was last changed or reviewed.
+_LABEL = (
+    r"(?P<label>page last (?:updated|reviewed|modified)|last (?:updated|reviewed|modified|revised)"
+    r"|date (?:modified|updated|of last update)|content last reviewed|review(?:ed)? date|updated(?: on)?"
+    r"|reviewed(?: on)?|date de (?:modification|mise à jour)|dernière mise à jour|mis à jour le)"
+)
+PAGE_DATE = re.compile(_LABEL + r"\s*(?:on|:|-|–|—)?\s*(?:" + _DATE + r")", re.I)
+META_DATE = re.compile(
+    r"<meta[^>]+(?:property|name|itemprop)=[\"'](?P<name>article:modified_time|og:updated_time|dcterms\.modified|"
+    r"dc\.date\.modified|dc\.modified|last-modified|modified|datemodified|dcterms\.date)[\"'][^>]*content=[\"']"
+    r"(?P<value>\d{4}-\d{2}-\d{2})"
+    r"|\"dateModified\"\s*:\s*\"(?P<ld>\d{4}-\d{2}-\d{2})",
+    re.I,
+)
+PDF_DATE = re.compile(rb"/ModDate\s*\(D:(\d{4})(\d{2})(\d{2})")
+
+
+def _month(name: str) -> int:
+    n = name.lower().rstrip(".")
+    return MONTHS.get(n) or MOIS.get(n) or 0
+
+
+def _date_from(m: re.Match) -> str:
+    """Turn a PAGE_DATE match into YYYY-MM-DD, or YYYY-MM when the page gives only a month."""
+    g = m.groupdict()
+    if g["iso"]:
+        return g["iso"]
+    if g["dmy"]:
+        return f"{int(g['dmy_y']):04d}-{_month(g['dmy_m']):02d}-{int(g['dmy']):02d}"
+    if g["mdy"]:
+        return f"{int(g['mdy_y']):04d}-{_month(g['mdy_m']):02d}-{int(g['mdy']):02d}"
+    if g["my_m"]:
+        return f"{int(g['my_y']):04d}-{_month(g['my_m']):02d}"
+    a, b, y = int(g["num_a"]), int(g["num_b"]), int(g["num_y"])
+    # 03/04/2025 could be March or April; only an unambiguous day (over 12) settles it.
+    if a > 12 and b <= 12:
+        return f"{y:04d}-{b:02d}-{a:02d}"
+    if b > 12 and a <= 12:
+        return f"{y:04d}-{a:02d}-{b:02d}"
+    return ""
+
+
+def page_date(html: str, text: str) -> tuple[str, str]:
+    """The date a page says it was last updated or reviewed, and where that came from.
+
+    The words on the page come first, because that is what readers see. The page's
+    metadata is used only when the page says nothing.
+    """
+    for m in PAGE_DATE.finditer(text):
+        d = _date_from(m)
+        if d and "1990" < d[:4] <= time.strftime("%Y"):
+            return d, "page: " + " ".join(m.group("label").split()).lower()
+    for m in META_DATE.finditer(html):
+        d = m.group("value") or m.group("ld")
+        if d and "1990" < d[:4] <= time.strftime("%Y"):
+            return d, "metadata: " + (m.group("name") or "dateModified").lower()
+    return "", ""
+
+
 class PageParser(HTMLParser):
     """Collect title, visible text and form fields."""
 
@@ -251,6 +324,11 @@ class Polite:
                 return record
         record.update(status=status, final_url=final, content_type=ctype)
         is_pdf = "pdf" in ctype.lower() or body[:5] == b"%PDF-"
+        if status == 200 and is_pdf:
+            m = PDF_DATE.search(body)
+            if m:
+                record["page_updated"] = "-".join(x.decode() for x in m.groups())
+                record["page_updated_from"] = "pdf metadata: moddate"
         if status == 200 and is_pdf and self.save_dir:
             import os
             safe = re.sub(r"[^A-Za-z0-9_.-]+", "_", key)[:150] + ".pdf"
@@ -268,6 +346,8 @@ class Polite:
         except Exception:
             pass
         text = " ".join(parser.text)
+        html = body.decode("utf-8", "replace")
+        record["page_updated"], record["page_updated_from"] = page_date(html, " ".join(text.split()))
         record["title"] = parser.title[:200]
         record["text"] = text[:20000]
         record["forms"] = [f for f in parser.forms if f["fields"]]
