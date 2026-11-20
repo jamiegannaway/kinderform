@@ -18,16 +18,45 @@ export const COUNTRY_NAMES: Record<string, string> = {
   US: "United States",
   CA: "Canada",
   AU: "Australia",
+  DE: "Germany",
+  FR: "France",
+  ES: "Spain",
 }
-export const COUNTRY_ORDER = ["UK", "US", "CA", "AU"]
+export const COUNTRY_ORDER = ["UK", "US", "CA", "AU", "DE", "FR", "ES"]
 
-const PLACES: Record<string, string> = {
-  ENG: "England", WLS: "Wales", SCT: "Scotland", NIR: "Northern Ireland",
-  AB: "Alberta", BC: "British Columbia", MB: "Manitoba", NB: "New Brunswick", NL: "Newfoundland and Labrador",
-  NS: "Nova Scotia", NT: "Northwest Territories", NU: "Nunavut", ON: "Ontario", PE: "Prince Edward Island",
-  QC: "Quebec", SK: "Saskatchewan", YT: "Yukon",
-  NSW: "New South Wales", VIC: "Victoria", QLD: "Queensland", WA: "Western Australia", SA: "South Australia",
-  TAS: "Tasmania", ACT: "Australian Capital Territory",
+// Place codes in the rules files, by country. Codes repeat across countries (NT is the Northwest
+// Territories in Canada and the Northern Territory in Australia), so each country has its own list.
+// US states come from register/us/states.csv.
+const PLACES: Record<string, Record<string, string>> = {
+  UK: { ENG: "England", WLS: "Wales", SCT: "Scotland", NIR: "Northern Ireland" },
+  CA: {
+    AB: "Alberta", BC: "British Columbia", MB: "Manitoba", NB: "New Brunswick", NL: "Newfoundland and Labrador",
+    NS: "Nova Scotia", NT: "Northwest Territories", NU: "Nunavut", ON: "Ontario", PE: "Prince Edward Island",
+    QC: "Quebec", SK: "Saskatchewan", YT: "Yukon",
+  },
+  AU: {
+    NSW: "New South Wales", VIC: "Victoria", QLD: "Queensland", WA: "Western Australia", SA: "South Australia",
+    TAS: "Tasmania", ACT: "Australian Capital Territory", NT: "Northern Territory",
+  },
+  DE: {
+    DE: "All of Germany", BW: "Baden-Württemberg", BY: "Bavaria", BE: "Berlin", BB: "Brandenburg", HB: "Bremen",
+    HH: "Hamburg", HE: "Hesse", MV: "Mecklenburg-Western Pomerania", NI: "Lower Saxony", NW: "North Rhine-Westphalia",
+    RP: "Rhineland-Palatinate", SL: "Saarland", SN: "Saxony", ST: "Saxony-Anhalt", SH: "Schleswig-Holstein",
+    TH: "Thuringia",
+  },
+  FR: {
+    FR: "All of France", ARA: "Auvergne-Rhône-Alpes", BFC: "Bourgogne-Franche-Comté", BRE: "Brittany",
+    CVL: "Centre-Val de Loire", COR: "Corsica", GES: "Grand Est", HDF: "Hauts-de-France", IDF: "Île-de-France",
+    NOR: "Normandy", NAQ: "Nouvelle-Aquitaine", OCC: "Occitanie", PDL: "Pays de la Loire",
+    PAC: "Provence-Alpes-Côte d'Azur", GP: "Guadeloupe", MQ: "Martinique", GF: "French Guiana", RE: "Réunion",
+    YT: "Mayotte",
+  },
+  ES: {
+    ES: "All of Spain", AN: "Andalusia", AR: "Aragon", AS: "Asturias", IB: "Balearic Islands", PV: "Basque Country",
+    CN: "Canary Islands", CB: "Cantabria", CL: "Castile and León", CM: "Castilla-La Mancha", CT: "Catalonia",
+    EX: "Extremadura", GA: "Galicia", RI: "La Rioja", MD: "Madrid", MC: "Murcia", NC: "Navarre",
+    VC: "Valencian Community", CE: "Ceuta", ML: "Melilla",
+  },
 }
 
 // ---- Page dates ------------------------------------------------------------------
@@ -132,7 +161,7 @@ export function formRows(c: Census, dates = loadPageDates()): FormRow[] {
       id: f.form_id,
       country: f.country,
       service: f.name.replace(/\s+(enquiry|inquiry|enquiries)(\s+form)?$/i, ""),
-      area: PLACES[f.region] ?? f.region,
+      area: f.region,
       type: SERVICE_TYPES[f.operator_type] ?? f.operator_type,
       stage: f.form_stage === "primary" ? "First contact" : "After first contact",
       link,
@@ -231,13 +260,16 @@ const MONEY: Record<string, [string, string]> = {
   aud_per_week: ["A$", "a week"],
   usd_per_month: ["US$", "a month"],
   usd_per_day: ["US$", "a day"],
+  eur_per_month: ["€", "a month"],
+  eur_per_day: ["€", "a day"],
+  eur: ["€", ""],
 }
 const UNIT_WORDS: Record<string, string> = { working_days: "working days", square_feet: "sq ft", other: "" }
 function valueText(v: string, unit: string): string {
   if (!v) return ""
   const u = unit.toLowerCase()
   const money = MONEY[u]
-  if (money) return `${money[0]}${v} ${money[1]}`
+  if (money) return `${money[0]}${v} ${money[1]}`.trim()
   return `${v} ${UNIT_WORDS[u] ?? u.replace(/_/g, " ")}`.trim()
 }
 
@@ -248,15 +280,19 @@ export function ruleRows(dates = loadPageDates()): RuleRow[] {
     ["US", "register/us/policies.csv"],
     ["CA", "register/ca/policies.csv"],
     ["AU", "register/au/policies.csv"],
+    ["DE", "register/de/policies.csv"],
+    ["FR", "register/fr/policies.csv"],
+    ["ES", "register/es/policies.csv"],
   ]
   const out: RuleRow[] = []
   for (const [country, rel] of files) {
+    if (!existsSync(resolve(ROOT, rel))) continue
     for (const r of read(rel)) {
       const code = r.jurisdiction ?? r.state_code
       out.push({
         id: r.policy_id,
         country,
-        place: (country === "US" ? states.get(code) : PLACES[code]) ?? code,
+        place: (country === "US" ? states.get(code) : PLACES[country]?.[code]) ?? code,
         topic: r.topic,
         appliesTo: r.applies_to,
         summary: r.rule_summary,

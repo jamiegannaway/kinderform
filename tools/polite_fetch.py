@@ -44,19 +44,32 @@ USER_AGENT = "OUCM-register-bot/0.1 (+https://github.com/jamiegannaway/OUCM; pol
 TIMEOUT = 25
 MAX_BYTES = 3_000_000
 
-# Link text or address that suggests an enquiry form, strongest first. English and French.
+# Link text or address that suggests an enquiry form, strongest first.
+# English, French, German, Spanish and Catalan.
 FOLLOW = [
     re.compile(r"enquir|inquir|expression[- ]of[- ]interest|express(?:ion)?[- ]interest|register[- ](?:your[- ])?interest"
-               r"|interest[- ]form|demande[- ]d.information|formulaire", re.I),
+               r"|interest[- ]form|demande[- ]d.information|formulaire|r[ée]union[- ]d.information|inscription"
+               r"|anfrage|kontaktformular|interessenbekundung|infoabend|informationsabend|infoveranstaltung|anmeld"
+               r"|formulario|formulari|solicitud[- ]de[- ]informaci|sesi[oó]n[- ]informativa|sessi[oó][- ]informativa"
+               r"|inscripci", re.I),
     re.compile(r"\bapply\b|application[- ]form|get[- ]started|start[- ](?:your[- ])?journey|become[- ]a[- ]foster"
-               r"|devenir[- ]famille|soumettre", re.I),
+               r"|devenir[- ]famille|devenir[- ]assistant|soumettre"
+               r"|pflegeeltern[- ]werden|pflegefamilie[- ]werden|bewerb"
+               r"|quiero[- ]ser|hazte|ser[- ]familia|fes[- ]te", re.I),
     re.compile(r"contact[- ]us|get[- ]in[- ]touch|request[- ](?:an?[- ])?(?:info|call)|info(?:rmation)?[- ]pack"
-               r"|nous[- ]joindre|contactez", re.I),
+               r"|nous[- ]joindre|contactez|kontakt|contacto|contacta|cont[aà]cte", re.I),
 ]
 
+# "Within N days" and the same in French, German and Spanish.
 PROMISE = re.compile(
-    r"[^.!?\n]{0,160}\bwithin\s+(?:one|two|three|four|five|seven|ten|\d{1,3})\s*"
-    r"(?:-\s*\w+\s*)?(?:business\s+|working\s+)?(?:hours?|days?|weeks?)\b[^.!?\n]{0,160}[.!?]?",
+    r"[^.!?\n]{0,160}(?:\bwithin\s+(?:one|two|three|four|five|seven|ten|\d{1,3})\s*"
+    r"(?:-\s*\w+\s*)?(?:business\s+|working\s+)?(?:hours?|days?|weeks?)\b"
+    r"|\binnerhalb\s+(?:von\s+)?(?:\d{1,3}|einem|einer|zwei|drei|vier|f[üu]nf|sieben|zehn)\s+"
+    r"(?:Werk|Arbeits)?(?:tag(?:en|e)?|stunden?|wochen?)\b"
+    r"|\b(?:sous|dans un d[ée]lai (?:maximum )?de|dans les)\s+(?:\d{1,3}|un|une|deux|trois|quatre|cinq|sept|dix)\s+"
+    r"(?:heures?|jours?|semaines?)\b"
+    r"|\ben\s+(?:un plazo (?:m[aá]ximo )?de|menos de|las pr[oó]ximas)\s+(?:\d{1,3}|un|una|dos|tres|cuatro|cinco|siete|diez)\s+"
+    r"(?:horas?|d[ií]as?|semanas?)\b)[^.!?\n]{0,160}[.!?]?",
     re.I,
 )
 
@@ -67,19 +80,31 @@ MONTHS.update({m[:3]: i for m, i in list(MONTHS.items())})
 MONTHS.update({"sept": 9})
 MOIS = {m: i for i, m in enumerate(
     "janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split(), 1)}
-_MONTH = r"(?:%s)" % "|".join(sorted(list(MONTHS) + list(MOIS), key=len, reverse=True))
+# German, Spanish and Catalan month names (words shared with French or English map to the same month).
+for names in ("januar februar märz april mai juni juli august september oktober november dezember",
+              "enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre",
+              "gener febrer març abril maig juny juliol agost setembre octubre novembre desembre"):
+    MOIS.update({m: i for i, m in enumerate(names.split(), 1)})
+_MONTH = r"(?:%s)" % "|".join(sorted(set(MONTHS) | set(MOIS), key=len, reverse=True))
 _DATE = (
     r"(?P<iso>\d{4}-\d{2}-\d{2})"
     r"|(?P<dmy>\d{1,2})(?:st|nd|rd|th|er)?\.?\s+(?P<dmy_m>" + _MONTH + r")\.?,?\s+(?P<dmy_y>\d{4})"
     r"|(?P<mdy_m>" + _MONTH + r")\.?\s+(?P<mdy>\d{1,2})(?:st|nd|rd|th)?,?\s+(?P<mdy_y>\d{4})"
     r"|(?P<my_m>" + _MONTH + r")\.?\s+(?P<my_y>\d{4})"
     r"|(?P<num_a>\d{1,2})/(?P<num_b>\d{1,2})/(?P<num_y>\d{4})"
+    # "20 de noviembre de 2026", "20 d'octubre de 2026" (Spanish and Catalan)
+    r"|(?P<de_d>\d{1,2})\s+d(?:e\s+|')(?P<de_m>" + _MONTH + r")\s+de\s+(?P<de_y>\d{4})"
+    # "20.11.2026" (German): always day, month, year
+    r"|(?P<dot_d>\d{1,2})\.(?P<dot_m>\d{1,2})\.(?P<dot_y>\d{4})"
 )
 # Phrases a page uses to tell readers when it was last changed or reviewed.
 _LABEL = (
     r"(?P<label>page last (?:updated|reviewed|modified)|last (?:updated|reviewed|modified|revised)"
     r"|date (?:modified|updated|of last update)|content last reviewed|review(?:ed)? date|updated(?: on)?"
-    r"|reviewed(?: on)?|date de (?:modification|mise à jour)|dernière mise à jour|mis à jour le)"
+    r"|reviewed(?: on)?|date de (?:modification|mise à jour)|dernière mise à jour|mis à jour le"
+    r"|stand(?=\s*:)|zuletzt (?:aktualisiert|geändert)|letzte (?:aktualisierung|änderung)|aktualisiert am"
+    r"|última (?:actualización|modificación)|fecha de (?:actualización|modificación)|actualizado(?: el)?"
+    r"|darrera (?:actualització|modificació)|actualitzat(?: el)?)"
 )
 PAGE_DATE = re.compile(_LABEL + r"\s*(?:on|:|-|–|—)?\s*(?:" + _DATE + r")", re.I)
 META_DATE = re.compile(
@@ -108,6 +133,11 @@ def _date_from(m: re.Match) -> str:
         return f"{int(g['mdy_y']):04d}-{_month(g['mdy_m']):02d}-{int(g['mdy']):02d}"
     if g["my_m"]:
         return f"{int(g['my_y']):04d}-{_month(g['my_m']):02d}"
+    if g["de_d"]:
+        return f"{int(g['de_y']):04d}-{_month(g['de_m']):02d}-{int(g['de_d']):02d}"
+    if g["dot_d"]:
+        d, mo = int(g["dot_d"]), int(g["dot_m"])
+        return f"{int(g['dot_y']):04d}-{mo:02d}-{d:02d}" if 1 <= mo <= 12 and 1 <= d <= 31 else ""
     a, b, y = int(g["num_a"]), int(g["num_b"]), int(g["num_y"])
     # 03/04/2025 could be March or April; only an unambiguous day (over 12) settles it.
     if a > 12 and b <= 12:
@@ -361,7 +391,8 @@ def has_enquiry_form(forms: list[dict]) -> bool:
     for form in forms:
         fields = form.get("fields", [])
         names = " ".join((f.get("name", "") + " " + f.get("type", "") + " " + f.get("label", "")).lower() for f in fields)
-        if len(fields) >= 3 and re.search(r"e-?mail|courriel|phone|t[ée]l[ée]phone|\btel\b", names):
+        if len(fields) >= 3 and re.search(r"e-?mail|courriel|correo|correu|phone|t[ée]l[ée]phone|\btel\b|telefon|"
+                                          r"tel[eéè]fono?", names):
             return True
     return False
 

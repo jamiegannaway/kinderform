@@ -35,12 +35,17 @@ SOURCES = [
     ("register/policies.csv", ["source_url"]),
     ("register/ca/policies.csv", ["source_url"]),
     ("register/au/policies.csv", ["source_url"]),
+    ("register/de/policies.csv", ["source_url"]),
+    ("register/fr/policies.csv", ["source_url"]),
+    ("register/es/policies.csv", ["source_url"]),
 ]
 
 
 def links() -> list[str]:
     seen: dict[str, None] = {}
     for rel, cols in SOURCES:
+        if not (ROOT / rel).exists():
+            continue
         with open(ROOT / rel, encoding="utf-8", newline="") as fh:
             for row in csv.DictReader(fh):
                 url = next((row[c].strip() for c in cols if row.get(c, "").strip()), "")
