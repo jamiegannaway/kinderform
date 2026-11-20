@@ -55,6 +55,16 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Read by hand the forms the crawler cannot reach: forms that load in the browser, portals, bot checks and PDFs
 - [ ] Find the missing websites in the Canada and Australia registers
 
+## Now: Germany, France and Spain (first pass)
+
+- [x] Front-door registers: Germany 95 (every Land), France 146 (fostering pages for 97 of 101 départements), Spain 87 (every community and both cities) (unverified)
+- [x] Rules registers: Germany 129, France 79, Spain 136, with the same topics as the other countries (unverified)
+- [x] The polite crawler and the question tagger read German, Spanish and Catalan; 16 enquiry forms added to the census
+- [x] The compare tables and the comparison across countries include all three
+- [ ] Example forms: Germany in KERN UX, France in Cunningham, Spain in DESY (Aragon), without government branding
+- [ ] Fill the gaps: foster payment rates for most German Länder and Spanish communities, Ceuta and Melilla, and the sites that refused automated reading
+- [ ] Read Legifrance and the BOE directly; both refused the research tools
+
 ## Now: compare tables for services
 
 - [x] Rules registers for the UK nations, Canada's provinces and territories and Australia's states and territories, with the same topics as the US (unverified)

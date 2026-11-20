@@ -40,7 +40,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 ## Layout
 
 - `schema/` Enquiry schema and synthetic examples; `enquiry-submission.schema.json` is what a person fills in, and `schema/ui/` holds the wording for each country's reference form (Canada also in French, `enquiry-submission.ca-fr.json`; `tests/validate_ui.py` keeps a translation in step with its main file)
-- `register/` front-door registers and rules registers (`policies.csv`) for the UK, then `us/`, `ca/` and `au/`, with column guides; `page-dates.csv` holds the date each source page gives
+- `register/` front-door registers and rules registers (`policies.csv`) for the UK, then `us/`, `ca/`, `au/`, `de/`, `fr/` and `es/`, with column guides; `page-dates.csv` holds the date each source page gives
 - `rubric/` audit rubric in Markdown and JSON
 - `census/` intake-form census: forms, questions, answer options, guidance (CSV)
 - `evidence/` evidence library; `findings.json` is "What we know so far". `research-log.json` is the research log: one entry for each report in `reports/` and what the research could mean for the project, shown as tables at `/research/log` and linked from the site footer; run `python tests/validate_research_log.py` after editing it. Everything here except the README is published at `/research` on the site, so a merge updates the public page
