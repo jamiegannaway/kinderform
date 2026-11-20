@@ -130,60 +130,64 @@ function FormOrCode() {
         </label>
       </fieldset>
 
-      <Card inert aria-hidden="true" className="gap-4 group-has-[#hero-view-code:checked]/view:hidden">
-        <CardHeader>
-          <CardTitle>Ask about fostering or adoption</CardTitle>
-          <CardDescription>It takes about 2 minutes</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="ex-name">Full name</Label>
-            <Input id="ex-name" defaultValue="Sam Example" readOnly tabIndex={-1} />
-          </div>
-          <div className="grid gap-2">
-            <Label>What would you like to find out about?</Label>
-            <Choice label="Fostering" />
-            <Choice label="Adoption" />
-            <Choice label="I'm not sure yet" checked />
-          </div>
-          <div className="grid gap-2">
-            <Label>Are you asking about a child you already know?</Label>
-            <div className="flex gap-6">
-              <Choice label="Yes" />
-              <Choice label="No" checked />
+      {/* Both views share one grid cell, so the box keeps the form's size and the page does not jump.
+          The view not chosen is invisible (it still takes up its space) rather than removed. */}
+      <div className="grid">
+        <Card inert aria-hidden="true" className="col-start-1 row-start-1 min-w-0 gap-4 group-has-[#hero-view-code:checked]/view:invisible">
+          <CardHeader>
+            <CardTitle>Ask about fostering or adoption</CardTitle>
+            <CardDescription>It takes about 2 minutes</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="ex-name">Full name</Label>
+              <Input id="ex-name" defaultValue="Sam Example" readOnly tabIndex={-1} />
             </div>
-          </div>
-          <div className="grid gap-2">
-            <Label>How should we contact you?</Label>
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              <Choice label="Email" checked />
-              <Choice label="Phone call" />
-              <Choice label="Text message" />
+            <div className="grid gap-2">
+              <Label>What would you like to find out about?</Label>
+              <Choice label="Fostering" />
+              <Choice label="Adoption" />
+              <Choice label="I'm not sure yet" checked />
             </div>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="ex-email">Email address</Label>
-            <Input id="ex-email" defaultValue="sam@example.org" readOnly tabIndex={-1} />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="ex-postcode">First part of your postcode</Label>
-            <Input id="ex-postcode" defaultValue="ZZ99" readOnly tabIndex={-1} className="w-28" />
-          </div>
-          <Button tabIndex={-1} className="w-fit">
-            Send enquiry
-          </Button>
-        </CardContent>
-      </Card>
+            <div className="grid gap-2">
+              <Label>Are you asking about a child you already know?</Label>
+              <div className="flex gap-6">
+                <Choice label="Yes" />
+                <Choice label="No" checked />
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <Label>How should we contact you?</Label>
+              <div className="flex flex-wrap gap-x-6 gap-y-2">
+                <Choice label="Email" checked />
+                <Choice label="Phone call" />
+                <Choice label="Text message" />
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="ex-email">Email address</Label>
+              <Input id="ex-email" defaultValue="sam@example.org" readOnly tabIndex={-1} />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="ex-postcode">First part of your postcode</Label>
+              <Input id="ex-postcode" defaultValue="ZZ99" readOnly tabIndex={-1} className="w-28" />
+            </div>
+            <Button tabIndex={-1} className="w-fit">
+              Send enquiry
+            </Button>
+          </CardContent>
+        </Card>
 
-      <Card className="hidden gap-0 overflow-hidden py-0 group-has-[#hero-view-code:checked]/view:flex">
-        <div className="flex items-center justify-between border-b px-4 py-2 text-xs text-muted-foreground">
-          <span className="font-mono">enquiry.json</span>
-          <span>Kinderform enquiry standard, draft 0.1</span>
-        </div>
-        <pre className="overflow-x-auto bg-muted/50 p-4 font-mono text-sm leading-6">
-          <code>{RECORD}</code>
-        </pre>
-      </Card>
+        <Card className="invisible col-start-1 row-start-1 min-w-0 gap-0 overflow-hidden py-0 group-has-[#hero-view-code:checked]/view:visible">
+          <div className="flex items-center justify-between border-b px-4 py-2 text-xs text-muted-foreground">
+            <span className="font-mono">enquiry.json</span>
+            <span>Kinderform enquiry standard, draft 0.1</span>
+          </div>
+          <pre className="flex-1 overflow-x-auto bg-muted/50 p-4 font-mono text-sm leading-6">
+            <code>{RECORD}</code>
+          </pre>
+        </Card>
+      </div>
 
       <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
         A made-up enquiry form, and the same enquiry as a record in our open standard. It asks only what a service
