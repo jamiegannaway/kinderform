@@ -97,7 +97,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] The date each source page gives for its last update, read by the polite crawler (`register/page-dates.csv`)
 - [x] `/compare`: enquiry forms, rules by topic and US application forms, each with the link and two dates, plus CSV downloads; facts only, no scores
 - [x] Each enquiry form shows what it asks beyond the Kinderform enquiry standard
-- [ ] Check a sample of the computer's topic tags by hand, and say how accurate they are
+- [x] Sample sheets for a person to check the computer's topic tags and the England law rows (`docs/checks/`, `tools/check_sample.py`)
+- [ ] Fill in the sample sheets, and say on the site how accurate the tags and the law map are
 - [ ] Re-read the sources every few months, and flag links that stop working
 - [ ] Invite services to correct their rows
 
