@@ -1,0 +1,1268 @@
+// KERN UX for the German reference form only.
+//
+// Ported from @kern-ux/native 2.9.0 (https://gitlab.opencode.de/kern-ux/kern-ux-plain),
+// Copyright the KERN-Team (Dataport and contributors), licensed under the European Union
+// Public Licence v. 1.2 (EUPL-1.2): https://interoperable-europe.ec.europa.eu/collection/eupl
+// This file is a derivative of that work, so it stays under the EUPL-1.2, unlike the rest of
+// the site's code, which is MIT. Changes from the original: rules are scoped under .kern-form,
+// only the components the form uses are kept, and the form template rules at the end are ours.
+//
+// No branding reserved for public bodies: no header strip (Kopfzeile, kern-kopfzeile.js),
+// no eagle word mark (Bildwortmarke). Kinderform is not a government service.
+//
+// Why a port: the published kern.css styles html, body and every element (*:not(i)), sets its
+// tokens on :root and switches to dark colours with the system setting. Here everything,
+// tokens included, sits under .kern-form, so nothing reaches the rest of the site (Tailwind and
+// shadcn/ui), and it is all unlayered, so Tailwind's preflight (in @layer base) cannot undo it.
+// The form keeps KERN's light theme in both site themes, like the other countries' forms.
+//
+// Kept from KERN, by source file: tokens (primitives, variables, light theme, layer level 0),
+// global (sr-only, kern-error, kern-number), icon, typography (body, hint, heading, label,
+// link, list, preline, title), alert, button, check, radio, checkbox, fieldset, input,
+// description-list, summary, details, progress, and the stack utilities.
+// Icons are KERN's Material Symbols masks (Apache License 2.0), as data URLs.
+//
+// Fonts: Fira Sans 400 and 600 (SIL Open Font License 1.1), self-hosted in
+// site/public/fonts/kern/ with OFL.txt. They are the Latin subsets from @fontsource/fira-sans
+// 5.3.0, which are smaller than the full files in @kern-ux/native.
+
+// ---- Fonts --------------------------------------------------------------------------
+
+$latin: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+  U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+$latin-ext: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+  U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+
+@mixin face($weight, $subset, $range) {
+  @font-face {
+    font-family: "Fira Sans";
+    font-style: normal;
+    font-display: swap;
+    font-weight: $weight;
+    src: url("/fonts/kern/fira-sans-#{$subset}-#{$weight}-normal.woff2") format("woff2");
+    unicode-range: $range;
+  }
+}
+@include face(400, "latin", $latin);
+@include face(600, "latin", $latin);
+// Answers are shown in 400, so names with letters beyond basic Latin (ł, ş, ğ) keep the font.
+@include face(400, "latin-ext", $latin-ext);
+
+// ---- Mixins (core/utilities/_mixins.scss) -----------------------------------------------
+
+@mixin normalize {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+@mixin text-base {
+  color: var(--kern-color-layout-text-default-contextual, #131525);
+  font-family: var(--kern-typography-font-family-default, "Fira Sans");
+  font-style: normal;
+  letter-spacing: var(--kern-metric-space-none, 0px);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+// $role: body, label, title, heading-…; $size: the font size and line height tokens.
+@mixin text($pad, $font-size, $line-height, $weight) {
+  @include text-base;
+  padding: var(--kern-metric-baseline-#{$pad}-padding-top) var(--kern-metric-space-none, 0px)
+    var(--kern-metric-baseline-#{$pad}-padding-bottom) var(--kern-metric-space-none, 0px);
+  font-size: var(--kern-typography-font-size-#{$font-size});
+  font-weight: var(--kern-typography-font-weight-#{$weight});
+  line-height: var(--kern-typography-line-height-#{$line-height});
+}
+@mixin body-default {
+  @include text(body-default, medium-static, medium-static, body-default);
+}
+@mixin body-small {
+  @include text(body-small, small-static, medium-static, body-default);
+}
+@mixin label-default {
+  @include text(label-default, medium-static, medium-static, label-default);
+}
+@mixin title-small {
+  @include text(title-small, medium-static, medium-static, title-default);
+}
+
+@mixin icon-size($size) {
+  width: var(--kern-metric-dimension-#{$size});
+  height: var(--kern-metric-dimension-#{$size});
+  min-width: var(--kern-metric-dimension-#{$size});
+  min-height: var(--kern-metric-dimension-#{$size});
+}
+
+@mixin sr-only {
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  position: absolute !important;
+}
+
+@mixin forced-colors-style {
+  @media (forced-colors: active) {
+    background-color: CanvasText !important;
+    forced-color-adjust: none;
+  }
+}
+
+@mixin forced-colors-focus {
+  @media (forced-colors: active) {
+    outline: auto !important;
+    outline-offset: 4px !important;
+    outline-width: 3px !important;
+    outline-color: transparent !important;
+  }
+}
+
+@mixin focus {
+  outline: 4px solid var(--kern-color-action-focus-default-contextual, #454b6b);
+  outline-offset: 0;
+}
+
+@mixin focus-offset {
+  outline: 4px solid var(--kern-color-action-focus-default-contextual, #454b6b);
+  outline-offset: 2px;
+}
+
+// ---- Icons (core/utilities/_icons.scss) ----------------------------------------------------
+
+$icon-arrow-back: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='m313-440 196 196q12 12 11.5 28T508-188q-12 11-28 11.5T452-188L188-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l264-264q11-11 27.5-11t28.5 11q12 12 12 28.5T508-715L313-520h447q17 0 28.5 11.5T800-480q0 17-11.5 28.5T760-440H313Z'/%3E%3C/svg%3E");
+$icon-arrow-forward: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='M647-440H200q-17 0-28.5-11.5T160-480q0-17 11.5-28.5T200-520h447L451-716q-12-12-11.5-28t12.5-28q12-11 28-11.5t28 11.5l264 264q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L508-188q-11 11-27.5 11T452-188q-12-12-12-28.5t12-28.5l195-195Z'/%3E%3C/svg%3E");
+$icon-arrow-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z'/%3E%3C/svg%3E");
+$icon-arrow-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='M480-528 324-372q-11 11-28 11t-28-11q-11-11-11-28t11-28l184-184q12-12 28-12t28 12l184 184q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-528Z'/%3E%3C/svg%3E");
+$icon-danger: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='M480-79q-16 0-30.5-6T423-102L102-423q-11-12-17-26.5T79-480q0-16 6-31t17-26l321-321q12-12 26.5-17.5T480-881q16 0 31 5.5t26 17.5l321 321q12 11 17.5 26t5.5 31q0 16-5.5 30.5T858-423L537-102q-11 11-26 17t-31 6Zm0-361q17 0 28.5-11.5T520-480v-160q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640v160q0 17 11.5 28.5T480-440Zm0 120q17 0 28.5-11.5T520-360q0-17-11.5-28.5T480-400q-17 0-28.5 11.5T440-360q0 17 11.5 28.5T480-320Z'/%3E%3C/svg%3E");
+$icon-success: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='m424-408-86-86q-11-11-28-11t-28 11q-11 11-11 28t11 28l114 114q12 12 28 12t28-12l226-226q11-11 11-28t-11-28q-11-11-28-11t-28 11L424-408Zm56 328q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z'/%3E%3C/svg%3E");
+$icon-warning: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='M109-120q-11 0-20-5.5T75-140q-5-9-5.5-19.5T75-180l370-640q6-10 15.5-15t19.5-5q10 0 19.5 5t15.5 15l370 640q6 10 5.5 20.5T885-140q-5 9-14 14.5t-20 5.5H109Zm371-120q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm0-120q17 0 28.5-11.5T520-400v-120q0-17-11.5-28.5T480-560q-17 0-28.5 11.5T440-520v120q0 17 11.5 28.5T480-360Z'/%3E%3C/svg%3E");
+$icon-info: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='M480-280q17 0 28.5-11.5T520-320v-160q0-17-11.5-28.5T480-520q-17 0-28.5 11.5T440-480v160q0 17 11.5 28.5T480-280Zm0-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z'/%3E%3C/svg%3E");
+$icon-edit: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='' viewBox='0 -960 960 960' width='' fill='%23000000'%3E%3Cpath d='M160-120q-17 0-28.5-11.5T120-160v-97q0-16 6-30.5t17-25.5l505-504q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L313-143q-11 11-25.5 17t-30.5 6h-97Zm544-528 56-56-56-56-56 56 56 56Z'/%3E%3C/svg%3E");
+// The icons the form shows with the kern-icon--<name> class.
+$icons: (
+  "arrow-back": $icon-arrow-back,
+  "arrow-forward": $icon-arrow-forward,
+  "danger": $icon-danger,
+  "success": $icon-success,
+  "warning": $icon-warning,
+  "info": $icon-info,
+  "edit": $icon-edit,
+);
+
+// ---- Root: tokens, colours and type --------------------------------------------------------
+
+.kern-form {
+  // Primitive colours (tokens/primitives/_colors.scss): only those the light theme below uses.
+  --kern-color-neutral-025: oklch(96.72% 0.0041 271.37);
+  --kern-color-neutral-100: oklch(91.08% 0.0124 276.09);
+  --kern-color-neutral-200: oklch(82.04% 0.0253 278.29);
+  --kern-color-neutral-300: oklch(75.46% 0.0348 276.22);
+  --kern-color-neutral-500: oklch(56.94% 0.0532 275.53);
+  --kern-color-neutral-600: oklch(50.2% 0.0579 276.79);
+  --kern-color-neutral-650: oklch(46.61% 0.0574 276.44);
+  --kern-color-neutral-700: oklch(42.13% 0.0539 275.67);
+  --kern-color-neutral-900: oklch(25.07% 0.0381 276.75);
+  --kern-color-neutral-950: oklch(20.23% 0.0321 277.67);
+  --kern-color-darkblue-700: oklch(42.84% 0.1689 265.02);
+  --kern-color-violet-700: oklch(44.8% 0.2219 313.44);
+  --kern-color-red-050: oklch(93.89% 0.0292 28.12);
+  --kern-color-red-600: oklch(52.37% 0.2002 29.28);
+  --kern-color-lightblue-050: oklch(93.28% 0.0544 213.68);
+  --kern-color-lightblue-600: oklch(49.29% 0.0962 228.1);
+  --kern-color-turquois-050: oklch(93.09% 0.0428 170.49);
+  --kern-color-turquois-600: oklch(48.73% 0.0985 168.19);
+  --kern-color-orange-050: oklch(93.57% 0.0683 84.88);
+  --kern-color-orange-600: oklch(50.7% 0.1152 63.44);
+  --kern-color-black: oklch(0% 0 0);
+  --kern-color-white: oklch(100% 0 0);
+
+  // Font (tokens/primitives/_font.scss).
+  --kern-typography-font-family-fira-sans: "Fira Sans", sans-serif;
+  --kern-typography-font-family-fira-mono: "Fira Mono", monospace;
+  --kern-font-size-16: 1rem;
+  --kern-font-size-18: 1.125rem;
+  --kern-font-size-21: 1.3125rem;
+  --kern-font-size-24: 1.5rem;
+  --kern-font-size-26: 1.625rem;
+  --kern-font-size-32: 2rem;
+  --kern-font-size-40: 2.5rem;
+
+  // Sizes (tokens/primitives/_sizes.scss): only those used.
+  --kern-0: 0rem;
+  --kern-1: 0.0625rem;
+  --kern-2: 0.125rem;
+  --kern-3: 0.1875rem;
+  --kern-4: 0.25rem;
+  --kern-5: 0.3125rem;
+  --kern-6: 0.375rem;
+  --kern-7: 0.4375rem;
+  --kern-8: 0.5rem;
+  --kern-9: 0.5625rem;
+  --kern-12: 0.75rem;
+  --kern-16: 1rem;
+  --kern-20: 1.25rem;
+  --kern-24: 1.5rem;
+  --kern-32: 2rem;
+  --kern-40: 2.5rem;
+  --kern-48: 3rem;
+  --kern-56: 3.5rem;
+  --kern-80: 5rem;
+  --kern-96: 6rem;
+  --kern-192: 12rem;
+  --kern-352: 22rem;
+  --kern-512: 32rem;
+
+  // Spacing (tokens/primitives/_spacing.scss).
+  --kern-metric-space-none: var(--kern-0);
+  --kern-metric-space-2x-small: var(--kern-2);
+  --kern-metric-space-x-small: var(--kern-4);
+  --kern-metric-space-small: var(--kern-8);
+  --kern-metric-space-default: var(--kern-16);
+  --kern-metric-space-large: var(--kern-24);
+  --kern-metric-space-x-large: var(--kern-32);
+  --kern-metric-space-2x-large: var(--kern-40);
+
+  // Metrics, components and typography (tokens/_variables.scss), mobile values first.
+  --kern-metric-border-width-none: var(--kern-0);
+  --kern-metric-border-width-light: var(--kern-1);
+  --kern-metric-border-width-default: var(--kern-2);
+  --kern-metric-border-width-bold: var(--kern-4);
+  --kern-metric-border-radius-none: var(--kern-0);
+  --kern-metric-border-radius-small: var(--kern-2);
+  --kern-metric-border-radius-default: var(--kern-4);
+  --kern-metric-border-radius-large: var(--kern-8);
+  --kern-metric-border-radius-circle: 50%;
+  --kern-component-description-list-term-max-width: var(--kern-352);
+  --kern-component-form-input-width-2: var(--kern-metric-dimension-2x-large);
+  --kern-component-form-input-width-4: var(--kern-metric-dimension-4x-large);
+  --kern-component-form-input-width-5: var(--kern-metric-dimension-5x-large);
+  --kern-component-form-input-width-10: var(--kern-192);
+  --kern-component-form-input-width-20: var(--kern-352);
+  --kern-component-form-input-width-30: var(--kern-512);
+  --kern-component-alert-icon-size: var(--kern-32);
+  --kern-metric-dimension-2x-small: var(--kern-8);
+  --kern-metric-dimension-x-small: var(--kern-16);
+  --kern-metric-dimension-small: var(--kern-20);
+  --kern-metric-dimension-default: var(--kern-24);
+  --kern-metric-dimension-large: var(--kern-32);
+  --kern-metric-dimension-x-large: var(--kern-48);
+  --kern-metric-dimension-2x-large: var(--kern-56);
+  --kern-metric-dimension-4x-large: var(--kern-80);
+  --kern-metric-dimension-5x-large: var(--kern-96);
+  --kern-typography-font-family-default: var(--kern-typography-font-family-fira-sans);
+  --kern-typography-reading-width: 65ch;
+  --kern-typography-line-height-medium-static: var(--kern-font-size-24);
+  --kern-typography-line-height-large-static: var(--kern-font-size-32);
+  --kern-typography-line-height-medium-adaptive: var(--kern-font-size-24);
+  --kern-typography-line-height-large-adaptive: var(--kern-font-size-32);
+  --kern-typography-font-size-small-static: var(--kern-font-size-16);
+  --kern-typography-font-size-medium-static: var(--kern-font-size-18);
+  --kern-typography-font-size-large-static: var(--kern-font-size-21);
+  --kern-typography-font-size-medium-adaptive: var(--kern-font-size-21);
+  --kern-typography-font-size-large-adaptive: var(--kern-font-size-26);
+  --kern-metric-baseline-body-default-padding-top: var(--kern-6);
+  --kern-metric-baseline-body-default-padding-bottom: var(--kern-2);
+  --kern-metric-baseline-body-large-padding-top: var(--kern-1);
+  --kern-metric-baseline-body-large-padding-bottom: var(--kern-7);
+  --kern-metric-baseline-body-small-padding-top: var(--kern-7);
+  --kern-metric-baseline-body-small-padding-bottom: var(--kern-1);
+  --kern-metric-baseline-heading-large-padding-top: var(--kern-7);
+  --kern-metric-baseline-heading-large-padding-bottom: var(--kern-9);
+  --kern-metric-baseline-heading-medium-padding-top: var(--kern-5);
+  --kern-metric-baseline-heading-medium-padding-bottom: var(--kern-3);
+  --kern-metric-baseline-title-default-padding-top: var(--kern-5);
+  --kern-metric-baseline-title-default-padding-bottom: var(--kern-3);
+  --kern-metric-baseline-title-small-padding-top: var(--kern-6);
+  --kern-metric-baseline-title-small-padding-bottom: var(--kern-2);
+  --kern-metric-baseline-preline-default-padding-top: var(--kern-6);
+  --kern-metric-baseline-preline-default-padding-bottom: var(--kern-2);
+  --kern-metric-baseline-label-default-padding-top: var(--kern-6);
+  --kern-metric-baseline-label-default-padding-bottom: var(--kern-2);
+  --kern-metric-baseline-label-small-padding-top: var(--kern-7);
+  --kern-metric-baseline-label-small-padding-bottom: var(--kern-1);
+  --kern-typography-font-weight-regular: 400;
+  --kern-typography-font-weight-medium: 500;
+  --kern-typography-font-weight-semi-bold: 600;
+  --kern-typography-font-weight-heading-default: var(--kern-typography-font-weight-semi-bold);
+  --kern-typography-font-weight-title-default: var(--kern-typography-font-weight-semi-bold);
+  --kern-typography-font-weight-body-default: var(--kern-typography-font-weight-regular);
+  --kern-typography-font-weight-body-strong: var(--kern-typography-font-weight-semi-bold);
+  --kern-typography-font-weight-preline-default: var(--kern-typography-font-weight-regular);
+  --kern-typography-font-weight-label-subtle: var(--kern-typography-font-weight-regular);
+  --kern-typography-font-weight-label-default: var(--kern-typography-font-weight-semi-bold);
+
+  // Light theme (tokens/_theme.scss, light-colors). The form does not follow the system's
+  // or the site's dark setting: it keeps its own light surface, as the other forms do.
+  --kern-color-layout-border: var(--kern-color-neutral-500);
+  --kern-color-layout-text-default: var(--kern-color-neutral-950);
+  --kern-color-layout-text-muted: var(--kern-color-neutral-650);
+  --kern-color-layout-text-inverse: var(--kern-color-neutral-025);
+  --kern-color-layout-background-default: var(--kern-color-white);
+  --kern-color-layout-background-default-surface: var(--kern-color-neutral-025);
+  --kern-color-action-default: var(--kern-color-darkblue-700);
+  --kern-color-action-on-default: var(--kern-color-white);
+  --kern-color-action-visited: var(--kern-color-violet-700);
+  --kern-color-action-focus-default: var(--kern-color-neutral-700);
+  --kern-color-action-state-opacity-hover: 92%;
+  --kern-color-action-state-opacity-active: 84%;
+  --kern-color-action-state-opacity-disabled: 0.4;
+  --kern-color-action-state-indicator-default: var(--kern-color-action-default);
+  --kern-color-action-state-indicator-tint: var(--kern-color-action-on-default);
+  --kern-color-form-input-border: var(--kern-color-neutral-900);
+  --kern-color-feedback-default: var(--kern-color-neutral-700);
+  --kern-color-feedback-default-background: var(--kern-color-neutral-100);
+  --kern-color-feedback-danger: var(--kern-color-red-600);
+  --kern-color-feedback-danger-background: var(--kern-color-red-050);
+  --kern-color-feedback-info: var(--kern-color-lightblue-600);
+  --kern-color-feedback-info-background: var(--kern-color-lightblue-050);
+  --kern-color-feedback-success: var(--kern-color-turquois-600);
+  --kern-color-feedback-success-background: var(--kern-color-turquois-050);
+  --kern-color-feedback-warning: var(--kern-color-orange-600);
+  --kern-color-feedback-warning-background: var(--kern-color-orange-050);
+  --kern-color-decorative-border-default: var(--kern-color-neutral-200);
+  --kern-color-layout-background-inverted: var(--kern-color-black);
+  --kern-color-action-state-indicator-shade-hover: color-mix(
+    in oklch,
+    var(--kern-color-action-default),
+    white calc(100% - var(--kern-color-action-state-opacity-hover))
+  );
+  --kern-color-action-state-indicator-shade-active: color-mix(
+    in oklch,
+    var(--kern-color-action-default),
+    white calc(100% - var(--kern-color-action-state-opacity-active))
+  );
+  --kern-color-action-state-indicator-tint-hover-opacity: color-mix(
+    in oklch,
+    var(--kern-color-action-default),
+    transparent var(--kern-color-action-state-opacity-hover)
+  );
+  --kern-color-action-state-indicator-tint-active-opacity: color-mix(
+    in oklch,
+    var(--kern-color-action-default),
+    transparent var(--kern-color-action-state-opacity-active)
+  );
+
+  // Layer level 0 (layers/_levels.scss): the contextual names the components read.
+  --kern-color-layout-text-default-contextual: var(--kern-color-layout-text-default);
+  --kern-color-layout-text-muted-contextual: var(--kern-color-layout-text-muted);
+  --kern-color-layout-layer-surface-contextual: var(--kern-color-layout-background-default-surface);
+  --kern-color-layout-background-default-contextual: var(--kern-color-layout-background-default);
+  --kern-color-layout-border-contextual: var(--kern-color-layout-border);
+  --kern-color-action-default-contextual: var(--kern-color-action-default);
+  --kern-color-action-on-default-contextual: var(--kern-color-action-on-default);
+  --kern-color-action-visited-contextual: var(--kern-color-action-visited);
+  --kern-color-action-focus-default-contextual: var(--kern-color-action-focus-default);
+  --kern-color-form-input-border-contextual: var(--kern-color-form-input-border);
+  --kern-color-decorative-border-contextual: var(--kern-color-decorative-border-default);
+  --kern-color-feedback-info-contextual: var(--kern-color-feedback-info);
+  --kern-color-feedback-info-background-contextual: var(--kern-color-feedback-info-background);
+  --kern-color-feedback-success-contextual: var(--kern-color-feedback-success);
+  --kern-color-feedback-success-background-contextual: var(--kern-color-feedback-success-background);
+  --kern-color-feedback-warning-contextual: var(--kern-color-feedback-warning);
+  --kern-color-feedback-warning-background-contextual: var(--kern-color-feedback-warning-background);
+  --kern-color-feedback-danger-contextual: var(--kern-color-feedback-danger);
+  --kern-color-feedback-danger-background-contextual: var(--kern-color-feedback-danger-background);
+  --kern-color-feedback-default-contextual: var(--kern-color-feedback-default);
+  --kern-color-feedback-default-background-contextual: var(--kern-color-feedback-default-background);
+
+  // The form brings its own light surface, text colour and font. It sets no padding or margin:
+  // the dialog around it does, and an unlayered padding here would beat Tailwind's p-* classes.
+  color-scheme: light;
+  box-sizing: border-box;
+  // Contains the visually hidden (position: absolute) text. Without it, inside a fixed dialog
+  // that text would overflow the dialog box and scrollIntoView would shift the dialog.
+  position: relative;
+  background-color: var(--kern-color-layout-background-default);
+  @include text-base;
+  font-size: var(--kern-typography-font-size-medium-static);
+  font-weight: var(--kern-typography-font-weight-body-default);
+  line-height: var(--kern-typography-line-height-medium-static);
+  overflow-wrap: break-word;
+  text-align: left;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+
+  // KERN's global.scss: border-box everywhere. :where() keeps these resets below the
+  // component classes.
+  :where(*, *::before, *::after) {
+    box-sizing: border-box;
+  }
+  :where(h1, h2, h3, p, ul, ol, dl, dd, pre, fieldset, legend, details, summary) {
+    margin: 0;
+    padding: 0;
+  }
+  :where(fieldset) {
+    border: 0;
+  }
+  :where(strong) {
+    font-weight: var(--kern-typography-font-weight-body-strong);
+  }
+  :where(input, button) {
+    font-family: inherit;
+  }
+  :where(label) {
+    cursor: pointer;
+  }
+  // Focusable elements other than those focused by script (global.scss).
+  :where([tabindex]:not([tabindex="-1"]):focus) {
+    @include focus-offset;
+  }
+}
+
+// The adaptive type tokens grow from 768px (tokens/_variables.scss).
+@media (min-width: 768px) {
+  .kern-form {
+    --kern-component-alert-icon-size: var(--kern-40);
+    --kern-typography-line-height-medium-adaptive: var(--kern-font-size-32);
+    --kern-typography-line-height-large-adaptive: var(--kern-font-size-40);
+    --kern-typography-font-size-medium-adaptive: var(--kern-font-size-24);
+    --kern-typography-font-size-large-adaptive: var(--kern-font-size-32);
+    --kern-metric-baseline-heading-large-padding-top: var(--kern-9);
+    --kern-metric-baseline-heading-large-padding-bottom: var(--kern-7);
+    --kern-metric-baseline-heading-medium-padding-top: var(--kern-8);
+    --kern-metric-baseline-heading-medium-padding-bottom: var(--kern-8);
+    --kern-metric-baseline-title-default-padding-top: var(--kern-8);
+    --kern-metric-baseline-title-default-padding-bottom: var(--kern-8);
+  }
+}
+
+.kern-form {
+  // ---- Global (core/global.scss) -----------------------------------------------------------
+
+  .kern-sr-only {
+    @include sr-only;
+  }
+
+  .kern-error {
+    @include normalize;
+    display: flex;
+    gap: var(--kern-metric-space-small, 8px);
+    align-items: flex-start;
+    align-self: stretch;
+    .kern-icon {
+      background-color: var(--kern-color-feedback-danger-contextual, #bd0f09);
+      margin: var(--kern-metric-baseline-body-default-padding-top, 6px) var(--kern-metric-space-none, 0px)
+        var(--kern-metric-baseline-body-default-padding-bottom, 2px) var(--kern-metric-space-none, 0px);
+    }
+  }
+
+  .kern-number {
+    display: flex;
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    padding: 2px 0px;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--kern-metric-border-radius-circle, 50%);
+    border: var(--kern-metric-border-width-default, 2px) solid var(--kern-color-layout-text-default-contextual, #131525);
+    color: var(--kern-color-layout-text-default-contextual, #131525);
+  }
+
+  // ---- Icon (components/_icon.scss) ----------------------------------------------------------
+
+  .kern-icon {
+    display: inline-block;
+    flex-shrink: 0;
+    @include icon-size(default);
+  }
+  .kern-icon--large {
+    @include icon-size(large);
+  }
+  @each $name, $url in $icons {
+    .kern-icon--#{$name} {
+      -webkit-mask: $url;
+      mask: $url;
+      background-color: var(--kern-color-layout-text-default-contextual, #131525);
+      @include forced-colors-style;
+    }
+  }
+
+  // ---- Typography (typography/*.scss) --------------------------------------------------------
+
+  .kern-body {
+    @include normalize;
+    @include body-default;
+  }
+  .kern-body--large {
+    @include text(body-large, large-static, large-static, body-default);
+  }
+  .kern-body--bold {
+    font-weight: var(--kern-typography-font-weight-body-strong, 600);
+  }
+
+  .kern-hint {
+    @include body-default;
+  }
+
+  .kern-heading-large {
+    @include normalize;
+    @include text(heading-large, large-adaptive, large-adaptive, heading-default);
+  }
+  .kern-heading-medium {
+    @include normalize;
+    @include text(heading-medium, medium-adaptive, medium-adaptive, heading-default);
+  }
+
+  .kern-label {
+    @include normalize;
+    @include label-default;
+    width: fit-content;
+  }
+  .kern-label--small {
+    @include text(label-small, small-static, medium-static, label-default);
+  }
+  .kern-label--subtle {
+    font-weight: var(--kern-typography-font-weight-label-subtle, 400);
+  }
+
+  .kern-link {
+    @include normalize;
+    @include body-default;
+    color: var(--kern-color-action-default-contextual, #2044aa);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: var(--kern-1, 1px);
+    text-underline-offset: var(--kern-3, 3px);
+    display: inline-flex;
+    gap: var(--kern-metric-space-x-small, 4px);
+    align-items: baseline;
+    cursor: pointer;
+    .kern-icon {
+      background-color: var(--kern-color-action-default-contextual, #2044aa);
+      align-self: self-start;
+    }
+    &:has(.kern-icon) {
+      text-decoration: none;
+    }
+    &:has(.kern-icon):active,
+    &:has(.kern-icon):hover {
+      text-decoration-line: underline;
+      text-decoration-style: solid;
+      text-decoration-skip-ink: none;
+      text-decoration-thickness: var(--kern-3, 3px);
+      text-underline-offset: var(--kern-3, 3px);
+    }
+    &:hover,
+    &:active {
+      text-decoration-thickness: var(--kern-3, 3px);
+    }
+    &:visited {
+      color: var(--kern-color-action-visited, #75009e);
+      .kern-icon {
+        background-color: var(--kern-color-action-visited, #75009e);
+      }
+    }
+    &:focus-visible {
+      position: relative;
+      z-index: 1;
+      @include focus-offset;
+      @include forced-colors-focus;
+    }
+  }
+  .kern-link--small {
+    gap: var(--kern-metric-space-2x-small, 2px);
+    @include body-small;
+    color: var(--kern-color-action-default-contextual, #2044aa);
+    .kern-icon {
+      @include icon-size(small);
+      margin-top: var(--kern-metric-space-2x-small, 2px);
+    }
+  }
+  .kern-link--no-visited-state:visited {
+    color: var(--kern-color-action-default-contextual, #2044aa);
+    .kern-icon {
+      background-color: var(--kern-color-action-default-contextual, #2044aa);
+    }
+  }
+
+  .kern-list {
+    @include normalize;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--kern-metric-space-none, 0);
+    @include body-default;
+    padding-left: var(--kern-metric-space-none, 0);
+  }
+  .kern-list--number {
+    padding-left: var(--kern-metric-space-x-large, 32px);
+    gap: var(--kern-metric-space-default, 16px);
+    list-style-type: decimal;
+  }
+
+  .kern-preline {
+    @include normalize;
+    @include text(preline-default, medium-static, medium-static, preline-default);
+    color: var(--kern-color-layout-text-muted-contextual, #51577a);
+    width: fit-content;
+  }
+
+  .kern-title {
+    @include normalize;
+    @include text(title-default, medium-adaptive, medium-adaptive, title-default);
+  }
+  .kern-title--small {
+    @include title-small;
+  }
+
+  // ---- Stack (layout/_utilities.scss) --------------------------------------------------------
+
+  @each $name, $space in (sm: small, md: default, lg: large, xl: x-large) {
+    .kern-stack-#{$name} {
+      display: flex;
+      flex-direction: column;
+      gap: var(--kern-metric-space-#{$space});
+    }
+  }
+
+  // ---- Alert (components/_alert.scss) ---------------------------------------------------------
+
+  .kern-alert {
+    border-radius: var(--kern-metric-border-radius-default, 4px);
+    outline: var(--kern-metric-border-width-default, 2px) solid transparent;
+  }
+  @each $tone in (info, success, warning, danger) {
+    .kern-alert--#{$tone} {
+      outline-color: var(--kern-color-feedback-#{$tone}-contextual);
+      background-color: var(--kern-color-feedback-#{$tone}-background-contextual);
+      .kern-icon--#{$tone} {
+        background-color: var(--kern-color-feedback-#{$tone}-contextual);
+        @include forced-colors-style;
+      }
+      .kern-alert__body {
+        outline: var(--kern-metric-border-width-light, 1px) solid var(--kern-color-feedback-#{$tone}-contextual);
+      }
+    }
+  }
+  .kern-alert__header {
+    display: flex;
+    padding: var(--kern-metric-space-default, 16px);
+    align-items: center;
+    .kern-icon {
+      @include icon-size(large);
+    }
+  }
+  .kern-alert .kern-title {
+    padding-left: var(--kern-metric-space-small, 8px);
+    padding-right: var(--kern-metric-space-small, 8px);
+  }
+  .kern-alert__body {
+    padding: var(--kern-metric-space-small, 8px) var(--kern-metric-space-large, 24px) var(--kern-metric-space-default, 16px)
+      var(--kern-metric-space-large, 24px);
+    background: var(--kern-color-layout-background-default-contextual, #fff);
+    border-radius: 0 0 var(--kern-metric-border-radius-default, 4px) var(--kern-metric-border-radius-default, 4px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--kern-metric-space-small, 8px);
+  }
+
+  // ---- Button (components/_button.scss) ----------------------------------------------------
+
+  .kern-btn {
+    appearance: none;
+    display: inline-flex;
+    min-height: var(--kern-metric-dimension-x-large, 48px);
+    margin: 0;
+    padding: var(--kern-metric-space-none, 0px) var(--kern-metric-space-default, 16px);
+    justify-content: center;
+    align-items: center;
+    vertical-align: top;
+    gap: var(--kern-metric-space-none, 0px);
+    border: none;
+    border-radius: var(--kern-metric-border-radius-default, 4px);
+    position: relative;
+    text-decoration: none;
+    .kern-label {
+      padding: var(--kern-metric-space-small, 8px);
+    }
+    &:not(:disabled, [disabled], [aria-disabled="true"]):hover {
+      cursor: pointer;
+    }
+    &:not([disabled]):not([tabindex="-1"]):focus {
+      @include focus-offset;
+    }
+    &:not([disabled]):not([tabindex="-1"]):focus-visible {
+      @include forced-colors-focus;
+    }
+  }
+  .kern-btn--primary {
+    background: var(--kern-color-action-default-contextual, #2044aa);
+    @media (forced-colors: active) {
+      border: 3px solid transparent;
+    }
+    .kern-label {
+      color: var(--kern-color-action-on-default-contextual, #fff);
+    }
+    > .kern-icon {
+      background-color: var(--kern-color-action-on-default-contextual, #fff);
+      @include forced-colors-style;
+    }
+    &:not(:disabled, [disabled], [aria-disabled="true"]):hover {
+      background: var(--kern-color-action-state-indicator-shade-hover);
+    }
+    &:not(:disabled, [disabled], [aria-disabled="true"]):active {
+      background: var(--kern-color-action-state-indicator-shade-active);
+    }
+  }
+  .kern-btn--secondary {
+    border: var(--kern-metric-border-width-light, 1px) solid var(--kern-color-action-default-contextual, #2044aa);
+    background: transparent;
+    .kern-label {
+      color: var(--kern-color-action-default-contextual, #2044aa);
+    }
+    > .kern-icon {
+      background-color: var(--kern-color-action-default-contextual, #2044aa);
+      @include forced-colors-style;
+    }
+    &:not(:disabled, [disabled], [aria-disabled="true"]):hover {
+      background: var(--kern-color-action-state-indicator-tint-hover-opacity);
+    }
+    &:not(:disabled, [disabled], [aria-disabled="true"]):active {
+      background: var(--kern-color-action-state-indicator-tint-active-opacity);
+    }
+    @media (forced-colors: active) {
+      border: 1px solid transparent !important;
+    }
+  }
+
+  // ---- Check, Radio, Checkbox (components/_check.scss, _radio.scss, _checkbox.scss) ----------
+
+  .kern-form-check {
+    display: grid;
+    grid-template-columns: var(--kern-metric-dimension-large, 32px) auto;
+    align-items: start;
+    padding-right: var(--kern-metric-space-default, 16px);
+    .kern-label {
+      font-weight: var(--kern-typography-font-weight-label-subtle, 400);
+      padding-top: var(--kern-metric-space-x-small, 4px);
+      padding-left: var(--kern-metric-space-default, 16px);
+    }
+  }
+  .kern-form-check__radio,
+  .kern-form-check__checkbox {
+    width: var(--kern-metric-dimension-large, 32px);
+    height: var(--kern-metric-dimension-large, 32px);
+    border: var(--kern-metric-border-width-default, 2px) solid var(--kern-color-form-input-border-contextual, #1d2034);
+    background: var(--kern-color-layout-layer-surface-contextual, #f3f4f7);
+    margin: var(--kern-metric-space-none, 0px);
+    appearance: none;
+    cursor: pointer;
+    &:hover {
+      border: var(--kern-metric-border-width-bold, 4px) solid var(--kern-color-form-input-border-contextual, #1d2034);
+    }
+    &:focus,
+    &:focus-visible {
+      @include focus;
+      border: var(--kern-metric-border-width-none, 0px);
+      @include forced-colors-focus;
+      @media (forced-colors: active) {
+        border: var(--kern-metric-border-width-default, 2px) solid CanvasText !important;
+      }
+      &:hover {
+        border: var(--kern-metric-border-width-none, 0px);
+      }
+    }
+  }
+  .kern-form-check__radio--error,
+  .kern-form-check__checkbox--error {
+    &:focus,
+    &:focus-visible {
+      @include focus;
+      outline-color: var(--kern-color-feedback-danger-contextual, #c31c13);
+      @include forced-colors-focus;
+    }
+  }
+
+  .kern-form-check__radio {
+    display: flex;
+    border-radius: 100%;
+    &::before {
+      border-radius: 100%;
+      content: "";
+      margin: auto;
+    }
+    &:checked::before {
+      background-color: var(--kern-color-form-input-border-contextual, #1d2034);
+      height: var(--kern-12, 12px);
+      width: var(--kern-12, 12px);
+      @include forced-colors-style;
+    }
+  }
+  .kern-form-check__radio--error {
+    border-color: var(--kern-color-feedback-danger-contextual, #c31c13) !important;
+    background: var(--kern-color-feedback-danger-background-contextual, #fee4e0);
+    &:checked::before {
+      background-color: var(--kern-color-feedback-danger-contextual, #c31c13);
+    }
+  }
+
+  .kern-form-check__checkbox {
+    border-radius: var(--kern-metric-border-radius-small, 2px);
+    &::before {
+      content: "";
+    }
+    &:focus::before,
+    &:focus-visible::before {
+      margin: var(--kern-6, 6px);
+    }
+    &:checked::before {
+      display: block;
+      position: relative;
+      left: var(--kern-3, 3px);
+      top: var(--kern-8, 8px);
+      transform: rotate(47deg) translate(-50%, -50%);
+      background-color: transparent;
+      border-width: var(--kern-metric-space-none, 0px) var(--kern-metric-border-width-default, 2px)
+        var(--kern-metric-border-width-default, 2px) var(--kern-metric-space-none, 0px);
+      border-color: var(--kern-color-form-input-border-contextual, #1d2034);
+      border-style: solid;
+      height: var(--kern-metric-dimension-x-small, 16px);
+      width: var(--kern-metric-dimension-2x-small, 8px);
+      margin: 4px;
+    }
+    &:checked:hover::before {
+      margin: var(--kern-metric-space-2x-small, 2px);
+    }
+    &:checked:focus::before,
+    &:checked:focus-visible::before {
+      margin: var(--kern-6, 6px);
+      @media (forced-colors: active) {
+        margin: 4px;
+      }
+    }
+  }
+  .kern-form-check__checkbox--error {
+    border-color: var(--kern-color-feedback-danger-contextual, #c31c13) !important;
+    background: var(--kern-color-feedback-danger-background-contextual, #fee4e0);
+    &:checked::before {
+      border-color: var(--kern-color-feedback-danger-contextual, #c31c13);
+    }
+    &:focus,
+    &:focus-visible {
+      box-shadow: 0 0 0 var(--kern-metric-border-width-bold, 4px) var(--kern-color-feedback-danger-contextual, #c31c13);
+      outline: var(--kern-metric-border-width-none, 0px);
+      border: var(--kern-metric-border-width-none, 0px);
+      @include forced-colors-focus;
+    }
+  }
+
+  // ---- Fieldset (components/_fieldset.scss) --------------------------------------------------
+
+  .kern-fieldset {
+    @include normalize;
+    min-width: auto;
+    legend {
+      float: left;
+    }
+    legend.kern-label {
+      margin-bottom: var(--kern-metric-space-small, 8px);
+      padding: var(--kern-metric-baseline-body-default-padding-top, 6px) var(--kern-metric-space-none, 0px)
+        var(--kern-metric-baseline-body-default-padding-bottom, 2px) var(--kern-metric-space-none, 0px);
+    }
+    &:has(.kern-hint) legend.kern-label {
+      margin-bottom: var(--kern-metric-space-none, 0px);
+    }
+    .kern-label:has(.kern-label__optional) {
+      display: inline;
+      flex-wrap: nowrap;
+    }
+    .kern-label__optional {
+      color: var(--kern-color-layout-text-muted-contextual, #51577a);
+      font-weight: var(--kern-typography-font-weight-label-subtle, 400);
+      white-space: nowrap;
+    }
+    .kern-hint {
+      clear: left;
+      margin-bottom: var(--kern-metric-space-small, 8px);
+    }
+    .kern-error {
+      margin-top: var(--kern-metric-space-small, 8px);
+    }
+  }
+  .kern-fieldset--error {
+    border-left: var(--kern-metric-border-width-bold, 4px) solid var(--kern-color-feedback-danger-contextual, #c31c13);
+    padding-left: var(--kern-metric-space-default, 16px);
+  }
+  .kern-fieldset__body {
+    clear: left;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--kern-metric-space-default, 16px);
+  }
+
+  // ---- Input (components/_input.scss) --------------------------------------------------------
+
+  .kern-form-input {
+    display: flex;
+    padding: var(--kern-metric-space-none, 0px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--kern-metric-space-none, 0px);
+    align-self: stretch;
+    .kern-label {
+      margin-bottom: var(--kern-metric-space-small, 8px);
+    }
+    .kern-label:has(.kern-label__optional) {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      gap: var(--kern-metric-space-none, 0px) var(--kern-metric-space-small, 8px);
+      align-self: stretch;
+      flex-wrap: wrap;
+    }
+    .kern-label__optional {
+      color: var(--kern-color-layout-text-muted-contextual, #404565);
+      font-weight: var(--kern-typography-font-weight-label-subtle, 400);
+    }
+    &:has(.kern-hint) .kern-label {
+      margin-bottom: var(--kern-metric-space-none, 0px);
+    }
+    .kern-hint {
+      margin-bottom: var(--kern-metric-space-small, 8px);
+    }
+    .kern-error {
+      order: 5;
+      margin-top: var(--kern-metric-space-small, 8px);
+    }
+  }
+  .kern-form-input__input {
+    @include body-default;
+    padding: var(--kern-metric-space-none, 0px) var(--kern-metric-space-default, 16px);
+    height: var(--kern-metric-dimension-x-large, 48px);
+    margin: 0;
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
+    border-radius: var(--kern-metric-border-radius-small, 2px);
+    border: none;
+    border-bottom: var(--kern-metric-border-width-default, 2px) solid var(--kern-color-form-input-border-contextual, #171a2b);
+    background: var(--kern-color-layout-layer-surface-contextual, #f7f7f9);
+    text-overflow: ellipsis;
+    @media (forced-colors: active) {
+      border: 1px solid transparent !important;
+    }
+    &:hover {
+      border-width: var(--kern-metric-border-width-bold, 4px);
+      padding-top: calc(var(--kern-metric-border-width-bold, 4px) - var(--kern-metric-border-width-default, 2px));
+    }
+    &:focus {
+      background: var(--kern-color-layout-layer-surface-contextual, #f7f7f9);
+      border: none;
+      padding-bottom: calc(var(--kern-metric-border-width-bold, 4px) - var(--kern-metric-border-width-default, 2px));
+      @include focus;
+    }
+    &:focus:hover {
+      padding-top: var(--kern-metric-space-none, 0px);
+    }
+  }
+  .kern-form-input__input--error {
+    border-bottom: var(--kern-metric-border-width-default, 2px) solid var(--kern-color-feedback-danger-contextual, #bd0f09);
+    background: var(--kern-color-feedback-danger-background-contextual, #feece8);
+    &:focus {
+      outline-color: var(--kern-color-feedback-danger-contextual, #bd0f09);
+      background: var(--kern-color-feedback-danger-background-contextual, #feece8);
+      border: none;
+    }
+  }
+  @each $width in (2, 4, 5, 10, 20, 30) {
+    .kern-form-input__input--width-#{$width} {
+      max-width: var(--kern-component-form-input-width-#{$width});
+    }
+  }
+  .kern-form-input--error {
+    border-left: var(--kern-metric-border-width-bold, 4px) solid var(--kern-color-feedback-danger-contextual, #bd0f09);
+    padding-left: var(--kern-metric-space-default, 16px);
+  }
+
+  // ---- Description list (components/_description-list.scss) -----------------------------------
+
+  .kern-description-list {
+    @include normalize;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--kern-metric-space-small, 8px);
+  }
+  .kern-description-list-item {
+    display: flex;
+    padding: var(--kern-metric-space-none, 0px);
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: var(--kern-metric-space-none, 0px);
+    align-self: stretch;
+    flex-wrap: wrap;
+    flex-direction: column;
+    word-break: break-word;
+    @media (min-width: 768px) {
+      flex-direction: row;
+      gap: var(--kern-metric-space-x-large, 32px);
+    }
+  }
+  .kern-description-list-item__key {
+    @include normalize;
+    @include body-default;
+    font-weight: var(--kern-typography-font-weight-semi-bold, 600);
+    @media (min-width: 768px) {
+      width: 30%;
+      max-width: var(--kern-component-description-list-term-max-width, 352px);
+    }
+  }
+  .kern-description-list-item__value {
+    @include normalize;
+    @include body-default;
+    @media (min-width: 768px) {
+      width: calc(70% - var(--kern-metric-space-x-large, 32px));
+    }
+  }
+
+  // ---- Summary (components/_summary.scss) -----------------------------------------------------
+
+  .kern-summary__header {
+    display: flex;
+    padding: var(--kern-metric-space-default, 16px) var(--kern-metric-space-none, 0px);
+    align-items: flex-start;
+    gap: var(--kern-metric-space-small, 8px) var(--kern-metric-space-default, 16px);
+    align-self: stretch;
+  }
+  .kern-summary__title-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--kern-metric-space-default, 16px);
+    margin: 0 !important;
+    padding: 0 !important;
+    .kern-number {
+      flex-shrink: 0;
+      margin-top: var(--kern-metric-space-x-small, 4px);
+      font-size: var(--kern-typography-font-size-small-static, 16px);
+      line-height: normal;
+      // Screen readers hear "1." before the title.
+      &::after {
+        content: ".";
+        @include sr-only;
+      }
+    }
+  }
+  .kern-summary .kern-title {
+    font-weight: var(--kern-typography-font-weight-regular, 400);
+    align-items: baseline;
+  }
+  .kern-summary__body {
+    display: flex;
+    padding: var(--kern-metric-space-default, 16px);
+    flex-direction: column;
+    gap: var(--kern-metric-space-x-large, 32px);
+    border-radius: var(--kern-metric-border-radius-default, 4px);
+    background: var(--kern-color-layout-layer-surface-contextual, #f3f4f7);
+    @media (forced-colors: active) {
+      border: 1px solid transparent !important;
+    }
+  }
+
+  // ---- Details (components/_details.scss) ---------------------------------------------------
+
+  .kern-details[open] > summary::before {
+    -webkit-mask: $icon-arrow-up;
+    mask: $icon-arrow-up;
+    background-color: var(--kern-color-action-default-contextual, #2044aa);
+    @include forced-colors-style;
+  }
+  .kern-details__header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--kern-metric-space-small, 8px);
+    @include title-small;
+    list-style-type: none;
+    &:focus-visible {
+      @include focus-offset;
+      @include forced-colors-focus;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &:hover .kern-title {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+      text-decoration-thickness: var(--kern-3, 3px);
+      text-underline-offset: var(--kern-3, 3px);
+    }
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+    }
+    &::before {
+      content: "";
+      @include icon-size(default);
+      -webkit-mask: $icon-arrow-down;
+      mask: $icon-arrow-down;
+      mask-size: cover;
+      mask-repeat: no-repeat;
+      background-color: var(--kern-color-action-default-contextual, #2044aa);
+      @include forced-colors-style;
+    }
+    .kern-title {
+      overflow-wrap: break-word;
+      padding: 0;
+      color: var(--kern-color-action-default-contextual, #2044aa);
+      line-height: var(--kern-metric-space-large, 24px);
+    }
+  }
+  .kern-details__body {
+    padding-left: var(--kern-metric-space-x-large, 32px);
+    width: 100%;
+    @media (max-width: 320px) {
+      box-shadow: -1px 0 0 0 var(--kern-color-decorative-border-contextual, #c0c3d5);
+      margin-left: var(--kern-12, 12px);
+      padding-left: calc(var(--kern-metric-space-x-large, 32px) - var(--kern-12, 12px));
+    }
+  }
+
+  // ---- Progress (components/_progress.scss) ---------------------------------------------------
+
+  .kern-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--kern-metric-space-small, 8px);
+    progress[value] {
+      appearance: none;
+      border: none;
+      width: 100%;
+      height: var(--kern-metric-dimension-2x-small, 8px);
+      border-radius: var(--kern-metric-border-radius-small, 2px);
+      background: var(--kern-color-feedback-default-background-contextual, #dfe1ea);
+      color: var(--kern-color-feedback-default-contextual, #454b6b);
+      vertical-align: baseline;
+    }
+    progress[value]::-webkit-progress-bar {
+      background: var(--kern-color-feedback-default-background-contextual, #dfe1ea);
+      border-radius: var(--kern-metric-border-radius-small, 2px);
+    }
+    progress[value]::-webkit-progress-value {
+      background-color: var(--kern-color-feedback-default-contextual, #454b6b);
+      border-radius: var(--kern-metric-border-radius-small, 2px);
+    }
+    progress[value]::-moz-progress-bar {
+      background-color: var(--kern-color-feedback-default-contextual, #454b6b);
+      border-radius: var(--kern-metric-border-radius-small, 2px);
+    }
+    @media (forced-colors: active) {
+      progress[value] {
+        background-color: var(--kern-color-layout-background-default);
+        border: 1px solid var(--kern-color-layout-background-inverted);
+        color: var(--kern-color-layout-background-inverted);
+        forced-color-adjust: none;
+      }
+      progress[value]::-webkit-progress-bar {
+        background-color: var(--kern-color-layout-background-default);
+      }
+      progress[value]::-webkit-progress-value,
+      progress[value]::-moz-progress-bar {
+        background-color: var(--kern-color-layout-background-inverted);
+      }
+    }
+  }
+
+  // ---- The form template (ours, not from KERN) ---------------------------------------------
+  // Last, so these placements win over the component rules above.
+
+  // The record on the confirmation page, in KERN's monospace token on the layer surface.
+  .kf-code {
+    border-radius: var(--kern-metric-border-radius-default);
+    background: var(--kern-color-layout-layer-surface-contextual);
+    color: var(--kern-color-layout-text-default-contextual);
+    font-family: var(--kern-typography-font-family-fira-mono);
+    font-size: var(--kern-font-size-16);
+  }
+
+  // Back link, progress and error summary sit above the form in the engine's step.
+  .kern-form__back {
+    margin-bottom: var(--kern-metric-space-default);
+  }
+  .kern-form__progress {
+    width: 100%;
+    margin-bottom: var(--kern-metric-space-large);
+  }
+  .kern-form__progress-count {
+    color: var(--kern-color-layout-text-muted-contextual);
+    font-weight: var(--kern-typography-font-weight-label-subtle);
+    white-space: nowrap;
+  }
+  .kern-form__error {
+    margin: var(--kern-metric-space-x-small) 0 var(--kern-metric-space-x-large);
+  }
+  // The engine moves focus to the error summary. KERN gives script-focused elements no ring
+  // (global.scss), but the Alert draws its frame with an outline, which kf-form.css removes
+  // from elements with tabindex="-1". Put the frame back.
+  .kern-alert--danger[tabindex="-1"]:focus {
+    outline: var(--kern-metric-border-width-default) solid var(--kern-color-feedback-danger-contextual);
+  }
+
+  // The fields of each page, then Continue, 32px apart.
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kern-metric-space-x-large);
+  }
+
+  // A question that is the page heading: the label or legend holds a Heading (large).
+  .kern-form__heading {
+    margin-bottom: var(--kern-metric-space-small);
+    .kern-label {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      width: auto;
+    }
+  }
+  .kern-form-input:has(.kern-hint) .kern-form__heading,
+  .kern-fieldset:has(.kern-hint) .kern-form__heading {
+    margin-bottom: var(--kern-metric-space-none);
+  }
+  .kern-fieldset legend.kern-form__legend {
+    float: left;
+    width: 100%;
+    padding: 0;
+  }
+  // "(optional)" after a heading keeps the heading size, in KERN's muted, regular style.
+  .kern-form__heading .kern-label__optional {
+    color: var(--kern-color-layout-text-muted-contextual);
+    font-weight: var(--kern-typography-font-weight-label-subtle);
+  }
+
+  // A hint under one option (KERN has none): in the label column, linked by aria-describedby.
+  .kern-form__option-hint {
+    grid-column: 2;
+    padding-left: var(--kern-metric-space-default);
+    color: var(--kern-color-layout-text-muted-contextual);
+  }
+
+  // Check page: a Summary for each section, each answer with its own change link.
+  .kern-form__summary-item .kern-description-list-item__value {
+    @media (min-width: 768px) {
+      width: auto;
+      flex: 1 1 0;
+    }
+  }
+  .kern-form__summary-action {
+    @include normalize;
+    flex-shrink: 0;
+  }
+  .kern-form__summary .kern-description-list {
+    gap: var(--kern-metric-space-default);
+  }
+
+  .kern-form__reference {
+    white-space: nowrap;
+  }
+}

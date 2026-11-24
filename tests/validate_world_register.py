@@ -1,4 +1,5 @@
-"""Check the Canada and Australia front-door registers (register/ca, register/au).
+"""Check the front-door registers for Canada, Australia, Germany, France and Spain
+(register/ca, register/au, register/de, register/fr, register/es).
 
 Same rules as the US register: allowed values, sources, dates, unique IDs, and no
 phone numbers or email addresses. Standard library only.
@@ -25,10 +26,27 @@ COUNTRIES = {
     "au": {"New South Wales": "nsw", "Victoria": "vic", "Queensland": "qld", "Western Australia": "wa",
            "South Australia": "sa", "Tasmania": "tas", "Australian Capital Territory": "act",
            "Northern Territory": "nt", "Australia": "au"},
+    # Germany: the 16 Länder, in English.
+    "de": {"Baden-Württemberg": "bw", "Bavaria": "by", "Berlin": "be", "Brandenburg": "bb", "Bremen": "hb",
+           "Hamburg": "hh", "Hesse": "he", "Mecklenburg-Western Pomerania": "mv", "Lower Saxony": "ni",
+           "North Rhine-Westphalia": "nw", "Rhineland-Palatinate": "rp", "Saarland": "sl", "Saxony": "sn",
+           "Saxony-Anhalt": "st", "Schleswig-Holstein": "sh", "Thuringia": "th", "Germany": "de"},
+    # France: the 18 regions. Each département's service is one row, named in coverage.
+    "fr": {"Auvergne-Rhône-Alpes": "ara", "Bourgogne-Franche-Comté": "bfc", "Brittany": "bre",
+           "Centre-Val de Loire": "cvl", "Corsica": "cor", "Grand Est": "ges", "Hauts-de-France": "hdf",
+           "Île-de-France": "idf", "Normandy": "nor", "Nouvelle-Aquitaine": "naq", "Occitanie": "occ",
+           "Pays de la Loire": "pdl", "Provence-Alpes-Côte d'Azur": "pac", "Guadeloupe": "gp", "Martinique": "mq",
+           "French Guiana": "gf", "Réunion": "re", "Mayotte": "yt", "France": "fr"},
+    # Spain: the 17 autonomous communities and the 2 autonomous cities, in English.
+    "es": {"Andalusia": "an", "Aragon": "ar", "Asturias": "as", "Balearic Islands": "ib", "Basque Country": "pv",
+           "Canary Islands": "cn", "Cantabria": "cb", "Castile and León": "cl", "Castilla-La Mancha": "cm",
+           "Catalonia": "ct", "Extremadura": "ex", "Galicia": "ga", "La Rioja": "ri", "Madrid": "md", "Murcia": "mc",
+           "Navarre": "nc", "Valencian Community": "vc", "Ceuta": "ce", "Melilla": "ml", "Spain": "es"},
 }
 
 ENUMS = {
-    "operator_type": {"state_agency", "child_welfare_agency", "indigenous_agency", "private_agency"},
+    "operator_type": {"state_agency", "child_welfare_agency", "indigenous_agency", "private_agency",
+                      "local_authority", "voluntary_agency"},
     "service_type": {"fostering", "adoption", "fostering_and_adoption"},
     "first_step": {"web_form", "phone_or_email", "info_session", "online_portal", "not_recorded"},
     "form_fields_observed": {"yes", "no"},
@@ -42,13 +60,23 @@ DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 URL = re.compile(r"^https?://[^\s/]+\.[^\s]+$")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<![\d/])(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\d)"
-                   r"|(?<![\d/])(?:\+61\s?|0)[2-478](?:[\s-]?\d){8}(?!\d)|\b1[38]00[\s-]?\d{3}[\s-]?\d{3}\b")
+                   r"|(?<![\d/])(?:\+61\s?|0)[2-478](?:[\s-]?\d){8}(?!\d)|\b1[38]00[\s-]?\d{3}[\s-]?\d{3}\b"
+                   # Germany, France and Spain
+                   r"|\+(?:49|33|34)[\s\d/.()-]{7,}"
+                   r"|(?<![\d/.])0[1-9](?:[\s.]\d{2}){4}(?!\d)"
+                   r"|(?<![\d/.,])0[1-9]\d{1,4}[\s/-]\d{4,8}(?!\d)"
+                   r"|(?<![\d/.,])[6789]\d{2}[\s.]\d{2,3}[\s.]\d{2,3}(?:[\s.]\d{2})?(?!\d)"
+                   r"|(?<![\d/.,])[6789]\d[\s.]\d{3}[\s.]\d{2}[\s.]\d{2}(?!\d)")
 
 
 def main() -> int:
     errors = []
+    checked = []
     for country, regions in COUNTRIES.items():
         path = ROOT / "register" / country / "front-doors.csv"
+        if not path.exists():
+            print(f"{country}: no register yet")
+            continue
         with path.open(encoding="utf-8", newline="") as fh:
             reader = csv.DictReader(fh)
             if reader.fieldnames != HEADER:
@@ -83,11 +111,12 @@ def main() -> int:
                 if col not in URLS and PHONE.search(val):
                     errors.append(f"{where}: {col} looks like it holds a phone number")
         print(f"{country}: {len(rows)} front doors")
+        checked.append(country.upper())
     if errors:
         for e in errors:
             print("FAIL", e)
         return 1
-    print("Canada and Australia register checks passed")
+    print(f"Register checks passed for {', '.join(checked)}")
     return 0
 
 

@@ -129,7 +129,47 @@ NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|register for|job|r
 PROMISE_CORE = re.compile(
     r"\b(?:call|contact|respond|reach out|hear (?:back )?from|get back|follow[- ]up|be in touch|reply|"
     r"hear back)\b[^.!?]{0,80}\bwithin\b|\bwithin\b[^.!?]{0,40}\b(?:will|you'?ll)\b[^.!?]{0,40}"
-    r"\b(?:call|contact|hear|reach out|be in touch)\b", re.I)
+    r"\b(?:call|contact|hear|reach out|be in touch)\b"
+    # German, French and Spanish
+    r"|(?:melden|kontaktieren|antworten|r[üu]ckmeldung|zur[üu]ckrufen|setzen uns)[^.!?]{0,80}\binnerhalb\b"
+    r"|\binnerhalb\b[^.!?]{0,60}(?:melden|kontakt|antwort|r[üu]ckmeldung|zur[üu]ck)"
+    r"|\brufen\b[^.!?]{0,60}\binnerhalb\b"
+    r"|(?:recontact|contacter|contactera|r[ée]pond|rappel)[^.!?]{0,80}(?:\bsous\b|dans un d[ée]lai|dans les)"
+    r"|(?:\bsous\b|dans un d[ée]lai de|dans les)[^.!?]{0,60}(?:recontact|contact|r[ée]pon|rappel)"
+    r"|(?:contactar|contactaremos|pondremos en contacto|responder|responderemos|llamar|llamaremos)[^.!?]{0,80}"
+    r"(?:en un plazo|en menos de|en las pr[oó]ximas)"
+    r"|(?:en un plazo|en menos de|en las pr[oó]ximas)[^.!?]{0,60}(?:contact|respond|llam)", re.I)
+
+# "Within N days" in English, German, French and Spanish: (number, unit, working days?)
+WITHIN = [
+    re.compile(r"within\s+(\w+)\s*(?:-\s*\w+\s*)?(business\s+|working\s+)?(hours?|days?|weeks?)", re.I),
+    re.compile(r"innerhalb\s+(?:von\s+)?(\w+)\s+(Werk|Arbeits)?(stunden?|tag(?:en|e)?|wochen?)", re.I),
+    re.compile(r"(?:sous|dans un d[ée]lai (?:maximum )?de|dans les)\s+(\w+)\s+()(heures?|jours?|semaines?)"
+               r"(\s+ouvr[ée]s|\s+ouvrables)?", re.I),
+    re.compile(r"en\s+(?:un plazo (?:m[aá]ximo )?de|menos de|las pr[oó]ximas)\s+(\w+)\s+()(horas?|d[ií]as?|semanas?)"
+               r"(\s+h[aá]biles|\s+laborables)?", re.I),
+]
+WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "seven": 7, "ten": 10,
+         "einem": 1, "einer": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "funf": 5, "sieben": 7, "zehn": 10,
+         "un": 1, "une": 1, "deux": 2, "trois": 3, "quatre": 4, "cinq": 5, "sept": 7, "dix": 10,
+         "uno": 1, "una": 1, "dos": 2, "tres": 3, "cuatro": 4, "cinco": 5, "siete": 7, "diez": 10}
+
+
+def within(text):
+    """The first "within N hours/days/weeks" promise in any of the four languages, as (n, unit, working)."""
+    for pattern in WITHIN:
+        m = pattern.search(text)
+        if not m:
+            continue
+        raw = m.group(1).lower()
+        n = int(raw) if raw.isdigit() else WORDS.get(raw)
+        if not n:
+            continue
+        u = m.group(3).lower()
+        unit = "hours" if u[0] in "hs" and not u.startswith("sem") else "weeks" if u[0] in "wsv" else "days"
+        working = bool(m.group(2) or (m.lastindex and m.lastindex >= 4 and m.group(4)))
+        return n, unit, working
+    return None
 
 
 def clean_promise(sentence):
@@ -221,16 +261,11 @@ def words(text):
 
 
 def stated_hours(text):
-    m = re.search(r"within\s+(\w+)\s*(?:-\s*\w+\s*)?(business\s+|working\s+)?(hours?|days?|weeks?)", text, re.I)
-    if not m:
+    w = within(text)
+    if not w:
         return ""
-    raw = m.group(1).lower()
-    n = int(raw) if raw.isdigit() else NUMBERS.get(raw)
-    if not n:
-        return ""
-    unit = m.group(3).lower()
-    hours = n if unit.startswith("hour") else n * 24 if unit.startswith("day") else n * 24 * 7
-    return str(hours)
+    n, unit, _ = w
+    return str(n if unit == "hours" else n * 24 if unit == "days" else n * 24 * 7)
 
 
 def main():

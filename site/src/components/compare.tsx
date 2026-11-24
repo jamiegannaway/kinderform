@@ -149,7 +149,11 @@ export function CompareIndex({
   rulePlaces,
   topics,
   applications,
+  formCountries,
+  ruleCountries,
 }: {
+  formCountries: string
+  ruleCountries: string
   forms: number
   formServices: number
   rules: number
@@ -162,13 +166,13 @@ export function CompareIndex({
       href: "/compare/forms",
       title: "Enquiry forms",
       figure: `${forms} forms`,
-      body: `The first form someone fills in, from ${formServices} services in the UK, the US, Canada and Australia. What each asks, what it asks beyond what a first reply needs, and any reply time it states.`,
+      body: `The first form someone fills in, from ${formServices} services in ${formCountries}. What each asks, what it asks beyond what a first reply needs, and any reply time it states.`,
     },
     {
       href: "/compare/rules",
       title: "Rules on who can foster",
       figure: `${rules} rules`,
-      body: `Published rules from ${rulePlaces} countries, states, provinces and territories, grouped into ${topics} topics such as minimum age, bedrooms, checks, training and allowances.`,
+      body: `Published rules from ${rulePlaces} countries and regions in ${ruleCountries}. They are grouped into ${topics} topics, such as minimum age, bedrooms, checks, training and allowances.`,
     },
     {
       href: "/compare/applications",
@@ -338,7 +342,17 @@ export function CompareForms({ rows }: { rows: FormRow[] }) {
 
 export type TopicSummary = TopicInfo & { rules: number; places: number; byCountry: Record<string, number> }
 
-export function CompareRulesIndex({ topics, rules, places }: { topics: TopicSummary[]; rules: number; places: number }) {
+export function CompareRulesIndex({
+  topics,
+  rules,
+  places,
+  countries,
+}: {
+  topics: TopicSummary[]
+  rules: number
+  places: number
+  countries: string
+}) {
   const groups = [...new Set(topics.map((t) => t.group))]
   return (
     <Page>
@@ -346,8 +360,7 @@ export function CompareRulesIndex({ topics, rules, places }: { topics: TopicSumm
         <Crumbs here="Rules" />
         <Intro title="Rules on who can foster, compared">
           <p className="text-xl leading-8 text-muted-foreground">
-            {rules} published rules from {places} countries, states, provinces and territories in the UK, the US,
-            Canada and Australia. Pick a topic to see every place side by side, with the source and two dates.
+            {rules} published rules from {places} countries and regions in {countries}. Pick a topic to see every place side by side, with the source and two dates.
           </p>
         </Intro>
       </div>

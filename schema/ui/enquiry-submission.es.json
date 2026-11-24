@@ -1,0 +1,324 @@
+{
+  "$comment": "Wording for the Spanish reference form, in Spanish as used in Spain (es-ES), addressing the reader as usted. Same pages, fields and options as enquiry-submission.uk.json, with the Spanish postcode in place of the UK postcode area. Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json.",
+  "locale": "es-ES",
+  "design_system": "desy",
+  "sections": [
+    "Sobre usted",
+    "Cómo contactar con usted",
+    "De qué le gustaría hablar",
+    "Revisar y enviar"
+  ],
+  "start": {
+    "title": "Pregunte por el acogimiento familiar o la adopción",
+    "body": [
+      "Use este formulario para hacer una pregunta o pedir una conversación. Se tarda unos 2 minutos.",
+      "Una persona del equipo de acogimiento familiar le responderá en 1 día laborable y le dirá su nombre.",
+      "No hace falta que sepa todavía si prefiere el acogimiento familiar o la adopción.",
+      "Por ahora no le preguntaremos por su salud, su casa, su dinero ni su familia."
+    ],
+    "button": "Empezar"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "Sobre usted",
+      "title": "¿Cómo se llama?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Nombre y apellidos",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Escriba su nombre y apellidos",
+              "maxLength": "El nombre y apellidos deben tener 100 caracteres como máximo"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "¿Cómo quiere que le llamemos? (opcional)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "Por ejemplo, un nombre más corto o el nombre que prefiera.",
+            "errors": {
+              "maxLength": "El nombre con el que quiere que le llamemos debe tener 50 caracteres como máximo"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "Sobre usted",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "¿Sobre qué quiere informarse?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Acogimiento familiar",
+              "adoption": "Adopción",
+              "not_sure": "Todavía no lo sé"
+            },
+            "optionHints": {
+              "not_sure": "No pasa nada. Podemos explicarle las dos cosas y otras formas de ayudar."
+            },
+            "errors": {
+              "required": "Elija sobre qué quiere informarse"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "Sobre usted",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "¿Pregunta por un niño o una niña de su familia o de su entorno?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "Por ejemplo, un nieto o una nieta, un sobrino o una sobrina, o el hijo o la hija de alguien cercano. Si es de su familia, se llama acogimiento en familia extensa. Le atiende otro equipo. No nos cuente aquí nada sobre el niño o la niña.",
+            "optionLabels": {
+              "true": "Sí",
+              "false": "No"
+            },
+            "errors": {
+              "required": "Indique si pregunta por un niño o una niña de su familia o de su entorno"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Cómo contactar con usted",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "¿Cómo quiere que nos pongamos en contacto con usted?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "Correo electrónico",
+              "phone_call": "Llamada de teléfono",
+              "text_message": "Mensaje de texto (SMS)"
+            },
+            "errors": {
+              "required": "Elija cómo quiere que nos pongamos en contacto con usted"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Cómo contactar con usted",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "¿Cuál es su correo electrónico?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "Solo lo usaremos para responderle.",
+            "errors": {
+              "required": "Escriba su correo electrónico",
+              "pattern": "Escriba un correo electrónico con el formato correcto, como nombre@example.org"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Cómo contactar con usted",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "¿Cuál es su número de teléfono?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "Por ejemplo, 600 000 000.",
+            "errors": {
+              "required": "Escriba su número de teléfono",
+              "pattern": "Escriba un número de teléfono con el formato correcto, como 600 000 000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Cómo contactar con usted",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "¿Cuándo le viene bien que le llamemos? (opcional)",
+          "options": {
+            "asHeading": true,
+            "hint": "Elija todas las opciones que quiera. Intentaremos llamarle en esos momentos.",
+            "optionLabels": {
+              "weekday_morning": "Mañanas entre semana",
+              "weekday_afternoon": "Tardes entre semana",
+              "weekday_evening": "A última hora de la tarde entre semana",
+              "saturday": "Sábados"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "Cómo contactar con usted",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/es_postcode",
+          "label": "¿Cuál es su código postal? (opcional)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "postal-code",
+            "inputmode": "numeric",
+            "inputWidth": 5,
+            "transform": "es_postcode",
+            "spellcheck": false,
+            "hint": "Por ejemplo, 28001. El código postal nos dice qué servicio le responde. No le pediremos su dirección.",
+            "errors": {
+              "pattern": "Escriba un código postal de España con 5 cifras, como 28001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "De qué le gustaría hablar",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "¿De qué le gustaría hablar? (opcional)",
+          "options": {
+            "asHeading": true,
+            "hint": "Elija todas las opciones que quiera. También nos lo puede contar cuando hablemos. No comparta aquí datos personales.",
+            "optionLabels": {
+              "eligibility": "Si puedo acoger o adoptar",
+              "what_it_involves": "Cómo es el día a día",
+              "money_and_support": "Ayudas económicas y apoyo",
+              "process_and_timescales": "Los pasos y cuánto tardan",
+              "types_of_care": "Los tipos de acogimiento",
+              "something_else": "Otra cosa"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "De qué le gustaría hablar",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "¿Cómo nos ha conocido? (opcional)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Por una amistad o un familiar",
+              "social_media": "Por las redes sociales",
+              "search": "Buscando en internet",
+              "event": "En una charla o un evento",
+              "advert": "Por un anuncio",
+              "council_or_agency_website": "En la web de un servicio público",
+              "other": "De otra forma"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "De qué le gustaría hablar",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "¿Quiere recibir novedades e invitaciones a eventos? (opcional)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Sí, quiero recibir novedades e invitaciones a eventos",
+            "hint": "Solo se las enviaremos si marca la casilla. Puede darse de baja cuando quiera."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Revise sus respuestas antes de enviarlas",
+    "change": "Cambiar",
+    "send_heading": "Ahora envíe su consulta",
+    "send_body": "Al enviarla, acepta que usemos estos datos para responderle.",
+    "button": "Enviar"
+  },
+  "confirmation": {
+    "title": "Consulta enviada",
+    "reference": "Su número de referencia",
+    "next_heading": "Qué pasa ahora",
+    "team": "nuestro equipo de acogimiento familiar",
+    "kinship_team": "nuestro equipo de acogimiento en familia extensa",
+    "day_word": "día laborable",
+    "example_label": "Ejemplo de primera respuesta (no enviada)",
+    "builders_heading": "Para quienes crean formularios de consulta",
+    "builders_body": "Estos son los datos que recibiría el servicio. Antes de mostrar esta página, el formulario los comprobó con el esquema publicado.",
+    "restart": "Volver a empezar"
+  },
+  "progress": {
+    "question": "Pregunta",
+    "of": "de",
+    "back": "Volver",
+    "continue": "Continuar",
+    "error_title": "Hay un problema",
+    "error_prefix": "Error:"
+  },
+  "demo_notice": "Este formulario es un ejemplo. No escriba datos reales. No se envía ni se guarda nada de lo que escriba."
+}

@@ -15,7 +15,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CENSUS = ROOT / "census"
 # Front doors can come from any country's register.
 REGISTERS = [ROOT / "register" / "front-doors.csv", ROOT / "register" / "us" / "front-doors.csv",
-             ROOT / "register" / "ca" / "front-doors.csv", ROOT / "register" / "au" / "front-doors.csv"]
+             ROOT / "register" / "ca" / "front-doors.csv", ROOT / "register" / "au" / "front-doors.csv",
+             ROOT / "register" / "de" / "front-doors.csv", ROOT / "register" / "fr" / "front-doors.csv",
+             ROOT / "register" / "es" / "front-doors.csv"]
 
 COLUMNS = {
     "forms.csv": ["form_id", "front_door_id", "name", "operator_type", "service_type", "country", "region", "form_stage",
@@ -36,9 +38,9 @@ ALLOWED = {
                                      "national_brand_council", "regional_service", "regional_adoption_agency",
                                      "voluntary_adoption_agency", "independent_fostering_agency", "platform_vendor",
                                      "state_agency", "county_agency", "private_agency", "child_welfare_agency",
-                                     "indigenous_agency"},
+                                     "indigenous_agency", "local_authority", "voluntary_agency"},
     ("forms.csv", "service_type"): {"fostering", "adoption", "fostering_and_adoption"},
-    ("forms.csv", "country"): {"UK", "US", "CA", "AU"},
+    ("forms.csv", "country"): {"UK", "US", "CA", "AU", "DE", "FR", "ES"},
     ("forms.csv", "form_stage"): {"primary", "secondary"},
     ("forms.csv", "access_route"): {"online_form", "downloadable_form", "phone_conversation", "sent_after_first_contact",
                                     "email_only", "signposting_only", "described_not_public", "council_portal"},
@@ -125,7 +127,7 @@ for r in guidance:
         err(f"guidance.csv {r['guidance_id']}: unknown form_id {r['form_id']}")
 
 # Region must fit the country: a UK nation, a US state or DC, a Canadian province or territory,
-# or an Australian state or territory
+# an Australian state or territory, a German Land, a French region or a Spanish autonomous community
 UK_REGIONS = {"England", "Wales", "Scotland", "Northern Ireland", "UK"}
 US_REGIONS = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
               "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
@@ -139,7 +141,12 @@ CA_REGIONS = {"Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "S
               "Nunavut", "Canada"}
 AU_REGIONS = {"New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania",
               "Australian Capital Territory", "Northern Territory", "Australia"}
-REGIONS = {"UK": UK_REGIONS, "US": US_REGIONS, "CA": CA_REGIONS, "AU": AU_REGIONS}
+# Germany, France and Spain use the same region names as their front-door registers.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from validate_world_register import COUNTRIES as WORLD  # noqa: E402
+
+REGIONS = {"UK": UK_REGIONS, "US": US_REGIONS, "CA": CA_REGIONS, "AU": AU_REGIONS,
+           "DE": set(WORLD["de"]), "FR": set(WORLD["fr"]), "ES": set(WORLD["es"])}
 for r in forms:
     allowed = REGIONS.get(r["country"], set())
     if r["region"] not in allowed:

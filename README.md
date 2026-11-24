@@ -38,6 +38,10 @@ OUCM was started by Jamie Gannaway, co-founder of Deployed, a company that build
 
 - Code: [MIT](LICENSE)
 - Schema, register, rubric, evidence notes and documentation: [CC BY 4.0](LICENSE-CONTENT.md)
+- Exceptions:
+  - The example form styles ported from KERN UX (`site/src/styles/kern.scss`) and DESY (`site/src/styles/desy.scss`) stay under the [EUPL-1.2](LICENSE-EUPL-1.2.txt), as their sources are.
+  - The self-hosted fonts in `site/public/fonts/` keep their own licences, which sit beside them.
+  - The illustrations in `site/public/illustrations/` are used under a paid licence and are not open (see the `LICENCE.md` there).
 
 ## Contributing
 

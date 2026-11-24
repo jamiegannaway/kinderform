@@ -5,6 +5,9 @@ export const FORM_COUNTRIES = [
   { code: "us", name: "United States", system: "U.S. Web Design System", short: "USWDS" },
   { code: "ca", name: "Canada", system: "GC Design System", short: "GC Design System" },
   { code: "au", name: "Australia", system: "Australian Government Design System", short: "AGDS" },
+  { code: "de", name: "Germany", system: "KERN UX-Standard", short: "KERN UX" },
+  { code: "fr", name: "France", system: "Cunningham design system", short: "Cunningham" },
+  { code: "es", name: "Spain", system: "DESY design system (Aragon)", short: "DESY" },
 ] as const
 export type FormCountry = (typeof FORM_COUNTRIES)[number]["code"]
 

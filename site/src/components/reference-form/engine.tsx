@@ -28,7 +28,14 @@ export type Control = {
     inputmode?: string
     spellcheck?: boolean
     inputWidth?: number
-    transform?: "postcode_area" | "zip_prefix" | "postal_code_fsa" | "au_postcode"
+    transform?:
+      | "postcode_area"
+      | "zip_prefix"
+      | "postal_code_fsa"
+      | "au_postcode"
+      | "de_postcode"
+      | "fr_postcode"
+      | "es_postcode"
   }
 }
 export type Page = {
@@ -40,7 +47,7 @@ export type Page = {
 }
 export type UiConfig = {
   locale: string
-  design_system: "govuk" | "uswds" | "gcds" | "agds"
+  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy"
   sections: string[]
   start: { title: string; body: string[]; button: string }
   pages: Page[]
@@ -94,8 +101,18 @@ export type Theme = {
 
 // ---- Shared state for renderers -----------------------------------------------
 
-type PageCtx = { errors: Errors; headingField: string | null; onBlurField: (field: string) => void }
-export const PageContext = createContext<PageCtx>({ errors: {}, headingField: null, onBlurField: () => {} })
+type PageCtx = {
+  errors: Errors
+  headingField: string | null
+  onBlurField: (field: string, value?: string) => void
+  onValue: (field: string, value: unknown) => void
+}
+export const PageContext = createContext<PageCtx>({
+  errors: {},
+  headingField: null,
+  onBlurField: () => {},
+  onValue: () => {},
+})
 export const usePage = () => useContext(PageContext)
 
 export const fieldOf = (scope: string) => scope.split("/").pop() as string
@@ -152,10 +169,13 @@ export function transform(kind: string | undefined, value: string): string {
     return up.length === 6 ? up.slice(0, 3) : up
   }
   if (kind === "au_postcode") return v.replace(/\s+/g, "")
+  // German, French and Spanish postcodes: five digits. Drop spaces and an old country prefix ("D-10115").
+  if (kind === "de_postcode" || kind === "fr_postcode" || kind === "es_postcode")
+    return v.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "")
   return v
 }
 
-function errorsFor(page: Page, data: Data): Errors {
+function errorsFor(page: Page, data: Data, locale: string): Errors {
   const fields = new Set(page.elements.map((e) => fieldOf(e.scope)))
   const controls = Object.fromEntries(page.elements.map((e) => [fieldOf(e.scope), e]))
   const out: Errors = {}
@@ -165,7 +185,7 @@ function errorsFor(page: Page, data: Data): Errors {
       e.keyword === "required" ? (e.params as { missingProperty: string }).missingProperty : e.instancePath.split("/")[1]
     if (!field || !fields.has(field) || out[field]) continue
     if (["if", "not", "additionalProperties"].includes(e.keyword)) continue
-    out[field] = controls[field].options?.errors?.[e.keyword] ?? "Check this answer"
+    out[field] = controls[field].options?.errors?.[e.keyword] ?? phrases(locale).check
   }
   return out
 }
@@ -186,9 +206,9 @@ function reference(): string {
 
 export function displayValue(c: Control, value: unknown, locale: string): string {
   const labels = c.options?.optionLabels ?? {}
-  const fr = isFrench(locale)
-  if (value === undefined || value === "" || (Array.isArray(value) && !value.length)) return fr ? "Non fourni" : "Not given"
-  if (c.options?.format === "checkbox") return value ? (fr ? "Oui" : "Yes") : fr ? "Non" : "No"
+  const t = phrases(locale)
+  if (value === undefined || value === "" || (Array.isArray(value) && !value.length)) return t.notGiven
+  if (c.options?.format === "checkbox") return value ? t.yes : t.no
   if (Array.isArray(value)) return value.map((v) => labels[String(v)] ?? String(v)).join(", ")
   return labels[String(value)] ?? String(value)
 }
@@ -202,6 +222,18 @@ export { JsonFormsDispatch } from "@jsonforms/react"
 
 export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
   const [data, setData] = useState<Data>({})
+  // The latest answers, updated the moment the form library reports a change. Handlers read this,
+  // not the last rendered copy: a change reported just before Continue or a blur has not been
+  // rendered yet, and saving the rendered copy would overwrite it.
+  const latest = useRef<Data>({})
+  const put = (d: Data) => {
+    latest.current = d
+    setData(d)
+  }
+  // Each field reports its new value here as it is set, before the form library passes it on.
+  const onValue = (field: string, value: unknown) => {
+    latest.current = { ...latest.current, [field]: value }
+  }
   const [step, setStep] = useState<Step>({ kind: "start" })
   const [errors, setErrors] = useState<Errors>({})
   const [returnToCheck, setReturnToCheck] = useState(false)
@@ -232,7 +264,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
           : step.kind === "done"
             ? ui.confirmation.title
             : base
-    document.title = `${hasErrors ? ui.progress.error_prefix + " " : ""}${label} | ${isFrench(ui.locale) ? "Exemple Kinderform" : "Kinderform example"}`
+    document.title = `${hasErrors ? ui.progress.error_prefix + " " : ""}${label} | ${phrases(ui.locale).example}`
   }, [step, errors])
 
   const go = (s: Step) => {
@@ -240,29 +272,30 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
     setStep(s)
   }
 
-  // Tidy a postcode as the person leaves the field. Read the latest data (a functional update):
-  // the typed value can reach state a moment after the blur, and must not be lost.
-  const onBlurField = (field: string) => {
+  // Tidy a postcode as the person leaves the field. Use the value the field holds at that moment:
+  // the form library reports a change a moment after the event, so state may still hold the old
+  // value. Without one, fall back to the latest answers.
+  const onBlurField = (field: string, value?: string) => {
     const c = page?.elements.find((e) => fieldOf(e.scope) === field)
     const kind = c?.options?.transform
     if (!kind) return
-    setData((d) =>
-      typeof d[field] === "string" ? { ...d, [field]: transform(kind, d[field] as string) || undefined } : d,
-    )
+    const d = latest.current
+    const current = typeof value === "string" ? value : d[field]
+    if (typeof current === "string") put({ ...d, [field]: transform(kind, current) || undefined })
   }
 
   const onContinue = (ev: React.FormEvent) => {
     ev.preventDefault()
     if (!page || step.kind !== "page") return
     // Apply any tidy-up (postcode, ZIP) before checking.
-    const next = { ...data }
+    const next = { ...latest.current }
     for (const c of page.elements) {
       const f = fieldOf(c.scope)
       if (c.options?.transform && typeof next[f] === "string") next[f] = transform(c.options.transform, next[f] as string) || undefined
       if (next[f] === "") delete next[f]
     }
-    const errs = errorsFor(page, clean(next, ui.pages))
-    setData(next)
+    const errs = errorsFor(page, clean(next, ui.pages), ui.locale)
+    put(next)
     if (Object.keys(errs).length) {
       setErrors(errs)
       return
@@ -293,7 +326,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
     const record = clean(data, ui.pages)
     if (!validate(record)) {
       // Should not happen: every page was checked. Send the person to the first problem.
-      const bad = visible.findIndex((p) => Object.keys(errorsFor(p, record)).length)
+      const bad = visible.findIndex((p) => Object.keys(errorsFor(p, record, ui.locale)).length)
       go({ kind: "page", index: Math.max(0, bad) })
       return
     }
@@ -327,7 +360,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
             <form noValidate onSubmit={onContinue}>
               {page.title && <T.PageHeading text={page.title} headingRef={headingRef} />}
               <PageContext.Provider
-                value={{ errors, headingField: page.title ? null : fieldOf(page.elements[0].scope), onBlurField }}
+                value={{ errors, headingField: page.title ? null : fieldOf(page.elements[0].scope), onBlurField, onValue }}
               >
                 <HeadingRefContext.Provider value={page.title ? null : headingRef}>
                   <JsonForms
@@ -337,7 +370,9 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                     renderers={T.renderers}
                     cells={[]}
                     validationMode="NoValidation"
-                    onChange={({ data: d }) => setData(d as Data)}
+                    // Every field reports to onValue as it is set, so latest is always the newest copy.
+                    // The library's own copy can lag a change behind, so it is not saved back.
+                    onChange={() => put(latest.current)}
                   />
                 </HeadingRefContext.Provider>
               </PageContext.Provider>
@@ -360,7 +395,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                 rows={visible.flatMap((p, pageIndex) =>
                   p.elements.map((c) => ({
                     key: fieldOf(c.scope),
-                    label: c.label.replace(/\s*\((optional|facultatif)\)$/, ""),
+                    label: c.label.replace(/\s*\((optional|facultatif|opcional)\)$/i, ""),
                     value: displayValue(c, data[fieldOf(c.scope)], ui.locale),
                     pageIndex,
                   })),
@@ -380,7 +415,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
             step={step}
             headingRef={headingRef}
             onRestart={() => {
-              setData({})
+              put({})
               setReturnToCheck(false)
               go({ kind: "start" })
             }}
@@ -402,27 +437,56 @@ export function formatDay(d: Date, locale: string) {
 // The Canadian form also comes in French (fr-CA): the few phrases that live in code follow it.
 export const isFrench = (locale: string) => locale.toLowerCase().startsWith("fr")
 
+// The few phrases that live in code, by language. Everything else is in the wording files.
+const PHRASES = {
+  en: { check: "Check this answer", notGiven: "Not given", yes: "Yes", no: "No", example: "Kinderform example" },
+  fr: { check: "Vérifiez cette réponse", notGiven: "Non fourni", yes: "Oui", no: "Non", example: "Exemple Kinderform" },
+  de: { check: "Bitte prüfen Sie diese Angabe", notGiven: "Nicht angegeben", yes: "Ja", no: "Nein", example: "Kinderform-Beispiel" },
+  es: { check: "Revise esta respuesta", notGiven: "No indicado", yes: "Sí", no: "No", example: "Ejemplo de Kinderform" },
+}
+export const phrases = (locale: string) =>
+  PHRASES[locale.slice(0, 2).toLowerCase() as keyof typeof PHRASES] ?? PHRASES.en
+
 export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
   const name = (record.preferred_name as string) || (record.full_name as string)
   const day = formatDay(due, ui.locale)
-  if (isFrench(ui.locale)) {
-    const how =
-      record.contact_method === "email"
-        ? "vous écrire par courriel"
-        : record.contact_method === "text_message"
-          ? "vous envoyer un message texte"
-          : "vous appeler"
+  const times = record.best_times && (record.best_times as string[]).length
+  const by = record.contact_method
+  // Made-up staff names for the example reply, one for each country version.
+  const locale = ui.locale
+  if (locale === "fr-FR") {
+    const how = by === "email" ? "vous écrire par e-mail" : by === "text_message" ? "vous envoyer un SMS" : "vous appeler"
+    if (record.knows_child)
+      return `Bonjour ${name}, merci de nous avoir contactés. Comme votre demande concerne un enfant que vous connaissez déjà, nous l'avons transmise à Sam, de ${ui.confirmation.kinship_team}. Sam va ${how} d'ici la fin de la journée du ${day}. Aucune de vos questions ne sera retenue contre vous.`
+    return `Bonjour ${name}, merci de nous avoir contactés. Je m'appelle Camille et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times ? ", à l'un des moments que vous avez choisis" : ""}. Il n'y a pas de mauvaises questions, et aucune de vos questions ne sera retenue contre vous.`
+  }
+  if (isFrench(locale)) {
+    const how = by === "email" ? "vous écrire par courriel" : by === "text_message" ? "vous envoyer un message texte" : "vous appeler"
     if (record.knows_child)
       return `Bonjour ${name}, merci d'avoir communiqué avec nous. Comme votre demande concerne un enfant que vous connaissez déjà, nous l'avons transmise à Sam, de ${ui.confirmation.kinship_team}. Sam va ${how} d'ici la fin de la journée du ${day}. Aucune de vos questions ne sera retenue contre vous.`
-    const times = record.best_times && (record.best_times as string[]).length ? ", à l'un des moments que vous avez choisis" : ""
-    return `Bonjour ${name}, merci d'avoir communiqué avec nous. Je m'appelle Chantal et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times}. Il n'y a pas de mauvaises questions, et aucune de vos questions ne sera retenue contre vous.`
+    return `Bonjour ${name}, merci d'avoir communiqué avec nous. Je m'appelle Chantal et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times ? ", à l'un des moments que vous avez choisis" : ""}. Il n'y a pas de mauvaises questions, et aucune de vos questions ne sera retenue contre vous.`
   }
-  // Made-up staff names for the example reply, one for each country version.
+  if (locale.startsWith("de")) {
+    const how = by === "email" ? "Ihnen eine E-Mail schreiben" : by === "text_message" ? "Ihnen eine SMS schicken" : "Sie anrufen"
+    if (record.knows_child)
+      return `Hallo ${name}, vielen Dank für Ihre Nachricht. Weil Sie nach einem Kind fragen, das Sie schon kennen, haben wir Ihre Nachricht an Sam von ${ui.confirmation.kinship_team} weitergegeben. Sam wird ${how}, spätestens am ${day}. Keine Ihrer Fragen wird gegen Sie verwendet.`
+    return `Hallo ${name}, vielen Dank für Ihre Nachricht. Ich bin Lena von ${ui.confirmation.team}. Ich werde ${how}, spätestens am ${day}${times ? ", zu einer der Zeiten, die Sie gewählt haben" : ""}. Es gibt keine falschen Fragen, und keine Ihrer Fragen wird gegen Sie verwendet.`
+  }
+  if (locale.startsWith("es")) {
+    // "I will" for the named worker, "Sam will" for the kinship team.
+    const [me, sam] =
+      by === "email"
+        ? ["le escribiré un correo electrónico", "le escribirá un correo electrónico"]
+        : by === "text_message"
+          ? ["le enviaré un SMS", "le enviará un SMS"]
+          : ["le llamaré", "le llamará"]
+    if (record.knows_child)
+      return `Hola, ${name}. Gracias por ponerse en contacto. Como pregunta por un niño o una niña que ya conoce, hemos pasado su mensaje a Sam, de ${ui.confirmation.kinship_team}. Sam ${sam} antes del final del ${day}. Ninguna de sus preguntas contará en su contra.`
+    return `Hola, ${name}. Gracias por ponerse en contacto. Soy Lucía, de ${ui.confirmation.team}, y ${me} antes del final del ${day}${times ? ", en uno de los momentos que ha elegido" : ""}. No hay preguntas equivocadas, y ninguna de sus preguntas contará en su contra.`
+  }
   const sender: Record<string, string> = { "en-US": "Maria", "en-CA": "Chantal", "en-AU": "Mia" }
-  const how =
-    record.contact_method === "email" ? "email you" : record.contact_method === "text_message" ? "text you" : "call you"
+  const how = by === "email" ? "email you" : by === "text_message" ? "text you" : "call you"
   if (record.knows_child)
     return `Hi ${name}, thank you for getting in touch. Because you're asking about a child you already know, we've passed your message to Sam in ${ui.confirmation.kinship_team}. Sam will ${how} by the end of ${day}. Nothing you ask counts against you.`
-  const times = record.best_times && (record.best_times as string[]).length ? ", at one of the times you chose" : ""
-  return `Hi ${name}, thank you for getting in touch. I'm ${sender[ui.locale] ?? "Priya"} from ${ui.confirmation.team}. I'll ${how} by the end of ${day}${times}. There are no wrong questions, and nothing you ask counts against you.`
+  return `Hi ${name}, thank you for getting in touch. I'm ${sender[locale] ?? "Priya"} from ${ui.confirmation.team}. I'll ${how} by the end of ${day}${times ? ", at one of the times you chose" : ""}. There are no wrong questions, and nothing you ask counts against you.`
 }

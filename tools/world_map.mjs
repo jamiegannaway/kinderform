@@ -1,5 +1,5 @@
 // Builds site/src/lib/world-map.ts: a small world map for the example form page, with the
-// four countries that have an example form drawn as separate shapes.
+// countries that have an example form drawn as separate shapes.
 //
 // Map data: Natural Earth 1:110m countries (public domain), via the world-atlas package.
 // Run once when the map needs to change, from an empty folder:
@@ -16,12 +16,18 @@ const world = require("world-atlas/countries-110m.json")
 const out = process.argv[2]
 if (!out) throw new Error("Give the output path, for example site/src/lib/world-map.ts")
 
-// ISO 3166 numeric codes, and a point inside each country for its label (lon, lat).
+// ISO 3166 numeric codes, and a point for each country's label (lon, lat).
+// Large countries carry their label in the middle. The European countries are too small for
+// that: their labels sit out at sea ("callout"), joined to a point inside the country ("target")
+// by a thin line. "align" says which side of the label touches the callout point.
 const COUNTRIES = [
-  { code: "uk", id: "826", name: "United Kingdom", label: [-2.5, 54] },
+  { code: "uk", id: "826", name: "United Kingdom", label: [-14, 61], target: [-2, 54], align: "right" },
   { code: "us", id: "840", name: "United States", label: [-99, 37.5] },
   { code: "ca", id: "124", name: "Canada", label: [-106, 61] },
   { code: "au", id: "036", name: "Australia", label: [134, -25.5] },
+  { code: "de", id: "276", name: "Germany", label: [18, 56.5], target: [10.4, 51.2], align: "left" },
+  { code: "fr", id: "250", name: "France", label: [-14, 48.5], target: [2.4, 46.8], align: "right" },
+  { code: "es", id: "724", name: "Spain", label: [-14, 36], target: [-3.7, 40.2], align: "right" },
 ]
 
 const all = topojson.feature(world, world.objects.countries).features.filter((f) => f.id !== "010") // no Antarctica
@@ -43,10 +49,16 @@ const pct = (v, of) => Math.round((1000 * v) / of) / 10
 const countries = COUNTRIES.map((c) => {
   const feature = all.find((f) => f.id === c.id)
   const [x, y] = projection(c.label)
+  const line = c.target
+    ? [x, y - top, ...((([tx, ty]) => [tx, ty - top])(projection(c.target)))].map((v) => +v.toFixed(1))
+    : null
   return {
     code: c.code,
     name: c.name,
     d: shift(path(feature)),
+    align: c.align ?? "center",
+    // From the label's edge to a point inside the country, in map units.
+    line,
     // Where the label sits, as a share of the map's width and height.
     x: pct(x, width),
     y: pct(y - top, height),

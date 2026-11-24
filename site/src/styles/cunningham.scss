@@ -1,0 +1,1011 @@
+// Cunningham design system for the French reference form only.
+//
+// Ported by hand from these MIT-licensed packages:
+//   @gouvfr-lasuite/cunningham-tokens 3.1.0  (tokens, written as CSS custom properties)
+//   @gouvfr-lasuite/cunningham-react  4.4.0  (dist/style.css: the component rules)
+// Cunningham was made by France Université Numérique and is now maintained by La Suite numérique
+// at DINUM (https://github.com/suitenumerique/cunningham). Its licence:
+//
+//   MIT License
+//
+//   Copyright (c) 2022 France Université Numérique
+//
+//   Permission is hereby granted, free of charge, to any person obtaining a copy
+//   of this software and associated documentation files (the "Software"), to deal
+//   in the Software without restriction, including without limitation the rights
+//   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//   copies of the Software, and to permit persons to whom the Software is
+//   furnished to do so, subject to the following conditions:
+//
+//   The above copyright notice and this permission notice shall be included in all
+//   copies or substantial portions of the Software.
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//   SOFTWARE.
+//
+// Why a port: cunningham-react's stylesheet sets rules on :root, html and body and ships
+// hundreds of global utility classes, which would leak into the rest of the site (Tailwind and
+// shadcn/ui). Here everything, tokens included, sits under .cunningham-form. The rules are
+// unlayered, so Tailwind's preflight (in @layer base) cannot undo them.
+//
+// Not the French State design system (DSFR): no DSFR code, CSS, tokens, icons or Marianne font,
+// no blue-white-red palette and no "République française" block. Kinderform is not a government
+// service. Cunningham's own default theme is used, with its own blue (#1167d4).
+//
+// Components ported: Button (brand primary, secondary, tertiary; medium and small; with icon),
+// Alert (info, success, warning, error, neutral; with additional content), Field (footer text,
+// error state), Input (classic variant: label above the box), Radio, RadioGroup, Checkbox,
+// CheckboxGroup and the offscreen helper. Cunningham has no error summary, summary list, details
+// or headings component: those are built from its tokens, in the "Form layout" section.
+//
+// Font: Roboto Flex (SIL Open Font License 1.1), the weight axis only, Latin and Latin Extended,
+// self-hosted from @fontsource-variable/roboto-flex 5.3.0 in site/public/fonts/cunningham/
+// with its licence (OFL.txt). Icons are inline SVG paths in cunningham.tsx, not the Material
+// Icons font.
+
+// ---- Font ---------------------------------------------------------------------
+// The family name Cunningham's tokens ask for. These two rules only define the font; they style
+// nothing on the page.
+@font-face {
+  font-family: "Roboto Flex Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url("/fonts/cunningham/roboto-flex-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Roboto Flex Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url("/fonts/cunningham/roboto-flex-latin-ext-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+// Cunningham's sm breakpoint (--c--globals--breakpoints--sm).
+$sm: 576px;
+$mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+.cunningham-form {
+  // ---- Tokens -----------------------------------------------------------------
+  // Only the tokens the form uses, with the names and values of the default (light) theme.
+  // Globals and contextuals come from cunningham-tokens 3.1.0 (dist/cunningham-tokens.css),
+  // component tokens from cunningham-react 4.4.0 (dist/style.css).
+  // globals
+  --c--globals--colors--brand-050: #eaf1fb;
+  --c--globals--colors--brand-100: #d5e4f7;
+  --c--globals--colors--brand-150: #c0d6f4;
+  --c--globals--colors--brand-550: #1167d4;
+  --c--globals--colors--brand-600: #0659c5;
+  --c--globals--colors--brand-650: #1a509f;
+  --c--globals--colors--brand-700: #20467f;
+  --c--globals--colors--gray-000: #ffffff;
+  --c--globals--colors--gray-050: #f0f1f2;
+  --c--globals--colors--gray-100: #e1e2e5;
+  --c--globals--colors--gray-150: #d2d4d8;
+  --c--globals--colors--gray-550: #686b6f;
+  --c--globals--colors--gray-600: #5c5f63;
+  --c--globals--colors--gray-850: #252627;
+  --c--globals--colors--info-050: #eaf1fb;
+  --c--globals--colors--info-150: #c0d6f4;
+  --c--globals--colors--info-600: #0659c5;
+  --c--globals--colors--info-700: #20467f;
+  --c--globals--colors--success-050: #e4f7d4;
+  --c--globals--colors--success-150: #aae579;
+  --c--globals--colors--success-600: #3a6a14;
+  --c--globals--colors--success-700: #344d24;
+  --c--globals--colors--warning-050: #fff1bd;
+  --c--globals--colors--warning-150: #ffcf25;
+  --c--globals--colors--warning-600: #745b03;
+  --c--globals--colors--warning-700: #524620;
+  --c--globals--colors--error-050: #fceded;
+  --c--globals--colors--error-150: #f7c9c9;
+  --c--globals--colors--error-550: #d80000;
+  --c--globals--colors--error-600: #c00101;
+  --c--globals--colors--error-700: #802820;
+  --c--globals--colors--black-050: #1b1c1d0d;
+  --c--globals--colors--white-950: #f7f8f8f2;
+  --c--globals--transitions--ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --c--globals--transitions--duration: 250ms;
+  --c--globals--font--sizes--sm: 0.875rem;
+  --c--globals--font--sizes--md: 1rem;
+  --c--globals--font--sizes--lg: 1.125rem;
+  --c--globals--font--sizes--s: 0.75rem;
+  --c--globals--font--sizes--h2: 1.75rem;
+  --c--globals--font--sizes--h3: 1.5rem;
+  --c--globals--font--sizes--h4: 1.375rem;
+  --c--globals--font--sizes--h5: 1.25rem;
+  --c--globals--font--weights--regular: 400;
+  --c--globals--font--weights--medium: 500;
+  --c--globals--font--weights--bold: 600;
+  --c--globals--font--families--base: "Roboto Flex Variable", sans-serif;
+  --c--globals--spacings--s: 1rem;
+  --c--globals--spacings--t: 0.5rem;
+  --c--globals--spacings--xxxs: 0.25rem;
+  --c--globals--spacings--xs: 0.5rem;
+  --c--globals--spacings--sm: 0.75rem;
+  --c--globals--spacings--base: 1rem;
+  --c--globals--spacings--md: 1.5rem;
+  --c--globals--spacings--lg: 2rem;
+  // contextuals
+  --c--contextuals--background--surface--primary: var(--c--globals--colors--gray-000);
+  --c--contextuals--background--surface--secondary: var(--c--globals--colors--gray-000);
+  --c--contextuals--background--semantic--contextual--primary: var(--c--globals--colors--black-050);
+  --c--contextuals--background--semantic--brand--primary: var(--c--globals--colors--brand-550);
+  --c--contextuals--background--semantic--brand--primary-hover: var(--c--globals--colors--brand-650);
+  --c--contextuals--background--semantic--brand--secondary: var(--c--globals--colors--brand-100);
+  --c--contextuals--background--semantic--brand--secondary-hover: var(--c--globals--colors--brand-150);
+  --c--contextuals--background--semantic--neutral--tertiary: var(--c--globals--colors--gray-050);
+  --c--contextuals--background--semantic--info--tertiary: var(--c--globals--colors--info-050);
+  --c--contextuals--background--semantic--success--tertiary: var(--c--globals--colors--success-050);
+  --c--contextuals--background--semantic--warning--tertiary: var(--c--globals--colors--warning-050);
+  --c--contextuals--background--semantic--error--tertiary: var(--c--globals--colors--error-050);
+  --c--contextuals--content--semantic--contextual--primary: var(--c--globals--colors--white-950);
+  --c--contextuals--content--semantic--brand--primary: var(--c--globals--colors--brand-700);
+  --c--contextuals--content--semantic--brand--secondary: var(--c--globals--colors--brand-600);
+  --c--contextuals--content--semantic--brand--tertiary: var(--c--globals--colors--brand-550);
+  --c--contextuals--content--semantic--brand--on-brand: var(--c--globals--colors--brand-050);
+  --c--contextuals--content--semantic--neutral--primary: var(--c--globals--colors--gray-850);
+  --c--contextuals--content--semantic--neutral--secondary: var(--c--globals--colors--gray-600);
+  --c--contextuals--content--semantic--neutral--tertiary: var(--c--globals--colors--gray-550);
+  --c--contextuals--content--semantic--info--primary: var(--c--globals--colors--info-700);
+  --c--contextuals--content--semantic--info--secondary: var(--c--globals--colors--info-600);
+  --c--contextuals--content--semantic--success--primary: var(--c--globals--colors--success-700);
+  --c--contextuals--content--semantic--success--secondary: var(--c--globals--colors--success-600);
+  --c--contextuals--content--semantic--warning--primary: var(--c--globals--colors--warning-700);
+  --c--contextuals--content--semantic--warning--secondary: var(--c--globals--colors--warning-600);
+  --c--contextuals--content--semantic--error--primary: var(--c--globals--colors--error-700);
+  --c--contextuals--content--semantic--error--secondary: var(--c--globals--colors--error-600);
+  --c--contextuals--border--surface--primary: var(--c--globals--colors--gray-100);
+  --c--contextuals--border--semantic--brand--primary: var(--c--globals--colors--brand-550);
+  --c--contextuals--border--semantic--neutral--primary: var(--c--globals--colors--gray-550);
+  --c--contextuals--border--semantic--neutral--tertiary: var(--c--globals--colors--gray-150);
+  --c--contextuals--border--semantic--info--tertiary: var(--c--globals--colors--info-150);
+  --c--contextuals--border--semantic--success--tertiary: var(--c--globals--colors--success-150);
+  --c--contextuals--border--semantic--warning--tertiary: var(--c--globals--colors--warning-150);
+  --c--contextuals--border--semantic--error--primary: var(--c--globals--colors--error-550);
+  --c--contextuals--border--semantic--error--tertiary: var(--c--globals--colors--error-150);
+  // components
+  --c--components--forms-labelledbox--classic-label-margin-bottom: var(--c--globals--spacings--xs);
+  --c--components--forms-labelledbox--classic-label-font-size: var(--c--globals--font--sizes--sm);
+  --c--components--forms-labelledbox--classic-label-color: var(--c--contextuals--content--semantic--neutral--primary);
+  --c--components--forms-labelledbox--classic-label-font-weight: var(--c--globals--font--weights--medium);
+  --c--components--forms-labelledbox--classic-label-line-height: 1.125rem;
+  --c--components--forms-input--font-weight: var(--c--globals--font--weights--regular);
+  --c--components--forms-input--font-size: var(--c--globals--font--sizes--sm);
+  --c--components--forms-input--border-radius: 8px;
+  --c--components--forms-input--border-radius--hover: 4px;
+  --c--components--forms-input--border-radius--focus: 4px;
+  --c--components--forms-input--border-width: 1px;
+  --c--components--forms-input--border-width--hover: 1px;
+  --c--components--forms-input--border-width--focus: 1px;
+  --c--components--forms-input--border-color: var(--c--contextuals--border--semantic--neutral--tertiary);
+  --c--components--forms-input--border-color--hover: var(--c--contextuals--border--semantic--neutral--tertiary);
+  --c--components--forms-input--border-color--focus: var(--c--contextuals--border--semantic--brand--primary);
+  --c--components--forms-input--border-style: solid;
+  --c--components--forms-input--placeholder-color: var(--c--contextuals--content--semantic--neutral--tertiary);
+  --c--components--forms-input--background-color: var(--c--contextuals--background--surface--secondary);
+  --c--components--forms-input--value-color: var(--c--contextuals--content--semantic--neutral--primary);
+  --c--components--forms-field--width: 292px;
+  --c--components--forms-field--font-size: var(--c--globals--font--sizes--s);
+  --c--components--forms-field--color: var(--c--contextuals--content--semantic--neutral--secondary);
+  --c--components--forms-field--color--error: var(--c--contextuals--content--semantic--error--secondary);
+  --c--components--forms-checkbox--background-color: var(--c--contextuals--background--surface--primary);
+  --c--components--forms-checkbox--font-size: var(--c--globals--font--sizes--s);
+  --c--components--forms-checkbox--font-weight: var(--c--globals--font--weights--medium);
+  --c--components--forms-checkbox--color: var(--c--contextuals--content--semantic--neutral--primary);
+  --c--components--forms-checkbox--border-color: var(--c--contextuals--content--semantic--neutral--tertiary);
+  --c--components--forms-checkbox--border-color--hover: var(--c--contextuals--content--semantic--neutral--tertiary);
+  --c--components--forms-checkbox--border-color--focus: var(--c--contextuals--content--semantic--brand--primary);
+  --c--components--forms-checkbox--border-radius: 2px;
+  --c--components--forms-checkbox--border-width: 1.5px;
+  --c--components--forms-checkbox--border-width--hover: 1px;
+  --c--components--forms-checkbox--accent-color: var(--c--contextuals--content--semantic--brand--tertiary);
+  --c--components--forms-checkbox--checkmark-color: var(--c--contextuals--content--semantic--contextual--primary);
+  --c--components--forms-checkbox--size: 1.5rem;
+  --c--components--button--border-radius: 4px;
+  --c--components--button--border-radius--focus: 4px;
+  --c--components--button--medium-height: 48px;
+  --c--components--button--small-height: 32px;
+  --c--components--button--medium-font-size: var(--c--globals--font--sizes--md);
+  --c--components--button--medium-icon-font-size: 1.5rem;
+  --c--components--button--small-font-size: var(--c--globals--font--sizes--sm);
+  --c--components--button--small-icon-font-size: var(--c--globals--font--sizes--md);
+  --c--components--button--font-weight: var(--c--globals--font--weights--medium);
+  --c--components--button--font-family: var(--c--globals--font--families--base);
+  --c--components--alert--background-color: var(--c--contextuals--background--semantic--neutral--tertiary);
+  --c--components--alert--border-radius: 4px;
+  --c--components--alert--border-color: var(--c--contextuals--border--semantic--neutral--primary);
+  --c--components--alert--border-left-color: var(--c--contextuals--border--semantic--neutral--primary);
+  --c--components--alert--font-weight: var(--c--globals--font--weights--medium);
+  --c--components--alert--color: var(--c--contextuals--content--semantic--neutral--primary);
+  --c--components--alert--icon-size: 19px;
+  --c--components--alert--additional-font-weight: var(--c--globals--font--weights--regular);
+  --c--components--alert--additional-color: var(--c--contextuals--content--semantic--neutral--primary);
+
+  // Kinderform theme. Cunningham is themed by changing its tokens (cunningham.ts), not its
+  // component rules. Its defaults suit dense apps; this is a public form, read on phones, so a
+  // few tokens change to meet WCAG 2.2 AA and to stop phones zooming into small inputs:
+  // - text in inputs, labels and options is 1rem, and help text 0.875rem (default 0.75 to 0.875rem);
+  // - the input border is neutral primary (#686b6f, 5.3:1 on white). The default (#d2d4d8,
+  //   1.5:1) is below the 3:1 that WCAG 1.4.11 asks for the edge of a field.
+  --c--components--forms-input--font-size: var(--c--globals--font--sizes--md);
+  --c--components--forms-input--border-color: var(--c--contextuals--border--semantic--neutral--primary);
+  --c--components--forms-input--border-color--hover: var(--c--contextuals--border--semantic--neutral--primary);
+  --c--components--forms-labelledbox--classic-label-font-size: var(--c--globals--font--sizes--md);
+  --c--components--forms-labelledbox--classic-label-line-height: 1.5rem;
+  --c--components--forms-checkbox--font-size: var(--c--globals--font--sizes--md);
+  --c--components--forms-field--font-size: var(--c--globals--font--sizes--sm);
+
+  // ---- Root -------------------------------------------------------------------
+  // The form brings its own light surface, text colour and font, so it reads the same inside a
+  // page in dark mode, like the other countries' forms. It sets no padding or margin: the dialog
+  // around it does, and an unlayered padding here would override Tailwind's p-* utilities.
+  color-scheme: light;
+  box-sizing: border-box;
+  // Contains the offscreen (position: absolute) text inside the dialog's scroll area.
+  position: relative;
+  background-color: var(--c--contextuals--background--surface--primary);
+  color: var(--c--contextuals--content--semantic--neutral--primary);
+  font-family: var(--c--globals--font--families--base);
+  font-size: var(--c--globals--font--sizes--md);
+  font-weight: var(--c--globals--font--weights--regular);
+  line-height: 1.5;
+  text-align: left;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+
+  // Plain elements start from nothing, whatever the page around does to them.
+  // :where() keeps these below the component classes.
+  :where(*, *::before, *::after) {
+    box-sizing: border-box;
+  }
+  :where(h1, h2, h3, p, ul, ol, dl, dd, pre, fieldset, legend, details, summary) {
+    margin: 0;
+    padding: 0;
+  }
+  :where(fieldset) {
+    min-width: 0;
+    border: 0;
+  }
+  :where(strong, b) {
+    font-weight: var(--c--globals--font--weights--bold);
+  }
+  :where(input, button) {
+    margin: 0;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  ::selection {
+    background-color: var(--c--contextuals--background--semantic--brand--secondary);
+    color: var(--c--contextuals--content--semantic--neutral--primary);
+  }
+
+  // ---- Offscreen (c__offscreen) ----------------------------------------------------
+
+  .c__offscreen {
+    position: absolute;
+    width: 1px;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0 !important;
+  }
+
+  // ---- Alert --------------------------------------------------------------------
+
+  .c__alert {
+    padding: 0.75rem 1rem;
+    background-color: var(--c--components--alert--background-color);
+    border-radius: var(--c--components--alert--border-radius);
+    border-style: solid;
+    border-width: 1px;
+    border-left-width: 3px;
+    font-weight: var(--c--components--alert--font-weight);
+    color: var(--c--components--alert--color);
+    box-sizing: border-box;
+    border-color: var(--c--components--alert--border-color);
+    border-left-color: var(--c--components--alert--border-left-color);
+  }
+  .c__alert__icon {
+    display: flex;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    justify-content: center;
+  }
+  // Cunningham sizes its icon font with font-size; the inline SVG takes the same size.
+  .c__alert__icon .cf-icon {
+    width: var(--c--components--alert--icon-size);
+    height: var(--c--components--alert--icon-size);
+  }
+  .c__alert__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 2.25rem;
+  }
+  .c__alert__content__left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: row-reverse;
+  }
+  .c__alert:not(.c__alert--neutral) .c__alert__additional {
+    padding-left: 2rem;
+  }
+  @each $type in (info, success, warning, error) {
+    .c__alert--#{$type} {
+      background-color: color-mix(
+        in srgb,
+        var(--c--contextuals--background--semantic--#{$type}--tertiary),
+        transparent 70%
+      );
+      border-color: var(--c--contextuals--border--semantic--#{$type}--tertiary);
+      border-left-color: var(--c--contextuals--border--semantic--#{$type}--tertiary);
+      color: var(--c--contextuals--content--semantic--#{$type}--primary) !important;
+    }
+    .c__alert--#{$type} .c__alert__icon {
+      color: var(--c--contextuals--content--semantic--#{$type}--primary);
+    }
+    .c__alert--#{$type} .c__alert__additional {
+      font-weight: var(--c--components--alert--additional-font-weight);
+      color: var(--c--contextuals--content--semantic--#{$type}--secondary);
+    }
+  }
+  .c__alert--neutral .c__alert__additional {
+    font-weight: var(--c--components--alert--additional-font-weight);
+    color: var(--c--components--alert--additional-color);
+  }
+
+  // ---- Button ---------------------------------------------------------------------
+
+  .c__button {
+    align-items: center;
+    border-radius: var(--c--components--button--border-radius);
+    border: thin solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    text-decoration: none;
+    font-weight: var(--c--components--button--font-weight);
+    font-family: var(--c--components--button--font-family);
+    transition: all var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out);
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .c__button__icon {
+    display: flex;
+    align-items: center;
+  }
+  .c__button--full-width {
+    width: 100%;
+    justify-content: center;
+  }
+  .c__button--medium {
+    height: var(--c--components--button--medium-height);
+    font-size: var(--c--components--button--medium-font-size);
+    padding: 0 var(--c--globals--spacings--s);
+  }
+  .c__button--medium .c__button__icon,
+  .c__button--medium .c__button__icon * {
+    font-size: var(--c--components--button--medium-icon-font-size);
+  }
+  .c__button--small {
+    height: var(--c--components--button--small-height);
+    font-size: var(--c--components--button--small-font-size);
+    padding: 0 0.75rem;
+  }
+  .c__button--small .c__button__icon,
+  .c__button--small .c__button__icon * {
+    font-size: var(--c--components--button--small-icon-font-size);
+  }
+  .c__button--with-icon--left,
+  .c__button--with-icon--right {
+    gap: var(--c--globals--spacings--xxxs);
+  }
+  .c__button--with-icon--left {
+    padding: 0 var(--c--globals--spacings--s) 0 var(--c--globals--spacings--t);
+  }
+  .c__button--with-icon--right {
+    padding: 0 var(--c--globals--spacings--t) 0 var(--c--globals--spacings--s);
+  }
+  .c__button--brand {
+    white-space: nowrap;
+  }
+  .c__button--brand:hover,
+  .c__button--brand:focus-visible {
+    border-radius: var(--c--components--button--border-radius--focus);
+  }
+  .c__button--brand--primary {
+    background-color: var(--c--contextuals--background--semantic--brand--primary);
+    color: var(--c--contextuals--content--semantic--brand--on-brand);
+  }
+  .c__button--brand--primary:focus-visible {
+    box-shadow:
+      0 0 0 1px #fff,
+      0 0 0 4px var(--c--contextuals--border--semantic--brand--primary);
+  }
+  .c__button--brand--primary:hover,
+  .c__button--brand--primary:focus-visible {
+    background-color: var(--c--contextuals--background--semantic--brand--primary-hover);
+  }
+  .c__button--brand--secondary {
+    background-color: var(--c--contextuals--background--semantic--brand--secondary);
+    color: var(--c--contextuals--content--semantic--brand--secondary);
+  }
+  .c__button--brand--secondary:focus-visible {
+    box-shadow:
+      0 0 0 1px #fff,
+      0 0 0 4px var(--c--contextuals--border--semantic--brand--primary);
+  }
+  .c__button--brand--secondary:hover,
+  .c__button--brand--secondary:focus-visible {
+    background-color: var(--c--contextuals--background--semantic--brand--secondary-hover);
+  }
+  .c__button--brand--tertiary {
+    background-color: transparent;
+    color: var(--c--contextuals--content--semantic--brand--tertiary);
+  }
+  .c__button--brand--tertiary:focus-visible {
+    box-shadow:
+      0 0 0 1px #fff,
+      0 0 0 4px var(--c--contextuals--border--semantic--brand--primary);
+  }
+  .c__button--brand--tertiary:hover,
+  .c__button--brand--tertiary:focus-visible {
+    background-color: var(--c--contextuals--background--semantic--contextual--primary);
+  }
+
+  // ---- Field ----------------------------------------------------------------------
+
+  .c__field {
+    display: inline-flex;
+    flex-direction: column;
+    width: var(--c--components--forms-field--width);
+    color: var(--c--components--forms-field--color);
+    box-sizing: border-box;
+    min-width: 0;
+  }
+  .c__field__footer {
+    font-size: var(--c--components--forms-field--font-size);
+    padding: 0.25rem calc(1rem + 2px) 0 calc(1rem + 2px);
+  }
+  .c__field__text {
+    word-break: break-word;
+  }
+  .c__field--error,
+  .c__field--error label {
+    color: var(--c--components--forms-field--color--error);
+  }
+  .c__field--full-width {
+    width: 100%;
+  }
+  .c__field--compact {
+    align-items: flex-start;
+    width: auto;
+  }
+
+  // ---- Input (classic variant) --------------------------------------------------------
+
+  .c__input__label {
+    display: block;
+    font-size: var(--c--components--forms-labelledbox--classic-label-font-size);
+    font-weight: var(--c--components--forms-labelledbox--classic-label-font-weight);
+    font-family: var(--c--globals--font--families--base);
+    font-style: normal;
+    line-height: var(--c--components--forms-labelledbox--classic-label-line-height);
+    color: var(--c--components--forms-labelledbox--classic-label-color);
+    margin-bottom: var(--c--components--forms-labelledbox--classic-label-margin-bottom);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .c__input__wrapper {
+    border-radius: var(--c--components--forms-input--border-radius);
+    border-width: var(--c--components--forms-input--border-width);
+    border-color: var(--c--components--forms-input--border-color);
+    border-style: var(--c--components--forms-input--border-style);
+    background-color: var(--c--components--forms-input--background-color);
+    display: flex;
+    transition:
+      border var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out),
+      border-radius var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out),
+      box-shadow var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out);
+    padding: 0 0.5rem;
+    gap: 1rem;
+    cursor: text;
+    box-sizing: border-box;
+    height: 3.5rem;
+  }
+  .c__input__wrapper .c__input {
+    font-size: var(--c--components--forms-input--font-size);
+    font-weight: var(--c--components--forms-input--font-weight);
+  }
+  .c__input__wrapper .c__input {
+    box-sizing: border-box;
+    outline: 0;
+    border: none;
+    color: var(--c--components--forms-input--value-color);
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    background-color: transparent;
+    font-family: var(--c--globals--font--families--base);
+  }
+  .c__input__wrapper .c__input::placeholder {
+    color: var(--c--components--forms-input--placeholder-color);
+    font-weight: var(--c--components--forms-input--font-weight);
+    line-height: 1.125rem;
+  }
+  .c__input__wrapper:hover:not(.c__input__wrapper--disabled) {
+    border-radius: var(--c--components--forms-input--border-radius--hover);
+    border-color: var(--c--components--forms-input--border-color--hover);
+    box-shadow: 0 0 0 var(--c--components--forms-input--border-width--hover)
+      var(--c--components--forms-input--border-color--hover);
+  }
+  .c__input__wrapper:focus-within {
+    box-shadow: 0 0 0 var(--c--components--forms-input--border-width--focus)
+      var(--c--components--forms-input--border-color--focus) !important;
+    border-radius: var(--c--components--forms-input--border-radius--focus);
+    border-color: var(--c--components--forms-input--border-color--focus) !important;
+  }
+  .c__input__wrapper--error {
+    border-color: var(--c--contextuals--border--semantic--error--primary);
+  }
+  .c__input__wrapper--classic {
+    align-items: center;
+    height: 2.75rem;
+  }
+
+  // ---- Checkbox, Radio and their groups -------------------------------------------------
+
+  .c__checkbox__group__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .c__checkbox__group .c__field__footer {
+    padding: 0.25rem 0 0 2rem;
+  }
+  .c__checkbox {
+    display: inline-flex;
+    padding: 0.25rem;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px;
+    margin-left: -0.25rem;
+    cursor: pointer;
+  }
+  .c__checkbox:focus-within {
+    outline: 0;
+    border-color: var(--c--contextuals--border--semantic--brand--primary);
+    box-shadow: 0 0 0 1px var(--c--contextuals--border--semantic--brand--primary);
+  }
+  .c__checkbox__container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--c--components--forms-checkbox--color);
+  }
+  .c__checkbox .c__field__footer {
+    padding: 0.25rem 0 0 2rem;
+  }
+  .c__checkbox__wrapper {
+    position: relative;
+  }
+  .c__checkbox__wrapper input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    background-color: var(--c--components--forms-checkbox--background-color);
+    width: var(--c--components--forms-checkbox--size);
+    height: var(--c--components--forms-checkbox--size);
+    border: var(--c--components--forms-checkbox--border-width) solid var(--c--components--forms-checkbox--border-color);
+    border-radius: var(--c--components--forms-checkbox--border-radius);
+    display: block;
+    cursor: pointer;
+    transition:
+      border var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out),
+      box-shadow var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out);
+  }
+  .c__checkbox__wrapper input:hover {
+    border-color: var(--c--components--forms-checkbox--border-color--hover);
+    box-shadow: 0 0 0 var(--c--components--forms-checkbox--border-width--hover)
+      var(--c--components--forms-checkbox--border-color--hover);
+  }
+  .c__checkbox__wrapper input:focus {
+    outline: none;
+    border-color: var(--c--components--forms-checkbox--border-color--focus);
+    box-shadow: 0 0 0 var(--c--components--forms-checkbox--border-width--hover)
+      var(--c--components--forms-checkbox--border-color--focus);
+  }
+  .c__checkbox__wrapper input:not(:checked) ~ .checkmark {
+    clip-path: inset(0 100% 0 0);
+  }
+  .c__checkbox__wrapper input:checked {
+    background-color: var(--c--components--forms-checkbox--accent-color);
+    border-color: var(--c--components--forms-checkbox--accent-color);
+  }
+  .c__checkbox__wrapper input:checked ~ .checkmark {
+    clip-path: inset(0 0 0 0);
+  }
+  .c__checkbox__wrapper input:checked:hover,
+  .c__checkbox__wrapper input:checked:focus {
+    border-color: var(--c--components--forms-checkbox--accent-color);
+    box-shadow: 0 0 0 var(--c--components--forms-checkbox--border-width--hover)
+      var(--c--components--forms-checkbox--accent-color);
+  }
+  .c__checkbox__wrapper svg {
+    clip-path: inset(0 100% 0 0);
+    transition: var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--c--components--forms-checkbox--checkmark-color);
+    // Cunningham stops clicks on the tick in React; here they pass through to the box.
+    pointer-events: none;
+  }
+  .c__checkbox__label {
+    font-size: var(--c--components--forms-checkbox--font-size);
+    font-weight: var(--c--components--forms-checkbox--font-weight);
+  }
+
+  .c__radio input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    width: var(--c--components--forms-checkbox--size);
+    height: var(--c--components--forms-checkbox--size);
+    border: var(--c--components--forms-checkbox--border-width) solid var(--c--components--forms-checkbox--border-color);
+    background-color: var(--c--components--forms-checkbox--background-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      border var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out),
+      box-shadow var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out);
+  }
+  .c__radio input:hover,
+  .c__radio input:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--c--components--forms-checkbox--border-width--hover)
+      var(--c--components--forms-checkbox--border-color);
+  }
+  .c__radio input:checked {
+    border-color: var(--c--components--forms-checkbox--accent-color);
+  }
+  .c__radio input:checked:hover,
+  .c__radio input:checked:focus {
+    box-shadow: 0 0 0 var(--c--components--forms-checkbox--border-width--hover)
+      var(--c--components--forms-checkbox--accent-color);
+  }
+  .c__radio input::before {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: all var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out);
+    box-shadow: inset 1em 1em var(--c--components--forms-checkbox--accent-color);
+  }
+  .c__radio input:checked::before {
+    transform: scale(1);
+  }
+
+  // ---- Form layout ------------------------------------------------------------------
+  // Cunningham has no headings, error summary, summary list or details component. These are
+  // built from its tokens, after the component rules so their placements win.
+
+  .cf-icon {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+  }
+
+  .cf-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cf-stack--sm {
+    gap: var(--c--globals--spacings--base);
+  }
+  .cf-stack--lg {
+    gap: var(--c--globals--spacings--lg);
+  }
+  .cf-prose > p + p {
+    margin-top: var(--c--globals--spacings--base);
+  }
+  p,
+  li {
+    max-width: 40em;
+  }
+
+  .cf-h1 {
+    color: var(--c--contextuals--content--semantic--neutral--primary);
+    font-size: var(--c--globals--font--sizes--h3);
+    font-weight: var(--c--globals--font--weights--bold);
+    line-height: 1.25;
+    @media (min-width: $sm) {
+      font-size: var(--c--globals--font--sizes--h2);
+    }
+  }
+  .cf-h2 {
+    color: var(--c--contextuals--content--semantic--neutral--primary);
+    font-size: var(--c--globals--font--sizes--h5);
+    font-weight: var(--c--globals--font--weights--bold);
+    line-height: 1.3;
+  }
+  // The title line of an Alert. The confirmation page's H1 is a little larger.
+  .cf-alert-title {
+    font-size: var(--c--globals--font--sizes--lg);
+    font-weight: var(--c--globals--font--weights--bold);
+    line-height: 1.4;
+  }
+  .cf-alert-title--page {
+    font-size: var(--c--globals--font--sizes--h4);
+    line-height: 1.3;
+  }
+  .c__alert__additional p + p,
+  .c__alert__additional p + ul {
+    margin-top: var(--c--globals--spacings--xs);
+  }
+
+  // Back (Button, brand tertiary, small, icon left): its icon lines up with the text below.
+  .cf-back {
+    margin: 0 0 var(--c--globals--spacings--base) calc(-1 * var(--c--globals--spacings--t));
+  }
+  // Section and question number above each question.
+  .cf-progress {
+    margin-bottom: var(--c--globals--spacings--xs);
+    color: var(--c--contextuals--content--semantic--neutral--secondary);
+    font-size: var(--c--globals--font--sizes--sm);
+    font-weight: var(--c--globals--font--weights--medium);
+  }
+  .cf-nowrap {
+    white-space: nowrap;
+  }
+
+  // Each form page: the heading, the fields, then Continue.
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--c--globals--spacings--md);
+  }
+  // On phones kf-form.css stretches Continue across the screen; keep its label centred.
+  .kf-actions .c__button,
+  .cf-actions .c__button {
+    justify-content: center;
+  }
+
+  // Error summary: an error Alert with the title and a list of links to each field.
+  .cf-error-summary {
+    margin: var(--c--globals--spacings--xs) 0 var(--c--globals--spacings--md);
+  }
+  // The engine moves focus here after a failed Continue. kf-form.css removes the outline from
+  // elements that take focus this way, so draw Cunningham's focus ring instead.
+  .c__alert[tabindex="-1"]:focus {
+    outline: none;
+    box-shadow:
+      0 0 0 1px #fff,
+      0 0 0 4px var(--c--contextuals--border--semantic--brand--primary);
+  }
+  .cf-error-summary__list {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .cf-error-summary__list li + li {
+    margin-top: var(--c--globals--spacings--xxxs);
+  }
+  .cf-link {
+    color: inherit;
+    font-weight: var(--c--globals--font--weights--medium);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    border-radius: 2px;
+    @media (hover: hover) {
+      &:hover {
+        text-decoration-thickness: 2px;
+      }
+    }
+    &:focus-visible {
+      outline: 2px solid var(--c--contextuals--border--semantic--brand--primary);
+      outline-offset: 2px;
+    }
+  }
+
+  // A question that is the page heading: the label (or the legend) sits inside the H1.
+  .cf-label-heading {
+    margin-bottom: var(--c--components--forms-labelledbox--classic-label-margin-bottom);
+  }
+  .cf-label-heading .c__input__label {
+    margin: 0;
+    overflow: visible;
+    color: inherit;
+    font: inherit;
+  }
+  .cf-fieldset {
+    display: flex;
+    flex-direction: column;
+  }
+  .cf-legend {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-bottom: var(--c--globals--spacings--xs);
+  }
+  .cf-legend--heading {
+    margin-bottom: var(--c--globals--spacings--sm);
+  }
+  // "(facultatif)" after a label, in the muted colour and regular weight.
+  .cf-optional {
+    color: var(--c--contextuals--content--semantic--neutral--secondary);
+    font-weight: var(--c--globals--font--weights--regular);
+    white-space: nowrap;
+  }
+  .cf-label-heading .cf-optional,
+  .cf-legend--heading .cf-optional {
+    font-size: var(--c--globals--font--sizes--md);
+  }
+
+  // Text fields take the width of the answer they expect, as Cunningham's 292px field does.
+  .cf-input--xs {
+    max-width: 7rem;
+  }
+  .cf-input--sm {
+    max-width: 12rem;
+  }
+  .cf-input--md {
+    max-width: var(--c--components--forms-field--width);
+  }
+  .cf-input--full {
+    max-width: 32rem;
+  }
+  .c__field__footer {
+    max-width: 40rem;
+  }
+  // The help text keeps its colour when the field shows an error; the message is the red line.
+  .c__field__text.cf-hint {
+    color: var(--c--components--forms-field--color);
+  }
+  .cf-error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--c--globals--spacings--xxxs);
+    color: var(--c--components--forms-field--color--error);
+    font-weight: var(--c--globals--font--weights--medium);
+    .cf-icon {
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-top: 0.05rem;
+    }
+  }
+  .cf-error + .cf-hint {
+    margin-top: var(--c--globals--spacings--xxxs);
+  }
+  .c__checkbox__group .c__checkbox__group__list {
+    gap: var(--c--globals--spacings--xs);
+  }
+
+  // Check your answers: a description list in Cunningham's colours.
+  .cf-summary {
+    border-top: 1px solid var(--c--contextuals--border--surface--primary);
+  }
+  .cf-summary__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--c--globals--spacings--xxxs);
+    padding: var(--c--globals--spacings--sm) 0;
+    border-bottom: 1px solid var(--c--contextuals--border--surface--primary);
+    @media (min-width: $sm) {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto;
+      gap: var(--c--globals--spacings--base);
+      align-items: start;
+    }
+  }
+  .cf-summary__key {
+    font-weight: var(--c--globals--font--weights--medium);
+  }
+  .cf-summary__value {
+    overflow-wrap: anywhere;
+  }
+  // The tertiary Change button: its text lines up with the answers on phones.
+  .cf-summary__action {
+    margin-left: calc(-1 * 0.75rem);
+    @media (min-width: $sm) {
+      margin: calc(-1 * 0.25rem) 0;
+    }
+  }
+
+  // What happens next.
+  .cf-steps {
+    padding-left: 1.5rem;
+    list-style: decimal;
+  }
+  .cf-steps li + li {
+    margin-top: var(--c--globals--spacings--xs);
+  }
+  .cf-reference {
+    font-weight: var(--c--globals--font--weights--bold);
+    white-space: nowrap;
+  }
+
+  // Details: the summary is a brand tertiary Button with a chevron that turns when open.
+  .cf-details__summary {
+    width: fit-content;
+    margin-left: calc(-1 * 0.75rem);
+    list-style: none;
+    &::marker,
+    &::-webkit-details-marker {
+      display: none;
+    }
+    .cf-icon {
+      transition: transform var(--c--globals--transitions--duration) var(--c--globals--transitions--ease-out);
+    }
+  }
+  .cf-details[open] .cf-details__summary .cf-icon {
+    transform: rotate(180deg);
+  }
+  .cf-details__body {
+    margin-top: var(--c--globals--spacings--xs);
+    padding: var(--c--globals--spacings--base);
+    border-left: 3px solid var(--c--contextuals--border--semantic--neutral--primary);
+    border-radius: var(--c--components--alert--border-radius);
+    background-color: var(--c--contextuals--background--semantic--neutral--tertiary);
+  }
+  .kf-code {
+    border: 1px solid var(--c--contextuals--border--surface--primary);
+    border-radius: var(--c--components--alert--border-radius);
+    background-color: var(--c--contextuals--background--surface--primary);
+    color: var(--c--contextuals--content--semantic--neutral--primary);
+    font-family: $mono;
+    font-size: var(--c--globals--font--sizes--sm);
+  }
+
+  // Windows high contrast: box-shadows and drawn backgrounds disappear, so use the browser's
+  // own radio buttons and checkboxes, and an outline for focus.
+  @media (forced-colors: active) {
+    .c__radio input,
+    .c__checkbox__wrapper input {
+      appearance: auto;
+    }
+    .c__radio input::before,
+    .c__checkbox__wrapper svg {
+      display: none;
+    }
+    .c__checkbox:focus-within,
+    .c__input__wrapper:focus-within,
+    .c__button:focus-visible,
+    .c__alert[tabindex="-1"]:focus {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before {
+      transition: none !important;
+    }
+  }
+}

@@ -13,7 +13,7 @@ page about fostering or adoption, this writes:
 - forms.csv: one primary form, observed "direct_fetch"
 - questions.csv: one row per question. Radio buttons and tick boxes that share a name
   are one question, labelled by their legend. Each is tagged with a census topic by
-  keyword rules (English and French). Questions the rules cannot place are tagged
+  keyword rules (English, French, German, Spanish and Catalan). Questions the rules cannot place are tagged
   other/unclassified for a person to tag.
 - answer_options.csv: the choices offered by select boxes, radio buttons and tick boxes
 - guidance.csv: whether a reply time is stated on the page, whether a privacy notice is
@@ -34,13 +34,13 @@ import urllib.parse
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from crawl_to_register import EMAIL, PHONE, clean_promise, stated_hours  # noqa: E402
+from crawl_to_register import EMAIL, PHONE, clean_promise, stated_hours, within  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 C = ROOT / "census"
 MARK = "Read by the polite crawler"
 
-# (category, topic, pattern), first match wins. English and French.
+# (category, topic, pattern), first match wins. English and French; MORE below adds German, Spanish and Catalan.
 RULES = [
     ("consent", "marketing", r"newsletter|subscribe|mailing list|marketing|e-?news|updates (?:by|via)|stay connected|keep in touch|stay up to date|"
                                     r"updates|opt out|products and services|infolettre|bulletin"),
@@ -116,7 +116,82 @@ RULES = [
     ("free_text", "questions", r"message|comment|question|anything else|additional|enquiry|inquiry|details|like us to know|"
                                r"specifics|notes|demande|pr[ée]cis"),
 ]
-RULES = [(c, t, re.compile(p, re.I)) for c, t, p in RULES]
+# German, Spanish and Catalan words for the same topics. Each is added to the first rule for its topic,
+# so the order above still decides which topic wins.
+MORE = {
+    ("consent", "marketing"): r"werbung|infopost|bolet[ií]n|comercial|publicidad|butllet",
+    ("consent", "privacy_acknowledgement"): r"datenschutzerkl|datenschutzhinweis|pol[ií]tica|privacidad|privacitat|"
+                                            r"pris connaissance|politique (?:du site|de confidentialit)",
+    ("consent", "declaration_and_checks"): r"best[äa]tige|versichere|wahrheitsgem|declaro|certifico",
+    ("consent", "processing"): r"einwillig|einverstanden|ich stimme|zustimm|datenschutz|acepto|consiento|autorizo|"
+                               r"consentimiento|protecci[oó]n de datos|accepto|consento",
+    ("contact_identity", "email"): r"correo|correu",
+    ("contact_identity", "date_of_birth"): r"geburtsdatum|geburtstag|geboren am|fecha de nacimiento|data de naixement",
+    ("eligibility", "age"): r"\balter\b|\bedad\b(?! de(?:l| los| las) (?:menor|niñ|hij))|\bedat\b",
+    ("contact_identity", "phone"): r"telefon|handy|\bmobil|rufnummer|tel[eé]fono|m[oó]vil|celular|tel[eè]fon|m[oò]bil",
+    ("contact_identity", "postcode"): r"\bplz\b|postleitzahl|c[oó]digo postal|codi postal",
+    ("routing", "nearest_office"): r"amb qui|con qui[eé]n|mit wem",
+    ("routing", "local_authority"): r"landkreis|bezirk|bundesland|jugendamt|provincia|municipio|comunidad aut[oó]noma|"
+                                    r"\bisla\b|comarca|municipi|d[ée]partement",
+    ("eligibility", "residency"): r"wohnhaft|\bresidencia\b|\bresido\b",
+    ("contact_identity", "address"): r"anschrift|stra(?:ß|ss)e|hausnummer|\bort\b|wohnort|\bstadt\b|direcci[oó]n|"
+                                     r"domicilio|\bcalle\b|localidad|poblaci[oó]n|ciudad|adreça|carrer|\bcommune\b|localitat|"
+                                     r"^pays\b|^land\b|^pa[ií]s\b",
+    ("contact_identity", "name"): r"apellido|nombre|cognom|anrede|civilit[ée]",
+    ("source", "how_heard"): r"aufmerksam|wie haben sie|erfahren sie|c[oó]mo (?:nos )?(?:ha|has) conocido|"
+                             r"c[oó]mo (?:se|te) enter|com (?:ens )?(?:ha|has) conegut",
+    ("contact_preference", "time"): r"erreichbar|uhrzeit|vormittag|nachmittag|abends|montag|dienstag|mittwoch|donnerstag|"
+                                    r"freitag|horario|ma[ñn]ana|\btarde\b|lunes|martes|mi[ée]rcoles|jueves|viernes|"
+                                    r"disponibilidad|horari|\bmat[ií]\b|\bheure\b|\bhora\b",
+    ("contact_preference", "method"): r"kontaktaufnahme|wie (?:m[öo]chten|sollen) wir|bevorzugt|c[oó]mo prefiere|"
+                                      r"medio de contacto|forma de contacto|v[ií]a de contacto",
+    ("contact_preference", "language"): r"sprache|idioma|llengua",
+    ("information_event", "event_dates"): r"infoabend|informationsabend|infoveranstaltung|veranstaltung|\btermin|r[ée]union|"
+                                          r"sesi[oó]n informativa|sessi[oó] informativa|charla|jornada",
+    ("experience", "own_children"): r"eigene kinder|leibliche kinder|hijos propios|tiene hijos|fills propis",
+    ("experience", "prior_fostering"): r"bereits pflege|schon einmal|ha sido familia|anteriormente",
+    ("experience", "childcare_experience"): r"erfahrung|experiencia|experi[eè]ncia",
+    ("interest", "child_preferences"): r"alter des kindes|geschwister|edad del menor|edad de los ni|hermanos|germans",
+    ("household", "children_in_household"): r"\bkinder\b|\bhijos\b|ni[ñn]os|menores|\bfills\b|infants",
+    ("household", "partner"): r"ehepartner|lebenspartner|ehefrau|ehemann|pareja|c[oó]nyuge|esposo|esposa|parella",
+    ("household", "applicant_type"): r"alleinstehend|alleinerziehend|\bpaar\b|monoparental|en pareja|soltero",
+    ("household", "relationships"): r"situation (?:familiale|matrimoniale)|familienstand|verheiratet|ledig|estado civil|casad[oa]|estat civil",
+    ("household", "household_composition"): r"haushalt|wer lebt|unidad familiar|convivientes|personas que viven|"
+                                             r"n[uú]cleo familiar|unitat familiar|convivents",
+    ("household", "pets"): r"haustier|\btiere\b|\bhund|katze|mascota|\bperro|\bgato\b",
+    ("housing", "spare_bedroom"): r"zimmer|wohnraum|habitaci[oó]n|dormitorio",
+    ("housing", "tenure"): r"\bmiete\b|eigentum|alquiler|en propiedad|lloguer",
+    ("housing", "smoking"): r"rauch|fumador|fumar|fumeu",
+    ("work", "income"): r"einkommen|gehalt|ingresos|salario|econ[oó]mic|ingressos",
+    ("work", "driving_licence"): r"f[üu]hrerschein|fahrzeug|\bauto\b|carn[eé] de conducir|permiso de conducir|veh[ií]culo|"
+                                 r"coche|carnet de conduir|cotxe",
+    ("work", "employment_history"): r"ausbildung|schulabschluss|bildung|estudios|nivel educativo|estudis",
+    ("work", "occupation"): r"\bberuf\b|t[äa]tigkeit|profesi[oó]n|ocupaci[oó]n|professi[oó]",
+    ("work", "employment_status"): r"berufst[äa]tig|arbeit|erwerbs|trabaj|situaci[oó]n laboral|empleo|treball",
+    ("equality", "ethnicity"): r"herkunft|etnia|origen",
+    ("equality", "gender"): r"geschlecht|\bsexo\b|g[ée]nero|\bsexe\b|g[eè]nere",
+    ("equality", "religion"): r"konfession|glaube",
+    ("health", "disability"): r"behinderung|discapacidad|discapacitat",
+    ("health", "health"): r"gesundheit|\bsalud\b|\bsalut\b",
+    ("criminal_record", "criminal_record"): r"f[üu]hrungszeugnis|vorstraf|antecedentes|delitos|antecedents",
+    ("eligibility", "citizenship"): r"staatsangeh[öo]rigkeit|nationalit[äa]t|nacionalidad|nacionalitat",
+    ("intent", "journey_stage"): r"wie lange|[üu]berlegen|wann m[öo]chten|cu[aá]ndo|desde cu[aá]ndo|th[ée]matique|\bsujet\b|"
+                                 r"\bobjet\b|\bbetreff\b|\basunto\b|\bassumpte\b",
+    ("interest", "care_type"): r"pflege|bereitschaft|vollzeit|kurzzeit|verwandt|acogi|urgencia|temporal|permanente|"
+                               r"adopci|acolli|assistant(?:e)? familia",
+    ("free_text", "motivation"): r"warum|por qu[eé]|motivaci[oó]n|per qu[eè]",
+    ("free_text", "about_you"): r"[üu]ber sich|erz[äa]hlen sie|sobre (?:usted|ti)|cu[ée]ntenos",
+    ("free_text", "questions"): r"nachricht|anmerkung|\bfrage|anliegen|mitteilung|bemerkung|sonstiges|mensaje|comentario|"
+                                r"consulta|pregunta|observaciones|missatge|comentari|observacions",
+}
+_seen = set()
+_rules = []
+for c, t, p in RULES:
+    if (c, t) not in _seen and (c, t) in MORE:
+        p = p + "|" + MORE[(c, t)]
+    _seen.add((c, t))
+    _rules.append((c, t, re.compile(p, re.I)))
+RULES = _rules
 
 JUNK = re.compile(
     r"^(?:item meta|fields?|input|wpforms|ninja|gform|nf|tfa|formid|track id|accepted by|search|recherche)\b|\bvalue$|"
@@ -124,15 +199,28 @@ JUNK = re.compile(
     r"captcha|recaptcha|not a robot|g-recaptcha|ak[ _]?hp|wpcf7|empty\d|characters shown|code (?:above|is in the image|in the image)|prevent spam|"
     r"form handle|form fields field|^(?:website|url|x/twitter|twitter|linkedin|to)$|^[a-z0-9]{10,}$|utm_|gclid|msclkid|"
     r"[gw]braid|fbclid|referr?er|entry ?page|page ?url|form ?type|nelio|sendmail|^project$|^fuction$|quiz|^ad |"
-    r"feedback|was this page helpful", re.I)
-PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*)\b", re.I)
+    r"feedback|was this page helpful|leer lassen|laisser (?:ce champ )?vide|dejar (?:en )?blanco|deixa(?:r|u) en blanc", re.I)
+PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*|"
+                         r"bitte (?:w[äa]hlen|ausw[äa]hlen)|ausw[äa]hlen|seleccion[ae]|elija|escoja|tria)\b", re.I)
 NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|job|resume|career|password|log ?in|sign ?in|"
-                         r"upload|type your signature|newsletter only|search|access record|subject access|records request", re.I)
+                         r"upload|type your signature|newsletter only|search|access record|subject access|records request|"
+                         r"spende|ehrenamt|stellenangebot|karriere|donaci|donativo|voluntari|empleo|trabaja con nosotros|"
+                         r"ofertas de trabajo|affiche|votre [ée]v[ée]nement|proposer un [ée]v[ée]nement", re.I)
 # A page whose address names an application holds the full application, not a first-contact form.
 # The census covers first contact only; application forms belong in register/us/application-forms.csv.
 APPLICATION_PAGE = re.compile(r"application|how-to-apply|apply-now|/apply/?$", re.I)
 NOT_APPLICATION = re.compile(r"process|enquir|inquir", re.I)  # "the application process" pages often carry an enquiry form
-TOPIC_PAGE = re.compile(r"foster|adopt|carer|famille d.accueil|famille d.adoption|accueil|out-of-home care|kinship", re.I)
+# Fields only a full application asks for: bank details, debts, place of birth, the applicant's signature line.
+APPLICATION_FIELDS = re.compile(r"\biban\b|bank account|sort code|schulden|kontoinhaber|geburtsort|antragsteller|"
+                                r"place of birth|lieu de naissance|lugar de nacimiento|\bdebts?\b", re.I)
+# Pages about childminding or elderly care, which share words with fostering in German and French.
+NOT_TOPIC = re.compile(r"kindertagespflege|tagesmutter|tagesv[äa]ter|altenpflege|seniorenpflege|"
+                       r"assistant(?:e)?s? maternel", re.I)
+# Words that show a page or form is about fostering or adoption. Bare "accueil" (French for the home
+# page) and bare "pflege" (also childminding and elderly care) are too broad, so only longer forms count.
+TOPIC_PAGE = re.compile(r"foster|adopt|carer|famille d.accueil|famille d.adoption|accueil familial|out-of-home care|kinship|"
+                        r"assistant(?:e)?s? familia|pflegefamilie|pflegeeltern|pflegekind|pflegestelle|vollzeitpflege|"
+                        r"bereitschaftspflege|pflegeverh[äa]ltnis|adopci|acogi|acolli", re.I)
 INPUT = {"text": "text", "email": "email", "tel": "tel", "textarea": "textarea", "select": "select",
          "radio": "radio", "checkbox": "checkbox", "date": "date", "number": "text", "url": "text"}
 
@@ -235,21 +323,36 @@ def _items(groups, order):
                    "required": field.get("required"), "options": options, "checked": False}
 
 
+def form_text(form):
+    """The form's own words: labels, field names and choices."""
+    return " ".join(label_of(f) + " " + f.get("name", "") + " " + " ".join(f.get("options", []))
+                    for f in form.get("fields", []))
+
+
 def is_enquiry(form, page_text):
+    """page_text is the page's title and address. The topic must show there or in the form itself,
+    not just in a menu, so a council's general contact form counts only if it mentions fostering
+    or adoption."""
     fields = form.get("fields", [])
     labels = " ".join((label_of(f) + " " + f.get("name", "") + " " + f.get("type", "")).lower() for f in fields)
     if len(fields) < 3 or NOT_ENQUIRY.search(labels):
         return False
-    if not re.search(r"name|\bnom\b|pr[ée]nom", labels) or not re.search(r"e-?mail|courriel|phone|t[ée]l", labels):
+    if not re.search(r"name|\bnom\b|pr[ée]nom|nombre|apellido|cognom", labels) or \
+            not re.search(r"e-?mail|courriel|correo|correu|phone|t[ée]l|telefon|m[oó]vil|handy", labels):
         return False
-    return bool(TOPIC_PAGE.search(page_text))
+    if NOT_TOPIC.search(page_text) or len(APPLICATION_FIELDS.findall(form_text(form))) >= 2:
+        return False
+    return bool(TOPIC_PAGE.search(page_text) or TOPIC_PAGE.search(form_text(form)))
 
 
 def reply_value(sentence):
-    m = re.search(r"within\s+(\w+)\s*(?:-\s*\w+\s*)?(business\s+|working\s+)?(hours?|days?|weeks?)", sentence, re.I)
-    if not m:
+    """The promise as English words, for example "2 working days", whatever language the page uses."""
+    w = within(sentence)
+    if not w:
         return ""
-    return f"{m.group(1)} {(m.group(2) or '').strip() + ' ' if m.group(2) else ''}{m.group(3).lower()}".replace("  ", " ")
+    n, unit, working = w
+    unit = unit[:-1] if n == 1 else unit
+    return f"{n} {'working ' if working else ''}{unit}"
 
 
 def load(name):
@@ -291,7 +394,7 @@ def main():
     site = lambda u: urllib.parse.urlsplit(u).netloc.lower().removeprefix("www.")
     human_sites = {site(u) for f in human if f["fields_observed"] != "no" for u in (f["form_url"], f["source_url"]) if u}
 
-    new_ids = set()
+    new_ids, new_urls = set(), set()
     new_forms, new_q, new_o, new_g = [], [], [], []
     for door in doors:
         recs = records.get(door["front_door_id"], [])
@@ -306,7 +409,7 @@ def main():
             if APPLICATION_PAGE.search(path) and not NOT_APPLICATION.search(path):
                 print("left out, an application page:", door["front_door_id"], r.get("final_url") or r["url"])
                 continue
-            page = (r.get("title", "") or "") + " " + (r.get("text", "") or "")
+            page = " ".join([r.get("title", "") or "", r["url"], r.get("final_url", "") or ""])
             for f in r.get("forms", []):
                 if is_enquiry(f, page) and (best is None or len(f["fields"]) > len(best["fields"])):
                     best, best_rec = f, r
@@ -316,9 +419,11 @@ def main():
         if url.rstrip("/") in human_urls or site(url) in human_sites or not url.startswith("https://"):
             continue
         form_id = re.sub(r"[^a-z0-9-]+", "-", door["front_door_id"].lower()).strip("-") + "-enquiry"
-        if form_id in new_ids:
+        # One row per form: a council's fostering and adoption pages often lead to the same form.
+        if form_id in new_ids or url.rstrip("/") in new_urls:
             continue
         new_ids.add(form_id)
+        new_urls.add(url.rstrip("/"))
         date = args.date or best_rec.get("fetched_at", "")
         text = (best_rec.get("text", "") or "").lower()
         platform = next((p for p in ("binti", "hubspot", "jotform", "formstack", "gravity", "wpforms", "salesforce",

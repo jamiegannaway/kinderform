@@ -13,7 +13,8 @@
 - [x] Plain language: site text rewritten to ISO 24495-1, with a house guide (`docs/plain-language.md`) and a check (`tools/plain_check.py`)
 - [x] Reviews of other fields (November 2026): reminders and missed appointments, and giving blood, stem cells and kidneys (not yet checked by a person)
 - [x] Research log on the site (`/research/log`, linked from the footer), built from `evidence/research-log.json`: each review and what it could mean for the project, as tables
-- [ ] Rewrite the two reviews of other fields in plain language, work through their "Check before public use" lists, and add their key sources to the library
+- [x] Rewrite the two reviews of other fields in plain language (20 November 2026): no sentences of 25 words or more, and terms explained
+- [ ] Work through the two reviews' "Check before public use" lists, and add their key sources to the library
 - [ ] Decide each idea in the research log in the open, starting with the time limits, reciprocity and the 2-week keeping-in-touch rule
 - [ ] Test the home, research and form check pages with readers from each group in the plain language guide
 - [ ] Check the remaining findings and the intake interactions review against their original sources
@@ -53,6 +54,17 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Review the machine-tagged topics, country by country
 - [ ] Read by hand the forms the crawler cannot reach: forms that load in the browser, portals, bot checks and PDFs
 - [ ] Find the missing websites in the Canada and Australia registers
+
+## Now: Germany, France and Spain (first pass)
+
+- [x] Front-door registers: Germany 95 (every Land), France 146 (fostering pages for 97 of 101 départements), Spain 87 (every community and both cities) (unverified)
+- [x] Rules registers: Germany 129, France 79, Spain 136, with the same topics as the other countries (unverified)
+- [x] The polite crawler and the question tagger read German, Spanish and Catalan; 16 enquiry forms added to the census
+- [x] The compare tables and the comparison across countries include all three
+- [x] Example forms: Germany in KERN UX, France in Cunningham, Spain in DESY (Aragon), without government branding, on the map
+- [ ] Have native speakers review the German, French and Spanish wording
+- [ ] Fill the gaps: foster payment rates for most German Länder and Spanish communities, Ceuta and Melilla, and the sites that refused automated reading
+- [ ] Read Legifrance and the BOE directly; both refused the research tools
 
 ## Now: compare tables for services
 

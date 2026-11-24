@@ -1,0 +1,9 @@
+{
+  "full_name": "Lucía Ejemplo",
+  "interest": "fostering",
+  "knows_child": false,
+  "contact_method": "email",
+  "email": "lucia@example.org",
+  "es_postcode": "28000",
+  "de_postcode": "00000"
+}

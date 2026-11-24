@@ -4,6 +4,9 @@ Files:
 - register/policies.csv     (England, Wales, Scotland, Northern Ireland)
 - register/ca/policies.csv  (Canadian provinces and territories)
 - register/au/policies.csv  (Australian states and territories)
+- register/de/policies.csv  (Germany: federal law and the 16 Länder)
+- register/fr/policies.csv  (France: national law and the regions)
+- register/es/policies.csv  (Spain: national law and the autonomous communities and cities)
 
 The US rules are in register/us/policies.csv and are checked by validate_us_register.py.
 Each row records what a published rule says, where it is written and when we checked it.
@@ -28,6 +31,12 @@ FILES = {
     "register/policies.csv": ("uk", {"ENG", "WLS", "SCT", "NIR"}),
     "register/ca/policies.csv": ("ca", {"AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"}),
     "register/au/policies.csv": ("au", {"NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"}),
+    "register/de/policies.csv": ("de", {"DE", "BW", "BY", "BE", "BB", "HB", "HH", "HE", "MV", "NI", "NW", "RP", "SL",
+                                        "SN", "ST", "SH", "TH"}),
+    "register/fr/policies.csv": ("fr", {"FR", "ARA", "BFC", "BRE", "CVL", "COR", "GES", "HDF", "IDF", "NOR", "NAQ",
+                                        "OCC", "PDL", "PAC", "GP", "MQ", "GF", "RE", "YT"}),
+    "register/es/policies.csv": ("es", {"ES", "AN", "AR", "AS", "IB", "PV", "CN", "CB", "CL", "CM", "CT", "EX", "GA",
+                                        "RI", "MD", "MC", "NC", "VC", "CE", "ML"}),
 }
 TOPICS = set(re.findall(r"^\| `([a-z_]+)` \|", (ROOT / "register/us/policy-topics.md").read_text(encoding="utf-8"), re.M))
 APPLIES = {"fostering", "adoption", "both"}
@@ -37,12 +46,15 @@ VERIFICATION = {"unverified", "verified"}
 UNITS = {
     "", "years", "months", "days", "working_days", "hours", "children", "people", "sessions",
     "GBP_per_week", "CAD_per_day", "CAD_per_month", "AUD_per_fortnight", "AUD_per_week",
+    "EUR_per_month", "EUR_per_day", "EUR",
 }
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(
     r"(?<![\d/])(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\d)"
     r"|(?<![\d/])(?:\+61\s?|\+44\s?|0)\d{1,4}[\s-]?\d{3,4}[\s-]?\d{3,4}(?!\d)"
     r"|\b1[38]00[\s-]?\d{3}[\s-]?\d{3}\b"
+    r"|\+(?:49|33|34)[\s\d/.()-]{7,}"
+    r"|(?<![\d/.])0[1-9](?:[\s.]\d{2}){4}(?!\d)"
 )
 
 errors: list[str] = []
@@ -57,8 +69,12 @@ def is_date(s: str) -> bool:
 
 
 total = 0
+checked = []
 for rel, (prefix, places) in FILES.items():
     path = ROOT / rel
+    if not path.exists():
+        print(f"{rel}: not added yet")
+        continue
     with open(path, encoding="utf-8", newline="") as fh:
         reader = csv.DictReader(fh)
         rows = list(reader)
@@ -66,6 +82,7 @@ for rel, (prefix, places) in FILES.items():
         errors.append(f"{rel}: header must be {','.join(HEADER)}")
         continue
     total += len(rows)
+    checked.append(prefix.upper())
     for pid, n in Counter(r["policy_id"] for r in rows).items():
         if n > 1:
             errors.append(f"{rel}: duplicate policy_id {pid}")
@@ -105,4 +122,4 @@ for e in errors:
     print("FAIL", e)
 if errors:
     sys.exit(1)
-print(f"OK: {total} rules for the UK nations, Canada and Australia")
+print(f"OK: {total} rules for {', '.join(checked)}")
