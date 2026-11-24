@@ -2109,6 +2109,15 @@ us-dc-form-foster-home-licensing-forms-q472,us-dc-form-foster-home-licensing-for
 us-dc-form-foster-home-licensing-forms-q473,us-dc-form-foster-home-licensing-forms,473,,CFSA Employee Name (print),contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-17
 us-dc-form-foster-home-licensing-forms-q474,us-dc-form-foster-home-licensing-forms,474,,CFSA Employee Title (print),work,employment_status,unknown,text,no,,,direct_fetch,2026-11-17
 us-dc-form-foster-home-licensing-forms-q475,us-dc-form-foster-home-licensing-forms,475,,CFSA Employee Signature,consent,declaration_and_checks,unknown,text,no,,,direct_fetch,2026-11-17
+us-ia-form-470-0743-q001,us-ia-form-470-0743,1,,Adoption Only,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q002,us-ia-form-470-0743,2,,Foster Only,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q003,us-ia-form-470-0743,3,,Dual,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q004,us-ia-form-470-0743,4,,Dual N/A,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q005,us-ia-form-470-0743,5,,N/A N/A,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q006,us-ia-form-470-0743,6,,Foster Only N/A,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q007,us-ia-form-470-0743,7,,Program director or designee signature,consent,declaration_and_checks,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q008,us-ia-form-470-0743,8,,Do not leave items blank: indicate X or N/A,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-24
+us-ia-form-470-0743-q009,us-ia-form-470-0743,9,,undefined,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-24
 us-id-form-tribal-nez-perce-application-q001,us-id-form-tribal-nez-perce-application,1,,"City, State, Zip Code",contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-17
 us-id-form-tribal-nez-perce-application-q002,us-id-form-tribal-nez-perce-application,2,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-17
 us-id-form-tribal-nez-perce-application-q003,us-id-form-tribal-nez-perce-application,3,,Age,eligibility,age,unknown,text,no,,,direct_fetch,2026-11-17

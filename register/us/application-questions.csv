@@ -646,6 +646,16 @@ us-dc-form-foster-home-licensing-forms,487,,Type of ID,other,unknown,free_text,h
 us-dc-form-foster-home-licensing-forms,488,,CFSA Employee Name (print),name,unknown,free_text,https://cfsa.dc.gov/sites/default/files/dc/sites/cfsa/publication/attachments/Foster%20Home%20Licensing%20Forms%20%28October%202017%29.pdf,2026-11-17,form_read,unverified
 us-dc-form-foster-home-licensing-forms,489,,CFSA Employee Title (print),employment,unknown,free_text,https://cfsa.dc.gov/sites/default/files/dc/sites/cfsa/publication/attachments/Foster%20Home%20Licensing%20Forms%20%28October%202017%29.pdf,2026-11-17,form_read,unverified
 us-dc-form-foster-home-licensing-forms,490,,CFSA Employee Signature,other,unknown,free_text,https://cfsa.dc.gov/sites/default/files/dc/sites/cfsa/publication/attachments/Foster%20Home%20Licensing%20Forms%20%28October%202017%29.pdf,2026-11-17,form_read,unverified
+us-ia-form-470-0743,1,,Adoption Only,interest_type,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,2,,Foster Only,interest_type,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,3,,Dual,other,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,4,,Dual N/A,other,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,5,,N/A N/A,other,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,6,,N/A,other,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,7,,Foster Only N/A,interest_type,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,8,,Program director or designee signature,other,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,9,,Do not leave items blank: indicate X or N/A,other,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
+us-ia-form-470-0743,10,,undefined,other,unknown,free_text,https://hhs.iowa.gov/media/19117/download,2026-11-24,form_read,unverified
 us-id-form-tribal-nez-perce-application,1,,"City, State, Zip Code",location,unknown,free_text,https://nezperce.org/wp-content/uploads/2025/02/FILLABLE-Foster-Care-Application_2025.pdf,2026-11-17,form_read,unverified
 us-id-form-tribal-nez-perce-application,2,,Name,name,unknown,free_text,https://nezperce.org/wp-content/uploads/2025/02/FILLABLE-Foster-Care-Application_2025.pdf,2026-11-17,form_read,unverified
 us-id-form-tribal-nez-perce-application,3,,Age,date_of_birth,unknown,free_text,https://nezperce.org/wp-content/uploads/2025/02/FILLABLE-Foster-Care-Application_2025.pdf,2026-11-17,form_read,unverified
