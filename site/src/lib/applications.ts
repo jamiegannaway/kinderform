@@ -4,8 +4,8 @@
 //
 // What leaves this file is numbers, country names and topic labels only. No form, service or URL.
 // First-contact forms are counted the same way as "What enquiry forms ask": forms read straight
-// from the live page. A US application is a state's packet: the documents read for that state,
-// taken together. Every figure is unverified until a person has checked the rows.
+// from the live page. A US application is a packet: the documents one service (a state, a county or a
+// tribe) gives applicants, taken together. Every figure is unverified until a person has checked the rows.
 import { askedBy, type Census, type Row } from "@/lib/census"
 import { factsFor } from "@/lib/form-check"
 import { COUNTRIES } from "@/lib/countries"
@@ -39,7 +39,7 @@ export type StageCountry = {
   name: string
   first: number // first-contact forms counted
   apps: number // applications counted
-  unit: string // what one application is ("forms", "state packets")
+  unit: string // what one application is ("forms", "packets")
   firstMedian: number
   appMedian: number
   topics: { label: string; sensitive: boolean; first: Share; app: Share }[]
@@ -66,17 +66,18 @@ export function applications(c: Census): ApplicationsData {
   for (const { code, name } of COUNTRIES) {
     const mine = appForms.filter((f) => f.country === code)
     if (!mine.length) continue
-    // A US state's application is a packet of documents: count the packet once.
-    const byState = code === "US"
+    // A US application is a packet of documents from one service: count the packet once.
+    const byPacket = code === "US"
+    const packetOf = (f: Row) => `${f.region}|${f.name.split(": ")[0]}`
     const groups = new Map<string, Row[]>()
     for (const f of mine) {
-      const key = byState ? f.region : f.form_id
+      const key = byPacket ? packetOf(f) : f.form_id
       groups.set(key, [...(groups.get(key) ?? []), ...(asked.get(f.form_id) ?? []).filter(answered)])
     }
     // A US packet counts only if it includes an application form, not just a medical or
     // background-check form, and gives enough questions to describe.
     const isApplication = (key: string) =>
-      !byState || mine.some((f) => f.region === key && /packet \(application\)/.test(f.notes))
+      !byPacket || mine.some((f) => packetOf(f) === key && /packet \(application\)/.test(f.notes))
     const units = [...groups.entries()]
       .filter(([key, qs]) => isApplication(key) && qs.length >= 3)
       .map(([, qs]) => qs)
@@ -93,7 +94,7 @@ export function applications(c: Census): ApplicationsData {
       name,
       first: first.length,
       apps: units.length,
-      unit: byState ? "state packets" : "forms",
+      unit: byPacket ? "packets" : "forms",
       firstMedian: median(first.map((f) => f.questions)),
       appMedian: median(units.map((qs) => qs.length)),
       topics: APPLICATION_TOPICS.map((t) => ({

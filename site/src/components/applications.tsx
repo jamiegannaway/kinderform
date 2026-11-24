@@ -10,7 +10,7 @@ const pct = (yes: number, of: number) => (of ? Math.round((100 * yes) / of) : 0)
 export function Applications({ data }: { data: ApplicationsData }) {
   const cols = data.countries.flatMap((c) => [
     { key: `${c.code}-first`, label: `${c.code} enquiry`, short: `${c.code} E`, n: c.first },
-    { key: `${c.code}-app`, label: `${c.code} application`, short: `${c.code} A`, n: c.apps, unit: c.unit === "forms" ? "forms" : "states" },
+    { key: `${c.code}-app`, label: `${c.code} application`, short: `${c.code} A`, n: c.apps, unit: c.unit },
   ])
   const rows = data.countries[0].topics.map((t, i) => ({
     label: t.label,
@@ -49,7 +49,7 @@ export function Applications({ data }: { data: ApplicationsData }) {
             key={c.code}
             label={`${c.name}: a typical application`}
             value={`${c.appMedian} questions`}
-            note={`A typical enquiry form asks ${c.firstMedian}. Based on ${c.first} enquiry forms and ${c.apps} ${c.unit === "forms" ? "application forms" : "states' application packets"}.`}
+            note={`A typical enquiry form asks ${c.firstMedian}. Based on ${c.first} enquiry forms and ${c.apps} ${c.unit === "forms" ? "application forms" : "application packets, each the set of forms one state, county or tribe gives applicants"}.`}
           />
         ))}
       </div>
@@ -64,7 +64,7 @@ export function Applications({ data }: { data: ApplicationsData }) {
                 `${c.name}: ${c.sensitiveFirst.yes} of ${c.sensitiveFirst.of} enquiry forms ask a sensitive question, against ${c.sensitiveApp.yes} of ${c.sensitiveApp.of} applications`,
             )
             .join(". "),
-          note: `${packets.length ? `A US application is a state's packet of forms, counted once. ` : ""}A computer read the forms and sorted the questions. It could not sort ${unsorted}% of the application questions. Not yet checked by a person.`,
+          note: `${packets.length ? `A US application is one service's packet of forms, counted once. ` : ""}A computer read the forms and sorted the questions. It could not sort ${unsorted}% of the application questions. Not yet checked by a person.`,
         }}
       >
         <HeatGrid columns={cols} rows={rows} />

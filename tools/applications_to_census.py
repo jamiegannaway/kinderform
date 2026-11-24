@@ -183,6 +183,7 @@ def main():
         new_q += list(csv.DictReader(open(args.questions, encoding="utf-8")))
 
     ids = {f["form_id"] for f in new_forms}
+    form_date = {f["form_id"]: f.get("date_checked", "") for f in new_forms}
     # Replace earlier rows for the same forms; keep everything else.
     forms = [f for f in forms if f["form_id"] not in ids]
     questions = [q for q in questions if q["form_id"] not in ids]
@@ -209,7 +210,7 @@ def main():
             "section": q.get("section", ""), "label_paraphrased": label[:200], "category": ct[0], "topic": ct[1],
             "required": q.get("required") or "unknown", "input_type": q.get("input_type") or "unknown",
             "type_inferred": "no", "conditional_on": "", "hint_paraphrased": "", "observed": "direct_fetch",
-            "date_checked": q.get("date_checked", ""),
+            "date_checked": q.get("date_checked") or form_date.get(q["form_id"], ""),
         })
 
     for f in new_forms:
