@@ -2,6 +2,13 @@
 
 `enquiry.schema.json` describes one fostering enquiry as it moves from first contact towards application. It is the first slice of a wider open standard for the carer pipeline; later slices will cover application, assessment, approval and leaving.
 
+## Build a form or use the data standard
+
+If your team wants a working form, [choose a starter](https://www.kinderform.org/build). The [any-country version](https://www.kinderform.org/build/global) uses the shared questions and leaves location open for your service to decide. Each kit includes wording, answer choices and branching rules for any form builder.
+
+- [Submission schema, version 0.1](https://www.kinderform.org/schema/enquiry-submission/0.1.json). Use this to validate the answers a person gives to the service. The kit’s wording file adds the rules for when to ask each question.
+- [Monitoring schema, version 0.1](https://www.kinderform.org/schema/enquiry/0.1.json). Use this for the service's own events after an enquiry arrives. The record excludes the person's name and contact details.
+
 ## Definitions
 
 - **Enquiry:** a record with an arrival time, a channel and an intent tier chosen by the enquirer. This sits alongside Ofsted's guidance that an initial enquiry must be actionable and include a name and contact details. The service holds those details in its own system; they are deliberately left out of this record.

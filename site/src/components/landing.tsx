@@ -223,13 +223,13 @@ export default function Landing() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <a href="#get-involved">Get involved</a>
+                <a href="/build">Use this form in my organisation</a>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href="/for-services">Ideas for services</a>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <a href="#making">What we are making</a>
+                <a href="/example-form">Try the example form</a>
               </Button>
             </div>
           </div>

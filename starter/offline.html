@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="$locale"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src $script_hash; style-src $style_hash; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>Kinderform · $region · $demo</title><style>$css</style></head>
+<body><a class="skip" href="#main">$skip</a><header><strong>Kinderform</strong><span>$region</span></header>
+<main id="main"><aside class="notice"><strong>$demo</strong><p>$notice</p></aside>
+<noscript><p>$enable</p></noscript>
+<section id="intro"><h1 tabindex="-1">$heading</h1><p>$intro</p><button id="start" type="button" disabled>$start</button></section>
+<p id="progress" hidden class="progress"></p><div id="questions">$questions</div>
+<nav id="actions" aria-label="$navigation" hidden><button type="button" id="next">$continue_label</button> <button type="button" id="back" class="secondary">$back</button></nav>
+<section id="review" hidden><h2 tabindex="-1">$review</h2><dl id="summary"></dl><button type="button" id="finish">$preview</button></section>
+<section id="done" hidden><h2 tabindex="-1">$done</h2><p>$details</p><pre id="record" tabindex="0" aria-label="$json"></pre>
+<button type="button" id="download">$export</button> <button type="button" class="secondary" id="restart">$restart</button></section>
+</main><footer>$source</footer>
+<script>$script</script></body></html>
