@@ -76,7 +76,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] `/research` "What applications ask": first contact against the application, topic by topic; `/compare/applications` covers all seven countries
 - [x] A second, wider UK search (about 600 pages, every Scottish council, adoption agencies and sitemaps) found only one more readable application form: UK application forms are almost never public
 - [ ] Ask UK services for the application forms they send after a first visit, so more than 6 can be read
-- [ ] Add the first-contact forms the second search found that the census lacks (Wigan, North Somerset, Lincolnshire, Midlothian, Reading)
+- [x] Follow up the forms the second search found: North Somerset's expression of interest added (a later step, from its printed pack); Midlothian's form link recorded, but its questions open only after a page is sent, so they were not read; Wigan's PDF is a diagram of the process, not a form
+- [ ] Read the forms our reader cannot: Reading's need JavaScript, and the addresses of Lincolnshire's forms 690 and 1185 were not found
 - [x] US: unsorted application questions down from 25% to under 5%; tables of the children a family would accept no longer count as the applicant's health
 - [x] US: the 11 register links that led to a policy or notice checked again: 5 forms found and read, 6 have no public copy (filled in online, or handed out after a first call). One Alabama row turned out to be a contract application for agencies, not families, and is no longer counted
 - [x] What the assessment must cover, topic by topic, from the law and statutory guidance in all four UK nations (`register/assessment.csv`, 297 rows, not yet checked by a person), never from licensed forms such as Form F

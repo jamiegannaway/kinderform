@@ -108,7 +108,7 @@ Not yet covered, or covered by guidance only:
 - Most of Scotland's 32 councils (the crawler read 3), and most Scottish and Northern Irish adoption services
 - Most regional adoption agency enquiry forms, which load in the browser or sit in council portals
 - Per-agency topics for adoption registration of interest forms. These are described only in total in the report
-- Any blank secondary fostering form: none was found published
+- Blank secondary fostering forms: almost none are published. One found so far: North Somerset's expression of interest at the back of its printed information pack (added 24 November 2026)
 
 The best next step is a browser-based pass by a person on the forms that would not render, recorded straight into these files.
 

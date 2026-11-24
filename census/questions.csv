@@ -4702,3 +4702,15 @@ uk-eng-warrington-no-wrong-door-eoi-q042,uk-eng-warrington-no-wrong-door-eoi,42,
 uk-eng-warrington-no-wrong-door-eoi-q043,uk-eng-warrington-no-wrong-door-eoi,43,Declaration,"Declaration that the details are correct, that the council may check them, that false or withheld details may lead to rejection, and that you will not share the form",consent,declaration_and_checks,yes,statement,no,,,direct_fetch,2026-11-24
 uk-eng-warrington-no-wrong-door-eoi-q044,uk-eng-warrington-no-wrong-door-eoi,44,Declaration,Agreement that the council may carry out initial checks,consent,declaration_and_checks,yes,statement,no,,,direct_fetch,2026-11-24
 uk-eng-warrington-no-wrong-door-eoi-q045,uk-eng-warrington-no-wrong-door-eoi,45,Household member consent,Each other adult over 18 in the home types their name to consent to the council's initial checks,consent,declaration_and_checks,yes,statement,no,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q001,uk-eng-north-somerset-eoi,1,,"Next step: come to an information evening, or have the team call to arrange a home visit",contact_preference,next_step,unknown,radio,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q002,uk-eng-north-somerset-eoi,2,,"Type of fostering you are interested in, if you know: short term, long term, respite, a specialist scheme, supported lodgings or Family Link",interest,care_type,unknown,checkbox,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q003,uk-eng-north-somerset-eoi,3,,Your full name,contact_identity,name,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q004,uk-eng-north-somerset-eoi,4,,Your date of birth,contact_identity,date_of_birth,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q005,uk-eng-north-somerset-eoi,5,,"Name, date of birth and relationship of everyone else in your household",household,household_composition,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q006,uk-eng-north-somerset-eoi,6,,Address,contact_identity,address,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q007,uk-eng-north-somerset-eoi,7,,Postcode,contact_identity,postcode,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q008,uk-eng-north-somerset-eoi,8,,Landline and mobile numbers,contact_identity,phone,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q009,uk-eng-north-somerset-eoi,9,,Email address,contact_identity,email,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q010,uk-eng-north-somerset-eoi,10,,How many bedrooms your home has,housing,spare_bedroom,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q011,uk-eng-north-somerset-eoi,11,,How many bedrooms are free for fostering,housing,spare_bedroom,unknown,text,yes,,,direct_fetch,2026-11-24
+uk-eng-north-somerset-eoi-q012,uk-eng-north-somerset-eoi,12,,"Best time to contact you: morning, afternoon or evening",contact_preference,time,unknown,checkbox,yes,,,direct_fetch,2026-11-24
