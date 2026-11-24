@@ -80,7 +80,7 @@ if (card) {
     }}
     reports={reports.map((r) => ({
       href: hrefOf(r.id),
-      title: titleOf(r.body).replace(/,? and a refined OUCM open standard$/i, ""),
+      title: titleOf(r.body).replace(/,? and a refined Kinderform open standard$/i, ""),
       when: monthOf(r.id),
       // Each report's card text comes from its entry in the research log.
       blurb: blurbFor(r.id) ?? "A review of existing research. We made it with an AI-assisted research tool. Most figures are not yet checked by a person.",

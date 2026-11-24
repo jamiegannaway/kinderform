@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import type { Group } from "@/lib/census"
+import { COUNTRY_NAMES } from "@/lib/compare"
 import { CAPS, DOMAINS } from "@/lib/form-check"
 import { Illustration } from "@/components/illustration"
 
@@ -223,7 +224,7 @@ export default function FormCheckPublic({
             <TableBody>
               {coverage.map((r) => (
                 <TableRow key={`${r.country}-${r.region}`}>
-                  <TableCell>{r.country === "UK" ? "United Kingdom" : "United States"}</TableCell>
+                  <TableCell>{COUNTRY_NAMES[r.country] ?? r.country}</TableCell>
                   <TableCell className="font-medium">{r.region}</TableCell>
                   <TableCell className="text-right tabular-nums">{r.primary}</TableCell>
                   <TableCell className="text-right tabular-nums">{r.read}</TableCell>

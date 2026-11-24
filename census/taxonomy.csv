@@ -1,4 +1,4 @@
-category,topic,description,sensitivity,england_fostering_stage_draft,oucm_enquiry_field,note
+category,topic,description,sensitivity,england_fostering_stage_draft,kinderform_enquiry_field,note
 account,existing_account,Whether the person has a council online account,none,service_operation,,
 consent,contact,Consent to be contacted about the enquiry,none,service_operation,lawful_basis,"Record the lawful basis, not the tick."
 consent,declaration_and_checks,Declaration of accuracy and permission for checks,none,stage_1,lawful_basis,Consent to checks is normally a Stage 1 step.
@@ -39,8 +39,8 @@ free_text,questions,Open box for questions or comments,free_text,service_operati
 health,disability,Disability,special_category,stage_1,kept_out_later_slice,Often asked as equality monitoring.
 health,health,"Health, including mental health",special_category,stage_1,kept_out_later_slice,Stage 1 includes a medical report.
 household,applicant_type,Applying as a couple or an individual,none,stage_1,kept_out_later_slice,Light-touch version of household particulars.
-household,children_in_household,"Whether children live in the home, sometimes by age band",household_third_party,stage_1,kept_out_later_slice,Questions about the enquirer's own children; OUCM records the topic only.
-household,household_composition,Who else lives in the home,household_third_party,stage_1,kept_out_later_slice,May include children; OUCM records the topic only.
+household,children_in_household,"Whether children live in the home, sometimes by age band",household_third_party,stage_1,kept_out_later_slice,Questions about the enquirer's own children; Kinderform records the topic only.
+household,household_composition,Who else lives in the home,household_third_party,stage_1,kept_out_later_slice,May include children; Kinderform records the topic only.
 household,partner,Whether a partner lives with the enquirer,household_third_party,stage_1,kept_out_later_slice,
 household,partner_date_of_birth,Partner's date of birth,household_third_party,stage_1,kept_out_identifier,
 household,partner_details,Partner's name or contact details,household_third_party,stage_1,kept_out_identifier,
@@ -54,7 +54,7 @@ information_event,event_dates,Information meeting dates the person can attend,no
 intent,journey_stage,"What the person wants now: information, a chat, to apply",none,service_operation,intent_tier,
 interest,care_type,Type of fostering or scheme of interest,none,service_operation,fostering_interests,
 interest,early_permanence,Interest in early permanence (adoption),none,service_operation,,No adoption field in schema v0.1.
-out_of_scope,child_specific,Questions about a particular child,child_data,out_of_scope,,Outside OUCM scope.
+out_of_scope,child_specific,Questions about a particular child,child_data,out_of_scope,,Outside Kinderform scope.
 prior_involvement,social_services,Previous involvement with social services,sensitive,stage_1,kept_out_later_slice,Stage 1 includes local authority checks.
 routing,local_authority,Which council the person lives in or wants,none,service_operation,la_gss_code,Can be derived from the postcode.
 routing,nearest_office,Nearest agency office,none,service_operation,,

@@ -1,14 +1,14 @@
 # Contributing
 
-Thank you for helping. You do not need to write code to contribute.
+Thank you for helping. You do not need to write code or have a GitHub account to contribute. [Choose a public or private way to get in touch](SUPPORT.md).
 
 ## Ways to help
 
 - **Correct the registers.** If a front door or a rule is wrong or out of date, open an issue or a pull request against the file in `register/` (the UK) or `register/us/`, `ca/`, `au/`, `de/`, `fr/` or `es/`. Give the source link and the date you checked it. Services can also email corrections to [jamie.gannaway@gmail.com](mailto:jamie.gannaway@gmail.com).
 - **Comment on the rubric.** Tell us what is unfair, missing or impractical in `rubric/rubric.md`. This matters most from people who run recruitment teams.
 - **Add evidence.** Suggest a paper or report for `evidence/library.md`, with a link and a two-sentence summary in your own words.
-- **Review the schema.** Try mapping your own enquiry export to `schema/enquiry.schema.json` and tell us what does not fit.
-- **Share lived experience.** If you have enquired about fostering, foster now, or grew up in care, your view of what a good first reply looks like is the most useful input this project can get.
+- **Review the schema.** Compare the field names in your system with the [enquiry schema](schema/enquiry.schema.json). Work locally, try [made-up records](docs/one-enquiry.md), and send only fictional examples.
+- **Share lived experience.** If you have enquired about fostering, foster now, or grew up in care, we would like to hear what made the first reply helpful or difficult. [Send private feedback](SUPPORT.md) and leave out names or identifying details.
 
 ## Ground rules
 

@@ -261,7 +261,7 @@ pact-adoption:q11:o17,pact-adoption:q11,17,OTHER: JEWISH,
 pact-adoption:q11:o18,pact-adoption:q11,18,OTHER: ANY OTHER ETHNIC GROUP,
 pact-adoption:q12:o01,pact-adoption:q12,1,"UK local authority list (about 200 entries, not itemised here)",
 pact-adoption:q13:o01,pact-adoption:q13,1,No,
-pact-adoption:q13:o02,pact-adoption:q13,2,Yes,Opens a children-details section (fields not visible; outside OUCM scope).
+pact-adoption:q13:o02,pact-adoption:q13,2,Yes,Opens a children-details section (fields not visible; outside Kinderform scope).
 pact-adoption:q14:o01,pact-adoption:q14,1,"Yes, I have at least one spare bedroom",
 pact-adoption:q14:o02,pact-adoption:q14,2,"No, I do not have a spare bedroom",
 pact-adoption:q15:o01,pact-adoption:q15,1,Online search,

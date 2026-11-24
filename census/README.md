@@ -1,6 +1,6 @@
 # Intake-form census (v0.1, November 2026)
 
-A list of fostering and adoption intake forms in the UK, the United States, Canada and Australia: what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
+A list of fostering and adoption intake forms in the UK, the US, Canada, Australia, Germany, France and Spain. It records what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
 
 > **Status: draft for analysis. Every row is unverified.** The data describes public pages and processes. It is not a score, and nothing here should be published as a named comparison until the method has been consulted on and each service has seen its own rows privately, with a right of reply.
 
@@ -26,9 +26,9 @@ IDs link the files: `questions.form_id` → `forms.form_id`, `answer_options.que
 |---|---|
 | `form_id` | Short ID, unique in this file |
 | `front_door_id` | Register ID, if the front door is in the register |
-| `operator_type` | UK: `regional_hub`, `single_authority`, `council`, `council_consortium`, `national_brand_council`, `regional_service`, `regional_adoption_agency`, `voluntary_adoption_agency`, `independent_fostering_agency`. US, Canada and Australia: `state_agency` (state, provincial or territorial government), `county_agency` (US counties and cities), `child_welfare_agency` (a mandated or delegated body that runs statutory child welfare, such as an Ontario Children's Aid Society), `indigenous_agency` (tribal, First Nations, Métis, Inuit or Aboriginal community-controlled), `private_agency` (licensed or accredited non-government agency). Any: `platform_vendor` |
-| `country` | `UK`, `US`, `CA` (Canada) or `AU` (Australia) |
-| `region` | A UK nation (`England`, `Wales`, `Scotland`, `Northern Ireland`), a US state or `District of Columbia`, a Canadian province or territory, or an Australian state or territory, written out in full |
+| `operator_type` | UK: `regional_hub`, `single_authority`, `council`, `council_consortium`, `national_brand_council`, `regional_service`, `regional_adoption_agency`, `voluntary_adoption_agency`, `independent_fostering_agency`. US, Canada and Australia: `state_agency` (state, provincial or territorial government), `county_agency` (US counties and cities), `child_welfare_agency` (a mandated or delegated body that runs statutory child welfare, such as an Ontario Children's Aid Society), `indigenous_agency` (tribal, First Nations, Métis, Inuit or Aboriginal community-controlled), `private_agency` (licensed or accredited non-government agency). Germany, France and Spain also use `local_authority` and `voluntary_agency`. Any country can use `platform_vendor`. |
+| `country` | `UK` (United Kingdom), `US` (United States), `CA` (Canada), `AU` (Australia), `DE` (Germany), `FR` (France) or `ES` (Spain) |
+| `region` | A UK nation (`England`, `Wales`, `Scotland`, `Northern Ireland`), a US state or `District of Columbia`, a Canadian province or territory, an Australian state or territory, a German Land, a French region or a Spanish autonomous community or city. Names are written in full |
 | `service_type` | `fostering`, `adoption` or `fostering_and_adoption` |
 | `form_stage` | `primary` (first contact) or `secondary` (after first contact, before assessment) |
 | `access_route` | `online_form`, `downloadable_form`, `phone_conversation`, `sent_after_first_contact`, `email_only`, `signposting_only`, `described_not_public`, `council_portal` |
@@ -76,9 +76,9 @@ A form with no row for a guidance type was not checked for it. That is different
 
 `sensitivity` is one of `none`, `personal_identifier`, `household_third_party`, `eligibility_gate`, `special_category`, `criminal_offence`, `immigration`, `equality_monitoring`, `health_related`, `free_text`, `sensitive`, `staff_identifier`, `child_data`.
 
-`england_fostering_stage_draft` is OUCM's **draft** reading of where each topic first becomes necessary under the Fostering Services (England) Regulations 2011, regulation 26 and Schedule 3, as summarised in the census report: `enquiry`, `stage_1`, `stage_2`, `not_in_schedule_3`, `service_operation` or `out_of_scope`. Check it against [legislation.gov.uk](https://legislation.gov.uk/uksi/2011/581/schedule/3) before relying on it. Adoption follows different regulations; see the report.
+`england_fostering_stage_draft` is Kinderform's **draft** reading of where each topic first becomes necessary under the Fostering Services (England) Regulations 2011, regulation 26 and Schedule 3, as summarised in the census report: `enquiry`, `stage_1`, `stage_2`, `not_in_schedule_3`, `service_operation` or `out_of_scope`. Check it against [legislation.gov.uk](https://legislation.gov.uk/uksi/2011/581/schedule/3) before relying on it. Adoption follows different regulations; see the report.
 
-`oucm_enquiry_field` says which field in `schema/enquiry.schema.json` the topic maps to, or why it is kept out (`kept_out_identifier`, `kept_out_later_slice`, `kept_out_free_text`).
+`kinderform_enquiry_field` says which field in `schema/enquiry.schema.json` the topic maps to, or why it is kept out (`kept_out_identifier`, `kept_out_later_slice`, `kept_out_free_text`).
 
 ## How the data was gathered
 
@@ -95,9 +95,9 @@ Labels, hints and guidance are paraphrased, to keep the dataset short and to avo
 
 ## Coverage and gaps
 
-**United States, Canada and Australia.** Forms come from the crawler, starting from the front-door registers in [`register/us/`](../register/us/), [`register/ca/`](../register/ca/) and [`register/au/`](../register/au/). Only forms that load as ordinary web pages can be read: forms that load in the browser with JavaScript, sit behind a portal or a bot check, or are PDFs are not yet recorded. Coverage is therefore uneven, and every crawler row is unverified.
+**United States, Canada, Australia, Germany, France and Spain.** The crawler starts with the service websites listed in the [country registers](../register/). Only forms that load as ordinary web pages can be read: forms that load in the browser with JavaScript, sit behind a portal or a bot check, or are PDFs are not yet recorded. Coverage is therefore uneven, and every crawler row is unverified.
 
-**UK.** Most UK rows were recorded by a person from 14 November 2026. On 18 November the crawler added 32 more forms from front doors new to the register: 15 in Wales (mostly Foster Wales local authorities), 4 in Scotland, 1 in Northern Ireland and 12 in England. On the site, the form check and the rubric use only the rows a person recorded. "How UK enquiry forms differ" and the comparison across four countries on `/research` use the crawler's forms as well.
+**UK.** Most UK rows were recorded by a person from 14 November 2026. On 18 November the crawler added 32 more forms from front doors new to the register: 15 in Wales (mostly Foster Wales local authorities), 4 in Scotland, 1 in Northern Ireland and 12 in England. On the site, the form check and the rubric use only the rows a person recorded. "How UK enquiry forms differ" and the comparison across countries on `/research` use the crawler's forms as well.
 
 This is a first pass, not a full census. See [`summary.md`](summary.md) for counts.
 

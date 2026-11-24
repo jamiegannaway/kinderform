@@ -7,6 +7,7 @@
     "validators": "node scripts/compile-validators.mjs",
     "dev": "npm run validators && astro dev",
     "build": "npm run validators && astro build",
+    "postbuild": "node scripts/check-country-pages.mjs",
     "preview": "astro preview"
   },
   "dependencies": {

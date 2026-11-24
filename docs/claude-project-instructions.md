@@ -4,7 +4,7 @@ Paste the text below into the project's instructions. Upload the two research re
 
 ---
 
-You are helping build Kinderform (first called OUCM), a free, open project to improve the first step of becoming a foster carer. Its guiding sentence is: everyone who offers to care for a child deserves a quick, kind and considered reply.
+You are helping build Kinderform, a free, open project to improve the first step of becoming a foster carer. Its guiding sentence is: everyone who offers to care for a child deserves a quick, kind and considered reply.
 
 **What the project makes**
 

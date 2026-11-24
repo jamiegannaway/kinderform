@@ -1,12 +1,12 @@
 # Front-door register
 
-`front-doors.csv` lists the public places where someone in the UK can enquire about fostering with a local authority: regional hubs, single-authority services and national brands. One row per front door, not per council, because most English councils now share a regional hub.
+[`front-doors.csv`](front-doors.csv) lists public routes for fostering and adoption enquiries in England, Wales, Scotland and Northern Ireland. Each row describes one place to get in touch. A regional hub may serve several councils.
 
-**Status: seed data from a first-pass desk review in November 2026. Every row is marked `unverified` until someone has checked it against the live page.** Scottish councils, English councils outside the hubs and independent fostering agencies are not yet included.
+**Status: seed data from a first-pass desk review in November 2026. Every row is marked `unverified` until someone has checked it against the live page.** The UK register includes Scottish councils, Welsh local authorities, Northern Irish trusts, English councils and regional adoption agencies. Coverage of English councils outside hubs is partial.
 
 The register holds neutral facts only. It contains no scores or judgements.
 
-The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/), Australia's in [`au/`](au/), Germany's in [`de/`](de/), France's in [`fr/`](fr/) and Spain's in [`es/`](es/). Their front-door columns are checked by `tests/validate_world_register.py`.
+The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/), Australia's in [`au/`](au/), Germany's in [`de/`](de/), France's in [`fr/`](fr/) and Spain's in [`es/`](es/). The US rows are checked by `tests/validate_us_register.py`. The other five country folders are checked by `tests/validate_world_register.py`.
 
 For Germany, France and Spain:
 
@@ -35,7 +35,7 @@ The published rules on who can foster and what approval involves, so services ca
 | `verification` | `unverified` until a person has checked the row against the source |
 | `notes` | Anything a reader needs, for example where practice differs from the rule |
 
-`tests/validate_policies.py` checks these three files. Every row is unverified until a person has checked it.
+`tests/validate_policies.py` checks the UK, Canadian, Australian, German, French and Spanish rules. `tests/validate_us_register.py` checks the US rules. Every row is unverified until a person has checked it.
 
 ## Columns
 
@@ -43,7 +43,7 @@ The published rules on who can foster and what approval involves, so services ca
 |---|---|
 | `front_door_id` | Short stable identifier, lower case with hyphens |
 | `name` | Public name of the front door |
-| `type` | `regional_hub`, `single_authority`, `national_brand`, `regional_service` |
+| `type` | `regional_hub`, `single_authority`, `national_brand`, `regional_service`, `regional_adoption_agency` |
 | `nation` | England, Wales, Scotland or Northern Ireland |
 | `coverage` | Authorities covered, in words |
 | `website` | Home page |

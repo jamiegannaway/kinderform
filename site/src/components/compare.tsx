@@ -96,7 +96,7 @@ function FactsNotice() {
           <a href={`${CORRECT}Correction%20to%20the%20compare%20tables`} className={LINK}>
             Email jamie.gannaway@gmail.com
           </a>{" "}
-          and we will fix it.
+          with the row, the public source, what changed and the date you checked. Leave out personal details.
         </p>
       </AlertDescription>
     </Alert>

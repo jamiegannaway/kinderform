@@ -3,6 +3,7 @@
 ## Now: foundations (v0.1)
 
 - [x] Repository, licences and working rules
+- [x] Add a [support guide](../SUPPORT.md), public correction forms, a [worked enquiry](one-enquiry.md) and [citation information](../CITATION.cff) for the first public draft.
 - [x] Enquiry schema v0.1 draft with synthetic examples and a validation test
 - [x] Front-door register seeded (unverified)
 - [x] Rubric v0.1 draft for comment

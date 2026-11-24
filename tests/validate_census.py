@@ -30,7 +30,7 @@ COLUMNS = {
     "guidance.csv": ["guidance_id", "form_id", "guidance_type", "present", "summary_paraphrased", "value",
                      "source_url", "observed", "date_checked"],
     "taxonomy.csv": ["category", "topic", "description", "sensitivity", "england_fostering_stage_draft",
-                     "oucm_enquiry_field", "note"],
+                     "kinderform_enquiry_field", "note"],
 }
 
 ALLOWED = {
