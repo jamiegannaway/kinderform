@@ -273,7 +273,7 @@ export function HeatGrid({
   unit = "forms",
 }: {
   unit?: string
-  columns: { key: string; label: string; short?: string; n: number }[]
+  columns: { key: string; label: string; short?: string; n: number; unit?: string }[]
   rows: { label: string; note?: string; cells: Record<string, { yes: number; of: number }> }[]
 }) {
   return (
@@ -298,7 +298,7 @@ export function HeatGrid({
                 )}
                 <span className="block font-normal text-muted-foreground tabular-nums">
                   {c.n}
-                  <span className="hidden sm:inline"> {unit}</span>
+                  <span className="hidden sm:inline"> {c.unit ?? unit}</span>
                 </span>
               </th>
             ))}

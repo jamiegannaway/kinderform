@@ -8,6 +8,7 @@ import { loadCensus } from "@/lib/census";
 import { formsDiffer } from "@/lib/forms-differ";
 import { usPicture } from "@/lib/us-register";
 import { countries } from "@/lib/countries";
+import { applications } from "@/lib/applications";
 import { blurbFor } from "@/lib/research-log";
 
 // Keep the order of findings.json: it is the order we want people to read them in.
@@ -23,6 +24,8 @@ const differ = formsDiffer(loadCensus());
 const us = usPicture();
 // First-contact forms across countries, measured the same way (see src/lib/countries.ts).
 const world = countries(loadCensus());
+// First contact against the application that follows (see src/lib/applications.ts).
+const apps = applications(loadCensus());
 
 // The withdrawals card at the top quotes the checked "withdrawals" finding. Read its
 // figures from the finding itself, and stop the build if the wording changes so they
@@ -89,6 +92,7 @@ if (card) {
     formsDiffer={differ}
     us={us}
     world={world}
+    apps={apps}
     withdrawals={withdrawals}
   />
 </Base>
