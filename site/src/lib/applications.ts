@@ -39,6 +39,7 @@ export type StageCountry = {
   name: string
   first: number // first-contact forms counted
   apps: number // applications counted
+  found: number // application forms listed for the country, read or not
   unit: string // what one application is ("forms", "packets")
   firstMedian: number
   appMedian: number
@@ -46,7 +47,12 @@ export type StageCountry = {
   sensitiveFirst: Share // first-contact forms asking any sensitive topic
   sensitiveApp: Share
 }
-export type ApplicationsData = { countries: StageCountry[]; appForms: number; appQuestions: number; unclassified: number }
+export type ApplicationsData = {
+  countries: StageCountry[]
+  appForms: number // application documents whose questions we read
+  appQuestions: number
+  unclassified: number
+}
 
 const median = (xs: number[]) => {
   if (!xs.length) return 0
@@ -60,7 +66,9 @@ const answered = (q: Row) => q.category !== "consent" && q.category !== "staff_r
 
 export function applications(c: Census): ApplicationsData {
   const asked = askedBy(c)
-  const appForms = c.forms.filter((f) => f.form_stage === "application" && f.fields_observed !== "no")
+  const listed = c.forms.filter((f) => f.form_stage === "application")
+  // Documents we could read: at least 3 questions the person answers.
+  const appForms = listed.filter((f) => (asked.get(f.form_id) ?? []).filter(answered).length >= 3)
   const appQs = appForms.flatMap((f) => (asked.get(f.form_id) ?? []).filter(answered))
   const out: StageCountry[] = []
   for (const { code, name } of COUNTRIES) {
@@ -94,6 +102,7 @@ export function applications(c: Census): ApplicationsData {
       name,
       first: first.length,
       apps: units.length,
+      found: listed.filter((f) => f.country === code).length,
       unit: byPacket ? "packets" : "forms",
       firstMedian: median(first.map((f) => f.questions)),
       appMedian: median(units.map((qs) => qs.length)),

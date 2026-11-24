@@ -27,7 +27,9 @@ export function Applications({ data }: { data: ApplicationsData }) {
   return (
     <section aria-labelledby="applications" className="space-y-8">
       <div className="max-w-3xl space-y-4">
-        <Badge variant="secondary">First pass: {data.countries.map((c) => c.name).join(" and ")}</Badge>
+        <Badge variant="secondary" className="whitespace-normal">
+          First pass: {data.countries.map((c) => c.name).join(" and ")}
+        </Badge>
         <h2 id="applications" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
           What applications ask
         </h2>
@@ -49,7 +51,7 @@ export function Applications({ data }: { data: ApplicationsData }) {
             key={c.code}
             label={`${c.name}: a typical application`}
             value={`${c.appMedian} questions`}
-            note={`A typical enquiry form asks ${c.firstMedian}. Based on ${c.first} enquiry forms and ${c.apps} ${c.unit === "forms" ? "application forms" : "application packets, each the set of forms one state, county or tribe gives applicants"}.`}
+            note={`A typical enquiry form asks ${c.firstMedian}. Based on ${c.first} enquiry forms and ${c.apps} ${c.unit === "forms" ? "application forms" : "application packets, each the set of forms one state, county or tribe gives applicants"}.${c.unit === "forms" && c.found > c.apps ? ` We found ${c.found} application forms but could read only ${c.apps}: most are given out after a first visit or behind a sign-in.` : ""}`}
           />
         ))}
       </div>

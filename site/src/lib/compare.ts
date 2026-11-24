@@ -381,7 +381,7 @@ export function applicationRows(c: Census = loadCensus(), dates = loadPageDates(
         name: f.name.split(": ").slice(1).join(": ") || "Application form",
         step: /registration of interest/i.test(f.name) ? "Registration of interest" : "Application",
         format: f.access_route === "online_form" ? "web" : f.access_route === "downloadable_form" ? "document" : "",
-        licensed: false,
+        licensed: /Licensed form/.test(f.notes),
         link,
         checked: f.date_checked,
         page: dates.get(link) ?? null,
