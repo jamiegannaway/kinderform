@@ -30,8 +30,16 @@ export type TopicCheck = {
   ukApp: Share | null
   usApp: Share | null
   allApp: Share // every country's applications together (a US packet counts once)
-  england: LawStage | null
+  // Where the law in each UK nation puts the topic, by nation code (ENG, WLS, SCT, NIR).
+  law: Record<string, LawStage> | null
 }
+
+export const NATIONS = [
+  { code: "ENG", name: "England" },
+  { code: "WLS", name: "Wales" },
+  { code: "SCT", name: "Scotland" },
+  { code: "NIR", name: "Northern Ireland" },
+] as const
 
 export type InsightsData = {
   checked: string // latest date a first-contact form was read
@@ -73,11 +81,12 @@ const EARLY: Record<string, string> = {
   spare_bedroom: "a spare room",
 }
 
+const STAGE_ORDER = ["stage_1", "stage_2", "assessment", "checks"]
 const STAGE_NAMES: Record<string, string> = {
   stage_1: "Stage 1",
   stage_2: "Stage 2",
   assessment: "Assessment",
-  checks: "Checks",
+  checks: "Check",
 }
 
 function lawMap(): Row[] {
@@ -119,11 +128,13 @@ export function insights(c: Census): InsightsData {
     return { yes: xs.filter((f) => f.spareRoom).length, of: xs.length }
   }
 
-  // The law map, England only for now.
-  const law = lawMap().filter((r) => r.jurisdiction === "ENG")
-  const stagesFor = (match: (q: Row) => boolean, service: string) =>
-    [...new Set(law.filter((r) => r.applies_to === service && match(r)).map((r) => STAGE_NAMES[r.stage] ?? r.stage))]
-      .sort()
+  // The law map. The stage-2 check below uses England; the table shows every nation.
+  const allLaw = lawMap()
+  const law = allLaw.filter((r) => r.jurisdiction === "ENG")
+  const stagesFor = (match: (q: Row) => boolean, service: string, nation = "ENG") =>
+    [...new Set(allLaw.filter((r) => r.jurisdiction === nation && r.applies_to === service && match(r)).map((r) => r.stage))]
+      .sort((a, b) => STAGE_ORDER.indexOf(a) - STAGE_ORDER.indexOf(b))
+      .map((x) => STAGE_NAMES[x] ?? x)
 
   // Topics the law puts only in stage 2, for each service.
   const stage2Only = (service: string) => {
@@ -160,8 +171,6 @@ export function insights(c: Census): InsightsData {
   const schedule = law.find((r) => r.applies_to === "fostering" && r.source_type === "legislation")
 
   const topics: TopicCheck[] = APPLICATION_TOPICS.map((t) => {
-    const fostering = stagesFor(t.match, "fostering")
-    const adoption = stagesFor(t.match, "adoption")
     return {
       label: t.label,
       sensitive: !!t.sensitive,
@@ -176,7 +185,14 @@ export function insights(c: Census): InsightsData {
         },
         { yes: 0, of: 0 },
       ),
-      england: law.length ? { fostering, adoption } : null,
+      law: allLaw.length
+        ? Object.fromEntries(
+            NATIONS.map((n) => [
+              n.code,
+              { fostering: stagesFor(t.match, "fostering", n.code), adoption: stagesFor(t.match, "adoption", n.code) },
+            ]),
+          )
+        : null,
     }
   })
 

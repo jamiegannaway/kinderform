@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/table"
 import { Illustration } from "@/components/illustration"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
-import type { InsightsData, RuleQuote, Share } from "@/lib/insights"
+import { NATIONS, type InsightsData, type RuleQuote, type Share } from "@/lib/insights"
 
 export type Withdrawals = { share: number; notExpected: number; year: string } | null
 
@@ -231,8 +231,8 @@ export function ForServices({
             tryThis: (
               <>
                 Check each question on your forms against the{" "}
-                <a href="#check-your-form" className={link}>
-                  table below
+                <a href="#law-by-nation" className={link}>
+                  law in your nation
                 </a>
                 . Move stage 2 questions to the assessment, where a social worker can explain why they matter. If you
                 ask about ethnicity or religion for monitoring, make it optional and keep it apart from the decision.
@@ -488,8 +488,7 @@ export function ForServices({
           <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
             Go down the list and note what your enquiry form asks. If it asks something few enquiry forms ask, check
             whether you need it before you have spoken to the person.
-            {law &&
-              " The last columns show where the law in England puts each topic in the assessment. Stage 1 is the first part, mostly checks. Stage 2 is the full assessment."}
+            {law && " The next table shows where the law in each UK nation puts each topic."}
           </p>
           <Table className="mt-6">
             <TableCaption className="text-left">The share of forms that ask about each topic.</TableCaption>
@@ -501,8 +500,6 @@ export function ForServices({
                 <TableHead className="text-right whitespace-normal">UK applications</TableHead>
                 <TableHead className="text-right whitespace-normal">US applications</TableHead>
                 <TableHead className="text-right whitespace-normal">Applications, all countries</TableHead>
-                {law && <TableHead className="whitespace-normal">England, fostering assessment</TableHead>}
-                {law && <TableHead className="whitespace-normal">England, adoption assessment</TableHead>}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -521,12 +518,6 @@ export function ForServices({
                   <Cell s={t.ukApp} />
                   <Cell s={t.usApp} />
                   <Cell s={t.allApp} />
-                  {law && (
-                    <TableCell className="whitespace-normal">{t.england?.fostering.join(", ") || "Not named"}</TableCell>
-                  )}
-                  {law && (
-                    <TableCell className="whitespace-normal">{t.england?.adoption.join(", ") || "Not named"}</TableCell>
-                  )}
                 </TableRow>
               ))}
             </TableBody>
@@ -544,22 +535,78 @@ export function ForServices({
             says should wait until after a conversation. A US application is one service&rsquo;s set of forms, counted
             once.
           </p>
-          {law && (
-            <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
-              &ldquo;Not named&rdquo; means the law&rsquo;s list does not name the topic. A person has not yet checked our
-              reading of the law. Our{" "}
-              <a href="https://github.com/jamiegannaway/kinderform/blob/main/register/assessment.csv" className={link}>
-                map of the law in all four UK nations
-              </a>{" "}
-              gives the source for each row.
-            </p>
-          )}
           <p className="mt-4">
             <a href="/for-services/topics.csv" className={link}>
-              Download this table (CSV)
+              Download this table, with the law in each UK nation (CSV)
             </a>
           </p>
         </section>
+
+        {law && (
+          <>
+            <Separator />
+            <section aria-labelledby="law-by-nation" className="py-12">
+              <H2 id="law-by-nation">Where the law puts each topic, in each UK nation</H2>
+              <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
+                The law in each nation lists what a fostering or adoption assessment must cover. England, and adoption in
+                Wales, split it into 2 stages. Stage 1 is mostly checks. Stage 2 is the full assessment. The other
+                nations have one assessment, plus checks the service must make.
+              </p>
+              <Table className="mt-6 min-w-[44rem]">
+                <TableCaption className="text-left">
+                  Stage 1 or Stage 2: the stage where the law puts the topic. Assessment: the assessment covers it. Check: a
+                  check the service must make. A dash: the law&rsquo;s list does not name it.
+                </TableCaption>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead rowSpan={2} className="align-bottom">
+                      Topic
+                    </TableHead>
+                    {NATIONS.map((n) => (
+                      <TableHead key={n.code} colSpan={2} className="border-l text-center">
+                        {n.name}
+                      </TableHead>
+                    ))}
+                  </TableRow>
+                  <TableRow>
+                    {NATIONS.flatMap((n) => [
+                      <TableHead key={`${n.code}-f`} className="border-l text-xs font-normal">
+                        Fostering
+                      </TableHead>,
+                      <TableHead key={`${n.code}-a`} className="text-xs font-normal">
+                        Adoption
+                      </TableHead>,
+                    ])}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {d.topics.map((t) => (
+                    <TableRow key={t.label}>
+                      <TableCell className="min-w-40 font-medium whitespace-normal">{t.label}</TableCell>
+                      {NATIONS.flatMap((n) => [
+                        <TableCell key={`${n.code}-f`} className="border-l text-xs whitespace-normal">
+                          {t.law?.[n.code]?.fostering.join(", ") || "–"}
+                        </TableCell>,
+                        <TableCell key={`${n.code}-a`} className="text-xs whitespace-normal">
+                          {t.law?.[n.code]?.adoption.join(", ") || "–"}
+                        </TableCell>,
+                      ])}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
+                We read the law on legislation.gov.uk and the statutory guidance on GOV.UK in November 2026. A person has
+                not yet checked our reading. Some laws are online only in their first form, and later changes may be
+                missing. Our{" "}
+                <a href="https://github.com/jamiegannaway/kinderform/blob/main/register/assessment.csv" className={link}>
+                  map of the law
+                </a>{" "}
+                gives the source and the paragraph for each row.
+              </p>
+            </section>
+          </>
+        )}
 
         <Separator />
 

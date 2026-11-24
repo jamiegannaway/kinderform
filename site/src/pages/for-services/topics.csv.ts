@@ -2,7 +2,7 @@
 // Counts of forms only; no service is named.
 import { loadCensus } from "@/lib/census"
 import { toCsv } from "@/lib/compare"
-import { insights, type Share } from "@/lib/insights"
+import { insights, NATIONS, type Share } from "@/lib/insights"
 
 export function GET() {
   const d = insights(loadCensus())
@@ -10,9 +10,10 @@ export function GET() {
   const csv = toCsv(
     ["topic", "personal", "uk_enquiry_forms_asking", "uk_enquiry_forms", "all_enquiry_forms_asking", "all_enquiry_forms",
       "uk_applications_asking", "uk_applications", "us_application_packets_asking", "us_application_packets", "all_applications_asking", "all_applications",
-      "england_fostering_assessment", "england_adoption_assessment", "latest_date_checked", "verification"],
+      ...NATIONS.flatMap((n) => [`${n.code.toLowerCase()}_fostering_assessment`, `${n.code.toLowerCase()}_adoption_assessment`]),
+      "latest_date_checked", "verification"],
     d.topics.map((t) => [t.label, t.sensitive ? "yes" : "no", ...cells(t.ukFirst), ...cells(t.allFirst),
-      ...cells(t.ukApp), ...cells(t.usApp), ...cells(t.allApp), t.england?.fostering.join("; ") ?? "", t.england?.adoption.join("; ") ?? "",
+      ...cells(t.ukApp), ...cells(t.usApp), ...cells(t.allApp), ...NATIONS.flatMap((n) => [t.law?.[n.code]?.fostering.join("; ") ?? "", t.law?.[n.code]?.adoption.join("; ") ?? ""]),
       d.checked, "unverified"]),
   )
   return new Response(csv, { headers: { "Content-Type": "text/csv; charset=utf-8" } })

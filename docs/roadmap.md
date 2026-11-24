@@ -87,7 +87,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] `/for-services`: ideas for recruitment teams, each putting our reading of public forms (no names) next to published research and the rules, with one thing to try
 - [x] A topic-by-topic table, with a CSV download, so a service can check its own enquiry form against enquiry forms and applications
 - [x] Show where the law in England puts each topic in the assessment, beside what forms ask
-- [ ] Show the other three UK nations the same way
+- [x] Show the other three UK nations the same way: a table of where the law in each nation puts each topic, for fostering and adoption
 - [ ] Read the law not yet covered: England's Schedule 4A and the Adoption and Children Act 2002 rules on age and residence, Scotland's 2010 adoption amendments and 2011 guidance
 - [ ] Ask recruitment teams which ideas help, and which are wrong, before adding more
 
