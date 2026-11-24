@@ -176,9 +176,9 @@ export function CompareIndex({
     },
     {
       href: "/compare/applications",
-      title: "Application forms (US)",
+      title: "Application forms",
       figure: `${applications} forms`,
-      body: "The forms in each US state's fostering and adoption application packet, with what each one is for.",
+      body: "The forms that come after the first enquiry, in the UK and the US: what each is for, how many questions it asks and which sensitive topics.",
     },
   ]
   return (
@@ -485,15 +485,18 @@ export function CompareTopic({ topic, rows }: { topic: TopicInfo; rows: RuleRow[
 // ---- /compare/applications ---------------------------------------------------------
 
 export function CompareApplications({ rows }: { rows: ApplicationRow[] }) {
-  const states = [...new Set(rows.map((r) => r.state))]
+  const uk = rows.filter((r) => r.country === "UK")
+  const us = rows.filter((r) => r.country === "US")
+  const read = rows.filter((r) => r.questions !== null).length
   return (
     <Page>
       <div>
-        <Crumbs here="US application forms" />
-        <Intro title="US application forms compared">
+        <Crumbs here="Application forms" />
+        <Intro title="Application forms compared">
           <p className="text-xl leading-8 text-muted-foreground">
-            The forms in each US state's application packet for fostering and adoption: {rows.length} forms from{" "}
-            {states.length} states. Licensed forms are named, not copied.
+            The forms that come after the first enquiry: {uk.length ? `${uk.length} from UK services and ` : ""}
+            {us.length} from US states' application packets. We have read the questions on {read} of them. Licensed
+            forms are named, not copied.
           </p>
         </Intro>
       </div>
@@ -501,12 +504,14 @@ export function CompareApplications({ rows }: { rows: ApplicationRow[] }) {
       <FactsNotice />
       <SwipeHint />
       <Table className="min-w-[52rem]">
-        <TableCaption className="sr-only">US application forms by state</TableCaption>
+        <TableCaption className="sr-only">Application forms by country and place</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-40">State</TableHead>
+            <TableHead className="w-40">Place</TableHead>
             <TableHead>Form</TableHead>
             <TableHead className="w-36">What it is for</TableHead>
+            <TableHead className="w-24">Questions</TableHead>
+            <TableHead className="w-48">Sensitive topics it asks about</TableHead>
             <TableHead className="w-40">Source</TableHead>
             <TableHead className="w-40">Dates</TableHead>
           </TableRow>
@@ -516,6 +521,7 @@ export function CompareApplications({ rows }: { rows: ApplicationRow[] }) {
             <TableRow key={r.id}>
               <TableHead scope="row" className={`${WRAP} font-medium`}>
                 {r.state}
+                <span className="block text-xs font-normal text-muted-foreground">{COUNTRY_NAMES[r.country]}</span>
               </TableHead>
               <TableCell className={`${WRAP} text-sm`}>
                 {r.name}
@@ -524,6 +530,12 @@ export function CompareApplications({ rows }: { rows: ApplicationRow[] }) {
                 </span>
               </TableCell>
               <TableCell className={`${WRAP} text-xs`}>{r.step}</TableCell>
+              <TableCell className="text-sm tabular-nums">
+                {r.questions ?? <span className="text-xs text-muted-foreground">Not read yet</span>}
+              </TableCell>
+              <TableCell className={`${WRAP} text-xs`}>
+                {r.questions === null ? "" : r.sensitive.length ? r.sensitive.join(", ") : "None found"}
+              </TableCell>
               <TableCell className={`${WRAP} text-xs`}>
                 {r.link ? <Source href={r.link} label={r.format ? `Form (${r.format})` : "Form"} /> : "No link found"}
               </TableCell>

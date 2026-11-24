@@ -7,7 +7,8 @@
 import { readFileSync, existsSync } from "node:fs"
 import { resolve } from "node:path"
 
-import { askedBy, parseCsv, type Census, type Row } from "@/lib/census"
+import { askedBy, loadCensus, parseCsv, type Census, type Row } from "@/lib/census"
+import { APPLICATION_TOPICS } from "@/lib/applications"
 import { TOPIC_ROWS } from "@/lib/countries"
 
 const ROOT = resolve(process.cwd(), "..")
@@ -162,7 +163,8 @@ export function formRows(c: Census, dates = loadPageDates()): FormRow[] {
   const asked = askedBy(c)
   const out: FormRow[] = []
   for (const f of c.forms) {
-    if (f.operator_type === "platform_vendor") continue
+    // Application forms are on /compare/applications.
+    if (f.operator_type === "platform_vendor" || f.form_stage === "application") continue
     const all = asked.get(f.form_id) ?? []
     const qs = all.filter((q) => !q.conditional_on && q.category !== "consent")
     const seen = f.fields_observed !== "no" && all.length > 0
@@ -326,7 +328,8 @@ export function ruleRows(dates = loadPageDates()): RuleRow[] {
 
 export type ApplicationRow = {
   id: string
-  state: string
+  country: string // UK or US
+  state: string // the US state, or the UK nation
   body: string
   name: string
   step: string
@@ -335,6 +338,8 @@ export type ApplicationRow = {
   link: string
   checked: string
   page: PageDate | null
+  questions: number | null // questions the person answers, where we have read them
+  sensitive: string[] // sensitive topics it asks about (see src/lib/applications.ts)
 }
 
 const STEPS: Record<string, string> = {
@@ -350,13 +355,45 @@ const STEPS: Record<string, string> = {
   other: "Other",
 }
 
-export function applicationRows(dates = loadPageDates()): ApplicationRow[] {
+// What we read of each application form in the census: how many questions, and which sensitive topics.
+function readOf(c: Census, formId: string): Pick<ApplicationRow, "questions" | "sensitive"> {
+  const qs = askedBy(c).get(formId)
+  if (!qs?.length) return { questions: null, sensitive: [] }
+  const answered = qs.filter((q) => q.category !== "consent" && q.category !== "staff_recorded")
+  return {
+    questions: answered.length,
+    sensitive: APPLICATION_TOPICS.filter((t) => t.sensitive && answered.some(t.match)).map((t) => t.label),
+  }
+}
+
+export function applicationRows(c: Census = loadCensus(), dates = loadPageDates()): ApplicationRow[] {
   const states = new Map(read("register/us/states.csv").map((s) => [s.state_code, s.state_name]))
-  return read("register/us/application-forms.csv")
+  // UK application forms, recorded in the census from the public documents.
+  const uk: ApplicationRow[] = c.forms
+    .filter((f) => f.form_stage === "application" && f.country === "UK")
+    .map((f) => {
+      const link = f.form_url || f.source_url
+      return {
+        id: f.form_id,
+        country: "UK",
+        state: f.region,
+        body: f.name.split(": ")[0],
+        name: f.name.split(": ").slice(1).join(": ") || "Application form",
+        step: /registration of interest/i.test(f.name) ? "Registration of interest" : "Application",
+        format: f.access_route === "online_form" ? "web" : f.access_route === "downloadable_form" ? "document" : "",
+        licensed: false,
+        link,
+        checked: f.date_checked,
+        page: dates.get(link) ?? null,
+        ...readOf(c, f.form_id),
+      }
+    })
+  const us: ApplicationRow[] = read("register/us/application-forms.csv")
     .map((r) => {
       const link = r.url || r.source_url
       return {
         id: r.form_id,
+        country: "US",
         state: states.get(r.state_code) ?? r.state_code,
         body: r.issuing_body,
         name: r.form_name + (r.form_number ? ` (${r.form_number})` : ""),
@@ -366,9 +403,13 @@ export function applicationRows(dates = loadPageDates()): ApplicationRow[] {
         link,
         checked: r.date_checked,
         page: dates.get(link) ?? null,
+        ...readOf(c, r.form_id),
       }
     })
-    .sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name))
+  const order = (r: ApplicationRow) => COUNTRY_ORDER.indexOf(r.country)
+  return [...uk, ...us].sort(
+    (a, b) => order(a) - order(b) || a.state.localeCompare(b.state) || a.name.localeCompare(b.name),
+  )
 }
 
 // ---- Downloads -------------------------------------------------------------------
