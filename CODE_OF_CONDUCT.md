@@ -18,6 +18,6 @@ This project touches the lives of children, carers and the people who work with 
 
 ## Reporting
 
-Report concerns privately to the maintainers through the repository's contact options. Reports are handled confidentially. Maintainers may remove content or contributors that break this code.
+Report concerns privately by email to [jamie.gannaway@gmail.com](mailto:jamie.gannaway@gmail.com). Reports are handled confidentially. Maintainers may remove content or contributors that break this code.
 
 This code draws on the [Contributor Covenant](https://www.contributor-covenant.org/).

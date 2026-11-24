@@ -1,0 +1,39 @@
+# Runs on every pull request and every push to main. Make "checks" a required status check
+# in the branch rules for main, so nothing merges unless the data, schema and site all pass.
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Data, schema and wording checks
+        run: for t in tests/*.py; do echo "== $t"; python3 "$t" || exit 1; done
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Build the site
+        run: npm ci --prefix site && npm run build --prefix site
+
+      - name: Plain-language check (report only)
+        run: python3 tools/plain_check.py site/dist | grep -v ' 0 of 25+ words, 0 avoided words' || true

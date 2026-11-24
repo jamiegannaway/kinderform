@@ -318,14 +318,28 @@ export default function Landing() {
 
           <Separator />
 
-          <Section id="who-title" title="Who is behind Kinderform" art="plant-seed">
+          <Section id="who-title" title="Who's behind Kinderform" art="plant-seed">
             <div className="max-w-2xl space-y-4 leading-7">
               <p>
-                Jamie Gannaway, a co-founder of Deployed, started Kinderform. Deployed builds intake
-                and routing systems for large organisations. This project gives that experience to the
-                fostering and adoption sector for free.
+                Jamie Gannaway is a co-founder of Deployed, a document assembly and decision intelligence
+                platform. Deployed builds intake and routing systems for large organisations. This project
+                gives that experience to the fostering and adoption sector for free.
               </p>
               <p>Kinderform is not a Deployed product and is not commercial. It will never be a sales channel.</p>
+              <p>
+                Everything is open source. The code, data and research are on{" "}
+                <a
+                  href="https://github.com/jamiegannaway/kinderform"
+                  className="font-medium underline underline-offset-4"
+                >
+                  GitHub
+                </a>
+                . To get in touch, email{" "}
+                <a href="mailto:jamie.gannaway@gmail.com" className="font-medium underline underline-offset-4">
+                  jamie.gannaway@gmail.com
+                </a>
+                .
+              </p>
             </div>
           </Section>
 
@@ -352,9 +366,9 @@ export default function Landing() {
               </CardContent>
               <CardFooter>
                 <Button asChild>
-                  <a href="mailto:hello@kinderform.org">
+                  <a href="mailto:jamie.gannaway@gmail.com">
                     <Mail aria-hidden="true" />
-                    Email hello@kinderform.org
+                    Email jamie.gannaway@gmail.com
                   </a>
                 </Button>
               </CardFooter>

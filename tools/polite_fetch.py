@@ -40,7 +40,7 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from html.parser import HTMLParser
 
-USER_AGENT = "OUCM-register-bot/0.1 (+https://github.com/jamiegannaway/OUCM; polite, read-only)"
+USER_AGENT = "Kinderform-register-bot/0.1 (+https://github.com/jamiegannaway/kinderform; polite, read-only)"
 TIMEOUT = 25
 MAX_BYTES = 3_000_000
 

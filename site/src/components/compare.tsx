@@ -23,7 +23,7 @@ import {
 
 const LINK = "font-medium text-foreground underline underline-offset-4"
 const WRAP = "whitespace-normal align-top"
-const CORRECT = "mailto:hello@kinderform.org?subject="
+const CORRECT = "mailto:jamie.gannaway@gmail.com?subject="
 
 function Crumbs({ here }: { here?: string }) {
   return (
@@ -94,7 +94,7 @@ function FactsNotice() {
         <p>
           Is a row wrong or out of date?{" "}
           <a href={`${CORRECT}Correction%20to%20the%20compare%20tables`} className={LINK}>
-            Email hello@kinderform.org
+            Email jamie.gannaway@gmail.com
           </a>{" "}
           and we will fix it.
         </p>
