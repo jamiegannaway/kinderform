@@ -178,7 +178,7 @@ export function CompareIndex({
       href: "/compare/applications",
       title: "Application forms",
       figure: `${applications} forms`,
-      body: "The forms that come after the first enquiry, in the UK and the US: what each is for, how many questions it asks and which sensitive topics.",
+      body: "The forms that come after the first enquiry, in the UK and the US. See how many questions each asks, and which sensitive topics.",
     },
   ]
   return (
