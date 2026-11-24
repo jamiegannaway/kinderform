@@ -1,0 +1,36 @@
+name: Correct a public fact
+description: Update a service listing, published rule, form detail or research note.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This report is public. Describe the page or service. Leave out case details and names of individual workers.
+        For personal data, a named worker, a security concern or a private right of reply, [contact Jamie privately](https://github.com/jamiegannaway/kinderform/blob/main/SUPPORT.md#report-a-privacy-or-security-problem-privately).
+  - type: input
+    id: entry
+    attributes:
+      label: Which Kinderform page or record needs a correction?
+      description: Give the page link, file name or row identifier.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What needs to change?
+      description: Say what Kinderform currently shows and what the source says.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Where can we check the fact?
+      description: Link to a public service page, published rule or original research source.
+    validations:
+      required: true
+  - type: input
+    id: checked
+    attributes:
+      label: When did you check the source?
+      placeholder: 24 November 2026
+    validations:
+      required: true

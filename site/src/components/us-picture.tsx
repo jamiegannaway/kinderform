@@ -278,7 +278,7 @@ export default function UsPicture({ data }: { data: Data }) {
 
       <p className="max-w-3xl text-sm text-muted-foreground">
         The data is open. You can find the register, its column guide and the method in the{" "}
-        <a href="https://github.com/jamiegannaway/OUCM/tree/main/register/us" className="underline underline-offset-4">
+        <a href="https://github.com/jamiegannaway/kinderform/tree/main/register/us" className="underline underline-offset-4">
           project repository
         </a>
         . There, each place to get in touch is called a front door. Agencies are welcome to correct their own rows.

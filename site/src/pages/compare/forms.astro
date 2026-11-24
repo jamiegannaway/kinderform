@@ -2,13 +2,14 @@
 import Base from "@/layouts/Base.astro";
 import { CompareForms } from "@/components/compare";
 import { loadCensus } from "@/lib/census";
-import { formRows } from "@/lib/compare";
+import { countryList, formRows } from "@/lib/compare";
 
 const rows = formRows(loadCensus());
+const countries = countryList(rows.map((row) => row.country));
 ---
 <Base
   title="Enquiry forms compared | Kinderform"
-  description="Every fostering and adoption enquiry form we have read in the UK, the US, Canada and Australia: what each asks, any reply time it states, the link and two dates."
+  description={`Compare the fostering and adoption enquiry forms we have recorded across ${countries}. See what each asks, its published reply time and when we checked it.`}
 >
   <CompareForms rows={rows} />
 </Base>

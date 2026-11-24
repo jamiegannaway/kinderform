@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/jamiegannaway/OUCM/schema/enquiry.schema.json",
+  "$id": "https://github.com/jamiegannaway/kinderform/schema/enquiry.schema.json",
   "title": "Enquiry",
   "description": "A fostering enquiry as it moves from first contact towards application. v0.1 draft. The record is deliberately pseudonymous: it carries no name, contact details or full postcode, so it can be shared for analysis without identifying the person.",
   "type": "object",

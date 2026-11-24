@@ -1,8 +1,8 @@
 # Clear, kind replies outperform clever nudges
 
-> **Status:** desk review, version 1, 19 November 2026. It looks at reminders, first replies and missed appointments in health, courts, jobcentres, education, talking therapies and volunteering. An AI-assisted research tool produced it. None of the evidence is about fostering, so every view on what carries over is our own. The figures have **not yet been checked by a person** against the original sources. Many were read from a summary of the study only. Check the source before you quote anything, starting with the list under "Check before public use". Everything we propose is for discussion. It is not yet part of the OUCM standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
+> **Status:** desk review, version 1, 19 November 2026. It looks at reminders, first replies and missed appointments in health, courts, jobcentres, education, talking therapies and volunteering. An AI-assisted research tool produced it. None of the evidence is about fostering, so every view on what carries over is our own. The figures have **not yet been checked by a person** against the original sources. Many were read from a summary of the study only. Check the source before you quote anything, starting with the list under "Check before public use". Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
 
-The evidence from health, courts, jobcentres, education, talking therapies and volunteering supports the direction of all 3 OUCM rules. It contradicts none of them. But it does not test any of the 3 time limits. We found no study in any field that compares:
+The evidence from health, courts, jobcentres, education, talking therapies and volunteering supports the direction of all 3 Kinderform rules. It contradicts none of them. But it does not test any of the 3 time limits. We found no study in any field that compares:
 
 - a 5-minute acknowledgement (the message that says an enquiry has arrived) with a slower one
 - first contact from a person within 1 working day with contact within 2 or 3 days
@@ -14,7 +14,7 @@ What the evidence does show is this:
 - Reminders for a booked event are worth a few percentage points, not a transformation.
 - The people a service most easily loses are lost through silence, wrong contact details and quiet closure, not through lack of interest.
 
-The strongest single results in this research work through felt obligation, penalty or guilt. OUCM should not copy them. They include:
+The strongest single results in this research work through felt obligation, penalty or guilt. Kinderform should not copy them. They include:
 
 - a named jobcentre adviser's "I've booked you a place"
 - a hospital text stating what a missed slot costs
@@ -35,9 +35,9 @@ Every claim carries one of 3 labels:
 
 - **Evidence**: a finding from a cited study.
 - **Observed practice**: what a service, charity or public body does or advises, with no proof of effect.
-- **Recommendation (OUCM)**: this report's own judgement.
+- **Recommendation (Kinderform)**: this report's own judgement.
 
-"pp" means percentage points, an absolute change. For example, a rise from 10% to 12% is 2 pp. We give the starting rate each time. Every judgement about whether a finding carries over to fostering is this report's, not the source's. All of the evidence comes from other fields. None of it was gathered from people enquiring about fostering. Almost all of it measures attendance, which is not OUCM's aim.
+"pp" means percentage points, an absolute change. For example, a rise from 10% to 12% is 2 pp. We give the starting rate each time. Every judgement about whether a finding carries over to fostering is this report's, not the source's. All of the evidence comes from other fields. None of it was gathered from people enquiring about fostering. Almost all of it measures attendance, which is not Kinderform's aim.
 
 **Terms used in this report.**
 
@@ -65,17 +65,17 @@ Every claim carries one of 3 labels:
 
 ## The three rules hold as commitments, and none of the time limits has been tested
 
-| OUCM draft rule | Verdict | What the evidence says | Strongest grade behind the direction |
+| Kinderform draft rule | Verdict | What the evidence says | Strongest grade behind the direction |
 |---|---|---|---|
 | Acknowledge within 5 minutes | Not contradicted; untested | No trial of acknowledgement speed exists in any field searched. Evidence on first messages is about what they say and who they are from. | None for speed; A for content and sender |
 | A person makes first contact within 1 working day | Direction supported; threshold untested | Shorter waits go with higher attendance in large NHS datasets. In 2 small trials, very fast first appointments pointed the same way. The results were not statistically significant. Nothing supports a longer wait. | B (A, weak and inconclusive) |
 | Call within 2 working days of a missed event, offering a one-to-one | Direction supported; threshold untested | Guidance and qualitative research favour prompt, active, supportive follow-up and oppose automatic closure. We found no trial of a recovery call, a second offer or any follow-up window. | D and C |
 
-**Recommendation (OUCM).** Keep all 3 limits. In the standard, describe them as "service commitments in line with the evidence on direction". Do not describe any of them as proven. Claiming more than the evidence shows would be exactly the kind of thing that harms trust with the sector.
+**Recommendation (Kinderform).** Keep all 3 limits. In the standard, describe them as "service commitments in line with the evidence on direction". Do not describe any of them as proven. Claiming more than the evidence shows would be exactly the kind of thing that harms trust with the sector.
 
 ## Nobody has tested a five-minute reply, but what the reply says is well evidenced
 
-**Evidence (none found).** No study in health, courts, welfare, education or volunteering tests an instant acknowledgement against a slower one. None tests whether people read an automated instant reply as cold. Wherever OUCM writes about these 2 claims, it should mark them as not backed by evidence.
+**Evidence (none found).** No study in health, courts, welfare, education or volunteering tests an instant acknowledgement against a slower one. None tests whether people read an automated instant reply as cold. Wherever Kinderform writes about these 2 claims, it should mark them as not backed by evidence.
 
 **Evidence (A, quasi-experimental; USA, 2020).** The best evidence on a first written message is the redesign of the New York City court summons. The redesign moved the date and place to the top. It gave the form a plain heading that said what it was. It brought the key information to the front. Across 323,922 summonses, this cut missed court dates by **6.2 pp from a starting rate of about 47%** ([Fishbane, Ouss and Shah, 2020](https://psych.wustl.edu/files/psych/fishbane20.pdf)). It cost nothing extra to print.
 
@@ -110,7 +110,7 @@ This gives the 5-minute acknowledgement a practical job that does not depend on 
 
 **Evidence (B; England, 2022).** An instant sign-up followed by nothing is itself a reason people leave. NHS England surveyed 11,107 NHS Volunteer Responders. Of these, 9% never received a task alert or a shift within their travel distance ([NHS England, December 2022](https://www.england.nhs.uk/long-read/nhs-volunteer-responders-volunteer-survey-and-engagement-meeting-results/)).
 
-**Recommendation (OUCM).** Confirm the 5-minute rule as a courtesy and a delivery check. Tighten what the message must contain:
+**Recommendation (Kinderform).** Confirm the 5-minute rule as a courtesy and a delivery check. Tighten what the message must contain:
 
 - a plain first line saying what it is ("We've received your enquiry about fostering")
 - the name of the real person or team who will be in touch, and by when
@@ -134,9 +134,9 @@ Telephone assessments happened sooner: a median of 7 days, against 19 for face t
 
 The closest comparison with fostering is special constable recruitment. Special constables are volunteer police officers. Becoming one is a vetted, months-long route into a helping role, run by a public body. A qualitative study of 63 applicants found people waiting months with no feedback ([Birmingham City University open access copy](https://www.open-access.bcu.ac.uk/15897/1/Improving_the_Application_and_Assessment_Experiences_of_Special_Constable_Candidates_in_England_and_Wales_-_Accepted%281%29.pdf)). They had "to keep prompting for updates". In one case, a person took up a different volunteer role during the wait. We found no study that times a reply to a volunteer enquiry and follows who goes on to volunteer.
 
-**Observed practice (D; England, 2023).** NHS Employers independently recommends the same components as the OUCM draft, for people waiting to start a job ([NHS Employers, March 2023](https://www.nhsemployers.org/articles/reducing-delay-between-job-offer-and-start-date)). They are a single named contact, an agreed rhythm of contact and stated timescales. NHS Employers publishes no figures on their effect.
+**Observed practice (D; England, 2023).** NHS Employers independently recommends the same components as the Kinderform draft, for people waiting to start a job ([NHS Employers, March 2023](https://www.nhsemployers.org/articles/reducing-delay-between-job-offer-and-start-date)). They are a single named contact, an agreed rhythm of contact and stated timescales. NHS Employers publishes no figures on their effect.
 
-**Recommendation (OUCM).** Confirm the 1-working-day rule and tighten its wording. One description of the rule is "a person makes first contact". The project's earlier evidence report describes it as a "first human attempt". These are different clocks. The standard should:
+**Recommendation (Kinderform).** Confirm the 1-working-day rule and tighten its wording. One description of the rule is "a person makes first contact". The project's earlier evidence report describes it as a "first human attempt". These are different clocks. The standard should:
 
 - define the rule as a first attempt by a named person within 1 working day
 - keep the separate limit for a conversation actually held
@@ -190,7 +190,7 @@ National and state bodies sent the same approach to more than 800,000 students. 
 
 **Evidence (B and D).** People like self-booking, and it is reasonable to offer ([Zhao et al., 2017](https://www.jmir.org/2017/4/e134)). But the evidence that it raises attendance is weak, and mostly from studies with no comparison group. And it suits people who are confident online. No randomised trial compares self-booked first appointments with allocated ones. We found no head-to-head trial of reminder timing either.
 
-**Recommendation (OUCM).** Add a simple reminder rule for booked events:
+**Recommendation (Kinderform).** Add a simple reminder rule for booked events:
 
 - a confirmation at booking
 - a reminder about a week ahead
@@ -231,7 +231,7 @@ In a very small London audit, reasons for missing included ([LSBU open research 
 
 **Evidence (A; USA, 2023).** Tone has trial support in a voluntary setting. In 2 field experiments with 117,073 renters, some outreach told people their situation was not their fault. This raised requests for rental assistance by about 18% over information alone ([Lasky-Fink and Linos, 2023](https://www.hks.harvard.edu/publications/improving-delivery-social-safety-net-role-stigma-0)). That is a relative change, and the starting rate was not in the notes. The outcome was requests for help, not attendance.
 
-**Recommendation (OUCM).** Confirm the call within 2 working days as a commitment consistent with "promptly and actively". Tighten what surrounds it:
+**Recommendation (Kinderform).** Confirm the call within 2 working days as a commitment consistent with "promptly and actively". Tighten what surrounds it:
 
 - The call should assume a slip or a clash, not bad faith.
 - If there is no answer, the service leaves a short personal voicemail. It also sends a message in the person's chosen channel with 3 equal options: another date, a one-to-one conversation, or "not for now".
@@ -244,21 +244,21 @@ In a very small London audit, reasons for missing included ([LSBU open research 
 
 **Evidence (A).** Texts and emails reach only people whose details are right and who have a stable phone. Only about 11% of New York summons recipients gave a number ([Fishbane et al., 2020](https://psych.wustl.edu/files/psych/fishbane20.pdf)). Those who did were already more likely to attend. People in neighbourhoods with more Black and Hispanic residents were less likely to give one. The Barts authors describe the patients they could reach as a minority who may differ from the rest ([Hallsworth et al., 2015](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0137306)). Homeless defendants gained nothing. Among people who were reached, poorer New York neighbourhoods gained more (12.5 pp against 6.4 pp; exploratory). The pattern is two-sided. Reminders narrow gaps among people who can be reached. They widen the gap between those who can be reached and those who cannot.
 
-**Evidence (B; Scotland, 2017 and 2019).** People's circumstances shape who misses. Among 550,083 Scottish general practice patients, repeated missing was 2.27 times as likely in the most deprived group ([Ellis et al., 2017](https://eprints.lancs.ac.uk/id/eprint/88220)). It was also somewhat more likely at ages 16 to 30. The linked finding is that repeated missing goes with much higher death rates among people with mental health conditions ([McQueenie et al., 2019](https://doaj.org/article/8726f50dfd414d0e89238a59bd35dfdd)). That finding is not relevant to fostering. It should not appear in OUCM public writing as if it were. Only the framing point carries over.
+**Evidence (B; Scotland, 2017 and 2019).** People's circumstances shape who misses. Among 550,083 Scottish general practice patients, repeated missing was 2.27 times as likely in the most deprived group ([Ellis et al., 2017](https://eprints.lancs.ac.uk/id/eprint/88220)). It was also somewhat more likely at ages 16 to 30. The linked finding is that repeated missing goes with much higher death rates among people with mental health conditions ([McQueenie et al., 2019](https://doaj.org/article/8726f50dfd414d0e89238a59bd35dfdd)). That finding is not relevant to fostering. It should not appear in Kinderform public writing as if it were. Only the framing point carries over.
 
 **Evidence (B; England).** In talking therapies, people in the least deprived fifth were more likely to attend assessment (odds ratio 1.51) ([Saxon et al., 2023](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9903253/)). Several minority ethnic groups were less likely to attend (for example, odds ratio 0.80 for Black against White patients) ([Sweetman et al., 2022](https://eprints.whiterose.ac.uk/192581/7/Risk_factors_for_initial_appointment_non_attendance_at_Improving_Access_to_Psychological_Therapy_IAPT_services_A_retrospective_analysis.pdf)). Opt-in steps lose people with anxiety. In volunteering, younger adults are the least tolerant of delay. In 2019, 34% of minority ethnic volunteers (base 177) agreed there was too much bureaucracy, against 24% overall ([NCVO, 2019](https://www.ncvo.org.uk/news-and-insights/news-index/time-well-spent-national-survey-volunteer-experience/volunteer-experience/)).
 
 **Evidence (C and D).** Reminders do not remove practical barriers such as transport, childcare, work clashes, limited hours or mistrust of services ([Lindsay et al., 2026](https://eprints.gla.ac.uk/389588/3/389588.pdf); [NHS England](https://www.england.nhs.uk/long-read/reducing-did-not-attends-dnas-in-outpatient-services/)). About 22% of Santa Clara clients needed messages in Spanish or Vietnamese, and got them ([Chohlas-Wood et al., 2025](https://www.5harad.com/papers/court-reminders.pdf)). None of the trials we read reported reminder effects by deprivation, ethnicity, language or disability. No figures exist for the effect of translated reminders.
 
-**Recommendation (OUCM).** Fix the main page, form and first message before adding text reminders, because those reach everyone. Offer at least one route that needs no smartphone. Treat a bounced or undelivered message as the service's task to resolve through another channel. Let people rearrange outside office hours without phoning. Provide plain English and the languages the local population needs. Do not borrow health services' tools for predicting who will miss. Nothing in OUCM scores, ranks or predicts people who enquire.
+**Recommendation (Kinderform).** Fix the main page, form and first message before adding text reminders, because those reach everyone. Offer at least one route that needs no smartphone. Treat a bounced or undelivered message as the service's task to resolve through another channel. Let people rearrange outside office hours without phoning. Provide plain English and the languages the local population needs. Do not borrow health services' tools for predicting who will miss. Nothing in Kinderform scores, ranks or predicts people who enquire.
 
 A reply to confirm attendance can prompt a courtesy call to someone who has not replied. But the service must never use it to rate a person or to decide who is worth following up. In Santa Clara, the gap in warrants between people who confirmed and those who did not was 2.9% against 16.8%. That gap was self-selection, not an effect: the people who chose to confirm already differed from those who did not.
 
-## High-performing techniques OUCM should not adopt
+## High-performing techniques Kinderform should not adopt
 
-Almost every trial in this research counts attendance as success. OUCM's aim is a well-informed decision and a person who feels respected. The project's guiding sentence is that everyone who offers to care for a child deserves a quick, kind and considered reply. Against that sentence, a message that raises attendance by making someone feel pushed is a failure. None of the trials measured how recipients felt. A fostering service also holds power over approval. Techniques that are mild between equals feel different when they come from a body that will later assess you.
+Almost every trial in this research counts attendance as success. Kinderform's aim is a well-informed decision and a person who feels respected. The project's guiding sentence is that everyone who offers to care for a child deserves a quick, kind and considered reply. Against that sentence, a message that raises attendance by making someone feel pushed is a failure. None of the trials measured how recipients felt. A fostering service also holds power over approval. Techniques that are mild between equals feel different when they come from a body that will later assess you.
 
-| Technique | What it achieved | Why OUCM should not use it |
+| Technique | What it achieved | Why Kinderform should not use it |
 |---|---|---|
 | Guilt wording | **Evidence (A).** Missed appointments 14.2% against 21.1% in Israel ([Berliner Senderey et al., 2020](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234817)) | Works by making the person feel bad. A person offering to care for a child would be treated as a problem to manage. |
 | Stating what a missed slot costs the service | **Evidence (A).** 8.4% against 11.1% at Barts ([Hallsworth et al., 2015](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0137306)) | A pressure message suited, at most, to a clinic slot someone else could use. It has no place in a voluntary offer. |
@@ -270,9 +270,9 @@ Almost every trial in this research counts attendance as success. OUCM's aim is 
 | Closing after one miss | **Evidence (C, D).** No measured benefit; harm falls on people with the most complicated lives | Makes people start again and reads a slip as lack of commitment. |
 | Being vague about what is optional | **Evidence (C).** Work coaches at the Department for Work and Pensions (DWP) did this to raise attendance. Some claimants attended from fear and found it stressful ([DWP, 2017](https://assets.publishing.service.gov.uk/media/5a8229cced915d74e340211c/2015-esa-trials-a-synthesis.pdf)) | Raises attendance and damages trust. |
 | Written commitments, attitude or "strengths" exercises | **Evidence (A, bundled, team's own report; D critique).** Reported as 15 to 20% more people off benefits at 13 weeks in the Loughton pilot ([Behavioural Insights Team](https://www.bi.team/?p=5287)). Criticised as coercive under sanctions ([Friedli and Stearn, 2015](https://pmc.ncbi.nlm.nih.gov/articles/PMC4484497)) | Messages must never test, score or steer a person's attitude. Practical journey details are help; a commitment device is not. |
-| Predicting who will miss | **Observed practice (D).** Used in parts of the health sector | Breaks OUCM's rule against scoring, ranking or predicting people. |
+| Predicting who will miss | **Observed practice (D).** Used in parts of the health sector | Breaks Kinderform's rule against scoring, ranking or predicting people. |
 
-**Recommendation (OUCM), and a disagreement to record.** The project's earlier evidence report lists messages that say "I have done something for you" among the "strongest transferable mechanisms". It also cites reciprocity, the pull to return a favour, as a basis for the contact rhythm. This report disagrees with that framing. The named sender and the concrete next step should stay, because they are honest and courteous. Reciprocity as a design goal should come out of the standard's stated basis. That is because it builds a sense of debt into a message to someone weighing a life decision. If that were noticed, it would harm trust with carers and with the sector.
+**Recommendation (Kinderform), and a disagreement to record.** The project's earlier evidence report lists messages that say "I have done something for you" among the "strongest transferable mechanisms". It also cites reciprocity, the pull to return a favour, as a basis for the contact rhythm. This report disagrees with that framing. The named sender and the concrete next step should stay, because they are honest and courteous. Reciprocity as a design goal should come out of the standard's stated basis. That is because it builds a sense of debt into a message to someone weighing a life decision. If that were noticed, it would harm trust with carers and with the sector.
 
 ## Evidence table
 
@@ -310,7 +310,7 @@ Almost every trial in this research counts attendance as success. OUCM's aim is 
 | Expected a quicker process: 14% (2019), 20% (2023) | [NCVO 2019](https://www.ncvo.org.uk/news-and-insights/news-index/time-well-spent-national-survey-volunteer-experience/volunteer-experience/); [NCVO 2023](https://www.ncvo.org.uk/news-and-insights/news-index/time-well-spent-2023/volunteer-experience-impact/) | 2019, 2023 | Great Britain | National surveys | B | Partly; understates the problem |
 | Applicants waiting months without updates | [Special constable study](https://www.open-access.bcu.ac.uk/15897/1/Improving_the_Application_and_Assessment_Experiences_of_Special_Constable_Candidates_in_England_and_Wales_-_Accepted%281%29.pdf) | Not given in notes | England and Wales | Qualitative survey, 63 | C | Strongly |
 
-## Proposed changes to the OUCM standard
+## Proposed changes to the Kinderform standard
 
 | Item | Verdict | Proposed rule | Basis |
 |---|---|---|---|
@@ -327,11 +327,11 @@ Almost every trial in this research counts attendance as success. OUCM's aim is 
 | Prohibited techniques | **Add** | A short list in the standard. No guilt, cost, penalty, "recorded", social-norm or obligation wording. Nothing vague about what is optional. No prediction of who will attend. | Table above |
 | Equity checks | **Add** | Assessable at system level. A route that needs no smartphone. Rearranging without phoning in office hours. Plain English and local languages. Any breakdown by group only with consent and after the first conversation. | Fishbane, Owens and Sloan (A); Ellis (B); NHS England (D) |
 | Reasons for a miss | **Add** | An optional coded reason offered by the person (clash, travel, caring, did not receive details, changed mind, other). Codes only, never free text. | NHS England case study (D, illustrative) |
-| Claims about effect | **Add** | Any OUCM statement of expected gain cites 1.4 pp as the planning figure and says local results vary. | DellaVigna and Linos (A) |
+| Claims about effect | **Add** | Any Kinderform statement of expected gain cites 1.4 pp as the planning figure and says local results vary. | DellaVigna and Linos (A) |
 
 ## Check before public use
 
-The notes flag the following items. Check each one against the original source before OUCM quotes it.
+The notes flag the following items. Check each one against the original source before Kinderform quotes it.
 
 | Item | Problem |
 |---|---|
@@ -378,7 +378,7 @@ We did not read:
 
 All of the evidence is from fields other than fostering.
 
-## Questions OUCM could test openly
+## Questions Kinderform could test openly
 
 Each of these could be:
 
@@ -398,7 +398,7 @@ Services would see their own results privately before anything is made public. N
 
 ## Conclusion
 
-The evidence from nearby fields changes the argument for OUCM's rules more than it changes the rules. Speed limits that looked like evidence-based thresholds turn out to be reasonable promises that nobody has tested. The well-evidenced parts are plain content, a known local sender, working contact details and an open door after a miss. The techniques with the largest published effects are the ones a project built on respect has to refuse. The evidence from trials at scale means little is lost by refusing them. The realistic prize from any message was always a few percentage points.
+The evidence from nearby fields changes the argument for Kinderform's rules more than it changes the rules. Speed limits that looked like evidence-based thresholds turn out to be reasonable promises that nobody has tested. The well-evidenced parts are plain content, a known local sender, working contact details and an open door after a miss. The techniques with the largest published effects are the ones a project built on respect has to refuse. The evidence from trials at scale means little is lost by refusing them. The realistic prize from any message was always a few percentage points.
 
 That leaves fostering services with an advantage the health service lacks. They hear from few enough people to do the personal follow-up that hospital guidance recommends and cannot afford. The standard's event records also make it possible to measure what no trial in this research measured:
 

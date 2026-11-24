@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private feedback or a service's right of reply
+    url: https://github.com/jamiegannaway/kinderform/blob/main/SUPPORT.md
+    about: Contact Jamie without opening a public issue or creating a GitHub account.
+  - name: Report personal data, a named worker or a security problem
+    url: https://github.com/jamiegannaway/kinderform/blob/main/SECURITY.md
+    about: Follow the private reporting guide. Send the location and leave out personal details.

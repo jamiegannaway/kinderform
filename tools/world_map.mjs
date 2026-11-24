@@ -4,7 +4,7 @@
 // Map data: Natural Earth 1:110m countries (public domain), via the world-atlas package.
 // Run once when the map needs to change, from an empty folder:
 //   npm i world-atlas@2.0.2 topojson-client@3.1.0 d3-geo@3.1.2
-//   node /path/to/OUCM/tools/world_map.mjs /path/to/OUCM/site/src/lib/world-map.ts
+//   node /path/to/kinderform/tools/world_map.mjs /path/to/kinderform/site/src/lib/world-map.ts
 import { createRequire } from "node:module"
 import { writeFileSync } from "node:fs"
 

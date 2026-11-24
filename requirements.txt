@@ -1,0 +1,5 @@
+# Python packages for the checks in tests/ (everything else uses the standard library).
+jsonschema==4.26.0
+
+# Optional: only tools/pdf_fields.py, which reads the fields of PDF forms.
+# pypdf==6.17.0

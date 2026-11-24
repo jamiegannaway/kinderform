@@ -1,8 +1,8 @@
 # Kept promises outperform persuasion in giving
 
-> **Status:** desk review, version 1, 19 November 2026. It looks at blood donation, stem cell registers and the assessment of people who offer to donate a kidney. An AI-assisted research tool produced it. None of the evidence is about fostering, so every view on what carries over is our own. The figures have **not yet been checked by a person** against the original sources. Many were read from a summary of the study only. Check the source before you quote anything, starting with the list under "Check before public use". Everything we propose is for discussion. It is not yet part of the OUCM standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
+> **Status:** desk review, version 1, 19 November 2026. It looks at blood donation, stem cell registers and the assessment of people who offer to donate a kidney. An AI-assisted research tool produced it. None of the evidence is about fostering, so every view on what carries over is our own. The figures have **not yet been checked by a person** against the original sources. Many were read from a summary of the study only. Check the source before you quote anything, starting with the list under "Check before public use". Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
 
-The evidence comes from blood donation, stem cell registers and the assessment of people who offer to donate a kidney. It backs the shape of the OUCM draft standard, but not its numbers.
+The evidence comes from blood donation, stem cell registers and the assessment of people who offer to donate a kidney. It backs the shape of the Kinderform draft standard, but not its numbers.
 
 Three things are well supported:
 
@@ -14,11 +14,11 @@ Three things are not supported. No study in these fields tests a 5-minute acknow
 
 A named guide is firmly established in guidance and valued in interviews. Yet no trial has tested it from the volunteer's side. And the United States experience shows that naming a role without defining it produces very uneven practice.
 
-In stem cell registers, ambivalence (mixed feelings about going ahead) is the strongest known predictor of stepping back. That is exactly why OUCM must treat it as a normal part of a large decision. OUCM must never measure it to score, rank or predict anyone.
+In stem cell registers, ambivalence (mixed feelings about going ahead) is the strongest known predictor of stepping back. That is exactly why Kinderform must treat it as a normal part of a large decision. Kinderform must never measure it to score, rank or predict anyone.
 
-Emotive appeals, urgency, gifts and "another way to help" mostly failed or backfired when tested. So the honest approach OUCM already prefers is also the better-evidenced one.
+Emotive appeals, urgency, gifts and "another way to help" mostly failed or backfired when tested. So the honest approach Kinderform already prefers is also the better-evidenced one.
 
-Almost all of this evidence measures whether people came back or went ahead. OUCM's aim is a well-informed decision and a respectful reply. So the direction of each finding matters more than its size.
+Almost all of this evidence measures whether people came back or went ahead. Kinderform's aim is a well-informed decision and a respectful reply. So the direction of each finding matters more than its size.
 
 ## How to read this report
 
@@ -30,7 +30,7 @@ Every claim carries one of 3 labels:
   - **C**: qualitative or small survey
   - **D**: guidance or opinion
 - **Observed practice** means what services or guidelines do or say, without a measured effect.
-- **Recommendation (OUCM)** means this report's own judgement. This includes every judgement about whether a finding carries over to fostering. We call that transfer.
+- **Recommendation (Kinderform)** means this report's own judgement. This includes every judgement about whether a finding carries over to fostering. We call that transfer.
 
 Those judgements are inferences. None of the notes behind this report contains fostering research. So no claim here is evidence about fostering itself.
 
@@ -60,13 +60,13 @@ Anything not yet checked, secondhand or internally inconsistent is marked where 
 
 ## An hour, a procedure, a household: where the analogy holds and where it breaks
 
-**Recommendation (OUCM).** The 3 fields differ from fostering in ways that limit what can be borrowed. Giving blood takes about an hour and can be repeated a few times a year. A stem cell donation is a single procedure, usually requested years after joining a register. Donating a kidney is one operation after a long assessment. Fostering changes a household for years and involves a child. So in fostering, a considered "no" is likely to be more common than in any of these fields, and more often the right answer.
+**Recommendation (Kinderform).** The 3 fields differ from fostering in ways that limit what can be borrowed. Giving blood takes about an hour and can be repeated a few times a year. A stem cell donation is a single procedure, usually requested years after joining a register. Donating a kidney is one operation after a long assessment. Fostering changes a household for years and involves a child. So in fostering, a considered "no" is likely to be more common than in any of these fields, and more often the right answer.
 
-**Recommendation (OUCM).** The research also has a different purpose. Blood studies count "came back to donate" as success. Register studies count "available when asked". In kidney donation, the trials of education at home aimed to raise the number of people offering a kidney to a relative or friend. OUCM does not want more yeses. It wants people to decide well, and to feel respected whichever way they decide.
+**Recommendation (Kinderform).** The research also has a different purpose. Blood studies count "came back to donate" as success. Register studies count "available when asked". In kidney donation, the trials of education at home aimed to raise the number of people offering a kidney to a relative or friend. Kinderform does not want more yeses. It wants people to decide well, and to feel respected whichever way they decide.
 
 So this report borrows mechanisms: what silence does, what a kept promise does and how a refusal feels. It also borrows formats, such as a conversation at home with the household. It does not borrow targets or effect sizes (how large an effect was). A 10-point rise in people returning to give blood says nothing reliable about the size of any effect on a decision to foster.
 
-**Recommendation (OUCM).** What does carry over is the position of the person. In all 4 settings, a volunteer offers something large to an organisation that needs it. They are asked intrusive questions and wait on other people's processes. They can be told "not you" or "not now". Some of the evidence is about how the organisation behaves: speed, clarity, follow-up, honesty and fairness. That part carries over far better than the parts about the volunteer's character.
+**Recommendation (Kinderform).** What does carry over is the position of the person. In all 4 settings, a volunteer offers something large to an organisation that needs it. They are asked intrusive questions and wait on other people's processes. They can be told "not you" or "not now". Some of the evidence is about how the organisation behaves: speed, clarity, follow-up, honesty and fairness. That part carries over far better than the parts about the volunteer's character.
 
 **Evidence (B).** A United States study surveyed 7,905 blood donors in 2003 and tracked them for 12 months. A convenient place and a good experience predicted whether people actually came back. Altruism, empathy and a sense of social responsibility did not ([Schlumpf et al. 2008](https://consensus.app/papers/details/w:b28067b5-85c4-4d87-b293-85ea5ef0e944/)). That is a reason to examine the process before questioning anyone's motivation.
 
@@ -109,9 +109,9 @@ A softer message does not remove the problem. Some Canadian women were advised, 
 
 **Evidence (C).** Kidney donor research describes the same harm in people's own words. Australians judged ineligible spoke of a "suspended donor status", changeable criteria, and being "dismissed and discarded by the system" ([Ralph et al. 2019](https://consensus.app/papers/details/w:d0c52a25-5500-4b2d-8839-940ab0fef3f1/)).
 
-**Recommendation (OUCM).** Transfer is strong in direction and weak in size. Everyone who enquires about fostering is at the "first visit" stage, where a "not now" does most damage. The ingredients that trials support are cheap and respectful. Someone from the service explains why at the time. A date is agreed with the person. And the service keeps its promise in plain words about a week before.
+**Recommendation (Kinderform).** Transfer is strong in direction and weak in size. Everyone who enquires about fostering is at the "first visit" stage, where a "not now" does most damage. The ingredients that trials support are cheap and respectful. Someone from the service explains why at the time. A date is agreed with the person. And the service keeps its promise in plain words about a week before.
 
-Two things do not transfer cleanly. First, in blood donation the service imposes the wait. OUCM's "not now" is mainly the person's own choice, and no study in these notes tests a self-chosen pause. Second, the if-then planning result is acceptable only on one condition. The person decides for themselves what would need to be true before they come back. Scripted prompts used to push people would breach OUCM's purpose.
+Two things do not transfer cleanly. First, in blood donation the service imposes the wait. Kinderform's "not now" is mainly the person's own choice, and no study in these notes tests a self-chosen pause. Second, the if-then planning result is acceptable only on one condition. The person decides for themselves what would need to be true before they come back. Scripted prompts used to push people would breach Kinderform's purpose.
 
 ## Silence predicts lost contact, and one message to an old list achieves little
 
@@ -152,7 +152,7 @@ A university press release puts the strongest effect as a 37% relative cut in la
 
 UK kidney guidance sets a week-by-week pathway ending at week 18 ([BTS/Renal Association 2018](https://bts.org.uk/wp-content/uploads/2018/01/BTS_LDKT_UK_Guidelines_2018.pdf)). Yet people who donated in the 2014 to 2016 UK cohort spent a median of 308 days, about 44 weeks, in assessment ([Bailey et al. 2017](https://core.ac.uk/download/96781141.pdf)). In a 2025 survey, most centres said they offered 18 weeks. But the survey was self-reported and internally inconsistent ([Nightingale et al. 2025](https://www.frontierspartnerships.org/articles/10.3389/ti.2025.15341/full)). In Canada and Australia, a donor's wait was often driven by someone else's process. Each month's delay in the recipient's referral added 0.9 months ([Habbous et al. 2018](https://consensus.app/papers/details/w:f29c658c-1913-4999-b563-4a154289999a/)).
 
-**Recommendation (OUCM).** Transfer is high for the principle and nil for the number. The evidence supports keeping in touch, and telling people when a wait is not about them. It also supports measuring the time that has passed from the person's side, instead of trusting a service's description of itself. It does not support "every two weeks" over every three or four. The claim that delay causes people to withdraw is plausible and widely asserted, but untested. Say "associated with".
+**Recommendation (Kinderform).** Transfer is high for the principle and nil for the number. The evidence supports keeping in touch, and telling people when a wait is not about them. It also supports measuring the time that has passed from the person's side, instead of trusting a service's description of itself. It does not support "every two weeks" over every three or four. The claim that delay causes people to withdraw is plausible and widely asserted, but untested. Say "associated with".
 
 ## The largest loss comes straight after the first form
 
@@ -176,7 +176,7 @@ A person on the phone did as well as text or email, or better.
 
 **Evidence (A), a weaker result than its reputation.** The celebrated "your blood was used" text has one positive Australian study, which was not randomised. In it, 70.3% returned within 12 months, against 62.6% ([Gemelli et al. 2017](https://consensus.app/papers/details/w:90cf5776-f065-4136-9c3d-f7fa57112ad4/)). One randomised trial of 20,365 donors (believed Denmark) found **no significant effect among whole-blood donors** ([Fosgaard et al. 2020](https://consensus.app/papers/details/w:dadee526-1695-4c3a-832f-47e08a2b74a4/)). The Swedish claim about such texts rests on press reporting. NHS Blood and Transplant has published no evaluation of its own scheme ([NHSBT, 14 June 2016](https://www.blood.co.uk/news-and-campaigns/news-and-statements/blood-donors-texted-when-their-blood-goes-to-hospitals/)). It should not be cited as proven.
 
-**Recommendation (OUCM).** Transfer is high for the shape. The gap between a form and a first conversation is where people silently disappear. Services should record "we could not reach this person" as its own outcome, never folded into "withdrew". Nothing in these notes tests how fast the first reply must be. The 5-minute and 1-working-day promises rest on respect and common sense, and OUCM should say so.
+**Recommendation (Kinderform).** Transfer is high for the shape. The gap between a form and a first conversation is where people silently disappear. Services should record "we could not reach this person" as its own outcome, never folded into "withdrew". Nothing in these notes tests how fast the first reply must be. The 5-minute and 1-working-day promises rest on respect and common sense, and Kinderform should say so.
 
 ## Being turned away well has five parts, none of them medical
 
@@ -196,7 +196,7 @@ BOUnD names support for people who do not go ahead as a priority. It recommends 
 
 **Evidence (B).** Being asked and then not needed is routine. At Anthony Nolan, 5.5% of requests were cancelled for transplant centre reasons ([Lown et al. 2013](https://bmt.confex.com/tandem/2013/webprogram/Paper2256.html)). No register study found measures how that feels, or whether those people are available next time.
 
-**Recommendation (OUCM).** Transfer is high. Put together, the evidence describes 5 parts of a decent "no":
+**Recommendation (Kinderform).** Transfer is high. Put together, the evidence describes 5 parts of a decent "no":
 
 1. Say at the start how often people do not go through, and that it is not a judgement of their worth.
 2. Give the decision by voice, with time.
@@ -224,9 +224,9 @@ No trial has tested any of the 5. Naming other real ways to help answers the los
 
 No controlled study was found of a coordinator, a named nurse or an advocate, measured from the volunteer's side.
 
-**Recommendation (OUCM).** Transfer is high for the named contact and the peer, and moderate for the independent role. Keep the named journey guide, and be honest that it rests on guidance and interviews. Define it by duties instead of a job title: what the guide must do, by when, and what happens when they are away.
+**Recommendation (Kinderform).** Transfer is high for the named contact and the peer, and moderate for the independent role. Keep the named journey guide, and be honest that it rests on guidance and interviews. Define it by duties instead of a job title: what the guide must do, by when, and what happens when they are away.
 
-The independent role raises a harder point. An agency that needs carers has a built-in interest, like a transplant team that needs a kidney. Transplant practice answers that with someone whose only loyalty is to the volunteer. OUCM should at least require that the guide's stated job is to support the person's decision either way. Does anything independent exist for people at the enquiry stage in England? Check this against Department for Education and Ofsted sources before making any claim about it.
+The independent role raises a harder point. An agency that needs carers has a built-in interest, like a transplant team that needs a kidney. Transplant practice answers that with someone whose only loyalty is to the volunteer. Kinderform should at least require that the guide's stated job is to support the person's decision either way. Does anything independent exist for people at the enquiry stage in England? Check this against Department for Education and Ofsted sources before making any claim about it.
 
 ## Ambivalence is normal, predictive, and not to be scored
 
@@ -260,7 +260,7 @@ None of these has been evaluated.
 
 **Evidence (B) and Observed practice (D).** Suspicion of an unusual offer is not supported. BOUnD compared people donating to a stranger with people donating to someone they know. It found no difference in outcomes, regret or withdrawal (hazard ratio 1.12, 95% confidence interval 0.75 to 1.67). But the stranger-donors reported fewer positive perceptions of the experience (79.9% against 86.2%) ([Mamode et al. 2025](https://library.kab.ac.ug/Record/doaj-art-212fefbb094541b79514cbbc3d908c3e/Description)). In Israel, 23.4% of 598 unrelated candidates were disqualified in 2008 to 2016. Of those disqualified, 41% were disqualified on mental health grounds, using criteria such as "ego strength" ([Ashkenazi et al. 2022](https://consensus.app/papers/details/w:d6fa5395-0d16-4d4c-a0b6-daa6319b4ca2/)). This is a picture of where vague motive-testing ends up.
 
-**Recommendation (OUCM).** Transfer is high as a principle and forbidden as a tool. For a decision as large as fostering, doubt at enquiry is probably wiser than certainty. Services should make room for people to voice it, and answer worries straight. They should say at the start that stopping is always allowed and is not a failure.
+**Recommendation (Kinderform).** Transfer is high as a principle and forbidden as a tool. For a decision as large as fostering, doubt at enquiry is probably wiser than certainty. Services should make room for people to voice it, and answer worries straight. They should say at the start that stopping is always allowed and is not a failure.
 
 Kidney donation has a so-called "medical alibi". A team gives a general reason so that a reluctant person can step back without blame. The notes summarise this from background knowledge and unread sources, so treat it as not yet checked. Its honest form is worth testing: one truthful, non-specific form of words ("this is not going ahead at the moment"). It would be agreed with the person and used for everyone. Nothing would be invented, and any safeguarding concern would be recorded truthfully.
 
@@ -281,15 +281,15 @@ Kidney donation has a so-called "medical alibi". A team gives a general reason s
 
 **Evidence (A/B, weak).** A 2019 review found only 8 intervention studies on blood donation in minority ethnic communities, all rated low quality ([Makin et al. 2019](https://consensus.app/papers/details/w:c98531c7-608f-4d5a-a55b-660716cc8b8f/)). No evaluation was found that shows any register change closing the availability gap.
 
-**Recommendation (OUCM).** Transfer is high as a method. Before anyone concludes that a group is "less committed", check whether the service lost touch with them or never answered their questions.
+**Recommendation (Kinderform).** Transfer is high as a method. Before anyone concludes that a group is "less committed", check whether the service lost touch with them or never answered their questions.
 
 The standard should let a service see, as group totals, the step at which different groups of people leave. It should require that every early question comes with a stated reason, or is dropped from first contact. The likely fostering equivalents are this report's assumptions, and need checking against current practice. They include questions on housing tenure (owning or renting), immigration status or time in the UK. They also include old rules that people believe still apply.
 
 Trust runs through people, so who replies matters. The standard should also ask services to say at enquiry who bears the costs of assessment. They should say what happens to those costs if the person is not approved. All of this must use group totals and synthetic (made-up) examples only. It must never rank an individual.
 
-## What OUCM should not adopt
+## What Kinderform should not adopt
 
-**Recommendation (OUCM).** OUCM's purpose rules out several things that appear in this research. Most of them also failed when tested.
+**Recommendation (Kinderform).** Kinderform's purpose rules out several things that appear in this research. Most of them also failed when tested.
 
 | Do not adopt | Why |
 |---|---|
@@ -305,7 +305,7 @@ Trust runs through people, so who replies matters. The standard should also ask 
 
 ## Evidence table
 
-Grades are the research notes' own. "Transfer" is a Recommendation (OUCM) judgement in every row. Sources were read as abstracts only, unless the notes say otherwise.
+Grades are the research notes' own. "Transfer" is a Recommendation (Kinderform) judgement in every row. Sources were read as abstracts only, unless the notes say otherwise.
 
 | Finding | Source | Year | Country | Method | Grade | Does it transfer to fostering? |
 |---|---|---|---|---|---|---|
@@ -357,9 +357,9 @@ Grades are the research notes' own. "Transfer" is a Recommendation (OUCM) judgem
 | Withdraw at any stage, no explanation, "not a failure" | [BTS/Renal Association](https://bts.org.uk/wp-content/uploads/2018/01/BTS_LDKT_UK_Guidelines_2018.pdf) | 2018 | UK | Guideline | D | High as wording |
 | Free to withdraw at any time; consent renewed at each stage | [WMDA](https://wmda.info/storage/2024/01/2024-WMDA-Stnds_20240101-final.pdf) | 2024 | International | Standards | D | High as principle |
 
-## Proposed changes to the OUCM standard
+## Proposed changes to the Kinderform standard
 
-Every row is a **Recommendation (OUCM)**. "Basis" names the strongest evidence and its grade. Where the basis is principle alone, it says so.
+Every row is a **Recommendation (Kinderform)**. "Basis" names the strongest evidence and its grade. Where the basis is principle alone, it says so.
 
 | Element | Verdict | Proposed wording or change | Basis |
 |---|---|---|---|
@@ -427,9 +427,9 @@ Every row is a **Recommendation (OUCM)**. "Basis" names the strongest evidence a
 - No evaluation showing any measure that closed an ethnic gap in availability or progression.
 - No evidence on whether telling people at the outset that they may stop without explanation changes what they do or how they feel.
 
-## Questions OUCM could test openly
+## Questions Kinderform could test openly
 
-**Recommendation (OUCM).** Each of these can be tested with services that volunteer. The method would be published first, and anything public would use synthetic examples. The outcomes would measure understanding and respect before anything else.
+**Recommendation (Kinderform).** Each of these can be tested with services that volunteer. The method would be published first, and anything public would use synthetic examples. The outcomes would measure understanding and respect before anything else.
 
 - Do people who are told at first contact that they can stop at any time, without explanation, report feeling better informed and less pressured?
 - A plain reminder could come a week before a self-chosen "not now" date, offering talk, pause and remove as equal options. Does it leave people feeling respected? How many choose each option?
@@ -442,7 +442,7 @@ Every row is a **Recommendation (OUCM)**. "Basis" names the strongest evidence a
 
 ## Conclusion
 
-The most useful thing these fields offer OUCM is a correction of emphasis. The draft standard puts its precision into speeds and intervals: 5 minutes, 1 day, 2 weeks. That is where the evidence is silent. The evidence is loudest about moments the draft treats lightly:
+The most useful thing these fields offer Kinderform is a correction of emphasis. The draft standard puts its precision into speeds and intervals: 5 minutes, 1 day, 2 weeks. That is where the evidence is silent. The evidence is loudest about moments the draft treats lightly:
 
 - the conversation in which someone is asked to wait
 - the promise to call back on a date
@@ -451,4 +451,4 @@ The most useful thing these fields offer OUCM is a correction of emphasis. The d
 
 A standard that is exact about those moments, and openly modest about its clock times, would be both better evidenced and more honest.
 
-The second lesson is that persuasion is not being sacrificed for principle. Some studies tested urgency, gifts, emotive wording and substitute good deeds against plain information and a kept promise. The plain version usually did as well or better. OUCM is in a position these fields have not reached. It can test the open questions above with respect and understanding as the outcomes. And it can publish the null results as prominently as the rest.
+The second lesson is that persuasion is not being sacrificed for principle. Some studies tested urgency, gifts, emotive wording and substitute good deeds against plain information and a kept promise. The plain version usually did as well or better. Kinderform is in a position these fields have not reached. It can test the open questions above with respect and understanding as the outcomes. And it can publish the null results as prominently as the rest.

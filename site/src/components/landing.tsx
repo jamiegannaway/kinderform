@@ -37,7 +37,7 @@ const making = [
   {
     title: "A picture of where people get in touch",
     status: "Method in draft",
-    body: "A register of where people get in touch about fostering across the UK. It also records what each enquiry form asks and promises. It looks at pages and processes as the person enquiring sees them. Each service sees its own results first.",
+    body: "A register of where people first ask about fostering or adoption. It records what each enquiry form asks and when it says someone will reply. It looks at pages and processes as the person enquiring sees them. Each service sees its own results first.",
   },
   {
     title: "A library of research",
@@ -234,12 +234,12 @@ export default function Landing() {
         </section>
 
         <div className="mx-auto max-w-6xl px-6">
-          <Alert>
+          <Alert id="find-a-service">
             <AlertTitle>Thinking of fostering or adopting?</AlertTitle>
             <AlertDescription>
               <p>
-                Kinderform is not a fostering or adoption service, so we cannot take your enquiry.
-                Please contact your local council.
+                To make a real enquiry, contact a fostering or adoption service where you live.
+                The links below can help you find a UK service. The Kinderform examples send nothing.
               </p>
               <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
                 {nations.map((n) => (
@@ -253,7 +253,17 @@ export default function Landing() {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <a href="https://www.gov.uk/child-adoption/early-stages-of-adoption" className="font-medium text-foreground underline underline-offset-4">
+                    How to contact an adoption agency
+                  </a>
+                </li>
               </ul>
+              <p>
+                Outside the UK, you can also browse the{" "}
+                <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">service pages listed by country</a>.
+                Check the details on the service’s own website before you contact them.
+              </p>
             </AlertDescription>
           </Alert>
         </div>
@@ -266,9 +276,9 @@ export default function Landing() {
                 problem. People who offer to help can wait weeks or months for a reply.
               </p>
               <p>
-                In England in 2024–25, there were almost 150,000 enquiries about fostering and 7,365
-                newly approved foster carers. The gap between these numbers is not exact. Some people
-                enquire more than once, and services count enquiries in different ways.
+                England recorded almost 150,000 fostering enquiries in 2024–25. In the same year,
+                7,365 foster carers gained approval. One figure counts enquiries and the other counts people.
+                A person can enquire more than once.
               </p>
               <p>
                 Nobody designs it that way. Recruitment teams are small and stretched, and systems
@@ -280,7 +290,7 @@ export default function Landing() {
                 <a href={SOURCE_URL} className="font-medium text-foreground underline underline-offset-4">
                   Renewing Fostering
                 </a>
-                , February 2026, page 14. Checked 14 November 2026.
+                , February 2026, page 14. Checked 24 November 2026.
               </p>
             </div>
           </Section>
@@ -318,14 +328,28 @@ export default function Landing() {
 
           <Separator />
 
-          <Section id="who-title" title="Who is behind Kinderform" art="plant-seed">
+          <Section id="who-title" title="Who's behind Kinderform" art="plant-seed">
             <div className="max-w-2xl space-y-4 leading-7">
               <p>
-                Jamie Gannaway, a co-founder of Deployed, started Kinderform. Deployed builds intake
-                and routing systems for large organisations. This project gives that experience to the
-                fostering and adoption sector for free.
+                Jamie Gannaway is a co-founder of Deployed, a document assembly and decision intelligence
+                platform. Deployed builds intake and routing systems for large organisations. This project
+                gives that experience to the fostering and adoption sector for free.
               </p>
               <p>Kinderform is not a Deployed product and is not commercial. It will never be a sales channel.</p>
+              <p>
+                You can find the code, data, research and their licences on{" "}
+                <a
+                  href="https://github.com/jamiegannaway/kinderform"
+                  className="font-medium underline underline-offset-4"
+                >
+                  GitHub
+                </a>
+                . To get in touch, email{" "}
+                <a href="mailto:jamie.gannaway@gmail.com" className="font-medium underline underline-offset-4">
+                  jamie.gannaway@gmail.com
+                </a>
+                .
+              </p>
             </div>
           </Section>
 
@@ -352,9 +376,9 @@ export default function Landing() {
               </CardContent>
               <CardFooter>
                 <Button asChild>
-                  <a href="mailto:hello@kinderform.org">
+                  <a href="mailto:jamie.gannaway@gmail.com">
                     <Mail aria-hidden="true" />
-                    Email hello@kinderform.org
+                    Email jamie.gannaway@gmail.com
                   </a>
                 </Button>
               </CardFooter>

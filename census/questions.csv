@@ -180,7 +180,7 @@ aberdeen-city:q07,aberdeen-city,7,,How heard,source,how_heard,unknown,unknown,ye
 scottish-borders:q01,scottish-borders,1,,Do you have a council online account,account,existing_account,unknown,unknown,yes,,First screen of the council's forms system.,search_snippet,2026-11-14
 hsc-ni:q01,hsc-ni,1,,What would you like to hear more about,interest,care_type,yes,unknown,yes,,,direct_fetch,2026-11-14
 hsc-ni:q02,hsc-ni,2,,Is the enquiry about a child-specific appeal,out_of_scope,child_specific,no,radio,yes,,,direct_fetch,2026-11-14
-hsc-ni:q03,hsc-ni,3,,Name of the child in the appeal,out_of_scope,child_specific,no,text,yes,q02=Yes,Child data; outside OUCM scope. Recorded only to show the question exists.,direct_fetch,2026-11-14
+hsc-ni:q03,hsc-ni,3,,Name of the child in the appeal,out_of_scope,child_specific,no,text,yes,q02=Yes,Child data; outside Kinderform scope. Recorded only to show the question exists.,direct_fetch,2026-11-14
 hsc-ni:q04,hsc-ni,4,,Your full name,contact_identity,name,yes,text,no,,First and last name.,direct_fetch,2026-11-14
 hsc-ni:q05,hsc-ni,5,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-14
 hsc-ni:q06,hsc-ni,6,,Phone,contact_identity,phone,yes,tel,yes,,A phone or mobile number to reach you on.,direct_fetch,2026-11-14

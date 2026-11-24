@@ -1,0 +1,31 @@
+name: Ask about Kinderform or suggest a change
+description: Ask how to use a tool, report a fault, suggest research or comment on the draft checklist.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        GitHub will publish your question. Use made-up examples. Please leave out real names, contact details, case records and copied assessment forms.
+        For personal feedback, a privacy or security problem, or a service's right of reply, [contact Jamie privately](https://github.com/jamiegannaway/kinderform/blob/main/SUPPORT.md).
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What would you like to do?
+      options:
+        - Ask how to use something
+        - Report a problem with a tool or example
+        - Suggest a research source
+        - Comment on the draft checklist or standard
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: What should we look at?
+      description: For a fault, give the steps, what you expected and what happened. For research, explain what the source adds.
+    validations:
+      required: true
+  - type: input
+    id: reference
+    attributes:
+      label: Relevant page, file or original source
+      description: If you cite research or make a factual claim, include a public source link and the date you checked it.
