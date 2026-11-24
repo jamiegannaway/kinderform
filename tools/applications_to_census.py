@@ -40,7 +40,10 @@ NOISE = re.compile(
     r"^(?:yes|no|yes no|n/?a|not applicable|other|none|neg|pos|check ?box\d*|text\d*|button\d*|reset|print|submit|"
     r"clear(?: form)?|page \d+|\d+|[a-z]|[a-z]\d*|provider #?\d+|#\d+|\(?[a-z]\)|[ivx]+\.?|date|please explain\.?|"
     r"explain|if yes,? (?:please )?explain\.?|select or enter (?:a )?date\.?|comments?|specify|one|two|three|four|"
-    r"consumed|[a-z]\. [a-z]{2,6})$"
+    r"consumed|[a-z]\. [a-z]{2,6}|undefined|choose an item|yes/no|dual(?: n/a)?|n/a n/a|both|full|initial|renewal|"
+    r"temp|returnee|unknown|declined|between|and|own|family|together|contact|child|parent|applicant|number|year|"
+    r"day of|a\.d\. 20|l w m|cog|oti|booking|child ?\(ren\)|parent i+|prospective parent|parent/guardian|home|"
+    r"other \(specify\)|other - explain|other reason|acceptable|dates?|this child|with it|you do|their part)$"
     r"|\bcheck ?box\b|^(?:neg|pos|yes|no)\b.*\bbox\b",
     re.I,
 )
@@ -50,13 +53,84 @@ STAFF = re.compile(
     r"supervisor|approved by|reviewed by|received by|date received|initials of completer|completed by staff|"
     r"\bcheck completed\b|\bdph check\b|licens(?:ing|e) (?:specialist|staff|number)|case (?:number|id)|"
     r"provider (?:number|id)|county use|district use|\bresults?\b|date completed|\bdmv\b|attendance|observations|"
-    r"^certification$|application change|^strengths/needs$",
+    r"^certification$|application change|^strengths/needs$|^(?:approved|disapproved|closed|home approved)$|disposition|"
+    r"waiver|appeal|registering agency|previous agency|restrictions to approval|number of children approved|"
+    r"date (?:home approved|training completed|referred|request submitted|of next court hearing)|request date|"
+    r"requesting organi[sz]ation|attention to|re-?submission|livescan|swan id|pae id|carematch id|nexus path|"
+    r"licensing (?:unit|agent|agency)|department file|^(?:date )?conducted$|findings|substantiation|dates of visits|"
+    r"individuals present|agency'?s plan|annual review|relicense|new hh member|^capacity|^specialist$|inv comm|"
+    r"ch ct police|ch local pd|fcd ps|^progress$|to whom it may concern|property owner|this is to verify|"
+    r"by and between|program manager|^(?:correct|incorrect)$|with the following changes|^skill \d|ncac|"
+    r"(?:pre|in)-service training|identified relative|^copy of|agency received|submit fingerprints|"
+    r"^form \d|other verification|court ordered case",
     re.I,
 )
+# Sections marked in register/us/application-questions.csv: a table of the children a family would accept
+# lists conditions such as "diabetes", which are about the child, not the applicant.
+SECTIONS = [
+    (re.compile(r"children the family would accept", re.I), ("interest", "child_preferences")),
+    (re.compile(r"^for the agency$", re.I), ("staff_recorded", "logged_by")),
+]
+# Screen-reader prompts in some PDFs ("Enter the city.", "Select for yes.", "Marriage info Ck").
+PROMPT = re.compile(r"^(?:select or enter|select for:?|select|enter(?: the| your)?)\s+|\s+ck$", re.I)
 SIGNATURE = re.compile(r"signature|signed|\binitials\b|^date signed|print(?:ed)? name", re.I)
 
 # Application topics, checked before the census tagger (first match wins).
 APP_RULES = [
+    ("work", "income", r"social security/disability|social security benefits|retirement|\bssi\b|\bssb\b|tanf|afdc|"
+                       r"^(?:gas|electricity|oil|cable|food|entertainment|telephone)$|property payments|car payment|"
+                       r"take home|source of income|financ|self-employment"),
+    ("interest", "child_preferences", r"will (?:not )?(?:accept|consider|except)|birth (?:parents?|family)|"
+                                      r"what would the child look like|know about the child|childhood ages do you"),
+    ("experience", "own_children", r"teacher|name of school|^grade level$|child'?s (?:name|last name|first)|"
+                                   r"school or child care|your child(?:ren)?'?s?\b|children (?:now )?in your|"
+                                   r"children by birth|what does this child|with this child|^appearance/hygiene$|"
+                                   r"^behaviou?r$|contacts with parent"),
+    ("experience", "life_story", r"childhood|your (?:mother|father|parents)|like your parents|different from your "
+                                 r"parents|growing up|left home|why did you leave|family traditions|happier or less "
+                                 r"happy|cope with|emotions?\b|^(?:[a-h]\. )?(?:anger|disappointment|frustration|"
+                                 r"sadness/depression|happiness|love/affection|stress)$|five words|meet your spouse|"
+                                 r"known each other|been married or coupled|partner likes|spouse or partner would|"
+                                 r"aware of this loss|spirituality|role models|important adults|decisions (?:are )?made|"
+                                 r"privacy|neighbou?rs|free time|chores|people who most|turn to for help|"
+                                 r"were you adopted|been in foster care|how did (?:you|your) .*(?:react|feel)|"
+                                 r"what do you (?:most |least )?like (?:most |least )?about|disappointment"),
+    ("work", "education", r"grade (?:level )?complet|highest grade|education level|advanced degree|college|"
+                          r"high school|diploma|\bged\b|parts of school|school expectations"),
+    ("free_text", "motivation", r"what made you think about|desire to become|interested in (?:only|becoming|both|pos)|"
+                                r"what do you think (?:you|others).*like|having a (?:new )?child in your home|"
+                                r"what would make you want"),
+    ("experience", "parenting_approach", r"rules can|forms of discipline|disliked most about being a parent|"
+                                        r"parenting experience|help the child fit"),
+    ("work", "employment_history", r"armed forces|branch of service|service dates"),
+    ("work", "occupation", r"child care in your home|in-home day care|day care center"),
+    ("criminal_record", "criminal_record", r"guilty|nolo"),
+    ("prior_involvement", "social_services", r"^investigated$"),
+    ("housing", "home_safety", r"body of water|describe the barriers|locking mechanisms|how often is it tested"),
+    ("housing", "spare_bedroom", r"describe house|drawer space|basement: there are"),
+    ("health", "health", r"date (?:of )?exam|examined|prognosis|^(?:physical|emotional)$|how does it manifest|"
+                         r"what are the symptoms"),
+    ("experience", "childcare_experience", r"parent to someone else"),
+    ("household", "relationships", r"marriage (?:info|certificate)"),
+    ("eligibility", "residency", r"radius of|reside in section|^citizen$|country of citizenship"),
+    ("contact_identity", "id_number", r"type of id|photo id|enrollment number"),
+    ("household", "previous_partners", r"relationship #?[2-9]|relationship ended|previous mar|copy of all divo"),
+    ("household", "relationships", r"marriage or relationship|place of marriage|marit ?al|dom\. partner|"
+                                   r"^(?:single|married|widowed)$|lgbt individual|how long have you been a single"),
+    ("household", "household_composition", r"^relationship(?: \d\.?)?$|relationship to (?:family|parent|you)|"
+                                           r"relation to applicant|list everyone in the home|name/age of child|"
+                                           r"^(?:biological|adopted|step|legal)$"),
+    ("equality", "gender", r"^(?:male|female|male/female|sex|gender: m f|sex: male)$"),
+    ("health", "health", r"blood pressure|\bheart\b|diabetes|epilep|seizure|\bhiv\b|physical activity|"
+                         r"insurance|medicaid|primary care|policy number|^health$|^medical$"),
+    ("housing", "smoking", r"packs? per day|tobacco|vap(?:e|ing)"),
+    ("interest", "care_type", r"^(?:first time|foster care|adoption|kinship(?: care)?|traditional|adoptive|"
+                              r"foster home|kinship foster home|adoptive home|therapeutic home|dhs home|"
+                              r"supported agency home)$"),
+    ("housing", "tenure", r"^(?:owner|renter|rent own|duplex|mortgage|rent)$|name\(s\) on (?:deed|lease)|"
+                          r"how long have you lived in"),
+    ("contact_identity", "address", r"^(?:ward|rural|urban|suburban)$|directions to your home|finding directions|"
+                                    r"floor: there are|my house has|apartment is located"),
     ("references", "referees", r"\breferen(?:ce|ces)\b|\breferee|allow the applicant|known the applicant|"
                                r"relationship to (?:the )?applicant|how long have you known"),
     ("contact_identity", "id_number", r"social security|\bssn\b|licen[cs]e number|passport|national insurance|"
@@ -64,7 +138,7 @@ APP_RULES = [
     ("contact_identity", "physical_description", r"eye colou?r|hair colou?r|\bheight\b|\bweight\b|"
                                                  r"distinguishing|\bmarks\b|tattoo"),
     ("equality", "ethnicity", r"american indian|alaska(?:n)? native|tribal|hispanic|latin[oa]|ethnic|\brace\b|"
-                              r"pacific islander|\basian\b|\bblack\b|\bwhite\b|biracial|multiracial"),
+                              r"pacific islander|\basian\b|\bblack\b|\bwhite\b|biracial|multiracial|african american|\btribe\b|\btrib\b"),
     ("equality", "religion", r"place of worship|church|relig|faith|synagogue|mosque"),
     ("housing", "home_safety", r"safety|smoke (?:detector|alarm)|fire (?:extinguisher|escape|drill)|carbon monoxide|"
                                r"lead paint|\bpool\b|fence|water (?:quality|supply|heater)|sanitation|outlet|gates?\b|"
@@ -103,16 +177,23 @@ INPUT = {"free_text": "text", "yes_no": "radio", "single_choice": "radio", "mult
 SERVICES = {"both": "fostering_and_adoption", "foster": "fostering", "fostering": "fostering", "adoption": "adoption"}
 
 
-def tag(label: str) -> tuple[str, str] | None:
+def tag(label: str, section: str = "") -> tuple[str, str] | None:
     """(category, topic) for a field the applicant fills in, or None for a field to leave out."""
-    text = " ".join(label.split())
+    raw = " ".join(label.split())
+    text = PROMPT.sub("", raw).strip(" .:")
     if not text or NOISE.search(text):
         return None
+    for pattern, topic in SECTIONS:
+        if section and pattern.search(section):
+            return topic
     if STAFF.search(text):
         return ("staff_recorded", "records_check") if re.search(r"check|regist|clear", text, re.I) else (
             "staff_recorded", "logged_by")
     if SIGNATURE.search(text):
         return ("consent", "declaration_and_checks")
+    # A PDF field named after the middle of a sentence ("within the next few years") is not a question.
+    if re.match(r"[a-z]", raw) and "?" not in raw:
+        return None
     for category, topic, pattern in APP_RULES:
         if pattern.search(text):
             return (category, topic)
@@ -193,7 +274,7 @@ def main():
     for q in new_q:
         label = " ".join(q["label_paraphrased"].split())
         given = (q.get("category", ""), q.get("topic", ""))
-        ct = given if given[0] and given in taxonomy else tag(label)
+        ct = given if given[0] and given in taxonomy else tag(label, q.get("section", ""))
         if ct is None:
             dropped += 1
             continue

@@ -54,7 +54,7 @@ Black: done. Grey: first pass, unverified. Light, dashed: not started.
 | States | 51 | 0 | 0 |
 | Front doors | 1257 | 406 | 0 |
 | Policy rules | 663 | 0 | 0 |
-| Application forms | 235 | 51 | 0 |
+| Application forms | 236 | 52 | 0 |
 | Enquiry questions | 552 | 552 | 0 |
 | Application questions | 1726 | 1726 | 0 |
 | Reply promises | 16 | 16 | 0 |

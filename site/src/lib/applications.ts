@@ -5,7 +5,7 @@
 // What leaves this file is numbers, country names and topic labels only. No form, service or URL.
 // First-contact forms are counted the same way as "What enquiry forms ask": forms read straight
 // from the live page. A US application is a packet: the documents one service (a state, a county or a
-// tribe) gives applicants, taken together. Every figure is unverified until a person has checked the rows.
+// tribe, or a private agency) gives applicants, taken together. Every figure is unverified until a person has checked the rows.
 import { askedBy, type Census, type Row } from "@/lib/census"
 import { factsFor } from "@/lib/form-check"
 import { COUNTRIES } from "@/lib/countries"
@@ -20,7 +20,8 @@ export const APPLICATION_TOPICS: { label: string; match: (q: Row) => boolean; se
   { label: "ID numbers, such as a social security number", match: (q) => q.topic === "id_number", sensitive: true },
   { label: "Who lives in the home", match: (q) => ["household_composition", "children_in_household", "partner", "partner_details", "partner_date_of_birth"].includes(q.topic) },
   { label: "Past partners or marriages", match: (q) => q.topic === "previous_partners", sensitive: true },
-  { label: "Work or income", match: (q) => q.category === "work" },
+  { label: "Work or income", match: (q) => q.category === "work" && q.topic !== "education" },
+  { label: "Schooling", match: (q) => q.topic === "education" },
   { label: "Bedrooms or housing", match: (q) => q.topic === "spare_bedroom" || q.topic === "tenure" },
   { label: "Home safety", match: (q) => q.topic === "home_safety" || q.topic === "firearms" },
   { label: "Health or disability", match: (q) => q.category === "health", sensitive: true },
@@ -29,6 +30,7 @@ export const APPLICATION_TOPICS: { label: string; match: (q: Row) => boolean; se
   { label: "Ethnicity, gender or faith", match: (q) => q.category === "equality", sensitive: true },
   { label: "Which children they could care for", match: (q) => q.topic === "child_preferences" },
   { label: "Parenting and discipline", match: (q) => q.topic === "parenting_approach" },
+  { label: "Their own childhood and relationships", match: (q) => q.topic === "life_story", sensitive: true },
   { label: "Why they want to do this", match: (q) => q.topic === "motivation" },
   { label: "Referees", match: (q) => q.category === "references" },
 ]

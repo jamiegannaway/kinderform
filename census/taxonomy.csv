@@ -82,3 +82,5 @@ housing,firearms,Firearms or other weapons in the home,none,,kept_out_later_slic
 contact_identity,id_number,"Social security, national insurance, passport or licence numbers",personal_identifier,,kept_out_later_slice,"Added for application forms, mainly background-check forms."
 contact_identity,physical_description,"Height, weight, eye or hair colour, for fingerprinting or checks",personal_identifier,,kept_out_later_slice,"Added for application forms, mainly US background-check forms."
 housing,home_safety,"Safety in the home: smoke alarms, pools, locks, medicines and chemicals",none,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
+experience,life_story,"The person's own childhood, family life, relationships and how they cope with feelings: the life-story part of a home study",sensitive,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
+work,education,"Schooling and qualifications, such as the highest grade or degree",none,,kept_out_later_slice,Added for application forms.
