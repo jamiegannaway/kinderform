@@ -93,6 +93,8 @@ export function ForServices({
   const england = bedrooms.find((b) => b.place === "England")
   const ni = bedrooms.find((b) => b.place === "Northern Ireland")
   const law = d.lawRows > 0
+  // Wales, Scotland and Northern Ireland, where we have read enquiry forms.
+  const others = (d.early?.nations ?? []).filter((n) => n.code !== "ENG" && n.enquiry.share.of > 0 && n.link)
   const insights = [
     {
       id: "ask-less",
@@ -206,6 +208,13 @@ export function ForServices({
                     to stage 2
                     {d.early.application.top.length ? `, such as ${listOf(d.early.application.top)}` : ""}. So do{" "}
                     {of(d.early.enquiry.share)} enquiry forms in England.
+                    {others.length > 0 && (
+                      <>
+                        {" "}
+                        Enquiry forms that ask something the law leaves to the assessment:{" "}
+                        {others.map((n) => `${n.name} ${of(n.enquiry.share)}`).join(", ")}.
+                      </>
+                    )}
                   </>
                 ),
               },
@@ -224,6 +233,20 @@ export function ForServices({
                     <a href={d.lawLinks.adoptionGuidance} className={link}>
                       Adoption statutory guidance, paragraphs 3.13 to 3.15
                     </a>
+                    {others.length > 0 && (
+                      <>
+                        . Wales, Scotland and Northern Ireland have one fostering assessment, plus checks. Wales splits
+                        adoption into 2 stages. The law:{" "}
+                        {others.map((n, i) => (
+                          <span key={n.code}>
+                            {i > 0 && ", "}
+                            <a href={n.link} className={link}>
+                              {n.name} ({n.citation})
+                            </a>
+                          </span>
+                        ))}
+                      </>
+                    )}
                   </>
                 ),
               },
@@ -234,7 +257,8 @@ export function ForServices({
                 <a href="#law-by-nation" className={link}>
                   law in your nation
                 </a>
-                . Move stage 2 questions to the assessment, where a social worker can explain why they matter. If you
+                . Move stage 2 questions, or in single-assessment nations the assessment&rsquo;s questions, to the
+                assessment, where a social worker can explain why they matter. If you
                 ask about ethnicity or religion for monitoring, make it optional and keep it apart from the decision.
               </>
             ),

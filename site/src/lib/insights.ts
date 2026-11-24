@@ -55,17 +55,22 @@ export type InsightsData = {
   }
   topics: TopicCheck[]
   lawRows: number // rows read from register/assessment.csv
-  // Questions the law in England puts in stage 2 of the assessment, asked on the enquiry form
-  // or the application. Null until register/assessment.csv exists.
+  // Questions the law leaves until later, asked earlier. Where the law has two stages (England,
+  // adoption in Wales), "later" means stage 2; where it has one assessment, it means the assessment.
+  // Applications count only in England: elsewhere the application starts the assessment.
+  // Null until register/assessment.csv exists.
   early: {
-    enquiry: { share: Share; top: string[] }
-    application: { share: Share; top: string[] }
+    enquiry: Early // England's enquiry forms
+    application: Early // England's application forms
+    nations: { code: string; name: string; enquiry: Early; link: string; citation: string }[]
   } | null
   lawLinks: { fostering: string; adoptionGuidance: string } | null
 }
 
+export type Early = { share: Share; top: string[] }
+
 // Stage 2 topics worth flagging when asked early. An open "about you" box and interest in early
-// permanence are left out: asking them early is not intrusive.
+// permanence are left out: asking them early is not intrusive. The spare room has its own idea.
 const EARLY: Record<string, string> = {
   ethnicity: "ethnicity",
   religion: "religion",
@@ -78,7 +83,6 @@ const EARLY: Record<string, string> = {
   parenting_approach: "views on parenting",
   childcare_experience: "experience with children",
   child_preferences: "which children they could care for",
-  spare_bedroom: "a spare room",
 }
 
 const STAGE_ORDER = ["stage_1", "stage_2", "assessment", "checks"]
@@ -136,20 +140,38 @@ export function insights(c: Census): InsightsData {
       .sort((a, b) => STAGE_ORDER.indexOf(a) - STAGE_ORDER.indexOf(b))
       .map((x) => STAGE_NAMES[x] ?? x)
 
-  // Topics the law puts only in stage 2, for each service.
-  const stage2Only = (service: string) => {
+  // Topics the law leaves until later, for each nation and service. Where the law has two stages,
+  // topics it names only in stage 2; where it has one assessment, topics it names in the assessment.
+  const later = new Map<string, Set<string>>()
+  const laterTopics = (nation: string, service: string) => {
+    const key = `${nation}|${service}`
+    if (later.has(key)) return later.get(key)!
+    const rows = allLaw.filter((r) => r.jurisdiction === nation && r.applies_to === service)
+    const twoStage = rows.some((r) => r.stage === "stage_1" || r.stage === "stage_2")
     const stages = new Map<string, Set<string>>()
-    for (const r of law.filter((r) => r.applies_to === service && r.topic in EARLY)) {
+    for (const r of rows.filter((r) => r.topic in EARLY)) {
       const k = `${r.category}/${r.topic}`
       stages.set(k, (stages.get(k) ?? new Set()).add(r.stage))
     }
-    return new Set([...stages].filter(([, v]) => v.size === 1 && v.has("stage_2")).map(([k]) => k))
+    const out = new Set(
+      [...stages]
+        .filter(([, v]) => (twoStage ? v.size === 1 && v.has("stage_2") : v.has("assessment")))
+        .map(([k]) => k),
+    )
+    later.set(key, out)
+    return out
   }
-  const s2Fostering = stage2Only("fostering")
-  const s2Adoption = stage2Only("adoption")
-  const s2Both = new Set([...s2Fostering].filter((k) => s2Adoption.has(k)))
-  const s2For = (f: Row) =>
-    f.service_type === "adoption" ? s2Adoption : f.service_type === "fostering" ? s2Fostering : s2Both
+  const NATION_OF: Record<string, string> = Object.fromEntries(NATIONS.map((n) => [n.name, n.code]))
+  const s2For = (f: Row) => {
+    const nation = NATION_OF[f.region] ?? "ENG"
+    const fostering = laterTopics(nation, "fostering")
+    const adoption = laterTopics(nation, "adoption")
+    return f.service_type === "adoption"
+      ? adoption
+      : f.service_type === "fostering"
+        ? fostering
+        : new Set([...fostering].filter((k) => adoption.has(k)))
+  }
   const answered = (q: Row) =>
     q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on && q.input_type !== "statement"
   const earlyIn = (forms: Row[]) => {
@@ -166,9 +188,20 @@ export function insights(c: Census): InsightsData {
     (f) => f.form_stage === "application" && f.country === "UK" && f.region === "England" &&
       (asked.get(f.form_id) ?? []).filter(answered).length >= 3,
   )
-  const englandFirst = ukFirst.filter((f) => f.form.region === "England").map((f) => f.form)
+  const firstIn = (region: string) => ukFirst.filter((f) => f.form.region === region).map((f) => f.form)
+  const englandFirst = firstIn("England")
   const guidance = law.find((r) => r.applies_to === "adoption" && /3\.13/.test(r.legal_citation))
   const schedule = law.find((r) => r.applies_to === "fostering" && r.source_type === "legislation")
+  // The fostering law each nation's map mostly cites: its main schedule.
+  const mainLaw = (nation: string) => {
+    const counts = new Map<string, { n: number; row: Row }>()
+    for (const r of allLaw.filter((r) => r.jurisdiction === nation && r.applies_to === "fostering" && r.source_type === "legislation")) {
+      const x = counts.get(r.source_url) ?? { n: 0, row: r }
+      counts.set(r.source_url, { n: x.n + 1, row: x.row })
+    }
+    const top = [...counts.values()].sort((a, b) => b.n - a.n)[0]?.row
+    return top ? { link: top.source_url, citation: top.legal_citation.split(", para")[0] } : { link: "", citation: "" }
+  }
 
   const topics: TopicCheck[] = APPLICATION_TOPICS.map((t) => {
     return {
@@ -233,7 +266,13 @@ export function insights(c: Census): InsightsData {
     },
     topics,
     lawRows: law.length,
-    early: law.length ? { enquiry: earlyIn(englandFirst), application: earlyIn(englandApps) } : null,
+    early: law.length
+      ? {
+          enquiry: earlyIn(englandFirst),
+          application: earlyIn(englandApps),
+          nations: NATIONS.map((n) => ({ code: n.code, name: n.name, enquiry: earlyIn(firstIn(n.name)), ...mainLaw(n.code) })),
+        }
+      : null,
     lawLinks: guidance && schedule ? { fostering: schedule.source_url, adoptionGuidance: guidance.source_url } : null,
   }
 }

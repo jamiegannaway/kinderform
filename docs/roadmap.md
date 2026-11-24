@@ -89,6 +89,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] A topic-by-topic table, with a CSV download, so a service can check its own enquiry form against enquiry forms and applications
 - [x] Show where the law in England puts each topic in the assessment, beside what forms ask
 - [x] Show the other three UK nations the same way: a table of where the law in each nation puts each topic, for fostering and adoption
+- [x] "Ask each question at the stage the law sets" covers Wales, Scotland and Northern Ireland: enquiry forms that ask what the law leaves to the assessment
 - [ ] Read the law not yet covered: England's Schedule 4A and the Adoption and Children Act 2002 rules on age and residence, Scotland's 2010 adoption amendments and 2011 guidance
 - [ ] Ask recruitment teams which ideas help, and which are wrong, before adding more
 
