@@ -54,9 +54,9 @@ Black: done. Grey: first pass, unverified. Light, dashed: not started.
 | States | 51 | 0 | 0 |
 | Front doors | 1257 | 406 | 0 |
 | Policy rules | 663 | 0 | 0 |
-| Application forms | 236 | 52 | 0 |
+| Application forms | 236 | 62 | 0 |
 | Enquiry questions | 552 | 552 | 0 |
-| Application questions | 1726 | 1726 | 0 |
+| Application questions | 1725 | 1725 | 0 |
 | Reply promises | 16 | 16 | 0 |
 
 </details>
@@ -91,7 +91,7 @@ Neutral counts across front doors and states. No front door is scored or ranked,
 - **Few front doors publish a reply time.** 15 of the 406 front-door pages opened state one, from 1 to 14 days.
 - **The usual minimum age is 21.** 40 of 48 jurisdictions with a recorded figure set it; the others set 18 or 19.
 - **The most common pre-service training is 20-29 hours** (14 of 37 jurisdictions with a figure).
-- **Application forms ask far more than enquiry forms.** 83% of the 18 fillable forms read ask for a date of birth, and most ask about relationships, work, education and who lives in the home.
+- **Application forms ask far more than enquiry forms.** 88% of the 17 fillable forms read ask for a date of birth, and most ask about relationships, work, education and who lives in the home.
 
 ### What people are asked
 
@@ -122,18 +122,18 @@ Neutral counts across front doors and states. No front door is scored or ranked,
 
 | Topic | Share of forms (%) |
 |---|---:|
-| Date of birth or age | 83 |
-| Fostering or adopting | 61 |
-| Race, gender or faith | 61 |
-| Relationship status | 61 |
-| Work | 61 |
-| Education | 50 |
-| Open comment box | 39 |
-| Who lives in the home | 39 |
-| Children they could care for | 33 |
-| Driving and vehicle | 33 |
-| Earlier marriages | 33 |
-| Consent to contact | 28 |
+| Date of birth or age | 88 |
+| Fostering or adopting | 65 |
+| Race, gender or faith | 65 |
+| Relationship status | 65 |
+| Work | 65 |
+| Education | 53 |
+| Open comment box | 41 |
+| Who lives in the home | 41 |
+| Children they could care for | 35 |
+| Driving and vehicle | 35 |
+| Earlier marriages | 35 |
+| Consent to contact | 29 |
 
 </details>
 

@@ -1,5 +1,4 @@
 form_id,question_order,section,question_paraphrase,topic,required,answer_type,source_url,date_checked,evidence_level,verification
-us-al-form-application-packet-traditional,1,,Date12 af date,other,unknown,free_text,https://dhr.alabama.gov/wp-content/uploads/2026/05/Application-Packet-Traditional.pdf,2026-11-17,form_read,unverified
 us-ca-form-rfa-07,1,,Health Screening for County/Agency,location,unknown,free_text,https://cdss.ca.gov/cdssweb/entres/forms/english/rfa07.pdf,2026-11-17,form_read,unverified
 us-ca-form-rfa-07,2,,"Applicant Name: (first, middle, last)",name,unknown,free_text,https://cdss.ca.gov/cdssweb/entres/forms/english/rfa07.pdf,2026-11-17,form_read,unverified
 us-ca-form-rfa-07,3,,Date of Birth,date_of_birth,unknown,free_text,https://cdss.ca.gov/cdssweb/entres/forms/english/rfa07.pdf,2026-11-17,form_read,unverified
