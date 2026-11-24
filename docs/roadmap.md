@@ -116,7 +116,8 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] US census: forms the crawler could not read, state agencies first, then counties where counties run child welfare
 - [ ] Share each service's census rows with it privately before any named analysis
 - [x] Polite crawler that reads public front-door pages and extracts form fields, consent wording and response-time promises (`tools/polite_fetch.py`)
-- [ ] Extend the register to the remaining English councils outside hubs (Scottish councils added November 2026)
+- [x] Extend the register to the remaining English councils (Scottish councils added November 2026): 78 council rows added on 24 November 2026, from the ONS list of councils; 5 more council enquiry forms in the census
+- [ ] Read the 14 English council sites that refused our reader (bot checks or 'not found'); all of them recruit through a hub
 - [ ] Baseline report on patterns and good examples
 - [ ] Discuss the first-contact standard and the draft `Interaction` record proposed in the intake interactions review, then decide what goes into the schema
 

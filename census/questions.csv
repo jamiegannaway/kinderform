@@ -4714,3 +4714,36 @@ uk-eng-north-somerset-eoi-q009,uk-eng-north-somerset-eoi,9,,Email address,contac
 uk-eng-north-somerset-eoi-q010,uk-eng-north-somerset-eoi,10,,How many bedrooms your home has,housing,spare_bedroom,unknown,text,yes,,,direct_fetch,2026-11-24
 uk-eng-north-somerset-eoi-q011,uk-eng-north-somerset-eoi,11,,How many bedrooms are free for fostering,housing,spare_bedroom,unknown,text,yes,,,direct_fetch,2026-11-24
 uk-eng-north-somerset-eoi-q012,uk-eng-north-somerset-eoi,12,,"Best time to contact you: morning, afternoon or evening",contact_preference,time,unknown,checkbox,yes,,,direct_fetch,2026-11-24
+uk-eng-hertfordshire-enquiry:q02,uk-eng-hertfordshire-enquiry,1,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-hertfordshire-enquiry:q03,uk-eng-hertfordshire-enquiry,2,,Phone number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-hertfordshire-enquiry:q04,uk-eng-hertfordshire-enquiry,3,,Email address,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-hertfordshire-enquiry:q05,uk-eng-hertfordshire-enquiry,4,,Are you happy to receive regular fostering news from us?,consent,marketing,unknown,radio,no,,,direct_fetch,2026-11-24
+uk-eng-hertfordshire-enquiry:q06,uk-eng-hertfordshire-enquiry,5,,"I have read, understood and accepted the privacy notice.",consent,privacy_acknowledgement,unknown,checkbox,no,,,direct_fetch,2026-11-24
+uk-eng-buckinghamshire-enquiry:q01,uk-eng-buckinghamshire-enquiry,1,,How can we help? Required,intent,journey_stage,yes,textarea,no,,,direct_fetch,2026-11-24
+uk-eng-buckinghamshire-enquiry:q02,uk-eng-buckinghamshire-enquiry,2,,Yes - sign me up to receive monthly fostering newsletters,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-24
+uk-eng-buckinghamshire-enquiry:q03,uk-eng-buckinghamshire-enquiry,3,,Full name Required,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-buckinghamshire-enquiry:q04,uk-eng-buckinghamshire-enquiry,4,,Email Required,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-24
+uk-eng-buckinghamshire-enquiry:q05,uk-eng-buckinghamshire-enquiry,5,,Phone Required,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-buckinghamshire-enquiry:q06,uk-eng-buckinghamshire-enquiry,6,,Postcode Required,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-buckinghamshire-enquiry:q07,uk-eng-buckinghamshire-enquiry,7,,i have read and accept buckinghamshire councils privacy policy and the fostering service notice,consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-24
+uk-eng-rotherham-enquiry:q01,uk-eng-rotherham-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-rotherham-enquiry:q02,uk-eng-rotherham-enquiry,2,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-rotherham-enquiry:q03,uk-eng-rotherham-enquiry,3,,Email Address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q01,uk-eng-barking-dagenham-enquiry,1,,Full name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q02,uk-eng-barking-dagenham-enquiry,2,,Date of birth,contact_identity,date_of_birth,yes,date,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q03,uk-eng-barking-dagenham-enquiry,3,,Phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q04,uk-eng-barking-dagenham-enquiry,4,,Email,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q05,uk-eng-barking-dagenham-enquiry,5,,Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q06,uk-eng-barking-dagenham-enquiry,6,,Address 2,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q07,uk-eng-barking-dagenham-enquiry,7,,City or town,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q08,uk-eng-barking-dagenham-enquiry,8,,Post code,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q09,uk-eng-barking-dagenham-enquiry,9,,"Choice of: Morning, Afternoon, Evening",contact_preference,time,unknown,checkbox,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q10,uk-eng-barking-dagenham-enquiry,10,,Where did you hear about us?,source,how_heard,yes,select,no,,,direct_fetch,2026-11-24
+uk-eng-barking-dagenham-enquiry:q11,uk-eng-barking-dagenham-enquiry,11,,Enter other…,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-ealing-enquiry:q01,uk-eng-ealing-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-ealing-enquiry:q02,uk-eng-ealing-enquiry,2,,Surname,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-24
+uk-eng-ealing-enquiry:q03,uk-eng-ealing-enquiry,3,,Phone Number,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-ealing-enquiry:q04,uk-eng-ealing-enquiry,4,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-24
+uk-eng-ealing-enquiry:q05,uk-eng-ealing-enquiry,5,,Where do you live?,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-24
+uk-eng-ealing-enquiry:q06,uk-eng-ealing-enquiry,6,,How did you hear about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-24
+uk-eng-ealing-enquiry:q07,uk-eng-ealing-enquiry,7,,I consent that Foster with Ealing can use the information pr,consent,processing,unknown,checkbox,no,,,direct_fetch,2026-11-24

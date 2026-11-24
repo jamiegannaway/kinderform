@@ -27,6 +27,7 @@ Standard library only.
 """
 
 import argparse
+import gzip
 import json
 import re
 import sys
@@ -308,6 +309,13 @@ class Polite:
                     # A cut-off PDF looks like a scan with no text. Say so, so nobody mistakes it.
                     print(f"note: stopped reading {url} at {MAX_BYTES:,} bytes; use --max-mb to read more",
                           file=sys.stderr)
+                # Some servers send gzip although the request did not ask for it. Unpack it, so the page
+                # is not read as empty.
+                if response.headers.get("Content-Encoding", "").lower() == "gzip" or body[:2] == b"\x1f\x8b":
+                    try:
+                        body = gzip.decompress(body)
+                    except (OSError, EOFError):
+                        pass
                 return response.status, response.geturl(), body, response.headers.get("Content-Type", "")
         except urllib.error.HTTPError as error:
             return error.code, url, b"", ""

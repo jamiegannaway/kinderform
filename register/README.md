@@ -2,7 +2,7 @@
 
 [`front-doors.csv`](front-doors.csv) lists public routes for fostering and adoption enquiries in England, Wales, Scotland and Northern Ireland. Each row describes one place to get in touch. A regional hub may serve several councils.
 
-**Status: seed data from a first-pass desk review in November 2026. Every row is marked `unverified` until someone has checked it against the live page.** The UK register includes Scottish councils, Welsh local authorities, Northern Irish trusts, English councils and regional adoption agencies. Coverage of English councils outside hubs is partial.
+**Status: seed data from a first-pass desk review in November 2026. Every row is marked `unverified` until someone has checked it against the live page.** The UK register includes Scottish councils, Welsh local authorities, Northern Irish trusts, English councils and regional adoption agencies. In November 2026 we looked for the fostering page of every English council with children's services. 15 still have no row of their own. 14 of them recruit through a regional hub, which has a row, but their own sites refused our reader. The City of London appears to have no fostering recruitment page of its own (unverified). A council that recruits through a hub has its own row where it has its own page; its `notes` name the hub.
 
 The register holds neutral facts only. It contains no scores or judgements.
 
