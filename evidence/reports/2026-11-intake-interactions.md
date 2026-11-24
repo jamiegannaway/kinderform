@@ -1,12 +1,12 @@
-# Fostering and adoption intake interactions: what the evidence says works, and a refined OUCM open standard
+# Fostering and adoption intake interactions: what the evidence says works, and a refined Kinderform open standard
 
-> **Status:** desk review, version 1, 14 November 2026. An AI-assisted research tool produced it. Most figures have **not yet been checked by a person** against the original sources, so check the source before you quote anything. Everything we propose is for discussion and is not yet part of the OUCM standard. See [how we made this review](#how-we-made-this-review).
+> **Status:** desk review, version 1, 14 November 2026. An AI-assisted research tool produced it. Most figures have **not yet been checked by a person** against the original sources, so check the source before you quote anything. Everything we propose is for discussion and is not yet part of the Kinderform standard. See [how we made this review](#how-we-made-this-review).
 
 ## Summary
 
 **What we looked at.** This review looks at what happens after someone first gets in touch to ask about fostering or adoption. We call that first contact an enquiry. We call the contacts that follow, up to a formal application, "intake interactions". These contacts may come from a person or from a digital tool. A service is a council, hub or agency that finds and approves foster carers or adopters.
 
-The review covers first replies, calls, follow-ups, information events, home visits and contact with experienced carers and adopters. It also covers hand-offs between teams, digital and AI tools, and conversations when someone withdraws. We focus on England, with shorter notes on Wales, Scotland, Northern Ireland and other countries. We then propose changes to the open standard that OUCM, the project behind kinderform.org, is drafting.
+The review covers first replies, calls, follow-ups, information events, home visits and contact with experienced carers and adopters. It also covers hand-offs between teams, digital and AI tools, and conversations when someone withdraws. We focus on England, with shorter notes on Wales, Scotland, Northern Ireland and other countries. We then propose changes to the open standard that Kinderform, the project behind kinderform.org, is drafting.
 
 **What we found.**
 
@@ -31,7 +31,7 @@ The review covers first replies, calls, follow-ups, information events, home vis
 - Several widely quoted figures on drop-out come from studies from 1990 to 2008.
 - A person checked a few citations by hand on 14 November 2026. Most figures have not yet been checked by a person against the original source.
 
-**What we suggest.** The OUCM draft standard should keep its rules on fast first replies, and add rules on continuity, hand-offs and honesty:
+**What we suggest.** The Kinderform draft standard should keep its rules on fast first replies, and add rules on continuity, hand-offs and honesty:
 
 - Keep the acknowledgement within 5 minutes, and a first attempt by a person to make contact within 1 working day.
 - Make this rule mandatory: "warm hand-off within 2 working days, first contact from the receiving team within 5".
@@ -54,7 +54,7 @@ We also label each claim:
 
 - **Evidence:** what studies and data show
 - **Observed practice:** what services and suppliers do, or say they do, in their own documents
-- **Recommendation (OUCM):** what we propose
+- **Recommendation (Kinderform):** what we propose
 
 ## Many people stop before approval, and fewer are coming forward to adopt
 
@@ -127,7 +127,7 @@ Assessment has 2 stages: Stage 1 is mainly checks and references, and Stage 2 is
 
 **Enquiries from relatives and friends need a separate route.** Some enquiries come from a relative or friend who wants to care for a particular child. These are kinship or connected-persons enquiries. They arrive the same way as other enquiries, but follow a different legal route, with an urgent assessment linked to that child. Foster with North East's training groups included kinship carers alongside other applicants. The Department for Education's end-to-end booklet has a separate section on kinship.
 
-**Recommendation (OUCM):** add a kinship flag at the first conversation. It should send the enquiry to the kinship or connected-persons team within 1 working day. Do not put it through the follow-up message sequence.
+**Recommendation (Kinderform):** add a kinship flag at the first conversation. It should send the enquiry to the kinship or connected-persons team within 1 working day. Do not put it through the follow-up message sequence.
 
 ### Adoption in England has formal steps, with time limits in statutory guidance
 
@@ -163,7 +163,7 @@ The Adoption Barometer is an annual survey by Adoption UK.
 - The AFA Cymru *National Fostering Framework Good Practice Guide* tells staff to "always offer prospective applicants a home visit within five working days".
 - The Adoption Barometer shows that people hoping to adopt in Wales report more positively than the UK average. 44% said their approval ran smoothly, against 39% across the UK, and 91% said their social worker was supportive.
 
-**Scotland and Northern Ireland.** We found no published standards for replying to enquiries that we could compare. The Scotland Barometer reports that "recommendations from others with experience of adopting" (21%) was the most-reported influence on choice of agency. This is a gap OUCM could fill through voluntary data sharing.
+**Scotland and Northern Ireland.** We found no published standards for replying to enquiries that we could compare. The Scotland Barometer reports that "recommendations from others with experience of adopting" (21%) was the most-reported influence on choice of agency. This is a gap Kinderform could fill through voluntary data sharing.
 
 ## What the evidence says works at each step
 
@@ -197,7 +197,7 @@ The table lists the main studies and their grades, and the text refers to them b
 
 ### Speed matters most for the first reply, but speed alone did not raise approvals
 
-**Recommendation (OUCM):** keep the fast first reply. It is cheap, and Essex's data shows that people the service cannot reach are the largest early loss. But do not promise that speed alone will mean more approvals.
+**Recommendation (Kinderform):** keep the fast first reply. It is cheap, and Essex's data shows that people the service cannot reach are the largest early loss. But do not promise that speed alone will mean more approvals.
 
 **Evidence:**
 
@@ -217,7 +217,7 @@ It applies only weakly to the later decision to apply, which depends on whether 
 
 ### The tone of the first call matters, especially to people who fear being judged
 
-**Recommendation (OUCM):** a first call that has a structure but feels like a conversation. It should cover:
+**Recommendation (Kinderform):** a first call that has a structure but feels like a conversation. It should cover:
 
 1. welcome and thanks
 2. their questions first ("there are no wrong questions; asking doesn't count against you")
@@ -244,7 +244,7 @@ It applies only weakly to the later decision to apply, which depends on whether 
 
 ### Offer a choice of information events, and call people who miss one
 
-**Recommendation (OUCM):**
+**Recommendation (Kinderform):**
 
 - Offer events both online and in person.
 - Do not make an event something people must attend before they can foster.
@@ -258,7 +258,7 @@ It applies only weakly to the later decision to apply, which depends on whether 
 
 ### Contact with experienced carers and adopters looks helpful, but has not been tested
 
-**Recommendation (OUCM):** offer peer contact at the first conversation. Peer contact means contact with an experienced carer or adopter. Give it a clear purpose, for example a 30-minute "what the first year is really like" call. Record whether it was offered, accepted and held.
+**Recommendation (Kinderform):** offer peer contact at the first conversation. Peer contact means contact with an experienced carer or adopter. Give it a clear purpose, for example a 30-minute "what the first year is really like" call. Record whether it was offered, accepted and held.
 
 **Evidence:**
 
@@ -270,7 +270,7 @@ It applies only weakly to the later decision to apply, which depends on whether 
 
 ### People value one named contact who keeps in touch
 
-**Recommendation (OUCM):** a named journey guide. Send a "what happens next" timeline after every change of stage.
+**Recommendation (Kinderform):** a named journey guide. Send a "what happens next" timeline after every change of stage.
 
 **Evidence:**
 
@@ -282,7 +282,7 @@ It applies only weakly to the later decision to apply, which depends on whether 
 
 This review calls a series of follow-up messages to people who are not ready yet "nurture".
 
-**Recommendation (OUCM):** let the person choose when to be contacted again, and send fewer, more relevant messages. See [what we propose for the OUCM standard](#what-we-propose-for-the-oucm-standard).
+**Recommendation (Kinderform):** let the person choose when to be contacted again, and send fewer, more relevant messages. See [what we propose for the Kinderform standard](#what-we-propose-for-the-kinderform-standard).
 
 **Evidence:**
 
@@ -303,7 +303,7 @@ The Department for Education's end-to-end model aims partly to "reduce handover"
 
 ### When people withdraw, ask why briefly and leave the door open
 
-**Recommendation (OUCM):** a short, optional exit conversation, plus one question with a set list of reasons. Make a clear "door stays open" offer.
+**Recommendation (Kinderform):** a short, optional exit conversation, plus one question with a set list of reasons. Make a clear "door stays open" offer.
 
 **Evidence:**
 
@@ -314,7 +314,7 @@ The Department for Education's end-to-end model aims partly to "reduce handover"
 
 ### People who do not "fit the mould" fear being judged
 
-**Recommendation (OUCM):**
+**Recommendation (Kinderform):**
 
 - Record, with consent, the demographics of people who stop at each stage.
 - Train the people who make first calls on myths that affect particular groups. Examples are renting, being single, being LGBTQ+, age, working, disability and convictions.
@@ -351,13 +351,13 @@ We found no trial on following up enquiries by Foundations (the What Works Centr
 
 ## Digital tools and AI can speed up first replies, but should not replace the conversation
 
-**The most important digital fact for OUCM: a national tool is coming, and an open standard could shape it.** The Department for Education has said that:
+**The most important digital fact for Kinderform: a national tool is coming, and an open standard could shape it.** The Department for Education has said that:
 
 - new hubs should follow government data, digital and technical standards "rather than investing in new digital solutions at this time"
 - the department "will develop digital tools… that streamline the recruitment and onboarding of prospective foster carers"
 - hubs will connect to these tools "when ready in 2027"
 
-**Rules to keep a person in charge (Recommendation, OUCM):**
+**Rules to keep a person in charge (Recommendation, Kinderform):**
 
 1. AI (artificial intelligence) may draft acknowledgements, summaries, follow-up emails and call notes, but a named person must approve anything personalised.
 2. Bots may answer factual common questions from an approved knowledge base, with links to sources. They must never decide whether someone is eligible. They must hand over to a person on any disclosure, sign of distress or "can I with my…" question.
@@ -415,7 +415,7 @@ These examples come from published documents and are not a ranking. Procedure ma
 - "Next to no contact" between adoption Stage 1 and Stage 2 workers (Adoption Barometer).
 - Agencies failing to follow up, in older studies (Keogh & Svensson; Geen et al.).
 
-**A note on secret shopping.** AdoptUSKids' checklist suggests checking the enquiry process with a "secret shopper method". OUCM should prefer test enquiries arranged with services, which agree to them and know about them, rather than deceptive mystery shopping.
+**A note on secret shopping.** AdoptUSKids' checklist suggests checking the enquiry process with a "secret shopper method". Kinderform should prefer test enquiries arranged with services, which agree to them and know about them, rather than deceptive mystery shopping.
 
 ## What can we learn from other countries?
 
@@ -431,7 +431,7 @@ These examples come from published documents and are not a ranking. Procedure ma
 
 ## Most of what matters is not measured nationally
 
-**Recommendation (OUCM):** define "enquiry" once, so that OUCM data can be compared. Use Ofsted's clarification for 2023–24: an enquiry must be "actionable", with a name and contact details.
+**Recommendation (Kinderform):** define "enquiry" once, so that Kinderform data can be compared. Use Ofsted's clarification for 2023–24: an enquiry must be "actionable", with a name and contact details.
 
 | Measure | How to measure it | Collected nationally now? |
 |---|---|---|
@@ -450,7 +450,7 @@ These examples come from published documents and are not a ranking. Procedure ma
 
 ASG is the Adoption and Special Guardianship Leadership Board.
 
-## What we propose for the OUCM standard
+## What we propose for the Kinderform standard
 
 These are proposals, and we have not adopted them.
 
@@ -561,7 +561,7 @@ Interaction {
 - There is no analysis of whether early closures affect some groups more than others.
 - There are no evaluations of chatbots or AI in this field.
 
-**Questions OUCM could answer openly:**
+**Questions Kinderform could answer openly:**
 
 1. Does a first reply from a named sender, with a pre-booked slot, raise the share of people who have a first conversation? A hub could test this with a randomised controlled trial, with each person put into a group by chance.
 2. Does offering peer contact at the first call raise the rate of expressions of interest and applications? Does it reduce withdrawals for the reason "process not as expected"?
@@ -585,7 +585,7 @@ Interaction {
 
 **Editing notes.** We changed the wording to follow the project's rule against market language about carers and children. Figures, evidence grades and sources did not change. Where a source's own published title uses such words, we kept the title as published. On 19 November 2026 we rewrote the review in plain language. Facts, figures, sources, quotations and conclusions did not change.
 
-**What this is not.** The recommendations are proposals for discussion, and none of them is part of the OUCM standard yet. Any change to `schema/` will go through the usual process: schema first, then examples and tests.
+**What this is not.** The recommendations are proposals for discussion, and none of them is part of the Kinderform standard yet. Any change to `schema/` will go through the usual process: schema first, then examples and tests.
 
 **How it relates to our other work.** Our earlier audit covered the online enquiry forms themselves. This review covers what happens after someone gets in touch.
 

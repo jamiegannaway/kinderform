@@ -1,23 +1,26 @@
 # Kinderform
 
-The open project behind [kinderform.org](https://www.kinderform.org). It started under the working title OUCM (Orphan UnCrushing Machine), which you will still see in some older documents.
+Kinderform helps councils, fostering services and adoption agencies give a kinder first reply to people who enquire. It is a free, independent project started by Jamie Gannaway, co-founder of Deployed.
 
-> Everyone who offers to care for a child deserves a quick, kind and considered reply.
+## Start here
 
-Kinderform is a free, open project to improve the first step of fostering and adoption: the moment someone raises their hand and asks. It publishes:
+| What would you like to do? | First step |
+| --- | --- |
+| Enquire about fostering or adoption | [Find an official service](https://www.kinderform.org/#find-a-service). A real enquiry goes to the service you choose. The Kinderform examples send nothing. |
+| Improve your service's first form or reply | [Try an example form for your country](https://www.kinderform.org/example-form), then [review your form with the draft checklist](https://www.kinderform.org/form-check). |
+| Check or correct your service's entry | [Compare forms and published rules](https://www.kinderform.org/compare). For a correction, give the public source, what changed and when you checked. [Get in touch with or without a GitHub account](SUPPORT.md). |
+| Share what the first reply felt like | What helped, or what would you change? [Send private feedback](SUPPORT.md). Please leave out names and case details. |
+| Try the data standard | [Follow one made-up enquiry](docs/one-enquiry.md) from an automatic acknowledgement to a two-way conversation. Then [try the schemas and sample records](schema/). |
+| Use the research or cite a version | [Read the evidence and its review status](https://www.kinderform.org/research), [see what changed](CHANGELOG.md) or [cite this work](CITATION.cff). |
 
-- an open standard for the enquiry record, and example enquiry forms built to it
-- a public picture of how fostering and adoption "front doors" work today: who people contact, what the first form asks and what the published rules say
-- a living library of the evidence
-
-It started in England, where almost 150,000 fostering enquiries in 2024–25 led to 7,365 newly approved carers, and where the government has said plainly that interest is not the problem. It now covers seven countries: the UK, the US, Canada, Australia, Germany, France and Spain.
+The enquiry standard and checklist are drafts for comment. The comparison tables describe public pages. Check the source and date on a row before using it to make a decision.
 
 ## What is in this repository
 
 | Folder | What it holds | Status |
 |---|---|---|
 | [`schema/`](schema/) | The Enquiry record: a vendor-neutral JSON Schema for a fostering enquiry, with synthetic examples. Also the shorter schema for what a person fills in, and the wording for each country's example form (`schema/ui/`) | v0.1 draft |
-| [`register/`](register/) | Front doors (who people contact first) and published rules on who can foster or adopt, for the UK and in `us/`, `ca/`, `au/`, `de/`, `fr/` and `es/`. Each row has a source link and the date checked | First pass, not yet checked by a person |
+| [`register/`](register/) | Front doors (who people contact first) and published rules on who can foster or adopt, organised by country. [See coverage, sources and dates](https://www.kinderform.org/compare) | First pass, not yet checked by a person |
 | [`census/`](census/) | An inventory of first-contact enquiry forms: every question, answer option and piece of guidance recorded so far | v0.1 draft, not yet checked by a person |
 | [`rubric/`](rubric/) | A rubric for assessing a front door, published for comment before it is used | v0.1 draft |
 | [`evidence/`](evidence/) | A living library of research and policy, published at [kinderform.org/research](https://www.kinderform.org/research) | Growing |
@@ -65,9 +68,11 @@ python3 tools/plain_check.py site/dist
 
 Jamie Gannaway is a co-founder of Deployed, a document assembly and decision intelligence platform. Deployed builds intake and routing systems for large organisations. This project gives that experience to the fostering and adoption sector for free.
 
-Kinderform is not a Deployed product and is not commercial. It will never be a sales channel. Everything is openly licensed so that anyone can use it without asking.
+Kinderform is independent and non-commercial. Its code, research and original data are available to reuse under the licences below. Third-party assets have their own terms.
 
-To get in touch, email [jamie.gannaway@gmail.com](mailto:jamie.gannaway@gmail.com).
+The project began in England. For 2024–25 the Department for Education reported almost 150,000 fostering enquiries. It also reported 7,365 newly approved foster carers. People may enquire more than once, and the figures count different things. [Renewing Fostering, page 14](https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf) (checked 24 November 2026).
+
+For questions, corrections and private feedback, see [Get help with Kinderform](SUPPORT.md).
 
 ## Licence
 
