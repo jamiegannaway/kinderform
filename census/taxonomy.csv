@@ -76,3 +76,9 @@ work,working_hours,Working hours and availability,none,stage_2,kept_out_later_sl
 interest,child_preferences,"Ages, needs or number of children the person could care for",none,service_operation,fostering_interests,"Added for forms outside England; records the question only, never answers."
 work,income,Income or household finances,sensitive,,kept_out_later_slice,Added for forms outside England. Stage not yet read against Schedule 3.
 other,unclassified,A question the keyword rules could not place; needs a person to tag it,none,,,Used only by tools/crawl_to_census.py. Re-tag by hand.
+references,referees,Names and contact details of people who will give a reference,household_third_party,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
+experience,parenting_approach,"Views on discipline, house rules and parenting",none,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
+housing,firearms,Firearms or other weapons in the home,none,,kept_out_later_slice,"Added for application forms, mainly in the US."
+contact_identity,id_number,"Social security, national insurance, passport or licence numbers",personal_identifier,,kept_out_later_slice,"Added for application forms, mainly background-check forms."
+contact_identity,physical_description,"Height, weight, eye or hair colour, for fingerprinting or checks",personal_identifier,,kept_out_later_slice,"Added for application forms, mainly US background-check forms."
+housing,home_safety,"Safety in the home: smoke alarms, pools, locks, medicines and chemicals",none,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.

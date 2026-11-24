@@ -41,7 +41,7 @@ ALLOWED = {
                                      "indigenous_agency", "local_authority", "voluntary_agency"},
     ("forms.csv", "service_type"): {"fostering", "adoption", "fostering_and_adoption"},
     ("forms.csv", "country"): {"UK", "US", "CA", "AU", "DE", "FR", "ES"},
-    ("forms.csv", "form_stage"): {"primary", "secondary"},
+    ("forms.csv", "form_stage"): {"primary", "secondary", "application"},
     ("forms.csv", "access_route"): {"online_form", "downloadable_form", "phone_conversation", "sent_after_first_contact",
                                     "email_only", "signposting_only", "described_not_public", "council_portal"},
     ("forms.csv", "fields_observed"): {"yes", "partial", "no"},
@@ -65,7 +65,10 @@ PHONE = re.compile(
     r"(?<![\d/])(?:\+44\s?|0)\d{2,4}[\s-]?\d{3,4}[\s-]?\d{3,4}(?!\d)"  # UK and Australian landlines
     r"|(?<![\d/])(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\d)"  # US and Canada
     r"|\b1[38]00[\s-]?\d{3}[\s-]?\d{3}\b")  # Australian 1300 and 1800 numbers
-MARKET = re.compile(r"\b(supply|demand|leads?|conversion|funnel)\b", re.IGNORECASE)
+# Sales words for people. Home-safety questions on application forms ask about lead paint and the
+# water supply, which are not market language.
+MARKET = re.compile(r"(?<!water )\bsupply\b|\bdemand\b|\bleads?\b(?![\s-]*(?:paint|based|pipes?|poison))|"
+                    r"\bconversion\b|\bfunnel\b", re.IGNORECASE)
 
 errors = []
 
