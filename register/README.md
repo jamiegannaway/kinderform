@@ -37,6 +37,28 @@ The published rules on who can foster and what approval involves, so services ca
 
 `tests/validate_policies.py` checks the UK, Canadian, Australian, German, French and Spanish rules. `tests/validate_us_register.py` checks the US rules. Every row is unverified until a person has checked it.
 
+## What the assessment must cover: `assessment.csv`
+
+What the law in each UK nation says a fostering or adoption assessment must cover, and at which stage. One row per requirement, in our own words, with the law or statutory guidance it comes from. Each row carries a census topic (see [`../census/taxonomy.csv`](../census/taxonomy.csv)), so the site can show which questions the law needs at which stage. The rows describe the law, never a licensed assessment form such as CoramBAAF's Form F.
+
+| Column | Meaning |
+| --- | --- |
+| `assessment_id` | `uk-<nation>-<service>-<part>-<topic>-<n>`, for example `uk-eng-fostering-s3-health-1` |
+| `jurisdiction` | `ENG`, `WLS`, `SCT` or `NIR` |
+| `applies_to` | `fostering` or `adoption` |
+| `stage` | `stage_1` or `stage_2` where the law has two stages (England, and adoption in Wales since 1 April 2020); `assessment` where it has one; `checks` for statutory checks |
+| `category`, `topic` | The closest census topic; `other`, `unclassified` when none fits |
+| `requirement_summary` | What the law requires, in one plain sentence |
+| `legal_citation` | The instrument, schedule and paragraph, for example `SI 2011/581, Sch 3, para 2` |
+| `source_type` | `legislation` or `statutory_guidance` |
+| `source_url` | The legislation.gov.uk or government page it was read from |
+| `date_checked` | When we read it |
+| `evidence_level` | `page_read` or `search_result` |
+| `verification` | `unverified` until a person has checked the row against the source |
+| `notes` | Which version of the law was read, and anything unclear |
+
+`tests/validate_assessment.py` checks it. The first pass (24 November 2026) read the revised text on legislation.gov.uk. Some instruments are online only in their original form, and the notes say so. `/for-services` shows the England stages beside what forms ask.
+
 ## Columns
 
 | Column | Meaning |

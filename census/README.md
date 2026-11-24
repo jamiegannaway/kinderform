@@ -76,7 +76,7 @@ A form with no row for a guidance type was not checked for it. That is different
 
 `sensitivity` is one of `none`, `personal_identifier`, `household_third_party`, `eligibility_gate`, `special_category`, `criminal_offence`, `immigration`, `equality_monitoring`, `health_related`, `free_text`, `sensitive`, `staff_identifier`, `child_data`.
 
-`england_fostering_stage_draft` is Kinderform's **draft** reading of where each topic first becomes necessary under the Fostering Services (England) Regulations 2011, regulation 26 and Schedule 3, as summarised in the census report: `enquiry`, `stage_1`, `stage_2`, `not_in_schedule_3`, `service_operation` or `out_of_scope`. Check it against [legislation.gov.uk](https://legislation.gov.uk/uksi/2011/581/schedule/3) before relying on it. Adoption follows different regulations; see the report.
+`england_fostering_stage_draft` is Kinderform's **draft** reading of where each topic first becomes necessary under the Fostering Services (England) Regulations 2011, regulation 26 and Schedule 3, as summarised in the census report: `enquiry`, `stage_1`, `stage_2`, `not_in_schedule_3`, `service_operation` or `out_of_scope`. Topics added for application forms, and three that disagreed with the law, were checked against Schedule 3 on 24 November 2026; their `note` says so. The full reading of the law, for fostering and adoption in all four UK nations, is in [`../register/assessment.csv`](../register/assessment.csv).
 
 `kinderform_enquiry_field` says which field in `schema/enquiry.schema.json` the topic maps to, or why it is kept out (`kept_out_identifier`, `kept_out_later_slice`, `kept_out_free_text`).
 
@@ -108,7 +108,7 @@ Not yet covered, or covered by guidance only:
 - Most of Scotland's 32 councils (the crawler read 3), and most Scottish and Northern Irish adoption services
 - Most regional adoption agency enquiry forms, which load in the browser or sit in council portals
 - Per-agency topics for adoption registration of interest forms. These are described only in total in the report
-- Any blank secondary fostering form: none was found published
+- Blank secondary fostering forms: almost none are published. One found so far: North Somerset's expression of interest at the back of its printed information pack (added 24 November 2026)
 
 The best next step is a browser-based pass by a person on the forms that would not render, recorded straight into these files.
 

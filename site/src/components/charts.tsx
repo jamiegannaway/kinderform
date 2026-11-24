@@ -271,14 +271,20 @@ export function HeatGrid({
   columns,
   rows,
   unit = "forms",
+  shortOnly = false,
 }: {
   unit?: string
-  columns: { key: string; label: string; short?: string; n: number }[]
+  columns: { key: string; label: string; short?: string; n: number; unit?: string }[]
   rows: { label: string; note?: string; cells: Record<string, { yes: number; of: number }> }[]
+  // Use the short column labels at every width, for grids with many columns. The full label
+  // stays in each header's title.
+  shortOnly?: boolean
 }) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[18rem] table-fixed border-separate border-spacing-1 text-sm">
+      <table
+        className={`w-full table-fixed border-separate border-spacing-1 text-sm ${shortOnly ? "min-w-[46rem]" : "min-w-[18rem]"}`}
+      >
         <thead>
           <tr>
             <th scope="col" className="w-[36%] text-left font-medium text-muted-foreground">
@@ -286,7 +292,11 @@ export function HeatGrid({
             </th>
             {columns.map((c) => (
               <th key={c.key} scope="col" className="px-1 pb-1 text-center align-bottom text-xs font-medium">
-                {c.short ? (
+                {c.short && shortOnly ? (
+                  <abbr title={`${c.label}: ${c.n} ${c.unit ?? unit}`} className="block no-underline">
+                    {c.short}
+                  </abbr>
+                ) : c.short ? (
                   <>
                     <abbr title={c.label} className="no-underline sm:hidden">
                       {c.short}
@@ -298,7 +308,7 @@ export function HeatGrid({
                 )}
                 <span className="block font-normal text-muted-foreground tabular-nums">
                   {c.n}
-                  <span className="hidden sm:inline"> {unit}</span>
+                  {!shortOnly && <span className="hidden sm:inline"> {c.unit ?? unit}</span>}
                 </span>
               </th>
             ))}
@@ -317,7 +327,7 @@ export function HeatGrid({
                 return (
                   <td
                     key={c.key}
-                    title={cell ? `${cell.yes} of ${cell.of} ${unit}` : `No ${unit}`}
+                    title={cell ? `${cell.yes} of ${cell.of} ${c.unit ?? unit}` : `No ${c.unit ?? unit}`}
                     className={`h-9 rounded-[4px] text-center text-xs font-medium tabular-nums ring-1 ring-inset ring-border ${SHADE(p)} ${
                       p >= 60 ? "text-primary-foreground" : "text-foreground"
                     }`}

@@ -1,4 +1,6 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Applications } from "@/components/applications"
+import type { ApplicationsData } from "@/lib/applications"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -117,6 +119,7 @@ export default function ResearchIndex({
   formsDiffer,
   us,
   world,
+  apps,
   withdrawals,
 }: {
   updated: string
@@ -127,6 +130,7 @@ export default function ResearchIndex({
   formsDiffer?: FormsDifferData
   us?: UsPictureData
   world?: CountriesData
+  apps?: ApplicationsData
   withdrawals?: Withdrawals
 }) {
   const sources = findings.flatMap((f) => f.sources)
@@ -193,6 +197,8 @@ export default function ResearchIndex({
         {formsDiffer && formsDiffer.read > 0 && <FormsDiffer data={formsDiffer} />}
 
         {world && world.allForms > 0 && <Countries data={world} />}
+
+        {apps && apps.countries.length > 0 && <Applications data={apps} />}
 
         {us && us.doors > 0 && <UsPicture data={us} />}
 

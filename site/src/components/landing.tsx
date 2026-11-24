@@ -226,6 +226,9 @@ export default function Landing() {
                 <a href="/build">Use this form in my organisation</a>
               </Button>
               <Button asChild size="lg" variant="outline">
+                <a href="/for-services">Ideas for services</a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
                 <a href="/example-form">Try the example form</a>
               </Button>
             </div>

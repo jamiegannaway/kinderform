@@ -304,6 +304,10 @@ class Polite:
         try:
             with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
                 body = response.read(MAX_BYTES)
+                if len(body) >= MAX_BYTES:
+                    # A cut-off PDF looks like a scan with no text. Say so, so nobody mistakes it.
+                    print(f"note: stopped reading {url} at {MAX_BYTES:,} bytes; use --max-mb to read more",
+                          file=sys.stderr)
                 return response.status, response.geturl(), body, response.headers.get("Content-Type", "")
         except urllib.error.HTTPError as error:
             return error.code, url, b"", ""
@@ -418,6 +422,7 @@ def follow_links(record: dict, limit: int) -> list[str]:
 
 
 def main() -> int:
+    global MAX_BYTES
     ap = argparse.ArgumentParser()
     ap.add_argument("urls")
     ap.add_argument("out")
@@ -425,7 +430,10 @@ def main() -> int:
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--save-dir", default="")
     ap.add_argument("--follow", type=int, default=0, help="follow up to N enquiry-like links when a page has no form")
+    ap.add_argument("--max-mb", type=float, default=MAX_BYTES / 1_000_000,
+                    help="read at most this many megabytes of each page or file (default 3; large PDF packets need more)")
     args = ap.parse_args()
+    MAX_BYTES = int(args.max_mb * 1_000_000)
     if args.delay < 3:
         print("Delay below 3 seconds is not allowed (CLAUDE.md rule 8).")
         return 2

@@ -8,7 +8,7 @@ Data lives in [`register/us/`](../register/us/). Column definitions are in its [
 
 ## At a glance
 
-*Counted from the files in [`register/us/`](../register/us/) on 2026-11-18. Every row is a lead to check until a person has verified it. Charts follow your light or dark theme; each has a table view.*
+*Counted from the files in [`register/us/`](../register/us/) on 2026-11-24. Every row is a lead to check until a person has verified it. Charts follow your light or dark theme; each has a table view.*
 
 <p align="center"><img src="img/us/headline.svg" alt="Headline numbers for the US survey" width="760"></p>
 
@@ -54,9 +54,9 @@ Black: done. Grey: first pass, unverified. Light, dashed: not started.
 | States | 51 | 0 | 0 |
 | Front doors | 1257 | 406 | 0 |
 | Policy rules | 663 | 0 | 0 |
-| Application forms | 235 | 51 | 0 |
+| Application forms | 236 | 62 | 0 |
 | Enquiry questions | 552 | 552 | 0 |
-| Application questions | 1716 | 1716 | 0 |
+| Application questions | 1725 | 1725 | 0 |
 | Reply promises | 16 | 16 | 0 |
 
 </details>
@@ -123,10 +123,10 @@ Neutral counts across front doors and states. No front door is scored or ranked,
 | Topic | Share of forms (%) |
 |---|---:|
 | Date of birth or age | 88 |
+| Fostering or adopting | 65 |
 | Race, gender or faith | 65 |
 | Relationship status | 65 |
 | Work | 65 |
-| Fostering or adopting | 59 |
 | Education | 53 |
 | Open comment box | 41 |
 | Who lives in the home | 41 |

@@ -68,13 +68,38 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Fill the gaps: foster payment rates for most German Länder and Spanish communities, Ceuta and Melilla, and the sites that refused automated reading
 - [ ] Read Legifrance and the BOE directly; both refused the research tools
 
+## Now: after first contact (first pass)
+
+- [x] The census can hold application forms (`form_stage` "application"), tagged with the same topics as first-contact forms; `tools/applications_to_census.py` adds them
+- [x] US: application packets read (a state's, a county's, a tribe's or a private agency's set of forms), from fillable PDFs and from the PDFs' text (not yet checked by a person)
+- [x] UK: 40 application forms and registrations of interest listed; 5 read in full, the rest are given out after a first visit or behind a sign-in (not yet checked by a person)
+- [x] `/research` "What applications ask": first contact against the application, topic by topic; `/compare/applications` covers all seven countries
+- [x] A second, wider UK search (about 600 pages, every Scottish council, adoption agencies and sitemaps) found only one more readable application form: UK application forms are almost never public
+- [ ] Ask UK services for the application forms they send after a first visit, so more than 6 can be read
+- [x] Follow up the forms the second search found: North Somerset's expression of interest added (a later step, from its printed pack); Midlothian's form link recorded, but its questions open only after a page is sent, so they were not read; Wigan's PDF is a diagram of the process, not a form
+- [ ] Read the forms our reader cannot: Reading's need JavaScript, and the addresses of Lincolnshire's forms 690 and 1185 were not found
+- [x] US: unsorted application questions down from 25% to under 5%; tables of the children a family would accept no longer count as the applicant's health
+- [x] US: the 11 register links that led to a policy or notice checked again: 5 forms found and read, 6 have no public copy (filled in online, or handed out after a first call). One Alabama row turned out to be a contract application for agencies, not families, and is no longer counted
+- [x] What the assessment must cover, topic by topic, from the law and statutory guidance in all four UK nations (`register/assessment.csv`, 297 rows, not yet checked by a person), never from licensed forms such as Form F
+- [x] Application forms in Canada (5), Australia (3), Germany (4), France (2) and Spain (6), read from public documents (not yet checked by a person); France's national CERFA form gets health and convictions through a medical certificate and a records check, not questions
+
+## Now: ideas for services
+
+- [x] `/for-services`: ideas for recruitment teams, each putting our reading of public forms (no names) next to published research and the rules, with one thing to try
+- [x] A topic-by-topic table, with a CSV download, so a service can check its own enquiry form against enquiry forms and applications
+- [x] Show where the law in England puts each topic in the assessment, beside what forms ask
+- [x] Show the other three UK nations the same way: a table of where the law in each nation puts each topic, for fostering and adoption
+- [ ] Read the law not yet covered: England's Schedule 4A and the Adoption and Children Act 2002 rules on age and residence, Scotland's 2010 adoption amendments and 2011 guidance
+- [ ] Ask recruitment teams which ideas help, and which are wrong, before adding more
+
 ## Now: compare tables for services
 
 - [x] Rules registers for the UK nations, Canada's provinces and territories and Australia's states and territories, with the same topics as the US (unverified)
 - [x] The date each source page gives for its last update, read by the polite crawler (`register/page-dates.csv`)
 - [x] `/compare`: enquiry forms, rules by topic and US application forms, each with the link and two dates, plus CSV downloads; facts only, no scores
 - [x] Each enquiry form shows what it asks beyond the Kinderform enquiry standard
-- [ ] Check a sample of the computer's topic tags by hand, and say how accurate they are
+- [x] Sample sheets for a person to check the computer's topic tags and the England law rows (`docs/checks/`, `tools/check_sample.py`)
+- [ ] Fill in the sample sheets, and say on the site how accurate the tags and the law map are
 - [ ] Re-read the sources every few months, and flag links that stop working
 - [ ] Invite services to correct their rows
 
@@ -105,7 +130,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Test the reference form with people who have enquired, and with screen reader users
 - [ ] Browser-only funnel tool that reads an export in the schema format; no data leaves the service
 - [ ] One pilot hub maps its export to the schema; publish the mapping guide as v0.2
-- [ ] Pipeline slices beyond enquiry: application, assessment, approval, leaving
+- [ ] Pipeline slices beyond enquiry: application (first pass under way, see above), assessment, approval, leaving
 - [ ] Adaptation for a second country (US survey under way, see above)
 
 ## Not on the roadmap

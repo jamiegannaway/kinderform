@@ -8,6 +8,7 @@ import { loadCensus } from "@/lib/census";
 import { formsDiffer } from "@/lib/forms-differ";
 import { usPicture } from "@/lib/us-register";
 import { countries } from "@/lib/countries";
+import { applications } from "@/lib/applications";
 import { blurbFor } from "@/lib/research-log";
 
 // Keep the order of findings.json: it is the order we want people to read them in.
@@ -23,6 +24,8 @@ const differ = formsDiffer(loadCensus());
 const us = usPicture();
 // First-contact forms across countries, measured the same way (see src/lib/countries.ts).
 const world = countries(loadCensus());
+// First contact against the application that follows (see src/lib/applications.ts).
+const apps = applications(loadCensus());
 
 // The withdrawals card at the top quotes the checked "withdrawals" finding. Read its
 // figures from the finding itself, and stop the build if the wording changes so they
@@ -64,6 +67,24 @@ if (card) {
   if (stale.length)
     throw new Error(`evidence/findings.json "forms-differ" no longer matches the census. Update it to say: ${stale.join("; ")}`);
 }
+
+// The "applications-ask-more" card is also written by hand. Stop the build if its figures no
+// longer match the census.
+const appCard = findings.find((f) => f.id === "applications-ask-more");
+const ukApps = apps.countries.find((c) => c.code === "UK");
+if (appCard && ukApps) {
+  const health = ukApps.topics.find((t) => t.label === "Health or disability")!;
+  const expected = [
+    `read ${apps.appForms} application forms and packets in ${apps.countries.length} countries`,
+    `typical UK application form asked ${ukApps.appMedian} questions, against ${ukApps.firstMedian} on a typical UK enquiry form`,
+    health.app.yes === health.app.of ? "Every UK application form we read asked about health" : `${health.app.yes} of ${health.app.of} UK application forms`,
+    health.first.yes === 0 ? `none of the ${health.first.of} UK enquiry forms did` : `${health.first.yes} of the ${health.first.of} UK enquiry forms`,
+    `of ${ukApps.found} we found, we could read ${ukApps.apps}`,
+  ];
+  const stale = expected.filter((e) => !appCard.summary.includes(e));
+  if (stale.length)
+    throw new Error(`evidence/findings.json "applications-ask-more" no longer matches the census. Update it to say: ${stale.join("; ")}`);
+}
 ---
 <Base
   title="Research: what we know about the first step | Kinderform"
@@ -89,6 +110,7 @@ if (card) {
     formsDiffer={differ}
     us={us}
     world={world}
+    apps={apps}
     withdrawals={withdrawals}
   />
 </Base>
