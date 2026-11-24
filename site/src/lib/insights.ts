@@ -45,6 +45,30 @@ export type InsightsData = {
   }
   topics: TopicCheck[]
   lawRows: number // rows read from register/assessment.csv
+  // Questions the law in England puts in stage 2 of the assessment, asked on the enquiry form
+  // or the application. Null until register/assessment.csv exists.
+  early: {
+    enquiry: { share: Share; top: string[] }
+    application: { share: Share; top: string[] }
+  } | null
+  lawLinks: { fostering: string; adoptionGuidance: string } | null
+}
+
+// Stage 2 topics worth flagging when asked early. An open "about you" box and interest in early
+// permanence are left out: asking them early is not intrusive.
+const EARLY: Record<string, string> = {
+  ethnicity: "ethnicity",
+  religion: "religion",
+  employment_history: "past jobs",
+  employment_status: "work",
+  income: "income",
+  motivation: "why they want to do this",
+  life_story: "their own childhood",
+  education: "schooling",
+  parenting_approach: "views on parenting",
+  childcare_experience: "experience with children",
+  child_preferences: "which children they could care for",
+  spare_bedroom: "a spare room",
 }
 
 const STAGE_NAMES: Record<string, string> = {
@@ -99,6 +123,39 @@ export function insights(c: Census): InsightsData {
     [...new Set(law.filter((r) => r.applies_to === service && match(r)).map((r) => STAGE_NAMES[r.stage] ?? r.stage))]
       .sort()
 
+  // Topics the law puts only in stage 2, for each service.
+  const stage2Only = (service: string) => {
+    const stages = new Map<string, Set<string>>()
+    for (const r of law.filter((r) => r.applies_to === service && r.topic in EARLY)) {
+      const k = `${r.category}/${r.topic}`
+      stages.set(k, (stages.get(k) ?? new Set()).add(r.stage))
+    }
+    return new Set([...stages].filter(([, v]) => v.size === 1 && v.has("stage_2")).map(([k]) => k))
+  }
+  const s2Fostering = stage2Only("fostering")
+  const s2Adoption = stage2Only("adoption")
+  const s2Both = new Set([...s2Fostering].filter((k) => s2Adoption.has(k)))
+  const s2For = (f: Row) =>
+    f.service_type === "adoption" ? s2Adoption : f.service_type === "fostering" ? s2Fostering : s2Both
+  const answered = (q: Row) => q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on
+  const earlyIn = (forms: Row[]) => {
+    const hits = forms.map((f) => {
+      const s2 = s2For(f)
+      return new Set((asked.get(f.form_id) ?? []).filter(answered).map((q) => `${q.category}/${q.topic}`).filter((k) => s2.has(k)))
+    })
+    const counts = new Map<string, number>()
+    for (const h of hits) for (const k of h) counts.set(k, (counts.get(k) ?? 0) + 1)
+    const top = [...counts].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k]) => EARLY[k.split("/")[1]])
+    return { share: { yes: hits.filter((h) => h.size).length, of: forms.length }, top }
+  }
+  const englandApps = c.forms.filter(
+    (f) => f.form_stage === "application" && f.country === "UK" && f.region === "England" &&
+      (asked.get(f.form_id) ?? []).filter(answered).length >= 3,
+  )
+  const englandFirst = ukFirst.filter((f) => f.form.region === "England").map((f) => f.form)
+  const guidance = law.find((r) => r.applies_to === "adoption" && /3\.13/.test(r.legal_citation))
+  const schedule = law.find((r) => r.applies_to === "fostering" && r.source_type === "legislation")
+
   const topics: TopicCheck[] = APPLICATION_TOPICS.map((t) => {
     const fostering = stagesFor(t.match, "fostering")
     const adoption = stagesFor(t.match, "adoption")
@@ -149,6 +206,8 @@ export function insights(c: Census): InsightsData {
     },
     topics,
     lawRows: law.length,
+    early: law.length ? { enquiry: earlyIn(englandFirst), application: earlyIn(englandApps) } : null,
+    lawLinks: guidance && schedule ? { fostering: schedule.source_url, adoptionGuidance: guidance.source_url } : null,
   }
 }
 

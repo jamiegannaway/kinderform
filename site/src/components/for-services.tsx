@@ -22,6 +22,7 @@ export type Withdrawals = { share: number; notExpected: number; year: string } |
 const link = "font-medium text-foreground underline underline-offset-4"
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const monthOf = (iso: string) => (/^\d{4}-\d{2}/.test(iso) ? `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}` : "2026")
+const listOf = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} or ${xs.at(-1)}`)
 const pct = (s: Share) => (s.of ? Math.round((100 * s.yes) / s.of) : 0)
 const of = (s: Share) => `${s.yes} of ${s.of}`
 
@@ -155,27 +156,33 @@ export function ForServices({
             </>
           ),
         },
-        {
-          label: law ? "What the law says" : "What research says",
-          kind: law ? "rules" : "research",
-          body: law ? (
-            <>
-              In England, the law sets out what the assessment covers and when. The{" "}
-              <a href="#check-your-form" className={link}>
-                table below
-              </a>{" "}
-              shows the stage for each topic.
-            </>
-          ) : (
-            <>
-              A service has to check health, convictions and the home before it approves anyone. These questions belong
-              in the application, after someone has talked to the person.{" "}
-              <a href="/research#applications" className={link}>
-                What applications ask
-              </a>
-            </>
-          ),
-        },
+        law && d.lawLinks
+          ? {
+              label: "What the law says",
+              kind: "rules",
+              body: (
+                <>
+                  In England, the law puts health, past relationships and the criminal record check in stage 1 of the
+                  assessment. None of them is needed to reply to an enquiry.{" "}
+                  <a href={d.lawLinks.fostering} className={link}>
+                    Fostering Services (England) Regulations 2011, Schedule 3
+                  </a>
+                </>
+              ),
+            }
+          : {
+              label: "What research says",
+              kind: "research",
+              body: (
+                <>
+                  A service has to check health, convictions and the home before it approves anyone. These questions
+                  belong in the application, after someone has talked to the person.{" "}
+                  <a href="/research#applications" className={link}>
+                    What applications ask
+                  </a>
+                </>
+              ),
+            },
       ] satisfies Part[],
       tryThis: (
         <>
@@ -184,6 +191,56 @@ export function ForServices({
         </>
       ),
     },
+    ...(d.early && d.lawLinks
+      ? [
+          {
+            id: "law-stages",
+            title: "Ask each question at the stage the law sets",
+            parts: [
+              {
+                label: "What we found",
+                kind: "ours",
+                body: (
+                  <>
+                    {of(d.early.application.share)} application forms we read in England ask something the law leaves
+                    to stage 2
+                    {d.early.application.top.length ? `, such as ${listOf(d.early.application.top)}` : ""}. So do{" "}
+                    {of(d.early.enquiry.share)} enquiry forms in England.
+                  </>
+                ),
+              },
+              {
+                label: "What the law says",
+                kind: "rules",
+                body: (
+                  <>
+                    In England, stage 1 covers identity, health, the household, referees and checks. Stage 2 covers
+                    personality, religion, ethnicity, work and experience.{" "}
+                    <a href={d.lawLinks.fostering} className={link}>
+                      Schedule 3
+                    </a>
+                    . For adoption, statutory guidance says the first form should be short. It must not be refused
+                    because of ethnicity, age, health, sexual orientation or religion.{" "}
+                    <a href={d.lawLinks.adoptionGuidance} className={link}>
+                      Adoption statutory guidance, paragraphs 3.13 to 3.15
+                    </a>
+                  </>
+                ),
+              },
+            ] satisfies Part[],
+            tryThis: (
+              <>
+                Check each question on your forms against the{" "}
+                <a href="#check-your-form" className={link}>
+                  table below
+                </a>
+                . Move stage 2 questions to the assessment, where a social worker can explain why they matter. If you
+                ask about ethnicity or religion for monitoring, make it optional and keep it apart from the decision.
+              </>
+            ),
+          },
+        ]
+      : []),
     {
       id: "say-when",
       title: "Say when you will reply, and who from",
@@ -431,7 +488,8 @@ export function ForServices({
           <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
             Go down the list and note what your enquiry form asks. If it asks something few enquiry forms ask, check
             whether you need it before you have spoken to the person.
-            {law && " The last columns show where the law in England puts each topic in the assessment."}
+            {law &&
+              " The last columns show where the law in England puts each topic in the assessment. Stage 1 is the first part, mostly checks. Stage 2 is the full assessment."}
           </p>
           <Table className="mt-6">
             <TableCaption className="text-left">The share of forms that ask about each topic.</TableCaption>
@@ -483,6 +541,16 @@ export function ForServices({
             says should wait until after a conversation. A US application is one service&rsquo;s set of forms, counted
             once.
           </p>
+          {law && (
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
+              &ldquo;Not named&rdquo; means the law&rsquo;s list does not name the topic. A person has not yet checked our
+              reading of the law. Our{" "}
+              <a href="https://github.com/jamiegannaway/kinderform/blob/main/register/assessment.csv" className={link}>
+                map of the law in all four UK nations
+              </a>{" "}
+              gives the source for each row.
+            </p>
+          )}
           <p className="mt-4">
             <a href="/for-services/topics.csv" className={link}>
               Download this table (CSV)

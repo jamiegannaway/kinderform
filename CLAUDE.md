@@ -42,7 +42,7 @@ Everyone who offers to care for a child deserves a quick, kind and considered re
 ## Layout
 
 - `schema/` Enquiry schema and synthetic examples; `enquiry-submission.schema.json` is what a person fills in, and `schema/ui/` holds the wording for each country's reference form (Canada also in French, `enquiry-submission.ca-fr.json`; `tests/validate_ui.py` keeps a translation in step with its main file)
-- `register/` front-door registers and rules registers (`policies.csv`) for the UK, then `us/`, `ca/`, `au/`, `de/`, `fr/` and `es/`, with column guides; `page-dates.csv` holds the date each source page gives
+- `register/` front-door registers and rules registers (`policies.csv`) for the UK, what the law in each UK nation says the assessment must cover (`assessment.csv`, checked by `tests/validate_assessment.py`; describe the law, never a licensed form), then `us/`, `ca/`, `au/`, `de/`, `fr/` and `es/`, with column guides; `page-dates.csv` holds the date each source page gives
 - `rubric/` audit rubric in Markdown and JSON
 - `census/` intake-form census: forms, questions, answer options, guidance (CSV). First-contact forms, plus application forms (`form_stage` "application", added by `tools/applications_to_census.py`) tagged with the same taxonomy so the two stages can be compared
 - `evidence/` evidence library; `findings.json` is "What we know so far". `research-log.json` is the research log: one entry for each report in `reports/` and what the research could mean for the project, shown as tables at `/research/log` and linked from the site footer; run `python tests/validate_research_log.py` after editing it. Everything here except the README is published at `/research` on the site, so a merge updates the public page

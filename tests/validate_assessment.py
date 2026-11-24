@@ -67,8 +67,11 @@ def main() -> int:
                              ("verification", VERIFICATION)):
             if r[col] not in allowed:
                 errors.append(f"{where}: {col} '{r[col]}' is not one of {sorted(allowed)}")
-        if r["stage"] in ("stage_1", "stage_2") and r["jurisdiction"] != "ENG":
-            errors.append(f"{where}: stage_1 and stage_2 are England's two-stage process")
+        # Two named stages: England (fostering and adoption) and Welsh adoption since 1 April 2020.
+        if r["stage"] in ("stage_1", "stage_2") and not (
+            r["jurisdiction"] == "ENG" or (r["jurisdiction"] == "WLS" and r["applies_to"] == "adoption")
+        ):
+            errors.append(f"{where}: stage_1 and stage_2 are for England, and for adoption in Wales")
         if (r["category"], r["topic"]) not in taxonomy:
             errors.append(f"{where}: unknown topic {r['category']}/{r['topic']}")
         summary = r["requirement_summary"].strip()

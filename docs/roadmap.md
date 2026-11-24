@@ -76,14 +76,16 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Ask UK services for the application forms they send after a first visit, so more than 5 can be read
 - [x] US: unsorted application questions down from 25% to under 5%; tables of the children a family would accept no longer count as the applicant's health
 - [x] US: the 11 register links that led to a policy or notice checked again: 5 forms found and read, 6 have no public copy (filled in online, or handed out after a first call). One Alabama row turned out to be a contract application for agencies, not families, and is no longer counted
-- [ ] Describe what the assessment covers, topic by topic, from the law and public guidance (for example England's Fostering Services Regulations 2011, Schedule 3), never from licensed forms such as Form F
+- [x] What the assessment must cover, topic by topic, from the law and statutory guidance in all four UK nations (`register/assessment.csv`, 297 rows, not yet checked by a person), never from licensed forms such as Form F
 - [ ] Application forms in Canada, Australia, Germany, France and Spain
 
 ## Now: ideas for services
 
 - [x] `/for-services`: ideas for recruitment teams, each putting our reading of public forms (no names) next to published research and the rules, with one thing to try
 - [x] A topic-by-topic table, with a CSV download, so a service can check its own enquiry form against enquiry forms and applications
-- [ ] Add where the law in each UK nation puts each topic in the assessment
+- [x] Show where the law in England puts each topic in the assessment, beside what forms ask
+- [ ] Show the other three UK nations the same way
+- [ ] Read the law not yet covered: England's Schedule 4A and the Adoption and Children Act 2002 rules on age and residence, Scotland's 2010 adoption amendments and 2011 guidance
 - [ ] Ask recruitment teams which ideas help, and which are wrong, before adding more
 
 ## Now: compare tables for services

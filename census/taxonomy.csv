@@ -28,13 +28,13 @@ equality,ethnicity,Ethnicity,special_category,stage_2,kept_out_later_slice,"Adop
 equality,gender,Gender,equality_monitoring,not_in_schedule_3,kept_out_later_slice,
 equality,religion,Religion,special_category,stage_2,kept_out_later_slice,
 experience,childcare_experience,Experience of caring for children,none,stage_2,kept_out_later_slice,
-experience,own_children,Whether the enquirer has had children,none,stage_2,kept_out_later_slice,
+experience,own_children,Whether the enquirer has had children,none,stage_1,kept_out_later_slice,Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv. Was stage_2.
 experience,prior_adoption,Whether the enquirer has adopted,none,stage_1,kept_out_later_slice,Previous applications and their outcome are Stage 1 items.
 experience,prior_fostering,Previous fostering experience,none,stage_1,kept_out_later_slice,Previous applications and their outcome are Stage 1 items.
-experience,professional_childcare,Paid work with children,none,stage_2,kept_out_later_slice,
+experience,professional_childcare,Paid work with children,none,stage_1,kept_out_later_slice,Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv. Was stage_2.
 free_text,about_you,Open box: tell us about yourself,free_text,service_operation,kept_out_free_text,
 free_text,access_needs,Access needs or anything else,free_text,service_operation,kept_out_free_text,
-free_text,motivation,Why the person wants to foster,free_text,stage_2,kept_out_free_text,
+free_text,motivation,Why the person wants to foster,free_text,not_in_schedule_3,kept_out_free_text,Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv. Was stage_2.
 free_text,questions,Open box for questions or comments,free_text,service_operation,kept_out_free_text,Free text can hold anything; best not exported.
 health,disability,Disability,special_category,stage_1,kept_out_later_slice,Often asked as equality monitoring.
 health,health,"Health, including mental health",special_category,stage_1,kept_out_later_slice,Stage 1 includes a medical report.
@@ -74,14 +74,14 @@ work,employment_status,Employment status or terms,none,stage_2,kept_out_later_sl
 work,occupation,Occupation,none,stage_2,kept_out_later_slice,
 work,working_hours,Working hours and availability,none,stage_2,kept_out_later_slice,
 interest,child_preferences,"Ages, needs or number of children the person could care for",none,service_operation,fostering_interests,"Added for forms outside England; records the question only, never answers."
-work,income,Income or household finances,sensitive,,kept_out_later_slice,Added for forms outside England. Stage not yet read against Schedule 3.
+work,income,Income or household finances,sensitive,stage_2,kept_out_later_slice,Added for forms outside England. Stage not yet read against Schedule 3. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv.
 other,unclassified,A question the keyword rules could not place; needs a person to tag it,none,,,Used only by tools/crawl_to_census.py. Re-tag by hand.
-references,referees,Names and contact details of people who will give a reference,household_third_party,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
-experience,parenting_approach,"Views on discipline, house rules and parenting",none,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
-housing,firearms,Firearms or other weapons in the home,none,,kept_out_later_slice,"Added for application forms, mainly in the US."
-contact_identity,id_number,"Social security, national insurance, passport or licence numbers",personal_identifier,,kept_out_later_slice,"Added for application forms, mainly background-check forms."
-contact_identity,physical_description,"Height, weight, eye or hair colour, for fingerprinting or checks",personal_identifier,,kept_out_later_slice,"Added for application forms, mainly US background-check forms."
-housing,home_safety,"Safety in the home: smoke alarms, pools, locks, medicines and chemicals",none,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
-experience,life_story,"The person's own childhood, family life, relationships and how they cope with feelings: the life-story part of a home study",sensitive,,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3.
-work,education,"Schooling and qualifications, such as the highest grade or degree",none,,kept_out_later_slice,Added for application forms.
-equality,sexual_orientation,"Sexual orientation, usually with a choice to decline",special_category,,kept_out_later_slice,Added for application forms.
+references,referees,Names and contact details of people who will give a reference,household_third_party,stage_1,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv.
+experience,parenting_approach,"Views on discipline, house rules and parenting",none,stage_2,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv.
+housing,firearms,Firearms or other weapons in the home,none,not_in_schedule_3,kept_out_later_slice,"Added for application forms, mainly in the US. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv."
+contact_identity,id_number,"Social security, national insurance, passport or licence numbers",personal_identifier,not_in_schedule_3,kept_out_later_slice,"Added for application forms, mainly background-check forms. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv."
+contact_identity,physical_description,"Height, weight, eye or hair colour, for fingerprinting or checks",personal_identifier,not_in_schedule_3,kept_out_later_slice,"Added for application forms, mainly US background-check forms. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv."
+housing,home_safety,"Safety in the home: smoke alarms, pools, locks, medicines and chemicals",none,stage_1,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv.
+experience,life_story,"The person's own childhood, family life, relationships and how they cope with feelings: the life-story part of a home study",sensitive,not_in_schedule_3,kept_out_later_slice,Added for application forms. Stage not yet read against Schedule 3. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv.
+work,education,"Schooling and qualifications, such as the highest grade or degree",none,not_in_schedule_3,kept_out_later_slice,Added for application forms. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv.
+equality,sexual_orientation,"Sexual orientation, usually with a choice to decline",special_category,not_in_schedule_3,kept_out_later_slice,Added for application forms. Stage checked against Sch 3 on 24 November 2026; see register/assessment.csv.
