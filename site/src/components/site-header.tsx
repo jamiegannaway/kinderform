@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 
 const TABS = [
   { href: "/", label: "Home" },
+  { href: "/for-services", label: "For services" },
   { href: "/form-check", label: "Form check" },
   { href: "/example-form", label: "Example form" },
   { href: "/research", label: "Research" },

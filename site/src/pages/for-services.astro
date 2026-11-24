@@ -1,0 +1,25 @@
+---
+import Base from "@/layouts/Base.astro";
+import { ForServices } from "@/components/for-services";
+import { loadCensus } from "@/lib/census";
+import { bedroomRules, insights } from "@/lib/insights";
+import findingsFile from "../../../evidence/findings.json";
+
+const data = insights(loadCensus());
+
+// The withdrawal figures are quoted from the "withdrawals" finding. Stop the build if its wording
+// changes so they can no longer be found, rather than show figures that disagree with /research.
+const wf = findingsFile.findings.find((f) => f.id === "withdrawals");
+let withdrawals = null;
+if (wf) {
+  const m = wf.summary.match(/in the year to ([\d]+ \w+ \d{4})\..*?That is (\d+)% of finished applications.*?(\d+)% said the process was not what they expected/);
+  if (!m) throw new Error('evidence/findings.json "withdrawals": cannot find the year, the withdrawal share and the "not what they expected" share for /for-services.');
+  withdrawals = { year: `the year to ${m[1]}`, share: Number(m[2]), notExpected: Number(m[3]) };
+}
+---
+<Base
+  title="What fostering and adoption services can do | Kinderform"
+  description="Ideas for recruitment teams in councils, hubs and agencies. Each one puts what we found in public enquiry and application forms next to published research, and suggests one thing to try."
+>
+  <ForServices data={data} bedrooms={bedroomRules()} withdrawals={withdrawals} />
+</Base>

@@ -226,6 +226,9 @@ export default function Landing() {
                 <a href="#get-involved">Get involved</a>
               </Button>
               <Button asChild size="lg" variant="outline">
+                <a href="/for-services">Ideas for services</a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
                 <a href="#making">What we are making</a>
               </Button>
             </div>
