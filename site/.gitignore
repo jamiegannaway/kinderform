@@ -2,3 +2,5 @@ node_modules/
 dist/
 .astro/
 src/generated/
+public/downloads/starter/
+public/schema/

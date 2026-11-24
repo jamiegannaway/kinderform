@@ -6,6 +6,7 @@ Kinderform helps fostering and adoption services improve their first reply. If y
 
 | I want to… | Where to start |
 | --- | --- |
+| Build a new form or adapt one in our own system | [Choose a starter for any builder](https://www.kinderform.org/build). Use the shared version or pick the wording for your location. |
 | Review the form my service uses | Try an [example form](https://www.kinderform.org/example-form). Compare your questions and the reply time you promise with the [draft checklist](rubric/rubric.md). |
 | Understand how to record a first reply | Follow [one made-up enquiry](docs/one-enquiry.md) from the form to a conversation. |
 | Correct something about a service | [Report a correction](https://github.com/jamiegannaway/kinderform/issues/new?template=correction.yml) or email Jamie. Give the public page, the change and the date you checked. |

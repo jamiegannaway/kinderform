@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinderform · $edition implementation kit</title>
+<style>
+:root{color-scheme:light dark;--paper:#fff;--ink:#242626;--muted:#565b59;--line:#d9dcd9;--tint:#f3f5f2;--accent:#214e3b}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 system-ui,sans-serif}
+main,header{max-width:54rem;margin:0 auto;padding:1.3rem clamp(1rem,4vw,3rem)}header{border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+header b{font-size:1.15rem}header span,.small{color:var(--muted);font-size:.9rem}h1{font-size:clamp(2rem,5.5vw,3.4rem);letter-spacing:-.04em;line-height:1.05;margin:1rem 0}h2{font-size:1.45rem;margin:2rem 0 .45rem}h3{font-size:1.04rem;margin:0}p{max-width:65ch;margin:.4rem 0 1rem}a{color:var(--accent);text-underline-offset:.2em}a:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+.action{display:inline-block;background:var(--accent);color:var(--paper);border-radius:.4rem;padding:.58rem 1rem;font-weight:650;text-decoration:none;margin:.3rem 0}
+ul{padding-left:1.3rem}li{margin-bottom:.45rem}dl{border-top:1px solid var(--line)}dt{margin-top:.65rem;font-weight:650}dd{margin:0 0 .6rem;color:var(--muted)}section:last-child{padding-bottom:1rem}
+@media(prefers-color-scheme:dark){:root{--paper:#151918;--ink:#f4f6f4;--muted:#bbc5bf;--line:#404841;--tint:#222824;--accent:#b4e1c4}}
+</style></head>
+<body><header><b>Kinderform</b><span>Implementation kit · $edition</span></header>
+<main><h1>Improve your first enquiry form</h1>
+<p>For fostering and adoption services. Try the example, then use its questions in your own form or website.</p>
+<p><strong lang="$locale">$form_title</strong><br><span class="small">Question language: $locale · Setup guides in English</span></p>
+<a class="action" href="form.html">Try the offline form</a>
+<p class="small">Use made-up details. No service receives this example enquiry.</p>
+<section><h2>Use it in your service</h2>
+<dl>
+<dt><a href="guide.md">Adapt an existing form or build a new one</a></dt><dd>Match your questions, set the contact choices, and try each path.</dd>
+<dt><a href="questions.md">Copy the questions and choices</a></dt><dd>Use these in your usual editor. The <a href="field-map.csv">field map</a> gives the name and value for each answer.</dd>
+<dt><a href="tally.md">Use Tally</a> or <a href="typeform.md">use Typeform</a></dt><dd>Import the wording, then set up the branches in your own account.</dd>
+<dt><a href="ai-prompt.txt">Work with an AI assistant</a></dt><dd>Use the prompt and blank kit files to draft a private copy.</dd>
+</dl></section>
+<section><h2>Keep only the contact details you need</h2>
+<ul><li><strong lang="$locale">$email_choice</strong> — ask for an email address.</li>
+<li><strong lang="$locale">$call_choice</strong> — ask for a phone number and offer optional call times.</li>
+<li><strong lang="$locale">$text_choice</strong> — ask for a phone number.</li></ul>
+<p>If your tool cannot show different questions, offer a short form for each route. You can also direct people to a contact your team monitors.</p>
+</section><section><h2>Check the result</h2>
+<p>Try email, phone and text. Change your answer and check that old contact details disappear from the saved record. Leave the updates box empty.</p>
+<p>Developers can check a made-up export with <a href="check.py">check.py</a> and <a href="test-cases.json">the test cases</a>. Follow the steps in <a href="guide.md">the setup guide</a>. The <a href="wording.json">wording</a> and <a href="submission-schema.json">submission schema</a> are included.</p>
+<p class="small"><a href="CREDITS.txt">Credit Kinderform when sharing your version</a>.</p>
+</section></main></body></html>

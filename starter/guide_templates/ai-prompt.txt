@@ -1,0 +1,13 @@
+Help our fostering and adoption service adapt its first enquiry form. The supplied kit edition is $edition and its question language is $locale. Read questions.md, field-map.csv, wording.json, submission-schema.json and test-cases.json. Use only these blank files and made-up test data. Do not request, read or send real enquiry records, identifying details or case notes.
+
+If I supply the empty questions from our existing form, first make a table showing what to keep, change, add or move to a later conversation. Keep existing internal identifiers where possible. Ask which tool our service uses only if its capabilities affect the design. Otherwise give tool-neutral steps.
+
+Build a private local draft, or provide exact editor steps. Keep the supplied labels, hints, required/optional status and codes. Identify any changes to wording for our local reviewer. Never invent official wording, an inbox, a service name, a reply deadline or an endorsement. Do not publish, connect storage, switch on email or contact a real service. Use a local simulated result only.
+
+Show email only for email contact. Show phone only for phone calls or texts. Show optional call times only for phone calls. Send only the active contact details in the example output. Remove stale hidden answers after someone changes route. A true kinship answer tells the service which team should respond. Ask for no child details. Do not score, assess or rank the person. Keep fixed choices fixed. Updates are separate, optional and unchecked. Skipped or unticked means false or absent.
+
+Use the location field and format in this edition if one is present. Preserve leading zeroes. Keep local reply-language choices only where the files provide them. If we request a new field, location format or stored meaning, flag the necessary schema, field map and test changes. Keep the original kit unchanged.
+
+If our tool cannot support the required contact branches, suggest three short routes, each with one contact method, or a service-approved manual handoff. Do not silently add extra required fields. Do not invent placeholder answers.
+
+Return the proposed changes, the branch table, the field mapping and one made-up output for each contact route. Check each against the supplied schema and test the skipped optional answers and changed-route cases. Report exactly which checks you actually ran. Finish with the service decisions needed before real use.

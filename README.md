@@ -7,6 +7,7 @@ Kinderform helps councils, fostering services and adoption agencies give a kinde
 | What would you like to do? | First step |
 | --- | --- |
 | Enquire about fostering or adoption | [Find an official service](https://www.kinderform.org/#find-a-service). A real enquiry goes to the service you choose. The Kinderform examples send nothing. |
+| Build or update an enquiry form in our own system | [Use Kinderform in your organisation](https://www.kinderform.org/build). Start with the shared questions for any country or use a local version. Download the questions, rules, HTML example and AI prompt for your own form builder. |
 | Improve your service's first form or reply | [Try an example form for your country](https://www.kinderform.org/example-form), then [review your form with the draft checklist](https://www.kinderform.org/form-check). |
 | Check or correct your service's entry | [Compare forms and published rules](https://www.kinderform.org/compare). For a correction, give the public source, what changed and when you checked. [Get in touch with or without a GitHub account](SUPPORT.md). |
 | Share what the first reply felt like | What helped, or what would you change? [Send private feedback](SUPPORT.md). Please leave out names and case details. |
@@ -19,6 +20,7 @@ The enquiry standard and checklist are drafts for comment. The comparison tables
 
 | Folder | What it holds | Status |
 |---|---|---|
+| [`starter/`](starter/) | Portable kits for people creating or updating a form, with a field map, offline HTML, branching rules and synthetic tests | [Download a kit](https://www.kinderform.org/build) |
 | [`schema/`](schema/) | The Enquiry record: a vendor-neutral JSON Schema for a fostering enquiry, with synthetic examples. Also the shorter schema for what a person fills in, and the wording for each country's example form (`schema/ui/`) | v0.1 draft |
 | [`register/`](register/) | Front doors (who people contact first) and published rules on who can foster or adopt, organised by country. [See coverage, sources and dates](https://www.kinderform.org/compare) | First pass, not yet checked by a person |
 | [`census/`](census/) | An inventory of first-contact enquiry forms: every question, answer option and piece of guidance recorded so far | v0.1 draft, not yet checked by a person |

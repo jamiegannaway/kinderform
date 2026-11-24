@@ -1,0 +1,34 @@
+{
+  "en": {
+    "skip": "Skip to the example", "demo": "Offline example", "notice": "Use made-up details. Your answers stay on this page. You can choose to download a JSON file at the end, and no enquiry is sent.",
+    "intro": "Try the questions and review your answers. This example cannot contact a service.",
+    "enable": "Enable JavaScript to try this offline example.", "review": "Review your example enquiry", "preview": "Preview the record", "done": "Your example enquiry record",
+    "details": "The browser checked the fields in this form. Use the validation instructions in the kit to check the JSON against the full submission schema.",
+    "export": "Download example JSON", "navigation": "Question navigation", "json": "Example submission JSON", "skipped": "Skipped", "issue": "Check this answer.",
+    "source": "Questions adapted from the Kinderform enquiry submission standard. Wording and schema licensed under CC BY 4.0. Standalone code licensed under MIT."
+  },
+  "fr": {
+    "skip": "Aller au formulaire", "demo": "Exemple hors ligne", "notice": "Utilisez des renseignements fictifs. Vos réponses restent sur cette page. À la fin, vous pouvez télécharger un fichier JSON. Aucune demande ne sera envoyée.",
+    "intro": "Essayez les questions et vérifiez vos réponses. Cet exemple ne permet pas de contacter un service.",
+    "enable": "Activez JavaScript pour essayer cet exemple hors ligne.", "review": "Vérifiez les réponses de cet exemple", "preview": "Afficher les données", "done": "Les données de votre exemple",
+    "details": "Le navigateur a vérifié les champs du formulaire. Suivez les instructions du kit pour valider le fichier JSON avec le schéma complet.",
+    "export": "Télécharger le fichier JSON", "navigation": "Navigation entre les questions", "json": "Données de l’exemple au format JSON", "skipped": "Sans réponse", "issue": "Vérifiez cette réponse.",
+    "source": "Questions adaptées de la norme Kinderform pour les demandes de renseignements. Texte et schéma sous licence CC BY 4.0. Code de cet exemple sous licence MIT."
+  },
+  "de": {
+    "skip": "Zum Formular", "demo": "Offline-Beispiel", "notice": "Verwenden Sie erfundene Angaben. Ihre Antworten bleiben auf dieser Seite. Am Ende können Sie eine JSON-Datei herunterladen. Es wird keine Anfrage gesendet.",
+    "intro": "Probieren Sie die Fragen aus und prüfen Sie Ihre Antworten. Über dieses Beispiel können Sie keine Stelle erreichen.",
+    "enable": "Aktivieren Sie JavaScript, um dieses Offline-Beispiel auszuprobieren.", "review": "Gehen Sie Ihre Beispielangaben durch", "preview": "Datensatz anzeigen", "done": "Ihr Beispieldatensatz",
+    "details": "Ihr Browser hat die Formularfelder geprüft. In der Anleitung zum Paket steht, wie Sie die JSON-Datei anhand des vollständigen Schemas prüfen.",
+    "export": "JSON-Beispiel herunterladen", "navigation": "Navigation zwischen den Fragen", "json": "Beispieldaten im JSON-Format", "skipped": "Übersprungen", "issue": "Prüfen Sie diese Antwort.",
+    "source": "Die Fragen basieren auf dem Kinderform-Standard für Erstanfragen. Texte und Schema stehen unter CC BY 4.0, der Code dieses Beispiels unter der MIT-Lizenz."
+  },
+  "es": {
+    "skip": "Ir al formulario", "demo": "Ejemplo sin conexión", "notice": "Utilice datos ficticios. Sus respuestas permanecen en esta página. Al terminar, puede descargar un archivo JSON. No se enviará ninguna consulta.",
+    "intro": "Pruebe las preguntas y revise sus respuestas. Este ejemplo no permite ponerse en contacto con ningún servicio.",
+    "enable": "Active JavaScript para probar este ejemplo sin conexión.", "review": "Revise las respuestas del ejemplo", "preview": "Ver los datos", "done": "Los datos de su ejemplo",
+    "details": "El navegador ha comprobado los campos del formulario. Siga las instrucciones del kit para validar el archivo JSON con el esquema completo.",
+    "export": "Descargar el ejemplo en JSON", "navigation": "Navegación entre preguntas", "json": "Datos del ejemplo en formato JSON", "skipped": "Sin respuesta", "issue": "Revise esta respuesta.",
+    "source": "Preguntas adaptadas del estándar de Kinderform para consultas iniciales. Textos y esquema bajo licencia CC BY 4.0. Código del ejemplo bajo licencia MIT."
+  }
+}
