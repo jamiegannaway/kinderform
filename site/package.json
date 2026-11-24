@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "validators": "node scripts/compile-validators.mjs",
+    "predev": "python3 ../starter/pack.py publish",
     "dev": "npm run validators && astro dev",
+    "prebuild": "python3 ../starter/pack.py publish",
     "build": "npm run validators && astro build",
     "postbuild": "node scripts/check-country-pages.mjs",
     "preview": "astro preview"

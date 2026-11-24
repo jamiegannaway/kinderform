@@ -1,0 +1,47 @@
+---
+import { ArrowRight, Globe } from "lucide-react";
+import Base from "@/layouts/Base.astro";
+import { SiteHeader, SiteFooter } from "@/components/site-header";
+import { LOCAL_STARTERS, STARTER_BASE } from "@/lib/starter-kits";
+---
+<Base title="Build an enquiry form for your service | Kinderform" description="Use Kinderform questions in your own form builder. Choose a country version or adapt the shared questions for a service anywhere.">
+  <SiteHeader current="/build" />
+  <main id="main" class="mx-auto max-w-5xl px-6 pt-8 pb-16 sm:pt-12">
+    <h1 class="max-w-4xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">Build an enquiry form for your service</h1>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+      Take the questions, answer choices and follow-up rules into the form builder your team already uses.
+      Each kit includes a working HTML example and a guide for testing your form with made-up details.
+    </p>
+    <section aria-labelledby="country-heading" class="mt-10">
+      <h2 id="country-heading" class="text-2xl font-semibold tracking-tight">Choose your starting point</h2>
+      <p class="mt-2 max-w-2xl text-muted-foreground">Use the shared questions anywhere. If a country version fits, it also gives you local wording and a location question.</p>
+      <a href="/build/global" class="group mt-5 mb-7 flex items-center gap-4 rounded-lg border bg-muted/65 p-5 hover:bg-accent focus-visible:ring-3 focus-visible:ring-ring">
+        <Globe aria-hidden="true" className="size-6 shrink-0" />
+        <span class="flex-1">
+          <span class="block font-semibold">Adapt the form for any country</span>
+          <span class="mt-1 block text-sm text-muted-foreground">Start with the shared English questions. Add local wording and choose how to route enquiries.</span>
+        </span>
+        <ArrowRight aria-hidden="true" className="size-5 shrink-0" />
+      </a>
+      <h3 class="text-lg font-semibold">Country versions</h3>
+      <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {LOCAL_STARTERS.map((kit) => (
+          <li>
+            <a href={`/build/${kit.key}`} class="group flex h-full items-center justify-between gap-3 rounded-lg border bg-card p-4 text-card-foreground hover:bg-accent focus-visible:ring-3 focus-visible:ring-ring">
+              <span>
+                <span class="block font-semibold">{kit.name}</span>
+                <span class="mt-1 block text-sm text-muted-foreground">{kit.language}</span>
+              </span>
+              <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-muted-foreground group-hover:text-foreground" />
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-6 text-sm text-muted-foreground">
+        Building forms for several countries?
+        <a href={`${STARTER_BASE}/kinderform-all-starters.zip`} download class="font-medium text-foreground underline underline-offset-4">Download all starter kits (ZIP)</a>
+      </p>
+    </section>
+  </main>
+  <SiteFooter />
+</Base>

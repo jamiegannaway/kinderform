@@ -117,6 +117,12 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
                 <DialogDescription className="sr-only sm:not-sr-only">
                   Built with the {meta.system}, without government branding. Nothing you enter is sent or stored.
                 </DialogDescription>
+                <a
+                  href={`/build/${country === "ca" && lang === "fr" ? "ca-fr" : country}`}
+                  className="w-fit text-sm font-medium underline underline-offset-4"
+                >
+                  {country === "ca" && lang === "fr" ? "Utiliser ce formulaire dans mon organisme" : "Use this form in my organisation"}
+                </a>
               </div>
               {other && (
                 // Switching language keeps your answers: the form stays the same, only its wording changes.
@@ -176,6 +182,9 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
               quickly and kindly.
             </li>
           </ul>
+          <Button asChild variant="outline">
+            <a href="/build">Use this form in my organisation</a>
+          </Button>
         </DialogContent>
       </Dialog>
     </>

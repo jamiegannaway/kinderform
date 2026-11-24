@@ -2,6 +2,7 @@
 // country opens its form in a dialog (see reference-form/form-dialog.tsx), so the page itself
 // never needs to scroll. Rendered at build time; the links work without JavaScript too.
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { FORM_COUNTRIES } from "@/components/reference-form/countries"
 import { LAND, MAP, MAP_COUNTRIES } from "@/lib/world-map"
@@ -85,16 +86,21 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
         <SiteHeader current="/example-form" />
       </div>
       <main id="main" className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col gap-4 px-6 pb-4">
-        <div className="shrink-0 space-y-2">
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary">Reference forms, draft 0.1</Badge>
-            <Badge variant="outline">Not real forms</Badge>
+        <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
+          <div className="min-w-0 flex-1 basis-96 space-y-2">
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="secondary">Reference forms, draft 0.1</Badge>
+              <Badge variant="outline">Not real forms</Badge>
+            </div>
+            <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight md:text-4xl">Example enquiry forms</h1>
+            <p className="max-w-3xl text-muted-foreground md:text-lg">
+              Pick a country to try its example form. Each asks the same few questions, in a public-sector design
+              system from that country, without government branding. Nothing you enter is sent or stored.
+            </p>
           </div>
-          <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight md:text-4xl">Example enquiry forms</h1>
-          <p className="max-w-3xl text-muted-foreground md:text-lg">
-            Pick a country to try its example form. Each asks the same few questions, in a public-sector design
-            system from that country, without government branding. Nothing you enter is sent or stored.
-          </p>
+          <Button asChild variant="outline">
+            <a href={open ? `/build/${open}` : "/build"}>Use this form in my organisation</a>
+          </Button>
         </div>
 
         <WorldMap />
