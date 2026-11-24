@@ -222,7 +222,7 @@ export function CompareIndex({
           files={[
             { href: "/compare/forms.csv", label: "Enquiry forms (CSV)" },
             { href: "/compare/rules.csv", label: "Rules (CSV)" },
-            { href: "/compare/applications.csv", label: "US application forms (CSV)" },
+            { href: "/compare/applications.csv", label: "Application forms (CSV)" },
           ]}
         />
       </section>

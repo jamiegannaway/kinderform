@@ -483,6 +483,11 @@ export function ForServices({
             says should wait until after a conversation. A US application is one service&rsquo;s set of forms, counted
             once.
           </p>
+          <p className="mt-4">
+            <a href="/for-services/topics.csv" className={link}>
+              Download this table (CSV)
+            </a>
+          </p>
         </section>
 
         <Separator />
