@@ -70,13 +70,21 @@ See [us-survey-plan.md](us-survey-plan.md).
 ## Now: after first contact (first pass)
 
 - [x] The census can hold application forms (`form_stage` "application"), tagged with the same topics as first-contact forms; `tools/applications_to_census.py` adds them
-- [x] US: 13 application packets read (a state's, a county's or a tribe's set of forms), from fillable PDFs and from the PDFs' text (not yet checked by a person)
+- [x] US: 14 application packets read (a state's, a county's, a tribe's or a private agency's set of forms), from fillable PDFs and from the PDFs' text (not yet checked by a person)
 - [x] UK: 40 application forms and registrations of interest listed; 5 read in full, the rest are given out after a first visit or behind a sign-in (not yet checked by a person)
 - [x] `/research` "What applications ask": first contact against the application, topic by topic; `/compare/applications` covers the UK and the US
 - [ ] Ask UK services for the application forms they send after a first visit, so more than 5 can be read
-- [ ] US: sort the 27% of application questions that are still unclassified, and replace the 11 register links that lead to a policy or notice
+- [x] US: unsorted application questions down from 25% to under 5%; tables of the children a family would accept no longer count as the applicant's health
+- [ ] US: replace the 11 register links that lead to a policy or notice
 - [ ] Describe what the assessment covers, topic by topic, from the law and public guidance (for example England's Fostering Services Regulations 2011, Schedule 3), never from licensed forms such as Form F
 - [ ] Application forms in Canada, Australia, Germany, France and Spain
+
+## Now: ideas for services
+
+- [x] `/for-services`: ideas for recruitment teams, each putting our reading of public forms (no names) next to published research and the rules, with one thing to try
+- [x] A topic-by-topic table, with a CSV download, so a service can check its own enquiry form against enquiry forms and applications
+- [ ] Add where the law in each UK nation puts each topic in the assessment
+- [ ] Ask recruitment teams which ideas help, and which are wrong, before adding more
 
 ## Now: compare tables for services
 
