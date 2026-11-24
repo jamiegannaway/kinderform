@@ -30,7 +30,11 @@ It started in England, where almost 150,000 fostering enquiries in 2024–25 led
 
 You need Python 3.11 or later and Node.js 22 or later.
 
-Run every check:
+Install the one Python package the checks need, then run every check:
+
+```bash
+pip install -r requirements.txt
+```
 
 ```bash
 for t in tests/*.py; do python3 "$t" || exit 1; done

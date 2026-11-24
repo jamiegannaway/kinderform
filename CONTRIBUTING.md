@@ -21,7 +21,7 @@ Thank you for helping. You do not need to write code to contribute.
 ## Pull requests
 
 - Keep each pull request to one change.
-- Run every check before you open a pull request: `for t in tests/*.py; do python3 "$t" || exit 1; done`
+- Run every check before you open a pull request: `pip install -r requirements.txt`, then `for t in tests/*.py; do python3 "$t" || exit 1; done`. GitHub runs the same checks on every pull request.
 - If you changed the site, build it (`npm ci --prefix site && npm run build --prefix site`) and run `python3 tools/plain_check.py site/dist`. Everything on the site follows the plain-language guide in `docs/plain-language.md`.
 - Schema first: change the schema, then add a valid and an invalid example in `schema/examples/`, then change the code.
 - Describe what changed and why in the pull request description.
