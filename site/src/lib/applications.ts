@@ -63,8 +63,10 @@ const median = (xs: number[]) => {
   return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2)
 }
 
-// Questions the person answers: not consent ticks, not fields for staff.
-const answered = (q: Row) => q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on
+// Questions the person answers: not consent ticks, not fields for staff, and not statements of
+// what to attach or what the office checks itself (input_type "statement").
+const answered = (q: Row) =>
+  q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on && q.input_type !== "statement"
 
 export function applications(c: Census): ApplicationsData {
   const asked = askedBy(c)

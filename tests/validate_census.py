@@ -67,7 +67,7 @@ PHONE = re.compile(
     r"|\b1[38]00[\s-]?\d{3}[\s-]?\d{3}\b")  # Australian 1300 and 1800 numbers
 # Sales words for people. Home-safety questions on application forms ask about lead paint and the
 # water supply, which are not market language.
-MARKET = re.compile(r"(?<!water )\bsupply\b|\bdemand\b|\bleads?\b(?![\s-]*(?:paint|based|pipes?|poison))|"
+MARKET = re.compile(r"(?<!water )\bsupply\b|\bdemand\b|\bleads?\b(?![\s-]*(?:paint|based|pipes?|poison|to\b))|"
                     r"\bconversion\b|\bfunnel\b", re.IGNORECASE)
 
 errors = []

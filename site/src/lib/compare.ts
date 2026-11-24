@@ -324,12 +324,12 @@ export function ruleRows(dates = loadPageDates()): RuleRow[] {
   return out.sort((a, b) => order(a) - order(b) || a.place.localeCompare(b.place) || a.id.localeCompare(b.id))
 }
 
-// ---- US application forms --------------------------------------------------------
+// ---- Application forms -----------------------------------------------------------
 
 export type ApplicationRow = {
   id: string
-  country: string // UK or US
-  state: string // the US state, or the UK nation
+  country: string
+  state: string // the US state, the UK nation, or the province, state or region
   body: string
   name: string
   step: string
@@ -359,7 +359,11 @@ const STEPS: Record<string, string> = {
 function readOf(c: Census, formId: string): Pick<ApplicationRow, "questions" | "sensitive"> {
   const qs = askedBy(c).get(formId)
   if (!qs?.length) return { questions: null, sensitive: [] }
-  const answered = qs.filter((q) => q.category !== "consent" && q.category !== "staff_recorded")
+  // The same questions as "What applications ask": not consent ticks, fields for staff, follow-up
+  // questions or statements of what to attach.
+  const answered = qs.filter(
+    (q) => q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on && q.input_type !== "statement",
+  )
   return {
     questions: answered.length,
     sensitive: APPLICATION_TOPICS.filter((t) => t.sensitive && answered.some(t.match)).map((t) => t.label),
@@ -368,18 +372,20 @@ function readOf(c: Census, formId: string): Pick<ApplicationRow, "questions" | "
 
 export function applicationRows(c: Census = loadCensus(), dates = loadPageDates()): ApplicationRow[] {
   const states = new Map(read("register/us/states.csv").map((s) => [s.state_code, s.state_name]))
-  // UK application forms, recorded in the census from the public documents.
+  // Application forms outside the US, recorded in the census from the public documents.
   const uk: ApplicationRow[] = c.forms
-    .filter((f) => f.form_stage === "application" && f.country === "UK")
+    .filter((f) => f.form_stage === "application" && f.country !== "US")
     .map((f) => {
       const link = f.form_url || f.source_url
       return {
         id: f.form_id,
-        country: "UK",
+        country: f.country,
         state: f.region,
         body: f.name.split(": ")[0],
         name: f.name.split(": ").slice(1).join(": ") || "Application form",
-        step: /registration of interest/i.test(f.name) ? "Registration of interest" : "Application",
+        step: /registration of interest|expression of interest/i.test(f.name + " " + f.notes.slice(0, 200))
+          ? "Registration of interest"
+          : "Application",
         format: f.access_route === "online_form" ? "web" : f.access_route === "downloadable_form" ? "document" : "",
         licensed: /Licensed form/.test(f.notes),
         link,

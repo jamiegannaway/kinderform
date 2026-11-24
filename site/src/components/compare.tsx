@@ -13,6 +13,7 @@ import { SiteFooter, SiteHeader } from "@/components/site-header"
 import {
   COUNTRY_NAMES,
   COUNTRY_ORDER,
+  countryList,
   shortDate,
   type ApplicationRow,
   type FormRow,
@@ -178,7 +179,7 @@ export function CompareIndex({
       href: "/compare/applications",
       title: "Application forms",
       figure: `${applications} forms`,
-      body: "The forms that come after the first enquiry, in the UK and the US. See how many questions each asks, and which sensitive topics.",
+      body: "The forms that come after the first enquiry, in all 7 countries. See how many questions each asks, and which sensitive topics.",
     },
   ]
   return (
@@ -485,18 +486,19 @@ export function CompareTopic({ topic, rows }: { topic: TopicInfo; rows: RuleRow[
 // ---- /compare/applications ---------------------------------------------------------
 
 export function CompareApplications({ rows }: { rows: ApplicationRow[] }) {
-  const uk = rows.filter((r) => r.country === "UK")
   const us = rows.filter((r) => r.country === "US")
+  const others = rows.filter((r) => r.country !== "US")
   const read = rows.filter((r) => r.questions !== null).length
+  const countries = countryList(others.map((r) => r.country))
   return (
     <Page>
       <div>
         <Crumbs here="Application forms" />
         <Intro title="Application forms compared">
           <p className="text-xl leading-8 text-muted-foreground">
-            The forms that come after the first enquiry: {uk.length ? `${uk.length} from UK services and ` : ""}
-            {us.length} from US states' application packets. We have read the questions on {read} of them. Licensed
-            forms are named, not copied.
+            The forms that come after the first enquiry: {us.length} from US application packets
+            {others.length ? ` and ${others.length} from ${countries}` : ""}. We have read the questions on {read} of
+            them. Licensed forms are named, not copied.
           </p>
         </Intro>
       </div>

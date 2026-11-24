@@ -29,6 +29,7 @@ export type TopicCheck = {
   allFirst: Share
   ukApp: Share | null
   usApp: Share | null
+  allApp: Share // every country's applications together (a US packet counts once)
   england: LawStage | null
 }
 
@@ -40,6 +41,7 @@ export type InsightsData = {
   reply: { uk: Share; us: Share; all: Share }
   spareRoom: { agencies: Share; councils: Share }
   app: {
+    all: { units: number; countries: number }
     uk: { median: number; forms: number; health: Share; partners: Share; criminal: Share } | null
     us: { median: number; packets: number; health: Share } | null
   }
@@ -137,7 +139,8 @@ export function insights(c: Census): InsightsData {
   const s2Both = new Set([...s2Fostering].filter((k) => s2Adoption.has(k)))
   const s2For = (f: Row) =>
     f.service_type === "adoption" ? s2Adoption : f.service_type === "fostering" ? s2Fostering : s2Both
-  const answered = (q: Row) => q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on
+  const answered = (q: Row) =>
+    q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on && q.input_type !== "statement"
   const earlyIn = (forms: Row[]) => {
     const hits = forms.map((f) => {
       const s2 = s2For(f)
@@ -166,6 +169,13 @@ export function insights(c: Census): InsightsData {
       allFirst: shareOf(firstQs(), t.match),
       ukApp: topicShare(ukApp, t.label),
       usApp: topicShare(usApp, t.label),
+      allApp: apps.countries.reduce(
+        (sum, a) => {
+          const x = topicShare(a, t.label)
+          return x ? { yes: sum.yes + x.yes, of: sum.of + x.of } : sum
+        },
+        { yes: 0, of: 0 },
+      ),
       england: law.length ? { fostering, adoption } : null,
     }
   })
@@ -193,6 +203,7 @@ export function insights(c: Census): InsightsData {
     },
     spareRoom: { agencies: byGroup("Independent agencies"), councils: byGroup("Councils and hubs") },
     app: {
+      all: { units: apps.countries.reduce((n, a) => n + a.apps, 0), countries: apps.countries.length },
       uk: ukApp
         ? {
             median: ukApp.appMedian,

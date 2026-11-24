@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-24",
   "about": "What we know so far about the first step, from someone getting in touch to their application. Shown at kinderform.org/research. Each source says whether a person has checked the claim against the original, when, and against what. Use null for 'not yet checked'. Edit by pull request; tests/validate_findings.py checks the format.",
   "findings": [
     {
@@ -36,6 +36,22 @@
           "year": "2026",
           "url": "https://assets.publishing.service.gov.uk/media/69c407bdb66ff902f45441d9/Fostering_Recruitment_and_Retention_Programme_end-to-end_programme_booklet.pdf",
           "checked": null
+        }
+      ]
+    },
+    {
+      "id": "applications-ask-more",
+      "stage": "Application",
+      "title": "Applications ask far more than enquiry forms, and most UK application forms are not public",
+      "summary": "In November 2026 we read 52 application forms and packets in 7 countries. A typical UK application form asked 58 questions, against 8 on a typical UK enquiry form. Every UK application form we read asked about health, but none of the 49 UK enquiry forms did. Most UK application forms are not public: of 41 we found, we could read 6. France's national form asks nothing about health or convictions. A medical certificate goes with it, and the council asks for the criminal record itself.",
+      "sources": [
+        {
+          "title": "What applications ask (Kinderform record of application forms, first pass)",
+          "by": "Kinderform",
+          "year": "2026",
+          "url": "/research#applications",
+          "checked": null,
+          "note": "Our own reading of public forms, not published research. A computer program and an AI tool read the forms between 17 and 24 November 2026. Nobody has checked them yet. Services are not named here; the forms are listed on the compare page."
         }
       ]
     },

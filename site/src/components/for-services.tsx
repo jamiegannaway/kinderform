@@ -500,6 +500,7 @@ export function ForServices({
                 <TableHead className="text-right whitespace-normal">Enquiry forms, all countries</TableHead>
                 <TableHead className="text-right whitespace-normal">UK applications</TableHead>
                 <TableHead className="text-right whitespace-normal">US applications</TableHead>
+                <TableHead className="text-right whitespace-normal">Applications, all countries</TableHead>
                 {law && <TableHead className="whitespace-normal">England, fostering assessment</TableHead>}
                 {law && <TableHead className="whitespace-normal">England, adoption assessment</TableHead>}
               </TableRow>
@@ -519,6 +520,7 @@ export function ForServices({
                   <Cell s={t.allFirst} />
                   <Cell s={t.ukApp} />
                   <Cell s={t.usApp} />
+                  <Cell s={t.allApp} />
                   {law && (
                     <TableCell className="whitespace-normal">{t.england?.fostering.join(", ") || "Not named"}</TableCell>
                   )}
@@ -533,7 +535,8 @@ export function ForServices({
             We counted {d.ukFirst.forms} UK enquiry forms and {d.first.forms} enquiry forms in all {d.first.countries}{" "}
             countries.
             {d.app.uk && ` We counted ${d.app.uk.forms} UK application forms.`}
-            {d.app.us && ` We counted ${d.app.us.packets} US application packets.`} A person has not yet checked these
+            {d.app.us && ` We counted ${d.app.us.packets} US application packets.`}
+            {` Across all ${d.app.all.countries} countries we counted ${d.app.all.units} applications.`} A person has not yet checked these
             counts. &ldquo;Personal&rdquo; marks topics our{" "}
             <a href="/form-check" className={link}>
               draft checklist

@@ -72,12 +72,14 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] The census can hold application forms (`form_stage` "application"), tagged with the same topics as first-contact forms; `tools/applications_to_census.py` adds them
 - [x] US: application packets read (a state's, a county's, a tribe's or a private agency's set of forms), from fillable PDFs and from the PDFs' text (not yet checked by a person)
 - [x] UK: 40 application forms and registrations of interest listed; 5 read in full, the rest are given out after a first visit or behind a sign-in (not yet checked by a person)
-- [x] `/research` "What applications ask": first contact against the application, topic by topic; `/compare/applications` covers the UK and the US
-- [ ] Ask UK services for the application forms they send after a first visit, so more than 5 can be read
+- [x] `/research` "What applications ask": first contact against the application, topic by topic; `/compare/applications` covers all seven countries
+- [x] A second, wider UK search (about 600 pages, every Scottish council, adoption agencies and sitemaps) found only one more readable application form: UK application forms are almost never public
+- [ ] Ask UK services for the application forms they send after a first visit, so more than 6 can be read
+- [ ] Add the first-contact forms the second search found that the census lacks (Wigan, North Somerset, Lincolnshire, Midlothian, Reading)
 - [x] US: unsorted application questions down from 25% to under 5%; tables of the children a family would accept no longer count as the applicant's health
 - [x] US: the 11 register links that led to a policy or notice checked again: 5 forms found and read, 6 have no public copy (filled in online, or handed out after a first call). One Alabama row turned out to be a contract application for agencies, not families, and is no longer counted
 - [x] What the assessment must cover, topic by topic, from the law and statutory guidance in all four UK nations (`register/assessment.csv`, 297 rows, not yet checked by a person), never from licensed forms such as Form F
-- [ ] Application forms in Canada, Australia, Germany, France and Spain
+- [x] Application forms in Canada (5), Australia (3), Germany (4), France (2) and Spain (6), read from public documents (not yet checked by a person); France's national CERFA form gets health and convictions through a medical certificate and a records check, not questions
 
 ## Now: ideas for services
 
