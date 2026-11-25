@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Download } from "lucide-react";
 import Base from "@/layouts/Base.astro";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
 import { buttonVariants } from "@/components/ui/button";
+import { Flag } from "@/components/flag";
 import { GLOBAL_STARTER, LOCAL_STARTERS, STARTER_BASE, STARTER_VERSION, starterName, type Starter } from "@/lib/starter-kits";
 
 export function getStaticPaths() {
@@ -28,7 +29,10 @@ const resources = [
   <main id="main" class="mx-auto max-w-5xl px-6 pt-6 pb-16 sm:pt-8">
     <a href="/build" class="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline"><ArrowLeft aria-hidden="true" className="size-4" /> All starter kits</a>
     <section class="mt-5 rounded-xl border bg-muted/35 p-5 sm:p-8" aria-labelledby="kit-heading">
-      <h1 id="kit-heading" class="max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-5xl">{title}</h1>
+      <div class="flex items-center gap-4">
+        <Flag kit={kit.key} className="size-10 sm:size-14" />
+        <h1 id="kit-heading" class="max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-5xl">{title}</h1>
+      </div>
       <p class="mt-4 max-w-3xl text-lg leading-relaxed">
         {kit.key === "global"
           ? "Shared questions in English. They do not ask where someone lives, so your team can decide whether to add that."
