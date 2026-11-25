@@ -1,5 +1,19 @@
 # Kinderform release notes
 
+## Unreleased
+
+Changes since v0.1.0-draft.2, not yet part of a numbered version.
+
+- **For services.** A new page, [What services can do](https://www.kinderform.org/for-services), gives 8 ideas. Each puts what our reading of public forms shows next to published research or the law, with one thing to try. Its topic table, with a CSV download, lets a service check its own form.
+- **What the law says.** `register/assessment.csv` sets out what the law in each UK nation says a fostering or adoption assessment must cover, and at which stage. It describes the law, never a licensed form.
+- **What applications ask.** The census now holds application forms from all 7 countries, tagged with the same topics as enquiry forms. `/research` and `/compare/applications` compare the two steps.
+- **More forms.** 78 English council fostering pages joined the register, and 8 more council enquiry forms joined the census. The site now counts 57 UK enquiry forms.
+- **Simpler pages.** Every main page is shorter and plainer, to ISO 24495-1. Method detail sits behind "How we did this". On phones, each page's drawing comes first.
+- **Header.** One row at every width, a Menu button on smaller screens, and a link to the code on GitHub.
+- **Tools.** `tools/polite_render.mjs` reads forms built by JavaScript under the same polite crawling rules. `tools/check_sample.py` makes sample sheets so a person can check the computer's topic tags and the law map.
+
+Every new row is a first pass, not yet checked by a person.
+
 ## v0.1.0-draft.2 · 24 November 2026
 
 - Services can now [take Kinderform into their own form or questionnaire builder](https://www.kinderform.org/build). One shared starter works as a starting point anywhere. Eight local wording sets cover seven countries, including Canada in English and French.

@@ -83,6 +83,12 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [x] What the assessment must cover, topic by topic, from the law and statutory guidance in all four UK nations (`register/assessment.csv`, 297 rows, not yet checked by a person), never from licensed forms such as Form F
 - [x] Application forms in Canada (5), Australia (3), Germany (4), France (2) and Spain (6), read from public documents (not yet checked by a person); France's national CERFA form gets health and convictions through a medical certificate and a records check, not questions
 
+## Now: simpler pages
+
+- [x] Every main page rewritten shorter and plainer to ISO 24495-1 (November 2026): each page leads with its point, method detail sits behind "How we did this", and each page's drawing comes first on phones
+- [x] One word for one thing: "sensitive question" added to the word list in `docs/plain-language.md`
+- [ ] Ask a few readers from services and research to try the pages and say what is still unclear
+
 ## Now: ideas for services
 
 - [x] `/for-services`: ideas for recruitment teams, each putting our reading of public forms (no names) next to published research and the rules, with one thing to try

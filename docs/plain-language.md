@@ -82,6 +82,7 @@ Use the words on the left. Explain the term the first time it appears on a page.
 | first reply | The first answer a person gets after they enquire | response, contact |
 | where people get in touch | The page, form, phone line or email address someone uses to enquire | front door (if you must use it, explain it) |
 | checklist | Our draft list of what a good enquiry form and first reply do | rubric, audit framework |
+| sensitive question | A question about date of birth, health, a criminal record, ethnicity, faith or immigration status, which our checklist says should wait until after a conversation | personal question, special category (outside the law) |
 | not yet checked by a person | A machine or one person collected it and nobody has checked it | unverified |
 | a computer program that reads public web pages | How we read forms at scale | crawler, scraper, bot |
 
