@@ -42,6 +42,10 @@ All fonts are served from this site.
 | Material Icons (modified by GSA, from USWDS) | US form | Apache License 2.0 |
 | AGDS, GCDS and KERN icons (inline SVG paths) | Australian, Canadian and German forms | The licence of each design system, above |
 
+## Flags
+
+The round flags on `/build` come from [flag-icons](https://github.com/lipis/flag-icons) 7.6.0, under the MIT licence, © Panayiotis Lipiridis. They are in `site/public/flags/`, with `LICENCE.md` beside them. Spain's is its civil flag, without the coat of arms.
+
 ## Map
 
 The world map on `/example-form` is drawn from [Natural Earth](https://www.naturalearthdata.com/) 1:110m country boundaries, which are in the public domain, through the `world-atlas` package (ISC). `tools/world_map.mjs` builds it.
