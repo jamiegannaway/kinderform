@@ -1,0 +1,26 @@
+---
+import Base from "@/layouts/Base.astro";
+import UsPicture from "@/components/us-picture";
+import { SiteFooter, SiteHeader } from "@/components/site-header";
+import { usPicture } from "@/lib/us-register";
+
+// The United States in detail: the counts from the US register, with no names. Moved off /research
+// so that page stays short.
+const us = usPicture();
+---
+<Base
+  title="Fostering and adoption in the United States: where people get in touch | Kinderform"
+  description="Where people can ask about fostering or adoption in each US state, who runs child welfare there, and what state rules say. Counts only, with no services named."
+>
+  <SiteHeader current="/research" />
+  <main id="main" class="mx-auto max-w-6xl space-y-8 px-6 pt-6 pb-20 md:pt-10">
+    <p class="text-sm">
+      <a href="/research" class="font-medium underline underline-offset-4">Research</a>
+      <span aria-hidden="true"> › </span>
+      <span class="text-muted-foreground">United States</span>
+    </p>
+    <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">The United States in detail</h1>
+    <UsPicture data={us} />
+  </main>
+  <SiteFooter />
+</Base>
