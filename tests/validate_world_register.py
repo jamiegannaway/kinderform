@@ -42,6 +42,19 @@ COUNTRIES = {
            "Canary Islands": "cn", "Cantabria": "cb", "Castile and León": "cl", "Castilla-La Mancha": "cm",
            "Catalonia": "ct", "Extremadura": "ex", "Galicia": "ga", "La Rioja": "ri", "Madrid": "md", "Murcia": "mc",
            "Navarre": "nc", "Valencian Community": "vc", "Ceuta": "ce", "Melilla": "ml", "Spain": "es"},
+    # Ireland: the four provinces (Ulster means its three counties in the Republic).
+    "ie": {"Connacht": "c", "Leinster": "l", "Munster": "m", "Ulster": "u", "Ireland": "ie"},
+    # The Netherlands: the 12 provinces, in English.
+    "nl": {"Drenthe": "dr", "Flevoland": "fl", "Friesland": "fr", "Gelderland": "ge", "Groningen": "gr",
+           "Limburg": "li", "North Brabant": "nb", "North Holland": "nh", "Overijssel": "ov", "Utrecht": "ut",
+           "Zeeland": "ze", "South Holland": "zh", "Netherlands": "nl"},
+    # New Zealand: the 16 regions.
+    "nz": {"Northland": "ntl", "Auckland": "auk", "Waikato": "wko", "Bay of Plenty": "bop", "Gisborne": "gis",
+           "Hawke's Bay": "hkb", "Taranaki": "tki", "Manawatū-Whanganui": "mwt", "Wellington": "wgn",
+           "Tasman": "tas", "Nelson": "nsn", "Marlborough": "mbh", "West Coast": "wtc", "Canterbury": "can",
+           "Otago": "ota", "Southland": "stl", "New Zealand": "nz"},
+    # Singapore: one city-state.
+    "sg": {"Singapore": "sg"},
 }
 
 ENUMS = {
@@ -66,7 +79,11 @@ PHONE = re.compile(r"(?<![\d/])(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}
                    r"|(?<![\d/.])0[1-9](?:[\s.]\d{2}){4}(?!\d)"
                    r"|(?<![\d/.,])0[1-9]\d{1,4}[\s/-]\d{4,8}(?!\d)"
                    r"|(?<![\d/.,])[6789]\d{2}[\s.]\d{2,3}[\s.]\d{2,3}(?:[\s.]\d{2})?(?!\d)"
-                   r"|(?<![\d/.,])[6789]\d[\s.]\d{3}[\s.]\d{2}[\s.]\d{2}(?!\d)")
+                   r"|(?<![\d/.,])[6789]\d[\s.]\d{3}[\s.]\d{2}[\s.]\d{2}(?!\d)"
+                   # Ireland, the Netherlands, New Zealand and Singapore
+                   r"|\+(?:353|31|64|65)[\s\d()-]{7,}"
+                   r"|(?<![\d/.,])0800[\s-]?\d{3}[\s-]?\d{3,4}(?!\d)"
+                   r"|(?<![\d/.,])[689]\d{3}[\s-]\d{4}(?!\d)")
 
 
 def main() -> int:

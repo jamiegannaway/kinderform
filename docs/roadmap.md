@@ -68,6 +68,18 @@ See [us-survey-plan.md](us-survey-plan.md).
 - [ ] Fill the gaps: foster payment rates for most German Länder and Spanish communities, Ceuta and Melilla, and the sites that refused automated reading
 - [ ] Read Legifrance and the BOE directly; both refused the research tools
 
+## Now: Ireland, the Netherlands, New Zealand and Singapore (first pass)
+
+Western Europe first, with the two Asia-Pacific countries asked for. Each has one national service or a small set of providers, and an open design system to build its example form with. Each design system's licence was checked on npm, 25 November 2026.
+
+- [ ] Front-door and rules registers for all four (unverified)
+- [ ] The polite crawler reads Dutch; census rows for the four countries
+- [ ] The compare tables and the comparison across countries include all four
+- [ ] Example forms, without government branding: Ireland in the gov.ie Design System (MIT), the Netherlands in NL Design System components with a neutral theme (EUPL-1.2; never the Rijkshuisstijl), New Zealand in the NZ Government Design System (MIT, alpha), Singapore in the Singapore Government Design System (MIT; never the official government banner)
+- [ ] Starter kits and flags for each
+- [ ] Then Belgium (Flanders and Wallonia, Dutch and French) and Italy (Bootstrap Italia, BSD-3-Clause)
+- [ ] Later, once an open design system that non-government sites may use is found: Portugal, Austria and Switzerland
+
 ## Now: after first contact (first pass)
 
 - [x] The census can hold application forms (`form_stage` "application"), tagged with the same topics as first-contact forms; `tools/applications_to_census.py` adds them
