@@ -89,13 +89,13 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
         <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
           <div className="min-w-0 flex-1 basis-96 space-y-2">
             <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">Reference forms, draft 0.1</Badge>
+              <Badge variant="secondary">Draft 0.1</Badge>
               <Badge variant="outline">Not real forms</Badge>
             </div>
             <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight md:text-4xl">Example enquiry forms</h1>
             <p className="max-w-3xl text-muted-foreground md:text-lg">
-              Pick a country to try its example form. Each asks the same few questions, in a public-sector design
-              system from that country, without government branding. Nothing you enter is sent or stored.
+              Pick a country to try its form, styled with that country’s public design system. Nothing you enter
+              is sent or stored.
             </p>
           </div>
           <Button asChild variant="outline">
@@ -128,7 +128,7 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
             How the forms are built
           </a>
           <span aria-hidden="true"> · </span>
-          This site sets no cookies and does not track you.
+          No cookies and no tracking.
         </p>
         <noscript>
           <p className="text-sm">These examples need JavaScript. A real form built to the Kinderform standard should work without it.</p>
