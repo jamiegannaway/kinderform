@@ -1107,7 +1107,7 @@ uk-sco-west-lothian-enquiry:q11,uk-sco-west-lothian-enquiry,11,,Is this a joint 
 uk-sco-west-lothian-enquiry:q12,uk-sco-west-lothian-enquiry,12,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q13,uk-sco-west-lothian-enquiry,13,,Does anyone in the household smoke?,household,household_composition,unknown,radio,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q14,uk-sco-west-lothian-enquiry,14,,If you are living with a partner have you been residing together for over two years?,household,partner,unknown,radio,no,,,direct_fetch,2026-11-18
-uk-sco-west-lothian-enquiry:q15,uk-sco-west-lothian-enquiry,15,,Why do you think you would like to become an adoptive/foster/short breaks/supported care carer?,interest,care_type,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q15,uk-sco-west-lothian-enquiry,15,,Why do you think you would like to become an adoptive/foster/short breaks/supported care carer?,free_text,motivation,unknown,textarea,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q16,uk-sco-west-lothian-enquiry,16,,Do you have children living at home?,experience,own_children,unknown,radio,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q17,uk-sco-west-lothian-enquiry,17,,Day,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q18,uk-sco-west-lothian-enquiry,18,,Month,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18

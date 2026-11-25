@@ -40,7 +40,7 @@ ALLOWED = {
                                      "state_agency", "county_agency", "private_agency", "child_welfare_agency",
                                      "indigenous_agency", "local_authority", "voluntary_agency"},
     ("forms.csv", "service_type"): {"fostering", "adoption", "fostering_and_adoption"},
-    ("forms.csv", "country"): {"UK", "US", "CA", "AU", "DE", "FR", "ES"},
+    ("forms.csv", "country"): {"UK", "US", "CA", "AU", "DE", "FR", "ES", "IE", "NL", "NZ", "SG"},
     ("forms.csv", "form_stage"): {"primary", "secondary", "application"},
     ("forms.csv", "access_route"): {"online_form", "downloadable_form", "phone_conversation", "sent_after_first_contact",
                                     "email_only", "signposting_only", "described_not_public", "council_portal"},
@@ -144,12 +144,13 @@ CA_REGIONS = {"Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "S
               "Nunavut", "Canada"}
 AU_REGIONS = {"New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania",
               "Australian Capital Territory", "Northern Territory", "Australia"}
-# Germany, France and Spain use the same region names as their front-door registers.
+# The other countries use the same region names as their front-door registers.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from validate_world_register import COUNTRIES as WORLD  # noqa: E402
 
 REGIONS = {"UK": UK_REGIONS, "US": US_REGIONS, "CA": CA_REGIONS, "AU": AU_REGIONS,
-           "DE": set(WORLD["de"]), "FR": set(WORLD["fr"]), "ES": set(WORLD["es"])}
+           "DE": set(WORLD["de"]), "FR": set(WORLD["fr"]), "ES": set(WORLD["es"]),
+           "IE": set(WORLD["ie"]), "NL": set(WORLD["nl"]), "NZ": set(WORLD["nz"]), "SG": set(WORLD["sg"])}
 for r in forms:
     allowed = REGIONS.get(r["country"], set())
     if r["region"] not in allowed:

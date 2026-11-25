@@ -22,13 +22,19 @@ export const COUNTRY_NAMES: Record<string, string> = {
   DE: "Germany",
   FR: "France",
   ES: "Spain",
+  IE: "Ireland",
+  NL: "Netherlands",
+  NZ: "New Zealand",
+  SG: "Singapore",
 }
-export const COUNTRY_ORDER = ["UK", "US", "CA", "AU", "DE", "FR", "ES"]
+export const COUNTRY_ORDER = ["UK", "US", "CA", "AU", "DE", "FR", "ES", "IE", "NL", "NZ", "SG"]
 
 // "the UK, the US, Canada and Germany": the countries given, in the usual order.
 export function countryList(codes: Iterable<string>): string {
   const have = new Set(codes)
-  const names = COUNTRY_ORDER.filter((c) => have.has(c)).map((c) => (c === "UK" || c === "US" ? `the ${c}` : COUNTRY_NAMES[c]))
+  const names = COUNTRY_ORDER.filter((c) => have.has(c)).map((c) =>
+    c === "UK" || c === "US" ? `the ${c}` : c === "NL" ? "the Netherlands" : COUNTRY_NAMES[c],
+  )
   return names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`
 }
 
@@ -65,6 +71,11 @@ const PLACES: Record<string, Record<string, string>> = {
     EX: "Extremadura", GA: "Galicia", RI: "La Rioja", MD: "Madrid", MC: "Murcia", NC: "Navarre",
     VC: "Valencian Community", CE: "Ceuta", ML: "Melilla",
   },
+  // Rules in these four countries are national.
+  IE: { IE: "All of Ireland" },
+  NL: { NL: "All of the Netherlands" },
+  NZ: { NZ: "All of New Zealand" },
+  SG: { SG: "Singapore" },
 }
 
 // ---- Page dates ------------------------------------------------------------------
@@ -275,16 +286,28 @@ const MONEY: Record<string, [string, string]> = {
   usd_per_month: ["US$", "a month"],
   usd_per_day: ["US$", "a day"],
   eur_per_month: ["€", "a month"],
+  eur_per_week: ["€", "a week"],
   eur_per_day: ["€", "a day"],
   eur: ["€", ""],
+  nzd_per_week: ["NZ$", "a week"],
+  nzd_per_fortnight: ["NZ$", "a fortnight"],
+  sgd_per_month: ["S$", "a month"],
+  sgd: ["S$", ""],
 }
 const UNIT_WORDS: Record<string, string> = { working_days: "working days", square_feet: "sq ft", other: "" }
+// "1 child", not "1 children".
+const ONE: Record<string, string> = {
+  years: "year", months: "month", weeks: "week", days: "day", "working days": "working day", hours: "hour",
+  children: "child", people: "person", sessions: "session",
+}
 function valueText(v: string, unit: string): string {
   if (!v) return ""
   const u = unit.toLowerCase()
   const money = MONEY[u]
   if (money) return `${money[0]}${withCommas(v)} ${money[1]}`.trim()
-  return `${v} ${UNIT_WORDS[u] ?? u.replace(/_/g, " ")}`.trim()
+  if (u === "percent") return `${v}%`
+  const words = UNIT_WORDS[u] ?? u.replace(/_/g, " ")
+  return `${v} ${Number(v) === 1 ? (ONE[words] ?? words) : words}`.trim()
 }
 
 export function ruleRows(dates = loadPageDates()): RuleRow[] {
@@ -297,6 +320,10 @@ export function ruleRows(dates = loadPageDates()): RuleRow[] {
     ["DE", "register/de/policies.csv"],
     ["FR", "register/fr/policies.csv"],
     ["ES", "register/es/policies.csv"],
+    ["IE", "register/ie/policies.csv"],
+    ["NL", "register/nl/policies.csv"],
+    ["NZ", "register/nz/policies.csv"],
+    ["SG", "register/sg/policies.csv"],
   ]
   const out: RuleRow[] = []
   for (const [country, rel] of files) {
