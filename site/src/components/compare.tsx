@@ -80,7 +80,7 @@ function Source({ href, label, note }: { href: string; label: string; note?: str
 }
 
 function SwipeHint() {
-  return <p className="text-xs text-muted-foreground md:hidden">Swipe the table sideways to see every column.</p>
+  return <p className="text-xs text-muted-foreground md:hidden">Swipe a table sideways to see every column.</p>
 }
 
 function FactsNotice() {
@@ -88,16 +88,13 @@ function FactsNotice() {
     <Alert className="max-w-3xl">
       <AlertTitle>Facts, not scores</AlertTitle>
       <AlertDescription>
+        <p>These tables do not rate or rank anyone. The rows are not yet checked by a person.</p>
         <p>
-          These tables say what each form asks and what each rule says. They do not rate or rank anyone. A computer
-          read most of the pages, and nobody has checked the rows yet.
-        </p>
-        <p>
-          Is a row wrong or out of date?{" "}
+          Is a row wrong?{" "}
           <a href={`${CORRECT}Correction%20to%20the%20compare%20tables`} className={LINK}>
             Email jamie.gannaway@gmail.com
           </a>{" "}
-          with the row, the public source, what changed and the date you checked. Leave out personal details.
+          with the row and its source. Leave out personal details.
         </p>
       </AlertDescription>
     </Alert>
@@ -151,10 +148,9 @@ export function CompareIndex({
   topics,
   applications,
   formCountries,
-  ruleCountries,
 }: {
   formCountries: string
-  ruleCountries: string
+  ruleCountries: string // used in the page description
   forms: number
   formServices: number
   rules: number
@@ -167,35 +163,35 @@ export function CompareIndex({
       href: "/compare/forms",
       title: "Enquiry forms",
       figure: `${forms} forms`,
-      body: `The first form someone fills in, from ${formServices} services in ${formCountries}. What each asks, what it asks beyond what a first reply needs, and any reply time it states.`,
+      body: `What each asks, from ${formServices} services in ${formCountries}.`,
     },
     {
       href: "/compare/rules",
       title: "Rules on who can foster",
       figure: `${rules} rules`,
-      body: `Published rules from ${rulePlaces} countries and regions in ${ruleCountries}. They are grouped into ${topics} topics, such as minimum age, bedrooms, checks, training and allowances.`,
+      body: `From ${rulePlaces} countries and regions, in ${topics} topics such as age, bedrooms and training.`,
     },
     {
       href: "/compare/applications",
       title: "Application forms",
       figure: `${applications} forms`,
-      body: "The forms that come after the first enquiry, in all 7 countries. See how many questions each asks, and which sensitive topics.",
+      body: "The forms that come after the enquiry, with how many questions each asks.",
     },
   ]
   return (
     <Page>
-      <section className="grid items-center gap-8 md:grid-cols-[minmax(0,48rem)_14rem] md:justify-between">
+      <section className="grid items-center gap-6 md:grid-cols-[minmax(0,48rem)_14rem] md:justify-between md:gap-8">
         <div className="space-y-5">
           <Badge variant="secondary">For fostering and adoption services</Badge>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance md:text-5xl">
             Compare forms and rules
           </h1>
           <p className="text-xl leading-8 text-muted-foreground">
-            See how your enquiry form and your rules compare with other places. Each table links to the source and
-            shows two dates: when the page says it was last updated, and when we last checked it.
+            Compare your enquiry form and rules with other places. Each row gives its source, the date the page shows
+            and the date we checked.
           </p>
         </div>
-        <Illustration name="details" className="mx-auto hidden w-full md:block" />
+        <Illustration name="details" className="order-first w-36 md:order-none md:mx-auto md:w-full" />
       </section>
 
       <div className="grid gap-6 md:grid-cols-3">
@@ -214,11 +210,8 @@ export function CompareIndex({
 
       <section aria-labelledby="downloads" className="space-y-3">
         <h2 id="downloads" className="text-xl font-semibold tracking-tight">
-          Download the tables
+          Download the tables as spreadsheets
         </h2>
-        <p className="max-w-3xl leading-7 text-muted-foreground">
-          Each table is also a spreadsheet file (CSV), with every column, so you can sort and filter it yourself.
-        </p>
         <Downloads
           files={[
             { href: "/compare/forms.csv", label: "Enquiry forms (CSV)" },
@@ -248,15 +241,14 @@ export function CompareForms({ rows }: { rows: FormRow[] }) {
         <Crumbs here="Enquiry forms" />
         <Intro title="Enquiry forms compared">
           <p className="text-xl leading-8 text-muted-foreground">
-            The first form someone fills in to ask about fostering or adoption, from {rows.length} forms. Each row
-            shows what the form asks, any reply time it states, a link, and two dates.
+            What {rows.length} enquiry forms ask, and any reply time they state.
           </p>
           <p className="leading-7">
-            {beyond.length} of the {read.length} forms we could read ask for something the{" "}
+            {beyond.length} of {read.length} forms we could read ask for more than our{" "}
             <a href="/example-form" className={LINK}>
-              Kinderform enquiry standard
+              enquiry standard
             </a>{" "}
-            leaves out. A first reply does not need these. The most common:{" "}
+            says a first reply needs. Most common:{" "}
             {top.map(([label, n], i) => (
               <span key={label}>
                 {i > 0 && (i === top.length - 1 ? " and " : ", ")}
@@ -280,6 +272,7 @@ export function CompareForms({ rows }: { rows: FormRow[] }) {
       </nav>
 
       <FactsNotice />
+      <SwipeHint />
 
       {countries.map((c) => {
         const mine = rows.filter((r) => r.country === c)
@@ -289,7 +282,6 @@ export function CompareForms({ rows }: { rows: FormRow[] }) {
               {COUNTRY_NAMES[c]}{" "}
               <span className="text-base font-normal text-muted-foreground">{mine.length} forms</span>
             </h2>
-            <SwipeHint />
             <Table className="min-w-[56rem]">
               <TableCaption className="sr-only">Enquiry forms in {COUNTRY_NAMES[c]}</TableCaption>
               <TableHeader>
@@ -361,7 +353,7 @@ export function CompareRulesIndex({
         <Crumbs here="Rules" />
         <Intro title="Rules on who can foster, compared">
           <p className="text-xl leading-8 text-muted-foreground">
-            {rules} published rules from {places} countries and regions in {countries}. Pick a topic to see every place side by side, with the source and two dates.
+            {rules} published rules from {places} countries and regions in {countries}. Pick a topic to compare them.
           </p>
         </Intro>
       </div>
@@ -384,10 +376,7 @@ export function CompareRulesIndex({
                       <CardTitle>{t.label}</CardTitle>
                       <CardDescription>{t.covers}</CardDescription>
                       <p className="pt-2 text-xs text-muted-foreground tabular-nums">
-                        {t.rules} rules from {t.places} places:{" "}
-                        {COUNTRY_ORDER.filter((c) => t.byCountry[c])
-                          .map((c) => `${c} ${t.byCountry[c]}`)
-                          .join(", ")}
+                        {t.rules} rules from {t.places} places
                       </p>
                     </CardHeader>
                   </Card>
@@ -411,7 +400,7 @@ export function CompareTopic({ topic, rows }: { topic: TopicInfo; rows: RuleRow[
         <Intro title={topic.label}>
           <p className="text-xl leading-8 text-muted-foreground">
             {topic.covers}. {rows.length} rules from {new Set(rows.map((r) => `${r.country}-${r.place}`)).size}{" "}
-            places, with the source and two dates for each.
+            places.
           </p>
         </Intro>
       </div>
@@ -427,6 +416,7 @@ export function CompareTopic({ topic, rows }: { topic: TopicInfo; rows: RuleRow[
           <a href="/compare/rules">All topics</a>
         </Button>
       </nav>
+      <SwipeHint />
       {countries.map((c) => {
         const mine = rows.filter((r) => r.country === c)
         return (
@@ -434,7 +424,6 @@ export function CompareTopic({ topic, rows }: { topic: TopicInfo; rows: RuleRow[
             <h2 id={`${c}-title`} className="text-2xl font-semibold tracking-tight">
               {COUNTRY_NAMES[c]}
             </h2>
-            <SwipeHint />
             <Table className="min-w-[48rem]">
               <TableCaption className="sr-only">
                 {topic.label}: rules in {COUNTRY_NAMES[c]}
@@ -496,9 +485,8 @@ export function CompareApplications({ rows }: { rows: ApplicationRow[] }) {
         <Crumbs here="Application forms" />
         <Intro title="Application forms compared">
           <p className="text-xl leading-8 text-muted-foreground">
-            The forms that come after the first enquiry: {us.length} from US application packets
-            {others.length ? ` and ${others.length} from ${countries}` : ""}. We have read the questions on {read} of
-            them. Licensed forms are named, not copied.
+            The forms that come after the enquiry: {us.length} from US application packets
+            {others.length ? ` and ${others.length} from ${countries}` : ""}. We have read the questions on {read}.
           </p>
         </Intro>
       </div>
