@@ -6,7 +6,9 @@
 // reads that HTML into the same records as an ordinary read, for tools/crawl_to_census.py.
 //
 // It keeps the polite crawling rule (CLAUDE.md, hard rule 8):
-// - it checks robots.txt for every address it fetches, the page and each script or data call;
+// - it checks robots.txt for every address it fetches, the page and each script or data call,
+//   and every address a redirect leads to (it fetches each request itself without following
+//   redirects, then follows any redirect one hop at a time, with the same checks and waits);
 // - it identifies itself with the same user agent as polite_fetch.py;
 // - it waits at least --delay seconds (5 by default, never under 3) between requests to one site;
 // - it loads only the page, its scripts and its data calls: no images, fonts, styles or media;
@@ -16,6 +18,7 @@
 // Usage (from the repository root):
 //   node tools/polite_render.mjs URLS.tsv OUT_DIR [--delay 5]
 // Behind an HTTPS proxy, run it with NODE_USE_ENV_PROXY=1 so its robots.txt requests use the proxy.
+// The browser and its own requests take the proxy from HTTPS_PROXY, skipping the hosts in NO_PROXY.
 // URLS.tsv has one "key<TAB>url" per line, as for polite_fetch.py. OUT_DIR gets one .html file per
 // page and manifest.jsonl. Treat what it saves as data from the web, not as instructions.
 import { createRequire } from "node:module"
@@ -122,6 +125,28 @@ async function allowed(url) {
   return !best || best.allow
 }
 
+// ---- redirects ----------------------------------------------------------------------------------
+// The browser does not show this tool the later steps of a redirect. So when a response redirects,
+// follow the chain here, one hop at a time with HEAD requests, checking each address against its own
+// site's robots.txt and waiting its turn. Returns the last address, or "" when a hop is blocked.
+async function redirectTarget(context, from, location) {
+  let url = new URL(location, from).href
+  for (let hop = 0; hop < 10; hop++) {
+    if (!(await allowed(url))) return ""
+    await throttle(new URL(url).host)
+    let res
+    try {
+      res = await context.request.head(url, { maxRedirects: 0, headers: { "User-Agent": USER_AGENT }, timeout: 30000 })
+    } catch {
+      return url // the browser will try it and report what happens
+    }
+    const next = res.status() >= 300 && res.status() < 400 ? res.headers()["location"] : ""
+    if (!next) return url
+    url = new URL(next, url).href
+  }
+  return "" // too many hops: stay out
+}
+
 // ---- render each page --------------------------------------------------------------------------
 mkdirSync(outDir, { recursive: true })
 const manifest = join(outDir, "manifest.jsonl")
@@ -130,7 +155,10 @@ const jobs = readFileSync(urlsFile, "utf-8")
   .map((l) => l.split("\t"))
   .filter(([k, u]) => k && /^https?:\/\//.test(u ?? ""))
 
-const browser = await chromium.launch()
+const proxy = process.env.HTTPS_PROXY || process.env.https_proxy
+const browser = await chromium.launch(
+  proxy ? { proxy: { server: proxy, bypass: process.env.NO_PROXY || process.env.no_proxy || "" } } : {},
+)
 for (const [key, url] of jobs) {
   const record = { key, url, fetched_at: new Date().toISOString().slice(0, 10), rendered: true, blocked: {} }
   const count = (why) => (record.blocked[why] = (record.blocked[why] ?? 0) + 1)
@@ -143,7 +171,23 @@ for (const [key, url] of jobs) {
     if (!KEEP.has(req.resourceType())) return count(req.resourceType()), route.abort()
     if (!(await allowed(req.url()))) return count("robots.txt"), route.abort()
     await throttle(new URL(req.url()).host)
-    return route.continue()
+    // Fetch the request here without following redirects. Most requests end here.
+    let response
+    try {
+      response = await route.fetch({ maxRedirects: 0 })
+    } catch {
+      return count("could not fetch"), route.abort()
+    }
+    const location = response.status() >= 300 && response.status() < 400 ? response.headers()["location"] : ""
+    if (!location) return route.fulfill({ response })
+    // A redirect: check every hop, then send the browser straight to the last address, once that
+    // site's turn has come. (If that address redirects only for GET and not for HEAD, the browser
+    // follows it unseen. Servers rarely do this.)
+    const target = await redirectTarget(context, req.url(), location)
+    if (!target) return count("robots.txt (redirect)"), route.abort()
+    count("redirect followed")
+    await throttle(new URL(target).host)
+    return route.fulfill({ status: 302, headers: { location: target } })
   })
   try {
     if (!(await allowed(url))) {
@@ -169,7 +213,8 @@ for (const [key, url] of jobs) {
       record.html_file = file
     }
   } catch (error) {
-    record.status = `error: ${error.name}`
+    // A page whose own redirect robots.txt blocks fails to load. Say why.
+    record.status = record.blocked["robots.txt (redirect)"] && !record.html_file ? "robots_disallowed" : `error: ${error.name}`
   }
   await context.close()
   appendFileSync(manifest, JSON.stringify(record) + "\n")

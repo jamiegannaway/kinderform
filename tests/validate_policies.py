@@ -1,4 +1,4 @@
-"""Check the rules registers for the UK nations, Canada and Australia.
+"""Check the rules registers for every country except the United States.
 
 Files:
 - register/policies.csv     (England, Wales, Scotland, Northern Ireland)
@@ -7,6 +7,8 @@ Files:
 - register/de/policies.csv  (Germany: federal law and the 16 Länder)
 - register/fr/policies.csv  (France: national law and the regions)
 - register/es/policies.csv  (Spain: national law and the autonomous communities and cities)
+- register/ie/policies.csv, register/nl/policies.csv, register/nz/policies.csv and
+  register/sg/policies.csv  (Ireland, the Netherlands, New Zealand and Singapore: national law)
 
 The US rules are in register/us/policies.csv and are checked by validate_us_register.py.
 Each row records what a published rule says, where it is written and when we checked it.
@@ -37,6 +39,10 @@ FILES = {
                                         "OCC", "PDL", "PAC", "GP", "MQ", "GF", "RE", "YT"}),
     "register/es/policies.csv": ("es", {"ES", "AN", "AR", "AS", "IB", "PV", "CN", "CB", "CL", "CM", "CT", "EX", "GA",
                                         "RI", "MD", "MC", "NC", "VC", "CE", "ML"}),
+    "register/ie/policies.csv": ("ie", {"IE"}),
+    "register/nl/policies.csv": ("nl", {"NL"}),
+    "register/nz/policies.csv": ("nz", {"NZ"}),
+    "register/sg/policies.csv": ("sg", {"SG"}),
 }
 TOPICS = set(re.findall(r"^\| `([a-z_]+)` \|", (ROOT / "register/us/policy-topics.md").read_text(encoding="utf-8"), re.M))
 APPLIES = {"fostering", "adoption", "both"}
@@ -44,9 +50,9 @@ SOURCE_TYPES = {"legislation", "statutory_guidance", "standards", "government_pa
 EVIDENCE = {"page_read", "search_result"}
 VERIFICATION = {"unverified", "verified"}
 UNITS = {
-    "", "years", "months", "days", "working_days", "hours", "children", "people", "sessions",
+    "", "years", "months", "weeks", "days", "percent", "working_days", "hours", "children", "people", "sessions",
     "GBP_per_week", "CAD_per_day", "CAD_per_month", "AUD_per_fortnight", "AUD_per_week",
-    "EUR_per_month", "EUR_per_day", "EUR",
+    "EUR_per_month", "EUR_per_week", "EUR_per_day", "EUR", "NZD_per_week", "NZD_per_fortnight", "SGD_per_month", "SGD",
 }
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(
@@ -54,6 +60,8 @@ PHONE = re.compile(
     r"|(?<![\d/])(?:\+61\s?|\+44\s?|0)\d{1,4}[\s-]?\d{3,4}[\s-]?\d{3,4}(?!\d)"
     r"|\b1[38]00[\s-]?\d{3}[\s-]?\d{3}\b"
     r"|\+(?:49|33|34)[\s\d/.()-]{7,}"
+    r"|\+(?:353|31|64|65)[\s\d()-]{7,}"
+    r"|(?<![\d/.,])0800[\s-]?\d{3}[\s-]?\d{3,4}(?!\d)"
     r"|(?<![\d/.])0[1-9](?:[\s.]\d{2}){4}(?!\d)"
 )
 
