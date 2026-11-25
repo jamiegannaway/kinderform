@@ -1107,7 +1107,7 @@ uk-sco-west-lothian-enquiry:q11,uk-sco-west-lothian-enquiry,11,,Is this a joint 
 uk-sco-west-lothian-enquiry:q12,uk-sco-west-lothian-enquiry,12,,Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q13,uk-sco-west-lothian-enquiry,13,,Does anyone in the household smoke?,household,household_composition,unknown,radio,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q14,uk-sco-west-lothian-enquiry,14,,If you are living with a partner have you been residing together for over two years?,household,partner,unknown,radio,no,,,direct_fetch,2026-11-18
-uk-sco-west-lothian-enquiry:q15,uk-sco-west-lothian-enquiry,15,,Why do you think you would like to become an adoptive/foster/short breaks/supported care carer?,interest,care_type,unknown,textarea,no,,,direct_fetch,2026-11-18
+uk-sco-west-lothian-enquiry:q15,uk-sco-west-lothian-enquiry,15,,Why do you think you would like to become an adoptive/foster/short breaks/supported care carer?,free_text,motivation,unknown,textarea,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q16,uk-sco-west-lothian-enquiry,16,,Do you have children living at home?,experience,own_children,unknown,radio,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q17,uk-sco-west-lothian-enquiry,17,,Day,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18
 uk-sco-west-lothian-enquiry:q18,uk-sco-west-lothian-enquiry,18,,Month,interest,care_type,unknown,text,no,,,direct_fetch,2026-11-18
@@ -4776,3 +4776,152 @@ uk-eng-west-sussex-enquiry:q09,uk-eng-west-sussex-enquiry,9,,Existing Foster Car
 uk-eng-west-sussex-enquiry:q10,uk-eng-west-sussex-enquiry,10,,I accept my details will be passed to the fostering team to deal with my enquiry,consent,processing,yes,checkbox,no,,,direct_fetch,2026-11-25
 uk-eng-sefton-enquiry:q08,uk-eng-sefton-enquiry,8,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
 uk-eng-west-sussex-enquiry:q11,uk-eng-west-sussex-enquiry,11,,Would you like to receive regular fostering news by email?,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q01,ie-ie-orchard-fostering-enquiry,1,,your name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q02,ie-ie-orchard-fostering-enquiry,2,,your county,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q03,ie-ie-orchard-fostering-enquiry,3,,phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q04,ie-ie-orchard-fostering-enquiry,4,,email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q05,ie-ie-orchard-fostering-enquiry,5,,spare bedroom,housing,spare_bedroom,unknown,radio,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q06,ie-ie-orchard-fostering-enquiry,6,,Ages of children in household (if any),household,children_in_household,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q07,ie-ie-orchard-fostering-enquiry,7,,your reference,other,unclassified,unknown,select,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q08,ie-ie-orchard-fostering-enquiry,8,,your day,other,unclassified,yes,select,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q09,ie-ie-orchard-fostering-enquiry,9,,your time,other,unclassified,yes,select,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q10,ie-ie-orchard-fostering-enquiry,10,,your message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-25
+ie-ie-orchard-fostering-enquiry:q11,ie-ie-orchard-fostering-enquiry,11,,I am over 25 years of age,eligibility,age,unknown,checkbox,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q01,ie-ie-origins-foster-care-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q02,ie-ie-origins-foster-care-enquiry,2,,Email Address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q03,ie-ie-origins-foster-care-enquiry,3,,Work Email,contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q04,ie-ie-origins-foster-care-enquiry,4,,Telephone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q05,ie-ie-origins-foster-care-enquiry,5,,Over 25 Years,eligibility,age,yes,radio,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q06,ie-ie-origins-foster-care-enquiry,6,,Has Spare Bedroom,housing,spare_bedroom,yes,radio,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q07,ie-ie-origins-foster-care-enquiry,7,,Ages and number of children in the house (if any),household,children_in_household,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q08,ie-ie-origins-foster-care-enquiry,8,,Best time(s) to call you?,contact_preference,time,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q09,ie-ie-origins-foster-care-enquiry,9,,Where are you living?,interest,care_type,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-origins-foster-care-enquiry:q10,ie-ie-origins-foster-care-enquiry,10,,Message,interest,care_type,unknown,textarea,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q01,ie-ie-five-rivers-fostering-enquiry,1,,Comments,free_text,questions,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q02,ie-ie-five-rivers-fostering-enquiry,2,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q03,ie-ie-five-rivers-fostering-enquiry,3,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q04,ie-ie-five-rivers-fostering-enquiry,4,,Phone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q05,ie-ie-five-rivers-fostering-enquiry,5,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q06,ie-ie-five-rivers-fostering-enquiry,6,,County,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q07,ie-ie-five-rivers-fostering-enquiry,7,,Have you previously applied to become a foster carer?,experience,prior_fostering,unknown,radio,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q08,ie-ie-five-rivers-fostering-enquiry,8,,How did you hear about Five Rivers Fostering?,source,how_heard,yes,select,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q09,ie-ie-five-rivers-fostering-enquiry,9,,"Please provide a brief summary of your family (ie members, children (if any), extended family)",household,household_composition,unknown,textarea,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q10,ie-ie-five-rivers-fostering-enquiry,10,,All Potential Foster Carers are vetted by An Garda Síochána during their assessment process.,experience,prior_fostering,unknown,radio,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q11,ie-ie-five-rivers-fostering-enquiry,11,,"Choice of: 9-10 AM, 10-11 AM, 11-12 AM, 12-1 PM, 1-2 PM, 2-3 PM, 3-4 PM, 4-5 PM, I agree to the privacy…",consent,privacy_acknowledgement,yes,checkbox,no,,,direct_fetch,2026-11-25
+ie-ie-five-rivers-fostering-enquiry:q12,ie-ie-five-rivers-fostering-enquiry,12,,Sign up to our Newsletter for Information & Events?,consent,marketing,unknown,radio,no,,,direct_fetch,2026-11-25
+ie-l-foster-care-ireland-enquiry:q01,ie-l-foster-care-ireland-enquiry,1,,Your Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-25
+ie-l-foster-care-ireland-enquiry:q02,ie-l-foster-care-ireland-enquiry,2,,Your Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+ie-l-foster-care-ireland-enquiry:q03,ie-l-foster-care-ireland-enquiry,3,,Your Email,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-25
+ie-l-foster-care-ireland-enquiry:q04,ie-l-foster-care-ireland-enquiry,4,,Your Mobile No.,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-25
+ie-l-foster-care-ireland-enquiry:q05,ie-l-foster-care-ireland-enquiry,5,,mm/dd/yyyy,other,unclassified,unknown,date,no,,,direct_fetch,2026-11-25
+ie-l-foster-care-ireland-enquiry:q06,ie-l-foster-care-ireland-enquiry,6,,Your Relationship Status,household,relationships,unknown,text,no,,,direct_fetch,2026-11-25
+ie-l-foster-care-ireland-enquiry:q07,ie-l-foster-care-ireland-enquiry,7,,Your Comments,free_text,questions,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q01,ie-ie-helping-hands-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q02,ie-ie-helping-hands-enquiry,2,,Tel,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q03,ie-ie-helping-hands-enquiry,3,,Email,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q04,ie-ie-helping-hands-enquiry,4,,Street Address,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q05,ie-ie-helping-hands-enquiry,5,,Address Line 2,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q06,ie-ie-helping-hands-enquiry,6,,Town,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q07,ie-ie-helping-hands-enquiry,7,,County,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q08,ie-ie-helping-hands-enquiry,8,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q09,ie-ie-helping-hands-enquiry,9,,Adoption query,interest,care_type,unknown,textarea,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q10,ie-ie-helping-hands-enquiry,10,,Country of choice,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q11,ie-ie-helping-hands-enquiry,11,,Declaration date,consent,declaration_and_checks,unknown,text,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q12,ie-ie-helping-hands-enquiry,12,,Gender approved to adopt,equality,gender,unknown,select,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q13,ie-ie-helping-hands-enquiry,13,,Additional needs included in your homestudy,experience,prior_fostering,unknown,textarea,no,,,direct_fetch,2026-11-25
+ie-ie-helping-hands-enquiry:q14,ie-ie-helping-hands-enquiry,14,,Phone,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q01,nl-fr-jeugdhulp-friesland-enquiry,1,,Heeft u een informatiebijeenkomst bijgewoond?,information_event,event_dates,yes,select,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q02,nl-fr-jeugdhulp-friesland-enquiry,2,,Geslacht (ouder 1),equality,gender,unknown,select,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q03,nl-fr-jeugdhulp-friesland-enquiry,3,,Voornaam (ouder 1),contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q04,nl-fr-jeugdhulp-friesland-enquiry,4,,Achternaam (ouder 1),contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q05,nl-fr-jeugdhulp-friesland-enquiry,5,,Straat + huisnummer (ouder 1),contact_identity,address,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q06,nl-fr-jeugdhulp-friesland-enquiry,6,,Adres (ouder 1),contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q07,nl-fr-jeugdhulp-friesland-enquiry,7,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q08,nl-fr-jeugdhulp-friesland-enquiry,8,,Woonplaats (ouder 1),contact_identity,address,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q09,nl-fr-jeugdhulp-friesland-enquiry,9,,Telefoonnummer (ouder 1),contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q10,nl-fr-jeugdhulp-friesland-enquiry,10,,E-mailadres (ouder 1),contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q11,nl-fr-jeugdhulp-friesland-enquiry,11,,DD-MM-JJJJ,other,unclassified,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q12,nl-fr-jeugdhulp-friesland-enquiry,12,,Geslacht (ouder 2),equality,gender,unknown,select,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q13,nl-fr-jeugdhulp-friesland-enquiry,13,,Voornaam (ouder 2),contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q14,nl-fr-jeugdhulp-friesland-enquiry,14,,Achternaam (ouder 2),contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q15,nl-fr-jeugdhulp-friesland-enquiry,15,,Straat + huisnummer (ouder 2),contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q16,nl-fr-jeugdhulp-friesland-enquiry,16,,Woonplaats (ouder 2),contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q17,nl-fr-jeugdhulp-friesland-enquiry,17,,Telefoonnummer (ouder 2),contact_identity,phone,unknown,tel,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q18,nl-fr-jeugdhulp-friesland-enquiry,18,,E-mailadres (ouder 2),contact_identity,email,unknown,email,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q19,nl-fr-jeugdhulp-friesland-enquiry,19,,Heeft u thuiswonende kinderen?,household,children_in_household,yes,select,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q20,nl-fr-jeugdhulp-friesland-enquiry,20,,Geslacht,equality,gender,yes,select,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q21,nl-fr-jeugdhulp-friesland-enquiry,21,,Voornaam,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q22,nl-fr-jeugdhulp-friesland-enquiry,22,,juvenile surname,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q23,nl-fr-jeugdhulp-friesland-enquiry,23,,Voorkeur vorm pleegzorg,interest,care_type,yes,select,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q24,nl-fr-jeugdhulp-friesland-enquiry,24,,Hoe heeft u ons gevonden?,source,how_heard,yes,select,no,,,direct_fetch,2026-11-25
+nl-fr-jeugdhulp-friesland-enquiry:q25,nl-fr-jeugdhulp-friesland-enquiry,25,,fostercare found us other,interest,care_type,yes,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q01,nl-li-xonar-enquiry,1,,Voornaam,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q02,nl-li-xonar-enquiry,2,,i Frm Pst Fld 2853225,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q03,nl-li-xonar-enquiry,3,,E-mailadres,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q04,nl-li-xonar-enquiry,4,,i Frm Pst Fld 2853229,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q05,nl-li-xonar-enquiry,5,,Adres,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q06,nl-li-xonar-enquiry,6,,Postcode,contact_identity,postcode,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q07,nl-li-xonar-enquiry,7,,i Frm Pst Fld 2853235,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q08,nl-li-xonar-enquiry,8,,Heeft u vragen of opmerkingen?,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q09,nl-li-xonar-enquiry,9,,"Via vrienden, familie of bekenden die zelf pleegouder zijn",interest,care_type,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q10,nl-li-xonar-enquiry,10,,"Choice of: Via Pleegzorg Nederland, Via een XONAR folder of magazine, Door te Googlen",interest,care_type,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q11,nl-li-xonar-enquiry,11,,Via de campagne 'Jouw huis een tweede thuis',other,unclassified,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q12,nl-li-xonar-enquiry,12,,"Choice of: Via social media, Anders, namelijk",contact_identity,name,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q13,nl-li-xonar-enquiry,13,,i Frm Pst Fld 2853239 other input,other,unclassified,unknown,text,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q14,nl-li-xonar-enquiry,14,,i Frm Pst Fld 2853241 choice,other,unclassified,unknown,radio,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q15,nl-li-xonar-enquiry,15,,Ja,other,unclassified,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nl-li-xonar-enquiry:q16,nl-li-xonar-enquiry,16,,i Frm Pst Fld 2853245 additional,free_text,questions,unknown,text,no,,,direct_fetch,2026-11-25
+nl-nh-kenter-enquiry:q01,nl-nh-kenter-enquiry,1,,Ik wil koffie drinken met,interest,care_type,yes,radio,no,,,direct_fetch,2026-11-25
+nl-nh-kenter-enquiry:q02,nl-nh-kenter-enquiry,2,,Voornaam,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nl-nh-kenter-enquiry:q03,nl-nh-kenter-enquiry,3,,E-mail,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+nl-nh-kenter-enquiry:q04,nl-nh-kenter-enquiry,4,,Op welke dagen & tijden ben je het best bereikbaar?,contact_preference,time,yes,textarea,no,,,direct_fetch,2026-11-25
+nl-nh-parlan-enquiry:q01,nl-nh-parlan-enquiry,1,,Naam,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nl-nh-parlan-enquiry:q02,nl-nh-parlan-enquiry,2,,city,contact_identity,address,unknown,text,no,,,direct_fetch,2026-11-25
+nl-nh-parlan-enquiry:q03,nl-nh-parlan-enquiry,3,,E-mail,contact_identity,email,yes,text,no,,,direct_fetch,2026-11-25
+nl-nh-parlan-enquiry:q04,nl-nh-parlan-enquiry,4,,Waar heeft u over pleegzorg gehoord?,source,how_heard,unknown,radio,no,,,direct_fetch,2026-11-25
+nl-nh-parlan-enquiry:q05,nl-nh-parlan-enquiry,5,,oor een volgend contact.,interest,care_type,yes,radio,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q01,nz-nz-oranga-tamariki-caregiving-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q02,nz-nz-oranga-tamariki-caregiving-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q03,nz-nz-oranga-tamariki-caregiving-enquiry,3,,Date of birth,contact_identity,date_of_birth,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q04,nz-nz-oranga-tamariki-caregiving-enquiry,4,,"Choice of: Māori, New Zealand European, Samoan, Cook Islands Māori, Tongan, Niuean, Chinese, Indian, Other…",equality,ethnicity,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q05,nz-nz-oranga-tamariki-caregiving-enquiry,5,,"Other? eg Dutch, Japanese, Tokelauan",equality,ethnicity,unknown,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q06,nz-nz-oranga-tamariki-caregiving-enquiry,6,,Your phone number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q07,nz-nz-oranga-tamariki-caregiving-enquiry,7,,Your email address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q08,nz-nz-oranga-tamariki-caregiving-enquiry,8,,Please choose the Oranga Tamariki Site closest to you.,routing,nearest_office,unknown,select,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q09,nz-nz-oranga-tamariki-caregiving-enquiry,9,,Contact preference,contact_identity,email,yes,radio,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q10,nz-nz-oranga-tamariki-caregiving-enquiry,10,,"Choice of: Internet / social media, Word of mouth, Magazine, Radio Ad, A flyer or poster, Other",source,how_heard,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-caregiving-enquiry:q11,nz-nz-oranga-tamariki-caregiving-enquiry,11,,"Second person - please provide second person details: first name, last name and date of birth.",contact_identity,date_of_birth,unknown,textarea,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q01,nz-nz-oranga-tamariki-whanau-care-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q02,nz-nz-oranga-tamariki-whanau-care-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q03,nz-nz-oranga-tamariki-whanau-care-enquiry,3,,Contact preference,contact_identity,email,unknown,radio,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q04,nz-nz-oranga-tamariki-whanau-care-enquiry,4,,Your phone number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q05,nz-nz-oranga-tamariki-whanau-care-enquiry,5,,Your email address,contact_identity,email,unknown,text,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q06,nz-nz-oranga-tamariki-whanau-care-enquiry,6,,Your location,routing,nearest_office,unknown,select,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q07,nz-nz-oranga-tamariki-whanau-care-enquiry,7,,I would like to find out more about,intent,journey_stage,unknown,checkbox,no,,,direct_fetch,2026-11-25
+nz-nz-oranga-tamariki-whanau-care-enquiry:q08,nz-nz-oranga-tamariki-whanau-care-enquiry,8,,Other - please specify,other,unclassified,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-open-home-foundation-enquiry:q01,nz-nz-open-home-foundation-enquiry,1,,I have read and understood OHF's Special Character Statement,other,unclassified,yes,checkbox,no,,,direct_fetch,2026-11-25
+nz-nz-open-home-foundation-enquiry:q02,nz-nz-open-home-foundation-enquiry,2,,Phone Questions? or,contact_identity,phone,unknown,text,no,,,direct_fetch,2026-11-25
+nz-nz-open-home-foundation-enquiry:q03,nz-nz-open-home-foundation-enquiry,3,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-open-home-foundation-enquiry:q04,nz-nz-open-home-foundation-enquiry,4,,Email Address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+nz-nz-open-home-foundation-enquiry:q05,nz-nz-open-home-foundation-enquiry,5,,Phone,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+nz-nz-open-home-foundation-enquiry:q06,nz-nz-open-home-foundation-enquiry,6,,Location/Region,routing,local_authority,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-open-home-foundation-enquiry:q07,nz-nz-open-home-foundation-enquiry,7,,Comments / Questions,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q01,nz-auk-kia-puawai-enquiry,1,,Do you have a spare room available,housing,spare_bedroom,unknown,radio,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q02,nz-auk-kia-puawai-enquiry,2,,Are you open to having a young person living in your home,eligibility,residency,unknown,radio,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q03,nz-auk-kia-puawai-enquiry,3,,Which region are you located in,routing,local_authority,unknown,radio,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q04,nz-auk-kia-puawai-enquiry,4,,Is your household comfortable completing Police and Oranga Tamariki vetting checks,household,household_composition,unknown,radio,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q05,nz-auk-kia-puawai-enquiry,5,,How did you hear about us,source,how_heard,yes,select,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q06,nz-auk-kia-puawai-enquiry,6,,Other - tell us more,free_text,about_you,unknown,text,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q07,nz-auk-kia-puawai-enquiry,7,,Name – Tō Ingoa,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q08,nz-auk-kia-puawai-enquiry,8,,Is your household comfortable completing Police and Oranga Tamariki vetting checks?,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q09,nz-auk-kia-puawai-enquiry,9,,City,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q10,nz-auk-kia-puawai-enquiry,10,,Email Address - Wāhitau Imēra,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q11,nz-auk-kia-puawai-enquiry,11,,Street Address,contact_identity,address,yes,text,no,,,direct_fetch,2026-11-25
+nz-auk-kia-puawai-enquiry:q12,nz-auk-kia-puawai-enquiry,12,,Please include anything else you would like to share with us here relating to caregiving.,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-25
+nz-nz-adoption-first-steps-enquiry:q01,nz-nz-adoption-first-steps-enquiry,1,,your name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+nz-nz-adoption-first-steps-enquiry:q02,nz-nz-adoption-first-steps-enquiry,2,,your email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+nz-nz-adoption-first-steps-enquiry:q03,nz-nz-adoption-first-steps-enquiry,3,,your message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-25
+sg-sg-boys-town-fostering-enquiry:q01,sg-sg-boys-town-fostering-enquiry,1,,Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+sg-sg-boys-town-fostering-enquiry:q02,sg-sg-boys-town-fostering-enquiry,2,,Contact Number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+sg-sg-boys-town-fostering-enquiry:q03,sg-sg-boys-town-fostering-enquiry,3,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+sg-sg-boys-town-fostering-enquiry:q04,sg-sg-boys-town-fostering-enquiry,4,,Your Message,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-25

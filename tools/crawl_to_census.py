@@ -13,7 +13,7 @@ page about fostering or adoption, this writes:
 - forms.csv: one primary form, observed "direct_fetch"
 - questions.csv: one row per question. Radio buttons and tick boxes that share a name
   are one question, labelled by their legend. Each is tagged with a census topic by
-  keyword rules (English, French, German, Spanish and Catalan). Questions the rules cannot place are tagged
+  keyword rules (English, French, German, Spanish, Catalan and Dutch). Questions the rules cannot place are tagged
   other/unclassified for a person to tag.
 - answer_options.csv: the choices offered by select boxes, radio buttons and tick boxes
 - guidance.csv: whether a reply time is stated on the page, whether a privacy notice is
@@ -59,7 +59,7 @@ RULES = [
     ("eligibility", "citizenship", r"place of birth|born in|country of birth"),
     ("eligibility", "residency", r"(?:currently|do you) live in|reside in|live in (?:the )?state|based in|living (?:in|within)|relocate"),
     ("routing", "local_authority", r"where do you live|\brcm\b|\bmrc\b"),
-    ("routing", "nearest_office", r"nearest|office|branch|location"),
+    ("routing", "nearest_office", r"nearest|closest|office|branch|location"),
     ("contact_identity", "address", r"address|street|suburb|\bcity\b|\btown\b|apartment|\bapt\b|\bsuite\b|po box|^line \d|"
                                     r"^country$|adresse|ville|rue"),
     ("contact_identity", "name", r"name|^(?:first|last|middle|title|prefix|suffix)\b|surname|\bnom\b|pr[ée]nom"),
@@ -85,6 +85,7 @@ RULES = [
     ("household", "applicant_type", r"single|couple|applying (?:as|alone|with)|joint applic|second applicant"),
     ("household", "relationships", r"marital|married|relationship status|in a relationship|[ée]tat civil"),
     ("household", "household_composition", r"household|live with you|people (?:in|living)|occupants|who lives|other adults?|"
+                                            r"summary of your family|about your family|"
                                             r"family unit|child (?:one|two|three|four)|lives with"),
     ("household", "pets", r"\bpets?\b|\bdogs?\b|animal"),
     ("housing", "spare_bedroom", r"bedroom|spare room|chambre"),
@@ -106,6 +107,8 @@ RULES = [
     ("eligibility", "residency", r"residen|visa|immigration|permanent"),
     ("prior_involvement", "social_services", r"social services|child protection|\bcps\b|involvement with"),
     ("intent", "journey_stage", r"how long have you been|thinking about|considering"),
+    # "Why do you want to foster?" names the care, but asks for motivation. It must come before care_type.
+    ("free_text", "motivation", r"^\W*(?:why|pourquoi)\b(?!.*contact)|what (?:made|makes|motivat)|motivat"),
     ("interest", "care_type", r"foster|adopt|respite|kinship|emergency|short.?term|long.?term|type of care|type of service|"
                               r"^service$|interest|program|"
                               r"treatment|famille d.accueil|accueil"),
@@ -184,6 +187,55 @@ MORE = {
     ("free_text", "questions"): r"nachricht|anmerkung|\bfrage|anliegen|mitteilung|bemerkung|sonstiges|mensaje|comentario|"
                                 r"consulta|pregunta|observaciones|missatge|comentari|observacions",
 }
+# Dutch words for the same topics, added the same way.
+DUTCH = {
+    ("consent", "marketing"): r"nieuwsbrief",
+    ("consent", "privacy_acknowledgement"): r"privacyverklaring|privacybeleid|privacyreglement",
+    ("consent", "declaration_and_checks"): r"naar waarheid|ik verklaar",
+    ("consent", "processing"): r"toestemming|ik ga akkoord|\bakkoord\b|verwerking van (?:mijn )?gegevens",
+    ("contact_identity", "date_of_birth"): r"geboortedatum|geboren op",
+    ("eligibility", "age"): r"leeftijd(?! van (?:het|de) kind)",
+    ("contact_identity", "phone"): r"telefoon|\bmobiel",
+    ("routing", "local_authority"): r"gemeente|provincie|\bregio\b",
+    ("contact_identity", "address"): r"\badres|straat|huisnummer|woonplaats|\bplaats\b",
+    ("contact_identity", "name"): r"\bnaam\b|voornaam|achternaam|tussenvoegsel|voorletters|aanhef|roepnaam",
+    ("source", "how_heard"): r"hoe (?:bent|heeft|ben|heb) (?:u|je|jij)|via welke weg|waar heeft u",
+    ("contact_preference", "time"): r"bereikbaar|ochtend|\bmiddag|\bavond\b|maandag|dinsdag|woensdag|donderdag|vrijdag",
+    ("contact_preference", "method"): r"hoe wilt u|hoe wil je|contactvoorkeur|voorkeur voor contact",
+    ("contact_preference", "language"): r"\btaal\b|voertaal",
+    ("information_event", "event_dates"): r"informatieavond|voorlichtingsavond|informatiebijeenkomst|bijeenkomst|infoavond",
+    ("experience", "own_children"): r"eigen kinderen",
+    ("experience", "prior_fostering"): r"eerder pleeg|al eerder|ooit pleeg",
+    ("experience", "childcare_experience"): r"ervaring",
+    ("interest", "child_preferences"): r"leeftijd van (?:het|de) kind|broertjes|zusjes|broers en zussen",
+    ("household", "children_in_household"): r"\bkinderen\b|thuiswonende",
+    ("household", "partner"): r"echtgeno",
+    ("household", "applicant_type"): r"alleenstaand|\bstel\b",
+    ("household", "relationships"): r"burgerlijke staat|getrouwd|gehuwd|samenwonend",
+    ("household", "household_composition"): r"huishouden|gezinssamenstelling|inwonend|gezinsleden|wie woont",
+    ("household", "pets"): r"huisdier|\bhond|\bkat\b|\bkatten\b",
+    ("housing", "spare_bedroom"): r"slaapkamer|\bkamer\b",
+    ("housing", "tenure"): r"huurwoning|koopwoning|\bhuur\b|eigen woning",
+    ("housing", "smoking"): r"\brook|\broken\b",
+    ("work", "income"): r"inkomen",
+    ("work", "driving_licence"): r"rijbewijs",
+    ("work", "employment_history"): r"opleiding",
+    ("work", "occupation"): r"\bberoep",
+    ("work", "employment_status"): r"\bwerk|\bbaan\b|werkzaam",
+    ("equality", "gender"): r"geslacht",
+    ("equality", "religion"): r"geloof|levensovertuiging",
+    ("health", "disability"): r"beperking",
+    ("health", "health"): r"gezondheid",
+    ("criminal_record", "criminal_record"): r"\bvog\b|verklaring omtrent|strafblad|\bvgb\b",
+    ("eligibility", "citizenship"): r"nationaliteit",
+    ("intent", "journey_stage"): r"\bonderwerp\b",
+    ("interest", "care_type"): r"pleeg|crisisopvang|deeltijd|voltijd|gezinshuis|logeer",
+    ("free_text", "motivation"): r"waarom|motivatie",
+    ("free_text", "about_you"): r"over (?:uzelf|jezelf)|vertel (?:ons|iets)",
+    ("free_text", "questions"): r"bericht|opmerking|\bvra(?:a)?g|toelichting",
+}
+for _key, _words in DUTCH.items():
+    MORE[_key] = MORE[_key] + "|" + _words if _key in MORE else _words
 _seen = set()
 _rules = []
 for c, t, p in RULES:
@@ -199,28 +251,33 @@ JUNK = re.compile(
     r"captcha|recaptcha|not a robot|g-recaptcha|ak[ _]?hp|wpcf7|empty\d|characters shown|code (?:above|is in the image|in the image)|prevent spam|"
     r"form handle|form fields field|^(?:website|url|x/twitter|twitter|linkedin|to)$|^[a-z0-9]{10,}$|utm_|gclid|msclkid|"
     r"[gw]braid|fbclid|referr?er|entry ?page|page ?url|form ?type|nelio|sendmail|^project$|^fuction$|quiz|^ad |"
-    r"feedback|was this page helpful|leer lassen|laisser (?:ce champ )?vide|dejar (?:en )?blanco|deixa(?:r|u) en blanc", re.I)
+    r"feedback|was this page helpful|leer lassen|laisser (?:ce champ )?vide|dejar (?:en )?blanco|deixa(?:r|u) en blanc|"
+    r"leeg laten|niet invullen", re.I)
 PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*|"
-                         r"bitte (?:w[äa]hlen|ausw[äa]hlen)|ausw[äa]hlen|seleccion[ae]|elija|escoja|tria)\b", re.I)
+                         r"bitte (?:w[äa]hlen|ausw[äa]hlen)|ausw[äa]hlen|seleccion[ae]|elija|escoja|tria|"
+                         r"maak een keuze|selecteer|kies)\b", re.I)
 NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|job|resume|career|password|log ?in|sign ?in|"
                          r"upload|type your signature|newsletter only|search|access record|subject access|records request|"
                          r"spende|ehrenamt|stellenangebot|karriere|donaci|donativo|voluntari|empleo|trabaja con nosotros|"
-                         r"ofertas de trabajo|affiche|votre [ée]v[ée]nement|proposer un [ée]v[ée]nement", re.I)
+                         r"ofertas de trabajo|affiche|votre [ée]v[ée]nement|proposer un [ée]v[ée]nement|"
+                         r"vacature|werken bij|doneer|donatie", re.I)
 # A page whose address names an application holds the full application, not a first-contact form.
 # The census covers first contact only; application forms belong in register/us/application-forms.csv.
 APPLICATION_PAGE = re.compile(r"application|how-to-apply|apply-now|/apply/?$", re.I)
 NOT_APPLICATION = re.compile(r"process|enquir|inquir", re.I)  # "the application process" pages often carry an enquiry form
 # Fields only a full application asks for: bank details, debts, place of birth, the applicant's signature line.
 APPLICATION_FIELDS = re.compile(r"\biban\b|bank account|sort code|schulden|kontoinhaber|geburtsort|antragsteller|"
-                                r"place of birth|lieu de naissance|lugar de nacimiento|\bdebts?\b", re.I)
+                                r"place of birth|lieu de naissance|lugar de nacimiento|\bdebts?\b|geboorteplaats|"
+                                r"burgerservicenummer|\bbsn\b", re.I)
 # Pages about childminding or elderly care, which share words with fostering in German and French.
 NOT_TOPIC = re.compile(r"kindertagespflege|tagesmutter|tagesv[äa]ter|altenpflege|seniorenpflege|"
-                       r"assistant(?:e)?s? maternel", re.I)
+                       r"assistant(?:e)?s? maternel|gastouder|kinderopvang", re.I)
 # Words that show a page or form is about fostering or adoption. Bare "accueil" (French for the home
 # page) and bare "pflege" (also childminding and elderly care) are too broad, so only longer forms count.
 TOPIC_PAGE = re.compile(r"foster|adopt|carer|famille d.accueil|famille d.adoption|accueil familial|out-of-home care|kinship|"
                         r"assistant(?:e)?s? familia|pflegefamilie|pflegeeltern|pflegekind|pflegestelle|vollzeitpflege|"
-                        r"bereitschaftspflege|pflegeverh[äa]ltnis|adopci|acogi|acolli", re.I)
+                        r"bereitschaftspflege|pflegeverh[äa]ltnis|adopci|acogi|acolli|pleegzorg|pleegouder|pleegkind|"
+                        r"pleeggezin|pleegfamilie|gezinshuis|caregiv|whānau care|whanau care", re.I)
 INPUT = {"text": "text", "email": "email", "tel": "tel", "textarea": "textarea", "select": "select",
          "radio": "radio", "checkbox": "checkbox", "date": "date", "number": "text", "url": "text"}
 

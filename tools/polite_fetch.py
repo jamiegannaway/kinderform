@@ -62,7 +62,7 @@ FOLLOW = [
                r"|nous[- ]joindre|contactez|kontakt|contacto|contacta|cont[aà]cte", re.I),
 ]
 
-# "Within N days" and the same in French, German and Spanish.
+# "Within N days" and the same in French, German, Spanish and Dutch.
 PROMISE = re.compile(
     r"[^.!?\n]{0,160}(?:\bwithin\s+(?:one|two|three|four|five|seven|ten|\d{1,3})\s*"
     r"(?:-\s*\w+\s*)?(?:business\s+|working\s+)?(?:hours?|days?|weeks?)\b"
@@ -71,7 +71,9 @@ PROMISE = re.compile(
     r"|\b(?:sous|dans un d[ée]lai (?:maximum )?de|dans les)\s+(?:\d{1,3}|un|une|deux|trois|quatre|cinq|sept|dix)\s+"
     r"(?:heures?|jours?|semaines?)\b"
     r"|\ben\s+(?:un plazo (?:m[aá]ximo )?de|menos de|las pr[oó]ximas)\s+(?:\d{1,3}|un|una|dos|tres|cuatro|cinco|siete|diez)\s+"
-    r"(?:horas?|d[ií]as?|semanas?)\b)[^.!?\n]{0,160}[.!?]?",
+    r"(?:horas?|d[ií]as?|semanas?)\b"
+    r"|\bbinnen\s+(?:\d{1,3}|één|een|twee|drie|vier|vijf|zeven|tien)\s+(?:werk)?(?:dagen|dag|weken|week|uur)\b)"
+    r"[^.!?\n]{0,160}[.!?]?",
     re.I,
 )
 
