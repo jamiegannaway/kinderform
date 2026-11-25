@@ -1,5 +1,4 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -16,6 +15,7 @@ import type { Group } from "@/lib/census"
 import { COUNTRY_NAMES } from "@/lib/compare"
 import { CAPS, DOMAINS } from "@/lib/form-check"
 import { Illustration } from "@/components/illustration"
+import { Tag } from "@/components/tag"
 
 type Patterns = {
   readable: number
@@ -69,7 +69,7 @@ export default function FormCheckPublic({
             name="details"
             className="mb-6 block w-36 lg:absolute lg:top-8 lg:right-0 lg:mb-0 lg:w-56 xl:w-64"
           />
-          <Badge variant="secondary">Draft for comment</Badge>
+          <Tag tone="blue">Draft for comment</Tag>
           <h1 id="fc-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Form check
           </h1>
@@ -172,7 +172,7 @@ export default function FormCheckPublic({
                   <TableCell className="min-w-64 whitespace-normal text-muted-foreground">{d.looks}</TableCell>
                   <TableCell className="text-right tabular-nums">{d.weight}</TableCell>
                   <TableCell>
-                    <Badge variant="outline">{d.seen ? "The public web page" : "The service's own data"}</Badge>
+                    <Tag tone={d.seen ? "teal" : "violet"}>{d.seen ? "The public web page" : "The service's own data"}</Tag>
                   </TableCell>
                 </TableRow>
               ))}
@@ -241,7 +241,7 @@ export default function FormCheckPublic({
                     <TableCell>United States</TableCell>
                     <TableCell className="font-medium">All states</TableCell>
                     <TableCell colSpan={2} className="text-right">
-                      <Badge variant="outline">Not started</Badge>
+                      <Tag tone="amber">Not started</Tag>
                     </TableCell>
                   </TableRow>
                 )}

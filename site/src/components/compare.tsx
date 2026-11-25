@@ -4,12 +4,12 @@
 import { ArrowUpRight, Download } from "lucide-react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Illustration } from "@/components/illustration"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
+import { Tag } from "@/components/tag"
 import {
   COUNTRY_NAMES,
   COUNTRY_ORDER,
@@ -119,7 +119,7 @@ function Downloads({ files }: { files: { href: string; label: string }[] }) {
 function Intro({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="max-w-3xl space-y-5">
-      <Badge variant="secondary">For fostering and adoption services</Badge>
+      <Tag tone="teal">For fostering and adoption services</Tag>
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance md:text-5xl">{title}</h1>
       {children}
     </section>
@@ -182,7 +182,7 @@ export function CompareIndex({
     <Page>
       <section className="grid items-center gap-6 md:grid-cols-[minmax(0,48rem)_14rem] md:justify-between md:gap-8">
         <div className="space-y-5">
-          <Badge variant="secondary">For fostering and adoption services</Badge>
+          <Tag tone="teal">For fostering and adoption services</Tag>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance md:text-5xl">
             Compare forms and rules
           </h1>
