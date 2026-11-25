@@ -36,7 +36,9 @@ const resources = [
       <p class="mt-4 max-w-3xl text-lg leading-relaxed">
         {kit.key === "global"
           ? "Shared questions in English. They do not ask where someone lives, so your team can decide whether to add that."
-          : `Questions in ${kit.language} that ask for ${kit.location}, to find the right local team.`}
+          : kit.location
+            ? `Questions in ${kit.language} that ask for ${kit.location}, to find the right local team.`
+            : `Questions in ${kit.language}. The service is national, so the form does not ask where someone lives.`}
       </p>
       <div class="mt-5 flex flex-wrap items-center gap-4">
         <a class={buttonVariants({ size: "lg" })} href={archive} download><Download aria-hidden="true" /> Download the starter kit (ZIP)</a>

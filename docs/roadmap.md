@@ -79,9 +79,10 @@ Western Europe first, with the two Asia-Pacific countries asked for. Each has on
 - [x] The polite crawler and the question tagger read Dutch; 15 enquiry forms added to the census (Ireland 5, the Netherlands 4, New Zealand 5, Singapore 1; unverified)
 - [x] The compare tables and the comparison across countries include all four
 - [ ] Read by hand the forms the reader cannot reach: Tusla's Microsoft Forms, Singapore's SG Cares portal and the Dutch providers that block automated reading
-- [ ] Example forms, without government branding: Ireland in the gov.ie Design System (MIT), the Netherlands in NL Design System components with a neutral theme (EUPL-1.2; never the Rijkshuisstijl), New Zealand in the NZ Government Design System (MIT, alpha), Singapore in the Singapore Government Design System (MIT; never the official government banner)
-- [ ] Starter kits and flags for each
-- [ ] Then Belgium (Flanders and Wallonia, Dutch and French) and Italy (Bootstrap Italia, BSD-3-Clause)
+- [x] Example forms, without government branding, on the map: Ireland in the Government of Ireland Design System (MIT), the Netherlands in NL Design System components with its neutral Start theme (EUPL-1.2; never the Rijkshuisstijl), New Zealand in the NZ Government Design System (MIT, alpha), Singapore in the Singapore Government Design System (MIT; never the official government banner)
+- [x] Starter kits and flags for each, in kit release v0.1.0-draft.3
+- [ ] Have native speakers review the Dutch wording, and check the te reo Māori in the New Zealand form
+- [ ] Next: Norway (Designsystemet, MIT), Denmark (Det Fælles Designsystem, MIT), Sweden (no national system; the Social Insurance Agency's, MIT) and Finland (Suomi.fi, MIT). Then Japan (the Digital Agency's design system, MIT) and Italy (Bootstrap Italia, BSD-3-Clause). Belgium could share the Dutch and French wording
 - [ ] Later, once an open design system that non-government sites may use is found: Portugal, Austria and Switzerland
 
 ## Now: after first contact (first pass)

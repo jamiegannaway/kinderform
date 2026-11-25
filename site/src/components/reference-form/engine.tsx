@@ -36,6 +36,9 @@ export type Control = {
       | "de_postcode"
       | "fr_postcode"
       | "es_postcode"
+      | "eircode_routing_key"
+      | "nl_postcode"
+      | "nz_postcode"
   }
 }
 export type Page = {
@@ -47,7 +50,7 @@ export type Page = {
 }
 export type UiConfig = {
   locale: string
-  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy"
+  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy" | "govie" | "nl-design" | "nzgds" | "sgds"
   sections: string[]
   start: { title: string; body: string[]; button: string }
   pages: Page[]
@@ -172,6 +175,17 @@ export function transform(kind: string | undefined, value: string): string {
   // German, French and Spanish postcodes: five digits. Drop spaces and an old country prefix ("D-10115").
   if (kind === "de_postcode" || kind === "fr_postcode" || kind === "es_postcode")
     return v.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "")
+  // A full Eircode, like A65 F4E2, keeps only its routing key: the first 3 characters.
+  if (kind === "eircode_routing_key") {
+    const up = v.toUpperCase().replace(/\s+/g, "")
+    return up.length === 7 ? up.slice(0, 3) : up
+  }
+  // A full Dutch postcode, like 1234 AB, keeps only its 4 digits.
+  if (kind === "nl_postcode") {
+    const up = v.toUpperCase().replace(/\s+/g, "")
+    return /^[0-9]{4}[A-Z]{2}$/.test(up) ? up.slice(0, 4) : up
+  }
+  if (kind === "nz_postcode") return v.replace(/\s+/g, "")
   return v
 }
 
@@ -395,7 +409,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                 rows={visible.flatMap((p, pageIndex) =>
                   p.elements.map((c) => ({
                     key: fieldOf(c.scope),
-                    label: c.label.replace(/\s*\((optional|facultatif|opcional)\)$/i, ""),
+                    label: c.label.replace(/\s*\((optional|facultatif|opcional|niet verplicht)\)$/i, ""),
                     value: displayValue(c, data[fieldOf(c.scope)], ui.locale),
                     pageIndex,
                   })),
@@ -443,6 +457,7 @@ const PHRASES = {
   fr: { check: "Vérifiez cette réponse", notGiven: "Non fourni", yes: "Oui", no: "Non", example: "Exemple Kinderform" },
   de: { check: "Bitte prüfen Sie diese Angabe", notGiven: "Nicht angegeben", yes: "Ja", no: "Nein", example: "Kinderform-Beispiel" },
   es: { check: "Revise esta respuesta", notGiven: "No indicado", yes: "Sí", no: "No", example: "Ejemplo de Kinderform" },
+  nl: { check: "Controleer dit antwoord", notGiven: "Niet ingevuld", yes: "Ja", no: "Nee", example: "Kinderform-voorbeeld" },
 }
 export const phrases = (locale: string) =>
   PHRASES[locale.slice(0, 2).toLowerCase() as keyof typeof PHRASES] ?? PHRASES.en
@@ -472,6 +487,13 @@ export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
       return `Hallo ${name}, vielen Dank für Ihre Nachricht. Weil Sie nach einem Kind fragen, das Sie schon kennen, haben wir Ihre Nachricht an Sam von ${ui.confirmation.kinship_team} weitergegeben. Sam wird ${how}, spätestens am ${day}. Keine Ihrer Fragen wird gegen Sie verwendet.`
     return `Hallo ${name}, vielen Dank für Ihre Nachricht. Ich bin Lena von ${ui.confirmation.team}. Ich werde ${how}, spätestens am ${day}${times ? ", zu einer der Zeiten, die Sie gewählt haben" : ""}. Es gibt keine falschen Fragen, und keine Ihrer Fragen wird gegen Sie verwendet.`
   }
+  if (locale.startsWith("nl")) {
+    // Dutch foster care providers address people as "je".
+    const how = by === "email" ? "je een e-mail sturen" : by === "text_message" ? "je een sms sturen" : "je bellen"
+    if (record.knows_child)
+      return `Hoi ${name}, bedankt voor je bericht. Je vraagt naar een kind dat je al kent. Daarom hebben we je bericht doorgestuurd naar Sam van ${ui.confirmation.kinship_team}. Sam gaat ${how}, uiterlijk op ${day}. Geen enkele vraag wordt tegen je gebruikt.`
+    return `Hoi ${name}, bedankt voor je bericht. Ik ben Sanne van ${ui.confirmation.team}. Ik ga ${how}, uiterlijk op ${day}${times ? ", op een van de momenten die je hebt gekozen" : ""}. Er zijn geen domme vragen, en geen enkele vraag wordt tegen je gebruikt.`
+  }
   if (locale.startsWith("es")) {
     // "I will" for the named worker, "Sam will" for the kinship team.
     const [me, sam] =
@@ -484,7 +506,9 @@ export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
       return `Hola, ${name}. Gracias por ponerse en contacto. Como pregunta por un niño o una niña que ya conoce, hemos pasado su mensaje a Sam, de ${ui.confirmation.kinship_team}. Sam ${sam} antes del final del ${day}. Ninguna de sus preguntas contará en su contra.`
     return `Hola, ${name}. Gracias por ponerse en contacto. Soy Lucía, de ${ui.confirmation.team}, y ${me} antes del final del ${day}${times ? ", en uno de los momentos que ha elegido" : ""}. No hay preguntas equivocadas, y ninguna de sus preguntas contará en su contra.`
   }
-  const sender: Record<string, string> = { "en-US": "Maria", "en-CA": "Chantal", "en-AU": "Mia" }
+  const sender: Record<string, string> = {
+    "en-US": "Maria", "en-CA": "Chantal", "en-AU": "Mia", "en-IE": "Aoife", "en-NZ": "Aroha", "en-SG": "Mei",
+  }
   const how = by === "email" ? "email you" : by === "text_message" ? "text you" : "call you"
   if (record.knows_child)
     return `Hi ${name}, thank you for getting in touch. Because you're asking about a child you already know, we've passed your message to Sam in ${ui.confirmation.kinship_team}. Sam will ${how} by the end of ${day}. Nothing you ask counts against you.`

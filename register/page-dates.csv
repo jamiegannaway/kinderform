@@ -1,6 +1,8 @@
 url,page_updated,page_updated_from,date_read,status
 https://18degreesma.org/contact-us/,2019-11-07,metadata: article:modified_time,2026-11-20,200
 https://Www.Dhhs.Nh.Gov/programs-services/child-protection-juvenile-justice/adoption,,,2026-11-20,403
+https://aai.gov.ie/en/domestic-adoption,,,2026-11-25,200
+https://aai.gov.ie/en/intercountry-adoption,,,2026-11-25,200
 https://accare.org.au/,2026-11-16,metadata: article:modified_time,2026-11-20,200
 https://acollimentmenorca.es/,,,2026-11-20,200
 https://adgirona.cat/contacta/,2019-04-17,metadata: article:modified_time,2026-11-20,200
@@ -17,6 +19,8 @@ https://adoptionandfostercare.hscni.net/foster-care/faq/,,,2026-11-20,200
 https://adoptionandfostercare.hscni.net/foster-care/fosteringprocess/,,,2026-11-20,200
 https://adoptionandfostercare.hscni.net/foster-care/training-and-support/,,,2026-11-20,200
 https://adoptionandfostercare.hscni.net/getintouch/,,,2026-11-20,200
+https://adoptionfirststeps.org.nz/,2025-10-08,metadata: article:modified_time,2026-11-25,200
+https://adoptionfirststeps.org.nz/contact-us/,2026-11-23,metadata: article:modified_time,2026-11-25,200
 https://adoptionmatters.org/contact-us/#form,,,2026-11-20,200
 https://adoptionsubsidy.substack.com/api/v1/file/21378a70-7b51-4604-8da3-6ca1175e7609.pdf,,,2026-11-20,200
 https://adoptlondon.org.uk/contact,2026-07-24,metadata: article:modified_time,2026-11-20,200
@@ -32,9 +36,18 @@ https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-i
 https://aem-prod.ok.gov/okdhs/services/foster/require.html,,,2026-11-20,robots_disallowed
 https://aem-prod.oklahoma.gov/okdhs/library/policy/current/oac-340/chapter-75/subchapter-7/parts-2/joint-approval-of-resource-homes.html,,,2026-11-20,404
 https://amarafamily.org/programs-resources/become-a-foster-parent/,2024-03-15,metadata: article:modified_time,2026-11-20,200
+https://api.warwickshire.gov.uk/documents/WCCC-210616518-50,2019-05-01,pdf metadata: moddate,2026-11-25,200
+https://aplicaciones.aragon.es/seda_core/rest/getRequestModel?childServiceId=1104,2025-11-25,pdf metadata: moddate,2026-11-25,200
+https://aplicaciones.aragon.es/seda_core/rest/getRequestModel?childServiceId=1105,2025-11-25,pdf metadata: moddate,2026-11-25,200
 https://apps.legislature.ky.gov/law/kar/downloads/docs/13793/document.markup.pdf,2026-09-02,pdf metadata: moddate,2026-11-20,200
 https://apps.oregonlegislature.gov/liz/2025R1/Downloads/CommitteeMeetingDocument/292274,2024-04-01,pdf metadata: moddate,2026-11-20,200
 https://archive.regulations.delaware.gov/register/may2019/proposed/22%20DE%20Reg%20933%2005-01-19.htm,,,2026-11-20,200
+https://ask.gov.sg/msf/questions/cm17ac90k0016cs6i8dl41aw1,,,2026-11-25,200
+https://ask.gov.sg/msf/questions/cm17afi1v001b12aif06ske2p,,,2026-11-25,200
+https://ask.gov.sg/msf/questions/cm17anh5b001gcs6igr1238c0,,,2026-11-25,200
+https://ask.gov.sg/msf/questions/cm2vjon60009a46yzv2shffpq,,,2026-11-25,200
+https://ask.gov.sg/msf/questions/cm2vk8rpr00a3a71bxv31am6t,,,2026-11-25,200
+https://ask.gov.sg/msf/questions/cm2vm38gp00aka71b2o7es0wq,,,2026-11-25,200
 https://assets.publishing.service.gov.uk/media/5a7abe16e5274a319e77a6a1/NMS_Fostering_Services.pdf,,,2026-11-20,200
 https://assets.publishing.service.gov.uk/media/5a7b8295e5274a7318b8f20c/20130522statutory_guidanceassessment_and_approval_of_foster_carers_final.pdf,,,2026-11-20,200
 https://atv.stockton.gov.uk/request-a-call-back-1/,,,2026-11-20,200
@@ -43,8 +56,10 @@ https://aws.state.ak.us/OnlinePublicNotices/Notices/Attachment.aspx?id=128015,,,
 https://barnetfs.trixonline.co.uk/chapter/assessment-and-approvals-of-prospective-adopters,,,2026-11-20,robots_disallowed
 https://bethany.org/contact-us,,,2026-11-20,200
 https://bethany.org/resources/how-to-become-a-foster-parent,,,2026-11-20,200
+https://bettercarenetwork.org/sites/default/files/attachments/National-Standards-for-Foster-Care-Ireland.pdf,2004-11-08,pdf metadata: moddate,2026-11-25,200
 https://bildung.luebeck.de/de/stadtleben/familie-und-bildung/schwangerschaft-babies/jugendamt/pflegekinder/pflegeeltern-werden.html,,,2026-11-20,robots_disallowed
 https://blaenau-gwent.fosterwales.gov.wales/fostering-with-your-local-authority/,2025-07-08,metadata: article:modified_time,2026-11-20,200
+https://blja.bayern.de/imperia/md/content/blvf/bayerlandesjugendamt/basisbogen_2021.pdf,,,2026-11-25,200
 https://blog.sevitahealth.com/how-to-become-a-foster-parent-in-pennsylvania,2026-10-23,metadata: datemodified,2026-11-20,200
 https://bouldercounty.gov/?p=743,,,2026-11-20,404
 https://bridgend.fosterwales.gov.wales/contact-us/,2026-01-13,metadata: article:modified_time,2026-11-20,200
@@ -59,6 +74,7 @@ https://california.public.law/codes/welfare_and_institutions_code_section_16519.
 https://cardiff.fosterwales.gov.wales/contact-us/,2026-02-05,metadata: article:modified_time,2026-11-20,200
 https://casott.on.ca/services/fostering/,2025-01-24,metadata: article:modified_time,2026-11-20,200
 https://cassdg.ca/en/accountability/feedback-inquiries/,2026-03-11,metadata: article:modified_time,2026-11-20,200
+https://ccsdisabilityaction.org.nz/become-a-foster-carer,,,2026-11-25,robots_disallowed
 https://cdss.ca.gov/cdssweb/entres/forms/english/rfa07.pdf,,,2026-11-20,200
 https://cfas.mecknc.gov/services/adoption-and-foster-care/criteria-becoming-foster-or-adoptive-parent,,,2026-11-20,200
 https://cfs.sbcounty.gov/?p=4535,,,2026-11-20,200
@@ -82,7 +98,6 @@ https://childrensportal.northtyneside.gov.uk/web/portal/pages/home/homeane,,,202
 https://childrenswi.org/childrens-and-the-community/foster-parents/foster-care/foster-care-application-form,,,2026-11-20,404
 https://co4kids.org/foster-care-adoption/,2024-12-03,metadata: article:modified_time,2026-11-20,200
 https://co4kids.org/fosteradoptFAQ,,,2026-11-20,200
-https://codes.ohio.gov/assets/laws/administrative-code/authenticated/5180/2/5/5180$2-5-20_20250101.pdf,2026-01-08,pdf metadata: moddate,2026-11-20,200
 https://codes.ohio.gov/assets/laws/administrative-code/authenticated/5180/2/5/5180$2-5-33_20250101.pdf,2026-01-23,pdf metadata: moddate,2026-11-20,200
 https://codes.ohio.gov/ohio-administrative-code/rule-5180:2-5-20,2026-01-23,page: last updated,2026-11-20,200
 https://codes.ohio.gov/ohio-administrative-code/rule-5180:2-5-32,2026-10-25,page: last updated,2026-11-20,200
@@ -91,6 +106,7 @@ https://codes.ohio.gov/ohio-administrative-code/rule-5180:2-7-05,2026-01-23,page
 https://colorado.public.law/statutes/crs_19-3-215,,,2026-11-20,200
 https://colorado.public.law/statutes/crs_26-6-910,,,2026-11-20,200
 https://colorado.public.law/statutes/crs_26-7-107,,,2026-11-20,200
+https://communitylaw.org.nz/community-law-manual/chapter-14-parents-guardians-and-caregivers/adoption/who-can-adopt/,2026-07-03,metadata: article:modified_time,2026-11-25,200
 https://contact.fosterwithyourlocalcouncil.org.uk/,,,2026-11-20,200
 https://contact.lafosteringse.org.uk/,,,2026-11-20,200
 https://content.govdelivery.com/accounts/MEHHS/bulletins/3141590,,,2026-11-20,200
@@ -159,8 +175,8 @@ https://dcyf.wa.gov/practice/practice-improvement/foster-parent-application-port
 https://dcyf.wa.gov/services/adoption-support-program/benefits,,,2026-11-20,200
 https://dcyf.wa.gov/services/foster-parenting/become-a-foster-parent/faq,,,2026-11-20,200
 https://dcyf.wa.gov/sites/default/files/forms/10-183.pdf,,,2026-11-20,200
+https://dcyf.wa.gov/sites/default/files/forms/10-354.pdf,,,2026-11-25,200
 https://dcyf.wa.gov/sites/default/files/pdf/CPA_RequiredDocs_March2025.pdf,,,2026-11-20,404
-https://dcyf.wa.gov/sites/default/files/pdf/cpa-requireddocs-foster.pdf,,,2026-11-20,200
 https://denbighshire.fosterwales.gov.wales/,2026-10-14,metadata: article:modified_time,2026-11-20,200
 https://dfcs.alaska.gov/ocs/Documents/FosterCare/06-9437-Clearance%20Form.pdf,,,2026-11-20,404
 https://dfcs.alaska.gov/ocs/Documents/FosterCare/Foster-Care-Application.pdf,,,2026-11-20,404
@@ -234,6 +250,7 @@ https://dssmanuals.mo.gov/?p=17968,,,2026-11-20,404
 https://dssmanuals.mo.gov/?p=18076,,,2026-11-20,200
 https://dssmanuals.mo.gov/?p=20556,,,2026-11-20,404
 https://dssmanuals.mo.gov/wp-content/themes/mogovwp_dssmanuals/public/cd/memos/2016/cd16-018.pdf,,,2026-11-20,200
+https://ealingfostering.co.uk/,2026-09-30,metadata: article:modified_time,2026-11-25,200
 https://easternusa.salvationarmy.org/eastern-pennsylvania/childrens-services/how-to-open-your-home-to-kids-in-need,,,2026-11-20,200
 https://eastrenfrewshire.gov.uk/fostering-enquiry-form,,,2026-11-20,403
 https://emanuals.jfs.ohio.gov/FamChild/FCASM/FCASPL/FCASPL-150.stm,,,2026-11-20,robots_disallowed
@@ -250,12 +267,21 @@ https://families.nt.gov.au/foster-and-kinship-carers/foster-care-payment-rate,,,
 https://families.nt.gov.au/media/documents/for-people-working-with-or-caring-for-children/child-protection-policies/Emergency-and-Authorised-Carer-Assessment-and-Approval-Policy.pdf,,,2026-11-20,403
 https://familiesfirst.org/adoption/,2026-07-02,metadata: og:updated_time,2026-11-20,200
 https://familyadoptionlinks.org.uk/thinking-of-adoption/the-adoption-process/,,,2026-11-20,200
+https://familyadoptionlinks.org.uk/wp-content/uploads/2022/01/Family-Adoption-Links-Information-Guide-compressed_1.pdf,,,2026-11-25,200
+https://familyworkssld.nz/services/foster-care,,,2026-11-25,200
+https://fca.fosteringapplication.co.uk/register,,,2026-11-25,robots_disallowed
 https://ffs.dhs.ga.gov/manuals/financial/2301.1_FosterCareOverview.pdf,2013-09-04,pdf metadata: moddate,2026-11-20,200
+https://file.go.gov.sg/adoptionhandbook.pdf,,,2026-11-25,200
 https://files.dcs.tn.gov/forms/0688.pdf,,,2026-11-20,404
 https://files.dcs.tn.gov/forms/0961I.doc,,,2026-11-20,404
 https://files.dcs.tn.gov/forms/0962.docx,,,2026-11-20,404
 https://files.dcs.tn.gov/policies/chap16/16.3.pdf,,,2026-11-20,404
+https://fiom.nl/adoptie/informatie-adoptie,,,2026-11-25,200
+https://fiom.nl/adoptie/kind-adopteren/adoptieprocedure-stap-stap,,,2026-11-25,200
+https://fiom.nl/adoptie/kind-adopteren/duur-kosten-adoptieprocedure,,,2026-11-25,200
+https://fiom.nl/adoptie/veelgestelde-vragen-interlandelijke-adoptieprocedures,,,2026-11-25,200
 https://five-rivers.org/fostering/the-application-process/,2025-02-17,metadata: article:modified_time,2026-11-20,200
+https://fiveriversfostering.ie/apply-online/,2024-05-20,metadata: article:modified_time,2026-11-25,200
 https://flrules.org/gateway/RuleNo.asp?id=65C-45.003,,,2026-11-20,200
 https://flrules.org/gateway/notice_Files.asp?ID=2122668,,,2026-11-20,200
 https://flrules.org/gateway/notice_Files.asp?ID=8312917,,,2026-11-20,200
@@ -263,19 +289,26 @@ https://flrules.org/gateway/ruleno.asp?id=65C-45.012,,,2026-11-20,200
 https://forms.in.gov/Download.aspx?id=15839,,,2026-11-20,200
 https://forms.in.gov/Download.aspx?id=9852,,,2026-11-20,200
 https://forms.in.gov/download.aspx?id=6719,,,2026-11-20,200
+https://forms.westnorthants.gov.uk/xfp/form/698,2025-09-15,metadata: dc.modified,2026-11-25,200
 https://formulaires.services.haute-garonne.fr/solidarites/reunion-d-information-prealable-a-l-agrement-assistante-familiale-ou-maternelle-secto/,,,2026-11-20,200
 https://forsyth.cc/dss/contactus.aspx,,,2026-11-20,200
 https://foster.mdcps.ms.gov/,,,2026-11-20,200
 https://fosterbirmingham.co.uk/contact-us/,2022-10-13,metadata: article:modified_time,2026-11-20,200
+https://fosterbirmingham.co.uk/how-to-foster/,2022-10-13,metadata: article:modified_time,2026-11-25,200
 https://fostercarelink.com/enquiry/,,,2026-11-20,200
 https://fostercounty.com/contact.php,,,2026-11-20,200
 https://fosterforeastmidlands.org.uk/apps/fosterform,,,2026-11-20,robots_disallowed
 https://fosterforgm.com,2026-05-18,metadata: datemodified,2026-11-20,200
 https://fosterforgm.com/explore-fostering/how-to-become-a-foster-carer,,,2026-11-20,404
+https://fostering.buckinghamshire.gov.uk/get-in-touch/,,,2026-11-25,200
+https://fostering.n-somerset.gov.uk/wp-content/uploads/2025/07/Fostering-Information-pack.pdf,,,2026-11-25,200
 https://fosteringandadoption.westlothian.gov.uk/article/79935/Enquire-about-Fostering-or-Adoption,,,2026-11-20,200
+https://fosteringandadoption.westlothian.gov.uk/article/80125/How-to-become-a-Foster-Carer,,,2026-11-25,200
 https://fosteringandadoption.westlothian.gov.uk/article/80129/Get-in-touch,,,2026-11-20,200
 https://fosteringchamps.org/wp-content/uploads/2020/06/Wyoming-Foster-and-Adoptive-Parent-Diligent-Recruitment-Plan.pdf,,,2026-11-20,200
 https://fosteringconnections.com.au/whats-involved/who-can-provide-care,,,2026-11-20,200
+https://fosteringwestsussex.org.uk/contact-us/,2026-11-23,metadata: article:modified_time,2026-11-25,200
+https://fosterplus.co.uk/becoming-foster-parent/foster-care-application-form,2025-08-14,metadata: article:modified_time,2026-11-25,200
 https://fosterwales.caerphilly.gov.uk/privacy-policy,2025-09-29,metadata: article:modified_time,2026-11-20,200
 https://fosterwales.gov.wales/guide-to-foster-carer-pay/,2026-07-20,metadata: article:modified_time,2026-11-20,200
 https://fosterwales.gov.wales/learning-and-development-for-foster-carers/,2025-11-04,metadata: article:modified_time,2026-11-20,200
@@ -283,14 +316,18 @@ https://fosterwales.gov.wales/ways-to-foster/,2025-05-06,metadata: article:modif
 https://fosterwales.gov.wales/who-can-foster/,2026-09-29,metadata: article:modified_time,2026-11-20,200
 https://fosterwales.gov.wales/your-local-authority/,2025-11-04,metadata: article:modified_time,2026-11-20,200
 https://fosterwales.gwynedd.llyw.cymru/,2026-09-04,metadata: article:modified_time,2026-11-20,200
+https://fosterwales.gwynedd.llyw.cymru/the-process/,2026-03-24,metadata: article:modified_time,2026-11-25,200
 https://fosterwales.monmouthshire.gov.uk/why-foster-with-your-local-authority,2023-03-17,metadata: article:modified_time,2026-11-20,200
 https://fosterwales.newport.gov.uk/?p=472,,,2026-11-20,404
+https://fosterwithus.org.uk/application-and-approval-process,,,2026-11-25,200
 https://fosterwithus.org.uk/form/enquiry-form,,,2026-11-20,200
 https://fosterwithwestlondon.org.uk/,,,2026-11-20,403
 https://fremontcountyco.gov/node/18553,,,2026-11-20,200
 https://gov.nu.ca/en/newsroom/seeking-foster-parents-kivalliq-region-and-sanikiluaq-2024-03-22,,,2026-11-20,403
+https://haltoncas.ca/wp-content/uploads/Homestudy-Application-Form-REVISED-30-Nov-23.pdf,,,2026-11-25,200
 https://harrow.gov.uk/childrens-social-care/fostering-harrow-1/5,,,2026-11-20,200
 https://hautesavoie.fr/contact/,2023-06-12,metadata: article:modified_time,2026-11-20,200
+https://health.eastdunbarton.gov.uk/services/a-z-of-services/children-families/adoption-fostering-kinship/fostering/,,,2026-11-25,200
 https://healthandwelfare.idaho.gov/services-programs/children-families/child-and-family-services-and-foster-care/apply-become-foster,,,2026-11-20,200
 https://healthandwelfare.idaho.gov/services-programs/children-families/child-and-family-services-and-foster-care/frequently-asked,,,2026-11-20,200
 https://healthandwelfare.idaho.gov/services-programs/children-families/child-protection-and-foster-care/about-adoption-through-foster,,,2026-11-20,200
@@ -315,7 +352,9 @@ https://in.gov/dcs/files/2025-Foster-Parent-Rate-Letter.pdf,,,2026-11-20,200
 https://in.gov/dcs/foster-care/become-a-foster-parent/licensing-requirements,2026-06-12,metadata: dcterms.modified,2026-11-20,200
 https://infanciayfamilias.castillalamancha.es/acogimiento-familiar-adopcion/acogimiento-familiar,,,2026-11-20,200
 https://intranet.caib.es/eboibfront/pdf/ca/2026/17/1211902,2026-02-04,pdf metadata: moddate,2026-11-20,200
+https://ispfostering.org.uk/about-fostering/becoming-a-foster-parent/fostering-assessment/,2026-01-14,metadata: article:modified_time,2026-11-25,200
 https://jcfswinnipeg.org/contact/,2026-02-06,metadata: article:modified_time,2026-11-20,200
+https://jeugdhulpfriesland.nl/pleegouder-worden,,,2026-11-25,200
 https://jri.org/program/foster-care/,2026-07-14,metadata: article:modified_time,2026-11-20,200
 https://junctionaustralia.org.au/foster-care/,2026-10-21,metadata: article:modified_time,2026-11-20,200
 https://kansas.kvc.org/frequently-asked-questions/,2026-01-05,metadata: article:modified_time,2026-11-20,200
@@ -324,6 +363,7 @@ https://kansas.tfifamily.org/?p=11304,2023-10-06,metadata: article:modified_time
 https://kansas.tfifamily.org/?p=8795,2025-07-24,metadata: article:modified_time,2026-11-20,200
 https://kansas.tfifamily.org/wp-content/uploads/2025/04/FFH-SurveyInstrument_20180131-10.pdf,2024-11-19,pdf metadata: moddate,2026-11-20,200
 https://kawerak.org/download/foster-care-application-2,,,2026-11-20,200
+https://kenterjeugdhulp.nl/voor-pleegouders/contact/,2026-11-19,metadata: og:updated_time,2026-11-25,200
 https://keyassets.org.au/contact,2025-03-10,metadata: article:modified_time,2026-11-20,200
 https://kffnm.ca/wp-content/uploads/2026/05/Basic-Rate.pdf,2025-09-15,pdf metadata: moddate,2026-11-20,200
 https://kids.delaware.gov/family-services/becoming-a-foster-care-parent/,2026-09-01,metadata: article:modified_time,2026-11-20,200
@@ -357,6 +397,7 @@ https://law.lis.virginia.gov/admincode/title22/agency40/chapter211/section60/,,,
 https://lawfilesext.leg.wa.gov/Law/WACArchive/2019/htm/WAC%20110%20%20TITLE/WAC%20110%20-148%20%20CHAPTER/WAC%20110%20-148%20-1320.htm,,,2026-11-20,200
 https://lawfilesext.leg.wa.gov/Law/WACArchive/2024/pdf/WAC%20110%20-148%20%20CHAPTER/WAC%20110%20-148%20-1320.pdf,2023-02-21,pdf metadata: moddate,2026-11-20,200
 https://lawrencecountypa.gov/getmedia/6b3a61e9-f2c8-498c-b14c-98c2d49939d6/Foster-Parent-Application-Packet.pdf,,,2026-11-20,200
+https://lccs.org.sg/parenting-adoption-services/,2026-11-11,metadata: article:modified_time,2026-11-25,200
 https://legislation.act.gov.au/DownloadFile/di/2023-202/current/PDF/2023-202.PDF,2023-07-20,pdf metadata: moddate,2026-11-20,200
 https://legislation.nt.gov.au/api/sitecore/Act/PDF?id=11661,,,2026-11-20,200
 https://legislature.maine.gov/doc/11644,,,2026-11-20,200
@@ -414,7 +455,10 @@ https://novascotia.ca/coms/families/documents/cfw-policy-manual-en.pdf,,,2026-11
 https://novascotia.ca/sns/paal/comserv/paal058.asp,,,2026-11-20,200
 https://nt.gov.au/__data/assets/pdf_file/0009/988317/become-a-carer-brochure.pdf,,,2026-11-20,403
 https://nwfhealth.org/foster/,,,2026-11-20,200
+https://ocfs.ny.gov/forms/ocfs/ocfs-5200/OCFS-5200A.docx,,,2026-11-25,error: RemoteDisconnected
+https://ocfs.ny.gov/forms/ocfs/ocfs-5200/OCFS-5200B.docx,,,2026-11-25,error: RemoteDisconnected
 https://ocg.nsw.gov.au/sites/default/files/2025-12/FS_OOHC_CR_Reviewableauthorisationdecisions.pdf,,,2026-11-20,200
+https://ohf.org.nz/get-involved/foster-for-us/,2026-04-07,metadata: article:modified_time,2026-11-25,200
 https://okfosters.org/,2025-07-09,metadata: article:modified_time,2026-11-20,200
 https://oklahoma.gov/content/dam/ok/en/okdhs/documents/searchcenter/okdhsformresults/04af001e.pdf,,,2026-11-20,200
 https://oklahoma.gov/okdhs/library/policy/current/oac-340/chapter-75/subchapter-7/parts-2/resource-family-assessment-rfa.html,,,2026-11-20,404
@@ -426,6 +470,8 @@ https://oneadoption.co.uk/about-us/about-one-adoption-west-yorkshire/contact-us-
 https://oneadoption.co.uk/steps-adoption,,,2026-11-20,200
 https://oneidacountyny.gov/departments/airport/uas-test-site/contact-us/,,,2026-11-20,200
 https://open.alberta.ca/dataset/a20eba02-08fc-451a-bae9-32c14036943a/resource/a5f0ef12-2862-45a3-8c57-bcb4eaddbcfb/download/cs-foster-care-handbook-guide-caregivers-2021.pdf,2021-10-29,pdf metadata: moddate,2026-11-20,200
+https://orangatamariki.govt.nz/assets/Uploads/Caregiving/Ways-you-can-care-booklet.pdf,2019-01-16,pdf metadata: moddate,2026-11-25,200
+https://orangatamariki.govt.nz/assets/Uploads/Working-with-children/Information-for-providers/Partnered-Care/What-is-Partnered-Care/National-Care-Standards-regulation-booklet.pdf,,,2026-11-25,200
 https://outside.vermont.gov/dept/DCF/Shared%20Documents/FSD/Care/PROVIDE-FOSTER-CARE.pdf,2022-06-29,pdf metadata: moddate,2026-11-20,200
 https://outside.vermont.gov/dept/DCF/Shared%20Documents/FSD/Policies/Policy221.pdf,,,2026-11-20,200
 https://outside.vermont.gov/dept/DCF/Shared%20Documents/FSD/Publications/Foster-Care-Licensing-Rules.pdf,,,2026-11-20,200
@@ -437,7 +483,9 @@ https://pamms.dhs.ga.gov/dfcs/cws/14-09/,,,2026-11-20,200
 https://pamms.dhs.ga.gov/dfcs/cws/14-10/,,,2026-11-20,200
 https://pamms.dhs.ga.gov/dfcs/cws/14-13/,,,2026-11-20,200
 https://pamms.dhs.ga.gov/dfcs/cws/appendix-c/,,,2026-11-20,200
+https://parliament.gov.sg/docs/default-source/default-document-library/children-and-young-persons-(amendment)-bill-22-2019.pdf,,,2026-11-25,200
 https://pathfinders.ngo/projects/foster-care/how-to-become-a-foster-carer/,2024-09-01,metadata: article:modified_time,2026-11-20,200
+https://pathfinders.ngo/wp-content/uploads/2023/03/Binder_Registration_HealthCheck_Foster_Care_20230327.pdf,2023-03-27,pdf metadata: moddate,2026-11-25,200
 https://pembrokeshire.fosterwales.gov.wales/,2026-11-17,metadata: article:modified_time,2026-11-20,200
 https://petersburgva.gov/328/Permanency,,,2026-11-20,200
 https://policies.ncdhhs.gov/wp-content/uploads/Appendix-3.5-Child-Welfare-Funding-%E2%80%93-Foster-Care-PATH-NC-April-2026-1.pdf,,,2026-11-20,404
@@ -457,6 +505,16 @@ https://portal.ct.gov/dcf/knowledge-base/articles/foster-care-and-adoption/foste
 https://portal.ct.gov/dcf/knowledge-base/articles/foster-care-and-adoption/foster-care/foster-parent-requirements,,,2026-11-20,200
 https://portal.ct.gov/dcf/policy/forms/alpha,,,2026-11-20,200
 https://powys.fosterwales.gov.wales/,2026-04-24,metadata: article:modified_time,2026-11-20,200
+https://practice.orangatamariki.govt.nz/our-work/adoption/intercountry-adoption/approving-intercountry-adoptive-applicants,2020-12-15,page: last modified,2026-11-25,200
+https://practice.orangatamariki.govt.nz/our-work/adoption/intercountry-adoption/the-new-zealand-central-authority-and-accredited-adoption-agencies-under-the-hague-convention,2020-12-15,page: last modified,2026-11-25,200
+https://practice.orangatamariki.govt.nz/our-work/care/caregivers/assessing-and-approving-caregivers-and-adoptive-applicants/assessing-the-home-environment-of-applicants,,,2026-11-25,200
+https://practice.orangatamariki.govt.nz/our-work/care/caregivers/assessing-and-approving-caregivers-and-adoptive-applicants/completing-police-vetting,2026-06-15,page: last modified,2026-11-25,200
+https://practice.orangatamariki.govt.nz/our-work/care/caregivers/assessing-and-approving-caregivers-and-adoptive-applicants/types-of-care,,,2026-11-25,200
+https://practice.orangatamariki.govt.nz/our-work/care/caregivers/reviewing-caregivers/adoptive-applicant-support-and-review,,,2026-11-25,200
+https://practice.orangatamariki.govt.nz/our-work/care/caregivers/support-for-caregivers/preparing-to-be-a-caregiver-or-adoptive-parent,2019-11-22,page: last modified,2026-11-25,200
+https://practice.orangatamariki.govt.nz/policy/caregiver-and-adoptive-applicant-assessment-and-approval,2026-10-29,page: last modified,2026-11-25,200
+https://practice.orangatamariki.govt.nz/policy/caregiver-support,,,2026-11-25,200
+https://practice.orangatamariki.govt.nz/policy/review-of-caregiver-approval,2025-06-27,page: last modified,2026-11-25,200
 https://prdext3.cga.ct.gov/app/related\20250226_2025%20Subcommittee%20Documents\20250310_Human%20Services/Attachment%20F%20Foster%20Care%20Maintenance%20Payment%20Rates.pdf,,,2026-11-20,200
 https://presse.sachsen-anhalt.de/wp-content/uploads/pdf/ministerium-fur-arbeit-soziales-gesundheit-und-gleichstellung_04_02_2025_Pressemitteilung_sozialministerium-staerkt-pflegefamilien.pdf,2025-02-04,pdf metadata: moddate,2026-11-20,200
 https://prod.fostercare.cdhs.state.co.us/Public/Create,,,2026-11-20,200
@@ -477,6 +535,7 @@ https://rcg.hawaii.gov/wp-content/uploads/2022/11/Resource-Caregiver-Renewal-Rec
 https://rcg.hawaii.gov/wp-content/uploads/2022/12/Trng.Verification-Form-DHS.final_.1-13.pdf,,,2026-11-20,200
 https://rct.fosterwales.gov.wales/contact-us/,2026-01-14,metadata: article:modified_time,2026-11-20,200
 https://recht.nrw.de/mbnrw/2026-61,,,2026-11-20,200
+https://reconnect.org.nz/becoming-a-whanau-caregiver/,,,2026-11-25,200
 https://recrutement.yvelines.fr/etre-assistant-familial/,2026-06-01,metadata: article:modified_time,2026-11-20,200
 https://register.dls.virginia.gov/details.aspx?id=8220,,,2026-11-20,500
 https://regulations.justia.com/states/alaska/title-7/part-4/chapter-67/article-1/section-7-aac-67-065,,,2026-11-20,403
@@ -519,6 +578,9 @@ https://regulations.justia.com/states/oklahoma/title-340/chapter-75/subchapter-7
 https://regulations.justia.com/states/rhode-island/title-214/chapter-40/subchapter-00/part-3/section-214-ricr-40-00-3-7,,,2026-11-20,403
 https://regulations.justia.com/states/west-virginia/agency-78/title-78/series-78-02,,,2026-11-20,403
 https://regulations.justia.com/states/west-virginia/agency-78/title-78/series-78-02/section-78-2-15,,,2026-11-20,403
+https://revisedacts.lawreform.ie/eli/1991/act/17/revised/en/html,,,2026-11-25,200
+https://revisedacts.lawreform.ie/eli/2010/act/21/revised/en/html,,,2026-11-25,200
+https://revisedacts.lawreform.ie/eli/2012/act/47/revised/en/html,,,2026-11-25,200
 https://ris.dls.virginia.gov/uploads/22VAC40/forms/35f00005306~1m.pdf,2018-10-15,pdf metadata: moddate,2026-11-20,200
 https://rules.sos.ga.gov/GAC/290-9-2,,,2026-11-20,200
 https://rules.sos.ri.gov/Regulations/part/214-40-00-3,,,2026-11-20,200
@@ -531,14 +593,19 @@ https://scotland.fosterplus.co.uk/,2026-09-16,metadata: article:modified_time,20
 https://secure.in.gov/dcs/files/12.07-v3-Licensing-Home-Visits-effective-6.1.2019-to-6.30.2023.pdf,,,2026-11-20,200
 https://secure.in.gov/dcs/files/12.14-ARCHIVED-8-31-2-22-v6.pdf,2022-08-30,pdf metadata: moddate,2026-11-20,200
 https://secure.in.gov/dcs/files/2025-Alternative-Training-Approvals.pdf,2026-05-29,pdf metadata: moddate,2026-11-20,200
+https://sede.carm.es/documentos/151/MODELO%20SOLICITUD%20ACOGIMIENTO%20FAMILIAR.doc,,,2026-11-25,200
 https://sede.comunidad.madrid/prestacion-social/acogimiento-familiar-menores,,,2026-11-20,404
 https://sede.gobiernodecanarias.org/sede/tramites/2018,,,2026-11-20,200
+https://seftonfostering.co.uk/enquire-now/,2025-06-03,metadata: article:modified_time,2026-11-25,200
+https://selfservice.mybfc.bracknell-forest.gov.uk/i/portal/p/myportal/newservicerequest/newsvc/request-auth?service=make_a_fostering_application,,,2026-11-25,robots_disallowed
 https://service.jena.de/en/official-medical-examination-case-adoption-foster-parenthood,,,2026-11-20,200
 https://service.niedersachsen.de/detail?areaId=31836&pstId=8664061,,,2026-11-20,403
 https://services.dffh.vic.gov.au/node/2246,,,2026-11-20,robots_disallowed
 https://sharenm.org/all-ages-adoption-plus/all-ages-adoption-plus,2026-11-20,metadata: article:modified_time,2026-11-20,200
 https://sharenm.org/open-skies-healthcare/therapeutic-foster-care-tfc-program,2026-11-20,metadata: article:modified_time,2026-11-20,200
 https://soziales.thueringen.de/kinder-jugendliche/landesjugendamt,2024-03,page: stand,2026-11-20,200
+https://spence-chapin.org/wp-content/uploads/2022/03/OCFS-5200A-3.docx,,,2026-11-25,200
+https://spence-chapin.org/wp-content/uploads/2022/03/OCFS-5200b-2.docx,,,2026-11-25,200
 https://spence-chapin.org/wp-content/uploads/2026/06/Application-NY-Home-Study-Only_2026.pdf,,,2026-11-20,200
 https://spurwink.org/foster-care,2022-05-06,metadata: article:modified_time,2026-11-20,200
 https://stgenssa.sccgov.org/debs/program_handbooks/charts/assets/3FosterCare/2025_Rates.htm,,,2026-11-20,200
@@ -549,9 +616,11 @@ https://tactfostering.org.uk/enquiry/,2026-04-30,metadata: article:modified_time
 https://taihs.net.au/foster-and-kinship-services/,,,2026-11-20,200
 https://teacher-education.uark.edu/background-checks/ChildMaltreatmentForm.pdf,,,2026-11-20,200
 https://teamfostering.co.uk/why-us/areas-we-cover/east-midlands/fostering-in-derby/,2025-11-11,metadata: article:modified_time,2026-11-20,200
+https://teamfostering.co.uk/your-journey/enquiry-process/,2025-02-12,metadata: article:modified_time,2026-11-25,200
 https://torfaen.fosterwales.gov.wales/how-it-works/,2026-03-24,metadata: article:modified_time,2026-11-20,200
 https://torontoccas.org/foster-care/,2026-05-05,metadata: article:modified_time,2026-11-20,200
 https://tramits.gencat.cat/ca/tramits/tramits-temes/Acolliment-familiar-dun-infant?moda=1,,,2026-11-20,robots_disallowed
+https://tramits.gencat.cat/web/shared/OVT/Departaments/DSO/Documents_i_enllacos/ICAA/2068_-_Adopcio_a_Catalunya/sollicitud-adopcio-catalunya-ca.pdf,,,2026-11-25,200
 https://ukfostering.org.uk/,,,2026-11-20,200
 https://und.edu/cfstc/foster-care-provider-education/foster-adopt.html,2026-07-28,metadata: dc.date.modified,2026-11-20,200
 https://utahfostercare.org/wp-content/uploads/2026/06/SLV26_ReadyReference.pdf,2026-06-23,pdf metadata: moddate,2026-11-20,200
@@ -571,13 +640,25 @@ https://webforms.waukeshacounty.gov/HHS/Foster-Care-How-Can-You-Help,,,2026-11-2
 https://webharvest.gov/congress116th/20210116020240/https://dcf.vermont.gov/foster,,,2026-11-20,200
 https://westerntrust.hscni.net/contact-us/general-enquiries/,,,2026-11-20,200
 https://westvirginia.kvc.org/services/foster-care/frequently-asked-questions-about-becoming-a-foster-parent-in-west-virginia/,2025-12-03,metadata: article:modified_time,2026-11-20,200
+https://wetten.overheid.nl/BWBR0002656/2025-07-05,,,2026-11-25,200
+https://wetten.overheid.nl/BWBR0004447/2018-08-01,,,2026-11-25,200
+https://wetten.overheid.nl/BWBR0004582/2020-02-13,,,2026-11-25,200
+https://wetten.overheid.nl/BWBR0034925/2026-01-01,,,2026-11-25,200
+https://wetten.overheid.nl/BWBR0034925/2026-01-01/#Hoofdstuk5_Artikel5.1,,,2026-11-25,200
+https://wetten.overheid.nl/BWBR0035779/2026-01-01,,,2026-11-25,200
+https://wetten.overheid.nl/BWBR0036007/2026-07-01,,,2026-11-25,200
 https://whyy.org/articles/foster-parent-delaware-new-jersey-pennsylvania/,2025-12-02,page: updated,2026-11-20,200
 https://www.Tennessee.gov/content/dam/tn/dcs/documents/training/tnkeyoverview.pdf,2026-05-14,pdf metadata: moddate,2026-11-20,200
 https://www.aberdeencity.gov.uk/Council-Services/social-care-and-health/kinship-adoption-and-fostering/make-an-adoption-and-fostering-enquiry,,,2026-11-20,robots_disallowed
+https://www.aberdeenshire.gov.uk/children-and-families/fostering/becoming-a-foster-carer,,,2026-11-25,200
+https://www.aberdeenshire.gov.uk/media/miibsym1/2025-information-for-prospective-adopters.pdf,2025-10-28,pdf metadata: moddate,2026-11-25,200
 https://www.act.gov.au/__data/assets/pdf_file/0012/2397729/Subsidies-and-Financial-Support-Guide-2025-26.pdf,,,2026-11-20,403
 https://www.adcogov.org/sites/default/files/KinshipApplication2020.pdf,,,2026-11-20,404
 https://www.adopteast.org.uk/contact/make-an-enquiry,,,2026-11-20,200
 https://www.adoptersforadoption.com/adoption-london/,2025-07-28,metadata: article:modified_time,2026-11-20,200
+https://www.adoptersforadoption.com/wp-content/uploads/2023/02/Adoption-Overview-2023.pdf,,,2026-11-25,200
+https://www.adoptionconnects.co.uk/about/adoption-process,,,2026-11-25,200
+https://www.adoptioncounts.org.uk/adoption-process,,,2026-11-25,200
 https://www.adoptioncounts.org.uk/enquire-about-adopting,,,2026-11-20,200
 https://www.adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/new-jersey,,,2026-11-20,200
 https://www.alberta.ca/become-a-foster-caregiver,,,2026-11-20,200
@@ -610,9 +691,11 @@ https://www.berlin.de/sen/jugend/familie-und-kinder/pflegekinder/,2026-09-02,met
 https://www.berlin.de/sen/jugend/recht/mdb-sen-jugend-rechtsvorschriften-av_pflege.pdf,,,2026-11-20,200
 https://www.berrystreet.org.au/you-can-help/become-a-foster-carer-original/foster-care-enquiry,,,2026-11-20,200
 https://www.betterhealth.vic.gov.au/health/healthyliving/foster-care,,,2026-11-20,200
+https://www.bexley.gov.uk/foster-bexley/new-fostering/how-apply-become-foster-carer,,,2026-11-25,200
 https://www.bidnetdirect.com/arkansas/solicitations/open-bids/statewide/Home-Studies/803858245,,,2026-11-20,200
 https://www.billtrack50.com/billdetail/1765688,,,2026-11-20,200
 https://www.bmfsfj.de/resource/blob/177912/19ddb6197cd6c2fbce4a07503bb1ce13/adoption-landesjugendaemter-data.pdf,2021-03-30,pdf metadata: moddate,2026-11-20,200
+https://www.bochum.de/C125830C0042AB74/vwContentByKey/N26R24Z7484HGILDE/$FILE/Bewerberfragebogen_Adoptiv_Pflegekind.pdf,,,2026-11-25,200
 https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763,,,2026-11-20,200
 https://www.boe.es/buscar/act.php?id=BOE-A-1996-1069,,,2026-11-20,200
 https://www.boe.es/buscar/act.php?id=BOE-A-1997-5498,,,2026-11-20,200
@@ -632,12 +715,16 @@ https://www.boe.es/buscar/act.php?id=BOE-A-2023-14347,,,2026-11-20,200
 https://www.boe.es/buscar/act.php?id=BOE-A-2023-8710,,,2026-11-20,200
 https://www.boe.es/buscar/act.php?id=BOE-A-2024-4784,,,2026-11-20,200
 https://www.boe.es/buscar/act.php?id=BOE-A-2026-23272,,,2026-11-20,200
+https://www.bolton.gov.uk/fostering/enquire-fostering,,,2026-11-25,200
+https://www.boystown.org.sg/fostering-services/,2026-10-15,metadata: article:modified_time,2026-11-25,200
 https://www.bradfordcft.org.uk/fostering/enquire/,,,2026-11-20,200
 https://www.bromley.gov.uk/Fosteringrequestform,,,2026-11-20,200
 https://www.canada.ca/content/dam/oag-bvg/audit-reports/documents/NLA-2026-Yukon-Child-and-Family-Services-En.PDF,2026-02-26,pdf metadata: moddate,2026-11-20,200
 https://www.canada.ca/en/auditor-general/our-work/audit-reports/nun-202305-e-44270.html,2026-07-13,metadata: dcterms.modified,2026-11-20,200
 https://www.capstonefostercare.co.uk/about-fostering/apply-for-foster-care/make-an-enquriy,,,2026-11-20,200
+https://www.caringfamilies.org.nz/becoming-a-caregiver-redesign/,2025-11-20,metadata: article:modified_time,2026-11-25,200
 https://www.carmarthenshire.gov.wales/council-services/children-family-services/adoption/,,,2026-11-20,200
+https://www.carmarthenshire.gov.wales/council-services/children-family-services/adoption/the-adoption-process/,,,2026-11-25,200
 https://www.carmarthenshire.gov.wales/council-services/children-family-services/fostering/,,,2026-11-20,200
 https://www.casapacifica.org/mental-health-services/foster-family-agency/,2026-04-06,metadata: article:modified_time,2026-11-20,200
 https://www.catholiccharitieshawaii.org/become-a-therapeutic-foster-family/,2025-03-06,metadata: article:modified_time,2026-11-20,200
@@ -689,6 +776,7 @@ https://www.childwelfare.gov/resources/home-study-requirements-prospective-paren
 https://www.cisss-cotenord.gouv.qc.ca/soins-et-services/direction-de-la-protection-de-la-jeunesse/devenir-famille-daccueil/,2026-07-09,page: dernière mise à jour,2026-11-20,200
 https://www.cisss-lanaudiere.gouv.qc.ca/famille-accueil/formulaire-soiree-information/,2025-11-27,page: dernière mise à jour,2026-11-20,200
 https://www.ciusss-capitalenationale.gouv.qc.ca/services/famille-enfants-parents/adoption-famille-accueil/devenir-famille-accueil/comment-faire,,,2026-11-20,200
+https://www.ciusss-capitalenationale.gouv.qc.ca/sites/d8/files/docs/NosServices/FamilleEnfantParent/AdoptionFamilleAccueil/2.2-Offre-service-RTF.pdf,,,2026-11-25,200
 https://www.civil-mercantil.com/sites/civil-mercantil.com/files/NSL022364.pdf,,,2026-11-20,200
 https://www.clarkcountynv.gov/residents/family_services/divisions/foster_care/become-a-foster-parent,,,2026-11-20,200
 https://www.clarvida.com/arizona/foster-care/become-a-foster-parent/,2026-09-29,metadata: article:modified_time,2026-11-20,200
@@ -702,6 +790,7 @@ https://www.comunidad.madrid/asuntos-sociales/acogimiento-familiar-menores,,,202
 https://www.comunidad.madrid/press-releases/download/116498,,,2026-11-20,404
 https://www.coramadoption.org.uk/adoption-process/,2026-11-17,metadata: article:modified_time,2026-11-20,200
 https://www.coramadoption.org.uk/contact-us/,2026-10-16,metadata: article:modified_time,2026-11-20,200
+https://www.coramadoption.org.uk/wp-content/uploads/sites/3/2026/10/Adoption-Information-Doc-A4-Oct-2026.pdf,2026-10-16,pdf metadata: moddate,2026-11-25,200
 https://www.correze.fr/formulaire-contact-infos-assistants-familiaux,,,2026-11-20,200
 https://www.courts.oregon.gov/programs/crb/news/Documents/2019%20CRB%20Conference/CertificationFosterParentsPP.pdf,,,2026-11-20,200
 https://www.cyfd.nm.gov/?p=1276,,,2026-11-20,200
@@ -728,6 +817,7 @@ https://www.departement06.fr/formulaire-reunion-informations-assistant-familial,
 https://www.depelchin.org/foster-parenting-in-texas,2026-09-28,metadata: article:modified_time,2026-11-20,200
 https://www.deutscher-verein.de/fileadmin/user_upload/dv/pdfs/Empfehlungen_Stellungnahmen/2025/DV-7-25_Pauschalbetraege_in_der_Vollzeitpflege.pdf,,,2026-11-20,200
 https://www.deux-sevres.fr/nos-missions/lenfance-et-la-famille/assistant-familial-le-departement-recrute,2026-10-26,metadata: datemodified,2026-11-20,200
+https://www.deux-sevres.fr/sites/default/files/2017-12/formulaire-demande-agr%C3%A9ment-adoption.pdf,2017-02-13,pdf metadata: moddate,2026-11-25,200
 https://www.dfps.texas.gov/Adoption_and_Foster_Care/About_TARE/Foster_Care/overview.asp,,,2026-11-20,200
 https://www.dhhs.nh.gov/programs-services/child-protection-juvenile-justice/current-foster-care-daily-rates,,,2026-11-20,403
 https://www.dhhs.nh.gov/sites/g/files/ehbemt476/files/documents/2021-11/dcyf-form-1722.pdf,,,2026-11-20,403
@@ -753,12 +843,17 @@ https://www.facsfla.ca/contact-us/,,,2026-11-20,200
 https://www.familias-acogida.es/,2026-06-11,metadata: article:modified_time,2026-11-20,200
 https://www.familyserviceri.org/programs/foster-care/,2025-01-09,metadata: og:updated_time,2026-11-20,200
 https://www.fcascotland.co.uk/enquiry/,2026-08-13,metadata: article:modified_time,2026-11-20,200
+https://www.fcascotland.co.uk/wp-content/uploads/2024/09/fca-scotland-application-new-form.docx,,,2026-11-25,200
 "https://www.fife.gov.uk/kb/docs/articles/health-and-social-care2/fostering,-adoption-and-kinship-care/adoption",,,2026-11-20,403
+https://www.formulaires.service-public.gouv.fr/gf/cerfa_13395.do,,,2026-11-25,200
 https://www.foster-adopt.org/wp-content/uploads/2017/08/2017_MO-Information-Packet138679.pdf,,,2026-11-20,404
+https://www.foster4.co.uk/6-steps/,,,2026-11-25,200
 https://www.foster4.co.uk/enquire/,,,2026-11-20,200
+https://www.foster4.co.uk/expression-of-interest-form/,,,2026-11-25,200
 https://www.fosterafuture.ca/for-foster-parents/,2024-08-14,metadata: article:modified_time,2026-11-20,200
 https://www.fosterafuture.ca/support-services/financial-support/,2026-05-12,metadata: article:modified_time,2026-11-20,200
 https://www.fosterafuture.ca/who-can-foster/,2026-03-24,metadata: article:modified_time,2026-11-20,200
+https://www.fostercareireland.ie/who-can-foster,,,2026-11-25,200
 https://www.fostereast.gov.uk/norfolk,,,2026-11-20,403
 https://www.fosteringconnections.com.au/faqs,,,2026-11-20,200
 https://www.fosteringconnections.com.au/get-in-touch,,,2026-11-20,200
@@ -766,10 +861,14 @@ https://www.fosteringconnections.com.au/whats-involved,,,2026-11-20,200
 https://www.fosteringnorthlondon.co.uk/enquire-today.html,,,2026-11-20,404
 https://www.fosteringnorthlondon.co.uk/getintouch.html,,,2026-11-20,404
 https://www.fosteringpeople.co.uk/locations/glasgow/,2026-06-29,metadata: article:modified_time,2026-11-20,200
+https://www.fosteringpeople.co.uk/wp-content/uploads/2025/05/fp-application-form-main-applicant-england-002.docx,,,2026-11-25,200
+https://www.fosteringpeople.co.uk/wp-content/uploads/2025/05/s07-fp-application-form-main-carer-scotland.docx,,,2026-11-25,200
+https://www.fosteringrotherham.com/,,,2026-11-25,200
 https://www.fosternorthlondon.gov.uk,,,2026-11-20,200
 https://www.fosterplus.co.uk/offices/glasgow/,2026-05-28,metadata: article:modified_time,2026-11-20,200
 https://www.fosterwales.flintshire.gov.uk/en/contact-us.aspx,,,2026-11-20,robots_disallowed
 https://www.fosterwithnortheast.org.uk/enquire-now,,,2026-11-20,403
+https://www.fosterwithyourlocalcouncil.org.uk/application-process/,2024-07-31,metadata: article:modified_time,2026-11-25,200
 https://www.foundcare.org.au/,2026-11-17,metadata: og:updated_time,2026-11-20,200
 https://www.fvacfss.ca/foster-care/,2026-01-16,metadata: article:modified_time,2026-11-20,200
 https://www.gard.fr/mes-demarches/pour-la-famille-les-enfants/devenir-assistante-familiale,,,2026-11-20,403
@@ -813,15 +912,22 @@ https://www.hamburg.de/resource/blob/38782/6f86871c38dba079ee994c89b3090a1e/fach
 https://www.haute-vienne.fr/nos-actions/enfance-et-famille/vous-souhaitez-accompagner-un-enfant-ou-travailler-aupres-denfants/de-facon-professionnelle/vous-souhaitez-devenir-assistant-familial,,,2026-11-20,200
 https://www.hautespyrenees.fr/assistant-familial-pourquoi-pas-vous/,,,2026-11-20,200
 https://www.heartlandforchildren.org/contact,,,2026-11-20,200
+https://www.helpinghands.ie/contact/,,,2026-11-25,200
 https://www.hennepin.us/-/media/hennepinus/residents/human-services/foster-parents/2023-2024-foster-care-rate-sheet.pdf,,,2026-11-20,error: URLError
+https://www.hephata.de/fileadmin/user_upload/bilder/Hilfe-und-Rat/Jugendhilfe/Bewerbungsfragebogen_Homepage.pdf,,,2026-11-25,200
+https://www.herefordshire.gov.uk/downloads/file/25781/foster-carer-recruitment-form,,,2026-11-25,200
+https://www.hertfordshire.gov.uk/services/childrens-social-care/fostering/fostering-service-intensive-enquiry-form.aspx,,,2026-11-25,200
 https://www.hhs.nd.gov/cfs/fostercare/provider-licensing-foster-parent-qualifications,,,2026-11-20,200
 https://www.hhs.nd.gov/sites/www/files/documents/CFS/nd-child-welfare-payment-rates.pdf,,,2026-11-20,404
+https://www.highland.gov.uk/fosteringandadoption/download/downloads/id/9/fostering_information.docx,,,2026-11-25,200
 https://www.hss.gov.nt.ca/en/services/foster-care/daily-foster-care-and-subsidized-adoption-rate,,,2026-11-20,error: TimeoutError
+https://www.hss.gov.nt.ca/sites/hss/files/resources/cfs-section-7-foster-care-services-forms.pdf,,,2026-11-25,200
 https://www.hss.gov.nt.ca/sites/hss/files/resources/standard_7.12_foster_home_capacity_for_infants_under_one_year_of_age.pdf,,,2026-11-20,200
 https://www.hss.gov.nt.ca/sites/hss/files/resources/standard_7.14_foster_parent_training.pdf,,,2026-11-20,200
 https://www.hss.gov.nt.ca/sites/hss/files/resources/standard_7.3_approval_of_regular_foster_homes.pdf,,,2026-11-20,200
 https://www.hss.gov.nt.ca/sites/hss/files/resources/standard_7.4_foster_home_criminal_record_check.pdf,,,2026-11-20,200
 https://www.hss.gov.nt.ca/sites/hss/files/resources/standard_7.6_annual_foster_home_reviews.pdf,,,2026-11-20,200
+https://www.icanz.org.nz/requirements-for-adoption,,,2026-11-25,200
 https://www.ifapa.org/training/foster-parent-training-requirements,,,2026-11-20,200
 https://www.ilga.gov/ftp/JCAR/AdminCode/089/089004020000150R.html,,,2026-11-20,robots_disallowed
 https://www.in.gov/dcs/files/12.05-Pre-Service-Training-Requirements.pdf,,,2026-11-20,404
@@ -832,17 +938,29 @@ https://www.in.gov/dcs/foster-and-kinship-care/foster-care/fosterrelative-licens
 https://www.in.gov/dcs/overview/policies/child-welfare-policies/indiana-adoption-assistance-program-forms/,2026-06-12,metadata: dcterms.modified,2026-11-20,200
 https://www.infanciaifamilia.org/que-fem/acolliment-familiar/,,,2026-11-20,200
 https://www.inverclyde.gov.uk/health-and-social-care/support-for-children-families/fostering-and-kinship/fostering,,,2026-11-20,robots_disallowed
+https://www.irishstatutebook.ie/eli/1995/si/260/made/en/print,,,2026-11-25,200
+https://www.irishstatutebook.ie/eli/1995/si/261/made/en/print,,,2026-11-25,200
+https://www.irishstatutebook.ie/eli/2025/act/19/enacted/en/print,,,2026-11-25,200
+https://www.jarabee.nl/pleegzorg/criteria-voor-pleegouderschap,,,2026-11-25,200
+https://www.jeugdzorgnederland.nl/wp-content/uploads/2026/10/Kwaliteitskader-Voorbereiding-en-screening-pleegzorg-2026-.pdf,,,2026-11-25,200
 https://www.jfandcs.com/faq,,,2026-11-20,200
 https://www.jitkentucky.org/documents/DCBS_ReimbursementList.pdf,,,2026-11-20,200
 https://www.juntadeandalucia.es/organismos/serviciossocialesfamiliaseigualdad/areas/infancia-familias/acogimiento/paginas/pasos-acogimiento.html,,,2026-11-20,200
+https://www.juntadeandalucia.es/sites/default/files/inline-files/2024/10/OFRECIMIENTO%20ACOGIMIENTO%20FAMILIAR%20%2811068%20ANEXO%20I%29.pdf,,,2026-11-25,200
+https://www.juntaex.es/documents/77055/1250295/SOLICITUD+DE+VALORACI%C3%93N+PARA+ADOPCI%C3%93N+NACIONAL.pdf/ee41540f-5417-d50d-4cb6-a7ac4f6e78cf,2025-01-20,pdf metadata: moddate,2026-11-25,200
 https://www.juntaex.es/hechos-vitales/quiero-acoger,,,2026-11-20,200
 https://www.juntaex.es/w/0639822,2026-10-13,page: fecha de actualización,2026-11-20,200
+https://www.justice.govt.nz/family/adoption/adoption-orders/,2025-09-17,page: last updated,2026-11-25,200
+https://www.justice.govt.nz/justice-sector-policy/key-initiatives/adoption-law-reform/,2026-10-07,page: last updated,2026-11-25,200
 https://www.kanaweyimik.com/contact,,,2026-11-20,200
 https://www.karlakuliny.org.au/contact-us/,2025-12-02,metadata: article:modified_time,2026-11-20,200
 https://www.karlsruhe.de/bildung-soziales/psychologische-soziale-beratung/pflegekinder-adoption,,,2026-11-20,200
 https://www.karlsruhe.de/stadt-rathaus/aktuelles/meldungen/neue-finanzielle-unterstuetzung-fuer-pflegeeltern,,,2026-11-20,200
 https://www.kennedykrieger.org/community/initiatives/therapeutic-foster-care/get-involved/how-you-can-help/steps-requirements-to-become-a-foster-parent,,,2026-11-20,200
+https://www.keyassets.co.nz/become-a-carer/who-can-foster/,,,2026-11-25,200
+https://www.kiapuawai.nz/caregiving,,,2026-11-25,200
 https://www.kidscounttoo.com/licensing,,,2026-11-20,200
+https://www.kinderbescherming.nl/voor-kind-en-ouder/pleegouderschap,2025-11-12,metadata: dcterms.modified,2026-11-25,200
 "https://www.kreis-vg.de/Leben/Kinder-Jugend-Familie/Pflegekinderdienst/index.php?object=frm,3079.4.1&NavID=2164.447",,,2026-11-20,200
 https://www.ktik-nsn.gov/social-services,,,2026-11-20,200
 https://www.lafosteringse.org.uk/application-process/,,,2026-11-20,200
@@ -917,6 +1035,7 @@ https://www.law.cornell.edu/regulations/wisconsin/Wis-Admin-Code-SS-DCF-56-13,,,
 https://www.law.cornell.edu/regulations/wyoming/049-1-Wyo-Code-R-SS-1-7,,,2026-11-20,200
 https://www.law.cornell.edu/regulations/wyoming/049-3-Wyo-Code-R-SS-3-21,,,2026-11-20,200
 https://www.lawrencecountypa.gov/getmedia/77f3e625-375e-4146-b07f-593383f33d53/ANNEX-A.docx,,,2026-11-20,200
+https://www.lbbd.gov.uk/form/leave-details-for-fostering-,,,2026-11-25,200
 https://www.legis.iowa.gov/docs/aco/arc/9860C.rtf,,,2026-11-20,200
 https://www.legis.iowa.gov/docs/iac/rule/02-18-2026.441.156.3.pdf,,,2026-11-20,200
 https://www.legis.iowa.gov/docs/iac/rule/04-05-2023.441.113.4.pdf,,,2026-11-20,200
@@ -938,6 +1057,7 @@ https://www.legislation.gov.uk/wsi/2018/1333/regulation/9,2026-06-11,metadata: d
 https://www.legislation.gov.uk/wsi/2018/1333/schedule/1,2026-06-11,metadata: dc.date.modified,2026-11-20,200
 https://www.legislation.gov.uk/wsi/2018/1339/part/10,2026-03-17,metadata: dc.date.modified,2026-11-20,200
 https://www.legislature.mi.gov/Publications/JCAR/JCAR%20Files/Rules%20before%20JCAR/Past%20Rules%20Before%20JCAR/22-13%20Foster%20Family%20Homes_Foster%20Family%20Group%20Homes/2020-003%20HS_FinalRule_StrikeBold_Version.htm,,,2026-11-20,200
+https://www.leicestershire.gov.uk/sites/default/files/field/pdf/2017/9/14/One2One_Fostering_Application_Form.pdf,,,2026-11-25,403
 https://www.leipzig.de/leben-in-leipzig/kinder-und-familie/pflegekinder-und-adoption/pflegekinder-aufnehmen,,,2026-11-20,200
 https://www.lesueurcounty.gov/477/Forms,,,2026-11-20,200
 https://www.lfsrm.org/Foster-Care,,,2026-11-20,200
@@ -966,6 +1086,7 @@ https://www.mdcps.ms.gov/sites/default/files/about-us/policies-%26-procedures/Li
 https://www.mdcps.ms.gov/sites/default/files/foster-%26-adoptive-parents/Resource%20Board%20Payment%20Schedule_2026.docx,,,2026-11-20,200
 https://www.meli.org.au/fostercare/make-a-foster-care-enquiry/,,,2026-11-20,200
 https://www.mercercountypa.gov/CYS/Documents/Resource.Care.Foster.Parent.Application.pdf,2014-08-14,pdf metadata: moddate,2026-11-20,200
+https://www.mercycare.com.au/wp-content/uploads/2021/07/FOSTER-CARER-APPLICATION-FORM_1.docx,,,2026-11-25,200
 https://www.michigan.gov/documents/mdhhs/Adoption_Checklist_-paperwork_642533_7.doc,,,2026-11-20,403
 https://www.michigan.gov/documents/mdhhs/CWL-1326-AH_1-17_571831_7.dot,,,2026-11-20,403
 https://www.michigan.gov/documents/mdhhs/CWL-3080_503483_7.pdf,,,2026-11-20,403
@@ -978,6 +1099,15 @@ https://www.mnaasged.ca/customary-care,,,2026-11-20,200
 https://www.montgomerycountyva.gov/1/contact-us,,,2026-11-20,200
 https://www.moray.gov.uk/child-protection-children-and-families/children-and-families/fostering/who-can-become-a-foster-carer/,,,2026-11-20,200
 https://www.morbihan.fr/nos-actions/accompagnement-tout-au-long-de-la-vie/enfance-famille/protection-de-lenfance/devenez-assistant-familial,,,2026-11-20,robots_disallowed
+https://www.msf.gov.sg/media-room/article/encouraging-more-to-become-foster-parents-to-teenagers,,,2026-11-25,200
+https://www.msf.gov.sg/media-room/article/safeguards-to-ensure-suitability-of-adult-who-foster-or-adopt-children-who-have-endured-traumatic-past,,,2026-11-25,200
+https://www.msf.gov.sg/what-we-do/adoption/about/adoption-of-children-act-2022,,,2026-11-25,200
+https://www.msf.gov.sg/what-we-do/adoption/adoption-eligibility/who-can-adopt,,,2026-11-25,200
+https://www.msf.gov.sg/what-we-do/adoption/adoption-eligibility/who-can-be-adopted,,,2026-11-25,200
+https://www.msf.gov.sg/what-we-do/adoption/adoption-process/step-2-undergo-home-study-report-adoption-suitability-assessment,,,2026-11-25,200
+https://www.msf.gov.sg/what-we-do/fostering/be-a-foster-parent/apply-to-be-a-foster-parent,,,2026-11-25,200
+https://www.msf.gov.sg/what-we-do/fostering/be-a-foster-parent/eligibility-criteria-for-foster-parents,,,2026-11-25,200
+https://www.msf.gov.sg/what-we-do/fostering/be-a-foster-parent/support-for-foster-parents,,,2026-11-25,200
 https://www.myflfamilies.com/foster-care/how-do-I/,2026-04-08,metadata: og:updated_time,2026-11-20,200
 https://www.mygov.scot/foster-care/become-foster-carer,2026-10-22,page: last updated,2026-11-20,200
 https://www.nationalfosteringgroup.co.uk/enquire-now/,,,2026-11-20,403
@@ -991,10 +1121,12 @@ https://www.nd.gov/eforms/Doc/sfn00974.pdf,,,2026-11-20,200
 https://www.nd.gov/eforms/Doc/sfn01037.pdf,,,2026-11-20,200
 https://www.nexusfostering.co.uk/contact-us,,,2026-11-20,200
 https://www.nhulundu.com.au/services/family-social-services/foster-kinship/,,,2026-11-20,200
+https://www.nidirect.gov.uk/articles/adoption-process-and-where-get-support,2025-03-24,metadata: og:updated_time,2026-11-25,200
 https://www.nidirect.gov.uk/articles/becoming-foster-kinship-foster-carer,2026-03-12,metadata: og:updated_time,2026-11-20,200
 https://www.nj.gov/dcf/providers/notices/PRN-2025-105-57-N.J.R.-1750.pdf,,,2026-11-20,404
 https://www.nj.gov/njfosteradopt/foster/requirements/index.html,,,2026-11-20,200
 https://www.nj.gov/njfosteradopt/services/support/,,,2026-11-20,200
+https://www.nottinghamshire.gov.uk/care/fostering/adoption-application-registration-of-interest,,,2026-11-25,404
 https://www.nsw.gov.au/community-services/foster-relative-and-kinship-care/become-a-foster-carer/how-to-become-a-carer,2026-07-20,metadata: article:modified_time,2026-11-20,200
 https://www.nsw.gov.au/community-services/foster-relative-and-kinship-care/become-a-foster-carer/who-can-be-a-carer,2026-09-25,metadata: article:modified_time,2026-11-20,200
 https://www.nsw.gov.au/community-services/foster-relative-and-kinship-care/caring-for-children-and-young-people/carer-review,2026-09-29,metadata: article:modified_time,2026-11-20,200
@@ -1013,19 +1145,44 @@ https://www.ontario.ca/document/child-protection-service-directives-forms-and-gu
 https://www.ontario.ca/laws/regulation/180155,,,2026-11-20,200
 https://www.ontario.ca/laws/regulation/180156,,,2026-11-20,200
 https://www.ontario.ca/page/become-foster-parent,2026-03-02,page: updated,2026-11-20,200
+https://www.orangatamariki.govt.nz/adoption/adopting-a-child-from-overseas/,2023-08-18,page: updated,2026-11-25,200
+https://www.orangatamariki.govt.nz/adoption/adopting-in-nz/,2023-11-15,page: updated,2026-11-25,200
+https://www.orangatamariki.govt.nz/adoption/enquiry-form/,2024-08-21,metadata: article:modified_time,2026-11-25,200
+https://www.orangatamariki.govt.nz/caregiving/becoming-a-caregiver/,2023-02-14,page: updated,2026-11-25,200
+https://www.orangatamariki.govt.nz/caregiving/becoming-a-caregiver/enquiry-form/,2025-07-25,page: updated,2026-11-25,200
+https://www.orangatamariki.govt.nz/caregiving/financial-help/caregiver-allowance/,2025-09-09,metadata: article:modified_time,2026-11-25,200
+https://www.orangatamariki.govt.nz/caregiving/financial-help/review-of-financial-assistance-for-caregivers/,2025-09-09,metadata: article:modified_time,2026-11-25,200
+https://www.orangatamariki.govt.nz/caregiving/types-of-caregiving/,2023-02-14,page: updated,2026-11-25,200
+https://www.orangatamariki.govt.nz/caregiving/who-can-care/,2023-02-13,page: updated,2026-11-25,200
+https://www.orangatamariki.govt.nz/working-with-children/information-for-providers/partnered-care/what-is-partnered-care/,2023-10-30,metadata: article:modified_time,2026-11-25,200
+https://www.orchardfostering.ie/contact-orchard-fostering/,2025-04-16,metadata: article:modified_time,2026-11-25,200
 https://www.oregon.gov/odhs/foster-care/Pages/resource-parent.aspx,,,2026-11-20,200
 https://www.oregon.gov/odhs/foster-care/pages/faq.aspx,,,2026-11-20,200
 https://www.oregon.gov/odhs/providers-partners/foster-care/Pages/training-renewal.aspx,,,2026-11-20,200
+https://www.originsfostercare.ie/apply-become-foster-carer,,,2026-11-25,200
 https://www.orne.fr/services/enfants-et-parents/assistants-familiaux,,,2026-11-20,200
 https://www.ozchild.org.au/get-involved/foster-carer-act/,2026-10-14,metadata: article:modified_time,2026-11-20,200
 https://www.pa.gov/content/dam/copapwp-pagov/en/dhs/documents/adoptpakids/documents/2025-05-05-cy-131-resource-family-applicant-registration-form.pdf,,,2026-11-20,200
 https://www.pacificclinics.org/news/what-is-a-resource-parent/,2025-03-07,metadata: og:updated_time,2026-11-20,200
 https://www.pactcharity.org/adoption-enquiry/,2026-03-13,metadata: datemodified,2026-11-20,200
 https://www.paris.fr/pages/devenir-famille-d-accueil-27433,,,2026-11-20,200
+https://www.parlan.nl/aanvragen-informatiepakket,,,2026-11-25,200
+https://www.parliament.gov.sg/docs/default-source/default-document-library/adoption-of-children-bill-12-2022.pdf,,,2026-11-25,200
 https://www.peopleslawiowa.org/index.php/research-topics/family-law/foster-care-and-adoption/becoming-foster-parent,,,2026-11-20,200
 https://www.pflegekinder-berlin.de,,,2026-11-20,200
 https://www.pflegekinder-berlin.de/servicebereich/termine-anmeldung-infoabend-und-vorbereitungsseminar/,,,2026-11-20,200
 https://www.pittcountync.gov/FormCenter/Surveys-7/Foster-Adoptive-Parent-Inquiry-48,,,2026-11-20,200
+https://www.pleegzorg.nl/informatie/geldzaken/kosten-en-vergoedingen/wanneer-heb-je-recht-op-een-pleegvergoeding,,,2026-11-25,200
+https://www.pleegzorg.nl/informatie/kennismaken-met-pleegzorg/pleegouder-worden/bestandspleegouder-worden-zo-gaat-dat,,,2026-11-25,200
+https://www.pleegzorg.nl/informatie/kennismaken-met-pleegzorg/pleegouder-worden/netwerkpleegouder-worden,,,2026-11-25,200
+https://www.pleegzorg.nl/informatie/kennismaken-met-pleegzorg/pleegouder-worden/pleegcontract,,,2026-11-25,200
+https://www.pleegzorg.nl/informatie/kennismaken-met-pleegzorg/pleegouder-worden/wie-kan-pleegouder-worden,,,2026-11-25,200
+https://www.pleegzorg.nl/informatie/kennismaken-met-pleegzorg/wat-pleegzorg/wie-doet-wat-voor-pleegouders,,,2026-11-25,200
+https://www.pleegzorg.nl/informatie/leven-als-pleeggezin/praktische-zaken/pleegzorg-combineren-met-werk,,,2026-11-25,200
+https://www.pleegzorg.nl/pleegouder-worden,,,2026-11-25,200
+https://www.pleegzorg.nl/pleegzorg-ontdekken-5-stappen/stap-3,,,2026-11-25,200
+https://www.pleegzorg.nl/pleegzorg-ontdekken-5-stappen/stap-4,,,2026-11-25,200
+https://www.pleegzorg.nl/pleegzorg-ontdekken-5-stappen/stap-5,,,2026-11-25,200
 https://www.potsdam.de/de/content/welche-voraussetzungen-muessen-pflegeeltern-erfuellen-um-ein-pflegekind-aufzunehmen,,,2026-11-20,robots_disallowed
 https://www.pressreader.com/usa/valley-city-times-record/20220527/281642488796034,,,2026-11-20,403
 https://www.princeedwardisland.ca/en/information/social-development-and-seniors/application-process-for-becoming-a-foster-family,,,2026-11-20,403
@@ -1034,6 +1191,7 @@ https://www.princeedwardisland.ca/en/service/what-you-need-when-applying-to-be-a
 https://www.princeedwardisland.ca/sites/default/files/publications/fostercarereview_pei_2019.pdf,,,2026-11-20,403
 https://www.puy-de-dome.fr/social/enfance-famille/devenir-assistant-familial.html,,,2026-11-20,200
 https://www.puyalluptribe-nsn.gov/member-services/tribal-community-wellness-division/foster-care-program/,2025-02-08,metadata: article:modified_time,2026-11-20,200
+https://www.qld.gov.au/__data/assets/pdf_file/0027/54288/frm-6-adoption-expression-interest.pdf,2025-12-10,pdf metadata: moddate,2026-11-25,200
 https://www.qld.gov.au/community/caring-child/foster-kinship-care/foster-kinship-care-become-a-carer/foster-kinship-care-top-questions,2026-08-27,page: last updated,2026-11-20,200
 https://www.qld.gov.au/community/caring-child/foster-kinship-care/foster-kinship-care-become-a-carer/foster-kinship-care-who-can-foster,2026-08-03,page: last updated,2026-11-20,200
 https://www.qld.gov.au/community/caring-child/foster-kinship-care/foster-kinship-care-become-a-carer/how-to-become-a-foster-carer/next-steps,2026-09-17,page: last updated,2026-11-20,200
@@ -1041,17 +1199,25 @@ https://www.qld.gov.au/community/caring-child/foster-kinship-care/information-fo
 https://www.qld.gov.au/community/caring-child/foster-kinship-care/information-for-carers/rights-and-responsibilities/carers-responsibilities/renewal-process,2025-04-16,page: last updated,2026-11-20,200
 https://www.quebec.ca/famille-et-soutien-aux-personnes/enfance/famille-accueil/description-famille-accueil,2023-07-25,page: dernière mise à jour,2026-11-20,200
 https://www.quebec.ca/famille-et-soutien-aux-personnes/enfance/famille-accueil/devenir-une-famille-daccueil,2025-09-02,page: dernière mise à jour,2026-11-20,200
+https://www.rading.nl/pleegzorg/,2026-11-13,metadata: article:modified_time,2026-11-25,200
 https://www.rbkc.gov.uk/data-protection/foster-west-london-privacy-notice-0,,,2026-11-20,404
 https://www.rctcbc.gov.uk/EN/Council/DataProtectionandFreedomofInformation/DataProtection/serviceprivacynotices/CommunityandChildrensServices/FosterWalesRecruitmentPrivacyNotice.aspx,,,2026-11-20,404
 https://www.regionalverband-saarbruecken.de/jugend/eltern-werden/adoption,,,2026-11-20,robots_disallowed
+https://www.revenue.ie/en/life-events-and-personal-circumstances/children/foster-care-related-payments.aspx,,,2026-11-25,200
 https://www.revisor.mn.gov/rules/2960/full,,,2026-11-20,200
 https://www.revisor.mn.gov/statutes/2025/cite/245A.16,,,2026-11-20,200
 https://www.revisor.mn.gov/statutes/?id=142A.609,,,2026-11-20,200
 https://www.ri.gov/press/view/5016,,,2026-11-20,200
+https://www.rijksoverheid.nl/actueel/nieuws/2026/01/16/wetsvoorstel-gereed-om-adoptie-uit-het-buitenland-af-te-bouwen-en-identiteitsherstel-eenvoudiger-te-maken,2026-01-23,metadata: dcterms.modified,2026-11-25,200
+https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/jeugdhulp/krijg-ik-een-vergoeding-voor-pleegzorg,2026-11-24,metadata: dcterms.modified,2026-11-25,200
+https://www.rijksoverheid.nl/themas/familie-zorg-en-gezondheid/adoptie/vraag-en-antwoord/adoptie/voorwaarden-adoptie-nederlands-kind,2026-11-04,metadata: dcterms.modified,2026-11-25,200
+https://www.rijksoverheid.nl/themas/werk/adoptieverlof-en-pleegzorgverlof/vraag-en-antwoord/adoptieverlof-en-pleegzorgverlof/hoe-lang-duurt-adoptieverlof-of-pleegzorgverlof,2025-12-12,metadata: dcterms.modified,2026-11-25,200
+https://www.royalgreenwich.gov.uk/download/downloads/id/1885/adoption_expression_of_interest_form.pdf,2018-03-14,pdf metadata: moddate,2026-11-25,200
 https://www.rummelsberger-diakonie.de/angebote/kinder-jugend-und-familie/angebote-fuer-familien/pflegekinderdienst/pflegekinderdienst,,,2026-11-20,200
 https://www.sa.gov.au/topics/care-and-support/foster-care/become-a-foster-carer/request-information-about-becoming-a-foster-carer,2024-08-27,page: page last updated,2026-11-20,200
 https://www.sa.gov.au/topics/care-and-support/foster-care/who-can-be-a-foster-carer,2026-08-07,page: page last updated,2026-11-20,200
 https://www.sacandfoxnation-nsn.gov/departments/indian-child-welfare/,,,2026-11-20,200
+https://www.santelaurentides.gouv.qc.ca/fileadmin/internet/cisss_laurentides/Soins_et_services/Ressources_hebergement/FOR_Offre_de_service_RTF_VF.docx,,,2026-11-25,200
 https://www.sarthe.fr/formulaire_de_contact,,,2026-11-20,200
 https://www.schwerin.de/politik-verwaltung/dienstleistungen/verwaltungsleistungen/Bewerbung-als-Pflegeeltern-beim-Jugendamt/,,,2026-11-20,200
 https://www.sec.state.ma.us/divisions/pubs-regs/hearings/pdf/1-16-26Public-Notice-110-CMR-7.104.pdf,,,2026-11-20,200
@@ -1068,12 +1234,16 @@ https://www.shineforth.org/contact-us/,2026-03-18,metadata: article:modified_tim
 https://www.sos.arkansas.gov/uploads/rulesRegs/Arkansas%20Register/2012/July12Reg/016.15.12-006.pdf,,,2026-11-20,200
 https://www.sos.arkansas.gov/uploads/rulesRegs/Arkansas%20Register/2014/july2014/016.15.14-005.pdf,,,2026-11-20,200
 https://www.sos.state.co.us/CCR/Upload/AGORequest/BasisAndPurposeAttachment2017-00307.pdf,,,2026-11-20,200
+https://www.southend.gov.uk/adoption-2/adoption-stage-one,,,2026-11-25,200
 https://www.srca.nm.gov/nmac/nmregister/xxx/8.26.4amend.html,,,2026-11-20,200
 https://www.stadt-koeln.de/service/produkt/pflegefamilie-werden,,,2026-11-20,200
+https://www.staffordshire.gov.uk/foster-staffordshire/thinking-fostering/fostering-village/fostering-applicant-timeline,,,2026-11-25,200
 https://www.stirling.gov.uk/social-work-social-care-and-health/adoption-fostering-and-kinship/fostering-a-child/how-to-become-a-foster-carer,,,2026-11-20,403
 https://www.sullivanny.gov/contact,,,2026-11-20,200
 https://www.sullivanny.gov/node/389,,,2026-11-20,200
 https://www.summitkids.org/Child-Services/Foster-Care/Foster-Care-Adoption-Inquiry-Form/,2026-10-28,metadata: article:modified_time,2026-11-20,200
+https://www.summitkids.org/wp-content/uploads/2023/04/ApplicationforChildPlacementJFS01691rev082022.pdf,2023-01-26,pdf metadata: moddate,2026-11-25,200
+https://www.surreycc.gov.uk/__data/assets/pdf_file/0011/519680/Application-Form-Fostering-2026.pdf,,,2026-11-25,200
 https://www.templateroller.com/template/2281446/form-04af043e-resource-family-application-other-adults-in-the-home-oklahoma.html,,,2026-11-20,200
 https://www.thefca.co.uk/regions/cymru/,2026-03-20,metadata: article:modified_time,2026-11-20,200
 https://www.thefosteringnetwork.org.uk/for-carers/becoming-a-foster-carer/who-can-foster/,,,2026-11-20,200
@@ -1083,9 +1253,22 @@ https://www.tn.gov/content/tn/dcs/program-areas/training/fpt/potential.html,,,20
 https://www.tn.gov/dcs/program-areas/foster-care-and-adoption/become-a-foster-parent/eligibility-criteria.html,,,2026-11-20,403
 https://www.tn.gov/dcs/program-areas/foster-care/resources/board-payments/board-rates.html,,,2026-11-20,403
 https://www.tn.gov/dcs/program-areas/training/provider-training/provider-fp-training.html,,,2026-11-20,200
+https://www.together4children.co.uk/adoption-process/,,,2026-11-25,200
 https://www.together4children.co.uk/contact/,,,2026-11-20,200
 https://www.toodego.com/reunion-dinformation-sur-le-metier-dassistant-familial/,,,2026-11-20,200
 https://www.torfaen.gov.uk/en/AboutTheCouncil/DataProtectionFreedomofInformation/DataProtection/Privacy-Notice/Service-Area-PNs/PN124-Fostering-Enquiries-and-Assessments-Privacy-Notice.aspx,,,2026-11-20,200
+https://www.tusla.ie/services/alternative-care/foster-care/can-i-foster/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/foster-care/can-i-foster/are-there-any-medical-conditions-which-prevent-me-from-fostering/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/foster-care/can-i-foster/can-i-work-and-foster-at-the-same-time/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/foster-care/can-i-foster/do-i-need-a-spare-room/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/foster-care/can-i-foster/will-training-be-provided/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/foster-care/can-i-foster/would-previous-convictions-prevent-someone-from-fostering/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/foster-care/foster-care-types/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/foster-care/fostering-supports/,,,2026-11-25,200
+https://www.tusla.ie/services/alternative-care/registration-and-inspection-service/non-statutory-foster-care-agencies/,,,2026-11-25,200
+https://www.tusla.ie/services/birth-information-and-tracing-and-adoption/what-is-adoption/adoption-assessment/,,,2026-11-25,200
+https://www.tusla.ie/services/birth-information-and-tracing-and-adoption/what-is-adoption/inter-country-adoption/,,,2026-11-25,200
+https://www.tusla.ie/uploads/content/Tusla_Fostering_Booklet.pdf,,,2026-11-25,200
 https://www.udel.edu/content/dam/udelImages/udaily/2016/november/pdf/FosterCare.pdf,,,2026-11-20,200
 https://www.ulstercountyny.gov/Departments/Social-Services/Divisions/Children-and-Family-Services/Foster-Care-and-Adoption/How-to-Become-a-Foster-Parent,,,2026-11-20,200
 https://www.umfs.org/?p=7379,2026-07-23,metadata: article:modified_time,2026-11-20,200
@@ -1099,10 +1282,13 @@ https://www.wa.gov.au/organisation/department-of-communities/training-new-foster
 https://www.wa.gov.au/system/files/2024-02/are_you_interested_in_foster_caring.pdf,,,2026-11-20,200
 https://www.wa.gov.au/system/files/2024-05/foster_care_faqs.pdf,,,2026-11-20,200
 https://www.wa.gov.au/system/files/2026-07/whopaysinwajuly.pdf,2026-07-03,pdf metadata: moddate,2026-11-20,200
+https://www.weechi.ca/wcm-docs/docs/naaniigaan_abinoojii/alternative_care_home_application_2019.pdf,,,2026-11-25,200
 https://www.westernbayadoption.org/home-page/contact/,2023-09-14,metadata: article:modified_time,2026-11-20,200
+https://www.wiesbaden.de/vv/medien/formulare/51/sozialdienst/Bewerbung-fuer-die-Vermittlung-eines-Pflegekindes.pdf,2022-12-29,pdf metadata: moddate,2026-11-25,200
 https://www.wiesbaden.de/vv/produkte/51/sozialdienst/eignungspruefung-fuer-interessierte-pflegeeltern,,,2026-11-20,200
 https://www.wuchopperen.org.au/contact-us/,2025-11-03,metadata: article:modified_time,2026-11-20,200
 https://www.wungening.com.au/contact/,2025-12-03,metadata: og:updated_time,2026-11-20,200
+https://www.xonar.nl/wat-wij-bieden/pleegzorg/pleegouder-worden/pleegzorg-informatie-aanvragen,,,2026-11-25,200
 https://www.xunta.gal/notas-de-prensa/-/nova/012235/xunta-incrementa-desde-mayo-las-ayudas-las-familias-acogedoras-apuesta-por-seguir,2025-04-30,metadata: datemodified,2026-11-20,200
 https://www.xunta.gal/notas-de-prensa/-/nova/026574/xunta-destaca-que-galicia-mantiene-entre-las-comunidades-autonomas-con-mejores,2026-07-09,metadata: datemodified,2026-11-20,200
 https://www.yahoo.com/news/licensed-kinship-care-pathway-aims-190234031.html,2025-05-06,metadata: datemodified,2026-11-20,200
@@ -1126,3 +1312,4 @@ https://www3.erie.gov/socialservices/basic-facts-becoming-foster-parent-erie-cou
 https://wyoleg.gov/InterimCommittee/2021/01-2021091304-0621RM028-PaymentsforFosterCareParents1.pdf,2021-09-01,pdf metadata: moddate,2026-11-20,200
 https://youcanfoster.org/northwest,,,2026-11-20,200
 https://yukon.ca/en/caregiver,,,2026-11-20,403
+https://zoek.officielebekendmakingen.nl/stcrt-2026-40388.pdf,2026-11-18,pdf metadata: moddate,2026-11-25,200

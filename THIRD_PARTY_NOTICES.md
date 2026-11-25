@@ -17,8 +17,12 @@ Each example form uses a public-sector design system from its country, without g
 | Germany | KERN UX-Standard (`@kern-ux/native` 2.9.0) | Styles ported to `site/src/styles/kern.scss` | [EUPL-1.2](LICENSE-EUPL-1.2.txt). The ported stylesheet stays under the EUPL-1.2 |
 | France | Cunningham (`@gouvfr-lasuite/cunningham-tokens` 3.1.0, `@gouvfr-lasuite/cunningham-react` 4.4.0) | Tokens and styles ported to `site/src/styles/cunningham.scss` | MIT, © France Université Numérique |
 | Spain | DESY, Government of Aragon (`desy-html` 17.0.2) | Styles ported to `site/src/styles/desy.scss` | [EUPL-1.2](LICENSE-EUPL-1.2.txt). The ported stylesheet stays under the EUPL-1.2 |
+| Netherlands | NL Design System: Utrecht component library (`@utrecht/component-library-css` 9.0.16), candidate components (`@nl-design-system-candidate/*-css`) and the Start theme (`@nl-design-system-unstable/start-design-tokens` 9.2.0) | Tokens and styles ported to `site/src/styles/nl-design.scss` | [EUPL-1.2](LICENSE-EUPL-1.2.txt). The ported stylesheet stays under the EUPL-1.2 |
+| Ireland | Government of Ireland Design System (`@ogcio/design-system-react` 1.52.0, `@ogcio/theme-govie` 1.21.8) | Tokens and styles ported to `site/src/styles/govie.scss` | MIT, © OGCIO |
+| New Zealand | New Zealand Government Design System, alpha (`@govtnz/ds` 0.2.2) | Styles ported to `site/src/styles/nzgds.scss` | MIT, © Crown copyright, Department of Internal Affairs |
+| Singapore | Singapore Government Design System (`@govtechsg/sgds-web-component` 3.31.0) | Tokens and component styles ported to `site/src/styles/sgds.scss` | MIT, © Government Technology Agency of Singapore. Logos, the state crest, the coat of arms and agency identifiers are outside the grant and are not used |
 
-The French form does not use the French State's design system (DSFR), which is reserved for State services on .gouv.fr. The Spanish form does not use the Spanish central government's design system, which is not open.
+The French form does not use the French State's design system (DSFR), which is reserved for State services on .gouv.fr. The Spanish form does not use the Spanish central government's design system, which is not open. The Irish form leaves out the GOV.IE header, the gov.ie logo and the Harp. The Singapore form leaves out the Official Government Banner, which is for .gov.sg services only. The New Zealand form leaves out the New Zealand Government logo and the coat of arms. The Dutch form does not use the central government's house style (Rijkshuisstijl), which only central government may use, or any city's theme.
 
 ## Fonts
 
@@ -28,19 +32,22 @@ All fonts are served from this site.
 |---|---|---|
 | Geist (`@fontsource-variable/geist`) | The main site | SIL Open Font License 1.1 |
 | Source Sans Pro, Merriweather, Public Sans (from USWDS) | US form | SIL Open Font License 1.1 |
-| Noto Sans and Lato (`@fontsource/noto-sans`, `@fontsource/lato`) | Canadian form | SIL Open Font License 1.1 |
+| Noto Sans and Lato (`@fontsource/noto-sans`, `@fontsource/lato`) | Canadian and Irish forms | SIL Open Font License 1.1 |
 | Fira Sans | German form, `site/public/fonts/kern/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
 | Roboto Flex | French form, `site/public/fonts/cunningham/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
 | Open Sans | Spanish form, `site/public/fonts/desy/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
+| IBM Plex Sans (`@fontsource/ibm-plex-sans` 5.3.0) | Dutch form, `site/public/fonts/nl-design/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
+| Inter (`@fontsource-variable/inter` 5.3.0) | Singapore form, `site/public/fonts/sgds/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
 
 ## Icons
 
 | Icons | Where | Licence |
 |---|---|---|
 | Lucide (`lucide-react`) | The main site | ISC |
-| Material Symbols (inline SVG paths) | French form | Apache License 2.0, © Google |
+| Material Symbols (inline SVG paths) | French and Irish forms | Apache License 2.0, © Google |
 | Material Icons (modified by GSA, from USWDS) | US form | Apache License 2.0 |
-| AGDS, GCDS and KERN icons (inline SVG paths) | Australian, Canadian and German forms | The licence of each design system, above |
+| Tabler Icons 3.35.0 (inline SVG paths) | Dutch form | MIT, © Paweł Kuna |
+| AGDS, GCDS, KERN, NZGDS and SGDS icons (inline SVG paths) | Australian, Canadian, German, New Zealand and Singapore forms | The licence of each design system, above |
 
 ## Flags
 

@@ -61,6 +61,12 @@
     } else if (field === "postal_code_fsa") {
       const upper = value.toUpperCase().replace(/\s/g, "");
       input.value = upper.length === 6 ? upper.slice(0, 3) : upper;
+    } else if (field === "eircode_routing_key") {
+      const upper = value.toUpperCase().replace(/\s/g, "");
+      input.value = upper.length === 7 ? upper.slice(0, 3) : upper;
+    } else if (field === "nl_postcode") {
+      const upper = value.toUpperCase().replace(/\s/g, "");
+      input.value = /^[0-9]{4}[A-Z]{2}$/.test(upper) ? upper.slice(0, 4) : upper;
     } else {
       input.value = value.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "");
       if (field === "au_postcode") input.value = value.replace(/\s+/g, "");

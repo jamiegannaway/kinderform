@@ -1,0 +1,1673 @@
+// NL Design System for the Dutch reference form only.
+//
+// Ported from these packages, licensed under the European Union Public Licence v. 1.2
+// (EUPL-1.2): https://interoperable-europe.ec.europa.eu/collection/eupl
+//   - @utrecht/component-library-css 9.0.16 (https://github.com/nl-design-system/utrecht),
+//     Copyright Gemeente Utrecht, Frameless B.V. and the Community for NL Design System
+//   - @nl-design-system-candidate/button-css 2.0.0, heading-css 2.0.0, link-css 3.0.0,
+//     paragraph-css 3.0.0, form-field-description-css 1.0.0, form-field-error-message-css 1.0.0
+//     and code-block-css 2.0.0 (https://github.com/nl-design-system/candidate)
+//   - @nl-design-system-unstable/start-design-tokens 9.2.0, the neutral "Start" theme
+//     (https://github.com/nl-design-system/themes)
+// This file is a derivative of that work, so it stays under the EUPL-1.2, unlike the rest of
+// the site's code, which is MIT. Changes from the original: rules are scoped under .nlds-form,
+// only the components and states the form uses are kept, the Start tokens are limited to the
+// ones those rules read, and the form template rules at the end are ours.
+//
+// Where a candidate component exists (button, heading, link, paragraph, form field description,
+// form field error message, code block), the form uses it. Everything else is the Utrecht
+// component library: form field, fieldset, label, text box, radio button, checkbox, alert, icon,
+// lists and pre-heading. Utrecht's components are styled here only with the Start theme's
+// values; nothing comes from @utrecht/design-tokens (Gemeente Utrecht's own theme).
+//
+// No government branding: no Rijkshuisstijl (central government house style), no
+// @rijkshuisstijl-community packages, no government logo or RO fonts, no city's theme and no coat
+// of arms. Kinderform is not a government service.
+//
+// Why a port: the published CSS sets its tokens on a theme class meant for the whole page and
+// expects the page to load every component. Here everything, tokens included, sits under
+// .nlds-form, so nothing reaches the rest of the site (Tailwind and shadcn/ui), and it is all
+// unlayered, so Tailwind's preflight (in @layer base) cannot undo it. The form keeps the Start
+// theme's light colours in both site themes, like the other countries' forms.
+//
+// Icons are Tabler Icons 3.35.0 (MIT, © Paweł Kuna), the icon set NL Design System uses, drawn
+// as inline SVG by site/src/components/reference-form/nl-design.tsx.
+//
+// Fonts: IBM Plex Sans 400 and 700 (SIL Open Font License 1.1), as the Start theme uses,
+// self-hosted in site/public/fonts/nl-design/ with OFL.txt. They are the Latin subsets from
+// @fontsource/ibm-plex-sans 5.3.0. The record on the confirmation page asks for IBM Plex Mono,
+// as Start does, and falls back to the system's monospace font: Plex Mono is not shipped.
+
+// ---- Fonts --------------------------------------------------------------------------
+
+$latin: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+  U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+$latin-ext: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+  U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+
+@mixin face($weight, $subset, $range) {
+  @font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-display: swap;
+    font-weight: $weight;
+    src: url("/fonts/nl-design/ibm-plex-sans-#{$subset}-#{$weight}-normal.woff2") format("woff2");
+    unicode-range: $range;
+  }
+}
+@include face(400, "latin", $latin);
+@include face(700, "latin", $latin);
+// Answers are shown in 400, so names with letters beyond basic Latin (ł, ş, ğ) keep the font.
+@include face(400, "latin-ext", $latin-ext);
+
+// ---- Mixins -----------------------------------------------------------------------------
+
+// Utrecht's focus ring (focus-ring.scss): a dashed outline with a light ring around it.
+@mixin focus-ring {
+  --_utrecht-focus-ring-box-shadow: 0 0 0 var(--utrecht-focus-outline-width, 0)
+    var(--utrecht-focus-inverse-outline-color, transparent);
+  box-shadow: var(--_utrecht-focus-ring-box-shadow);
+  outline-color: var(--utrecht-focus-outline-color, revert);
+  outline-offset: var(--utrecht-focus-outline-offset, revert);
+  outline-style: var(--utrecht-focus-outline-style, revert);
+  outline-width: var(--utrecht-focus-outline-width, revert);
+  z-index: 1;
+}
+
+@mixin sr-only {
+  block-size: 1px !important;
+  border-width: 0 !important;
+  clip-path: inset(50%) !important;
+  inline-size: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+}
+
+// ---- Root: tokens, surface and type ---------------------------------------------------
+
+.nlds-form {
+  // Start theme tokens (@nl-design-system-unstable/start-design-tokens 9.2.0, light, from
+  // dist/theme.css): only those the rules below read, directly or through another token.
+
+  --utrecht-unordered-list-marker-color: var(--basis-color-default-color-document);
+  --utrecht-unordered-list-item-padding-inline-start: var(--basis-space-inline-md);
+  --utrecht-unordered-list-item-margin-block-start: var(--basis-space-block-sm);
+  --utrecht-unordered-list-item-margin-block-end: var(--basis-space-block-sm);
+  --utrecht-unordered-list-padding-inline-start: var(--basis-space-inline-xl);
+  --utrecht-unordered-list-line-height: var(--basis-text-line-height-md);
+  --utrecht-unordered-list-font-size: var(--basis-text-font-size-md);
+  --utrecht-textbox-invalid-color: var(--basis-form-control-color);
+  --utrecht-textbox-invalid-border-width: var(--basis-form-control-invalid-border-width);
+  --utrecht-textbox-invalid-border-color: var(--basis-form-control-invalid-border-color);
+  --utrecht-textbox-invalid-background-color: var(--basis-form-control-invalid-background-color);
+  --utrecht-textbox-hover-color: var(--basis-form-control-hover-color);
+  --utrecht-textbox-hover-border-color: var(--basis-form-control-hover-border-color);
+  --utrecht-textbox-hover-background-color: var(--basis-form-control-hover-background-color);
+  --utrecht-textbox-focus-color: var(--basis-form-control-focus-color);
+  --utrecht-textbox-focus-border-color: var(--basis-form-control-focus-border-color);
+  --utrecht-textbox-focus-background-color: var(--basis-form-control-focus-background-color);
+  --utrecht-textbox-padding-inline-start: var(--basis-form-control-padding-inline-start);
+  --utrecht-textbox-padding-inline-end: var(--basis-form-control-padding-inline-end);
+  --utrecht-textbox-padding-block-start: var(--basis-form-control-padding-block-start);
+  --utrecht-textbox-padding-block-end: var(--basis-form-control-padding-block-end);
+  --utrecht-textbox-max-inline-size: var(--basis-form-control-max-inline-size);
+  --utrecht-textbox-line-height: var(--basis-form-control-line-height);
+  --utrecht-textbox-font-weight: var(--basis-form-control-font-weight);
+  --utrecht-textbox-font-size: var(--basis-form-control-font-size);
+  --utrecht-textbox-font-family: var(--basis-form-control-font-family);
+  --utrecht-textbox-color: var(--basis-form-control-color);
+  --utrecht-textbox-border-width: var(--basis-form-control-border-width);
+  --utrecht-textbox-border-radius: var(--basis-form-control-border-radius);
+  --utrecht-textbox-border-color: var(--basis-form-control-border-color);
+  --utrecht-textbox-background-color: var(--basis-form-control-background-color);
+  --utrecht-radio-button-checked-hover-color: var(--basis-color-action-1-inverse-color-hover);
+  --utrecht-radio-button-checked-hover-border-width: var(--basis-form-control-hover-border-width);
+  --utrecht-radio-button-checked-hover-border-color: var(--basis-color-transparent);
+  --utrecht-radio-button-checked-hover-background-color: var(--basis-form-control-hover-accent-color);
+  --utrecht-radio-button-checked-focus-color: var(--basis-form-control-focus-color);
+  --utrecht-radio-button-checked-focus-border-width: var(--basis-form-control-focus-border-width);
+  --utrecht-radio-button-checked-focus-border-color: var(--basis-form-control-focus-border-color);
+  --utrecht-radio-button-checked-focus-background-color: var(--basis-form-control-focus-accent-color);
+  --utrecht-radio-button-checked-active-color: var(--basis-color-action-1-inverse-color-active);
+  --utrecht-radio-button-checked-active-border-width: var(--basis-form-control-active-border-width);
+  --utrecht-radio-button-checked-active-border-color: var(--basis-color-transparent);
+  --utrecht-radio-button-checked-active-background-color: var(--basis-form-control-active-accent-color);
+  --utrecht-radio-button-checked-color: var(--basis-color-action-1-inverse-color-default);
+  --utrecht-radio-button-checked-border-width: var(--basis-form-control-border-width);
+  --utrecht-radio-button-checked-border-color: var(--basis-color-transparent);
+  --utrecht-radio-button-checked-background-color: var(--basis-form-control-accent-color);
+  --utrecht-radio-button-invalid-color: var(--utrecht-radio-button-invalid-border-color);
+  --utrecht-radio-button-invalid-border-width: var(--basis-form-control-invalid-border-width);
+  --utrecht-radio-button-invalid-border-color: var(--basis-form-control-invalid-border-color);
+  --utrecht-radio-button-hover-color: var(--utrecht-radio-button-hover-border-color);
+  --utrecht-radio-button-hover-border-width: var(--basis-form-control-hover-border-width);
+  --utrecht-radio-button-hover-border-color: var(--basis-form-control-hover-border-color);
+  --utrecht-radio-button-hover-background-color: var(--basis-form-control-hover-background-color);
+  --utrecht-radio-button-focus-color: var(--utrecht-radio-button-focus-border-color);
+  --utrecht-radio-button-focus-border-width: var(--basis-form-control-focus-border-width);
+  --utrecht-radio-button-focus-border-color: var(--basis-form-control-focus-border-color);
+  --utrecht-radio-button-focus-background-color: var(--basis-form-control-focus-background-color);
+  --utrecht-radio-button-active-color: var(--utrecht-radio-button-active-border-color);
+  --utrecht-radio-button-active-border-width: var(--basis-form-control-active-border-width);
+  --utrecht-radio-button-active-border-color: var(--basis-form-control-active-border-color);
+  --utrecht-radio-button-active-background-color: var(--basis-form-control-active-background-color);
+  --utrecht-radio-button-icon-size: var(--basis-size-3xs);
+  --utrecht-radio-button-size: var(--basis-size-xs);
+  --utrecht-radio-button-margin-inline-end: var(--basis-space-inline-md);
+  --utrecht-radio-button-color: var(--utrecht-radio-button-border-color);
+  --utrecht-radio-button-border-width: var(--basis-form-control-border-width);
+  --utrecht-radio-button-border-color: var(--basis-form-control-border-color);
+  --utrecht-radio-button-background-color: var(--basis-form-control-background-color);
+  --utrecht-pre-heading-margin-block-start: var(--basis-space-none);
+  --utrecht-pre-heading-margin-block-end: var(--basis-space-none);
+  --utrecht-pre-heading-line-height: var(--basis-text-line-height-md);
+  --utrecht-pre-heading-font-weight: var(--basis-text-font-weight-bold);
+  --utrecht-pre-heading-font-size: var(--basis-text-font-size-sm);
+  --utrecht-pre-heading-font-family: var(--basis-text-font-family-default);
+  --utrecht-pre-heading-color: var(--basis-color-default-color-document);
+  --utrecht-ordered-list-item-padding-inline-start: var(--basis-space-inline-md);
+  --utrecht-ordered-list-item-margin-block-start: var(--basis-space-block-sm);
+  --utrecht-ordered-list-item-margin-block-end: var(--basis-space-block-sm);
+  --utrecht-ordered-list-padding-inline-start: var(--basis-space-inline-3xl);
+  --utrecht-ordered-list-line-height: var(--basis-text-line-height-md);
+  --utrecht-ordered-list-font-size: var(--basis-text-font-size-md);
+  --utrecht-link-focus-visible-text-decoration: none;
+  --utrecht-link-focus-color: var(--basis-focus-color);
+  --utrecht-link-focus-background-color: var(--basis-focus-background-color);
+  --utrecht-icon-size: var(--basis-size-icon-md);
+  --utrecht-icon-inset-block-start: var(--basis-space-none);
+  --utrecht-form-label-radio-font-weight: var(--basis-text-font-weight-default);
+  --utrecht-form-label-checkbox-font-weight: var(--basis-text-font-weight-default);
+  --utrecht-form-label-checkbox-color: var(--basis-color-default-color-document);
+  --utrecht-form-label-font-weight: var(--basis-text-font-weight-bold);
+  --utrecht-form-label-font-size: var(--basis-text-font-size-md);
+  --utrecht-form-label-color: var(--basis-color-default-color-document);
+  --utrecht-form-field-error-message-margin-block-end: var(--basis-space-block-lg);
+  --utrecht-form-field-description-margin-block-start: var(--basis-space-none);
+  --utrecht-form-field-description-margin-block-end: var(--basis-space-block-lg);
+  --utrecht-form-field-label-margin-block-end: var(--basis-space-block-lg);
+  --utrecht-form-field-invalid-padding-inline-start: var(--basis-space-inline-xl);
+  --utrecht-form-field-invalid-border-inline-start-width: var(--basis-border-width-md);
+  --utrecht-form-field-invalid-border-inline-start-color: var(--basis-color-negative-border-default);
+  --utrecht-form-field-margin-block-start: var(--basis-space-none);
+  --utrecht-form-field-margin-block-end: var(--basis-space-none);
+  --utrecht-form-fieldset-legend-margin-block-end: var(--basis-space-block-lg);
+  --utrecht-form-fieldset-legend-line-height: var(--basis-text-line-height-md);
+  --utrecht-form-fieldset-legend-font-weight: var(--basis-text-font-weight-bold);
+  --utrecht-form-fieldset-legend-font-size: var(--basis-text-font-size-md);
+  --utrecht-form-fieldset-legend-font-family: var(--basis-text-font-family-default);
+  --utrecht-form-fieldset-legend-color: var(--basis-color-default-color-document);
+  --utrecht-form-fieldset-invalid-padding-inline-start: var(--basis-space-inline-xl);
+  --utrecht-form-fieldset-invalid-border-inline-start-width: var(--basis-border-width-md);
+  --utrecht-form-fieldset-invalid-border-inline-start-color: var(--basis-color-negative-border-default);
+  --utrecht-form-fieldset-margin-block-start: var(--basis-space-none);
+  --utrecht-form-fieldset-margin-block-end: var(--basis-space-none);
+  --utrecht-document-line-height: var(--basis-text-line-height-md);
+  --utrecht-document-font-weight: var(--basis-text-font-weight-default);
+  --utrecht-document-font-size: var(--basis-text-font-size-md);
+  --utrecht-document-font-family: var(--basis-text-font-family-default);
+  --utrecht-document-color: var(--basis-color-default-color-document);
+  --utrecht-document-background-color: var(--basis-color-default-bg-document);
+  --utrecht-checkbox-checked-hover-color: var(--basis-color-action-1-inverse-color-hover);
+  --utrecht-checkbox-checked-hover-border-width: var(--basis-form-control-hover-border-width);
+  --utrecht-checkbox-checked-hover-border-color: var(--basis-color-transparent);
+  --utrecht-checkbox-checked-hover-background-color: var(--basis-form-control-hover-accent-color);
+  --utrecht-checkbox-checked-active-color: var(--basis-color-action-1-inverse-color-active);
+  --utrecht-checkbox-checked-active-border-width: var(--basis-form-control-active-border-width);
+  --utrecht-checkbox-checked-active-border-color: var(--basis-color-transparent);
+  --utrecht-checkbox-checked-active-background-color: var(--basis-form-control-active-accent-color);
+  --utrecht-checkbox-checked-color: var(--basis-color-action-1-inverse-color-default);
+  --utrecht-checkbox-checked-border-width: var(--basis-form-control-border-width);
+  --utrecht-checkbox-checked-border-color: var(--basis-color-transparent);
+  --utrecht-checkbox-checked-background-color: var(--basis-form-control-accent-color);
+  --utrecht-checkbox-invalid-border-width: var(--basis-form-control-invalid-border-width);
+  --utrecht-checkbox-invalid-border-color: var(--basis-form-control-invalid-border-color);
+  --utrecht-checkbox-hover-border-width: var(--basis-form-control-hover-border-width);
+  --utrecht-checkbox-hover-border-color: var(--basis-form-control-hover-border-color);
+  --utrecht-checkbox-hover-background-color: var(--basis-form-control-hover-background-color);
+  --utrecht-checkbox-focus-border-width: var(--basis-form-control-focus-border-width);
+  --utrecht-checkbox-focus-border-color: var(--basis-form-control-focus-border-color);
+  --utrecht-checkbox-focus-background-color: var(--basis-form-control-focus-background-color);
+  --utrecht-checkbox-active-border-width: var(--basis-form-control-active-border-width);
+  --utrecht-checkbox-active-border-color: var(--basis-form-control-active-border-color);
+  --utrecht-checkbox-active-background-color: var(--basis-form-control-active-background-color);
+  --utrecht-checkbox-size: var(--basis-size-xs);
+  --utrecht-checkbox-margin-inline-end: var(--basis-space-inline-md);
+  --utrecht-checkbox-border-width: var(--basis-form-control-border-width);
+  --utrecht-checkbox-border-radius: var(--basis-border-radius-none);
+  --utrecht-checkbox-border-color: var(--basis-form-control-border-color);
+  --utrecht-checkbox-background-color: var(--basis-form-control-background-color);
+  --utrecht-alert-warning-color: var(--basis-color-warning-color-document);
+  --utrecht-alert-warning-border-color: var(--basis-color-warning-border-default);
+  --utrecht-alert-warning-background-color: var(--basis-color-warning-bg-default);
+  --utrecht-alert-ok-color: var(--basis-color-positive-color-document);
+  --utrecht-alert-ok-border-color: var(--basis-color-positive-border-default);
+  --utrecht-alert-ok-background-color: var(--basis-color-positive-bg-default);
+  --utrecht-alert-error-color: var(--basis-color-negative-color-document);
+  --utrecht-alert-error-border-color: var(--basis-color-negative-border-default);
+  --utrecht-alert-error-background-color: var(--basis-color-negative-bg-default);
+  --utrecht-alert-info-color: var(--basis-color-info-color-document);
+  --utrecht-alert-info-border-color: var(--basis-color-info-border-default);
+  --utrecht-alert-info-background-color: var(--basis-color-info-bg-default);
+  --utrecht-alert-message-row-gap: var(--basis-space-row-md);
+  --utrecht-alert-icon-warning-color: var(--basis-color-warning-color-default);
+  --utrecht-alert-icon-ok-color: var(--basis-color-positive-color-default);
+  --utrecht-alert-icon-error-color: var(--basis-color-negative-color-default);
+  --utrecht-alert-icon-info-color: var(--basis-color-info-color-default);
+  --utrecht-alert-icon-color: var(--basis-color-info-color-default);
+  --utrecht-alert-icon-size: var(--basis-size-icon-xl);
+  --utrecht-alert-icon-inset-block-start: var(--basis-space-none);
+  --utrecht-alert-content-row-gap: var(--basis-space-row-xl);
+  --utrecht-alert-padding-inline-start: var(--basis-space-inline-xl);
+  --utrecht-alert-padding-inline-end: var(--basis-space-inline-xl);
+  --utrecht-alert-padding-block-start: var(--basis-space-block-xl);
+  --utrecht-alert-padding-block-end: var(--basis-space-block-2xl);
+  --utrecht-alert-margin-block-start: var(--basis-space-none);
+  --utrecht-alert-margin-block-end: var(--basis-space-none);
+  --utrecht-alert-column-gap: var(--basis-space-column-md);
+  --utrecht-alert-color: var(--basis-color-info-color-document);
+  --utrecht-alert-border-width: var(--basis-border-width-md);
+  --utrecht-alert-border-radius: var(--basis-border-radius-none);
+  --utrecht-alert-border-color: var(--basis-color-info-border-default);
+  --utrecht-alert-background-color: var(--basis-color-info-bg-default);
+
+  --nl-paragraph-lead-margin-block-start: var(--basis-space-none);
+  --nl-paragraph-lead-margin-block-end: var(--basis-space-none);
+  --nl-paragraph-lead-line-height: var(--basis-text-line-height-lg);
+  --nl-paragraph-lead-font-weight: var(--basis-text-font-weight-default);
+  --nl-paragraph-lead-font-size: var(--basis-text-font-size-lg);
+  --nl-paragraph-margin-block-start: var(--basis-space-none);
+  --nl-paragraph-margin-block-end: var(--basis-space-none);
+  --nl-paragraph-line-height: var(--basis-text-line-height-md);
+  --nl-paragraph-font-weight: var(--basis-text-font-weight-default);
+  --nl-paragraph-font-size: var(--basis-text-font-size-md);
+  --nl-paragraph-font-family: var(--basis-text-font-family-default);
+  --nl-paragraph-color: var(--basis-color-default-color-document);
+  --nl-link-hover-text-decoration-thickness: auto;
+  --nl-link-hover-text-decoration-line: none;
+  --nl-link-hover-color: var(--basis-color-action-2-color-hover);
+  --nl-link-active-color: var(--basis-color-action-2-color-active);
+  --nl-link-text-underline-offset: auto;
+  --nl-link-text-decoration-thickness: auto;
+  --nl-link-text-decoration-line: underline;
+  --nl-link-text-decoration-color: var(--basis-color-action-2-color-default);
+  --nl-link-color: var(--basis-color-action-2-color-default);
+  --nl-heading-level-3-margin-block-start: var(--basis-space-none);
+  --nl-heading-level-3-margin-block-end: var(--basis-space-none);
+  --nl-heading-level-3-line-height: var(--basis-text-line-height-xl);
+  --nl-heading-level-3-font-weight: var(--basis-heading-font-weight);
+  --nl-heading-level-3-font-size: var(--basis-text-font-size-xl);
+  --nl-heading-level-3-font-family: var(--basis-heading-font-family);
+  --nl-heading-level-3-color: var(--basis-heading-color);
+  --nl-heading-level-2-margin-block-start: var(--basis-space-none);
+  --nl-heading-level-2-margin-block-end: var(--basis-space-none);
+  --nl-heading-level-2-line-height: var(--basis-text-line-height-2xl);
+  --nl-heading-level-2-font-weight: var(--basis-heading-font-weight);
+  --nl-heading-level-2-font-size: var(--basis-text-font-size-2xl);
+  --nl-heading-level-2-font-family: var(--basis-heading-font-family);
+  --nl-heading-level-2-color: var(--basis-heading-color);
+  --nl-heading-level-1-margin-block-start: var(--basis-space-none);
+  --nl-heading-level-1-margin-block-end: var(--basis-space-none);
+  --nl-heading-level-1-line-height: var(--basis-text-line-height-3xl);
+  --nl-heading-level-1-font-weight: var(--basis-heading-font-weight);
+  --nl-heading-level-1-font-size: var(--basis-text-font-size-3xl);
+  --nl-heading-level-1-font-family: var(--basis-heading-font-family);
+  --nl-heading-level-1-color: var(--basis-heading-color);
+  --nl-form-field-error-message-icon-size: var(--basis-size-icon-md);
+  --nl-form-field-error-message-icon-color: var(--basis-color-negative-color-default);
+  --nl-form-field-error-message-margin-block-start: var(--basis-space-none);
+  --nl-form-field-error-message-margin-block-end: var(--basis-space-none);
+  --nl-form-field-error-message-line-height: var(--basis-text-line-height-md);
+  --nl-form-field-error-message-font-weight: var(--basis-text-font-weight-default);
+  --nl-form-field-error-message-font-size: var(--basis-text-font-size-md);
+  --nl-form-field-error-message-font-family: var(--basis-text-font-family-default);
+  --nl-form-field-error-message-column-gap: var(--basis-space-text-xs);
+  --nl-form-field-error-message-color: var(--basis-color-negative-color-default);
+  --nl-form-field-description-margin-block-start: var(--basis-space-none);
+  --nl-form-field-description-margin-block-end: var(--basis-space-none);
+  --nl-form-field-description-line-height: var(--basis-text-line-height-md);
+  --nl-form-field-description-font-weight: var(--basis-text-font-weight-default);
+  --nl-form-field-description-font-size: var(--basis-text-font-size-md);
+  --nl-form-field-description-font-family: var(--basis-text-font-family-default);
+  --nl-form-field-description-color: var(--basis-color-default-color-subtle);
+  --nl-code-block-padding-inline: var(--basis-space-inline-xl);
+  --nl-code-block-padding-block: var(--basis-space-block-xl);
+  --nl-code-block-line-height: var(--basis-text-line-height-md);
+  --nl-code-block-font-size: var(--basis-text-font-size-md);
+  --nl-code-block-font-family: var(--basis-text-font-family-monospace);
+  --nl-code-block-color: var(--basis-color-default-color-document);
+  --nl-code-block-border-radius: var(--basis-border-radius-sm);
+  --nl-code-block-background-color: var(--basis-color-default-bg-default);
+  --nl-button-secondary-hover-color: var(--basis-color-action-1-color-hover);
+  --nl-button-secondary-hover-border-color: var(--basis-color-action-1-border-hover);
+  --nl-button-secondary-hover-background-color: var(--basis-color-action-1-bg-hover);
+  --nl-button-secondary-active-color: var(--basis-color-action-1-color-active);
+  --nl-button-secondary-active-border-color: var(--basis-color-action-1-border-active);
+  --nl-button-secondary-active-background-color: var(--basis-color-action-1-bg-active);
+  --nl-button-secondary-line-height: var(--nl-button-default-line-height);
+  --nl-button-secondary-font-weight: var(--nl-button-default-font-weight);
+  --nl-button-secondary-font-size: var(--nl-button-default-font-size);
+  --nl-button-secondary-color: var(--basis-color-action-1-color-default);
+  --nl-button-secondary-border-width: var(--nl-button-default-border-width);
+  --nl-button-secondary-border-color: var(--basis-color-action-1-border-default);
+  --nl-button-secondary-background-color: var(--basis-color-transparent);
+  --nl-button-primary-hover-color: var(--basis-color-action-1-inverse-color-hover);
+  --nl-button-primary-hover-border-color: var(--basis-color-transparent);
+  --nl-button-primary-hover-background-color: var(--basis-color-action-1-inverse-bg-hover);
+  --nl-button-primary-active-color: var(--basis-color-action-1-inverse-color-active);
+  --nl-button-primary-active-border-color: var(--basis-color-transparent);
+  --nl-button-primary-active-background-color: var(--basis-color-action-1-inverse-bg-active);
+  --nl-button-primary-line-height: var(--nl-button-default-line-height);
+  --nl-button-primary-font-weight: var(--nl-button-default-font-weight);
+  --nl-button-primary-font-size: var(--nl-button-default-font-size);
+  --nl-button-primary-color: var(--basis-color-action-1-inverse-color-default);
+  --nl-button-primary-border-width: var(--nl-button-default-border-width);
+  --nl-button-primary-border-color: var(--basis-color-transparent);
+  --nl-button-primary-background-color: var(--basis-color-action-1-inverse-bg-default);
+  --nl-button-default-hover-color: var(--basis-color-default-color-hover);
+  --nl-button-default-hover-border-color: var(--basis-color-default-border-hover);
+  --nl-button-default-hover-background-color: var(--basis-color-default-bg-hover);
+  --nl-button-default-active-color: var(--basis-color-default-color-active);
+  --nl-button-default-active-border-color: var(--basis-color-default-border-active);
+  --nl-button-default-active-background-color: var(--basis-color-default-bg-active);
+  --nl-button-default-line-height: var(--basis-text-line-height-md);
+  --nl-button-default-font-weight: var(--basis-text-font-weight-bold);
+  --nl-button-default-font-size: var(--basis-text-font-size-md);
+  --nl-button-default-color: var(--basis-color-default-color-default);
+  --nl-button-default-border-width: var(--basis-border-width-sm);
+  --nl-button-default-border-color: var(--basis-color-default-border-default);
+  --nl-button-default-background-color: var(--basis-color-default-bg-default);
+  --nl-button-icon-size: var(--basis-size-icon-md);
+  --nl-button-focus-color: var(--basis-focus-color);
+  --nl-button-focus-border-color: var(--basis-color-transparent);
+  --nl-button-focus-background-color: var(--basis-focus-background-color);
+  --nl-button-padding-inline-start: var(--basis-space-inline-xl);
+  --nl-button-padding-inline-end: var(--basis-space-inline-xl);
+  --nl-button-padding-block-start: var(--basis-space-block-md);
+  --nl-button-padding-block-end: var(--basis-space-block-md);
+  --nl-button-min-inline-size: var(--basis-pointer-target-min-inline-size);
+  --nl-button-min-block-size: var(--basis-pointer-target-min-block-size);
+  --nl-button-font-family: var(--basis-text-font-family-default);
+  --nl-button-column-gap: var(--basis-space-text-xs);
+  --nl-button-border-radius: var(--basis-border-radius-md);
+
+  --todo-form-summary-item-value-row-padding-inline-start: var(--basis-space-none);
+  --todo-form-summary-item-value-row-padding-inline-end: var(--basis-space-none);
+  --todo-form-summary-item-value-row-padding-block-start: var(--basis-space-block-lg);
+  --todo-form-summary-item-value-row-padding-block-end: var(--basis-space-block-lg);
+  --todo-form-summary-item-value-padding-inline-start: var(--basis-space-none);
+  --todo-form-summary-item-value-padding-inline-end: var(--basis-space-none);
+  --todo-form-summary-item-value-padding-block-start: var(--basis-space-block-sm);
+  --todo-form-summary-item-value-padding-block-end: var(--basis-space-block-lg);
+  --todo-form-summary-item-value-font-weight: var(--basis-text-font-weight-default);
+  --todo-form-summary-item-key-row-padding-inline-start: var(--basis-space-none);
+  --todo-form-summary-item-key-row-padding-inline-end: var(--basis-space-inline-xl);
+  --todo-form-summary-item-key-row-padding-block-start: var(--basis-space-block-lg);
+  --todo-form-summary-item-key-row-padding-block-end: var(--basis-space-block-lg);
+  --todo-form-summary-item-key-padding-inline-start: var(--basis-space-none);
+  --todo-form-summary-item-key-padding-inline-end: var(--basis-space-none);
+  --todo-form-summary-item-key-padding-block-start: var(--basis-space-block-lg);
+  --todo-form-summary-item-key-padding-block-end: var(--basis-space-block-sm);
+  --todo-form-summary-item-key-font-weight: var(--basis-text-font-weight-bold);
+  --todo-form-summary-item-action-row-padding-inline-start: var(--basis-space-inline-xl);
+  --todo-form-summary-item-action-row-padding-inline-end: var(--basis-space-none);
+  --todo-form-summary-item-action-row-padding-block-start: var(--basis-space-block-lg);
+  --todo-form-summary-item-action-row-padding-block-end: var(--basis-space-block-lg);
+  --todo-form-summary-item-action-padding-block-start: var(--basis-space-block-lg);
+  --todo-form-summary-item-action-padding-block-end: var(--basis-space-block-lg);
+  --todo-form-summary-item-color: var(--basis-color-default-color-document);
+  --todo-form-summary-item-border-width: var(--basis-border-width-sm);
+  --todo-form-summary-item-border-color: var(--basis-color-default-border-subtle);
+  --todo-form-summary-line-height: var(--basis-text-line-height-md);
+  --todo-form-summary-font-size: var(--basis-text-font-size-md);
+  --todo-form-summary-font-family: var(--basis-text-font-family-default);
+  --todo-form-field-label-suffix-margin-inline-start: var(--basis-space-inline-sm);
+  --todo-form-field-label-suffix-line-height: var(--basis-text-line-height-md);
+  --todo-form-field-label-suffix-font-weight: var(--basis-text-font-weight-default);
+  --todo-form-field-label-suffix-font-size: var(--basis-text-font-size-md);
+  --todo-form-field-label-suffix-font-family: var(--basis-text-font-family-default);
+  --todo-form-field-label-suffix-color: var(--basis-color-default-color-document);
+
+  --basis-pointer-target-min-inline-size: 3rem;
+  --basis-pointer-target-min-block-size: 3rem;
+  --basis-heading-font-weight: var(--basis-text-font-weight-bold);
+  --basis-heading-font-family: var(--basis-text-font-family-default);
+  --basis-heading-color: var(--basis-color-default-color-document);
+  --basis-form-control-invalid-border-width: var(--basis-border-width-md);
+  --basis-form-control-invalid-border-color: var(--basis-color-negative-border-default);
+  --basis-form-control-invalid-background-color: var(--basis-color-negative-bg-default);
+  --basis-form-control-hover-color: var(--basis-form-control-color);
+  --basis-form-control-hover-border-width: var(--basis-border-width-md);
+  --basis-form-control-hover-border-color: var(--basis-color-default-border-hover);
+  --basis-form-control-hover-background-color: var(--basis-color-default-bg-hover);
+  --basis-form-control-hover-accent-color: var(--basis-color-action-1-inverse-bg-hover);
+  --basis-form-control-focus-color: var(--basis-form-control-color);
+  --basis-form-control-focus-border-width: var(--basis-border-width-md);
+  --basis-form-control-focus-border-color: var(--basis-color-default-border-active);
+  --basis-form-control-focus-background-color: var(--basis-form-control-background-color);
+  --basis-form-control-focus-accent-color: var(--basis-form-control-background-color);
+  --basis-form-control-active-border-width: var(--basis-border-width-md);
+  --basis-form-control-active-border-color: var(--basis-color-default-border-active);
+  --basis-form-control-active-background-color: var(--basis-color-default-bg-active);
+  --basis-form-control-active-accent-color: var(--basis-color-action-1-inverse-bg-active);
+  --basis-form-control-max-inline-size: 25rem;
+  --basis-form-control-padding-inline-start: var(--basis-space-inline-lg);
+  --basis-form-control-padding-inline-end: var(--basis-space-inline-lg);
+  --basis-form-control-padding-block-start: var(--basis-space-block-lg);
+  --basis-form-control-padding-block-end: var(--basis-space-block-lg);
+  --basis-form-control-line-height: var(--basis-text-line-height-md);
+  --basis-form-control-font-weight: var(--basis-text-font-weight-default);
+  --basis-form-control-font-size: var(--basis-text-font-size-md);
+  --basis-form-control-font-family: var(--basis-text-font-family-default);
+  --basis-form-control-color: var(--basis-color-default-color-document);
+  --basis-form-control-border-width: var(--basis-border-width-sm);
+  --basis-form-control-border-radius: 0px;
+  --basis-form-control-border-color: var(--basis-color-default-border-default);
+  --basis-form-control-background-color: var(--basis-color-default-bg-document);
+  --basis-form-control-accent-color: var(--basis-color-action-1-inverse-bg-default);
+  --basis-focus-outline-width: var(--basis-border-width-md);
+  --basis-focus-outline-style: dashed;
+  --basis-focus-outline-offset: 0px;
+  --basis-focus-inverse-outline-color: #ffffff;
+  --basis-focus-outline-color: #0b0c0c;
+  --basis-focus-color: #0b0c0c;
+  --basis-focus-background-color: #ffdd00;
+  --basis-border-width-md: 0.125rem;
+  --basis-border-width-sm: 0.0625rem;
+  --basis-border-radius-md: 8px;
+  --basis-border-radius-sm: 4px;
+  --basis-border-radius-none: 0px;
+  --basis-size-icon-xl: 2rem;
+  --basis-size-icon-md: 1.5rem;
+  --basis-size-xs: 24px;
+  --basis-size-3xs: 8px;
+  --basis-space-row-xl: 16px;
+  --basis-space-row-md: 8px;
+  --basis-space-column-md: 8px;
+  --basis-space-text-xs: 4px;
+  --basis-space-block-4xl: 32px;
+  --basis-space-block-3xl: 24px;
+  --basis-space-block-2xl: 20px;
+  --basis-space-block-xl: 16px;
+  --basis-space-block-lg: 12px;
+  --basis-space-block-md: 8px;
+  --basis-space-block-sm: 4px;
+  --basis-space-inline-3xl: 24px;
+  --basis-space-inline-xl: 16px;
+  --basis-space-inline-lg: 12px;
+  --basis-space-inline-md: 8px;
+  --basis-space-inline-sm: 4px;
+  --basis-space-none: 0px;
+  --basis-color-action-1-inverse-color-active: var(--basis-color-accent-1-inverse-color-active);
+  --basis-color-action-1-inverse-color-hover: var(--basis-color-accent-1-inverse-color-hover);
+  --basis-color-action-1-inverse-color-default: var(--basis-color-accent-1-inverse-color-default);
+  --basis-color-action-1-inverse-bg-active: var(--basis-color-accent-1-inverse-bg-active);
+  --basis-color-action-1-inverse-bg-hover: var(--basis-color-accent-1-inverse-bg-hover);
+  --basis-color-action-1-inverse-bg-default: var(--basis-color-accent-1-inverse-bg-default);
+  --basis-color-accent-1-inverse-color-active: #ffffff;
+  --basis-color-accent-1-inverse-color-hover: #ffffff;
+  --basis-color-accent-1-inverse-color-default: #ffffff;
+  --basis-color-accent-1-inverse-bg-active: #003b81;
+  --basis-color-accent-1-inverse-bg-hover: #04499a;
+  --basis-color-accent-1-inverse-bg-default: #1b59a4;
+  --basis-color-warning-color-document: #27190a;
+  --basis-color-warning-color-default: #844c12;
+  --basis-color-warning-border-default: #c8700e;
+  --basis-color-warning-bg-default: #ffeedd;
+  --basis-color-positive-color-document: #00210c;
+  --basis-color-positive-color-default: #006827;
+  --basis-color-positive-border-default: #009b3a;
+  --basis-color-positive-bg-default: #e4f5ea;
+  --basis-color-negative-color-document: #410000;
+  --basis-color-negative-color-default: #b70000;
+  --basis-color-negative-border-default: #f14848;
+  --basis-color-negative-bg-default: #feeded;
+  --basis-color-info-color-document: #001b3c;
+  --basis-color-info-color-default: #1b59a4;
+  --basis-color-info-border-default: #5c89be;
+  --basis-color-info-bg-default: #ecf1f7;
+  --basis-color-action-2-color-active: var(--basis-color-accent-1-color-active);
+  --basis-color-action-2-color-hover: var(--basis-color-accent-1-color-hover);
+  --basis-color-action-2-color-default: var(--basis-color-accent-1-color-default);
+  --basis-color-action-1-color-active: var(--basis-color-accent-1-color-active);
+  --basis-color-action-1-color-hover: var(--basis-color-accent-1-color-hover);
+  --basis-color-action-1-color-default: var(--basis-color-accent-1-color-default);
+  --basis-color-action-1-border-active: var(--basis-color-accent-1-border-active);
+  --basis-color-action-1-border-hover: var(--basis-color-accent-1-border-hover);
+  --basis-color-action-1-border-default: var(--basis-color-accent-1-border-default);
+  --basis-color-action-1-bg-active: var(--basis-color-accent-1-bg-active);
+  --basis-color-action-1-bg-hover: var(--basis-color-accent-1-bg-hover);
+  --basis-color-accent-1-color-active: #003b81;
+  --basis-color-accent-1-color-hover: #04499a;
+  --basis-color-accent-1-color-default: #1b59a4;
+  --basis-color-accent-1-border-active: #3f74b2;
+  --basis-color-accent-1-border-hover: #4e7fb8;
+  --basis-color-accent-1-border-default: #5c89be;
+  --basis-color-accent-1-bg-active: #dde6f1;
+  --basis-color-accent-1-bg-hover: #e4ecf4;
+  --basis-color-default-color-document: #1b1b1b;
+  --basis-color-default-color-subtle: #636363;
+  --basis-color-default-color-active: #3e3e3e;
+  --basis-color-default-color-hover: #4b4b4b;
+  --basis-color-default-color-default: #595959;
+  --basis-color-default-border-active: #727272;
+  --basis-color-default-border-hover: #7c7c7c;
+  --basis-color-default-border-default: #868686;
+  --basis-color-default-border-subtle: #c4c4c4;
+  --basis-color-default-bg-active: #e5e5e5;
+  --basis-color-default-bg-hover: #ebebeb;
+  --basis-color-default-bg-default: #f1f1f1;
+  --basis-color-default-bg-document: #fcfcfc;
+  --basis-color-transparent: rgba(0, 0, 0, 0);
+  --basis-text-line-height-3xl: 1.25;
+  --basis-text-line-height-2xl: 1.25;
+  --basis-text-line-height-xl: 1.25;
+  --basis-text-line-height-lg: 1.25;
+  --basis-text-line-height-md: 1.5;
+  --basis-text-font-size-3xl: 2rem;
+  --basis-text-font-size-2xl: 1.75rem;
+  --basis-text-font-size-xl: 1.5rem;
+  --basis-text-font-size-lg: 1.25rem;
+  --basis-text-font-size-md: 1rem;
+  --basis-text-font-size-sm: 0.875rem;
+  --basis-text-font-weight-bold: 700;
+  --basis-text-font-weight-default: 400;
+  --basis-text-font-family-monospace: 'IBM Plex Mono', monospace;
+  --basis-text-font-family-default: 'IBM Plex Sans', sans-serif;
+
+  // Ours. Start gives Utrecht's focus ring no values, so it takes them from Start's basis focus
+  // tokens: a 2px dashed outline, a white ring and, on links and buttons, a yellow background.
+  --utrecht-focus-outline-color: var(--basis-focus-outline-color);
+  --utrecht-focus-outline-offset: var(--basis-focus-outline-offset);
+  --utrecht-focus-outline-style: var(--basis-focus-outline-style);
+  --utrecht-focus-outline-width: var(--basis-focus-outline-width);
+  --utrecht-focus-inverse-outline-color: var(--basis-focus-inverse-outline-color);
+
+  // The form brings its own light surface, text colour and font (Utrecht Document). It sets no
+  // padding or margin: the dialog around it does, and an unlayered padding here would beat
+  // Tailwind's p-* classes.
+  color-scheme: light;
+  box-sizing: border-box;
+  // Contains the visually hidden (position: absolute) text. Without it, inside a fixed dialog
+  // that text would overflow the dialog box and scrollIntoView would shift the dialog.
+  position: relative;
+  // On phones the dialog's scroll area has a fixed height: fill it, so the surface has no edge.
+  min-block-size: 100%;
+  background-color: var(--utrecht-document-background-color, inherit);
+  color: var(--utrecht-document-color, inherit);
+  font-family: var(--utrecht-document-font-family, inherit);
+  font-size: var(--utrecht-document-font-size, inherit);
+  font-weight: var(--utrecht-document-font-weight, inherit);
+  line-height: var(--utrecht-document-line-height, inherit);
+  overflow-wrap: break-word;
+  text-align: start;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+
+  // Resets the components assume. :where() keeps them below the component classes.
+  :where(*, *::before, *::after) {
+    box-sizing: border-box;
+  }
+  :where(h1, h2, h3, p, ul, ol, dl, dd, pre, legend, details, summary) {
+    margin: 0;
+    padding: 0;
+  }
+  :where(strong) {
+    font-weight: var(--basis-text-font-weight-bold);
+  }
+  :where(input, button) {
+    font-family: inherit;
+  }
+
+  // ---- Paragraph (candidate paragraph-css 3.0.0) ---------------------------------------------
+
+  .nl-paragraph {
+    box-sizing: border-box;
+    color: var(--nl-paragraph-color, inherit);
+    font-family: var(--nl-paragraph-font-family, inherit);
+    font-size: var(--nl-paragraph-font-size, inherit);
+    font-weight: var(--nl-paragraph-font-weight, inherit);
+    line-height: var(--nl-paragraph-line-height, inherit);
+    margin-block-end: var(--nl-paragraph-margin-block-end, revert);
+    margin-block-start: var(--nl-paragraph-margin-block-start, revert);
+  }
+  .nl-paragraph--lead {
+    font-size: var(--nl-paragraph-lead-font-size, var(--nl-paragraph-font-size, inherit));
+    font-weight: var(--nl-paragraph-lead-font-weight, var(--nl-paragraph-font-weight, inherit));
+    line-height: var(--nl-paragraph-lead-line-height, var(--nl-paragraph-line-height, inherit));
+    margin-block-end: var(--nl-paragraph-lead-margin-block-end, var(--nl-paragraph-margin-block-end, revert));
+    margin-block-start: var(--nl-paragraph-lead-margin-block-start, var(--nl-paragraph-margin-block-start, revert));
+  }
+
+  // ---- Heading (candidate heading-css 2.0.0) -------------------------------------------------
+  // The level class sets the look; the element sets the level, so an h2 can look like level 3.
+
+  .nl-heading {
+    box-sizing: border-box;
+    break-after: avoid;
+    break-inside: avoid;
+  }
+  .nl-heading--level-1 {
+    color: var(--nl-heading-level-1-color, inherit);
+    font-family: var(--nl-heading-level-1-font-family);
+    font-size: var(--nl-heading-level-1-font-size, revert);
+    font-weight: var(--nl-heading-level-1-font-weight, bold);
+    line-height: var(--nl-heading-level-1-line-height);
+    margin-block-end: var(--nl-heading-level-1-margin-block-end, revert);
+    margin-block-start: var(--nl-heading-level-1-margin-block-start, revert);
+  }
+  .nl-heading--level-2 {
+    color: var(--nl-heading-level-2-color, inherit);
+    font-family: var(--nl-heading-level-2-font-family);
+    font-size: var(--nl-heading-level-2-font-size, revert);
+    font-weight: var(--nl-heading-level-2-font-weight, bold);
+    line-height: var(--nl-heading-level-2-line-height);
+    margin-block-end: var(--nl-heading-level-2-margin-block-end, revert);
+    margin-block-start: var(--nl-heading-level-2-margin-block-start, revert);
+  }
+  .nl-heading--level-3 {
+    color: var(--nl-heading-level-3-color, inherit);
+    font-family: var(--nl-heading-level-3-font-family);
+    font-size: var(--nl-heading-level-3-font-size, revert);
+    font-weight: var(--nl-heading-level-3-font-weight, bold);
+    line-height: var(--nl-heading-level-3-line-height);
+    margin-block-end: var(--nl-heading-level-3-margin-block-end, revert);
+    margin-block-start: var(--nl-heading-level-3-margin-block-start, revert);
+  }
+
+  // ---- Link (candidate link-css 3.0.0) ---------------------------------------------------------
+
+  .nl-link:any-link {
+    --_nl-link-forced-colors-color: LinkText;
+    box-sizing: border-box;
+    color: var(--_nl-link-state-color, var(--nl-link-color, var(--_nl-link-forced-colors-color)));
+    text-decoration-color: var(--_nl-link-state-text-decoration-color, var(--nl-link-text-decoration-color, currentcolor));
+    text-decoration-line: var(--_nl-link-state-text-decoration-line, var(--nl-link-text-decoration-line, underline));
+    text-decoration-skip-ink: all;
+    text-decoration-thickness: max(var(--_nl-link-state-text-decoration-thickness, var(--nl-link-text-decoration-thickness)), 1px);
+    text-underline-offset: var(--nl-link-text-underline-offset);
+  }
+  .nl-link:any-link:hover {
+    --_nl-link-forced-colors-color: LinkText;
+    --_nl-link-state-color: var(--nl-link-hover-color);
+    --_nl-link-state-text-decoration-line: var(--nl-link-hover-text-decoration-line);
+    --_nl-link-state-text-decoration-thickness: var(--nl-link-hover-text-decoration-thickness);
+    text-decoration-skip-ink: none;
+  }
+  .nl-link:any-link:active {
+    --_nl-link-forced-colors-color: ActiveText;
+    --_nl-link-state-color: var(--nl-link-active-color);
+  }
+  // The candidate link leaves focus-visible to do. Ours: Utrecht Link's focus state, with
+  // Start's values for it (dark text on yellow, no underline, the focus ring).
+  .nl-link:any-link:focus-visible {
+    @include focus-ring;
+    --_nl-link-state-color: var(--utrecht-link-focus-color);
+    --_nl-link-state-text-decoration-line: var(--utrecht-link-focus-visible-text-decoration);
+    background-color: var(--utrecht-link-focus-background-color, transparent);
+    text-decoration-skip-ink: none;
+  }
+
+  // ---- Button (candidate button-css 2.0.0): default, primary and secondary -------------------
+
+  .nl-button {
+    --nl-icon-block-size: var(--nl-button-icon-size);
+    --nl-icon-inline-size: var(--nl-button-icon-size);
+    --nl-icon-color: currentColor;
+    align-items: center;
+    block-size: fit-content;
+    border-radius: var(--nl-button-border-radius);
+    border-style: solid;
+    box-sizing: border-box;
+    column-gap: var(--nl-button-column-gap);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--nl-button-font-family);
+    font-feature-settings: inherit;
+    inline-size: fit-content;
+    justify-content: center;
+    min-block-size: var(--nl-button-min-block-size, max(44px, fit-content));
+    min-inline-size: var(--nl-button-min-inline-size, max(44px, fit-content));
+    overflow-wrap: break-word;
+    padding-block-end: var(--nl-button-padding-block-end);
+    padding-block-start: var(--nl-button-padding-block-start);
+    padding-inline-end: var(--nl-button-padding-inline-end);
+    padding-inline-start: var(--nl-button-padding-inline-start);
+    position: relative;
+    text-align: start;
+    text-box-trim: trim-both;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: middle;
+    // Default
+    background-color: var(--nl-button-default-background-color);
+    border-color: var(--nl-button-default-border-color);
+    border-width: var(--nl-button-default-border-width);
+    color: var(--nl-button-default-color);
+    font-size: var(--nl-button-default-font-size);
+    font-weight: var(--nl-button-default-font-weight);
+    line-height: var(--nl-button-default-line-height);
+  }
+  @media screen and (forced-colors: active) {
+    .nl-button {
+      background-color: ButtonFace !important;
+      border-color: ButtonText !important;
+      color: ButtonText !important;
+    }
+    .nl-button:hover {
+      border-color: Highlight !important;
+    }
+  }
+  .nl-button__icon-start,
+  .nl-button__icon-end {
+    line-height: 0;
+  }
+  .nl-button__label {
+    background-color: inherit;
+    overflow-wrap: break-word;
+    text-box-trim: trim-both;
+  }
+  // A pointer target of at least 24 by 24 pixels (WCAG 2.5.8).
+  .nl-button::after {
+    content: "";
+    block-size: 24px;
+    display: block;
+    inline-size: 24px;
+    left: 50%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  .nl-button:hover {
+    background-color: var(--nl-button-default-hover-background-color);
+    border-color: var(--nl-button-default-hover-border-color);
+    color: var(--nl-button-default-hover-color);
+  }
+  .nl-button:active {
+    background-color: var(--nl-button-default-active-background-color);
+    border-color: var(--nl-button-default-active-border-color);
+    color: var(--nl-button-default-active-color);
+  }
+
+  .nl-button:where(.nl-button--primary) {
+    background-color: var(--nl-button-primary-background-color);
+    border-color: var(--nl-button-primary-border-color);
+    border-width: var(--nl-button-primary-border-width);
+    color: var(--nl-button-primary-color);
+    font-size: var(--nl-button-primary-font-size);
+    font-weight: var(--nl-button-primary-font-weight);
+    line-height: var(--nl-button-primary-line-height);
+  }
+  .nl-button:where(.nl-button--primary):hover {
+    background-color: var(--nl-button-primary-hover-background-color);
+    border-color: var(--nl-button-primary-hover-border-color);
+    color: var(--nl-button-primary-hover-color);
+  }
+  .nl-button:where(.nl-button--primary):active {
+    background-color: var(--nl-button-primary-active-background-color);
+    border-color: var(--nl-button-primary-active-border-color);
+    color: var(--nl-button-primary-active-color);
+  }
+
+  .nl-button:where(.nl-button--secondary) {
+    background-color: var(--nl-button-secondary-background-color);
+    border-color: var(--nl-button-secondary-border-color);
+    border-width: var(--nl-button-secondary-border-width);
+    color: var(--nl-button-secondary-color);
+    font-size: var(--nl-button-secondary-font-size);
+    font-weight: var(--nl-button-secondary-font-weight);
+    line-height: var(--nl-button-secondary-line-height);
+  }
+  .nl-button:where(.nl-button--secondary):hover {
+    background-color: var(--nl-button-secondary-hover-background-color);
+    border-color: var(--nl-button-secondary-hover-border-color);
+    color: var(--nl-button-secondary-hover-color);
+  }
+  .nl-button:where(.nl-button--secondary):active {
+    background-color: var(--nl-button-secondary-active-background-color);
+    border-color: var(--nl-button-secondary-active-border-color);
+    color: var(--nl-button-secondary-active-color);
+  }
+
+  .nl-button:focus-visible {
+    @include focus-ring;
+    background-color: var(--nl-button-focus-background-color);
+    border-color: var(--nl-button-focus-border-color);
+    color: var(--nl-button-focus-color);
+  }
+
+  // ---- Form field description (candidate form-field-description-css 1.0.0) -----------------
+
+  .nl-form-field-description {
+    box-sizing: border-box;
+    color: var(--nl-form-field-description-color);
+    font-family: var(--nl-form-field-description-font-family);
+    font-size: var(--nl-form-field-description-font-size);
+    font-weight: var(--nl-form-field-description-font-weight);
+    line-height: var(--nl-form-field-description-line-height);
+    margin-block-end: var(--nl-form-field-description-margin-block-end);
+    margin-block-start: var(--nl-form-field-description-margin-block-start);
+  }
+
+  // ---- Form field error message (candidate form-field-error-message-css 1.0.0) ------------
+
+  .nl-form-field-error-message {
+    align-items: baseline;
+    color: var(--nl-form-field-error-message-color);
+    column-gap: var(--nl-form-field-error-message-column-gap);
+    display: flex;
+    font-family: var(--nl-form-field-error-message-font-family);
+    font-size: var(--nl-form-field-error-message-font-size);
+    font-weight: var(--nl-form-field-error-message-font-weight);
+    line-height: var(--nl-form-field-error-message-line-height);
+    margin-block-end: var(--nl-form-field-error-message-margin-block-end);
+    margin-block-start: var(--nl-form-field-error-message-margin-block-start);
+  }
+  .nl-form-field-error-message__icon {
+    --nl-icon-block-size: var(--nl-form-field-error-message-icon-size);
+    --nl-icon-inline-size: var(--nl-form-field-error-message-icon-size);
+    color: var(--nl-form-field-error-message-icon-color);
+    flex-shrink: 0;
+    font-size: var(--nl-form-field-error-message-icon-size);
+    line-height: 0;
+    margin-block: 0;
+  }
+  .nl-form-field-error-message__content {
+    flex: 1;
+    margin-block: 0;
+  }
+
+  // ---- Code block (candidate code-block-css 2.0.0) ---------------------------------------------
+
+  .nl-code-block {
+    background-color: var(--nl-code-block-background-color);
+    border-radius: var(--nl-code-block-border-radius);
+    box-sizing: border-box;
+    color: var(--nl-code-block-color);
+    display: block;
+    font-family: var(--nl-code-block-font-family, monospace), monospace;
+    font-size: var(--nl-code-block-font-size);
+    hyphens: none;
+    line-height: var(--nl-code-block-line-height);
+    padding-block: var(--nl-code-block-padding-block);
+    padding-inline: var(--nl-code-block-padding-inline);
+    tab-size: 4;
+    white-space: pre-wrap;
+  }
+  .nl-code-block__code {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  // ---- Icon (Utrecht icon) -----------------------------------------------------------------
+
+  .utrecht-icon {
+    block-size: var(--utrecht-icon-size);
+    color: var(--utrecht-icon-color);
+    display: inline-block;
+    font-size: var(--utrecht-icon-size);
+    inline-size: var(--utrecht-icon-size);
+    inset-block-start: var(--utrecht-icon-inset-block-start, 0);
+    position: relative;
+  }
+  .utrecht-icon svg {
+    height: 100%;
+    pointer-events: none;
+    width: 100%;
+  }
+
+  // ---- Pre-heading (Utrecht) -----------------------------------------------------------------
+
+  .utrecht-pre-heading {
+    color: var(--utrecht-pre-heading-color, var(--utrecht-heading-color, var(--utrecht-document-color, inherit)));
+    font-family: var(--utrecht-pre-heading-font-family, var(--utrecht-heading-font-family, var(--utrecht-document-font-family)));
+    font-size: var(--utrecht-pre-heading-font-size);
+    font-weight: var(--utrecht-pre-heading-font-weight, var(--utrecht-heading-font-weight, bold));
+    line-height: var(--utrecht-pre-heading-line-height);
+    margin-block-end: calc(var(--utrecht-space-around, 0) * var(--utrecht-pre-heading-margin-block-end, 0));
+    margin-block-start: calc(var(--utrecht-space-around, 0) * var(--utrecht-pre-heading-margin-block-start, 0));
+  }
+
+  // ---- Lists (Utrecht unordered list and ordered list) -----------------------------------
+
+  .utrecht-unordered-list {
+    --_utrecht-unordered-list-list-style-type: var(--utrecht-unordered-list-list-style-type, "●");
+    box-sizing: border-box;
+    font-family: var(--utrecht-document-font-family, inherit);
+    font-size: var(--utrecht-unordered-list-font-size, var(--utrecht-document-font-size, inherit));
+    line-height: var(--utrecht-unordered-list-line-height, var(--utrecht-document-line-height, inherit));
+    list-style-type: var(--_utrecht-unordered-list-list-style-type, "●");
+    margin-block-end: calc(var(--utrecht-space-around, 0) * var(--utrecht-unordered-list-margin-block-end, var(--utrecht-paragraph-margin-block-end, 0)));
+    margin-block-start: calc(var(--utrecht-space-around, 0) * var(--utrecht-unordered-list-margin-block-start, var(--utrecht-paragraph-margin-block-start, 0)));
+    margin-inline-start: var(--utrecht-unordered-list-margin-inline-start, 1ch);
+    padding-inline-start: var(--utrecht-unordered-list-padding-inline-start, 0);
+    text-align: start;
+  }
+  .utrecht-unordered-list__item {
+    margin-block-end: var(--utrecht-unordered-list-item-margin-block-end);
+    margin-block-start: var(--utrecht-unordered-list-item-margin-block-start);
+    padding-inline-start: var(--utrecht-unordered-list-item-padding-inline-start, 1ch);
+  }
+  .utrecht-unordered-list__item::marker {
+    color: var(--utrecht-unordered-list-marker-color);
+    font-size: 1em;
+  }
+  .utrecht-ordered-list {
+    box-sizing: border-box;
+    font-family: var(--utrecht-document-font-family, inherit);
+    font-size: var(--utrecht-ordered-list-font-size, var(--utrecht-unordered-list-font-size, var(--utrecht-document-font-size, inherit)));
+    line-height: var(--utrecht-ordered-list-line-height, var(--utrecht-unordered-list-line-height, var(--utrecht-document-line-height, inherit)));
+    list-style-type: decimal;
+    margin-block-end: calc(var(--utrecht-space-around, 0) * var(--utrecht-ordered-list-margin-block-end, var(--utrecht-unordered-list-margin-block-end, 0)));
+    margin-block-start: calc(var(--utrecht-space-around, 0) * var(--utrecht-ordered-list-margin-block-start, var(--utrecht-unordered-list-margin-block-start, 0)));
+    padding-inline-start: var(--utrecht-ordered-list-padding-inline-start, var(--utrecht-unordered-list-padding-inline-start, 2ch));
+    text-align: start;
+  }
+  .utrecht-ordered-list__item {
+    margin-block-end: var(--utrecht-ordered-list-item-margin-block-end, var(--utrecht-unordered-list-item-margin-block-end));
+    margin-block-start: var(--utrecht-ordered-list-item-margin-block-start, var(--utrecht-unordered-list-item-margin-block-start));
+    padding-inline-start: var(--utrecht-ordered-list-item-padding-inline-start, var(--utrecht-unordered-list-item-padding-inline-start, 1ch));
+  }
+
+  // ---- Alert (Utrecht) -------------------------------------------------------------------------
+
+  .utrecht-alert {
+    background-color: var(--_utrecht-alert-background-color, var(--utrecht-alert-background-color));
+    border-color: var(--_utrecht-alert-border-color, var(--utrecht-alert-border-color));
+    border-radius: var(--utrecht-alert-border-radius, 0);
+    border-style: solid;
+    border-width: var(--_utrecht-alert-border-width, var(--utrecht-alert-border-width, 0));
+    color: var(--_utrecht-alert-color, var(--utrecht-alert-color));
+    column-gap: var(--utrecht-alert-column-gap);
+    display: flex;
+    flex-direction: row;
+    margin-block-end: calc(var(--utrecht-space-around, 0) * var(--utrecht-alert-margin-block-end, 0));
+    margin-block-start: calc(var(--utrecht-space-around, 0) * var(--utrecht-alert-margin-block-start, 0));
+    padding-block-end: var(--utrecht-alert-padding-block-end);
+    padding-block-start: var(--utrecht-alert-padding-block-start);
+    padding-inline-end: var(--utrecht-alert-padding-inline-end);
+    padding-inline-start: var(--utrecht-alert-padding-inline-start);
+  }
+  .utrecht-alert__icon {
+    --utrecht-icon-color: var(--_utrecht-alert-icon-color, var(--utrecht-alert-icon-color));
+    --utrecht-icon-size: var(--utrecht-alert-icon-size);
+    --utrecht-icon-inset-block-start: var(--utrecht-alert-icon-inset-block-start);
+  }
+  .utrecht-alert__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--utrecht-alert-content-row-gap);
+  }
+  .utrecht-alert__message {
+    --utrecht-heading-color: var(--utrecht-alert-color);
+    --utrecht-paragraph-color: var(--utrecht-alert-color);
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--utrecht-alert-message-row-gap);
+  }
+  .utrecht-alert--info {
+    --_utrecht-alert-icon-color: var(--utrecht-alert-icon-info-color);
+    --_utrecht-alert-background-color: var(--utrecht-alert-info-background-color);
+    --_utrecht-alert-border-color: var(--utrecht-alert-info-border-color);
+    --_utrecht-alert-border-width: var(--utrecht-alert-info-border-width);
+    --_utrecht-alert-color: var(--utrecht-alert-info-color);
+  }
+  .utrecht-alert--ok {
+    --_utrecht-alert-icon-color: var(--utrecht-alert-icon-ok-color);
+    --_utrecht-alert-background-color: var(--utrecht-alert-ok-background-color);
+    --_utrecht-alert-border-color: var(--utrecht-alert-ok-border-color);
+    --_utrecht-alert-border-width: var(--utrecht-alert-ok-border-width);
+    --_utrecht-alert-color: var(--utrecht-alert-ok-color);
+  }
+  .utrecht-alert--warning {
+    --_utrecht-alert-icon-color: var(--utrecht-alert-icon-warning-color);
+    --_utrecht-alert-background-color: var(--utrecht-alert-warning-background-color);
+    --_utrecht-alert-border-color: var(--utrecht-alert-warning-border-color);
+    --_utrecht-alert-border-width: var(--utrecht-alert-warning-border-width);
+    --_utrecht-alert-color: var(--utrecht-alert-warning-color);
+  }
+  .utrecht-alert--error {
+    --_utrecht-alert-icon-color: var(--utrecht-alert-icon-error-color);
+    --_utrecht-alert-background-color: var(--utrecht-alert-error-background-color);
+    --_utrecht-alert-border-color: var(--utrecht-alert-error-border-color);
+    --_utrecht-alert-border-width: var(--utrecht-alert-error-border-width);
+    --_utrecht-alert-color: var(--utrecht-alert-error-color);
+  }
+
+  // ---- Form label (Utrecht) ----------------------------------------------------------------
+
+  .utrecht-form-label {
+    color: var(--utrecht-form-label-color);
+    font-size: var(--utrecht-form-label-font-size);
+    font-weight: var(--utrecht-form-label-font-weight);
+  }
+  .utrecht-form-label--checkbox {
+    color: var(--utrecht-form-label-checkbox-color, var(--utrecht-form-label-color));
+    cursor: var(--utrecht-action-activate-cursor, revert);
+    font-weight: var(--utrecht-form-label-checkbox-font-weight, var(--utrecht-form-label-font-weight));
+  }
+  .utrecht-form-label--radio {
+    color: var(--utrecht-form-label-checkbox-color, var(--utrecht-form-label-color));
+    cursor: var(--utrecht-action-activate-cursor, revert);
+    font-weight: var(--utrecht-form-label-radio-font-weight, var(--utrecht-form-label-font-weight));
+  }
+
+  // ---- Form field (Utrecht): label, description, error message, then the input -----------
+  // After the candidate description and error message, so the form field places them.
+
+  .utrecht-form-field {
+    break-inside: avoid;
+    font-family: var(--utrecht-document-font-family, inherit);
+    margin-block-end: calc(var(--utrecht-space-around, 0) * var(--utrecht-form-field-margin-block-end, 0));
+    margin-block-start: calc(var(--utrecht-space-around, 0) * var(--utrecht-form-field-margin-block-start, 0));
+  }
+  .utrecht-form-field--invalid {
+    border-inline-start-color: var(--utrecht-form-field-invalid-border-inline-start-color);
+    border-inline-start-style: solid;
+    border-inline-start-width: var(--utrecht-form-field-invalid-border-inline-start-width, 0);
+    padding-inline-start: var(--utrecht-form-field-invalid-padding-inline-start);
+  }
+  .utrecht-form-field--checkbox {
+    display: grid;
+    gap: 0 var(--utrecht-checkbox-margin-inline-end, 12px);
+    grid-template-areas: "input label" "input description" "input error-message";
+    grid-template-columns: var(--utrecht-checkbox-size) 100fr;
+  }
+  .utrecht-form-field--radio {
+    display: grid;
+    gap: 0 var(--utrecht-radio-button-margin-inline-end, 12px);
+    grid-template-areas: "input label" "input description" "input error-message";
+    grid-template-columns: var(--utrecht-radio-button-size) 100fr;
+  }
+  .utrecht-form-field__input {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    grid-area: input;
+    order: 5;
+  }
+  .utrecht-form-field__label {
+    grid-area: label;
+    margin-block-end: var(--utrecht-form-field-label-margin-block-end);
+    margin-block-start: 0;
+    order: 1;
+  }
+  .utrecht-form-field__description {
+    grid-area: description;
+    margin-block-end: var(--utrecht-form-field-description-margin-block-end);
+    margin-block-start: var(--utrecht-form-field-description-margin-block-start);
+    order: 2;
+  }
+  .utrecht-form-field__error-message {
+    grid-area: error-message;
+    margin-block-end: var(--utrecht-form-field-error-message-margin-block-end);
+    order: 3;
+  }
+
+  // ---- Fieldset (Utrecht form fieldset) ----------------------------------------------------
+
+  .utrecht-form-fieldset {
+    margin-block-end: calc(var(--utrecht-space-around, 0) * var(--utrecht-form-fieldset-margin-block-end, 0));
+    margin-block-start: calc(var(--utrecht-space-around, 0) * var(--utrecht-form-fieldset-margin-block-start, 0));
+  }
+  .utrecht-form-fieldset--html-fieldset {
+    all: revert;
+    border-width: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    min-inline-size: 0;
+    padding-block-end: 0;
+    padding-block-start: 0.01em;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+  }
+  .utrecht-form-fieldset__legend--html-legend {
+    display: table;
+    inline-size: 100%;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+  }
+  .utrecht-form-fieldset__legend {
+    break-after: avoid-page;
+    break-inside: avoid-page;
+    color: var(--utrecht-form-fieldset-legend-color, var(--utrecht-document-color, inherit));
+    font-family: var(--utrecht-form-fieldset-legend-font-family, var(--utrecht-document-font-family));
+    font-size: var(--utrecht-form-fieldset-legend-font-size);
+    font-weight: var(--utrecht-form-fieldset-legend-font-weight);
+    line-height: var(--utrecht-form-fieldset-legend-line-height);
+  }
+  .utrecht-form-fieldset--invalid {
+    border-inline-start-color: var(--utrecht-form-fieldset-invalid-border-inline-start-color, var(--utrecht-form-field-invalid-border-inline-start-color));
+    border-inline-start-style: solid;
+    border-inline-start-width: var(--utrecht-form-fieldset-invalid-border-inline-start-width, var(--utrecht-form-field-invalid-border-inline-start-width));
+    padding-inline-start: var(--utrecht-form-fieldset-invalid-padding-inline-start, var(--utrecht-form-field-invalid-padding-inline-start));
+  }
+
+  // ---- Text box (Utrecht textbox, the <input> states) --------------------------------------
+
+  .utrecht-textbox {
+    --_utrecht-textbox-value-char: 0.667em + 0.334ch;
+    --_utrecht-textbox-max-inline-size: calc(
+      calc(var(--utrecht-textbox-value-max-length) * var(--_utrecht-textbox-value-char)) +
+        var(--utrecht-textbox-padding-inline-end, var(--utrecht-form-control-padding-inline-end, 0)) +
+        var(--utrecht-textbox-padding-inline-start, var(--utrecht-form-control-padding-inline-start, 0)) +
+        var(--utrecht-textbox-border-width, var(--utrecht-form-control-border-width, 0)) +
+        var(--utrecht-textbox-autocomplete-ui-size, 44px)
+    );
+    --_utrecht-textbox-border-width: var(--utrecht-textbox-border-width, var(--utrecht-form-control-border-width));
+    --_utrecht-textbox-border-block-end-width: var(
+      --utrecht-textbox-border-bottom-width,
+      var(--utrecht-textbox-border-width, var(--utrecht-form-control-border-width))
+    );
+    --_utrecht-textbox-padding-block-end: var(--utrecht-textbox-padding-block-end, var(--utrecht-form-control-padding-block-end, 0));
+    --_utrecht-textbox-padding-block-start: var(--utrecht-textbox-padding-block-start, var(--utrecht-form-control-padding-block-start, 0));
+    max-inline-size: min(var(--_utrecht-textbox-max-inline-size, 100%), var(--utrecht-textbox-max-inline-size, var(--utrecht-form-control-max-inline-size)));
+    min-block-size: var(--utrecht-pointer-target-min-size, var(--basis-pointer-target-min-block-size, 44px));
+    min-inline-size: var(--utrecht-pointer-target-min-size, var(--basis-pointer-target-min-inline-size, 44px));
+    border-color: var(--utrecht-textbox-border-color, var(--utrecht-form-control-border-color));
+    border-radius: var(--utrecht-textbox-border-radius, var(--utrecht-form-control-border-radius, 0));
+    border-style: solid;
+    border-width: var(--_utrecht-textbox-border-width);
+    border-block-end-width: var(--_utrecht-textbox-border-block-end-width);
+    box-sizing: border-box;
+    background-color: var(--utrecht-textbox-background-color, var(--utrecht-form-control-background-color));
+    color: var(--utrecht-textbox-color, var(--utrecht-form-control-color));
+    block-size: initial;
+    display: block;
+    font-family: var(--utrecht-textbox-font-family, var(--utrecht-form-control-font-family));
+    font-size: var(--utrecht-textbox-font-size, var(--utrecht-form-control-font-size, inherit));
+    font-weight: var(--utrecht-textbox-font-weight, var(--utrecht-form-control-font-weight, initial));
+    inline-size: 100%;
+    line-height: var(--utrecht-textbox-line-height, var(--utrecht-form-control-line-height, initial));
+    overflow: hidden;
+    padding-block-end: var(--_utrecht-textbox-padding-block-end);
+    padding-block-start: var(--_utrecht-textbox-padding-block-start);
+    padding-inline-end: var(--utrecht-textbox-padding-inline-end, var(--utrecht-form-control-padding-inline-end, initial));
+    padding-inline-start: var(--utrecht-textbox-padding-inline-start, var(--utrecht-form-control-padding-inline-start, initial));
+    white-space: nowrap;
+  }
+  .utrecht-textbox--tel-size {
+    --utrecht-textbox-value-max-length: 19;
+  }
+  .utrecht-textbox--html-input:hover {
+    background-color: var(--utrecht-textbox-hover-background-color, var(--utrecht-form-control-hover-background-color, var(--utrecht-textbox-background-color, var(--utrecht-form-control-background-color))));
+    border-color: var(--utrecht-textbox-hover-border-color, var(--utrecht-form-control-hover-border-color, var(--utrecht-textbox-border-color, var(--utrecht-form-control-border-color))));
+    color: var(--utrecht-textbox-hover-color, var(--utrecht-form-control-hover-color, var(--utrecht-textbox-color, var(--utrecht-form-control-color))));
+  }
+  .utrecht-textbox--html-input:focus {
+    background-color: var(--utrecht-textbox-focus-background-color, var(--utrecht-form-control-focus-background-color, var(--utrecht-textbox-background-color, var(--utrecht-form-control-background-color))));
+    border-color: var(--utrecht-textbox-focus-border-color, var(--utrecht-form-control-focus-border-color, var(--utrecht-textbox-border-color, var(--utrecht-form-control-border-color))));
+    color: var(--utrecht-textbox-focus-color, var(--utrecht-form-control-focus-color, var(--utrecht-textbox-color, var(--utrecht-form-control-color))));
+  }
+  .utrecht-textbox--html-input:focus-visible {
+    @include focus-ring;
+  }
+  .utrecht-textbox--html-input[aria-invalid="true"] {
+    --_utrecht-textbox-border-width: var(
+      --utrecht-textbox-invalid-border-width,
+      var(--utrecht-form-control-invalid-border-width, var(--utrecht-textbox-border-width, var(--utrecht-form-control-border-width)))
+    );
+    border-color: var(--utrecht-textbox-invalid-border-color, var(--utrecht-form-control-invalid-border-color, var(--utrecht-textbox-border-color, var(--utrecht-form-control-border-color))));
+    border-width: var(--_utrecht-textbox-border-width);
+    border-block-end-width: var(--utrecht-textbox-invalid-border-bottom-width, var(--utrecht-form-control-invalid-border-bottom-width, var(--utrecht-textbox-border-bottom-width, var(--utrecht-form-control-border-bottom-width, var(--_utrecht-textbox-border-width)))));
+    background-color: var(--utrecht-textbox-invalid-background-color, var(--utrecht-form-control-invalid-background-color, var(--utrecht-textbox-background-color, var(--utrecht-form-control-background-color))));
+    color: var(--utrecht-textbox-invalid-color, var(--utrecht-form-control-invalid-color, var(--utrecht-textbox-color, var(--utrecht-form-control-color))));
+  }
+  .utrecht-textbox--html-input[type="email" i],
+  .utrecht-textbox--html-input[inputMode="email" i] {
+    font-variant-ligatures: none;
+  }
+  .utrecht-textbox--html-input[type="tel" i],
+  .utrecht-textbox--html-input[inputMode="numeric" i],
+  .utrecht-textbox--html-input[inputMode="tel" i] {
+    -moz-appearance: textfield;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  // ---- Radio button (Utrecht, the native <input> states) -----------------------------------
+
+  .utrecht-radio-button {
+    appearance: none;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    --_utrecht-radio-button-background-color: var(
+      --_utrecht-radio-button-interactive-background-color,
+      var(--_utrecht-radio-button-state-background-color, var(--utrecht-radio-button-background-color))
+    );
+    --_utrecht-radio-button-border-color: var(
+      --_utrecht-radio-button-interactive-border-color,
+      var(--_utrecht-radio-button-state-border-color, var(--utrecht-radio-button-border-color, currentColor))
+    );
+    --_utrecht-radio-button-border-width: var(
+      --_utrecht-radio-button-interactive-border-width,
+      var(--_utrecht-radio-button-state-border-width, var(--utrecht-radio-button-border-width))
+    );
+    --_utrecht-radio-button-color: var(
+      --_utrecht-radio-button-interactive-color,
+      var(--_utrecht-radio-button-state-color, var(--utrecht-radio-button-color, currentColor))
+    );
+    --_utrecht-radio-button-icon-size: 0;
+    background-color: var(--_utrecht-radio-button-background-color);
+    background-image: radial-gradient(
+      circle,
+      var(--_utrecht-radio-button-color, transparent) calc(var(--_utrecht-radio-button-icon-size, 50%) - 5%),
+      var(--_utrecht-radio-button-background-color, currentColor) var(--_utrecht-radio-button-icon-size, 50%)
+    );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    block-size: var(--utrecht-radio-button-size, 1em);
+    border-color: var(--_utrecht-radio-button-border-color);
+    border-radius: 50%;
+    border-style: solid;
+    border-width: var(--_utrecht-radio-button-border-width);
+    cursor: var(--utrecht-action-activate-cursor, revert);
+    inline-size: var(--utrecht-radio-button-size, 1em);
+    margin-inline-end: var(--utrecht-radio-button-margin-inline-end);
+    min-block-size: 24px;
+    min-inline-size: 24px;
+    print-color-adjust: exact;
+    user-select: none;
+    vertical-align: top;
+  }
+  .utrecht-radio-button--html-input:checked {
+    --_utrecht-radio-button-icon-size: var(--utrecht-radio-button-icon-size, 50%);
+    --_utrecht-radio-button-state-background-color: var(--utrecht-radio-button-checked-background-color);
+    --_utrecht-radio-button-state-border-color: var(--utrecht-radio-button-checked-border-color);
+    --_utrecht-radio-button-state-border-width: var(--utrecht-radio-button-checked-border-width);
+    --_utrecht-radio-button-state-color: var(--utrecht-radio-button-checked-color);
+    --_utrecht-radio-button-state-active-background-color: var(--utrecht-radio-button-checked-active-background-color);
+    --_utrecht-radio-button-state-active-border-color: var(--utrecht-radio-button-checked-active-border-color);
+    --_utrecht-radio-button-state-active-border-width: var(--utrecht-radio-button-checked-active-border-width);
+    --_utrecht-radio-button-state-active-color: var(--utrecht-radio-button-checked-active-color);
+    --_utrecht-radio-button-state-focus-background-color: var(--utrecht-radio-button-checked-focus-background-color);
+    --_utrecht-radio-button-state-focus-border-color: var(--utrecht-radio-button-checked-focus-border-color);
+    --_utrecht-radio-button-state-focus-border-width: var(--utrecht-radio-button-checked-focus-border-width);
+    --_utrecht-radio-button-state-focus-color: var(--utrecht-radio-button-checked-focus-color);
+    --_utrecht-radio-button-state-hover-background-color: var(--utrecht-radio-button-checked-hover-background-color);
+    --_utrecht-radio-button-state-hover-border-color: var(--utrecht-radio-button-checked-hover-border-color);
+    --_utrecht-radio-button-state-hover-border-width: var(--utrecht-radio-button-checked-hover-border-width);
+    --_utrecht-radio-button-state-hover-color: var(--utrecht-radio-button-checked-hover-color);
+  }
+  .utrecht-radio-button--html-input[aria-invalid="true"] {
+    border-color: var(--utrecht-radio-button-invalid-border-color, var(--utrecht-radio-button-border-color));
+    border-width: var(--utrecht-radio-button-invalid-border-width, var(--utrecht-radio-button-border-width));
+    color: var(--utrecht-radio-button-invalid-color, var(--utrecht-radio-button-color));
+  }
+  .utrecht-radio-button--html-input:focus:not([aria-disabled="true"], :disabled) {
+    --_utrecht-radio-button-interactive-background-color: var(
+      --_utrecht-radio-button-state-focus-background-color,
+      var(--utrecht-radio-button-focus-background-color)
+    );
+    --_utrecht-radio-button-interactive-border-color: var(
+      --_utrecht-radio-button-state-focus-border-color,
+      var(--utrecht-radio-button-focus-border-color)
+    );
+    --_utrecht-radio-button-interactive-border-width: var(
+      --_utrecht-radio-button-state-focus-border-width,
+      var(--utrecht-radio-button-focus-border-width)
+    );
+    --_utrecht-radio-button-interactive-color: var(
+      --_utrecht-radio-button-state-focus-color,
+      var(--utrecht-radio-button-focus-color)
+    );
+  }
+  .utrecht-radio-button--html-input:focus-visible {
+    @include focus-ring;
+  }
+  .utrecht-radio-button--html-input:hover:not([aria-disabled="true"], :disabled) {
+    --_utrecht-radio-button-interactive-background-color: var(
+      --_utrecht-radio-button-state-hover-background-color,
+      var(--utrecht-radio-button-hover-background-color)
+    );
+    --_utrecht-radio-button-interactive-border-color: var(
+      --_utrecht-radio-button-state-hover-border-color,
+      var(--utrecht-radio-button-hover-border-color)
+    );
+    --_utrecht-radio-button-interactive-border-width: var(
+      --_utrecht-radio-button-state-hover-border-width,
+      var(--utrecht-radio-button-hover-border-width)
+    );
+    --_utrecht-radio-button-interactive-color: var(
+      --_utrecht-radio-button-state-hover-color,
+      var(--utrecht-radio-button-hover-color)
+    );
+  }
+  .utrecht-radio-button--html-input:active:not([aria-disabled="true"], :disabled) {
+    --_utrecht-radio-button-interactive-background-color: var(
+      --_utrecht-radio-button-state-active-background-color,
+      var(--utrecht-radio-button-active-background-color)
+    );
+    --_utrecht-radio-button-interactive-border-color: var(
+      --_utrecht-radio-button-state-active-border-color,
+      var(--utrecht-radio-button-active-border-color)
+    );
+    --_utrecht-radio-button-interactive-border-width: var(
+      --_utrecht-radio-button-state-active-border-width,
+      var(--utrecht-radio-button-active-border-width)
+    );
+    --_utrecht-radio-button-interactive-color: var(
+      --_utrecht-radio-button-state-active-color,
+      var(--utrecht-radio-button-active-color)
+    );
+  }
+
+  // ---- Checkbox (Utrecht custom checkbox, the native <input> states) -----------------------
+
+  .utrecht-checkbox {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    cursor: var(--utrecht-action-activate-cursor, revert);
+    user-select: none;
+  }
+  .utrecht-checkbox--custom {
+    appearance: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    block-size: var(--utrecht-checkbox-size, 1em);
+    border-color: var(--utrecht-checkbox-border-color);
+    border-radius: var(--utrecht-checkbox-border-radius, 0);
+    border-style: solid;
+    border-width: var(--utrecht-checkbox-border-width);
+    cursor: var(--utrecht-action-activate-cursor, revert);
+    inline-size: var(--utrecht-checkbox-size, 1em);
+    margin-block-start: var(--utrecht-checkbox-margin-block-start);
+    min-block-size: 24px;
+    min-inline-size: 24px;
+    print-color-adjust: exact;
+    vertical-align: top;
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input:hover:not(:where(:checked, :indeterminate, [aria-disabled="true"], :disabled)) {
+    background-color: var(--utrecht-checkbox-hover-background-color, var(--utrecht-checkbox-background-color));
+    border-color: var(--utrecht-checkbox-hover-border-color, var(--utrecht-checkbox-border-color));
+    border-width: var(--utrecht-checkbox-hover-border-width, var(--utrecht-checkbox-border-width));
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input:focus {
+    background-color: var(--utrecht-checkbox-focus-background-color, var(--utrecht-checkbox-background-color));
+    border-color: var(--utrecht-checkbox-focus-border-color, var(--utrecht-checkbox-border-color));
+    border-width: var(--utrecht-checkbox-focus-border-width, var(--utrecht-checkbox-border-width));
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input:focus-visible {
+    @include focus-ring;
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input[aria-invalid="true"] {
+    border-color: var(--utrecht-checkbox-invalid-border-color, var(--utrecht-checkbox-border-color));
+    border-width: var(--utrecht-checkbox-invalid-border-width, var(--utrecht-checkbox-border-width));
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input:active:not(:where(:checked, :indeterminate, [aria-disabled="true"], :disabled)) {
+    background-color: var(--utrecht-checkbox-active-background-color, var(--utrecht-checkbox-background-color));
+    border-color: var(--utrecht-checkbox-active-border-color, var(--utrecht-checkbox-border-color));
+    border-width: var(--utrecht-checkbox-active-border-width, var(--utrecht-checkbox-border-width));
+    color: var(--utrecht-checkbox-active-color, var(--utrecht-checkbox-color));
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input:checked {
+    background-color: var(--utrecht-checkbox-checked-background-color, var(--utrecht-checkbox-background-color));
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+    border-color: var(--utrecht-checkbox-checked-border-color, var(--utrecht-checkbox-border-color));
+    border-width: var(--utrecht-checkbox-checked-border-width, var(--utrecht-checkbox-border-width));
+    color: var(--utrecht-checkbox-checked-color, var(--utrecht-checkbox-color));
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input:checked:hover:not([aria-disabled="true"], :disabled) {
+    background-color: var(--utrecht-checkbox-checked-hover-background-color, var(--utrecht-checkbox-checked-background-color, var(--utrecht-checkbox-background-color)));
+    border-color: var(--utrecht-checkbox-checked-hover-border-color, var(--utrecht-checkbox-checked-border-color, var(--utrecht-checkbox-border-color)));
+    border-width: var(--utrecht-checkbox-checked-hover-border-width, var(--utrecht-checkbox-checked-border-width, var(--utrecht-checkbox-border-width)));
+    color: var(--utrecht-checkbox-checked-hover-color, var(--utrecht-checkbox-checked-color, var(--utrecht-checkbox-color)));
+  }
+  .utrecht-checkbox--custom.utrecht-checkbox--html-input:checked:active:not([aria-disabled="true"], :disabled) {
+    background-color: var(--utrecht-checkbox-checked-active-background-color, var(--utrecht-checkbox-checked-background-color, var(--utrecht-checkbox-background-color)));
+    border-color: var(--utrecht-checkbox-checked-active-border-color, var(--utrecht-checkbox-checked-border-color, var(--utrecht-checkbox-border-color)));
+    border-width: var(--utrecht-checkbox-checked-active-border-width, var(--utrecht-checkbox-checked-border-width, var(--utrecht-checkbox-border-width)));
+    color: var(--utrecht-checkbox-checked-active-color, var(--utrecht-checkbox-checked-color, var(--utrecht-checkbox-color)));
+  }
+  @media (forced-colors: active) {
+    .utrecht-checkbox--custom.utrecht-checkbox--html-input:checked {
+      forced-color-adjust: none;
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+    .utrecht-radio-button--html-input {
+      forced-color-adjust: none;
+      border-color: CanvasText;
+      --_utrecht-radio-button-background-color: Canvas;
+      --_utrecht-radio-button-color: Highlight;
+    }
+  }
+
+  // ---- The form template (ours, not from NL Design System) ---------------------------------
+  // Last, so these placements win over the component rules above. Spacing uses Start's basis
+  // space tokens.
+
+  .nlds-form__sr-only {
+    @include sr-only;
+  }
+
+  // Each step stacks its parts: 32px between blocks, 16px inside a block.
+  .nlds-form__stack {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--basis-space-block-4xl);
+  }
+  .nlds-form__stack-sm {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--basis-space-block-xl);
+  }
+  .nlds-form__stack-xs {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--basis-space-block-md);
+  }
+  // The fields of each page, then Continue, 32px apart.
+  form {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--basis-space-block-4xl);
+  }
+
+  // The icon inside a link or button follows the text size.
+  .nlds-form__link-icon {
+    --utrecht-icon-size: var(--basis-size-icon-md);
+    vertical-align: middle;
+    margin-inline-end: var(--basis-space-text-xs);
+  }
+  .nl-button .utrecht-icon {
+    --utrecht-icon-size: var(--nl-button-icon-size);
+  }
+  .nl-form-field-error-message__icon .utrecht-icon {
+    --utrecht-icon-size: var(--nl-form-field-error-message-icon-size);
+    inset-block-start: 0.25em;
+  }
+
+  // Back link and progress sit above the form in the engine's step.
+  .nlds-form__back {
+    display: inline-block;
+    margin-block-end: var(--basis-space-block-xl);
+  }
+  .nlds-form__progress {
+    margin-block-end: var(--basis-space-block-lg);
+  }
+  .nlds-form__progress-count {
+    color: var(--basis-color-default-color-subtle);
+    font-weight: var(--basis-text-font-weight-default);
+    white-space: nowrap;
+  }
+  .nlds-form__error-summary {
+    margin-block-end: var(--basis-space-block-3xl);
+  }
+  // The engine moves focus to the error summary and kf-form.css removes the outline of elements
+  // with tabindex="-1". Show the focus ring there, so the move is visible.
+  .utrecht-alert[tabindex="-1"]:focus {
+    @include focus-ring;
+  }
+
+  // A question that is the page heading: the label or legend holds a Heading (level 1).
+  .nlds-form__heading {
+    margin-block-end: var(--utrecht-form-field-label-margin-block-end);
+    .utrecht-form-label {
+      font: inherit;
+      color: inherit;
+    }
+  }
+  .utrecht-form-fieldset__legend {
+    margin-block-end: var(--utrecht-form-fieldset-legend-margin-block-end);
+  }
+  .utrecht-form-fieldset__legend:has(.nlds-form__heading) {
+    margin-block-end: 0;
+  }
+
+  // "(niet verplicht)" after a label, in Start's label suffix style (todo-form-field-label-suffix).
+  .nlds-form__label-suffix {
+    color: var(--todo-form-field-label-suffix-color);
+    font-family: var(--todo-form-field-label-suffix-font-family);
+    font-size: var(--todo-form-field-label-suffix-font-size);
+    font-weight: var(--todo-form-field-label-suffix-font-weight);
+    line-height: var(--todo-form-field-label-suffix-line-height);
+    margin-inline-start: var(--todo-form-field-label-suffix-margin-inline-start);
+  }
+  // After a heading it keeps the heading's size, in the regular weight.
+  .nlds-form__heading .nlds-form__label-suffix {
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  // The options of a question, 12px apart (the label's own margin), the last one without it.
+  .nlds-form__options > .utrecht-form-field:last-child {
+    > .utrecht-form-field__label:last-child,
+    > .utrecht-form-field__description:last-child {
+      margin-block-end: 0;
+    }
+    > .utrecht-form-field__label:has(+ .utrecht-form-field__input:last-child) {
+      margin-block-end: 0;
+    }
+  }
+
+  // Input widths, by the number of characters expected (Utrecht textbox size).
+  @each $n in (4, 5, 10, 20) {
+    .nlds-form__textbox--#{$n} {
+      --utrecht-textbox-value-max-length: #{$n};
+    }
+  }
+
+  // Check page: Start's form summary tokens (todo-form-summary). Question, answer and change
+  // link side by side on wider screens, one under the other on phones.
+  .nlds-form__summary {
+    color: var(--todo-form-summary-item-color);
+    font-family: var(--todo-form-summary-font-family);
+    font-size: var(--todo-form-summary-font-size);
+    line-height: var(--todo-form-summary-line-height);
+    margin: 0;
+  }
+  .nlds-form__summary-item {
+    border-block-end: var(--todo-form-summary-item-border-width) solid var(--todo-form-summary-item-border-color);
+    display: grid;
+    grid-template-areas: "key action" "value value";
+    grid-template-columns: 1fr auto;
+  }
+  .nlds-form__summary-key {
+    font-weight: var(--todo-form-summary-item-key-font-weight);
+    grid-area: key;
+    padding-block: var(--todo-form-summary-item-key-padding-block-start) var(--todo-form-summary-item-key-padding-block-end);
+    padding-inline: var(--todo-form-summary-item-key-padding-inline-start) var(--todo-form-summary-item-key-padding-inline-end);
+  }
+  .nlds-form__summary-value {
+    font-weight: var(--todo-form-summary-item-value-font-weight);
+    grid-area: value;
+    margin: 0;
+    padding-block: var(--todo-form-summary-item-value-padding-block-start) var(--todo-form-summary-item-value-padding-block-end);
+    padding-inline: var(--todo-form-summary-item-value-padding-inline-start) var(--todo-form-summary-item-value-padding-inline-end);
+  }
+  .nlds-form__summary-action {
+    grid-area: action;
+    margin: 0;
+    padding-block: var(--todo-form-summary-item-action-padding-block-start) var(--todo-form-summary-item-action-padding-block-end);
+    padding-inline: var(--basis-space-inline-xl) 0;
+    text-align: end;
+  }
+  @media (min-width: 640px) {
+    .nlds-form__summary-item {
+      grid-template-areas: "key value action";
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto;
+    }
+    .nlds-form__summary-key {
+      padding-block: var(--todo-form-summary-item-key-row-padding-block-start) var(--todo-form-summary-item-key-row-padding-block-end);
+      padding-inline: var(--todo-form-summary-item-key-row-padding-inline-start) var(--todo-form-summary-item-key-row-padding-inline-end);
+    }
+    .nlds-form__summary-value {
+      padding-block: var(--todo-form-summary-item-value-row-padding-block-start) var(--todo-form-summary-item-value-row-padding-block-end);
+      padding-inline: var(--todo-form-summary-item-value-row-padding-inline-start) var(--todo-form-summary-item-value-row-padding-inline-end);
+    }
+    .nlds-form__summary-action {
+      padding-block: var(--todo-form-summary-item-action-row-padding-block-start) var(--todo-form-summary-item-action-row-padding-block-end);
+      padding-inline: var(--todo-form-summary-item-action-row-padding-inline-start) var(--todo-form-summary-item-action-row-padding-inline-end);
+    }
+  }
+  .nlds-form__reference {
+    white-space: nowrap;
+  }
+
+  // The record on the confirmation page: a <details> whose summary looks like a Link with a
+  // chevron, then a Code Block. Long values wrap.
+  .nlds-form__details > summary {
+    color: var(--nl-link-color);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    column-gap: var(--basis-space-text-xs);
+    font-weight: var(--basis-text-font-weight-bold);
+    list-style: none;
+    text-decoration-line: underline;
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &:hover {
+      color: var(--nl-link-hover-color);
+      text-decoration-line: var(--nl-link-hover-text-decoration-line);
+    }
+    &:focus-visible {
+      @include focus-ring;
+      background-color: var(--utrecht-link-focus-background-color);
+      color: var(--utrecht-link-focus-color);
+      text-decoration-line: none;
+    }
+    .utrecht-icon {
+      --utrecht-icon-size: var(--basis-size-icon-md);
+      transition: transform 120ms ease-out;
+    }
+  }
+  .nlds-form__details[open] > summary .utrecht-icon {
+    transform: rotate(90deg);
+  }
+  .nlds-form__details-body {
+    margin-block-start: var(--basis-space-block-xl);
+  }
+  .nl-code-block {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nlds-form__details > summary .utrecht-icon {
+      transition: none;
+    }
+  }
+
+  // On phones the engine keeps Continue in a bar at the bottom (kf-form.css). Give it the form's
+  // surface and Start's subtle border.
+  .kf-actions {
+    @media (max-width: 639.98px) {
+      background: var(--utrecht-document-background-color);
+      border-top-color: var(--basis-color-default-border-subtle);
+      .nl-button {
+        inline-size: 100%;
+      }
+    }
+  }
+}
