@@ -49,7 +49,8 @@ export function Applications({ data }: { data: ApplicationsData }) {
           asks, and whether someone has talked to the person first.
         </p>
         <p className="leading-7 text-muted-foreground">
-          We read {data.appForms} application forms and packets in {n} {n === 1 ? "country" : "countries"}. The{" "}
+          We read {data.appForms} application documents in {n} {n === 1 ? "country" : "countries"}, making up{" "}
+          {data.countries.reduce((t, c) => t + c.apps, 0)} applications (a US packet of several documents counts once). The{" "}
           <a href="/compare/applications" className="font-medium text-foreground underline underline-offset-4">
             compare page
           </a>{" "}

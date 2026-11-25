@@ -1,7 +1,7 @@
 // The example form in each country, and the design system it is built with. Shared by the map
 // page (rendered at build time) and the dialog that opens each form (in the browser).
 export const FORM_COUNTRIES = [
-  { code: "uk", name: "United Kingdom", system: "GOV.UK Design System", short: "GOV.UK" },
+  { code: "uk", name: "United Kingdom", system: "GOV.UK Design System", short: "GOV.UK Frontend" },
   { code: "us", name: "United States", system: "U.S. Web Design System", short: "USWDS" },
   { code: "ca", name: "Canada", system: "GC Design System", short: "GC Design System" },
   { code: "au", name: "Australia", system: "Australian Government Design System", short: "AGDS" },

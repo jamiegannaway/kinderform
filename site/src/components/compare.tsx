@@ -167,9 +167,9 @@ export function CompareIndex({
     },
     {
       href: "/compare/rules",
-      title: "Rules on who can foster",
-      figure: `${rules} rules`,
-      body: `From ${rulePlaces} countries and regions, in ${topics} topics such as age, bedrooms and training.`,
+      title: "Rules on who can foster or adopt",
+      figure: `${rules.toLocaleString("en-GB")} rules`,
+      body: `From ${rulePlaces} places in ${COUNTRY_ORDER.length} countries, in ${topics} topics such as age, bedrooms and training.`,
     },
     {
       href: "/compare/applications",
@@ -188,7 +188,7 @@ export function CompareIndex({
           </h1>
           <p className="text-xl leading-8 text-muted-foreground">
             Compare your enquiry form and rules with other places. Each row gives its source, the date the page shows
-            and the date we checked.
+            and the date we read it.
           </p>
         </div>
         <Illustration name="details" className="order-first w-36 md:order-none md:mx-auto md:w-full" />
@@ -353,7 +353,7 @@ export function CompareRulesIndex({
         <Crumbs here="Rules" />
         <Intro title="Rules on who can foster, compared">
           <p className="text-xl leading-8 text-muted-foreground">
-            {rules} published rules from {places} countries and regions in {countries}. Pick a topic to compare them.
+            {rules.toLocaleString("en-GB")} published rules from {places} places in {countries}. Pick a topic to compare them.
           </p>
         </Intro>
       </div>

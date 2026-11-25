@@ -134,7 +134,7 @@ export const BEYOND_STANDARD = new Set([
   "Who lives in the home",
   "Spare bedroom or housing",
   "Work or income",
-  "Ethnicity, gender or faith",
+  "Ethnicity, gender, sexuality or faith",
   "Health or disability",
   "Criminal record",
   "Citizenship or residency",

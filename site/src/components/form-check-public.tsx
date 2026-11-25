@@ -74,7 +74,7 @@ export default function FormCheckPublic({
             Form check
           </h1>
           <p className="mt-6 max-w-2xl text-xl text-muted-foreground">
-            Form check looks at fostering and adoption enquiry forms from the side of the person who fills them in.
+            Form check is our draft checklist for enquiry forms. It gives a form points out of 100, from the side of the person filling it in. We have not published any service&rsquo;s result.
           </p>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
             It looks at pages and processes, never at staff, and we would like your comments.
@@ -107,12 +107,13 @@ export default function FormCheckPublic({
         <section aria-labelledby="fc-patterns" className="py-12">
           <H2 id="fc-patterns">What we found so far</H2>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            We read {p.readable} UK enquiry forms in {checked}. For reply times, we checked {p.replyChecked} forms in
-            all countries. The counts are not yet checked by a person.
+            These counts use the {p.readable} UK enquiry forms a person recorded in {checked}, which we wrote the
+            checklist from. The research page also counts forms a computer program read, so its numbers differ. The
+            counts are not yet checked by a person.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Stat value={String(p.readable)} label="UK enquiry forms read" />
-            <Stat value={`${p.replyStated} of ${p.replyChecked}`} label="Say when you will hear back" />
+            <Stat value={`${p.replyStated} of ${p.replyChecked}`} label="Say when you will hear back (where we looked)" />
             <Stat value={`${p.sensitive} of ${p.readable}`} label="Ask sensitive questions" />
             <Stat value={`${p.spareRoom} of ${p.readable}`} label="Ask about a spare room" />
           </div>
@@ -247,7 +248,7 @@ export default function FormCheckPublic({
               </TableBody>
             </Table>
             <p className="mt-4 text-sm">
-              In the United States, Form check is built to cover each state and, where needed, each county.
+              In the United States, we plan to cover every state, and every county where counties run fostering.
             </p>
           </details>
         </section>

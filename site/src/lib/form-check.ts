@@ -10,6 +10,7 @@ import {
   type Group,
   type Row,
 } from "@/lib/census"
+import { isSensitive } from "@/lib/sensitive"
 
 // Rubric v0.1 domains (rubric/rubric.md). `seen` says whether the census can see it.
 export const DOMAINS = [
@@ -34,7 +35,7 @@ export const DOMAINS = [
 ] as const
 
 export const CAPS = [
-  "Asking about criminal convictions, health or other sensitive matters when someone first enquires",
+  "Asking about criminal convictions or health, including disability, when someone first enquires",
   "Making people agree to a newsletter or marketing before they can enquire",
   "Conflicting phone numbers for the same place to get in touch",
   "An old form still online next to the current one",
@@ -173,19 +174,20 @@ export function ranked(c: Census): Record<Group, Ranking> {
   return out
 }
 
-// Pattern counts for the public page. No names.
+// Pattern counts for the public page. No names. Every count uses the same forms: the UK forms a
+// person recorded, which the checklist was written from. "Sensitive" is the site's one definition
+// (src/lib/sensitive.ts).
 export function patterns(c: Census) {
   const facts = factsFor(c)
-  const primaryChecked = c.forms.filter((f) => f.form_stage === "primary").map((f) => f.form_id)
-  const rtRows = c.guidance.filter((g) => g.guidance_type === "response_time" && primaryChecked.includes(g.form_id))
-  const rtForms = new Set(rtRows.map((g) => g.form_id))
-  const rtYes = new Set(rtRows.filter((g) => g.present === "yes").map((g) => g.form_id))
+  const asked = askedBy(c)
+  const sensitive = (x: FormFacts) => (asked.get(x.form.form_id) ?? []).some((q) => !q.conditional_on && isSensitive(q))
+  const checked = facts.filter((x) => x.replyChecked)
   return {
     readable: facts.length,
-    sensitive: facts.filter((x) => x.sensitive.length || x.dateOfBirth).length,
+    sensitive: facts.filter(sensitive).length,
     spareRoom: facts.filter((x) => x.spareRoom).length,
-    replyChecked: rtForms.size,
-    replyStated: rtYes.size,
+    replyChecked: checked.length,
+    replyStated: checked.filter((x) => x.replyPromise).length,
     byGroup: Object.fromEntries(
       (["Councils and hubs", "Independent agencies", "Adoption agencies"] as Group[]).map((g) => {
         const xs = facts.filter((x) => x.group === g)
@@ -194,7 +196,7 @@ export function patterns(c: Census) {
           {
             n: xs.length,
             medianQuestions: median(xs.map((x) => x.questions)),
-            sensitive: xs.filter((x) => x.sensitive.length || x.dateOfBirth).length,
+            sensitive: xs.filter(sensitive).length,
             spareRoom: xs.filter((x) => x.spareRoom).length,
           },
         ]
