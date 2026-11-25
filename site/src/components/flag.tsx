@@ -12,6 +12,10 @@ const FLAG: Record<Exclude<StarterKey, "global">, string> = {
   de: "de",
   fr: "fr",
   es: "es",
+  ie: "ie",
+  nl: "nl",
+  nz: "nz",
+  sg: "sg",
 }
 
 // A small round flag in the shadcn/ui Avatar look: the classes of its Avatar, AvatarImage and

@@ -21,13 +21,18 @@ if (!out) throw new Error("Give the output path, for example site/src/lib/world-
 // that: their labels sit out at sea ("callout"), joined to a point inside the country ("target")
 // by a thin line. "align" says which side of the label touches the callout point.
 const COUNTRIES = [
-  { code: "uk", id: "826", name: "United Kingdom", label: [-14, 61], target: [-2, 54], align: "right" },
+  { code: "uk", id: "826", name: "United Kingdom", label: [-24, 67], target: [-2, 54], align: "right" },
   { code: "us", id: "840", name: "United States", label: [-99, 37.5] },
   { code: "ca", id: "124", name: "Canada", label: [-106, 61] },
   { code: "au", id: "036", name: "Australia", label: [134, -25.5] },
-  { code: "de", id: "276", name: "Germany", label: [18, 56.5], target: [10.4, 51.2], align: "left" },
-  { code: "fr", id: "250", name: "France", label: [-14, 48.5], target: [2.4, 46.8], align: "right" },
-  { code: "es", id: "724", name: "Spain", label: [-14, 36], target: [-3.7, 40.2], align: "right" },
+  { code: "de", id: "276", name: "Germany", label: [24, 54], target: [10.4, 51.2], align: "left" },
+  { code: "fr", id: "250", name: "France", label: [-24, 44.5], target: [2.4, 46.8], align: "right" },
+  { code: "es", id: "724", name: "Spain", label: [-24, 33], target: [-3.7, 40.2], align: "right" },
+  { code: "ie", id: "372", name: "Ireland", label: [-24, 56], target: [-8, 53.2], align: "right" },
+  { code: "nl", id: "528", name: "Netherlands", label: [14, 66], target: [5.5, 52.3], align: "left" },
+  { code: "nz", id: "554", name: "New Zealand", label: [160, -50], target: [172.5, -42], align: "right" },
+  // Singapore is too small for the 1:110m map, so it is drawn as a dot at "dot".
+  { code: "sg", id: "702", name: "Singapore", label: [96, -12], target: [103.8, 1.35], align: "right", dot: [103.8, 1.35] },
 ]
 
 const all = topojson.feature(world, world.objects.countries).features.filter((f) => f.id !== "010") // no Antarctica
@@ -45,9 +50,15 @@ const others = topojson.merge(
   world.objects.countries.geometries.filter((g) => !ids.has(g.id) && g.id !== "010"),
 )
 const pct = (v, of) => Math.round((1000 * v) / of) / 10
+// A small circle, for a country too small to draw.
+const dot = (lonLat, r = 3) => {
+  const [x, y] = projection(lonLat).map((v) => +v.toFixed(1))
+  return `M${x - r},${+(y - top).toFixed(1)}a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0Z`
+}
 
 const countries = COUNTRIES.map((c) => {
   const feature = all.find((f) => f.id === c.id)
+  if (!feature && !c.dot) throw new Error(`${c.name} is not in the map data: give it a dot`)
   const [x, y] = projection(c.label)
   const line = c.target
     ? [x, y - top, ...((([tx, ty]) => [tx, ty - top])(projection(c.target)))].map((v) => +v.toFixed(1))
@@ -55,7 +66,7 @@ const countries = COUNTRIES.map((c) => {
   return {
     code: c.code,
     name: c.name,
-    d: shift(path(feature)),
+    d: feature ? shift(path(feature)) : dot(c.dot),
     align: c.align ?? "center",
     // From the label's edge to a point inside the country, in map units.
     line,

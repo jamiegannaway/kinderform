@@ -30,5 +30,13 @@
     "details": "El navegador ha comprobado los campos del formulario. Siga las instrucciones del kit para validar el archivo JSON con el esquema completo.",
     "export": "Descargar el ejemplo en JSON", "navigation": "Navegación entre preguntas", "json": "Datos del ejemplo en formato JSON", "skipped": "Sin respuesta", "issue": "Revise esta respuesta.",
     "source": "Preguntas adaptadas del estándar de Kinderform para consultas iniciales. Textos y esquema bajo licencia CC BY 4.0. Código del ejemplo bajo licencia MIT."
+  },
+  "nl": {
+    "skip": "Naar het formulier", "demo": "Offline voorbeeld", "notice": "Gebruik verzonnen gegevens. Uw antwoorden blijven op deze pagina. Aan het eind kunt u een JSON-bestand downloaden. Er wordt niets verstuurd.",
+    "intro": "Probeer de vragen uit en controleer uw antwoorden. Via dit voorbeeld bereikt u geen organisatie.",
+    "enable": "Zet JavaScript aan om dit offline voorbeeld te proberen.", "review": "Controleer uw voorbeeldgegevens", "preview": "Gegevens bekijken", "done": "Uw voorbeeldgegevens",
+    "details": "Uw browser heeft de formuliervelden gecontroleerd. In de handleiding bij het pakket staat hoe u het JSON-bestand controleert met het volledige schema.",
+    "export": "JSON-voorbeeld downloaden", "navigation": "Navigatie tussen de vragen", "json": "Voorbeeldgegevens in JSON", "skipped": "Overgeslagen", "issue": "Controleer dit antwoord.",
+    "source": "De vragen zijn gebaseerd op de Kinderform-standaard voor eerste aanmeldingen. Teksten en schema vallen onder CC BY 4.0, de code van dit voorbeeld onder de MIT-licentie."
   }
 }

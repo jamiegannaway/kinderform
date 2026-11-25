@@ -36,6 +36,9 @@ export type Control = {
       | "de_postcode"
       | "fr_postcode"
       | "es_postcode"
+      | "eircode_routing_key"
+      | "nl_postcode"
+      | "nz_postcode"
   }
 }
 export type Page = {
@@ -172,6 +175,17 @@ export function transform(kind: string | undefined, value: string): string {
   // German, French and Spanish postcodes: five digits. Drop spaces and an old country prefix ("D-10115").
   if (kind === "de_postcode" || kind === "fr_postcode" || kind === "es_postcode")
     return v.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "")
+  // A full Eircode, like A65 F4E2, keeps only its routing key: the first 3 characters.
+  if (kind === "eircode_routing_key") {
+    const up = v.toUpperCase().replace(/\s+/g, "")
+    return up.length === 7 ? up.slice(0, 3) : up
+  }
+  // A full Dutch postcode, like 1234 AB, keeps only its 4 digits.
+  if (kind === "nl_postcode") {
+    const up = v.toUpperCase().replace(/\s+/g, "")
+    return /^[0-9]{4}[A-Z]{2}$/.test(up) ? up.slice(0, 4) : up
+  }
+  if (kind === "nz_postcode") return v.replace(/\s+/g, "")
   return v
 }
 

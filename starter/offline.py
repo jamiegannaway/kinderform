@@ -9,7 +9,8 @@ from string import Template
 
 ASSETS = Path(__file__).parent
 REGION = {"uk": "United Kingdom", "us": "United States", "ca": "Canada", "ca-fr": "Canada",
-          "au": "Australia", "de": "Deutschland", "fr": "France", "es": "España", "global": "Global"}
+          "au": "Australia", "de": "Deutschland", "fr": "France", "es": "España", "ie": "Ireland",
+          "nl": "Nederland", "nz": "New Zealand", "sg": "Singapore", "global": "Global"}
 
 
 def _question(page, schema):

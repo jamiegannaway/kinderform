@@ -8,6 +8,10 @@ export const FORM_COUNTRIES = [
   { code: "de", name: "Germany", system: "KERN UX-Standard", short: "KERN UX" },
   { code: "fr", name: "France", system: "Cunningham design system", short: "Cunningham" },
   { code: "es", name: "Spain", system: "DESY design system (Aragon)", short: "DESY" },
+  { code: "ie", name: "Ireland", system: "Government of Ireland Design System", short: "gov.ie Design System" },
+  { code: "nl", name: "Netherlands", system: "NL Design System", short: "NL Design System" },
+  { code: "nz", name: "New Zealand", system: "New Zealand Government Design System", short: "NZ Government Design System" },
+  { code: "sg", name: "Singapore", system: "Singapore Government Design System", short: "SGDS" },
 ] as const
 export type FormCountry = (typeof FORM_COUNTRIES)[number]["code"]
 

@@ -29,6 +29,10 @@ const LOADERS: Record<FormCountry, () => Promise<{ default: Loaded }>> = {
   de: () => import("./load-de"),
   fr: () => import("./load-fr"),
   es: () => import("./load-es"),
+  ie: () => import("./load-ie"),
+  nl: () => import("./load-nl"),
+  nz: () => import("./load-nz"),
+  sg: () => import("./load-sg"),
 }
 
 const BASE = "/example-form"
