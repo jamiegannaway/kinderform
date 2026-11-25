@@ -1,0 +1,1032 @@
+// Government of Ireland Design System (GOV.IE) for the Irish reference form only.
+//
+// Ported from @ogcio/design-system-react 1.52.0 (dist/styles.css and the components' markup)
+// and @ogcio/theme-govie 1.21.8 (dist/light.css), both under the MIT licence,
+// Copyright (c) 2024 OGCIO (PER). Source: https://github.com/ogcio/govie-ds
+// Docs: https://ds.services.gov.ie
+//
+// No government branding. Kinderform is not a government service: no GOV.IE header, no gov.ie
+// logo, no Harp and no Government of Ireland logos (the footer logo included). The design
+// system's docs ask that its header is not used off official GOV.IE domains.
+//
+// Why a port: the React components are built for Tailwind and ship one 1 MB stylesheet that also
+// styles html, body and every element (Tailwind's preflight), with its tokens on :root. Here only
+// the components the form uses are kept, and everything, tokens included, sits under .govie-form,
+// so nothing reaches the rest of the site (Tailwind and shadcn/ui). It is all unlayered, so the
+// site's own preflight (in @layer base) cannot undo it. The form keeps GOV.IE's light theme in both
+// site themes, like the other countries' forms.
+//
+// What is kept, by GOV.IE name: tokens (primitives, semantic colours, type scale, typography),
+// Heading, Paragraph, Label (FormFieldLabel with its secondary label), HintText, ErrorText,
+// FormField's error state, InputText, InputRadio, InputCheckbox, Button, Link, Alert,
+// SummaryList, Details, List, ProgressBar and the few utilities the components' markup uses.
+// Icons are the design system's inline SVGs (Material Symbols paths, Apache License 2.0).
+//
+// Fonts: Lato 400 and 700 (SIL Open Font License 1.1), self-hosted from @fontsource/lato, the
+// package the design system itself loads them from. Only the weights the form uses. Paths are
+// relative to this file, as in gcds.scss, so the build copies the files.
+
+// ---- Fonts --------------------------------------------------------------------------------
+
+$fontsource: "../../node_modules/@fontsource";
+$latin: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+  U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+$latin-ext: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+  U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+
+@mixin face($weight, $subset, $range) {
+  @font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-display: swap;
+    font-weight: $weight;
+    src: url("#{$fontsource}/lato/files/lato-#{$subset}-#{$weight}-normal.woff2") format("woff2");
+    unicode-range: $range;
+  }
+}
+@include face(400, "latin", $latin);
+@include face(700, "latin", $latin);
+// Answers are shown in 400, so names with letters beyond basic Latin (Ó, ł, ğ) keep the font.
+@include face(400, "latin-ext", $latin-ext);
+
+// ---- Breakpoints (--gieds-screen-*) ---------------------------------------------------------
+
+$screen-xs: 480px;
+$screen-sm: 640px;
+$screen-md: 768px;
+$screen-xl: 1280px;
+
+// ---- Mixins ---------------------------------------------------------------------------------
+
+// Links, the Details summary: GOV.IE's focus is a 2px dark ring inside a 3px yellow one.
+@mixin focus-ring {
+  border-radius: var(--gieds-border-radius-100);
+  box-shadow:
+    0 0 0 2px var(--gieds-color-gray-950),
+    0 0 0 5px var(--gieds-color-yellow-400);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+// Underlined text (Tailwind's underline, as the design system configures it).
+@mixin underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: max(1px, 0.08em);
+  text-underline-offset: 0.2em;
+  @supports (-moz-appearance: none) {
+    text-decoration-thickness: max(1px);
+    text-underline-offset: 0.23em;
+  }
+  @supports (background: -webkit-named-image(i)) {
+    text-underline-offset: 0.23em;
+  }
+}
+
+// ---- Root: tokens, colours and type -----------------------------------------------------------
+
+.govie-form {
+  // Primitive colours (light.css): only those the components below use.
+  --gieds-color-neutral-white: #ffffff;
+  --gieds-color-gray-50: #f7f7f8;
+  --gieds-color-gray-100: #e9eaed;
+  --gieds-color-gray-200: #d8dadf;
+  --gieds-color-gray-300: #babec4;
+  --gieds-color-gray-400: #a1a6af;
+  --gieds-color-gray-500: #828893;
+  --gieds-color-gray-600: #686d78;
+  --gieds-color-gray-700: #51555e;
+  --gieds-color-gray-800: #3a3c41;
+  --gieds-color-gray-950: #0b0c0c;
+  --gieds-color-blue-50: #f2f9ff;
+  --gieds-color-blue-100: #d4e8fd;
+  --gieds-color-blue-700: #2c55a2;
+  --gieds-color-blue-800: #15387c;
+  --gieds-color-red-50: #fff4f2;
+  --gieds-color-red-100: #fdd1ca;
+  --gieds-color-red-600: #bb250d;
+  --gieds-color-red-700: #9a1a04;
+  --gieds-color-yellow-50: #fffceb;
+  --gieds-color-yellow-300: #ffed44;
+  --gieds-color-yellow-400: #ffdd00;
+  --gieds-color-yellow-700: #99681f;
+  --gieds-color-green-50: #f4fff1;
+  --gieds-color-green-100: #c5f3bf;
+  --gieds-color-green-700: #00703c;
+  --gieds-color-emerald-50: #f0fff7;
+  --gieds-color-emerald-800: #004d44;
+  --gieds-color-emerald-900: #003630;
+  --gieds-color-purple-700: #5e37b2;
+
+  // Palette roles (light.css).
+  --gieds-color-primary-50: var(--gieds-color-emerald-50);
+  --gieds-color-primary-800: var(--gieds-color-emerald-800);
+  --gieds-color-primary-900: var(--gieds-color-emerald-900);
+  --gieds-color-neutral-50: var(--gieds-color-gray-50);
+  --gieds-color-neutral-100: var(--gieds-color-gray-100);
+  --gieds-color-neutral-200: var(--gieds-color-gray-200);
+  --gieds-color-neutral-600: var(--gieds-color-gray-600);
+  --gieds-color-neutral-700: var(--gieds-color-gray-700);
+  --gieds-color-neutral-950: var(--gieds-color-gray-950);
+  --gieds-color-support-error-50: var(--gieds-color-red-50);
+  --gieds-color-support-error-100: var(--gieds-color-red-100);
+  --gieds-color-support-error-600: var(--gieds-color-red-600);
+  --gieds-color-support-error-700: var(--gieds-color-red-700);
+  --gieds-color-support-warning-50: var(--gieds-color-yellow-50);
+  --gieds-color-support-warning-300: var(--gieds-color-yellow-300);
+  --gieds-color-support-warning-700: var(--gieds-color-yellow-700);
+  --gieds-color-support-success-50: var(--gieds-color-green-50);
+  --gieds-color-support-success-100: var(--gieds-color-green-100);
+  --gieds-color-support-success-700: var(--gieds-color-green-700);
+  --gieds-color-support-info-50: var(--gieds-color-blue-50);
+  --gieds-color-support-info-100: var(--gieds-color-blue-100);
+  --gieds-color-support-info-700: var(--gieds-color-blue-700);
+  --gieds-color-support-focus-400: var(--gieds-color-yellow-400);
+  --gieds-color-utility-convention-700: var(--gieds-color-blue-700);
+  --gieds-color-utility-convention-800: var(--gieds-color-blue-800);
+  --gieds-color-utility-convention-alt-700: var(--gieds-color-purple-700);
+
+  // Semantic colours (light.css).
+  --gieds-color-text-system-neutral-default: var(--gieds-color-neutral-950);
+  --gieds-color-text-system-neutral-muted: var(--gieds-color-neutral-600);
+  --gieds-color-text-intent-info-default: var(--gieds-color-support-info-700);
+  --gieds-color-text-intent-success-default: var(--gieds-color-support-success-700);
+  --gieds-color-text-intent-error-default: var(--gieds-color-support-error-700);
+  --gieds-color-text-intent-warning-default: var(--gieds-color-support-warning-700);
+  --gieds-color-text-tone-primary-fill-default: var(--gieds-color-neutral-white);
+  --gieds-color-text-tone-primary-outline-default: var(--gieds-color-primary-800);
+  --gieds-color-text-tone-convention-default: var(--gieds-color-utility-convention-700);
+  --gieds-color-text-tone-convention-hover: var(--gieds-color-utility-convention-800);
+  --gieds-color-icon-tone-convention-visited: var(--gieds-color-utility-convention-alt-700);
+  --gieds-color-surface-system-neutral-default: var(--gieds-color-neutral-white);
+  --gieds-color-surface-system-neutral-layer1: var(--gieds-color-neutral-50);
+  --gieds-color-surface-tone-primary-fill-default: var(--gieds-color-primary-800);
+  --gieds-color-surface-tone-primary-fill-hover: var(--gieds-color-primary-900);
+  --gieds-color-surface-tone-primary-outline-hover: var(--gieds-color-primary-50);
+  --gieds-color-surface-intent-info-default: var(--gieds-color-support-info-50);
+  --gieds-color-surface-intent-success-default: var(--gieds-color-support-success-50);
+  --gieds-color-surface-intent-error-default: var(--gieds-color-support-error-50);
+  --gieds-color-surface-intent-warning-default: var(--gieds-color-support-warning-50);
+  --gieds-color-border-tone-primary-outline-default: var(--gieds-color-primary-800);
+  --gieds-color-border-intent-info-subtle: var(--gieds-color-support-info-100);
+  --gieds-color-border-intent-success-subtle: var(--gieds-color-support-success-100);
+  --gieds-color-border-intent-error-default: var(--gieds-color-support-error-600);
+  --gieds-color-border-intent-error-subtle: var(--gieds-color-support-error-100);
+  --gieds-color-border-intent-warning-subtle: var(--gieds-color-support-warning-300);
+  --gieds-color-border-intent-focus-default: var(--gieds-color-neutral-950);
+  --gieds-color-border-intent-focus-light: var(--gieds-color-neutral-white);
+  --gieds-color-border-system-neutral-default: var(--gieds-color-neutral-950);
+  --gieds-color-border-system-neutral-muted: var(--gieds-color-neutral-200);
+  --gieds-color-border-system-neutral-interactive-hover: var(--gieds-color-neutral-950);
+  --gieds-color-shadow-intent-focus-default: var(--gieds-color-support-focus-400);
+
+  // Borders, space and layers (light.css): only those used.
+  --gieds-border-width-100: 1px;
+  --gieds-border-width-200: 2px;
+  --gieds-border-width-300: 3px;
+  --gieds-border-width-400: 4px;
+  --gieds-border-radius-100: 2px;
+  --gieds-border-radius-200: 4px;
+  --gieds-space-0: 0px;
+  --gieds-space-0-5: 2px;
+  --gieds-space-1: 4px;
+  --gieds-space-1-5: 6px;
+  --gieds-space-2: 8px;
+  --gieds-space-2-5: 10px;
+  --gieds-space-3: 12px;
+  --gieds-space-4: 16px;
+  --gieds-space-5: 20px;
+  --gieds-space-6: 24px;
+  --gieds-space-8: 32px;
+  --gieds-space-10: 40px;
+  --gieds-space-12: 48px;
+  --gieds-space-24: 96px;
+  --gieds-space-48: 192px;
+  --gieds-z-index-1: 1;
+
+  // Type (light.css).
+  --gieds-font-family-primary: Lato, Arial, sans-serif;
+  --gieds-font-family-tertiary: ui-monospace, "Cascadia Mono", "Segoe UI Mono", consolas, "Liberation Mono", monospace;
+  --gieds-font-size-200: 0.875rem;
+  --gieds-font-size-300: 1rem;
+  --gieds-font-size-400: 1.125rem;
+  --gieds-font-size-500: 1.25rem;
+  --gieds-font-size-600: 1.5rem;
+  --gieds-font-size-700: 1.75rem;
+  --gieds-font-size-800: 2rem;
+  --gieds-font-size-900: 2.25rem;
+  --gieds-font-weight-400: 400;
+  --gieds-font-weight-700: 700;
+  --gieds-font-line-height-700: 1.25;
+  --gieds-font-line-height-800: 1.3;
+  --gieds-font-line-height-1000: 1.5;
+  --gieds-type-scale-heading-bold-200: var(--gieds-font-weight-700) var(--gieds-font-size-400) / var(--gieds-font-line-height-1000)
+    var(--gieds-font-family-primary);
+  --gieds-type-scale-heading-bold-300: var(--gieds-font-weight-700) var(--gieds-font-size-500) / var(--gieds-font-line-height-1000)
+    var(--gieds-font-family-primary);
+  --gieds-type-scale-heading-bold-400: var(--gieds-font-weight-700) var(--gieds-font-size-600) / var(--gieds-font-line-height-700)
+    var(--gieds-font-family-primary);
+  --gieds-type-scale-heading-bold-500: var(--gieds-font-weight-700) var(--gieds-font-size-700) / var(--gieds-font-line-height-700)
+    var(--gieds-font-family-primary);
+  --gieds-type-scale-heading-bold-600: var(--gieds-font-weight-700) var(--gieds-font-size-800) / var(--gieds-font-line-height-700)
+    var(--gieds-font-family-primary);
+  --gieds-type-scale-heading-bold-700: var(--gieds-font-weight-700) var(--gieds-font-size-900) / var(--gieds-font-line-height-700)
+    var(--gieds-font-family-primary);
+  --gieds-type-scale-text-300: var(--gieds-font-weight-400) var(--gieds-font-size-400) / var(--gieds-font-line-height-1000)
+    var(--gieds-font-family-primary);
+  --gieds-type-scale-text-400: var(--gieds-font-weight-400) var(--gieds-font-size-500) / var(--gieds-font-line-height-1000)
+    var(--gieds-font-family-primary);
+  // Typography: the type scale step each heading and text size takes, by breakpoint (default,
+  // xs from 640px, md from 768px, xl from 1280px).
+  --gieds-typography-default-heading-lg: var(--gieds-type-scale-heading-bold-500);
+  --gieds-typography-default-heading-md: var(--gieds-type-scale-heading-bold-300);
+  --gieds-typography-default-heading-sm: var(--gieds-type-scale-heading-bold-300);
+  --gieds-typography-default-heading-xs: var(--gieds-type-scale-heading-bold-200);
+  --gieds-typography-default-text-lg: var(--gieds-type-scale-text-400);
+  --gieds-typography-default-text-md: var(--gieds-type-scale-text-300);
+  --gieds-typography-xs-heading-lg: var(--gieds-type-scale-heading-bold-500);
+  --gieds-typography-xs-heading-md: var(--gieds-type-scale-heading-bold-300);
+  --gieds-typography-xs-heading-sm: var(--gieds-type-scale-heading-bold-300);
+  --gieds-typography-xs-heading-xs: var(--gieds-type-scale-heading-bold-200);
+  --gieds-typography-xs-text-lg: var(--gieds-type-scale-text-400);
+  --gieds-typography-xs-text-md: var(--gieds-type-scale-text-300);
+  --gieds-typography-md-heading-lg: var(--gieds-type-scale-heading-bold-600);
+  --gieds-typography-md-heading-md: var(--gieds-type-scale-heading-bold-400);
+  --gieds-typography-md-heading-sm: var(--gieds-type-scale-heading-bold-300);
+  --gieds-typography-md-heading-xs: var(--gieds-type-scale-heading-bold-200);
+  --gieds-typography-md-text-lg: var(--gieds-type-scale-text-400);
+  --gieds-typography-md-text-md: var(--gieds-type-scale-text-300);
+  --gieds-typography-xl-heading-lg: var(--gieds-type-scale-heading-bold-700);
+  --gieds-typography-xl-heading-md: var(--gieds-type-scale-heading-bold-500);
+  --gieds-typography-xl-heading-sm: var(--gieds-type-scale-heading-bold-400);
+  --gieds-typography-xl-heading-xs: var(--gieds-type-scale-heading-bold-200);
+  --gieds-typography-xl-text-lg: var(--gieds-type-scale-text-400);
+  --gieds-typography-xl-text-md: var(--gieds-type-scale-text-300);
+
+  // The form brings its own light surface, text colour and font (styles.css sets them on html).
+  // It sets no padding or margin: the dialog around it does, and an unlayered padding here would
+  // beat Tailwind's p-* classes.
+  color-scheme: light;
+  box-sizing: border-box;
+  // Contains the visually hidden (position: absolute) text. Without it, inside a fixed dialog
+  // that text would overflow the dialog box and scrollIntoView would shift the dialog.
+  position: relative;
+  background-color: var(--gieds-color-surface-system-neutral-default);
+  color: var(--gieds-color-gray-950);
+  font: var(--gieds-typography-default-text-md);
+  overflow-wrap: break-word;
+  text-align: left;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  // The parts of Tailwind's preflight (in styles.css) the components rely on, kept inside the
+  // form. :where() keeps them below the component classes.
+  :where(*, *::before, *::after) {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--gieds-color-gray-200);
+  }
+  :where(h1, h2, h3, p, ul, ol, dl, dd, pre, fieldset, legend, table, th, td, details, summary) {
+    margin: 0;
+    padding: 0;
+  }
+  :where(h1, h2, h3) {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  :where(a) {
+    color: inherit;
+    text-decoration: inherit;
+  }
+  :where(ol, ul) {
+    list-style: none;
+  }
+  :where(strong) {
+    font-weight: var(--gieds-font-weight-700);
+  }
+  :where(button, input) {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  :where(button) {
+    -webkit-appearance: button;
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+    text-transform: none;
+  }
+  :where(table) {
+    border-collapse: collapse;
+    border-color: inherit;
+    text-indent: 0;
+  }
+  :where(svg) {
+    display: block;
+    vertical-align: middle;
+  }
+  :where(label) {
+    cursor: pointer;
+  }
+}
+
+@media (min-width: $screen-sm) {
+  .govie-form {
+    font: var(--gieds-typography-xs-text-md);
+  }
+}
+@media (min-width: $screen-md) {
+  .govie-form {
+    font: var(--gieds-typography-md-text-md);
+  }
+}
+@media (min-width: $screen-xl) {
+  .govie-form {
+    font: var(--gieds-typography-xl-text-md);
+  }
+}
+
+.govie-form {
+  // ---- Utilities the components' markup uses (styles.css) -------------------------------------
+
+  .gi-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  .gi-block {
+    display: block;
+  }
+  .gi-shrink-0 {
+    flex-shrink: 0;
+  }
+  .gi-mt-1 {
+    margin-top: var(--gieds-space-1);
+  }
+  .gi-pl-5 {
+    padding-left: var(--gieds-space-5);
+  }
+  .gi-pr-5 {
+    padding-right: var(--gieds-space-5);
+  }
+  .gi-text-md {
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-1000);
+  }
+  .gi-font-bold {
+    font-weight: var(--gieds-font-weight-700);
+  }
+
+  // ---- Heading and Paragraph (styles.css: gi-heading-*, gi-paragraph-*) ------------------------
+
+  .gi-heading-lg {
+    font: var(--gieds-typography-default-heading-lg);
+  }
+  .gi-heading-md {
+    font: var(--gieds-typography-default-heading-md);
+  }
+  .gi-heading-sm {
+    font: var(--gieds-typography-default-heading-sm);
+  }
+  .gi-heading-xs {
+    font: var(--gieds-typography-default-heading-xs);
+  }
+  .gi-paragraph-md,
+  .gi-paragraph-lg {
+    max-width: 65ch;
+  }
+  .gi-paragraph-md {
+    font: var(--gieds-typography-default-text-md);
+  }
+  .gi-paragraph-lg {
+    font: var(--gieds-typography-default-text-lg);
+  }
+  @each $bp, $name in ($screen-sm: xs, $screen-md: md, $screen-xl: xl) {
+    @media (min-width: $bp) {
+      .gi-heading-lg {
+        font: var(--gieds-typography-#{$name}-heading-lg);
+      }
+      .gi-heading-md {
+        font: var(--gieds-typography-#{$name}-heading-md);
+      }
+      .gi-heading-sm {
+        font: var(--gieds-typography-#{$name}-heading-sm);
+      }
+      .gi-heading-xs {
+        font: var(--gieds-typography-#{$name}-heading-xs);
+      }
+      .gi-paragraph-md {
+        font: var(--gieds-typography-#{$name}-text-md);
+      }
+      .gi-paragraph-lg {
+        font: var(--gieds-typography-#{$name}-text-lg);
+      }
+    }
+  }
+
+  // ---- Label, HintText, ErrorText and FormField (styles.css) ----------------------------------
+
+  .gi-label {
+    display: block;
+    color: var(--gieds-color-text-system-neutral-default);
+  }
+  // FormFieldLabel's secondaryLabel: "(optional)" after the label, muted and regular. GOV.IE
+  // spaces it with a 4px margin; here a real space does it, so screen readers do not run the
+  // words together.
+  .gi-secondary-label {
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-1000);
+    font-weight: var(--gieds-font-weight-400);
+    color: var(--gieds-color-text-system-neutral-muted);
+  }
+  .gi-hint-text {
+    margin-bottom: var(--gieds-space-0);
+    stroke: var(--gieds-color-text-system-neutral-muted);
+    font-weight: var(--gieds-font-weight-400);
+    color: var(--gieds-color-text-system-neutral-muted);
+  }
+  .gi-hint-text-md {
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-1000);
+  }
+  .gi-error-text {
+    font-weight: var(--gieds-font-weight-400);
+    color: var(--gieds-color-text-intent-error-default);
+  }
+  .gi-error-text-md {
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-1000);
+  }
+  // A field with an error: a red bar down its left side, and red text fields.
+  .gi-error-state {
+    border-left-width: var(--gieds-border-width-400);
+    border-style: solid;
+    border-color: var(--gieds-color-border-intent-error-default);
+    padding-left: var(--gieds-space-4);
+    :is(input[type="text"], input[type="email"], input[type="tel"]) {
+      border-color: var(--gieds-color-border-intent-error-default);
+    }
+    :is(input[type="text"], input[type="email"], input[type="tel"]):focus-visible {
+      border-width: var(--gieds-border-width-300);
+      border-color: var(--gieds-color-border-intent-focus-default);
+    }
+  }
+
+  // ---- InputText (styles.css) -----------------------------------------------------------------
+
+  .gi-input-text-container,
+  .gi-input-text-inner {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+  .gi-input-text-inner {
+    color: var(--gieds-color-text-system-neutral-default);
+  }
+  .gi-input-half-width {
+    width: 50% !important;
+  }
+  .gi-input-text {
+    z-index: var(--gieds-z-index-1);
+    margin-top: var(--gieds-space-0);
+    box-sizing: border-box;
+    height: var(--gieds-space-10);
+    width: 100%;
+    flex: 0 1 auto;
+    border-radius: var(--gieds-border-radius-100);
+    border-width: var(--gieds-border-width-200);
+    border-style: solid;
+    border-color: var(--gieds-color-border-intent-focus-default);
+    background-color: var(--gieds-color-surface-system-neutral-default);
+    padding: var(--gieds-space-2);
+    font-size: var(--gieds-font-size-300);
+    line-height: 2.5rem;
+    &:focus {
+      outline: 3px solid var(--gieds-color-shadow-intent-focus-default);
+      outline-offset: 0;
+      border-width: var(--gieds-border-width-300);
+      border-color: var(--gieds-color-border-intent-focus-default);
+    }
+    @media (min-width: $screen-xs) {
+      font-size: var(--gieds-font-size-400);
+      line-height: 1.25rem;
+    }
+  }
+
+  // ---- InputRadio (styles.css) ----------------------------------------------------------------
+
+  .gi-input-radio-container {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gieds-space-3);
+  }
+  .gi-input-radio-medium {
+    height: var(--gieds-space-8);
+    min-height: var(--gieds-space-8);
+    width: var(--gieds-space-8);
+    min-width: var(--gieds-space-8);
+    flex: none;
+    cursor: pointer;
+    appearance: none;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: var(--gieds-color-surface-system-neutral-default);
+    &:hover {
+      box-shadow: 0 0 0 4px var(--gieds-color-gray-200);
+    }
+    &:focus {
+      outline: 3px solid var(--gieds-color-shadow-intent-focus-default);
+      outline-offset: 0;
+      border-width: 4px;
+    }
+    &:focus:hover {
+      box-shadow: 0 0 0 6px var(--gieds-color-gray-200);
+    }
+    // The dot: a 14px circle, drawn as the border of an empty box and moved to the centre.
+    &:checked::before {
+      content: "";
+      display: block;
+      width: var(--gieds-space-0);
+      border-radius: 50%;
+      border: 7px solid #000;
+      transform: translate(7px, 7px);
+    }
+    &:checked:focus::before {
+      transform: translate(5px, 5px);
+    }
+  }
+
+  // ---- InputCheckbox (styles.css) -------------------------------------------------------------
+
+  .gi-input-checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: var(--gieds-space-3);
+  }
+  .gi-input-checkbox-medium {
+    position: relative;
+    height: var(--gieds-space-8);
+    width: var(--gieds-space-8);
+    flex: none;
+    cursor: pointer;
+    appearance: none;
+    border-radius: var(--gieds-border-radius-100);
+    border: var(--gieds-border-width-200) solid var(--gieds-color-border-system-neutral-default);
+    background-color: var(--gieds-color-surface-system-neutral-default);
+    &:hover {
+      outline: 3px solid var(--gieds-color-gray-200);
+      outline-offset: 0;
+    }
+    &:focus {
+      outline: 3px solid var(--gieds-color-shadow-intent-focus-default);
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 1px var(--gieds-color-border-system-neutral-interactive-hover);
+    }
+    // The tick: the left and bottom borders of a box, turned 45 degrees.
+    &:checked::before {
+      content: "";
+      position: relative;
+      display: block;
+      left: var(--gieds-space-1);
+      top: var(--gieds-space-1-5);
+      width: var(--gieds-space-5);
+      height: var(--gieds-space-2-5);
+      transform: rotate(-45deg);
+      border-style: solid;
+      border-color: var(--gieds-color-border-system-neutral-default);
+      border-width: 0 0 var(--gieds-border-width-400) var(--gieds-border-width-400);
+    }
+  }
+
+  // ---- Button (styles.css, with the focus states of the React Button's classes) ----------------
+
+  .gi-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--gieds-space-2);
+    border-radius: var(--gieds-border-radius-100);
+    border: var(--gieds-border-width-200) solid;
+    font-family: var(--gieds-font-family-primary);
+    &:focus {
+      outline: 3px solid var(--gieds-color-shadow-intent-focus-default);
+      outline-offset: 0;
+      border-color: var(--gieds-color-border-intent-focus-default);
+    }
+  }
+  .gi-btn-primary {
+    border-color: transparent;
+    background-color: var(--gieds-color-surface-tone-primary-fill-default);
+    stroke: var(--gieds-color-text-tone-primary-fill-default);
+    color: var(--gieds-color-text-tone-primary-fill-default);
+    &:hover {
+      background-color: var(--gieds-color-surface-tone-primary-fill-hover);
+    }
+    &:focus {
+      background-color: var(--gieds-color-surface-tone-primary-fill-hover);
+      box-shadow: inset 0 0 0 2px var(--gieds-color-border-intent-focus-light);
+    }
+  }
+  .gi-btn-secondary {
+    border-color: var(--gieds-color-border-tone-primary-outline-default);
+    stroke: var(--gieds-color-text-tone-primary-outline-default);
+    color: var(--gieds-color-text-tone-primary-outline-default);
+    &:hover,
+    &:focus {
+      background-color: var(--gieds-color-surface-tone-primary-outline-hover);
+    }
+  }
+  .gi-btn-regular {
+    height: var(--gieds-space-10);
+    padding: var(--gieds-space-2) var(--gieds-space-3);
+    font-size: var(--gieds-font-size-300);
+    line-height: var(--gieds-font-line-height-1000);
+  }
+  .gi-btn-large {
+    height: var(--gieds-space-12);
+    padding: var(--gieds-space-3) var(--gieds-space-4);
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-800);
+  }
+
+  // ---- Link (styles.css) ----------------------------------------------------------------------
+
+  .gi-link {
+    position: relative;
+    display: inline-flex;
+    width: fit-content;
+    color: var(--gieds-color-text-tone-convention-default);
+    @include underline;
+    &:hover {
+      text-decoration-thickness: max(2px, 0.12em);
+    }
+    &:focus,
+    &:focus-visible {
+      @include focus-ring;
+      text-decoration-line: none;
+    }
+    &:not(.gi-link-inherit) {
+      &:hover,
+      &:focus {
+        color: var(--gieds-color-text-tone-convention-hover);
+      }
+      &:visited {
+        color: var(--gieds-color-icon-tone-convention-visited);
+      }
+    }
+  }
+  .gi-link.gi-link-no-visited:visited {
+    color: var(--gieds-color-text-tone-convention-default);
+  }
+  .gi-link-inherit,
+  .gi-link-inherit:hover {
+    color: inherit;
+  }
+  .gi-link-icon {
+    position: absolute;
+    &[data-size="md"] {
+      top: 5.5px;
+    }
+  }
+  .gi-link-icon-start {
+    left: var(--gieds-space-0);
+  }
+
+  // ---- Alert (styles.css, with the React Alert's gap between title and text) -------------------
+
+  .gi-alert-base {
+    position: relative;
+    display: flex;
+    max-width: 640px;
+    flex-direction: row;
+    gap: var(--gieds-space-2);
+    border-radius: var(--gieds-border-radius-100);
+    border-width: var(--gieds-border-width-100);
+    border-style: solid;
+    padding: var(--gieds-space-3);
+  }
+  .gi-alert-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gieds-space-1);
+    padding-right: var(--gieds-space-2);
+  }
+  .gi-alert-title {
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-800);
+    font-weight: var(--gieds-font-weight-700);
+  }
+  .gi-alert-info {
+    border-color: var(--gieds-color-border-intent-info-subtle);
+    background-color: var(--gieds-color-surface-intent-info-default);
+    color: var(--gieds-color-text-intent-info-default);
+  }
+  .gi-alert-success {
+    border-color: var(--gieds-color-border-intent-success-subtle);
+    background-color: var(--gieds-color-surface-intent-success-default);
+    color: var(--gieds-color-text-intent-success-default);
+  }
+  .gi-alert-warning {
+    border-color: var(--gieds-color-border-intent-warning-subtle);
+    background-color: var(--gieds-color-surface-intent-warning-default);
+    color: var(--gieds-color-text-intent-warning-default);
+  }
+  .gi-alert-danger {
+    border-color: var(--gieds-color-border-intent-error-subtle);
+    background-color: var(--gieds-color-surface-intent-error-default);
+    color: var(--gieds-color-text-intent-error-default);
+  }
+
+  // ---- List (styles.css) ----------------------------------------------------------------------
+
+  .gi-list {
+    list-style-type: none;
+    > li {
+      margin-bottom: var(--gieds-space-1);
+    }
+  }
+  .gi-list-number {
+    list-style-type: decimal;
+    padding-left: var(--gieds-space-4);
+    > li {
+      margin-bottom: var(--gieds-space-0);
+    }
+  }
+  .gi-list-spaced > li {
+    margin-bottom: var(--gieds-space-4);
+  }
+
+  // ---- SummaryList (styles.css; rows withBorder, as the React SummaryListRow draws them) ------
+
+  .gi-summary-list {
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--gieds-border-radius-200);
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-1000);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    > table {
+      width: 100%;
+    }
+    > table > tbody tr {
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--gieds-space-2);
+      padding-bottom: var(--gieds-space-2);
+      vertical-align: middle;
+      border-bottom: var(--gieds-border-width-100) solid var(--gieds-color-border-system-neutral-muted);
+      @media (min-width: $screen-md) {
+        display: table-row;
+        padding-top: var(--gieds-space-0);
+        padding-bottom: var(--gieds-space-0);
+      }
+    }
+    > table th {
+      text-align: left;
+      vertical-align: top;
+      font-weight: var(--gieds-font-weight-700);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    > table td {
+      vertical-align: top;
+    }
+    > table tr > td,
+    > table tr > th {
+      min-height: var(--gieds-space-12);
+      padding: var(--gieds-space-2) var(--gieds-space-3);
+    }
+  }
+  .gi-summary-list-action {
+    white-space: nowrap;
+    vertical-align: top;
+    font-size: var(--gieds-font-size-300);
+    line-height: var(--gieds-font-line-height-1000);
+    font-weight: var(--gieds-font-weight-400);
+    @media (min-width: $screen-md) {
+      text-align: right;
+    }
+  }
+
+  // ---- Details (styles.css, with the React Details' turning chevron) ---------------------------
+
+  .gi-details {
+    display: block;
+    font-size: var(--gieds-font-size-400);
+    line-height: var(--gieds-font-line-height-1000);
+    color: var(--gieds-color-gray-950);
+  }
+  .gi-details-summary {
+    position: relative;
+    margin-bottom: var(--gieds-space-1);
+    display: flex;
+    width: fit-content;
+    cursor: pointer;
+    list-style-type: none;
+    align-items: center;
+    color: var(--gieds-color-gray-950);
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &:hover > .gi-details-summary-text {
+      text-decoration-thickness: max(2px, 0.12em);
+    }
+    &:focus,
+    &:focus-visible {
+      @include focus-ring;
+    }
+    &:focus > .gi-details-summary-text {
+      text-decoration-line: none;
+    }
+    svg {
+      @media (prefers-reduced-motion: no-preference) {
+        transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+  }
+  .gi-details[open] > .gi-details-summary svg {
+    transform: rotate(180deg);
+  }
+  .gi-details-summary-text {
+    @include underline;
+  }
+  .gi-details-text {
+    border-left: 5px solid var(--gieds-color-gray-200);
+    padding-top: var(--gieds-space-4);
+    padding-bottom: var(--gieds-space-4);
+    padding-left: var(--gieds-space-5);
+  }
+
+  // ---- ProgressBar (styles.css) ----------------------------------------------------------------
+  // GOV.IE draws the bar as a div whose width is set inline, which the Content-Security-Policy
+  // blocks. The native <progress> takes the same look.
+
+  .gi-progress-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > span {
+      margin-top: var(--gieds-space-2);
+      font-size: var(--gieds-font-size-300);
+      line-height: var(--gieds-font-line-height-1000);
+      color: var(--gieds-color-gray-950);
+    }
+  }
+  .gi-progress-bar {
+    display: block;
+    width: 100%;
+    height: var(--gieds-space-1);
+    overflow: hidden;
+    appearance: none;
+    border: 0;
+    border-radius: var(--gieds-border-radius-100);
+    background-color: var(--gieds-color-gray-400);
+    color: var(--gieds-color-gray-950);
+    &::-webkit-progress-bar {
+      background-color: var(--gieds-color-gray-400);
+      border-radius: var(--gieds-border-radius-100);
+    }
+    &::-webkit-progress-value {
+      background-color: var(--gieds-color-gray-950);
+      border-radius: var(--gieds-border-radius-100);
+    }
+    &::-moz-progress-bar {
+      background-color: var(--gieds-color-gray-950);
+      border-radius: var(--gieds-border-radius-100);
+    }
+    @media (forced-colors: active) {
+      border: 1px solid CanvasText;
+    }
+  }
+
+  // ---- The form template (ours, not from GOV.IE) ------------------------------------------------
+  // Last, so these placements win over the component rules above.
+
+  // The record on the confirmation page, in GOV.IE's monospace token on its first surface layer.
+  .kf-code {
+    border-radius: var(--gieds-border-radius-200);
+    background: var(--gieds-color-surface-system-neutral-layer1);
+    color: var(--gieds-color-text-system-neutral-default);
+    font-family: var(--gieds-font-family-tertiary);
+    font-size: var(--gieds-font-size-300);
+  }
+
+  // Blocks of a page, as GOV.IE's Stack lays them out.
+  .govie-form__stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gieds-space-6);
+  }
+  .govie-form__stack--sm {
+    gap: var(--gieds-space-3);
+  }
+  .govie-form__stack--xl {
+    gap: var(--gieds-space-8);
+  }
+  .govie-form__stack > .gi-btn {
+    align-self: flex-start;
+  }
+  // The stack spaces blocks, so a spaced list's last item needs no margin of its own.
+  .govie-form__stack > .gi-list-spaced > li:last-child {
+    margin-bottom: 0;
+  }
+
+  // Back link, progress and error summary sit above the form in the engine's step.
+  .govie-form__back {
+    margin-bottom: var(--gieds-space-6);
+  }
+  .govie-form__progress {
+    width: 100%;
+    margin-bottom: var(--gieds-space-8);
+  }
+  .govie-form__error-summary {
+    margin-bottom: var(--gieds-space-8);
+  }
+
+  // The fields of each page, then Continue, 32px apart.
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gieds-space-8);
+  }
+
+  // FormField's spacing: the label and hint, the error 4px below them, then the field 12px below
+  // (the React FormField's gi-pb-3, gi-gap-1 and gi-mb-1). The legend comes first in its
+  // fieldset, so the question names the group.
+  .govie-form__field {
+    min-width: 0;
+  }
+  .govie-form__error {
+    margin-top: var(--gieds-space-1);
+    margin-bottom: var(--gieds-space-1);
+  }
+  .govie-form__control {
+    margin-top: var(--gieds-space-3);
+  }
+  legend.govie-form__legend {
+    display: block;
+    width: 100%;
+    float: left;
+    padding: 0;
+    + * {
+      clear: left;
+    }
+  }
+  .govie-form__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gieds-space-2-5);
+  }
+
+  // A question that is the page heading: the label or legend holds a Heading.
+  .govie-form__heading {
+    margin-bottom: var(--gieds-space-2);
+    .gi-label {
+      display: inline;
+      font: inherit;
+      color: inherit;
+    }
+  }
+
+  // Narrow fields for short answers (GOV.IE sizes fields with the classes it is given).
+  .govie-form__input--5 {
+    max-width: var(--gieds-space-24);
+  }
+  .govie-form__input--10 {
+    max-width: var(--gieds-space-48);
+  }
+
+  // Check page: long questions wrap, rather than being cut off with an ellipsis, and on wider
+  // screens they take under half the row, so answers have room.
+  .gi-summary-list > table th {
+    white-space: normal;
+    overflow: visible;
+    @media (min-width: $screen-md) {
+      width: 45%;
+    }
+  }
+  .govie-form__summary-value {
+    overflow-wrap: anywhere;
+  }
+
+  .govie-form__reference {
+    white-space: nowrap;
+  }
+
+  // On phones the engine pins Continue to the bottom, full width: keep its label centred.
+  .kf-actions .gi-btn {
+    justify-content: center;
+  }
+}
