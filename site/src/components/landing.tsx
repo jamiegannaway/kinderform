@@ -1,7 +1,6 @@
 import { ArrowUpRight, Code, FileText, Mail } from "lucide-react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -17,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import { Illustration, type IllustrationName } from "@/components/illustration"
+import { Tag } from "@/components/tag"
 
 const SOURCE_URL =
   "https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf"
@@ -210,7 +210,7 @@ export default function Landing() {
           <div>
             {/* On phones the hero's form example comes after the text, so a drawing opens the page. */}
             <Illustration name="notification" className="mb-6 w-36 md:hidden" />
-            <Badge variant="secondary">Early days: drafts for comment</Badge>
+            <Tag tone="blue">Early days: drafts for comment</Tag>
             <h1
               id="hero-title"
               className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight text-balance lg:text-5xl"
@@ -300,7 +300,7 @@ export default function Landing() {
                   <CardHeader>
                     <CardTitle className="leading-snug">{m.title}</CardTitle>
                     <CardAction>
-                      <Badge variant="outline">{m.status}</Badge>
+                      <Tag tone={/draft/i.test(m.status) ? "blue" : "green"}>{m.status}</Tag>
                     </CardAction>
                   </CardHeader>
                   <CardContent className="text-sm leading-6 text-muted-foreground">{m.body}</CardContent>

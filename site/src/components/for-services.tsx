@@ -1,8 +1,7 @@
 // "For services" (/for-services): what our reading of public forms and published research could mean
 // for a fostering or adoption service. Numbers come from src/lib/insights.ts and name no service.
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import {
   Table,
@@ -13,7 +12,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Illustration } from "@/components/illustration"
+import { Illustration, type IllustrationName } from "@/components/illustration"
+import { Tag, type Tone } from "@/components/tag"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import { NATIONS, type InsightsData, type RuleQuote, type Share } from "@/lib/insights"
 
@@ -47,23 +47,47 @@ function HowWeDidThis({ children }: { children: React.ReactNode }) {
 
 type Part = { label: string; body: React.ReactNode }
 
-function Insight({ n, id, title, parts, tryThis }: { n: number; id: string; title: string; parts: Part[]; tryThis: React.ReactNode }) {
+// The kind of each part, by its label: our data, published research, or the law.
+const toneOf = (label: string): Tone => (/law|rules/i.test(label) ? "teal" : /found/i.test(label) ? "blue" : "violet")
+
+function Insight({
+  n,
+  id,
+  title,
+  art,
+  parts,
+  tryThis,
+}: {
+  n: number
+  id: string
+  title: string
+  art: IllustrationName
+  parts: Part[]
+  tryThis: React.ReactNode
+}) {
   return (
     <Card id={id} className="scroll-m-20">
       <CardHeader>
         <CardDescription className="tabular-nums">{n}</CardDescription>
         <CardTitle className="text-xl leading-snug">{title}</CardTitle>
+        <CardAction>
+          <Illustration name={art} className="w-16 md:w-20" />
+        </CardAction>
       </CardHeader>
       <CardContent>
         <dl className="grid gap-5 md:grid-cols-3">
           {parts.map((p) => (
             <div key={p.label} className="space-y-2">
-              <dt className="font-medium">{p.label}</dt>
+              <dt>
+                <Tag tone={toneOf(p.label)}>{p.label}</Tag>
+              </dt>
               <dd className="text-sm leading-6 text-muted-foreground">{p.body}</dd>
             </div>
           ))}
           <div className="space-y-2 rounded-lg bg-muted p-4">
-            <dt className="font-medium">Try this</dt>
+            <dt>
+              <Tag tone="green">Try this</Tag>
+            </dt>
             <dd className="text-sm leading-6">{tryThis}</dd>
           </div>
         </dl>
@@ -98,6 +122,7 @@ export function ForServices({
   const insights = [
     {
       id: "ask-less",
+      art: "faqs" as IllustrationName,
       title: "Ask only what you need to reply",
       parts: [
         {
@@ -135,6 +160,7 @@ export function ForServices({
     },
     {
       id: "sensitive-later",
+      art: "call" as IllustrationName,
       title: "Save sensitive questions until after a conversation",
       parts: [
         {
@@ -181,6 +207,7 @@ export function ForServices({
       ? [
           {
             id: "law-stages",
+      art: "crossroad" as IllustrationName,
             title: "Ask each question at the stage the law sets",
             parts: [
               {
@@ -231,6 +258,7 @@ export function ForServices({
       : []),
     {
       id: "say-when",
+      art: "calendar" as IllustrationName,
       title: "Say when you will reply, and who from",
       parts: [
         {
@@ -260,6 +288,7 @@ export function ForServices({
       ? [
           {
             id: "spare-room",
+      art: "studying" as IllustrationName,
             title: "If you ask about a spare room, explain the rule",
             parts: [
               {
@@ -289,6 +318,7 @@ export function ForServices({
       : []),
     {
       id: "preview-application",
+      art: "check" as IllustrationName,
       title: "Tell people early what the application will ask",
       parts: [
         {
@@ -329,6 +359,7 @@ export function ForServices({
     },
     {
       id: "one-contact",
+      art: "peace" as IllustrationName,
       title: "Keep one person in touch from enquiry to application",
       parts: [
         {
@@ -364,6 +395,7 @@ export function ForServices({
     },
     {
       id: "test",
+      art: "chart" as IllustrationName,
       title: "Test one change at a time, and share what you learn",
       parts: [
         {
@@ -410,7 +442,7 @@ export function ForServices({
             name="details"
             className="mb-6 block w-36 lg:absolute lg:top-8 lg:right-0 lg:mb-0 lg:w-56 xl:w-64"
           />
-          <Badge variant="secondary">First look, not yet checked by a person</Badge>
+          <Tag tone="amber">First look, not yet checked by a person</Tag>
           <h1 id="fs-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             What services can do
           </h1>
@@ -441,7 +473,7 @@ export function ForServices({
         <section aria-labelledby="fs-ideas" className="space-y-6 pb-12">
           <H2 id="fs-ideas">{insights.length} things to try</H2>
           {insights.map((x, i) => (
-            <Insight key={x.id} n={i + 1} id={x.id} title={x.title} parts={x.parts} tryThis={x.tryThis} />
+            <Insight key={x.id} n={i + 1} id={x.id} title={x.title} art={x.art} parts={x.parts} tryThis={x.tryThis} />
           ))}
         </section>
 
@@ -476,9 +508,9 @@ export function ForServices({
                   <TableCell className="min-w-40 font-medium whitespace-normal">
                     {t.label}
                     {t.sensitive && (
-                      <Badge variant="outline" className="ml-2 font-normal">
+                      <Tag tone="rose" className="ml-2 font-normal">
                         sensitive
-                      </Badge>
+                      </Tag>
                     )}
                   </TableCell>
                   <Cell s={t.ukFirst} />

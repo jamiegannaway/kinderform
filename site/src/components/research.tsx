@@ -1,6 +1,5 @@
 import { Applications } from "@/components/applications"
 import type { ApplicationsData } from "@/lib/applications"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
@@ -10,6 +9,7 @@ import type { CountriesData } from "@/lib/countries"
 import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 import type { UsPicture as UsPictureData } from "@/lib/us-register"
 import { Illustration } from "@/components/illustration"
+import { Tag } from "@/components/tag"
 
 export type Checked = { date: string; against: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
@@ -40,14 +40,14 @@ function SourceItem({ s }: { s: Source }) {
           {s.by}, {s.year}
         </span>
         {s.checked ? (
-          <Badge variant="outline" className="whitespace-normal">
+          <Tag tone="green" className="whitespace-normal">
             Checked {longDate(s.checked.date)}
             {s.checked.against === "full text" ? "" : `, against the ${s.checked.against}`}
-          </Badge>
+          </Tag>
         ) : (
-          <Badge variant="secondary" className="whitespace-normal">
+          <Tag tone="amber" className="whitespace-normal">
             Not yet checked
-          </Badge>
+          </Tag>
         )}
       </p>
     </li>
@@ -140,7 +140,7 @@ export default function ResearchIndex({
         <section className="grid items-center gap-6 md:grid-cols-[minmax(0,48rem)_14rem] md:justify-between md:gap-8">
           <Illustration name="examining" className="w-36 md:order-last md:mx-auto md:w-full" />
           <div className="space-y-5">
-            <Badge variant="secondary">Updated {longDate(updated)}</Badge>
+            <Tag tone="blue">Updated {longDate(updated)}</Tag>
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance md:text-5xl">
               What we know about the first step
             </h1>

@@ -6,9 +6,15 @@
 // inverted so the lines stay readable.
 export type IllustrationName =
   | "analysing"
+  | "calendar"
+  | "call"
+  | "chart"
+  | "check"
   | "clock-is-ticking"
+  | "crossroad"
   | "details"
   | "examining"
+  | "faqs"
   | "notification"
   | "paper-airplane"
   | "peace"

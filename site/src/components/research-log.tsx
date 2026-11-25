@@ -1,19 +1,19 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import { longDate } from "@/components/research"
 import { KIND_LABEL, type Kind, type LogEntry, type Meaning } from "@/lib/research-log"
+import { Tag, type Tone } from "@/components/tag"
 
 const cell = "align-top whitespace-normal py-3"
-const KIND_VARIANT: Record<Kind, "default" | "secondary" | "outline" | "destructive"> = {
-  keep: "outline",
-  tighten: "secondary",
-  change: "default",
-  add: "secondary",
-  avoid: "destructive",
-  test: "outline",
+const KIND_TONE: Record<Kind, Tone> = {
+  keep: "green",
+  tighten: "blue",
+  change: "amber",
+  add: "violet",
+  avoid: "rose",
+  test: "teal",
 }
 
 export default function ResearchLog({
@@ -129,7 +129,7 @@ export default function ResearchLog({
                 <TableRow key={m.id} id={m.id}>
                   <TableCell className={`${cell} w-[14%] font-medium`}>{m.part}</TableCell>
                   <TableCell className="py-3 align-top">
-                    <Badge variant={KIND_VARIANT[m.kind]}>{KIND_LABEL[m.kind]}</Badge>
+                    <Tag tone={KIND_TONE[m.kind]}>{KIND_LABEL[m.kind]}</Tag>
                   </TableCell>
                   <TableCell className={`${cell} w-[32%]`}>{m.idea}</TableCell>
                   <TableCell className={`${cell} text-muted-foreground`}>{m.why}</TableCell>

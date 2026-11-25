@@ -1,11 +1,11 @@
 // /example-form: a world map with the countries that have an example form. Picking a
 // country opens its form in a dialog (see reference-form/form-dialog.tsx), so the page itself
 // never needs to scroll. Rendered at build time; the links work without JavaScript too.
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { FORM_COUNTRIES } from "@/components/reference-form/countries"
 import { LAND, MAP, MAP_COUNTRIES } from "@/lib/world-map"
+import { Tag } from "@/components/tag"
 
 const href = (code: string) => `/example-form/${code}`
 
@@ -90,8 +90,8 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
         <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
           <div className="min-w-0 flex-1 basis-96 space-y-2">
             <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">Draft 0.1</Badge>
-              <Badge variant="outline">Not real forms</Badge>
+              <Tag tone="blue">Draft 0.1</Tag>
+              <Tag tone="amber">Not real forms</Tag>
             </div>
             <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight md:text-4xl">Example enquiry forms</h1>
             <p className="max-w-3xl text-muted-foreground md:text-lg">
