@@ -17,7 +17,9 @@ CENSUS = ROOT / "census"
 REGISTERS = [ROOT / "register" / "front-doors.csv", ROOT / "register" / "us" / "front-doors.csv",
              ROOT / "register" / "ca" / "front-doors.csv", ROOT / "register" / "au" / "front-doors.csv",
              ROOT / "register" / "de" / "front-doors.csv", ROOT / "register" / "fr" / "front-doors.csv",
-             ROOT / "register" / "es" / "front-doors.csv"]
+             ROOT / "register" / "es" / "front-doors.csv", ROOT / "register" / "ie" / "front-doors.csv",
+             ROOT / "register" / "nl" / "front-doors.csv", ROOT / "register" / "nz" / "front-doors.csv",
+             ROOT / "register" / "sg" / "front-doors.csv"]
 
 COLUMNS = {
     "forms.csv": ["form_id", "front_door_id", "name", "operator_type", "service_type", "country", "region", "form_stage",

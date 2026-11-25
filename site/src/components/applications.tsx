@@ -26,7 +26,7 @@ export function Applications({ data }: { data: ApplicationsData }) {
   const unsorted = pct(data.unclassified, data.appQuestions)
   const small = data.countries.filter((c) => c.apps < 5)
   const hidden = data.countries.filter((c) => c.unit === "forms" && c.found > c.apps)
-  const the = (name: string) => (/^United /.test(name) ? `the ${name}` : name)
+  const the = (name: string) => (/^(?:United |Netherlands)/.test(name) ? `the ${name}` : name)
   const countryNames = (cs: typeof small) => {
     const names = cs.map((c) => the(c.name))
     return names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`

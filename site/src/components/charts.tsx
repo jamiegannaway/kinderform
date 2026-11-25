@@ -264,6 +264,9 @@ export function DotStrips({ rows, axisLabel }: { rows: { label: string; values: 
   )
 }
 
+// "1 form", not "1 forms".
+const one = (n: number, unit: string) => (n === 1 && unit.endsWith("s") ? unit.slice(0, -1) : unit)
+
 // Heat grid: rows are topics, columns are groups, each cell the share of forms that ask.
 // Shade comes from the primary token at fixed opacity steps; the figure is always shown.
 // The cell shade, in steps of 10. The /60 step is skipped: neither dark nor light text reaches
@@ -303,7 +306,7 @@ export function HeatGrid({
             {columns.map((c) => (
               <th key={c.key} scope="col" className="px-1 pb-1 text-center align-bottom text-xs font-medium">
                 {c.short && shortOnly ? (
-                  <abbr title={`${c.label}: ${c.n} ${c.unit ?? unit}`} className="block no-underline">
+                  <abbr title={`${c.label}: ${c.n} ${one(c.n, c.unit ?? unit)}`} className="block no-underline">
                     {c.short}
                   </abbr>
                 ) : c.short ? (
@@ -318,7 +321,7 @@ export function HeatGrid({
                 )}
                 <span className="block font-normal text-muted-foreground tabular-nums">
                   {c.n}
-                  {!shortOnly && <span className="hidden sm:inline"> {c.unit ?? unit}</span>}
+                  {!shortOnly && <span className="hidden sm:inline"> {one(c.n, c.unit ?? unit)}</span>}
                 </span>
               </th>
             ))}
@@ -339,7 +342,7 @@ export function HeatGrid({
                 return (
                   <td
                     key={c.key}
-                    title={cell ? `${cell.yes} of ${cell.of} ${c.unit ?? unit}` : `No ${c.unit ?? unit}`}
+                    title={cell ? `${cell.yes} of ${cell.of} ${one(cell.of, c.unit ?? unit)}` : `No ${c.unit ?? unit}`}
                     className={`h-9 rounded-[4px] text-center text-xs font-medium tabular-nums ring-1 ring-inset ring-border ${SHADE(p)} ${
                       dark ? "text-primary-foreground" : "text-foreground"
                     }`}

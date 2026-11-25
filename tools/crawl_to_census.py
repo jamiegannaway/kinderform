@@ -59,7 +59,7 @@ RULES = [
     ("eligibility", "citizenship", r"place of birth|born in|country of birth"),
     ("eligibility", "residency", r"(?:currently|do you) live in|reside in|live in (?:the )?state|based in|living (?:in|within)|relocate"),
     ("routing", "local_authority", r"where do you live|\brcm\b|\bmrc\b"),
-    ("routing", "nearest_office", r"nearest|office|branch|location"),
+    ("routing", "nearest_office", r"nearest|closest|office|branch|location"),
     ("contact_identity", "address", r"address|street|suburb|\bcity\b|\btown\b|apartment|\bapt\b|\bsuite\b|po box|^line \d|"
                                     r"^country$|adresse|ville|rue"),
     ("contact_identity", "name", r"name|^(?:first|last|middle|title|prefix|suffix)\b|surname|\bnom\b|pr[ée]nom"),
@@ -85,6 +85,7 @@ RULES = [
     ("household", "applicant_type", r"single|couple|applying (?:as|alone|with)|joint applic|second applicant"),
     ("household", "relationships", r"marital|married|relationship status|in a relationship|[ée]tat civil"),
     ("household", "household_composition", r"household|live with you|people (?:in|living)|occupants|who lives|other adults?|"
+                                            r"summary of your family|about your family|"
                                             r"family unit|child (?:one|two|three|four)|lives with"),
     ("household", "pets", r"\bpets?\b|\bdogs?\b|animal"),
     ("housing", "spare_bedroom", r"bedroom|spare room|chambre"),

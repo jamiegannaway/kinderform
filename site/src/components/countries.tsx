@@ -212,7 +212,7 @@ export default function Countries({ data }: { data: CountriesData }) {
         </h2>
         <p className="leading-7">
           Only {data.reply.yes} of {data.reply.of} forms say when you will hear back. We read {data.allForms} enquiry
-          forms in {listNames(data.countries.map((c) => (/^United /.test(c.name) ? `the ${c.name}` : c.name)))}.
+          forms in {listNames(data.countries.map((c) => (/^(?:United |Netherlands)/.test(c.name) ? `the ${c.name}` : c.name)))}.
         </p>
         <p className="leading-7 text-muted-foreground">
           These results are not yet checked by a person. The{" "}
@@ -242,7 +242,7 @@ export default function Countries({ data }: { data: CountriesData }) {
           rows={data.countries.map((c) => ({
             label: c.name,
             values: c.questions,
-            note: `${c.forms} forms, typically ${c.median} questions`,
+            note: c.forms === 1 ? `1 form, with ${c.median} questions` : `${c.forms} forms, typically ${c.median} questions`,
           }))}
           axisLabel="Questions on the form"
         />
