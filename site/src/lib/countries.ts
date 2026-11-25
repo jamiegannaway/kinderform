@@ -8,6 +8,7 @@
 // differ". Every figure is unverified until a person has checked the rows.
 import { askedBy, type Census, type Row } from "@/lib/census"
 import { factsFor, type FormFacts } from "@/lib/form-check"
+import { isSensitive } from "@/lib/sensitive"
 
 export const COUNTRIES = [
   { code: "UK", name: "United Kingdom" },
@@ -40,10 +41,10 @@ export const TOPIC_ROWS: { label: string; match: (q: Row) => boolean; sensitive?
   { label: "Date of birth or age", match: (q) => q.topic === "date_of_birth" || q.topic === "age", sensitive: true },
   { label: "How they heard about the service", match: (q) => q.category === "source" },
   { label: "Fostering, adoption or type of care", match: (q) => q.category === "interest" },
-  { label: "Who lives in the home", match: (q) => q.category === "household" },
+  { label: "Who lives in the home", match: (q) => ["household_composition", "children_in_household", "partner", "partner_details", "partner_date_of_birth"].includes(q.topic) },
   { label: "Spare bedroom or housing", match: (q) => q.category === "housing" },
   { label: "Work or income", match: (q) => q.category === "work" },
-  { label: "Ethnicity, gender or faith", match: (q) => q.category === "equality", sensitive: true },
+  { label: "Ethnicity, gender, sexuality or faith", match: (q) => q.category === "equality", sensitive: true },
   { label: "Health or disability", match: (q) => q.category === "health", sensitive: true },
   { label: "Criminal record", match: (q) => q.category === "criminal_record", sensitive: true },
   { label: "Citizenship or residency", match: (q) => q.topic === "citizenship" || q.topic === "residency", sensitive: true },
@@ -61,7 +62,7 @@ export type CountryStats = {
   totalQuestions: number
   required: { yes: number; of: number } // questions marked required, on forms that mark any
   topics: { label: string; yes: number; of: number; sensitive: boolean }[]
-  asksSensitive: number // forms asking date of birth or a sensitive topic
+  asksSensitive: number // forms asking a sensitive question (src/lib/sensitive.ts)
   reply: { stated: number; of: number } // forms that state a reply time, of those checked
   replyRange: string[] // the reply times stated, quickest first
 }
@@ -95,6 +96,8 @@ const hours = (v: string) => {
 
 export function countries(c: Census): CountriesData {
   const asked = askedBy(c)
+  // The site's one definition of a sensitive question (src/lib/sensitive.ts).
+  const asksSensitive = (formId: string) => (asked.get(formId) ?? []).some((q) => !q.conditional_on && isSensitive(q))
   const facts = factsFor(c, COUNTRIES.map((x) => x.code), true).filter((f) => f.form.observed === "direct_fetch")
   const stats: CountryStats[] = []
   for (const { code, name } of COUNTRIES) {
@@ -127,7 +130,7 @@ export function countries(c: Census): CountriesData {
         of: mine.length,
         sensitive: !!t.sensitive,
       })),
-      asksSensitive: mine.filter((f) => f.sensitive.length > 0 || f.dateOfBirth).length,
+      asksSensitive: mine.filter((f) => asksSensitive(f.form.form_id)).length,
       reply: { stated: replyChecked.filter((f) => f.replyPromise).length, of: replyChecked.length },
       replyRange: replies,
     })
@@ -140,7 +143,7 @@ export function countries(c: Census): CountriesData {
     allMedian: median(all),
     shortest: all.length ? Math.min(...all) : 0,
     longest: all.length ? Math.max(...all) : 0,
-    asksSensitive: { yes: facts.filter((f) => f.sensitive.length > 0 || f.dateOfBirth).length, of: facts.length },
+    asksSensitive: { yes: facts.filter((f) => asksSensitive(f.form.form_id)).length, of: facts.length },
     reply: { yes: replyChecked.filter((f) => f.replyPromise).length, of: replyChecked.length },
     checked: facts.map((f) => f.form.date_checked).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort().at(-1) ?? "",
   }

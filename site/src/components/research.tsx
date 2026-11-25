@@ -101,6 +101,8 @@ const WORDS: [string, string][] = [
   ["Adoption agency", "A service that finds and approves adopters. Some are councils working together."],
   ["Place to get in touch", "The page, form, phone line or email address someone uses to enquire."],
   ["Checklist", "Our draft list of what a good enquiry form and first reply do."],
+  ["Typical", "The middle value: half of the forms ask more, and half ask fewer."],
+  ["Sensitive question", "A question about date of birth, health, a criminal record, ethnicity, faith, immigration status or past partners."],
   ["Not yet checked by a person", "A computer program or one person collected it, and nobody has checked it since."],
 ]
 
@@ -128,7 +130,10 @@ export default function ResearchIndex({
   withdrawals?: Withdrawals
 }) {
   const sources = findings.flatMap((f) => f.sources)
-  const checkedCount = sources.filter((s) => s.checked).length
+  // Each source once, even when two findings cite it.
+  const unique = [...new Map(sources.map((s) => [s.url, s])).values()]
+  const fullText = unique.filter((s) => s.checked && s.checked.against === "full text").length
+  const otherCheck = unique.filter((s) => s.checked && s.checked.against !== "full text").length
   return (
     <>
       <SiteHeader current="/research" />
@@ -145,7 +150,8 @@ export default function ResearchIndex({
               alone did not lead to more approvals. And few enquiry forms say when you will hear back.
             </p>
             <p className="leading-7">
-              We do not name or score any service on this page. The{" "}
+              We do not name or score any service from our own reading of forms. Studies we cite may name the
+              services they studied. The{" "}
               <a href="/compare" className="font-medium underline underline-offset-4">
                 compare pages
               </a>{" "}
@@ -180,8 +186,9 @@ export default function ResearchIndex({
           <div className="max-w-3xl space-y-4">
             <H2 id="known">Research and our own reading give {findings.length} findings so far</H2>
             <p className="leading-7">
-              A person has checked {checkedCount} of the {sources.length} sources against the original, on the date
-              shown. The rest are not yet checked by a person, so check them before you quote them.
+              A person has checked {fullText} of the {unique.length} sources against the full text
+              {otherCheck ? `, and ${otherCheck} more against the abstract only` : ""}. The rest are not yet checked by a
+              person, so check them before you quote them.
             </p>
             <HowWeDidThis>
               <p>

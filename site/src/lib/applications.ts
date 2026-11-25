@@ -9,6 +9,7 @@
 import { askedBy, type Census, type Row } from "@/lib/census"
 import { factsFor } from "@/lib/form-check"
 import { COUNTRIES } from "@/lib/countries"
+import { isSensitive } from "@/lib/sensitive"
 
 // Topics in reading order. Sensitive ones are the questions our draft checklist says should wait
 // until after a conversation.
@@ -28,6 +29,7 @@ export const APPLICATION_TOPICS: { label: string; match: (q: Row) => boolean; se
   { label: "Criminal record", match: (q) => q.category === "criminal_record", sensitive: true },
   { label: "Past contact with child protection", match: (q) => q.category === "prior_involvement", sensitive: true },
   { label: "Ethnicity, gender, sexuality or faith", match: (q) => q.category === "equality", sensitive: true },
+  { label: "Citizenship or residency", match: (q) => q.topic === "citizenship" || q.topic === "residency", sensitive: true },
   { label: "Which children they could care for", match: (q) => q.topic === "child_preferences" },
   { label: "Parenting and discipline", match: (q) => q.topic === "parenting_approach" },
   { label: "Their own childhood and relationships", match: (q) => q.topic === "life_story", sensitive: true },
@@ -100,7 +102,7 @@ export function applications(c: Census): ApplicationsData {
       yes: sets.filter((qs) => qs.some(match)).length,
       of: sets.length,
     })
-    const anySensitive = (q: Row) => APPLICATION_TOPICS.some((t) => t.sensitive && t.match(q))
+    const anySensitive = isSensitive
     out.push({
       code,
       name,

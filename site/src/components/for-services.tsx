@@ -104,8 +104,8 @@ export function ForServices({
           label: "We found",
           body: (
             <>
-              A typical UK enquiry form asks {d.ukFirst.median} questions. Across {d.first.countries} countries, forms
-              ask {d.first.shortest} to {d.first.longest}.
+              A typical UK enquiry form asks {d.ukFirst.median} questions: half ask more, half ask fewer. Across{" "}
+              {d.first.countries} countries, forms ask {d.first.shortest} to {d.first.longest}.
             </>
           ),
         },
@@ -124,11 +124,12 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Ask only for a name, one way to reach the person and roughly where they live, as our{" "}
+          Ask for a name, one way to reach the person and roughly where they live. Leave the rest for a
+          conversation. Our{" "}
           <a href="/example-form" className={link}>
             example forms
           </a>{" "}
-          do.
+          add only a few optional questions.
         </>
       ),
     },
@@ -140,7 +141,7 @@ export function ForServices({
           label: "We found",
           body: (
             <>
-              {of(d.ukFirst.sensitive)} UK enquiry forms ask a sensitive question, such as date of birth, health or
+              {of(d.ukFirst.sensitive)} UK enquiry forms ask a sensitive question, most often date of birth or
               ethnicity.
             </>
           ),
@@ -150,8 +151,8 @@ export function ForServices({
               label: "The law",
               body: (
                 <>
-                  In England, the law puts health, past relationships and the criminal record check in stage 1 of
-                  the fostering assessment.{" "}
+                  In England, the fostering assessment has 2 stages, and both start after someone applies. Stage 1
+                  covers checks, such as health, past relationships and the criminal record.{" "}
                   <a href={d.lawLinks.fostering} className={link}>
                     Fostering Services (England) Regulations 2011, Schedule 3
                   </a>
@@ -191,7 +192,7 @@ export function ForServices({
                     {others.length > 0 && (
                       <>
                         {" "}
-                        Elsewhere, enquiry forms that ask assessment questions:{" "}
+                        Elsewhere, the law has one assessment. Forms that ask its topics, such as ethnicity:{" "}
                         {others.map((n) => `${n.name} ${of(n.enquiry.share)}`).join(", ")}.
                       </>
                     )}
@@ -206,8 +207,8 @@ export function ForServices({
                     <a href={d.lawLinks.fostering} className={link}>
                       Schedule 3
                     </a>
-                    . Adoption agencies must not refuse a first form because of ethnicity, age, health, sexual
-                    orientation or religion.{" "}
+                    . Adoption agencies must not refuse a registration of interest, the first form for adoption,
+                    because of ethnicity, age, health, sexual orientation or religion.{" "}
                     <a href={d.lawLinks.adoptionGuidance} className={link}>
                       Adoption statutory guidance, paragraphs 3.13 to 3.15
                     </a>
@@ -306,7 +307,7 @@ export function ForServices({
           body: withdrawals ? (
             <>
               In England in {withdrawals.year}, {withdrawals.share}% of finished fostering applications ended in
-              withdrawal. Of those who withdrew, {withdrawals.notExpected}% said the process was not what they
+              withdrawal. Of the applicants who withdrew, {withdrawals.notExpected}% said the process was not what they
               expected.{" "}
               <a href="/research#withdrawals" className={link}>
                 Withdrawals
@@ -334,7 +335,7 @@ export function ForServices({
           label: "Research",
           body: (
             <>
-              People drop out when one team hands them to another and nobody answers their questions.{" "}
+              In one hub&rsquo;s evaluation, some people who withdrew said contact stopped after a hand-over.{" "}
               <a href="/research#hand-offs" className={link}>
                 Hand-offs
               </a>
@@ -345,8 +346,8 @@ export function ForServices({
           label: "Other fields",
           body: (
             <>
-              Blood and stem cell services lose the most people right after the first form, when nobody reaches
-              them.{" "}
+              Our review of blood and stem cell donation found the biggest loss comes right after the first form,
+              when nobody reaches the person. Not yet checked by a person.{" "}
               <a href="/research/log" className={link}>
                 Research log
               </a>
@@ -356,8 +357,8 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Give each person one named contact. If you cannot reach someone, record it and try another way within 1
-          working day.
+          Give each person one named contact. If you cannot reach someone, record it and try another way. We suggest
+          doing that within 1 working day.
         </>
       ),
     },
@@ -532,7 +533,8 @@ export function ForServices({
               <Table className="mt-6 min-w-[44rem]">
                 <TableCaption className="text-left">
                   Stage 1 or Stage 2: the stage where the law puts the topic. Assessment: the assessment covers it. Check: a
-                  check the service must make. A dash: the law&rsquo;s list does not name it.
+                  check the service must make. A dash: that nation&rsquo;s law does not name it. Topics no nation&rsquo;s law names, such as ID
+                  numbers, are left out.
                 </TableCaption>
                 <TableHeader>
                   <TableRow>
@@ -557,7 +559,7 @@ export function ForServices({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {d.topics.map((t) => (
+                  {d.topics.filter((t) => NATIONS.some((n) => t.law?.[n.code]?.fostering.length || t.law?.[n.code]?.adoption.length)).map((t) => (
                     <TableRow key={t.label}>
                       <TableCell className="min-w-40 font-medium whitespace-normal">{t.label}</TableCell>
                       {NATIONS.flatMap((n) => [

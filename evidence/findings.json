@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "about": "What we know so far about the first step, from someone getting in touch to their application. Shown at kinderform.org/research. Each source says whether a person has checked the claim against the original, when, and against what. Use null for 'not yet checked'. Edit by pull request; tests/validate_findings.py checks the format.",
   "findings": [
     {
@@ -10,7 +10,7 @@
       "sources": [
         {
           "title": "Evaluation of Foster with North East Pathfinder Hub: year 3 report",
-          "by": "Ipsos and CEI for the Department for Education",
+          "by": "Ipsos and the Centre for Evidence and Implementation (CEI) for the Department for Education",
           "year": "2026",
           "url": "https://assets.publishing.service.gov.uk/media/6aa8195b1a63d2d2be90460e/Evaluation_of_Foster_with_North_East_Pathfinder_Hub_year_3_report.pdf",
           "checked": { "date": "2026-11-14", "against": "full text", "note": "Executive summary and impact results, about pages 12, 42 and 50." }
@@ -25,7 +25,7 @@
       "sources": [
         {
           "title": "Evaluation of Foster with North East Pathfinder Hub: year 3 report",
-          "by": "Ipsos and CEI for the Department for Education",
+          "by": "Ipsos and the Centre for Evidence and Implementation (CEI) for the Department for Education",
           "year": "2026",
           "url": "https://assets.publishing.service.gov.uk/media/6aa8195b1a63d2d2be90460e/Evaluation_of_Foster_with_North_East_Pathfinder_Hub_year_3_report.pdf",
           "checked": { "date": "2026-11-14", "against": "full text", "note": "Executive summary, about page 12." }
@@ -59,14 +59,14 @@
       "id": "withdrawals",
       "stage": "Application",
       "title": "Most fostering applications that finish end in withdrawal, not approval",
-      "summary": "In England, fostering services received 8,290 applications in the year to 31 March 2025. Of the 5,370 applications that finished that year, services approved 2,050 and 3,290 ended in withdrawal. That is 61% of finished applications, not of all applications received. Where the applicant withdrew, 20% said the process was not what they expected.",
+      "summary": "In England, fostering services received 8,290 applications in the year to 31 March 2025. Of the 5,370 applications that finished that year, services approved 2,050 and 3,290 ended in withdrawal. Applicants withdrew 2,175 of these and services withdrew 1,115. That is 61% of finished applications, not of all applications received. Where the applicant withdrew, 20% said the process was not what they expected.",
       "sources": [
         {
           "title": "Main findings: fostering in England 1 April 2024 to 31 March 2025",
           "by": "Ofsted",
           "year": "2025",
           "url": "https://www.gov.uk/government/statistics/fostering-in-england-1-april-2024-to-31-march-2025/main-findings-fostering-in-england-1-april-2024-to-31-march-2025",
-          "checked": { "date": "2026-11-14", "against": "full text", "note": "Published 26 November 2025." }
+          "checked": { "date": "2026-11-14", "against": "full text", "note": "Published 26 November 2025. The split between applicants and services was added on 25 November 2026 from the same page, and a person has not yet checked it." }
         }
       ]
     },
@@ -97,7 +97,7 @@
           "year": "2026",
           "url": "/research#how-forms-differ",
           "checked": null,
-          "note": "Our own reading of public pages, not published research. A computer program read the pages on 14 and 18 November 2026. Nobody has checked them in a browser yet. Services are not named."
+          "note": "Our own reading of public pages, not published research. A person recorded some forms and a computer program read the rest, between 14 and 25 November 2026. Nobody has checked them yet. Services are not named."
         }
       ]
     },

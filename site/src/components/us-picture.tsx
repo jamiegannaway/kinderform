@@ -99,8 +99,8 @@ export default function UsPicture({ data }: { data: Data }) {
         </h2>
         <p className="leading-7">
           In {states(countyStates)}, each county runs its own child welfare service. So each county has its own place
-          to get in touch. {replies ? `Only ${replies}` : "None"} of the {fmt(data.pagesOpened)} pages we read say
-          when they will reply.
+          to get in touch. {replies ? `Only ${replies}` : "None"} of the {fmt(data.pagesOpened)} web pages we read say
+          when they will reply. This counts pages, not forms.
         </p>
         <p className="leading-7 text-muted-foreground">
           {data.verified
@@ -228,7 +228,7 @@ export default function UsPicture({ data }: { data: Data }) {
           </ChartCard>
         </div>
         <p className="mt-6 max-w-3xl text-sm leading-6 text-muted-foreground">
-          The{" "}
+          The state rules below come from search results. We have not yet opened most of the pages they come from. The{" "}
           <a href="/compare/rules" className="font-medium text-foreground underline underline-offset-4">
             compare page
           </a>{" "}

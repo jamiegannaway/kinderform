@@ -32,10 +32,10 @@ const making = [
   {
     title: "An open standard for enquiries",
     status: "Draft 0.1",
-    body: "Lets services see how fast people hear back.",
+    body: "A shared way to record enquiries, so services can measure how fast people hear back.",
   },
   {
-    title: "Where people get in touch",
+    title: "A record of enquiry forms",
     status: "Method in draft",
     body: "What each enquiry form asks, and when it promises a reply.",
   },
@@ -51,7 +51,7 @@ const principles = [
   ["No real personal data.", "Every example is made up."],
   ["Nothing scores people.", "No tool ranks or screens anyone."],
   ["Pages and processes, not staff.", "Teams are small and stretched, not the problem."],
-  ["Facts first.", "No service gets a public score before it can reply."],
+  ["No public scores yet.", "No service gets a public score until it has seen its results and had time to correct them."],
 ]
 
 function Section({
@@ -261,7 +261,7 @@ export default function Landing() {
               </ul>
               <p>
                 Outside the UK, see our{" "}
-                <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">service pages listed by country</a>.
+                <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">list of enquiry forms</a>.
               </p>
             </AlertDescription>
           </Alert>
@@ -276,7 +276,7 @@ export default function Landing() {
               </p>
               <p>
                 England recorded almost 150,000 fostering enquiries in 2024–25. That year, 7,365
-                foster carers gained approval. People can enquire more than once.
+                foster carers were approved. This counts people, not households, and people can enquire more than once.
               </p>
               <p>
                 No shared tool shows how long people wait. Kinderform works on that.

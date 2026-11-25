@@ -196,7 +196,7 @@ export default function FormsDiffer({ data }: { data: Data }) {
           <p>
             Each bar counts only the forms where we could tell. Each chart stands on its own, so nobody can follow one
             form from chart to chart. Each service will see its own results first, in private, with time to correct
-            them. Our scoring method is on{" "}
+            them. Our draft checklist is on{" "}
             <a href="/form-check" className="font-medium text-foreground underline underline-offset-4">
               Form check
             </a>

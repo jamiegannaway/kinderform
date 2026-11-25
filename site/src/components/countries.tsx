@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { ChartCard, DotStrips, HeatGrid, HorizontalBars, StackedBars } from "@/components/charts"
-import { ANSWER_KINDS, type CountriesData } from "@/lib/countries"
+import { type CountriesData } from "@/lib/countries"
 
 const pct = (yes: number, of: number) => (of ? Math.round((100 * yes) / of) : 0)
 const listNames = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`)
@@ -87,7 +87,7 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
         <InsightCard
           eyebrow="Sensitive questions, early"
           figure={oneIn(data.asksSensitive.yes, data.asksSensitive.of)}
-          claim="enquiry forms ask something sensitive, such as date of birth, health or a criminal record"
+          claim="enquiry forms ask something sensitive, most often date of birth or ethnicity"
         >
           <HorizontalBars
             compact
@@ -196,16 +196,7 @@ export default function Countries({ data }: { data: CountriesData }) {
   const sensitiveRows = topicRows?.filter((r) => r.note)
   // Answer kinds as a heat grid too: five kinds are too many for the grey chart tokens to keep
   // apart in a stacked bar, in both themes.
-  const kindRows = ANSWER_KINDS.map((k) => ({
-    label: k.label,
-    cells: Object.fromEntries(data.countries.map((c) => [c.code, { yes: c.answerKinds[k.key], of: c.totalQuestions }])),
-  }))
-  const kindCols = data.countries.map((c) => ({ key: c.code, label: c.name, short: c.code, n: c.totalQuestions }))
   const sum = (f: (c: CountriesData["countries"][number]) => number) => data.countries.reduce((n, c) => n + f(c), 0)
-  const totalQs = sum((c) => c.totalQuestions)
-  const typed = sum((c) => c.answerKinds.typed)
-  const reqYes = sum((c) => c.required.yes)
-  const reqOf = sum((c) => c.required.of)
   const topicShare = (label: string) => {
     const yes = sum((c) => c.topics.find((x) => x.label === label)?.yes ?? 0)
     return pct(yes, data.allForms)
@@ -270,33 +261,6 @@ export default function Countries({ data }: { data: CountriesData }) {
         </ChartCard>
       )}
 
-      <div className={pairs}>
-        <ChartCard
-          title="What kind of answer each question wants"
-          description="The share of questions in each country"
-          footer={{
-            lead: `${pct(typed, totalQs)}% of ${totalQs.toLocaleString("en-GB")} questions want a typed answer`,
-            note: "Pick one means a drop-down list or radio buttons. Not shown means the page did not say.",
-          }}
-        >
-          <HeatGrid columns={kindCols} rows={kindRows} unit="questions" />
-        </ChartCard>
-        <ChartCard
-          title="How many questions you must answer"
-          description="The share of questions marked as required, on forms that mark any"
-          footer={{
-            lead: reqOf ? `${pct(reqYes, reqOf)}% of questions are marked as required` : "None of the forms we read mark which questions are required",
-          }}
-        >
-          <HorizontalBars
-            max={100}
-            data={data.countries
-              .filter((c) => c.required.of > 0)
-              .map((c) => ({ label: c.name, value: pct(c.required.yes, c.required.of), display: `${pct(c.required.yes, c.required.of)}%` }))}
-            labelWidth="sm:grid-cols-[8rem_minmax(0,1fr)]"
-          />
-        </ChartCard>
-      </div>
 
       <div className={pairs}>
         {sensitiveRows && (
