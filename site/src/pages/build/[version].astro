@@ -15,14 +15,15 @@ const base = `${STARTER_BASE}/${kit.key}`;
 const archive = `${STARTER_BASE}/kinderform-${kit.key}-starter.zip`;
 const file = (path: string) => `${base}/${path}`;
 const linkStyle = "font-medium text-foreground underline underline-offset-4 hover:decoration-2";
+const summaryStyle = "cursor-pointer font-medium underline-offset-4 hover:underline";
 const resources = [
-  { file: "questions.md", title: "Questions and answer choices", type: "Markdown", detail: "The wording, shown in form order." },
-  { file: "field-map.csv", title: "Field map", type: "CSV", detail: "Match each question to a field in your system." },
-  { file: "wording.json", title: "Form wording for software", type: "JSON", detail: "Labels, hints, answers and rules for showing questions." },
-  { file: "test-cases.json", title: "Made-up test cases", type: "JSON", detail: "Check different answers before you publish." },
+  { file: "questions.md", title: "Questions and answer choices", type: "Markdown", detail: "In the order the form asks them." },
+  { file: "field-map.csv", title: "Field map", type: "CSV", detail: "Matches each question to a field in your system." },
+  { file: "wording.json", title: "Form wording for software", type: "JSON", detail: "Labels, hints, answers and when to show each question." },
+  { file: "test-cases.json", title: "Made-up test cases", type: "JSON", detail: "Answers to try before you go live." },
 ];
 ---
-<Base title={`${title} | Kinderform`} description={`Download the ${name} Kinderform starter. Copy questions into your own questionnaire tool, use plain HTML or build with an AI assistant.`}>
+<Base title={`${title} | Kinderform`} description={`Download the ${name} Kinderform starter kit. Copy the questions into your own form builder, use plain HTML or build with an AI tool.`}>
   <SiteHeader current="/build" />
   <main id="main" class="mx-auto max-w-5xl px-6 pt-6 pb-16 sm:pt-8">
     <a href="/build" class="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline"><ArrowLeft aria-hidden="true" className="size-4" /> All starter kits</a>
@@ -30,32 +31,35 @@ const resources = [
       <h1 id="kit-heading" class="max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-5xl">{title}</h1>
       <p class="mt-4 max-w-3xl text-lg leading-relaxed">
         {kit.key === "global"
-          ? "Start with shared questions in English. This version leaves out location so your team can decide whether it needs to ask where someone lives."
-          : `The questions are in ${kit.language}. For local routing, the example asks for ${kit.location}. Your team can adapt the wording and reply time.`}
+          ? "Shared questions in English. They do not ask where someone lives, so your team can decide whether to add that."
+          : `Questions in ${kit.language} that ask for ${kit.location}, to find the right local team.`}
       </p>
       <div class="mt-5 flex flex-wrap items-center gap-4">
         <a class={buttonVariants({ size: "lg" })} href={archive} download><Download aria-hidden="true" /> Download the starter kit (ZIP)</a>
         <a href={kit.example ?? "#own-tool"} class="inline-flex items-center gap-1.5 font-medium underline underline-offset-4">{kit.example ? "Try this example form" : "See the setup steps"}<ArrowRight aria-hidden="true" className="size-4" /></a>
       </div>
-      <p class="mt-3 text-sm text-muted-foreground">Kit {STARTER_VERSION.replace("v", "")}. The download includes all the files below.</p>
+      <p class="mt-3 text-sm text-muted-foreground">Kit {STARTER_VERSION.replace("v", "")}, with all the files below.</p>
     </section>
     <div class="mt-9 grid items-start gap-9 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
       <section aria-labelledby="own-tool">
         <h2 id="own-tool" class="text-2xl font-semibold tracking-tight">Use your own form builder</h2>
-        <p class="mt-3 leading-7">Open a blank form in your usual questionnaire tool. Keep it in draft while you make these changes.</p>
+        <p class="mt-3 leading-7">Set up a draft form in 3 steps.</p>
         <ol class="mt-4 list-decimal space-y-3 pl-5 leading-7 marker:font-semibold">
-          <li>Copy the <a href={file("questions.md")} class={linkStyle}>questions and answers</a>. Use the <a href={file("field-map.csv")} class={linkStyle}>field map</a> to set required answers and show follow-up questions.</li>
-          <li>Choose who receives each enquiry in your organisation. Set your real contact details, privacy notice and a reply time your team can meet.</li>
-          <li>Run the <a href={file("test-cases.json")} class={linkStyle}>made-up test cases</a>. Check the confirmation, handoff and reply before inviting anyone to use the form.</li>
+          <li>Copy the <a href={file("questions.md")} class={linkStyle}>questions and answers</a>. Use the <a href={file("field-map.csv")} class={linkStyle}>field map</a> to set required answers and follow-up questions.</li>
+          <li>Choose who gets each enquiry. Add your contact details, privacy notice and a reply time you can meet.</li>
+          <li>Try the <a href={file("test-cases.json")} class={linkStyle}>made-up test cases</a> before you go live. Check the thank-you message, who gets the enquiry and your reply.</li>
         </ol>
-        <p class="mt-4 leading-7">If your builder cannot hide follow-up questions, offer separate email, phone and text paths. Ask only for the contact detail each path needs.</p>
+        <details class="mt-4 leading-7">
+          <summary class={summaryStyle}>If your form builder cannot hide questions</summary>
+          <p class="mt-2">Offer separate email, phone and text versions. Each asks only for the contact detail it needs.</p>
+        </details>
         <a class={`${linkStyle} mt-4 inline-flex items-center gap-2`} href={file("guide.md")} download>Download the full setup guide <ArrowRight aria-hidden="true" className="size-4" /></a>
         <section class="mt-7 border-t pt-6" aria-labelledby="other-tools">
           <h2 id="other-tools" class="text-xl font-semibold tracking-tight">Other ways to build it</h2>
           <ul class="mt-3 space-y-3 leading-7">
-            <li><a class={linkStyle} href={file("form.html")} download>Download a plain HTML form</a> to open locally and adapt with your web team. The example sends nothing.</li>
-            <li><a class={linkStyle} href={file("ai-prompt.txt")} download>Download the AI build prompt</a>. Use it with the kit files and made-up data in your chosen AI tool.</li>
-            <li>If your team uses <a class={linkStyle} href={file("tally.md")}>Tally</a> or <a class={linkStyle} href={file("typeform.md")}>Typeform</a>, follow the guide for that tool.</li>
+            <li><a class={linkStyle} href={file("form.html")} download>Download a plain HTML form</a> for your web team to adapt. It sends nothing.</li>
+            <li><a class={linkStyle} href={file("ai-prompt.txt")} download>Download the AI build prompt</a> to use in an AI tool, with made-up data only.</li>
+            <li>Using <a class={linkStyle} href={file("tally.md")}>Tally</a> or <a class={linkStyle} href={file("typeform.md")}>Typeform</a>? Follow its guide.</li>
           </ul>
         </section>
       </section>
@@ -70,7 +74,7 @@ const resources = [
           ))}
           <li class="py-3">
             <a class={linkStyle} href="/schema/enquiry-submission/0.1.json">Shared rules for form answers</a> <span class="text-xs text-muted-foreground">(JSON Schema)</span>
-            <p class="mt-1 text-sm text-muted-foreground">Check the format and allowed values for an enquiry.</p>
+            <p class="mt-1 text-sm text-muted-foreground">The format and allowed answers.</p>
           </li>
         </ul>
       </aside>

@@ -138,35 +138,31 @@ export function SiteFooter() {
           <a href="/research/log" className="font-medium text-foreground underline underline-offset-4">
             Research log
           </a>
-          : each piece of research we have done, and what it could mean for the project.
+          : what each piece of research could mean for the project.
         </p>
         <p>
           <a href={REPO_URL} className="font-medium text-foreground underline underline-offset-4">
             Kinderform on GitHub
           </a>
-          : the code, data and research behind this site, open for anyone to use and improve.
+          : our code, data and research, free for anyone to use.
         </p>
         <p>
-          This site sets no cookies, does not track you and loads nothing from other sites. If you choose dark mode,
-          your browser remembers it on this device only.
+          This site sets no cookies, does not track you and loads nothing from other sites. A dark mode choice
+          stays on your device.
         </p>
         <p>
-          Our code is under the MIT licence. Our writing and data are under{" "}
+          Code: MIT licence. Writing and data:{" "}
           <a
             href="https://creativecommons.org/licenses/by/4.0/"
             className="font-medium text-foreground underline underline-offset-4"
           >
             CC BY 4.0
           </a>
-          . We built the site with the{" "}
+          . Design:{" "}
           <a href="https://ui.shadcn.com" className="font-medium text-foreground underline underline-offset-4">
             shadcn/ui
-          </a>{" "}
-          design system.
-        </p>
-        <p>
-          The drawings are by Notioly. We use them under a paid licence, so they are not openly licensed
-          and you cannot reuse them.
+          </a>
+          . Drawings: Notioly, under a paid licence, so you cannot reuse them.
         </p>
       </div>
     </footer>

@@ -32,27 +32,26 @@ const making = [
   {
     title: "An open standard for enquiries",
     status: "Draft 0.1",
-    body: "A shared way to describe what an enquiry record holds. It lets any service see how quickly people hear back. It holds no names and nothing about children. It works with any form or case system a service already uses.",
+    body: "Lets services see how fast people hear back.",
   },
   {
-    title: "A picture of where people get in touch",
+    title: "Where people get in touch",
     status: "Method in draft",
-    body: "A register of where people first ask about fostering or adoption. It records what each enquiry form asks and when it says someone will reply. It looks at pages and processes as the person enquiring sees them. Each service sees its own results first.",
+    body: "What each enquiry form asks, and when it promises a reply.",
   },
   {
     title: "A library of research",
     status: "Growing",
-    body: "Research on how people come to foster and adopt, why some stop along the way, and why carers stay. We keep adding to it.",
+    body: "Why people start, stop or stay in fostering and adoption.",
   },
 ]
 
 const principles = [
-  ["About adults who offer to care.", "Nothing here holds children's records or makes decisions about children."],
+  ["About adults who offer to care.", "No children's records, and no decisions about children."],
   ["No real personal data.", "Every example is made up."],
-  ["Nothing scores people.", "No tool here ranks, screens or makes predictions about anyone who enquires."],
-  ["Pages and processes, not staff.", "Recruitment teams are small and stretched, and they are not the problem."],
-  ["Facts in public, scores only after a reply.", "We publish facts about forms and rules, with their sources. We will not publish a score for any service before it has had time to reply."],
-  ["Free and open.", "Our code, writing and data are openly licensed, so anyone can use them without asking."],
+  ["Nothing scores people.", "No tool ranks or screens anyone."],
+  ["Pages and processes, not staff.", "Teams are small and stretched, not the problem."],
+  ["Facts first.", "No service gets a public score before it can reply."],
 ]
 
 function Section({
@@ -69,7 +68,7 @@ function Section({
   return (
     <section
       aria-labelledby={id}
-      className={`py-12 md:py-16 ${art ? "grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_14rem] lg:grid-cols-[minmax(0,1fr)_16rem]" : ""}`}
+      className={`py-12 md:py-16 ${art ? "grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_14rem] md:gap-8 lg:grid-cols-[minmax(0,1fr)_16rem]" : ""}`}
     >
       <div className="min-w-0">
         <h2 id={id} className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
@@ -77,7 +76,8 @@ function Section({
         </h2>
         <div className="mt-6">{children}</div>
       </div>
-      {art && <Illustration name={art} className="mx-auto w-40 md:w-full" />}
+      {/* On phones the drawing comes first, small; from the md width it sits beside the text. */}
+      {art && <Illustration name={art} className="order-first w-36 md:order-none md:mx-auto md:w-full" />}
     </section>
   )
 }
@@ -208,7 +208,7 @@ export default function Landing() {
           className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-8 pb-16 md:grid-cols-[1.1fr_0.9fr] md:pt-16 md:pb-24"
         >
           <div>
-            <Badge variant="secondary">Early days: drafts shared for comment</Badge>
+            <Badge variant="secondary">Early days: drafts for comment</Badge>
             <h1
               id="hero-title"
               className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight text-balance lg:text-5xl"
@@ -216,10 +216,8 @@ export default function Landing() {
               Everyone who offers to care for a child deserves a quick, kind and considered reply.
             </h1>
             <p className="mt-6 max-w-xl text-xl text-muted-foreground">
-              Kinderform is a free, open project to make the first step of fostering and adoption
-              kinder. It gives services shared tools to reply well to people who enquire. By
-              services, we mean the councils, hubs and agencies that find and approve foster carers
-              and adopters.
+              Kinderform makes free, open tools that help services give that reply. Services are the
+              councils, hubs and agencies that find and approve foster carers and adopters.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -240,10 +238,7 @@ export default function Landing() {
           <Alert id="find-a-service">
             <AlertTitle>Thinking of fostering or adopting?</AlertTitle>
             <AlertDescription>
-              <p>
-                To make a real enquiry, contact a fostering or adoption service where you live.
-                The links below can help you find a UK service. The Kinderform examples send nothing.
-              </p>
+              <p>Kinderform cannot take enquiries. Contact a service where you live:</p>
               <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
                 {nations.map((n) => (
                   <li key={n.name}>
@@ -263,9 +258,8 @@ export default function Landing() {
                 </li>
               </ul>
               <p>
-                Outside the UK, you can also browse the{" "}
+                Outside the UK, see our{" "}
                 <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">service pages listed by country</a>.
-                Check the details on the service’s own website before you contact them.
               </p>
             </AlertDescription>
           </Alert>
@@ -275,18 +269,15 @@ export default function Landing() {
           <Section id="why-title" title="Interest is not the problem" art="clock-is-ticking">
             <div className="max-w-2xl space-y-4 leading-7">
               <p>
-                The government's own plan for fostering says plainly that interest is not the
-                problem. People who offer to help can wait weeks or months for a reply.
+                People who offer to help can wait weeks or months for a reply, says the government’s
+                fostering plan.
               </p>
               <p>
-                England recorded almost 150,000 fostering enquiries in 2024–25. In the same year,
-                7,365 foster carers gained approval. One figure counts enquiries and the other counts people.
-                A person can enquire more than once.
+                England recorded almost 150,000 fostering enquiries in 2024–25. That year, 7,365
+                foster carers gained approval. People can enquire more than once.
               </p>
               <p>
-                Nobody designs it that way. Recruitment teams are small and stretched, and systems
-                differ from place to place. There is also no shared way to see how long people wait.
-                That part can be fixed, and it is the part Kinderform works on.
+                No shared tool shows how long people wait. Kinderform works on that.
               </p>
               <p className="text-sm text-muted-foreground">
                 Source: Department for Education,{" "}
@@ -366,15 +357,15 @@ export default function Landing() {
                   Get involved
                 </CardTitle>
                 <CardDescription className="text-base">
-                  We would especially like to hear from:
+                  We’d like to hear from:
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="ml-5 list-disc space-y-2 leading-7">
-                  <li>foster carers and adopters, about when they first got in touch</li>
+                  <li>foster carers and adopters</li>
                   <li>people who have been in care</li>
-                  <li>recruitment teams in councils, hubs and agencies</li>
-                  <li>developers who build forms for public services</li>
+                  <li>recruitment teams</li>
+                  <li>developers of public service forms</li>
                 </ul>
               </CardContent>
               <CardFooter>
@@ -386,7 +377,7 @@ export default function Landing() {
                 </Button>
               </CardFooter>
               </div>
-              <Illustration name="paper-airplane" className="mx-auto hidden w-48 md:block" />
+              <Illustration name="paper-airplane" className="order-first ml-6 w-32 md:order-none md:mx-auto md:w-48" />
             </Card>
           </section>
         </div>
