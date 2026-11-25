@@ -28,12 +28,13 @@ function WorldMap() {
   // screen, using container query units. The labels sit over the map at fixed shares of its size.
   return (
     <div className="relative min-h-0 flex-1 [container-type:size]">
+      <p className="sr-only">World map. {names(FORM_COUNTRIES)} are highlighted. Choose a country from the list below.</p>
       <div className="absolute inset-0 m-auto h-[min(100cqh,calc(100cqw*0.436))] w-[min(100cqw,calc(100cqh/0.436))]">
         <svg
           viewBox={`0 0 ${MAP.width} ${MAP.height}`}
           className="size-full"
-          role="img"
-          aria-label={`World map. ${names(FORM_COUNTRIES)} are highlighted.`}
+          aria-hidden="true"
+          focusable="false"
         >
           <path d={LAND} className="fill-muted stroke-background" strokeWidth={0.6} />
           {MAP_COUNTRIES.map((c) =>

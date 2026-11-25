@@ -266,7 +266,14 @@ export function DotStrips({ rows, axisLabel }: { rows: { label: string; values: 
 
 // Heat grid: rows are topics, columns are groups, each cell the share of forms that ask.
 // Shade comes from the primary token at fixed opacity steps; the figure is always shown.
-const SHADE = (p: number) => `bg-primary/${Math.round(p / 10) * 10}`
+// The cell shade, in steps of 10. The /60 step is skipped: neither dark nor light text reaches
+// 4.5:1 contrast on it, so it uses /70 with light text. Checked with axe-core in both themes.
+const STEP = (p: number) => {
+  const r = Math.round(p / 10) * 10
+  return r === 60 ? 70 : r
+}
+// In dark mode the light primary makes /50 a mid grey on which no text passes, so it drops to /40.
+const SHADE = (p: number) => `bg-primary/${STEP(p)}${STEP(p) === 50 ? " dark:bg-primary/40" : ""}`
 export function HeatGrid({
   columns,
   rows,
@@ -281,7 +288,10 @@ export function HeatGrid({
   shortOnly?: boolean
 }) {
   return (
-    <div className="overflow-x-auto">
+    <div
+      tabIndex={0}
+      className="overflow-x-auto rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+    >
       <table
         className={`w-full table-fixed border-separate border-spacing-1 text-sm ${shortOnly ? "min-w-[46rem]" : "min-w-[18rem]"}`}
       >
@@ -324,12 +334,14 @@ export function HeatGrid({
               {columns.map((c) => {
                 const cell = r.cells[c.key]
                 const p = cell && cell.of ? Math.round((100 * cell.yes) / cell.of) : 0
+                // Light text on /70 and darker, dark text on /50 and lighter: 4.5:1 or more either way.
+                const dark = STEP(p) >= 70
                 return (
                   <td
                     key={c.key}
                     title={cell ? `${cell.yes} of ${cell.of} ${c.unit ?? unit}` : `No ${c.unit ?? unit}`}
                     className={`h-9 rounded-[4px] text-center text-xs font-medium tabular-nums ring-1 ring-inset ring-border ${SHADE(p)} ${
-                      p >= 60 ? "text-primary-foreground" : "text-foreground"
+                      dark ? "text-primary-foreground" : "text-foreground"
                     }`}
                   >
                     {cell && cell.of ? `${p}%` : "–"}

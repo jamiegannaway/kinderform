@@ -87,6 +87,7 @@ See [us-survey-plan.md](us-survey-plan.md).
 
 - [x] Every main page rewritten shorter and plainer to ISO 24495-1 (November 2026): each page leads with its point, method detail sits behind "How we did this", and each page's drawing comes first on phones
 - [x] One word for one thing: "sensitive question" added to the word list in `docs/plain-language.md`
+- [x] Accessibility: axe-core finds no problems on the 9 main pages, in light and dark and with the phone menu open (25 November 2026). Fixed: grid and map contrast, keyboard access to tables that scroll sideways, a heading level, and the example forms map
 - [ ] Ask a few readers from services and research to try the pages and say what is still unclear
 
 ## Now: ideas for services
