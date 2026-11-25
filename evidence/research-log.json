@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-25",
  "about": "A log of each piece of research the project has done, and what it could mean for our work. Every idea here is for discussion until we decide it in the open.",
  "entries": [
   {
@@ -63,6 +63,73 @@
     "Long silences go with losing touch. Most people a stem cell register loses could not be reached; few had changed their minds.",
     "The biggest loss comes straight after the first form, when nobody manages to speak to the person.",
     "Plain, factual messages did as well as urgent or emotional ones, or better."
+   ]
+  },
+  {
+   "id": "international",
+   "date": "2026-11-25",
+   "title": "What other countries count, and what cutting paperwork has done",
+   "report": "reports/2026-11-drop-out-and-paperwork-international.md",
+   "question": "How many people who get in touch go on to be approved in other countries, and has making the process simpler or faster led to more carers?",
+   "looked_at": [
+    "Global and European bodies",
+    "15 countries",
+    "States, regions and councils",
+    "Research on paperwork in public services"
+   ],
+   "how": "A desk review made with an AI-assisted research tool.",
+   "checked": "Not yet checked by a person. Several figures are old, secondhand or read from a summary only.",
+   "learned": [
+    "Most people who get in touch do not go on to be approved, in every country that publishes figures. The figures cannot be compared fairly, because 'enquiry' means different things.",
+    "Once in assessment, most people who leave choose to leave. Few are turned down.",
+    "No study with a comparison shows that a faster or simpler process leads to more approvals. England's hubs and Denmark both found none.",
+    "A poor or slow reply does put people off, and slow approval falls hardest on kinship carers."
+   ]
+  },
+  {
+   "id": "engagement",
+   "date": "2026-11-25",
+   "title": "Where people are lost: fostering research and lessons from other fields",
+   "report": "reports/2026-11-engagement-and-failure-modes.md",
+   "question": "Where do people drop away between an offer and a first step, in fostering and in other fields, and why?",
+   "looked_at": [
+    "Fostering and adoption",
+    "Applying for jobs and volunteering",
+    "Who gets a reply from public bodies",
+    "Taking up family services",
+    "Paperwork in public services"
+   ],
+   "how": "A quick scan made with an AI-assisted search of research papers and the web. Much of the evidence is not about fostering.",
+   "checked": "Not yet checked by a person. Every finding was read from a summary only.",
+   "learned": [
+    "The first reply, the wait between steps and how the service communicates are where people are most often lost.",
+    "A shorter process is not always better. In a study of 222,772 job applicants, length did not predict quitting, and honest time estimates went with fewer people leaving.",
+    "Longer gaps before the next step go with more people dropping away.",
+    "Public bodies sometimes reply less often, or less warmly, depending on the sender's name. Nobody has tested this for fostering.",
+    "Honest information makes some people decide not to go on. That is an informed choice, not a failure."
+   ]
+  },
+  {
+   "id": "automation",
+   "date": "2026-11-25",
+   "title": "Automate the admin, keep the conversation human",
+   "report": "reports/2026-11-automating-admin.md",
+   "question": "What can software safely take off a small recruitment team, and what must stay with a person?",
+   "looked_at": [
+    "AI note-taking in adult social care",
+    "Status messages in government services",
+    "Online-first access to GP surgeries",
+    "Chatbots in public services",
+    "Automated decisions about benefits"
+   ],
+   "how": "A quick web scan made with an AI-assisted research tool. None of the evidence is about fostering enquiries.",
+   "checked": "Not yet checked by a person. Several figures are councils' or suppliers' own.",
+   "learned": [
+    "People who enquire value talking to a person, and the first conversation is where they are most often put off.",
+    "Taking note-taking and routine messages off staff can give time back, by councils' own reports.",
+    "Telling people where things stand cuts the calls they make to chase for news.",
+    "An automated front door can add work if it only adds another way in.",
+    "Automated judgements about people have caused serious harm in benefits systems."
    ]
   }
  ],
@@ -297,6 +364,130 @@
     "intake-interactions",
     "reminders",
     "giving"
+   ]
+  },
+  {
+   "id": "stage-names",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "Use shared stage names that keep withdrawal apart from refusal: withdrew by person, withdrew by service, paused and not approved. Keep to Ofsted's own split of withdrawals.",
+   "why": "Flanders publishes clear stages and one English council does too. Where stages are split out, most people who leave chose to, and few were turned down.",
+   "from": [
+    "international"
+   ]
+  },
+  {
+   "id": "kinship-apart",
+   "part": "How we measure",
+   "kind": "keep",
+   "idea": "Keep kinship enquiries on their own route and count them apart from general fostering.",
+   "why": "Mixing the two changed the totals in the Netherlands and Florida. Slow approval falls hardest on kinship carers in New Zealand and Ireland.",
+   "from": [
+    "international"
+   ]
+  },
+  {
+   "id": "respect-not-numbers",
+   "part": "How we talk about evidence",
+   "kind": "change",
+   "idea": "Describe a fast first reply and a short form as respect for the person. Do not say they will produce more carers, and do not say form length is the main cause of drop-out.",
+   "why": "England's hubs and Denmark found faster or simpler processes with no rise in approvals. A large study of job applicants found length did not predict quitting.",
+   "from": [
+    "international",
+    "engagement"
+   ]
+  },
+  {
+   "id": "no-ranking-tables",
+   "part": "What we will not use",
+   "kind": "avoid",
+   "idea": "Do not publish tables that rank services by the share of enquiries that end in approval.",
+   "why": "The figures are not comparable, a low rate can show people choosing with care, and research for DfE warned that comparisons could raise tensions between services.",
+   "from": [
+    "international"
+   ]
+  },
+  {
+   "id": "come-back",
+   "part": "Withdrawal",
+   "kind": "add",
+   "idea": "Make it easy for someone who stepped back to pick up again later without starting over.",
+   "why": "California lets a person who withdrew apply again within 12 months. In Flanders, families who pause rarely return.",
+   "from": [
+    "international"
+   ]
+  },
+  {
+   "id": "honest-timings",
+   "part": "First reply",
+   "kind": "tighten",
+   "idea": "In 'what happens next', say honestly how long each step usually takes, using the service's own figures.",
+   "why": "In a study of 222,772 job applicants, processes that gave longer, more cautious time estimates lost fewer people.",
+   "from": [
+    "engagement"
+   ]
+  },
+  {
+   "id": "gaps-between-steps",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "Measure the gap between each step, not only the time to the first reply.",
+   "why": "In jobs, volunteering and research studies, longer gaps before the next step go with more people dropping away.",
+   "from": [
+    "engagement",
+    "international"
+   ]
+  },
+  {
+   "id": "chased-for-news",
+   "part": "How we measure",
+   "kind": "test",
+   "idea": "Try recording when a person had to get in touch to chase for news. Use it to judge the process, never a member of staff.",
+   "why": "Contact that happens only because the first reply fell short can be counted. Status messages were built in government services to cut it.",
+   "from": [
+    "engagement",
+    "automation"
+   ]
+  },
+  {
+   "id": "no-secret-tests",
+   "part": "What we will not use",
+   "kind": "avoid",
+   "idea": "Do not send made-up enquiries to services without their agreement. Check fairness from a service's own reply times, or with test enquiries the service has agreed to.",
+   "why": "Studies of who gets a reply use made-up emails without consent. Doing that to small fostering teams would harm trust.",
+   "from": [
+    "engagement"
+   ]
+  },
+  {
+   "id": "automate-admin",
+   "part": "Automation",
+   "kind": "add",
+   "idea": "Sort work into three groups. Automate routine admin: the acknowledgement, routing, booking, one reminder, the record and the figures. Let software draft and a person approve. Never automate the first conversation, a view on whether a person is suitable, or ending contact.",
+   "why": "Teams are small. Taking admin off staff can give time back, people who enquire value a person, and automated judgements about people have caused serious harm.",
+   "from": [
+    "automation",
+    "engagement"
+   ]
+  },
+  {
+   "id": "automation-rules",
+   "part": "Automation",
+   "kind": "add",
+   "idea": "Four rules: say when a message is automated and always offer a person; nobody has to use a chatbot to enquire; automation never closes an enquiry; count staff time returned and less chasing, not enquiries handled without a person.",
+   "why": "An automated front door can add work if it settles nothing, and people still look for a person to talk to.",
+   "from": [
+    "automation"
+   ]
+  },
+  {
+   "id": "automation-record",
+   "part": "Enquiry record",
+   "kind": "test",
+   "idea": "Try recording whether the acknowledgement was automated and whether the first contact was made by a person, so a check can stop a first conversation being recorded as automated.",
+   "why": "A rule written only in words is easy to lose. The record already keeps the time of each of these steps.",
+   "from": [
+    "automation"
    ]
   }
  ]
