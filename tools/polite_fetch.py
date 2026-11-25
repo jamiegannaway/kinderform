@@ -27,6 +27,7 @@ Standard library only.
 """
 
 import argparse
+import gzip
 import json
 import re
 import sys
@@ -308,6 +309,13 @@ class Polite:
                     # A cut-off PDF looks like a scan with no text. Say so, so nobody mistakes it.
                     print(f"note: stopped reading {url} at {MAX_BYTES:,} bytes; use --max-mb to read more",
                           file=sys.stderr)
+                # Some servers send gzip although the request did not ask for it. Unpack it, so the page
+                # is not read as empty.
+                if response.headers.get("Content-Encoding", "").lower() == "gzip" or body[:2] == b"\x1f\x8b":
+                    try:
+                        body = gzip.decompress(body)
+                    except (OSError, EOFError):
+                        pass
                 return response.status, response.geturl(), body, response.headers.get("Content-Type", "")
         except urllib.error.HTTPError as error:
             return error.code, url, b"", ""
@@ -373,21 +381,50 @@ class Polite:
             return record
         if status != 200 or "html" not in ctype.lower():
             return record
+        return read_html(record, body.decode("utf-8", "replace"))
+
+
+def read_html(record: dict, html: str) -> dict:
+    """Fill a record from a page's HTML: title, text, forms, reply-time promises and links.
+
+    A page saved by polite_render.mjs may hold its frames too, after "<!-- frame -->" markers;
+    each part is read on its own and the results joined."""
+    title, texts, forms, links = "", [], [], []
+    for part in html.split("\n<!-- frame -->\n"):
         parser = PageParser()
         try:
-            parser.feed(body.decode("utf-8", "replace"))
+            parser.feed(part)
             parser.finish()
         except Exception:
             pass
-        text = " ".join(parser.text)
-        html = body.decode("utf-8", "replace")
-        record["page_updated"], record["page_updated_from"] = page_date(html, " ".join(text.split()))
-        record["title"] = parser.title[:200]
-        record["text"] = text[:20000]
-        record["forms"] = [f for f in parser.forms if f["fields"]]
-        record["promises"] = sorted({m.group(0).strip()[:300] for m in PROMISE.finditer(text)})[:10]
-        record["links"] = parser.links[:400]
-        return record
+        title = title or parser.title
+        texts.append(" ".join(parser.text))
+        forms += [f for f in parser.forms if f["fields"]]
+        links += parser.links
+    text = " ".join(texts)
+    record["page_updated"], record["page_updated_from"] = page_date(html, " ".join(text.split()))
+    record["title"] = title[:200]
+    record["text"] = text[:20000]
+    record["forms"] = forms
+    record["promises"] = sorted({m.group(0).strip()[:300] for m in PROMISE.finditer(text)})[:10]
+    record["links"] = links[:400]
+    return record
+
+
+def from_rendered(manifest: str, out: str) -> int:
+    """Turn pages saved by tools/polite_render.mjs into records like an ordinary read's."""
+    n = 0
+    with open(manifest, encoding="utf-8") as fh, open(out, "a", encoding="utf-8") as dest:
+        for line in fh:
+            record = json.loads(line)
+            path = record.pop("html_file", "")
+            if path and record.get("status") == 200:
+                with open(path, encoding="utf-8") as page:
+                    read_html(record, page.read())
+            dest.write(json.dumps(record) + "\n")
+            n += 1
+    print(f"done {n}")
+    return 0
 
 
 def has_enquiry_form(forms: list[dict]) -> bool:
@@ -424,8 +461,10 @@ def follow_links(record: dict, limit: int) -> list[str]:
 def main() -> int:
     global MAX_BYTES
     ap = argparse.ArgumentParser()
-    ap.add_argument("urls")
+    ap.add_argument("urls", help="key<TAB>url lines; with --rendered, the manifest.jsonl polite_render.mjs wrote")
     ap.add_argument("out")
+    ap.add_argument("--rendered", action="store_true",
+                    help="read pages saved by tools/polite_render.mjs instead of fetching")
     ap.add_argument("--delay", type=float, default=5.0)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--save-dir", default="")
@@ -433,6 +472,8 @@ def main() -> int:
     ap.add_argument("--max-mb", type=float, default=MAX_BYTES / 1_000_000,
                     help="read at most this many megabytes of each page or file (default 3; large PDF packets need more)")
     args = ap.parse_args()
+    if args.rendered:
+        return from_rendered(args.urls, args.out)
     MAX_BYTES = int(args.max_mb * 1_000_000)
     if args.delay < 3:
         print("Delay below 3 seconds is not allowed (CLAUDE.md rule 8).")
