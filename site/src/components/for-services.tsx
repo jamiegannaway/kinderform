@@ -133,14 +133,14 @@ export function ForServices({
       ),
     },
     {
-      id: "personal-later",
-      title: "Save personal questions until after a conversation",
+      id: "sensitive-later",
+      title: "Save sensitive questions until after a conversation",
       parts: [
         {
           label: "We found",
           body: (
             <>
-              {of(d.ukFirst.sensitive)} UK enquiry forms ask a personal question, such as date of birth, health or
+              {of(d.ukFirst.sensitive)} UK enquiry forms ask a sensitive question, such as date of birth, health or
               ethnicity.
             </>
           ),
@@ -172,7 +172,7 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Ask personal questions in the application, after a conversation, and say why you need each one.
+          Ask sensitive questions in the application, after a conversation, and say why you need each one.
         </>
       ),
     },
@@ -457,7 +457,7 @@ export function ForServices({
               <a href="/form-check" className={link}>
                 draft checklist
               </a>{" "}
-              says &ldquo;personal&rdquo; topics should wait until after a conversation.
+              says &ldquo;sensitive&rdquo; topics should wait until after a conversation.
             </TableCaption>
             <TableHeader>
               <TableRow>
@@ -476,7 +476,7 @@ export function ForServices({
                     {t.label}
                     {t.sensitive && (
                       <Badge variant="outline" className="ml-2 font-normal">
-                        personal
+                        sensitive
                       </Badge>
                     )}
                   </TableCell>
