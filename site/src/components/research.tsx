@@ -28,9 +28,8 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
   )
 }
 
-// One line per source. The section says once what an undated source means, so only a
-// source a person has checked carries a mark: the date it was checked, and "abstract"
-// when the check was against the abstract alone.
+// One line per source, each with its check status (CLAUDE.md, hard rule 6): the date a person
+// checked it, and "abstract" when the check was against the abstract alone, or "Not yet checked".
 function SourceItem({ s }: { s: Source }) {
   return (
     <li className="space-y-1">
@@ -41,10 +40,14 @@ function SourceItem({ s }: { s: Source }) {
         <span>
           {s.by}, {s.year}
         </span>
-        {s.checked && (
+        {s.checked ? (
           <Badge variant="outline" className="whitespace-normal">
             Checked {longDate(s.checked.date)}
             {s.checked.against === "full text" ? "" : `, against the ${s.checked.against}`}
+          </Badge>
+        ) : (
+          <Badge variant="secondary" className="whitespace-normal">
+            Not yet checked
           </Badge>
         )}
       </p>

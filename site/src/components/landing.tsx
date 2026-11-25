@@ -208,6 +208,8 @@ export default function Landing() {
           className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-8 pb-16 md:grid-cols-[1.1fr_0.9fr] md:pt-16 md:pb-24"
         >
           <div>
+            {/* On phones the hero's form example comes after the text, so a drawing opens the page. */}
+            <Illustration name="notification" className="mb-6 w-36 md:hidden" />
             <Badge variant="secondary">Early days: drafts for comment</Badge>
             <h1
               id="hero-title"
