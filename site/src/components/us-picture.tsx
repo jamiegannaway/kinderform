@@ -46,11 +46,11 @@ function TableView({ title, head, rows }: { title: string; head: string[]; rows:
   )
 }
 
-// Three greys from the theme, each with its own text colour, plus a dashed edge on the
-// lightest so the three models differ by more than shade. Each tile is also labelled.
+// Three greys from the theme, each with its own text colour at 4.5:1 contrast or more, plus a
+// dashed edge on the lightest so the three models differ by more than shade. Each tile is labelled.
 const TILE: Record<Tile["model"], string> = {
   state: "bg-primary text-primary-foreground",
-  county: "bg-chart-2 text-white",
+  county: "bg-primary/70 text-primary-foreground",
   hybrid: "border-2 border-dashed border-foreground/60 bg-muted text-foreground",
   unknown: "bg-muted text-muted-foreground",
 }
@@ -72,7 +72,7 @@ function TileMap({ data }: { data: Data }) {
                 className={`flex aspect-square flex-col items-center justify-center rounded-md ${TILE[t.model]}`}
               >
                 <span className="text-[0.6rem] font-bold leading-none sm:text-sm">{t.code}</span>
-                <span className="hidden text-xs leading-tight tabular-nums opacity-90 sm:block">{t.doors}</span>
+                <span className="hidden text-xs leading-tight tabular-nums sm:block">{t.doors}</span>
               </div>
             ) : (
               <div key={`${r}-${c}`} aria-hidden="true" />

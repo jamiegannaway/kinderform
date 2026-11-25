@@ -96,7 +96,7 @@ const RECORD = `{
 }`
 
 const VIEW_TAB =
-  "inline-flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-3 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] has-[:checked]:bg-background has-[:checked]:text-foreground has-[:checked]:shadow-sm has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/50 dark:has-[:checked]:border-input dark:has-[:checked]:bg-input/30"
+  "inline-flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-3 text-sm font-medium whitespace-nowrap text-foreground transition-[color,box-shadow] dark:text-muted-foreground has-[:checked]:bg-background has-[:checked]:text-foreground has-[:checked]:shadow-sm has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/50 dark:has-[:checked]:border-input dark:has-[:checked]:bg-input/30"
 
 function Choice({ label, checked = false }: { label: string; checked?: boolean }) {
   return (
@@ -183,7 +183,7 @@ function FormOrCode() {
             <span className="font-mono">enquiry.json</span>
             <span>Kinderform enquiry standard, draft 0.1</span>
           </div>
-          <pre className="flex-1 overflow-x-auto bg-muted/50 p-4 font-mono text-sm leading-6">
+          <pre tabIndex={0} className="flex-1 overflow-x-auto bg-muted/50 p-4 font-mono text-sm leading-6 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50">
             <code>{RECORD}</code>
           </pre>
         </Card>

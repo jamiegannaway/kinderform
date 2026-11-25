@@ -41,7 +41,7 @@ function Strip({ group, values }: { group: string; values: number[] }) {
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h4 className="text-sm font-medium">{group}</h4>
+        <h3 className="text-sm font-medium">{group}</h3>
         <p className="text-sm text-muted-foreground tabular-nums">{summary}</p>
       </div>
       <div
