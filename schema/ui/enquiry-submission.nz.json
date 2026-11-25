@@ -170,10 +170,10 @@
             "autocomplete": "tel",
             "inputmode": "tel",
             "inputWidth": 20,
-            "hint": "For example, 021 123 4567.",
+            "hint": "For example, 021 000 0000.",
             "errors": {
               "required": "Enter your phone number",
-              "pattern": "Enter a phone number in the correct format, like 021 123 4567"
+              "pattern": "Enter a phone number in the correct format, like 021 000 0000"
             }
           }
         }
