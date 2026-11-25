@@ -4747,3 +4747,32 @@ uk-eng-ealing-enquiry:q04,uk-eng-ealing-enquiry,4,,Email,contact_identity,email,
 uk-eng-ealing-enquiry:q05,uk-eng-ealing-enquiry,5,,Where do you live?,routing,local_authority,unknown,text,no,,,direct_fetch,2026-11-24
 uk-eng-ealing-enquiry:q06,uk-eng-ealing-enquiry,6,,How did you hear about us?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-24
 uk-eng-ealing-enquiry:q07,uk-eng-ealing-enquiry,7,,I consent that Foster with Ealing can use the information pr,consent,processing,unknown,checkbox,no,,,direct_fetch,2026-11-24
+uk-eng-bolton-enquiry:q01,uk-eng-bolton-enquiry,1,,First name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q02,uk-eng-bolton-enquiry,2,,Last name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q03,uk-eng-bolton-enquiry,3,,E-mail address,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q04,uk-eng-bolton-enquiry,4,,Mobile number,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q05,uk-eng-bolton-enquiry,5,,Who do you pay council tax to?,routing,local_authority,yes,select,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q06,uk-eng-bolton-enquiry,6,,Where did you find out about fostering for your local authority?,source,how_heard,unknown,select,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q07,uk-eng-bolton-enquiry,7,,Preferred time for a call back,contact_preference,time,unknown,select,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q08,uk-eng-bolton-enquiry,8,,Let us know if you have any questions...,free_text,questions,unknown,textarea,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q09,uk-eng-bolton-enquiry,9,,I consent to be contacted about my enquiry using the informa,consent,contact,unknown,checkbox,no,,,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:q10,uk-eng-bolton-enquiry,10,,I would like to receive regular information from Foster for,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q01,uk-eng-sefton-enquiry,1,,"What would you like us to do next? Email you an information pack, call you for a chat, or send details of information events",contact_preference,next_step,yes,checkbox,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q02,uk-eng-sefton-enquiry,2,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q03,uk-eng-sefton-enquiry,3,,Last Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q04,uk-eng-sefton-enquiry,4,,Phone,contact_identity,phone,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q05,uk-eng-sefton-enquiry,5,,How did you hear about us,source,how_heard,yes,select,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q06,uk-eng-sefton-enquiry,6,,I would like to receive email fostering newsletters,consent,marketing,unknown,radio,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q07,uk-eng-sefton-enquiry,7,,Tick to say you have read and agree to the privacy terms,consent,privacy_acknowledgement,yes,radio,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q01,uk-eng-west-sussex-enquiry,1,,First Name,contact_identity,name,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q02,uk-eng-west-sussex-enquiry,2,,Last Name,contact_identity,name,unknown,text,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q03,uk-eng-west-sussex-enquiry,3,,Contact Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q04,uk-eng-west-sussex-enquiry,4,,Contact Number,contact_identity,phone,yes,tel,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q05,uk-eng-west-sussex-enquiry,5,,Postcode,contact_identity,postcode,yes,text,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q06,uk-eng-west-sussex-enquiry,6,,Message,free_text,questions,yes,textarea,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q07,uk-eng-west-sussex-enquiry,7,,Source,source,how_heard,yes,select,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q08,uk-eng-west-sussex-enquiry,8,,Please specify,source,how_heard_detail,unknown,text,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q09,uk-eng-west-sussex-enquiry,9,,Existing Foster Carer?,transfer,current_carer,unknown,radio,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q10,uk-eng-west-sussex-enquiry,10,,I accept my details will be passed to the fostering team to deal with my enquiry,consent,processing,yes,checkbox,no,,,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:q08,uk-eng-sefton-enquiry,8,,Email,contact_identity,email,yes,email,no,,,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:q11,uk-eng-west-sussex-enquiry,11,,Would you like to receive regular fostering news by email?,consent,marketing,unknown,checkbox,no,,,direct_fetch,2026-11-25
