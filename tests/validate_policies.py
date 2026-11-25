@@ -50,7 +50,7 @@ SOURCE_TYPES = {"legislation", "statutory_guidance", "standards", "government_pa
 EVIDENCE = {"page_read", "search_result"}
 VERIFICATION = {"unverified", "verified"}
 UNITS = {
-    "", "years", "months", "days", "working_days", "hours", "children", "people", "sessions",
+    "", "years", "months", "weeks", "days", "percent", "working_days", "hours", "children", "people", "sessions",
     "GBP_per_week", "CAD_per_day", "CAD_per_month", "AUD_per_fortnight", "AUD_per_week",
     "EUR_per_month", "EUR_per_week", "EUR_per_day", "EUR", "NZD_per_week", "NZD_per_fortnight", "SGD_per_month", "SGD",
 }
