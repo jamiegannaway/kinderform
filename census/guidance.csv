@@ -617,3 +617,12 @@ uk-eng-barking-dagenham-enquiry:g03,uk-eng-barking-dagenham-enquiry,marketing_co
 uk-eng-ealing-enquiry:g01,uk-eng-ealing-enquiry,response_time,no,No reply time found on the form page or the front-door page.,,https://ealingfostering.co.uk/,direct_fetch,2026-11-24
 uk-eng-ealing-enquiry:g02,uk-eng-ealing-enquiry,privacy_notice_link,yes,Links to a privacy notice.,,https://ealingfostering.co.uk/,direct_fetch,2026-11-24
 uk-eng-ealing-enquiry:g03,uk-eng-ealing-enquiry,marketing_consent,no,No newsletter or marketing opt-in found on the form.,none,https://ealingfostering.co.uk/,direct_fetch,2026-11-24
+uk-eng-bolton-enquiry:g01,uk-eng-bolton-enquiry,response_time,no,No reply time found on the form page or the front-door page.,,https://www.bolton.gov.uk/fostering/enquire-fostering,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:g02,uk-eng-bolton-enquiry,privacy_notice_link,yes,Links to a privacy notice.,,https://www.bolton.gov.uk/fostering/enquire-fostering,direct_fetch,2026-11-25
+uk-eng-bolton-enquiry:g03,uk-eng-bolton-enquiry,marketing_consent,yes,The form has a separate newsletter opt-in.,separate_unticked,https://www.bolton.gov.uk/fostering/enquire-fostering,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:g01,uk-eng-sefton-enquiry,response_time,no,No reply time found on the form page or the front-door page.,,https://seftonfostering.co.uk/enquire-now/,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:g02,uk-eng-sefton-enquiry,privacy_notice_link,yes,Links to a privacy notice.,,https://seftonfostering.co.uk/enquire-now/,direct_fetch,2026-11-25
+uk-eng-sefton-enquiry:g03,uk-eng-sefton-enquiry,marketing_consent,yes,The form has a newsletter or marketing opt-in.,separate_unticked,https://seftonfostering.co.uk/enquire-now/,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:g01,uk-eng-west-sussex-enquiry,response_time,yes,Says it will make contact within 2 working days.,2 working days,https://fosteringwestsussex.org.uk/contact-us/,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:g02,uk-eng-west-sussex-enquiry,privacy_notice_link,yes,Links to a privacy notice.,,https://fosteringwestsussex.org.uk/contact-us/,direct_fetch,2026-11-25
+uk-eng-west-sussex-enquiry:g03,uk-eng-west-sussex-enquiry,marketing_consent,yes,The form has a separate newsletter opt-in.,separate_unticked,https://fosteringwestsussex.org.uk/contact-us/,direct_fetch,2026-11-25

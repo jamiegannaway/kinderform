@@ -1,6 +1,5 @@
 // "Across countries" on /research, and the insight cards at the top of the page.
 // Counts only, no services named. Static HTML; shadcn chart look from charts.tsx.
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { ChartCard, DotStrips, HeatGrid, HorizontalBars, StackedBars } from "@/components/charts"
@@ -8,6 +7,8 @@ import { ANSWER_KINDS, type CountriesData } from "@/lib/countries"
 
 const pct = (yes: number, of: number) => (of ? Math.round((100 * yes) / of) : 0)
 const listNames = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`)
+const longDate = (iso: string) =>
+  new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
 
 // "1 in 5" reads better than "21%" for small shares; large shares stay as a percentage.
 export function oneIn(yes: number, of: number): string {
@@ -17,7 +18,23 @@ export function oneIn(yes: number, of: number): string {
   return `1 in ${Math.round(1 / share)}`
 }
 
-export type Withdrawals = { completed: number; approved: number; withdrawn: number; share: number; source: string }
+// Method detail for a section on /research: closed until the reader opens it, with no JavaScript.
+export function HowWeDidThis({ children }: { children: React.ReactNode }) {
+  return (
+    <details className="max-w-3xl text-sm leading-6">
+      <summary className="cursor-pointer font-medium underline-offset-4 hover:underline">How we did this</summary>
+      <div className="mt-3 space-y-3 text-muted-foreground">{children}</div>
+    </details>
+  )
+}
+
+export type Withdrawals = {
+  completed: number
+  approved: number
+  withdrawn: number
+  share: number
+  source: { label: string; url: string; checked: string | null }
+}
 
 // A finding card: what it means in one line, the figure, a small chart, and where it comes from.
 function InsightCard({
@@ -31,7 +48,7 @@ function InsightCard({
   figure: string
   claim: string
   children?: React.ReactNode
-  footer: string
+  footer?: React.ReactNode
 }) {
   return (
     <Card className="gap-4">
@@ -41,7 +58,7 @@ function InsightCard({
         <p className="text-sm leading-snug font-medium">{claim}</p>
       </CardHeader>
       {children && <CardContent>{children}</CardContent>}
-      <CardFooter className="mt-auto text-xs leading-snug text-muted-foreground">{footer}</CardFooter>
+      {footer && <CardFooter className="mt-auto text-xs leading-snug text-muted-foreground">{footer}</CardFooter>}
     </Card>
   )
 }
@@ -52,69 +69,89 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
       .filter((c) => f(c).of > 0)
       .map((c) => ({ label: c.name, value: pct(f(c).yes, f(c).of), display: `${pct(f(c).yes, f(c).of)}%` }))
   const nCountries = data.countries.length
-  const scope = `Based on ${data.allForms} enquiry forms in ${nCountries} ${nCountries === 1 ? "country" : "countries"}, read from the live web page. Not yet checked by a person.`
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      <InsightCard
-        eyebrow="Before anyone has spoken to you"
-        figure={`${data.allMedian} questions`}
-        claim="is what a typical enquiry form asks"
-        footer={`Forms ask from ${data.shortest} to ${data.longest} questions. ${scope}`}
-      >
-        <HorizontalBars
-          compact
-          data={data.countries.map((c) => ({ label: c.name, value: c.median, display: String(c.median) }))}
-          labelWidth="grid-cols-[7.5rem_minmax(0,1fr)]"
-        />
-      </InsightCard>
-      <InsightCard
-        eyebrow="Sensitive questions, early"
-        figure={oneIn(data.asksSensitive.yes, data.asksSensitive.of)}
-        claim="forms ask for a date of birth, or about health, ethnicity, faith or a criminal record, when you first enquire"
-        footer={scope}
-      >
-        <HorizontalBars
-          compact
-          max={100}
-          data={byCountry((c) => ({ yes: c.asksSensitive, of: c.forms }))}
-          labelWidth="grid-cols-[7.5rem_minmax(0,1fr)]"
-        />
-      </InsightCard>
-      <InsightCard
-        eyebrow="Knowing what happens next"
-        figure={oneIn(data.reply.yes, data.reply.of)}
-        claim="forms say when you will hear back"
-        footer={`Out of ${data.reply.of} forms where we looked for a reply time on the page. Not yet checked by a person.`}
-      >
-        <HorizontalBars
-          compact
-          max={100}
-          data={byCountry((c) => ({ yes: c.reply.stated, of: c.reply.of }))}
-          labelWidth="grid-cols-[7.5rem_minmax(0,1fr)]"
-        />
-      </InsightCard>
-      {withdrawals && (
+    <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <InsightCard
-          eyebrow="After applying, in England"
-          figure={`${withdrawals.share}%`}
-          claim="of finished fostering applications ended in withdrawal, not approval"
-          footer={withdrawals.source}
+          eyebrow="Before anyone has spoken to you"
+          figure={`${data.allMedian} questions`}
+          claim="is what a typical enquiry form asks"
+          footer={`Forms ask from ${data.shortest} to ${data.longest} questions.`}
         >
-          <StackedBars
-            segments={[
-              { key: "withdrawn", label: "Withdrawn", className: "bg-primary" },
-              { key: "approved", label: "Approved", className: "bg-chart-2" },
-            ]}
-            rows={[
-              {
-                label: `${withdrawals.completed.toLocaleString("en-GB")} finished applications`,
-                total: withdrawals.completed,
-                parts: { withdrawn: withdrawals.withdrawn, approved: withdrawals.approved },
-              },
-            ]}
+          <HorizontalBars
+            compact
+            data={data.countries.map((c) => ({ label: c.name, value: c.median, display: String(c.median) }))}
+            labelWidth="grid-cols-[7.5rem_minmax(0,1fr)]"
           />
         </InsightCard>
-      )}
+        <InsightCard
+          eyebrow="Sensitive questions, early"
+          figure={oneIn(data.asksSensitive.yes, data.asksSensitive.of)}
+          claim="enquiry forms ask something sensitive, such as date of birth, health or a criminal record"
+        >
+          <HorizontalBars
+            compact
+            max={100}
+            data={byCountry((c) => ({ yes: c.asksSensitive, of: c.forms }))}
+            labelWidth="grid-cols-[7.5rem_minmax(0,1fr)]"
+          />
+        </InsightCard>
+        <InsightCard
+          eyebrow="Knowing what happens next"
+          figure={oneIn(data.reply.yes, data.reply.of)}
+          claim="enquiry forms say when you will hear back"
+          footer={`Of ${data.reply.of} forms where we looked for a reply time.`}
+        >
+          <HorizontalBars
+            compact
+            max={100}
+            data={byCountry((c) => ({ yes: c.reply.stated, of: c.reply.of }))}
+            labelWidth="grid-cols-[7.5rem_minmax(0,1fr)]"
+          />
+        </InsightCard>
+        {withdrawals && (
+          <InsightCard
+            eyebrow="After applying, in England"
+            figure={`${withdrawals.share}%`}
+            claim="of finished fostering applications ended in withdrawal, not approval"
+            footer={
+              <p>
+                Source:{" "}
+                <a href={withdrawals.source.url} className="underline underline-offset-4">
+                  {withdrawals.source.label}
+                </a>
+                .{" "}
+                {withdrawals.source.checked
+                  ? `A person checked it on ${longDate(withdrawals.source.checked)}.`
+                  : "Not yet checked by a person."}
+              </p>
+            }
+          >
+            <StackedBars
+              segments={[
+                { key: "withdrawn", label: "Withdrawn", className: "bg-primary" },
+                { key: "approved", label: "Approved", className: "bg-chart-2" },
+              ]}
+              rows={[
+                {
+                  label: `${withdrawals.completed.toLocaleString("en-GB")} finished applications`,
+                  total: withdrawals.completed,
+                  parts: { withdrawn: withdrawals.withdrawn, approved: withdrawals.approved },
+                },
+              ]}
+            />
+          </InsightCard>
+        )}
+      </div>
+      <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+        The first 3 figures come from {data.allForms} enquiry forms in {nCountries}{" "}
+        {nCountries === 1 ? "country" : "countries"}. We read them on their live web pages
+        {data.checked ? `, most recently on ${longDate(data.checked)}` : ""}. They are not yet checked by a person. The{" "}
+        <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
+          compare page
+        </a>{" "}
+        lists every form.
+      </p>
     </div>
   )
 }
@@ -173,39 +210,33 @@ export default function Countries({ data }: { data: CountriesData }) {
     const yes = sum((c) => c.topics.find((x) => x.label === label)?.yes ?? 0)
     return pct(yes, data.allForms)
   }
+  const n = data.countries.length
   // Side by side, two heat grids fit four countries. With more, each card takes the full width.
-  const pairs = data.countries.length > 4 ? "grid gap-6 *:min-w-0" : "grid gap-6 *:min-w-0 lg:grid-cols-2"
+  const pairs = n > 4 ? "grid gap-6 *:min-w-0" : "grid gap-6 *:min-w-0 lg:grid-cols-2"
   return (
     <section aria-labelledby="countries" className="space-y-8">
       <div className="max-w-3xl space-y-4">
-        <Badge variant="secondary" className="whitespace-normal">
-          {listNames(data.countries.map((c) => c.name))}
-        </Badge>
         <h2 id="countries" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          What enquiry forms ask in {data.countries.length}{" "}
-          {data.countries.length === 1 ? "country" : "countries"}
+          In {n} {n === 1 ? "country" : "countries"}, a typical enquiry form asks {data.allMedian} questions
         </h2>
         <p className="leading-7">
-          A typical enquiry form asks {data.allMedian} questions, and few forms say when you will hear back. The
-          enquiry form is often the first thing a service learns about someone.
+          Only {data.reply.yes} of {data.reply.of} forms say when you will hear back. We read {data.allForms} enquiry
+          forms in {listNames(data.countries.map((c) => (/^United /.test(c.name) ? `the ${c.name}` : c.name)))}.
         </p>
-        <p className="leading-7">
-          We read {data.allForms} enquiry forms from the live web page and measured each one the same way:
-        </p>
-        <ul className="ml-5 list-disc space-y-2 leading-7">
-          <li>how many questions it asks</li>
-          <li>what the questions are about</li>
-          <li>what kind of answer each question wants</li>
-          <li>whether the form says when you will hear back.</li>
-        </ul>
         <p className="leading-7 text-muted-foreground">
-          This section does not name any service: the{" "}
+          These results are not yet checked by a person. The{" "}
           <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
             compare page
           </a>{" "}
-          lists each form. A computer program read the forms and sorted each question into a topic. These
-          results are not yet checked by a person, so treat them as early patterns.
+          lists each form.
         </p>
+        <HowWeDidThis>
+          <p>
+            A computer program read each form on its live web page. It counted the questions and sorted each one into a
+            topic. It also noted what kind of answer each question wants, and whether the form says when you will hear
+            back. We measured every form the same way.
+          </p>
+        </HowWeDidThis>
       </div>
 
       <ChartCard
@@ -213,7 +244,7 @@ export default function Countries({ data }: { data: CountriesData }) {
         description="Each dot is one form"
         footer={{
           lead: `A typical form asks ${data.allMedian} questions`,
-          note: `The ${data.allForms} forms ask from ${data.shortest} to ${data.longest} questions.`,
+          note: `The ${data.allForms} forms ask from ${data.shortest} to ${data.longest}.`,
         }}
       >
         <DotStrips
@@ -228,11 +259,11 @@ export default function Countries({ data }: { data: CountriesData }) {
 
       {topicRows && (
         <ChartCard
-          title="What enquiry forms ask about, by country"
-          description="The share of forms in each country that ask about each topic. Darker means more forms ask."
+          title="What enquiry forms ask about"
+          description="The share of forms in each country that ask about each topic. Darker means more."
           footer={{
             lead: `${topicShare("Email address")}% ask for an email address and ${topicShare("Phone number")}% for a phone number`,
-            note: "Our draft checklist says topics marked sensitive should wait until after a conversation.",
+            note: "Our draft checklist says sensitive topics should wait until after a conversation.",
           }}
         >
           <HeatGrid columns={cols} rows={topicRows} />
@@ -241,10 +272,10 @@ export default function Countries({ data }: { data: CountriesData }) {
 
       <div className={pairs}>
         <ChartCard
-          title="What kind of answer each question asks for"
-          description="The share of questions in each country that ask for each kind of answer"
+          title="What kind of answer each question wants"
+          description="The share of questions in each country"
           footer={{
-            lead: `${pct(typed, totalQs)}% of ${totalQs.toLocaleString("en-GB")} questions ask for a typed answer`,
+            lead: `${pct(typed, totalQs)}% of ${totalQs.toLocaleString("en-GB")} questions want a typed answer`,
             note: "Pick one means a drop-down list or radio buttons. Not shown means the page did not say.",
           }}
         >
@@ -255,7 +286,6 @@ export default function Countries({ data }: { data: CountriesData }) {
           description="The share of questions marked as required, on forms that mark any"
           footer={{
             lead: reqOf ? `${pct(reqYes, reqOf)}% of questions are marked as required` : "None of the forms we read mark which questions are required",
-            note: "We left out forms that do not mark which questions are required.",
           }}
         >
           <HorizontalBars
@@ -271,11 +301,11 @@ export default function Countries({ data }: { data: CountriesData }) {
       <div className={pairs}>
         {sensitiveRows && (
           <ChartCard
-            title="Which sensitive questions enquiry forms ask, by country"
+            title="Which sensitive questions enquiry forms ask"
             description="The share of forms in each country that ask each one"
             footer={{
               lead: `${data.asksSensitive.of - data.asksSensitive.yes} of ${data.asksSensitive.of} forms ask none of these`,
-              note: "A service may still have good reason to ask. This chart counts the questions; it does not judge them.",
+              note: "We count these questions. We do not judge them.",
             }}
           >
             <HeatGrid columns={cols} rows={sensitiveRows} />
@@ -283,7 +313,7 @@ export default function Countries({ data }: { data: CountriesData }) {
         )}
         <ChartCard
           title="How many enquiry forms say when you will hear back"
-          description="The share of forms in each country that give a reply time on the page"
+          description="The share of forms in each country that give a reply time"
           footer={{
             lead: `${data.reply.yes} of ${data.reply.of} forms give a reply time`,
             note: data.countries

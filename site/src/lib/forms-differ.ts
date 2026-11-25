@@ -39,8 +39,10 @@ function list(xs: string[]): string {
 // "1 working day; visit within 5 working days" -> "1 working day"
 const firstReply = (v: string) => v.split(";")[0].trim().replace(/(\d)-(\d)/, "$1 to $2")
 
+// A reply time in days, to sort them: "24 hours" is 1 day, "2 working days" about 2.8.
 function daysOf(v: string): number {
   const n = Number(v.match(/\d+/)?.[0] ?? NaN)
+  if (/hour/i.test(v)) return n / 24
   return /working/.test(v) ? n * 1.4 : n
 }
 
