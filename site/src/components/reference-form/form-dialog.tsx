@@ -168,7 +168,13 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
             </li>
             <li>
               Each country's form uses a public-sector design system from that country: GOV.UK, the U.S. Web Design
-              System, the GC Design System, the Australian Government Design System and, in Germany, KERN UX.
+              System, the GC Design System, the Australian Government Design System, the Government of Ireland Design
+              System, the New Zealand Government Design System, the Singapore Government Design System and, in
+              Germany, KERN UX.
+            </li>
+            <li>
+              The Dutch form uses NL Design System components with its neutral theme. Only central government may use
+              the central government&rsquo;s house style.
             </li>
             <li>
               France's State design system may only be used by State services. So the French form uses Cunningham,
