@@ -22,7 +22,6 @@ export type Withdrawals = { share: number; notExpected: number; year: string } |
 const link = "font-medium text-foreground underline underline-offset-4"
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const monthOf = (iso: string) => (/^\d{4}-\d{2}/.test(iso) ? `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}` : "2026")
-const listOf = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} or ${xs.at(-1)}`)
 const pct = (s: Share) => (s.of ? Math.round((100 * s.yes) / s.of) : 0)
 const of = (s: Share) => `${s.yes} of ${s.of}`
 
@@ -34,12 +33,19 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
   )
 }
 
-type Part = { label: string; kind: "ours" | "research" | "rules"; body: React.ReactNode }
-const KIND: Record<Part["kind"], string> = {
-  ours: "Our reading of public forms",
-  research: "Published research",
-  rules: "Published rules",
+// Method detail, out of the way of the main text. A native <details>, so it needs no JavaScript.
+function HowWeDidThis({ children }: { children: React.ReactNode }) {
+  return (
+    <details className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
+      <summary className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline">
+        How we did this
+      </summary>
+      <div className="mt-2 space-y-2">{children}</div>
+    </details>
+  )
 }
+
+type Part = { label: string; body: React.ReactNode }
 
 function Insight({ n, id, title, parts, tryThis }: { n: number; id: string; title: string; parts: Part[]; tryThis: React.ReactNode }) {
   return (
@@ -52,17 +58,12 @@ function Insight({ n, id, title, parts, tryThis }: { n: number; id: string; titl
         <dl className="grid gap-5 md:grid-cols-3">
           {parts.map((p) => (
             <div key={p.label} className="space-y-2">
-              <dt className="flex flex-wrap items-center gap-2">
-                <span className="font-medium">{p.label}</span>
-                <Badge variant="outline" className="font-normal text-muted-foreground">
-                  {KIND[p.kind]}
-                </Badge>
-              </dt>
+              <dt className="font-medium">{p.label}</dt>
               <dd className="text-sm leading-6 text-muted-foreground">{p.body}</dd>
             </div>
           ))}
           <div className="space-y-2 rounded-lg bg-muted p-4">
-            <dt className="font-medium">What to try</dt>
+            <dt className="font-medium">Try this</dt>
             <dd className="text-sm leading-6">{tryThis}</dd>
           </div>
         </dl>
@@ -91,7 +92,6 @@ export function ForServices({
 }) {
   const d = data
   const england = bedrooms.find((b) => b.place === "England")
-  const ni = bedrooms.find((b) => b.place === "Northern Ireland")
   const law = d.lawRows > 0
   // Wales, Scotland and Northern Ireland, where we have read enquiry forms.
   const others = (d.early?.nations ?? []).filter((n) => n.code !== "ENG" && n.enquiry.share.of > 0 && n.link)
@@ -101,21 +101,19 @@ export function ForServices({
       title: "Ask only what you need to reply",
       parts: [
         {
-          label: "What we found",
-          kind: "ours",
+          label: "We found",
           body: (
             <>
-              A typical enquiry form in the UK asks {d.ukFirst.median} questions. Across {d.first.forms} forms in{" "}
-              {d.first.countries} countries, the shortest asks {d.first.shortest} and the longest asks {d.first.longest}.
+              A typical UK enquiry form asks {d.ukFirst.median} questions. Across {d.first.countries} countries, forms
+              ask {d.first.shortest} to {d.first.longest}.
             </>
           ),
         },
         {
-          label: "What research says",
-          kind: "research",
+          label: "Research",
           body: (
             <>
-              Many people see getting in touch as the start of an application. They worry about asking the wrong
+              Many people see an enquiry as the start of an application, and worry about asking the wrong
               question.{" "}
               <a href="/research#first-contact-feeling" className={link}>
                 How the first contact feels
@@ -126,12 +124,11 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Ask for a name, one way to reach the person and roughly where they live. Everything else can wait for a
-          conversation. Our{" "}
+          Ask only for a name, one way to reach the person and roughly where they live, as our{" "}
           <a href="/example-form" className={link}>
             example forms
           </a>{" "}
-          show what that looks like.
+          do.
         </>
       ),
     },
@@ -140,32 +137,21 @@ export function ForServices({
       title: "Save personal questions until after a conversation",
       parts: [
         {
-          label: "What we found",
-          kind: "ours",
+          label: "We found",
           body: (
             <>
               {of(d.ukFirst.sensitive)} UK enquiry forms ask a personal question, such as date of birth, health or
               ethnicity.
-              {d.app.uk && (
-                <>
-                  {" "}
-                  {d.app.uk.health.yes === d.app.uk.health.of
-                    ? "Every UK application form we read asks about health."
-                    : `${of(d.app.uk.health)} UK application forms ask about health.`}{" "}
-                  {of(d.app.uk.partners)} ask about past partners and {of(d.app.uk.criminal)} about criminal records.
-                </>
-              )}
             </>
           ),
         },
         law && d.lawLinks
           ? {
-              label: "What the law says",
-              kind: "rules",
+              label: "The law",
               body: (
                 <>
-                  In England, the law puts health, past relationships and the criminal record check in stage 1 of the
-                  assessment. None of them is needed to reply to an enquiry.{" "}
+                  In England, the law puts health, past relationships and the criminal record check in stage 1 of
+                  the fostering assessment.{" "}
                   <a href={d.lawLinks.fostering} className={link}>
                     Fostering Services (England) Regulations 2011, Schedule 3
                   </a>
@@ -173,12 +159,10 @@ export function ForServices({
               ),
             }
           : {
-              label: "What research says",
-              kind: "research",
+              label: "Research",
               body: (
                 <>
-                  A service has to check health, convictions and the home before it approves anyone. These questions
-                  belong in the application, after someone has talked to the person.{" "}
+                  A service has to check health, convictions and the home before it approves anyone.{" "}
                   <a href="/research#applications" className={link}>
                     What applications ask
                   </a>
@@ -188,8 +172,7 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Move personal questions to the application. Ask them after you have spoken to the person, and say why you
-          need each one.
+          Ask personal questions in the application, after a conversation, and say why you need each one.
         </>
       ),
     },
@@ -200,18 +183,15 @@ export function ForServices({
             title: "Ask each question at the stage the law sets",
             parts: [
               {
-                label: "What we found",
-                kind: "ours",
+                label: "We found",
                 body: (
                   <>
-                    {of(d.early.application.share)} application forms we read in England ask something the law leaves
-                    to stage 2
-                    {d.early.application.top.length ? `, such as ${listOf(d.early.application.top)}` : ""}. So do{" "}
-                    {of(d.early.enquiry.share)} enquiry forms in England.
+                    In England, {of(d.early.application.share)} application forms and {of(d.early.enquiry.share)}{" "}
+                    enquiry forms ask something the law leaves to stage 2.
                     {others.length > 0 && (
                       <>
                         {" "}
-                        Enquiry forms that ask something the law leaves to the assessment:{" "}
+                        Elsewhere, enquiry forms that ask assessment questions:{" "}
                         {others.map((n) => `${n.name} ${of(n.enquiry.share)}`).join(", ")}.
                       </>
                     )}
@@ -219,47 +199,30 @@ export function ForServices({
                 ),
               },
               {
-                label: "What the law says",
-                kind: "rules",
+                label: "The law",
                 body: (
                   <>
-                    In England, stage 1 covers identity, health, the household, referees and checks. Stage 2 covers
-                    personality, religion, ethnicity, work and experience.{" "}
+                    In England, stage 2 covers personality, religion, ethnicity, work and experience.{" "}
                     <a href={d.lawLinks.fostering} className={link}>
                       Schedule 3
                     </a>
-                    . For adoption, statutory guidance says the first form should be short. It must not be refused
-                    because of ethnicity, age, health, sexual orientation or religion.{" "}
+                    . Adoption agencies must not refuse a first form because of ethnicity, age, health, sexual
+                    orientation or religion.{" "}
                     <a href={d.lawLinks.adoptionGuidance} className={link}>
                       Adoption statutory guidance, paragraphs 3.13 to 3.15
                     </a>
-                    {others.length > 0 && (
-                      <>
-                        . Wales, Scotland and Northern Ireland have one fostering assessment, plus checks. Wales splits
-                        adoption into 2 stages. The law:{" "}
-                        {others.map((n, i) => (
-                          <span key={n.code}>
-                            {i > 0 && ", "}
-                            <a href={n.link} className={link}>
-                              {n.name} ({n.citation})
-                            </a>
-                          </span>
-                        ))}
-                      </>
-                    )}
                   </>
                 ),
               },
             ] satisfies Part[],
             tryThis: (
               <>
-                Check each question on your forms against the{" "}
+                Check each question against the{" "}
                 <a href="#law-by-nation" className={link}>
                   law in your nation
                 </a>
-                . Move stage 2 questions, or in single-assessment nations the assessment&rsquo;s questions, to the
-                assessment, where a social worker can explain why they matter. If you
-                ask about ethnicity or religion for monitoring, make it optional and keep it apart from the decision.
+                , and move later questions to the assessment. If you monitor ethnicity or religion, make it optional
+                and keep it apart from the decision.
               </>
             ),
           },
@@ -270,22 +233,19 @@ export function ForServices({
       title: "Say when you will reply, and who from",
       parts: [
         {
-          label: "What we found",
-          kind: "ours",
+          label: "We found",
           body: (
             <>
-              {of(d.reply.uk)} UK enquiry forms we checked say when you will hear back. In the United States it is{" "}
-              {of(d.reply.us)}.
+              {of(d.reply.uk)} UK enquiry forms we checked give a reply time, as do {of(d.reply.us)} in the United
+              States.
             </>
           ),
         },
         {
-          label: "What research says",
-          kind: "research",
+          label: "Research",
           body: (
             <>
-              Some people who go no further say the way the service replied put them off. People also drop out when
-              contact stops.{" "}
+              Some people give up because of how a service replied, or because contact stopped.{" "}
               <a href="/research#put-off" className={link}>
                 How replies put people off
               </a>
@@ -293,11 +253,7 @@ export function ForServices({
           ),
         },
       ] satisfies Part[],
-      tryThis: (
-        <>
-          Put a reply time on the form and in the automatic reply. Say who will be in touch and what happens next.
-        </>
-      ),
+      tryThis: <>On the form and in the automatic reply, say when you will reply, who from, and what happens next.</>,
     },
     ...(england
       ? [
@@ -306,35 +262,27 @@ export function ForServices({
             title: "If you ask about a spare room, explain the rule",
             parts: [
               {
-                label: "What we found",
-                kind: "ours",
+                label: "We found",
                 body: (
                   <>
-                    {of(d.spareRoom.agencies)} UK independent agency enquiry forms ask about a spare room. Among
-                    council and hub forms it is {of(d.spareRoom.councils)}.
+                    {of(d.spareRoom.agencies)} UK enquiry forms from independent agencies ask about a spare room,
+                    against {of(d.spareRoom.councils)} from councils and hubs.
                   </>
                 ),
               },
               {
-                label: "What the rules say",
-                kind: "rules",
+                label: "The rules",
                 body: (
                   <>
                     England: {england.rule}{" "}
                     <a href={england.url} className={link}>
                       {england.source}
                     </a>
-                    .{ni && <> Northern Ireland: {ni.rule}</>}
                   </>
                 ),
               },
             ] satisfies Part[],
-            tryThis: (
-              <>
-                If you ask, say what counts as a spare room and when children can share. Then people who could foster
-                do not rule themselves out.
-              </>
-            ),
+            tryThis: <>Say when children can share a room, so people who could foster do not rule themselves out.</>,
           },
         ]
       : []),
@@ -343,25 +291,22 @@ export function ForServices({
       title: "Tell people early what the application will ask",
       parts: [
         {
-          label: "What we found",
-          kind: "ours",
+          label: "We found",
           body: d.app.uk ? (
             <>
               A typical UK application form asks {d.app.uk.median} questions, against {d.ukFirst.median} on an enquiry
               form.
-              {d.app.us && <> A typical US application packet asks {d.app.us.median}.</>}
             </>
           ) : (
             <>We have not yet read enough application forms.</>
           ),
         },
         {
-          label: "What research says",
-          kind: "research",
+          label: "Research",
           body: withdrawals ? (
             <>
-              In England in {withdrawals.year}, {withdrawals.share}% of fostering applications that finished ended in
-              withdrawal. Of the applicants who withdrew, {withdrawals.notExpected}% said the process was not what they
+              In England in {withdrawals.year}, {withdrawals.share}% of finished fostering applications ended in
+              withdrawal. Of those who withdrew, {withdrawals.notExpected}% said the process was not what they
               expected.{" "}
               <a href="/research#withdrawals" className={link}>
                 Withdrawals
@@ -378,9 +323,7 @@ export function ForServices({
         },
       ] satisfies Part[],
       tryThis: (
-        <>
-          At the first conversation, share a plain list of what the application and assessment will ask, and why.
-        </>
+        <>At the first conversation, share a plain list of what the application and assessment will ask, and why.</>
       ),
     },
     {
@@ -388,11 +331,10 @@ export function ForServices({
       title: "Keep one person in touch from enquiry to application",
       parts: [
         {
-          label: "What research says",
-          kind: "research",
+          label: "Research",
           body: (
             <>
-              People drop out when one team hands them on to another and nobody answers their questions.{" "}
+              People drop out when one team hands them to another and nobody answers their questions.{" "}
               <a href="/research#hand-offs" className={link}>
                 Hand-offs
               </a>
@@ -400,12 +342,11 @@ export function ForServices({
           ),
         },
         {
-          label: "From other fields",
-          kind: "research",
+          label: "Other fields",
           body: (
             <>
-              In blood and stem cell donation, the biggest loss comes straight after the first form, when nobody manages
-              to speak to the person.{" "}
+              Blood and stem cell services lose the most people right after the first form, when nobody reaches
+              them.{" "}
               <a href="/research/log" className={link}>
                 Research log
               </a>
@@ -415,8 +356,8 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Give each person one named contact. Record &ldquo;not yet reached&rdquo; as its own outcome, and try another
-          way to reach them within 1 working day.
+          Give each person one named contact. If you cannot reach someone, record it and try another way within 1
+          working day.
         </>
       ),
     },
@@ -425,8 +366,7 @@ export function ForServices({
       title: "Test one change at a time, and share what you learn",
       parts: [
         {
-          label: "What research says",
-          kind: "research",
+          label: "Research",
           body: (
             <>
               We found no trial of follow-up with real people who enquire, in any country.{" "}
@@ -438,10 +378,9 @@ export function ForServices({
         },
         {
           label: "A warning",
-          kind: "research",
           body: (
             <>
-              One regional hub made first visits much quicker, but approvals did not rise. Speed alone was not enough.{" "}
+              One regional hub made first visits much quicker, but approvals did not rise.{" "}
               <a href="/research#speed-alone" className={link}>
                 Speed alone
               </a>
@@ -451,11 +390,11 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Change one thing, such as a shorter form or a clearer automatic reply. Compare the months before and after.{" "}
+          Compare the months before and after one change, and{" "}
           <a href="/#get-involved" className={link}>
-            Tell us what you find
+            tell us what you find
           </a>
-          , and we will share it without naming you unless you want us to.
+          . We will not name you without asking.
         </>
       ),
     },
@@ -466,29 +405,29 @@ export function ForServices({
       <SiteHeader current="/for-services" />
       <main id="main" className="mx-auto max-w-6xl px-6">
         <section aria-labelledby="fs-title" className="relative pt-8 pb-12 md:pt-14">
-          <Illustration name="details" className="absolute top-8 right-0 hidden w-56 lg:block xl:w-64" />
+          <Illustration
+            name="details"
+            className="mb-6 block w-36 lg:absolute lg:top-8 lg:right-0 lg:mb-0 lg:w-56 xl:w-64"
+          />
           <Badge variant="secondary">First look, not yet checked by a person</Badge>
           <h1 id="fs-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             What services can do
           </h1>
           <p className="mt-6 max-w-2xl text-xl text-muted-foreground">
-            This page is for recruitment teams and managers in councils, hubs and agencies. Each idea puts what we found
-            in public forms next to published research, and suggests one thing to try.
+            Here are {insights.length} ideas for recruitment teams, each with one thing to try.
           </p>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            We read the forms in {monthOf(d.checked)}. A computer program read most of them, and a
-            person has not yet checked the results. The research has its own sources and dates on the{" "}
+            We read the forms in {monthOf(d.checked)}. The{" "}
             <a href="/research" className={link}>
               research page
-            </a>
-            .
+            </a>{" "}
+            gives the source and date of each finding.
           </p>
           <Alert className="mt-8 max-w-3xl">
             <AlertTitle>Nothing here names or scores a service</AlertTitle>
             <AlertDescription>
               <p>
-                The numbers count forms, not services. To see the facts about your own form, with its link and the date
-                we checked, use the{" "}
+                The numbers count forms, not services. To see your own form, use the{" "}
                 <a href="/compare/forms" className={link}>
                   compare page
                 </a>
@@ -510,12 +449,16 @@ export function ForServices({
         <section aria-labelledby="check-your-form" className="py-12">
           <H2 id="check-your-form">Check your own form, topic by topic</H2>
           <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
-            Go down the list and note what your enquiry form asks. If it asks something few enquiry forms ask, check
-            whether you need it before you have spoken to the person.
-            {law && " The next table shows where the law in each UK nation puts each topic."}
+            If your form asks something few others ask, check that you need it before a conversation.
           </p>
           <Table className="mt-6">
-            <TableCaption className="text-left">The share of forms that ask about each topic.</TableCaption>
+            <TableCaption className="text-left">
+              The share of forms that ask about each topic. Our{" "}
+              <a href="/form-check" className={link}>
+                draft checklist
+              </a>{" "}
+              says &ldquo;personal&rdquo; topics should wait until after a conversation.
+            </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead>Topic</TableHead>
@@ -546,24 +489,20 @@ export function ForServices({
               ))}
             </TableBody>
           </Table>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
-            We counted {d.ukFirst.forms} UK enquiry forms and {d.first.forms} enquiry forms in all {d.first.countries}{" "}
-            countries.
-            {d.app.uk && ` We counted ${d.app.uk.forms} UK application forms.`}
-            {d.app.us && ` We counted ${d.app.us.packets} US application packets.`}
-            {` Across all ${d.app.all.countries} countries we counted ${d.app.all.units} applications.`} A person has not yet checked these
-            counts. &ldquo;Personal&rdquo; marks topics our{" "}
-            <a href="/form-check" className={link}>
-              draft checklist
-            </a>{" "}
-            says should wait until after a conversation. A US application is one service&rsquo;s set of forms, counted
-            once.
-          </p>
           <p className="mt-4">
             <a href="/for-services/topics.csv" className={link}>
-              Download this table, with the law in each UK nation (CSV)
+              Download this table and the law by nation (CSV)
             </a>
           </p>
+          <HowWeDidThis>
+            <p>
+              We counted {d.ukFirst.forms} UK enquiry forms and {d.first.forms} in all {d.first.countries} countries.
+              {` We counted ${d.app.all.units} applications in all ${d.app.all.countries} countries`}
+              {d.app.uk && `, ${d.app.uk.forms} of them in the UK`}
+              {d.app.us && `${d.app.uk ? " and" : ","} ${d.app.us.packets} in the United States`}.
+              {d.app.us && " A US application is one service’s set of forms."}
+            </p>
+          </HowWeDidThis>
         </section>
 
         {law && (
@@ -572,9 +511,23 @@ export function ForServices({
             <section aria-labelledby="law-by-nation" className="py-12">
               <H2 id="law-by-nation">Where the law puts each topic, in each UK nation</H2>
               <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
-                The law in each nation lists what a fostering or adoption assessment must cover. England, and adoption in
-                Wales, split it into 2 stages. Stage 1 is mostly checks. Stage 2 is the full assessment. The other
-                nations have one assessment, plus checks the service must make.
+                England, and adoption in Wales, split the assessment into 2 stages.{" "}
+                {others.length > 0 ? (
+                  <>
+                    Fostering law in{" "}
+                    {others.map((n, i) => (
+                      <span key={n.code}>
+                        {i > 0 && (i === others.length - 1 ? " and " : ", ")}
+                        <a href={n.link} className={link}>
+                          {n.name}
+                        </a>
+                      </span>
+                    ))}{" "}
+                    sets one assessment, plus checks.
+                  </>
+                ) : (
+                  "Elsewhere there is one assessment, plus checks."
+                )}
               </p>
               <Table className="mt-6 min-w-[44rem]">
                 <TableCaption className="text-left">
@@ -619,15 +572,16 @@ export function ForServices({
                   ))}
                 </TableBody>
               </Table>
-              <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
-                We read the law on legislation.gov.uk and the statutory guidance on GOV.UK in November 2026. A person has
-                not yet checked our reading. Some laws are online only in their first form, and later changes may be
-                missing. Our{" "}
-                <a href="https://github.com/jamiegannaway/kinderform/blob/main/register/assessment.csv" className={link}>
-                  map of the law
-                </a>{" "}
-                gives the source and the paragraph for each row.
-              </p>
+              <HowWeDidThis>
+                <p>
+                  We read the law on legislation.gov.uk and GOV.UK in November 2026. Some laws online may miss later
+                  changes. Our{" "}
+                  <a href="https://github.com/jamiegannaway/kinderform/blob/main/register/assessment.csv" className={link}>
+                    map of the law
+                  </a>{" "}
+                  gives the source of each row.
+                </p>
+              </HowWeDidThis>
             </section>
           </>
         )}
@@ -635,35 +589,27 @@ export function ForServices({
         <Separator />
 
         <section aria-labelledby="fs-next" className="py-12">
-          <H2 id="fs-next">Use this with your own data</H2>
+          <H2 id="fs-next">Next steps</H2>
           <ul className="mt-6 ml-5 max-w-3xl list-disc space-y-3 leading-7">
             <li>
-              Find your own form on the{" "}
-              <a href="/compare/forms" className={link}>
-                compare page
-              </a>
-              . It lists what each form asks, with the link and the date we checked.
-            </li>
-            <li>
-              Read our{" "}
+              Comment on our{" "}
               <a href="/form-check" className={link}>
                 draft checklist
-              </a>{" "}
-              for enquiry forms and first replies, and tell us what you think of it.
+              </a>
+              .
             </li>
             <li>
-              Look up the published rules on who can foster or adopt in your area on the{" "}
+              Compare the{" "}
               <a href="/compare/rules" className={link}>
-                rules page
+                rules on who can foster or adopt
               </a>
               .
             </li>
             <li>
-              If something here is wrong, or you have tried one of these ideas,{" "}
               <a href="/#get-involved" className={link}>
-                get in touch
-              </a>
-              .
+                Tell us
+              </a>{" "}
+              if something here is wrong, or if you try an idea.
             </li>
           </ul>
         </section>

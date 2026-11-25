@@ -27,6 +27,8 @@ type Patterns = {
 }
 type CoverageRow = { country: string; region: string; primary: number; read: number }
 
+const link = "font-medium text-foreground underline underline-offset-4"
+
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <Card className="gap-2 py-5">
@@ -63,44 +65,34 @@ export default function FormCheckPublic({
       <SiteHeader current="/form-check" />
       <main id="main" className="mx-auto max-w-6xl px-6">
         <section aria-labelledby="fc-title" className="relative pt-8 pb-12 md:pt-14">
-          <Illustration name="details" className="absolute top-8 right-0 hidden w-56 lg:block xl:w-64" />
+          <Illustration
+            name="details"
+            className="mb-6 block w-36 lg:absolute lg:top-8 lg:right-0 lg:mb-0 lg:w-56 xl:w-64"
+          />
           <Badge variant="secondary">Draft for comment</Badge>
           <h1 id="fc-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Form check
           </h1>
           <p className="mt-6 max-w-2xl text-xl text-muted-foreground">
-            Form check looks at how fostering and adoption enquiry forms treat the people who fill them
-            in. We look at each form from the side of the person enquiring. That means how much it asks,
-            whether it says when you will hear back, and how it handles your details.
+            Form check looks at fostering and adoption enquiry forms from the side of the person who fills them in.
           </p>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            Form check is for recruitment teams and managers in councils, regional hubs and agencies, and
-            for sector bodies. It looks at pages and processes, never at staff. The method is a draft, and we
-            are sharing it so you can comment on it.
+            It looks at pages and processes, never at staff, and we would like your comments.
           </p>
-          <p className="mt-4 max-w-2xl leading-7 font-medium">What we found so far:</p>
-          <ul className="mt-2 ml-5 max-w-2xl list-disc space-y-2 leading-7">
-            <li>
-              {p.sensitive} of {p.readable} UK enquiry forms we could read ask sensitive questions, such as
-              date of birth or health.
-            </li>
-            <li>
-              {p.spareRoom} of {p.readable} ask about a spare room.
-            </li>
-            <li>
-              {p.replyStated} of {p.replyChecked} forms we checked say when you will hear back.
-            </li>
-          </ul>
           <Alert className="mt-8 max-w-3xl">
             <AlertTitle>No service is named or scored here yet</AlertTitle>
             <AlertDescription>
-              Each service will see its own results in private, with time to correct them, before we
-              publish any score by name. The facts about each form are public on the{" "}
-              <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
-                compare page
-              </a>
-              . The counts on this page come from a first look by a computer
-              program that reads public web pages. They are not yet checked by a person.
+              <p>
+                We will follow{" "}
+                <a href="#fc-results" className={link}>
+                  4 steps
+                </a>{" "}
+                before we name anyone. The facts about each form are on the{" "}
+                <a href="/compare/forms" className={link}>
+                  compare page
+                </a>
+                .
+              </p>
             </AlertDescription>
           </Alert>
           {privatePreview && (
@@ -113,21 +105,21 @@ export default function FormCheckPublic({
         </section>
 
         <section aria-labelledby="fc-patterns" className="py-12">
-          <H2 id="fc-patterns">What our first look at enquiry forms found</H2>
+          <H2 id="fc-patterns">What we found so far</H2>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            We could read the questions on {p.readable} enquiry forms in the UK, and looked at them in{" "}
-            {checked}.
+            We read {p.readable} UK enquiry forms in {checked}. For reply times, we checked {p.replyChecked} forms in
+            all countries. The counts are not yet checked by a person.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Stat value={String(p.readable)} label="Enquiry forms read" />
+            <Stat value={String(p.readable)} label="UK enquiry forms read" />
             <Stat value={`${p.replyStated} of ${p.replyChecked}`} label="Say when you will hear back" />
-            <Stat value={`${p.sensitive} of ${p.readable}`} label="Ask sensitive questions on the enquiry form" />
-            <Stat value={`${p.spareRoom} of ${p.readable}`} label="Ask about a spare room on the enquiry form" />
+            <Stat value={`${p.sensitive} of ${p.readable}`} label="Ask sensitive questions" />
+            <Stat value={`${p.spareRoom} of ${p.readable}`} label="Ask about a spare room" />
           </div>
           <Table className="mt-8">
             <TableCaption>
-              Sensitive questions are about things such as date of birth, ethnicity, health, criminal record
-              or immigration status. Councils and hubs includes regional services.
+              Sensitive questions ask about things such as date of birth, ethnicity, health, criminal record or
+              immigration status. Councils and hubs include regional services.
             </TableCaption>
             <TableHeader>
               <TableRow>
@@ -160,9 +152,8 @@ export default function FormCheckPublic({
         <section aria-labelledby="fc-method" className="py-12">
           <H2 id="fc-method">Our draft checklist looks at 9 areas</H2>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            The checklist is our draft list of what a good enquiry form and first reply do. It has 9
-            areas, worth 100 points in total. We can judge some areas from a public web page. Others need
-            information from the service itself, because a page alone cannot show them.
+            It lists what a good enquiry form and first reply do, worth 100 points in all. Some areas need the
+            service&rsquo;s own data.
           </p>
           <Table className="mt-6">
             <TableHeader>
@@ -190,8 +181,7 @@ export default function FormCheckPublic({
             <CardHeader>
               <CardTitle>Things that need fixing first</CardTitle>
               <CardDescription>
-                Any one of these means a form can score no more than 50 out of 100. Each one can stop
-                someone from enquiring, or break their trust.
+                Any one of these limits a form to 50 out of 100, as it can put people off.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -206,59 +196,60 @@ export default function FormCheckPublic({
 
         <Separator />
 
-        <section aria-labelledby="fc-coverage" className="py-12">
-          <H2 id="fc-coverage">Where we have looked for enquiry forms</H2>
-          <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-            This table shows how many enquiry forms we found in each place, and how many of those we could
-            read.
-          </p>
-          <Table className="mt-6">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Country</TableHead>
-                <TableHead>Part of the country</TableHead>
-                <TableHead className="text-right">Enquiry forms found</TableHead>
-                <TableHead className="text-right">Forms we could read</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {coverage.map((r) => (
-                <TableRow key={`${r.country}-${r.region}`}>
-                  <TableCell>{COUNTRY_NAMES[r.country] ?? r.country}</TableCell>
-                  <TableCell className="font-medium">{r.region}</TableCell>
-                  <TableCell className="text-right tabular-nums">{r.primary}</TableCell>
-                  <TableCell className="text-right tabular-nums">{r.read}</TableCell>
-                </TableRow>
-              ))}
-              {!coverage.some((r) => r.country === "US") && (
-                <TableRow>
-                  <TableCell>United States</TableCell>
-                  <TableCell className="font-medium">All states</TableCell>
-                  <TableCell colSpan={2} className="text-right">
-                    <Badge variant="outline">Not started</Badge>
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          <p className="mt-4 max-w-2xl text-sm text-muted-foreground">
-            In the United States, foster care runs through state agencies and, in some states, through
-            counties and private agencies. Form check is built to cover each state and, where needed, each
-            county.
-          </p>
+        <section aria-labelledby="fc-results" className="scroll-m-20 py-12">
+          <H2 id="fc-results">Services will see their own results before we publish any names</H2>
+          <ol className="mt-6 ml-5 max-w-2xl list-decimal space-y-3 leading-7">
+            <li>We publish this draft method and ask carers, services and sector bodies for comments.</li>
+            <li>Each service gets its own results in private, with time to correct them.</li>
+            <li>We report patterns across the sector, and name examples of good practice.</li>
+            <li>Named results for every service come last.</li>
+          </ol>
         </section>
 
         <Separator />
 
-        <section aria-labelledby="fc-results" className="py-12">
-          <H2 id="fc-results">Services will see their own results before we publish any names</H2>
-          <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">We will share results in 4 steps.</p>
-          <ol className="mt-6 ml-5 max-w-2xl list-decimal space-y-3 leading-7">
-            <li>We publish this draft method and ask carers, services and sector bodies to comment on it.</li>
-            <li>Each service gets its own results in private, with time to correct errors and make changes.</li>
-            <li>We start public reporting with patterns across the sector and named examples of good practice.</li>
-            <li>Named results for every service come last, and always look at the page and process, never at staff.</li>
-          </ol>
+        <section aria-labelledby="fc-coverage" className="py-12">
+          <details className="max-w-3xl leading-7 text-muted-foreground">
+            <summary
+              id="fc-coverage"
+              className="cursor-pointer font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              How we did this
+            </summary>
+            <p className="mt-2">How many enquiry forms we found, and could read, in each place.</p>
+            <Table className="mt-4 text-foreground">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Country</TableHead>
+                  <TableHead>Part of the country</TableHead>
+                  <TableHead className="text-right">Enquiry forms found</TableHead>
+                  <TableHead className="text-right">Forms we could read</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {coverage.map((r) => (
+                  <TableRow key={`${r.country}-${r.region}`}>
+                    <TableCell>{COUNTRY_NAMES[r.country] ?? r.country}</TableCell>
+                    <TableCell className="font-medium">{r.region}</TableCell>
+                    <TableCell className="text-right tabular-nums">{r.primary}</TableCell>
+                    <TableCell className="text-right tabular-nums">{r.read}</TableCell>
+                  </TableRow>
+                ))}
+                {!coverage.some((r) => r.country === "US") && (
+                  <TableRow>
+                    <TableCell>United States</TableCell>
+                    <TableCell className="font-medium">All states</TableCell>
+                    <TableCell colSpan={2} className="text-right">
+                      <Badge variant="outline">Not started</Badge>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <p className="mt-4 text-sm">
+              In the United States, Form check is built to cover each state and, where needed, each county.
+            </p>
+          </details>
         </section>
       </main>
       <SiteFooter />
