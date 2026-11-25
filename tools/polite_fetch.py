@@ -1,7 +1,8 @@
 """Polite fetcher for public front-door pages and forms.
 
 Follows rule 8 in CLAUDE.md:
-- respects robots.txt (a page robots.txt disallows is skipped and logged)
+- respects robots.txt (a page robots.txt disallows is skipped and logged), including
+  every address a redirect leads to, on any site
 - identifies itself with a project URL in the User-Agent
 - waits at least DELAY seconds between requests to the same site
 - reads public pages with GET only and never submits a form
@@ -280,6 +281,25 @@ class PageParser(HTMLParser):
                 field["options"] = [o for o in field["options"] if o][:15]
 
 
+class RobotsBlocked(Exception):
+    """A redirect led to an address that robots.txt does not let us read."""
+
+
+class CheckRedirects(urllib.request.HTTPRedirectHandler):
+    """Before following a redirect, check the new address against its own site's robots.txt and
+    wait the delay for that site, as for any other request. Without this, urllib follows a
+    redirect to another site without asking that site's robots.txt."""
+
+    def __init__(self, polite: "Polite") -> None:
+        self.polite = polite
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: N802 (urllib's name)
+        if not self.polite.allowed(newurl):
+            raise RobotsBlocked(newurl)
+        self.polite._wait(urllib.parse.urlsplit(newurl).netloc.lower())
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
 class Polite:
     def __init__(self, delay: float, save_dir: str = "") -> None:
         self.delay = delay
@@ -288,22 +308,31 @@ class Polite:
         self.last: dict[str, float] = defaultdict(float)
         self.locks: dict[str, threading.Lock] = defaultdict(threading.Lock)
         self.guard = threading.Lock()
+        self.opener = urllib.request.build_opener(CheckRedirects(self))
+        # robots.txt files are fetched without the check, so a robots.txt that redirects cannot
+        # send the check round in a circle.
+        self.robots_opener = urllib.request.build_opener()
 
     def _lock(self, host: str) -> threading.Lock:
         with self.guard:
             return self.locks[host]
 
     def _wait(self, host: str) -> None:
-        gap = time.monotonic() - self.last[host]
-        if gap < self.delay:
-            time.sleep(self.delay - gap)
-        self.last[host] = time.monotonic()
+        # Book the next free slot for this site under a lock, so two threads (for example one
+        # following a redirect) can never both go at once.
+        with self.guard:
+            now = time.monotonic()
+            slot = max(now, self.last[host] + self.delay)
+            self.last[host] = slot
+        if slot > now:
+            time.sleep(slot - now)
 
-    def _get(self, url: str) -> tuple[int, str, bytes, str]:
+    def _get(self, url: str, robots_file: bool = False) -> tuple[int, str, bytes, str]:
         request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,*/*;q=0.5"},
                                          method="GET")
+        opener = self.robots_opener if robots_file else self.opener
         try:
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
+            with opener.open(request, timeout=TIMEOUT) as response:
                 body = response.read(MAX_BYTES)
                 if len(body) >= MAX_BYTES:
                     # A cut-off PDF looks like a scan with no text. Say so, so nobody mistakes it.
@@ -328,7 +357,7 @@ class Polite:
             parser = urllib.robotparser.RobotFileParser()
             try:
                 self._wait(host)
-                status, _, body, _ = self._get(robots_url)
+                status, _, body, _ = self._get(robots_url, robots_file=True)
                 if status >= 400:
                     parser.parse([])  # no robots.txt: everything allowed
                 else:
@@ -361,6 +390,10 @@ class Polite:
                     return record
                 self._wait(host)
                 status, final, body, ctype = self._get(url)
+            except RobotsBlocked as blocked:
+                record["status"] = "robots_disallowed"
+                record["redirected_to"] = str(blocked)
+                return record
             except Exception as error:  # network errors, timeouts
                 record["status"] = f"error: {type(error).__name__}"
                 return record

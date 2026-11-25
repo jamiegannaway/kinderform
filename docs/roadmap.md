@@ -72,7 +72,10 @@ See [us-survey-plan.md](us-survey-plan.md).
 
 Western Europe first, with the two Asia-Pacific countries asked for. Each has one national service or a small set of providers, and an open design system to build its example form with. Each design system's licence was checked on npm, 25 November 2026.
 
-- [ ] Front-door and rules registers for all four (unverified)
+- [x] Front-door registers: Ireland 48, the Netherlands 43, New Zealand 29, Singapore 13 (unverified)
+- [x] Rules registers: Ireland 63, the Netherlands 77, New Zealand 102, Singapore 59, with the same topics as the other countries (unverified)
+- [x] The crawler and the headless renderer check robots.txt for every address a redirect leads to, and wait their turn there
+- [ ] Read the laws directly where the official sites refused our reader: legislation.govt.nz, Singapore Statutes Online, gov.ie and Citizens Information
 - [ ] The polite crawler reads Dutch; census rows for the four countries
 - [ ] The compare tables and the comparison across countries include all four
 - [ ] Example forms, without government branding: Ireland in the gov.ie Design System (MIT), the Netherlands in NL Design System components with a neutral theme (EUPL-1.2; never the Rijkshuisstijl), New Zealand in the NZ Government Design System (MIT, alpha), Singapore in the Singapore Government Design System (MIT; never the official government banner)

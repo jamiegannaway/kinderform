@@ -6,7 +6,7 @@
 
 The register holds neutral facts only. It contains no scores or judgements.
 
-The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/), Australia's in [`au/`](au/), Germany's in [`de/`](de/), France's in [`fr/`](fr/) and Spain's in [`es/`](es/). The US rows are checked by `tests/validate_us_register.py`. The other five country folders are checked by `tests/validate_world_register.py`.
+The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/), Australia's in [`au/`](au/), Germany's in [`de/`](de/), France's in [`fr/`](fr/), Spain's in [`es/`](es/), Ireland's in [`ie/`](ie/), the Netherlands' in [`nl/`](nl/), New Zealand's in [`nz/`](nz/) and Singapore's in [`sg/`](sg/). The US rows are checked by `tests/validate_us_register.py`. The other nine country folders are checked by `tests/validate_world_register.py`.
 
 For Germany, France and Spain:
 
@@ -14,18 +14,24 @@ For Germany, France and Spain:
 - `operator_type` adds `local_authority` (a youth welfare office or Jugendamt, a département council, or a provincial or island council in Spain) and `voluntary_agency` (non-profit providers, such as freie Träger, associations and entidades colaboradoras).
 - Text is in English, with the local term in brackets the first time it helps, for example "foster care permit (Pflegeerlaubnis)".
 
+For Ireland, the Netherlands, New Zealand and Singapore:
+
+- `region` is an Irish province (Ulster means its three counties in the Republic), a Dutch province, a New Zealand region, or Singapore. A row for a whole country uses the country's name. Tusla areas, provider areas and iwi rohe are named in `coverage`.
+- The same operator types apply. Iwi and Māori providers in New Zealand are `indigenous_agency`.
+- Their rules are national, so `jurisdiction` is `IE`, `NL`, `NZ` or `SG`.
+
 ## Rules: `policies.csv`
 
-The published rules on who can foster and what approval involves, so services can compare their own rules with other places. `policies.csv` here covers the four UK nations. [`ca/policies.csv`](ca/policies.csv) covers Canada's 13 provinces and territories, and [`au/policies.csv`](au/policies.csv) Australia's 8 states and territories. [`de/policies.csv`](de/policies.csv), [`fr/policies.csv`](fr/policies.csv) and [`es/policies.csv`](es/policies.csv) cover Germany, France and Spain: national law, and regional rules where they differ. The US rules are in [`us/policies.csv`](us/policies.csv). One row per rule. A row records what the rule says, where it is written and when we checked it. It never judges the rule.
+The published rules on who can foster and what approval involves, so services can compare their own rules with other places. `policies.csv` here covers the four UK nations. [`ca/policies.csv`](ca/policies.csv) covers Canada's 13 provinces and territories, and [`au/policies.csv`](au/policies.csv) Australia's 8 states and territories. [`de/policies.csv`](de/policies.csv), [`fr/policies.csv`](fr/policies.csv) and [`es/policies.csv`](es/policies.csv) cover Germany, France and Spain: national law, and regional rules where they differ. [`ie/policies.csv`](ie/policies.csv), [`nl/policies.csv`](nl/policies.csv), [`nz/policies.csv`](nz/policies.csv) and [`sg/policies.csv`](sg/policies.csv) cover Ireland, the Netherlands, New Zealand and Singapore, where the rules are national. The US rules are in [`us/policies.csv`](us/policies.csv). One row per rule. A row records what the rule says, where it is written and when we checked it. It never judges the rule.
 
 | Column | Meaning |
 | --- | --- |
 | `policy_id` | `<country>-<place>-<topic>-<n>`, for example `uk-eng-min_age-1` or `ca-on-board_rate-1` |
-| `jurisdiction` | `ENG`, `WLS`, `SCT`, `NIR`; a Canadian province or territory code; an Australian state or territory code; `DE` or a Land code (`BY`, `NW`...); `FR` or a region code (`IDF`, `BRE`...); `ES` or an autonomous community or city code (`CT`, `MD`...) |
+| `jurisdiction` | `ENG`, `WLS`, `SCT`, `NIR`; a Canadian province or territory code; an Australian state or territory code; `DE` or a Land code (`BY`, `NW`...); `FR` or a region code (`IDF`, `BRE`...); `ES` or an autonomous community or city code (`CT`, `MD`...); `IE`, `NL`, `NZ` or `SG` |
 | `applies_to` | `fostering`, `adoption` or `both` |
 | `topic` | A code from [`us/policy-topics.md`](us/policy-topics.md), shared by every country |
 | `rule_summary` | What the rule says, in one or two plain sentences |
-| `value`, `unit` | A number and its unit where the rule has one (for example `21`, `years`; `208`, `GBP_per_week`) |
+| `value`, `unit` | A number and its unit where the rule has one (for example `21`, `years`; `208`, `GBP_per_week`; `16`, `weeks`). The test lists every unit allowed |
 | `legal_citation` | The act, regulation or standard and section; blank for guidance |
 | `source_type` | `legislation`, `statutory_guidance`, `standards`, `government_page`, `agency_page` or `sector_body` |
 | `effective_date` | When the rule or rate took effect, where stated |
@@ -35,7 +41,7 @@ The published rules on who can foster and what approval involves, so services ca
 | `verification` | `unverified` until a person has checked the row against the source |
 | `notes` | Anything a reader needs, for example where practice differs from the rule |
 
-`tests/validate_policies.py` checks the UK, Canadian, Australian, German, French and Spanish rules. `tests/validate_us_register.py` checks the US rules. Every row is unverified until a person has checked it.
+`tests/validate_policies.py` checks the rules of every country except the United States. `tests/validate_us_register.py` checks the US rules. Every row is unverified until a person has checked it.
 
 ## What the assessment must cover: `assessment.csv`
 
