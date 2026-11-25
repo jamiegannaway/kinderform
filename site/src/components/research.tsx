@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import FormsDiffer from "@/components/forms-differ"
-import UsPicture from "@/components/us-picture"
 import Countries, { HowWeDidThis, InsightCards, type Withdrawals } from "@/components/countries"
 import type { CountriesData } from "@/lib/countries"
 import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
@@ -211,7 +210,18 @@ export default function ResearchIndex({
 
         {apps && apps.countries.length > 0 && <Applications data={apps} />}
 
-        {us && us.doors > 0 && <UsPicture data={us} />}
+        {us && us.doors > 0 && (
+          <section aria-labelledby="us-picture" className="max-w-3xl space-y-4">
+            <H2 id="us-picture">In the United States, we found {us.doors.toLocaleString("en-GB")} places to get in touch</H2>
+            <p className="leading-7">
+              In many states each county runs its own child welfare service, so each county has its own place to get in
+              touch. The United States page has the map, each state&rsquo;s count and what state rules say.
+            </p>
+            <Button asChild variant="outline">
+              <a href="/research/united-states">See the United States in detail</a>
+            </Button>
+          </section>
+        )}
 
         <section aria-labelledby="deeper" className="space-y-6">
           <div className="max-w-3xl space-y-4">
