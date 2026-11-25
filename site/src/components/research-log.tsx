@@ -41,15 +41,15 @@ export default function ResearchLog({
             Research log
           </h1>
           <p className="text-lg leading-8 text-muted-foreground">
-            This page lists each piece of research we have done and what it could mean for the project. We update it
-            when we add a review. Last updated {longDate(updated)}.
+            We have done {entries.length} {entries.length === 1 ? "review" : "reviews"} of research so far. Together
+            they give {meanings.length} ideas for our work. Last updated {longDate(updated)}.
           </p>
           <Alert>
             <AlertTitle>These are ideas for discussion, not decisions</AlertTitle>
             <AlertDescription>
               <p>
-                We made each review with an AI-assisted research tool. Most figures are not yet checked by a person.
-                Nothing here has changed our draft standard. We will decide each idea in the open.
+                We made each review with an AI-assisted research tool. Most figures are not yet checked by a person. We
+                will decide each idea in the open.
               </p>
             </AlertDescription>
           </Alert>
@@ -57,7 +57,7 @@ export default function ResearchLog({
 
         <section aria-labelledby="log" className="space-y-6">
           <h2 id="log" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-            What we have looked at
+            We looked at fostering and at fields with a similar first step
           </h2>
           <Table className="min-w-[60rem]">
             <TableCaption>Newest first. Each title opens the full report.</TableCaption>
@@ -104,12 +104,11 @@ export default function ResearchLog({
         <section aria-labelledby="meaning" className="space-y-6">
           <div className="max-w-3xl space-y-4">
             <h2 id="meaning" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-              What it could mean for the project
+              The reviews suggest {meanings.length} ideas for our work
             </h2>
             <p className="leading-7">
-              Each row is one idea for our draft standard or for how we work. The standard is our open description of a
-              good first reply to someone who asks about fostering. Only our first review is about fostering. The other
-              two look at other fields, so each idea from them is our own view of what carries over.
+              Our draft standard is our open description of a good first reply. Ideas from other fields are our own view
+              of what carries over to fostering.
             </p>
           </div>
           <Table className="min-w-[60rem]">
@@ -153,11 +152,10 @@ export default function ResearchLog({
 
         <section aria-labelledby="help" className="max-w-3xl space-y-4">
           <h2 id="help" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-            Tell us where we are wrong
+            We want your view on these ideas
           </h2>
           <p className="leading-7">
-            If you work in fostering or adoption, or you are a carer, we would like your view on these ideas. Please
-            also tell us about research we have missed.
+            Tell us where we are wrong, or what research we have missed.
           </p>
           <Button asChild>
             <a href="/#get-involved">Get in touch</a>

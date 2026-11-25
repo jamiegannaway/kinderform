@@ -1,9 +1,9 @@
 // "How first-contact forms differ": the census on /research, with no names.
 // Static HTML only. Hover text uses the title attribute; the table view uses <details>.
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import type { FormsDiffer as Data, Measure } from "@/lib/forms-differ"
+import { HowWeDidThis } from "@/components/countries"
 
 // The site's Content-Security-Policy blocks inline styles, so positions use fixed classes.
 const AXIS_MAX = 20
@@ -47,7 +47,7 @@ function Strip({ group, values }: { group: string; values: number[] }) {
       <div
         role="img"
         aria-label={`${group}: ${summary}.`}
-        className="grid h-16 grid-cols-[repeat(21,minmax(0,1fr))] border-b border-border"
+        className="grid min-h-16 grid-cols-[repeat(21,minmax(0,1fr))] border-b border-border"
       >
         {counts.map((n, i) => (
           <div key={i} className="flex flex-col-reverse items-center gap-0.5 pb-0.5">
@@ -172,40 +172,43 @@ export default function FormsDiffer({ data }: { data: Data }) {
           UK enquiry forms differ a lot in what they ask and what they promise
         </h2>
         <p className="leading-7">
-          The shortest UK enquiry form asks {allQ[0]} questions and the longest asks {allQ[allQ.length - 1]}. Of the{" "}
-          {replyOf} forms where we looked for a reply time, {replyYes} say when you will hear back. We read{" "}
-          {d.read} forms from fostering and adoption services across the UK, straight from their live web pages, on{" "}
-          {longDate(d.checked)}.
+          The shortest UK enquiry form asks {allQ[0]} questions and the longest asks {allQ[allQ.length - 1]}. Only{" "}
+          {replyYes} of {replyOf} forms say when you will hear back.
         </p>
         <p className="leading-7 text-muted-foreground">
-          We do not name any service here. Each chart stands on its own, so nobody can follow one form from one chart
-          to the next. Each service will see its own results privately first, with time to correct them.
+          We read {d.read} forms on the live web pages of UK fostering and adoption services. The latest read was on{" "}
+          {longDate(d.checked)}. These results are not yet checked by a person.
         </p>
-      </div>
-
-      <Alert className="max-w-3xl">
-        <AlertTitle>Early results, not yet checked by a person</AlertTitle>
-        <AlertDescription>
+        <HowWeDidThis>
           <p>
             A computer program that reads public web pages turned each page into text. That text does not always show
             which questions are required, so some counts may be wrong by 1 or 2. We left out {d.leftOut} more{" "}
-            {formsWord(d.leftOut)} because we saw them only through a search engine&rsquo;s copy. You can read our
-            scoring method on{" "}
+            {formsWord(d.leftOut)} that we saw only through a search engine&rsquo;s copy.
+          </p>
+          <p>
+            We did not count consent boxes, or questions that appear only after an earlier answer.
+          </p>
+          <p>
+            Councils and hubs includes regional services. Adoption agencies work under different rules from fostering
+            services, so we show them for comparison. Where a service has one form for an information pack and another
+            to enquire, we count both.
+          </p>
+          <p>
+            Each bar counts only the forms where we could tell. Each chart stands on its own, so nobody can follow one
+            form from chart to chart. Each service will see its own results first, in private, with time to correct
+            them. Our scoring method is on{" "}
             <a href="/form-check" className="font-medium text-foreground underline underline-offset-4">
               Form check
             </a>
             .
           </p>
-        </AlertDescription>
-      </Alert>
+        </HowWeDidThis>
+      </div>
 
       <Card>
         <CardHeader>
           <CardTitle className="text-lg leading-snug">How many questions each UK enquiry form asks</CardTitle>
-          <CardDescription>
-            Forms ask from {allQ[0]} to {allQ[allQ.length - 1]} questions. Each dot is one form. We did not count consent
-            boxes, or questions that appear only after an earlier answer.
-          </CardDescription>
+          <CardDescription>Each dot is one form.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {d.questions.map((r) => (
@@ -221,13 +224,6 @@ export default function FormsDiffer({ data }: { data: Data }) {
           <MeterCard key={m.id} m={m} />
         ))}
       </div>
-
-      <p className="max-w-3xl text-sm text-muted-foreground">
-        Councils and hubs includes regional services. Adoption agencies work under different regulations from fostering
-        services, so we show their forms for comparison. Some services have a form for an information pack and a
-        separate enquiry form, and we count each one. The figures beside each bar count only the forms where we could
-        tell. If we could not check a form for that question, we left it out of that bar.
-      </p>
     </section>
   )
 }

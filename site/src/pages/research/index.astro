@@ -9,7 +9,7 @@ import { formsDiffer } from "@/lib/forms-differ";
 import { usPicture } from "@/lib/us-register";
 import { countries } from "@/lib/countries";
 import { applications } from "@/lib/applications";
-import { blurbFor } from "@/lib/research-log";
+import { researchLog } from "@/lib/research-log";
 
 // Keep the order of findings.json: it is the order we want people to read them in.
 const order = findingsFile.findings.map((f) => f.id);
@@ -26,6 +26,9 @@ const us = usPicture();
 const world = countries(loadCensus());
 // First contact against the application that follows (see src/lib/applications.ts).
 const apps = applications(loadCensus());
+// The question each report asks, from its entry in the research log.
+const log = researchLog();
+const questionFor = (id: string) => log.entries.find((e) => e.href === hrefOf(id))?.question;
 
 // The withdrawals card at the top quotes the checked "withdrawals" finding. Read its
 // figures from the finding itself, and stop the build if the wording changes so they
@@ -42,7 +45,7 @@ if (wf) {
     approved: n(m[2]),
     withdrawn: n(m[3]),
     share: n(m[4]),
-    source: `${src.by}, ${src.year}.${src.checked ? " A person has checked this against the source." : " Not yet checked by a person."}`,
+    source: { label: `${src.by}, ${src.year}`, url: src.url, checked: src.checked?.date ?? null },
   };
 }
 
@@ -88,7 +91,7 @@ if (appCard && ukApps) {
 ---
 <Base
   title="Research: what we know about the first step | Kinderform"
-  description="What research and our own reading of enquiry forms tell us about the first step into fostering and adoption. Each claim says whether a person has checked it."
+  description="What research and our own reading of enquiry forms tell us about the first step into fostering and adoption. Each claim says if a person has checked it."
 >
   <ResearchIndex
     updated={findingsFile.updated}
@@ -97,14 +100,15 @@ if (appCard && ukApps) {
       href: "/research/library",
       title: "Evidence library",
       when: libUpdated ? `Updated ${longDate(libUpdated)}` : "Evidence library",
-      blurb: "Every source we have found on enquiries, assessment and why carers stay or leave. We sum up each one in our own words and note the gaps we know about.",
+      blurb: "Every source we have found, summed up in our own words, with the gaps we know about.",
     }}
     reports={reports.map((r) => ({
       href: hrefOf(r.id),
       title: titleOf(r.body).replace(/,? and a refined Kinderform open standard$/i, ""),
       when: monthOf(r.id),
-      // Each report's card text comes from its entry in the research log.
-      blurb: blurbFor(r.id) ?? "A review of existing research. We made it with an AI-assisted research tool. Most figures are not yet checked by a person.",
+      // Each report's card asks the question from its entry in the research log. The section
+      // says once that most figures are not yet checked by a person.
+      blurb: questionFor(r.id) ?? "A review of existing research.",
     }))}
     updates={updates.map((u) => ({ href: hrefOf(u.id), title: titleOf(u.body), when: monthOf(u.id) }))}
     formsDiffer={differ}
