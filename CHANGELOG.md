@@ -1,9 +1,11 @@
 # Kinderform release notes
 
-## Unreleased
+## v0.1.0-draft.3 · 25 November 2026
 
-Changes since v0.1.0-draft.2, not yet part of a numbered version.
-
+- **Four more countries.** Ireland, the Netherlands, New Zealand and Singapore each have an example form in their own public design system, without government branding, and a starter kit: the Government of Ireland Design System, NL Design System with its neutral theme, the New Zealand Government Design System and the Singapore Government Design System. The Dutch kit is in Dutch.
+- **The least location a service needs.** The submission schema adds the first 3 characters of an Eircode, the 4 digits of a Dutch postcode and a New Zealand postcode. Singapore's form asks for no location, as its fostering scheme is national.
+- **Registers and rules.** Places to get in touch and the published rules in all four countries, with 15 of their enquiry forms in the census. The compare tables and the comparison across countries include them.
+- **Polite crawling.** The crawler and the headless reader check robots.txt for every address a redirect leads to.
 - **For services.** A new page, [What services can do](https://www.kinderform.org/for-services), gives 8 ideas. Each puts what our reading of public forms shows next to published research or the law, with one thing to try. Its topic table, with a CSV download, lets a service check its own form.
 - **What the law says.** `register/assessment.csv` sets out what the law in each UK nation says a fostering or adoption assessment must cover, and at which stage. It describes the law, never a licensed form.
 - **What applications ask.** The census now holds application forms from all 7 countries, tagged with the same topics as enquiry forms. `/research` and `/compare/applications` compare the two steps.
@@ -13,6 +15,8 @@ Changes since v0.1.0-draft.2, not yet part of a numbered version.
 - **Tools.** `tools/polite_render.mjs` reads forms built by JavaScript under the same polite crawling rules. `tools/check_sample.py` makes sample sheets so a person can check the computer's topic tags and the law map.
 
 Every new row is a first pass, not yet checked by a person.
+
+[All starter kits (ZIP)](https://www.kinderform.org/downloads/starter/v0.1.0-draft.3/kinderform-all-starters.zip)
 
 ## v0.1.0-draft.2 · 24 November 2026
 

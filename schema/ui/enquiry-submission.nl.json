@@ -1,0 +1,326 @@
+{
+  "$comment": "Wording for the reference form (Netherlands, in Dutch, language level B1, addressing the reader as 'je'). Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json. Optional questions end with '(niet verplicht)', as NL Design System advises. The adoption hint says that sign-up to adopt a child born in the Netherlands is closed; source: Fiom, register/nl/front-doors.csv (read 2026-11-25, unverified).",
+  "locale": "nl-NL",
+  "design_system": "nl-design",
+  "sections": [
+    "Over jou",
+    "Hoe we je bereiken",
+    "Waar je over wilt praten",
+    "Controleren en versturen"
+  ],
+  "start": {
+    "title": "Stel een vraag over pleegzorg of adoptie",
+    "body": [
+      "Met dit formulier stel je een vraag of vraag je om een gesprek. Het invullen duurt ongeveer 2 minuten.",
+      "Een vaste contactpersoon van ons pleegzorgteam antwoordt je binnen 1 werkdag.",
+      "Je hoeft nog niet te weten of pleegzorg of adoptie bij je past.",
+      "We vragen nu nog niets over je gezondheid, je huis, je geld of je gezin."
+    ],
+    "button": "Start"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "Over jou",
+      "title": "Wat is je naam?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Voornaam en achternaam",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Vul je voornaam en achternaam in",
+              "maxLength": "Je naam mag niet langer zijn dan 100 tekens"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "Hoe mogen we je noemen? (niet verplicht)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "Bijvoorbeeld een korte naam of een naam die je liever hebt.",
+            "errors": {
+              "maxLength": "Deze naam mag niet langer zijn dan 50 tekens"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "Over jou",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "Waar wil je meer over weten?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Pleegzorg",
+              "adoption": "Adoptie",
+              "not_sure": "Dat weet ik nog niet"
+            },
+            "optionHints": {
+              "adoption": "Je kunt je op dit moment niet aanmelden om een kind uit Nederland te adopteren. Je kunt wel een vraag over adoptie stellen.",
+              "not_sure": "Dat is prima. We vertellen je over allebei, en over andere manieren om te helpen."
+            },
+            "errors": {
+              "required": "Kies waar je meer over wilt weten"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "Over jou",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Gaat je vraag over een kind dat je al kent?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "Bijvoorbeeld een kleinkind, nichtje, neefje of het kind van vrienden. Dat heet netwerkpleegzorg. Een ander team helpt je daarbij. Schrijf hier niets over het kind.",
+            "optionLabels": {
+              "true": "Ja",
+              "false": "Nee"
+            },
+            "errors": {
+              "required": "Kies ‘Ja’ als je vraag over een kind gaat dat je al kent"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Hoe we je bereiken",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "Hoe wil je dat we contact met je opnemen?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "Per e-mail",
+              "phone_call": "Per telefoon",
+              "text_message": "Per sms"
+            },
+            "errors": {
+              "required": "Kies hoe je wilt dat we contact met je opnemen"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Hoe we je bereiken",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "Wat is je e-mailadres?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "We gebruiken het alleen om je te antwoorden.",
+            "errors": {
+              "required": "Vul je e-mailadres in",
+              "pattern": "Vul een e-mailadres in zoals naam@example.org",
+              "maxLength": "Je e-mailadres mag niet langer zijn dan 254 tekens"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Hoe we je bereiken",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "Wat is je telefoonnummer?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "Bijvoorbeeld 06 12345678.",
+            "errors": {
+              "required": "Vul je telefoonnummer in",
+              "pattern": "Vul een telefoonnummer in zoals 06 12345678"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Hoe we je bereiken",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "Wanneer kunnen we je het beste bellen? (niet verplicht)",
+          "options": {
+            "asHeading": true,
+            "hint": "Kies alles wat past. We proberen je op die momenten te bellen.",
+            "optionLabels": {
+              "weekday_morning": "Doordeweeks ’s ochtends",
+              "weekday_afternoon": "Doordeweeks ’s middags",
+              "weekday_evening": "Doordeweeks ’s avonds",
+              "saturday": "Op zaterdag"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "Hoe we je bereiken",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/nl_postcode",
+          "label": "Wat zijn de 4 cijfers van je postcode? (niet verplicht)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "off",
+            "inputmode": "numeric",
+            "inputWidth": 4,
+            "transform": "nl_postcode",
+            "spellcheck": false,
+            "hint": "Bijvoorbeeld 1234. Alleen de cijfers, zonder de letters. Zo weten we welke pleegzorgorganisatie bij jou in de buurt werkt. We vragen niet naar je adres.",
+            "errors": {
+              "pattern": "Vul alleen de 4 cijfers van je postcode in, zoals 1234"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Waar je over wilt praten",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "Waar wil je over praten? (niet verplicht)",
+          "options": {
+            "asHeading": true,
+            "hint": "Kies alles wat past. Je kunt het ons ook in het gesprek vertellen. Schrijf hier niets persoonlijks.",
+            "optionLabels": {
+              "eligibility": "Of ik pleegouder kan worden of een kind kan adopteren",
+              "what_it_involves": "Hoe het dagelijks leven eruitziet",
+              "money_and_support": "Geld en hulp",
+              "process_and_timescales": "De stappen en hoe lang ze duren",
+              "types_of_care": "De verschillende vormen van pleegzorg",
+              "something_else": "Iets anders"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Waar je over wilt praten",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "Hoe heb je over ons gehoord? (niet verplicht)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Via vrienden of familie",
+              "social_media": "Via sociale media",
+              "search": "Via een zoekmachine",
+              "event": "Op een bijeenkomst",
+              "advert": "Via een advertentie",
+              "council_or_agency_website": "Via de website van mijn gemeente",
+              "other": "Op een andere manier"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Waar je over wilt praten",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Wil je nieuws en uitnodigingen voor bijeenkomsten krijgen? (niet verplicht)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Ja, stuur me nieuws en uitnodigingen",
+            "hint": "We sturen ze alleen als je het vakje aanvinkt. Je kunt je altijd weer afmelden."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Controleer je antwoorden",
+    "change": "Wijzig",
+    "send_heading": "Verstuur je vraag",
+    "send_body": "Als je dit verstuurt, mogen we deze gegevens gebruiken om je te antwoorden.",
+    "button": "Verstuur"
+  },
+  "confirmation": {
+    "title": "Je vraag is verstuurd",
+    "reference": "Je referentienummer",
+    "next_heading": "Zo gaat het verder",
+    "team": "ons pleegzorgteam",
+    "kinship_team": "ons team voor netwerkpleegzorg",
+    "day_word": "werkdag",
+    "example_label": "Voorbeeld van een eerste antwoord (niet verstuurd)",
+    "builders_heading": "Voor wie aanmeldformulieren bouwt",
+    "builders_body": "Dit zijn de gegevens die de pleegzorgorganisatie zou krijgen. Het formulier heeft ze voor deze pagina gecontroleerd met het gepubliceerde schema.",
+    "restart": "Opnieuw beginnen"
+  },
+  "progress": {
+    "question": "Vraag",
+    "of": "van",
+    "back": "Terug",
+    "continue": "Volgende",
+    "error_title": "Er is iets niet goed ingevuld",
+    "error_prefix": "Fout:"
+  },
+  "demo_notice": "Dit is een voorbeeldformulier. Vul geen echte gegevens in. Wat je invult, wordt niet verstuurd of bewaard."
+}

@@ -409,7 +409,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                 rows={visible.flatMap((p, pageIndex) =>
                   p.elements.map((c) => ({
                     key: fieldOf(c.scope),
-                    label: c.label.replace(/\s*\((optional|facultatif|opcional)\)$/i, ""),
+                    label: c.label.replace(/\s*\((optional|facultatif|opcional|niet verplicht)\)$/i, ""),
                     value: displayValue(c, data[fieldOf(c.scope)], ui.locale),
                     pageIndex,
                   })),
