@@ -1,5 +1,15 @@
 # Kinderform release notes
 
+## Unreleased · audit remediation (starter candidate v0.1.0-draft.4)
+
+- Record the [26 November adversarial audit](docs/audits/2026-11-26.md), its fixes and the work that still needs independent review.
+- Keep named draft scores out of every static build, including previews. Local development needs an explicit opt-in.
+- Use one sensitive-question definition. Correct proven topic errors, count shared form URLs once, and record unknown branching instead of implying it was checked.
+- Separate assessment requirements from Kinderform's proposed question timing. Mark draft extractions locally and bind recorded checks to the reviewed finding text.
+- Strengthen phone and contact-route validation. Check monitoring event order, allow intent to remain absent until declared, and explain that pseudonymous records remain private.
+- Add a first-reply worksheet, synthetic rehearsal and event-mapping guide to the starter kits. Use bounded reassurance in the reference forms.
+- Preserve the earlier starter archives. The draft.4 candidate contains the revised rules and guide; no service pilot or independent legal review is claimed.
+
 ## v0.1.0-draft.3 · 25 November 2026
 
 - **Four more countries.** Ireland, the Netherlands, New Zealand and Singapore each have an example form in their own public design system, without government branding, and a starter kit: the Government of Ireland Design System, NL Design System with its neutral theme, the New Zealand Government Design System and the Singapore Government Design System. The Dutch kit is in Dutch.

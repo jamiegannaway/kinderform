@@ -132,14 +132,14 @@ export default function FormCheckNamed({ groups, built }: { groups: Record<Group
       <SiteHeader current="/form-check" />
       <main id="main" className="mx-auto max-w-7xl px-6">
         <section className="pt-8 pb-4 md:pt-14">
-          <Badge variant="destructive">Private preview. Do not share.</Badge>
+          <Badge variant="destructive">Local review. Do not share.</Badge>
           <h1 className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Form check: named results
           </h1>
           <Alert className="mt-8 max-w-4xl">
             <AlertTitle>A working view, not a finding</AlertTitle>
             <AlertDescription>
-              <p>We build this page only for private Vercel previews, never for kinderform.org.</p>
+              <p>This page is for an explicitly enabled local review server. Static builds never include it.</p>
               <ul className="mt-2 ml-5 list-disc space-y-2">
                 <li>
                   Scores use the draft checklist (version 0.1) on only the areas a public page can show,

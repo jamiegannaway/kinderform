@@ -39,7 +39,7 @@ const DONE = {
   who: (team: string, how: string) => `Une personne de ${team} va ${how}`,
   times: ", à l'un des moments que vous avez choisis",
   talk: "Pendant l'échange.",
-  talkBody: "Posez toutes vos questions. Il n'y a pas de mauvaises questions, et aucune ne sera retenue contre vous.",
+  talkBody: "Vous pouvez poser des questions sans vous engager à déposer une candidature.",
   notSure: " Nous vous parlerons de l'accueil familial, de l'adoption et d'autres façons d'aider.",
   plans: "Si vos projets changent, ce n'est pas grave. Vous pouvez nous le dire à tout moment.",
 }

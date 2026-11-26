@@ -11,7 +11,7 @@ import type { UsPicture as UsPictureData } from "@/lib/us-register"
 import { Illustration } from "@/components/illustration"
 import { Tag } from "@/components/tag"
 
-export type Checked = { date: string; against: string; note?: string } | null
+export type Checked = { date: string; against: string; claim_sha256: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
 export type Finding = { id: string; stage: string; title: string; summary: string; sources: Source[] }
 export type Doc = { href: string; title: string; when: string; blurb?: string }
@@ -28,8 +28,8 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 }
 
 // One line per source, each with its check status (CLAUDE.md, hard rule 6): the date a person
-// checked it, and "abstract" when the check was against the abstract alone. A source nobody has
-// checked gets no tag: the About page says once how the site was made.
+// checked it, and "abstract" when the check was against the abstract alone. Each check is bound
+// to this version of the finding, so edited claims cannot inherit an older green badge.
 function SourceItem({ s }: { s: Source }) {
   return (
     <li className="space-y-1">
@@ -42,10 +42,12 @@ function SourceItem({ s }: { s: Source }) {
         </span>
         {s.checked ? (
           <Tag tone="green" className="whitespace-normal">
-            Checked {longDate(s.checked.date)}
+            Source checked {longDate(s.checked.date)}
             {s.checked.against === "full text" ? "" : `, against the ${s.checked.against}`}
           </Tag>
-        ) : null}
+        ) : (
+          <Tag tone="amber">Draft extraction</Tag>
+        )}
       </p>
     </li>
   )
@@ -63,6 +65,7 @@ function FindingCard({ f }: { f: Finding }) {
       <CardHeader>
         <CardDescription>{f.stage}</CardDescription>
         <CardTitle className="text-lg leading-snug">{f.title}</CardTitle>
+        {f.sources.some((s) => !s.checked) && <Tag tone="amber" className="w-fit">Finding needs review</Tag>}
       </CardHeader>
       <CardContent className="mt-auto space-y-4">
         <details className="text-sm">
@@ -142,7 +145,7 @@ export default function ResearchIndex({
             </h1>
             <p className="text-xl leading-8 text-muted-foreground">
               In England, most fostering applications that finish end in withdrawal, not approval. Quicker first visits
-              alone did not lead to more approvals. And few enquiry forms say when you will hear back.
+              were not shown to increase approvals in one hub study. And few forms we could read give a reply time.
             </p>
             <p className="leading-7">
               We do not name or score any service from our own reading of forms. Studies we cite may name the
@@ -181,7 +184,7 @@ export default function ResearchIndex({
           <div className="max-w-3xl space-y-4">
             <H2 id="known">Research and our own reading give {findings.length} findings so far</H2>
             <p className="leading-7">
-              A person has checked {fullText} of the {unique.length} sources against the full text
+              Recorded checks cover {fullText} of the {unique.length} sources against the full text
               {otherCheck ? `, and ${otherCheck} more against the abstract only` : ""}.{" "}
               <a href="/about#how" className="font-medium underline underline-offset-4">
                 How we made this site
@@ -190,8 +193,8 @@ export default function ResearchIndex({
             </p>
             <HowWeDidThis>
               <p>
-                A checked source means a person compared our summary with the original, on the date shown. A summary not
-                yet checked comes from an abstract, from our AI-assisted review or from our own reading of public pages.
+                A source check covers that source's part of the summary, on the date shown. It does not check other sources in the finding.
+                A draft extraction still needs a person to check it against the original.
                 Findings by Kinderform come from our own reading of public forms, not from published research.
               </p>
             </HowWeDidThis>

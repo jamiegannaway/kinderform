@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "about": "A log of each piece of research the project has done, and what it could mean for our work. Every idea here is for discussion until we decide it in the open.",
  "entries": [
   {
@@ -17,7 +17,7 @@
    "how": "A desk review made with an AI-assisted research tool.",
    "checked": "A person checked 3 sources on 14 November 2026. The rest are not yet checked by a person.",
    "learned": [
-    "Speed alone is not enough. A hub in the North East of England made first visits much quicker, but approvals did not rise. (Ipsos and CEI for the Department for Education, 2026.)",
+    "A North East hub study found quicker first visits without a statistically significant gain in approvals. This does not isolate speed or prove no effect. (Ipsos and CEI for the Department for Education, 2026.)",
     "People are lost when contact lapses, or when one team passes them on to another.",
     "We found no trial of any single step after an enquiry in fostering or adoption."
    ]
@@ -39,8 +39,8 @@
    "how": "A desk review made with an AI-assisted research tool. None of the evidence is about fostering.",
    "checked": "Not yet checked by a person. Many sources were read from a summary only.",
    "learned": [
-    "No study in any field tests our time limits: 5 minutes, 1 working day or 2 working days.",
-    "What the first message says, and who it is from, has better evidence than how fast it arrives.",
+    "Our desk search found no study testing our time limits: 5 minutes, 1 working day or 2 working days.",
+    "Our search found more direct evidence about message wording and sender than reply speed. It did not compare their effects head to head.",
     "Reminders help a little. Government teams in the United States ran 126 trials, and the average gain was 1.4 percentage points (DellaVigna and Linos, 2022).",
     "The wording that works best uses guilt, cost, penalty or a sense of debt. We should not copy it."
    ]
@@ -82,8 +82,8 @@
    "learned": [
     "Most people who get in touch do not go on to be approved, in every country that publishes figures. The figures cannot be compared fairly, because 'enquiry' means different things.",
     "Once in assessment, most people who leave choose to leave. Few are turned down.",
-    "No study with a comparison shows that a faster or simpler process leads to more approvals. England's hubs and Denmark both found none.",
-    "A poor or slow reply does put people off, and slow approval falls hardest on kinship carers."
+    "Our desk search did not establish more approvals from faster or simpler processes. The England and Denmark comparisons do not prove no effect.",
+    "Some people say a poor or slow reply put them off. Several reports describe approval delays affecting kinship carers."
    ]
   },
   {
@@ -105,7 +105,7 @@
     "The first reply, the wait between steps and how the service communicates are where people are most often lost.",
     "A shorter process is not always better. In a study of 222,772 job applicants, length did not predict quitting, and honest time estimates went with fewer people leaving.",
     "Longer gaps before the next step go with more people dropping away.",
-    "Public bodies sometimes reply less often, or less warmly, depending on the sender's name. Nobody has tested this for fostering.",
+    "Public bodies sometimes reply less often, or less warmly, depending on the sender's name. Our search found no test of this for fostering.",
     "Honest information makes some people decide not to go on. That is an informed choice, not a failure."
    ]
   },
@@ -139,7 +139,7 @@
    "part": "First reply",
    "kind": "keep",
    "idea": "Keep the 5-minute acknowledgement and the first reply from a person within 1 working day. Call them promises we make out of respect, not limits that research has proved.",
-   "why": "No study in any field we looked at tests either limit. Nothing we found supports a longer wait.",
+   "why": "Our search found no study testing either limit. The limits are proposed service commitments, not proven thresholds.",
    "from": [
     "reminders",
     "giving",
@@ -202,7 +202,7 @@
    "part": "Information events and visits",
    "kind": "tighten",
    "idea": "After a missed event, call within 2 working days and assume a slip. Offer another date, a one-to-one talk, or 'not for now' as equal choices.",
-   "why": "Guidance and interviews back prompt, kind follow-up. No trial has tested any follow-up or any time limit.",
+   "why": "Guidance and interviews back prompt, kind follow-up. Our search found no trial of follow-up or any time limit.",
    "from": [
     "reminders"
    ]
@@ -264,7 +264,7 @@
    "part": "Being turned away",
    "kind": "add",
    "idea": "Set a minimum for a decent 'no'. Say early that it can happen, and tell the person by voice. Give the real reason, offer a review, and call again later.",
-   "why": "People turned down as kidney donors said the handling hurt more than the decision. No trial has tested this.",
+   "why": "People turned down as kidney donors said the handling hurt more than the decision. Our search found no trial testing this.",
    "from": [
     "giving"
    ]

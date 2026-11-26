@@ -13,7 +13,9 @@ import { factsFor } from "@/lib/form-check"
 export type Meter = { group: Group; yes: number; of: number }
 export type Measure = { id: string; label: string; note: string; rows: Meter[] }
 export type FormsDiffer = {
-  read: number // forms counted here
+  read: number // unique form URLs counted here
+  branchingUnknownQuestions: number
+  branchingUnknownForms: number
   leftOut: number // readable forms left out because they were not read from the live page
   checked: string // ISO date of the latest direct read
   questions: { group: Group; values: number[] }[] // one number per form, sorted
@@ -61,7 +63,7 @@ export function formsDiffer(c: Census): FormsDiffer {
       return { group: g, yes: judged.filter(Boolean).length, of: judged.length }
     })
 
-  const sensitiveTopics = [...new Set(facts.flatMap((x) => [...(x.dateOfBirth ? ["Date of birth"] : []), ...x.sensitive]))]
+  const sensitiveTopics = [...new Set(facts.flatMap((x) => x.sensitive))]
   const replies = [...new Set(facts.map((x) => x.replyPromise).filter((v): v is string => !!v).map(firstReply))].sort(
     (a, b) => daysOf(a) - daysOf(b),
   )
@@ -74,6 +76,8 @@ export function formsDiffer(c: Census): FormsDiffer {
 
   return {
     read: facts.length,
+    branchingUnknownQuestions: facts.reduce((n, f) => n + f.branchingUnknownQuestions, 0),
+    branchingUnknownForms: facts.filter((f) => f.branchingUnknownQuestions > 0).length,
     leftOut: all.length - facts.length,
     checked: facts.map((x) => x.form.date_checked).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort().at(-1) ?? "",
     questions: groups.map((g) => ({ group: g, values: by(g).map((x) => x.questions).sort((a, b) => a - b) })),
@@ -90,7 +94,7 @@ export function formsDiffer(c: Census): FormsDiffer {
         note: sensitiveTopics.length
           ? `The questions were about ${list(sensitiveTopics.map(short))}.`
           : "None of these forms asked one.",
-        rows: meter((x) => x.sensitive.length > 0 || x.dateOfBirth),
+        rows: meter((x) => x.sensitive.length > 0),
       },
       {
         id: "reply-time",

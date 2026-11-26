@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import type { FormsDiffer as Data, Measure } from "@/lib/forms-differ"
 import { HowWeDidThis } from "@/components/countries"
+import { Tag } from "@/components/tag"
 
 // The site's Content-Security-Policy blocks inline styles, so positions use fixed classes.
 const AXIS_MAX = 20
@@ -30,7 +31,7 @@ function describe(values: number[]): string {
   if (!values.length) return "No forms read"
   const lo = values[0]
   const hi = values[values.length - 1]
-  const range = lo === hi ? `all ${lo} questions` : `${lo} to ${hi} questions`
+  const range = lo === hi ? `all ${lo} recorded questions` : `${lo} to ${hi} recorded questions`
   return `${values.length} ${formsWord(values.length)}, ${range}, typically ${median(values)}`
 }
 
@@ -75,7 +76,7 @@ function Axis() {
           </span>
         ))}
       </div>
-      <p className="text-center text-xs text-muted-foreground">Number of questions on the form</p>
+      <p className="text-center text-xs text-muted-foreground">Recorded questions, known follow-ups left out</p>
     </div>
   )
 }
@@ -88,7 +89,7 @@ function QuestionsTable({ rows }: { rows: Data["questions"] }) {
       <Table className="mt-3">
         <TableHeader>
           <TableRow>
-            <TableHead>Number of questions</TableHead>
+            <TableHead>Recorded questions</TableHead>
             {rows.map((r) => (
               <TableHead key={r.group} className="text-right">
                 {r.group}
@@ -169,24 +170,25 @@ export default function FormsDiffer({ data }: { data: Data }) {
     <section aria-labelledby="how-forms-differ" className="scroll-m-20 space-y-6">
       <div className="max-w-3xl space-y-4">
         <h2 id="how-forms-differ" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          UK enquiry forms differ a lot in what they ask and what they promise
+          The UK forms we could read differ in questions and reply promises
         </h2>
         <p className="leading-7">
-          The shortest UK enquiry form asks {allQ[0]} questions and the longest asks {allQ[allQ.length - 1]}. Only{" "}
+          Among these forms, recorded questions range from {allQ[0]} to {allQ[allQ.length - 1]}. Only{" "}
           {replyYes} of {replyOf} forms say when you will hear back.
         </p>
         <p className="leading-7 text-muted-foreground">
+          <Tag tone="amber" className="mr-2">Draft extraction</Tag>
           We read {d.read} forms on the live web pages of UK fostering and adoption services. The latest read was on{" "}
           {longDate(d.checked)}.
         </p>
         <HowWeDidThis>
           <p>
-            A computer program that reads public web pages turned each page into text. That text does not always show
-            which questions are required, so some counts may be wrong by 1 or 2. We left out {d.leftOut} more{" "}
+            A program turned public pages into text. Its counts and topic tags still need review. We have not measured the error rate.
+            We left out {d.leftOut} more{" "}
             {formsWord(d.leftOut)} that we saw only through a search engine&rsquo;s copy.
           </p>
           <p>
-            We did not count consent boxes, or questions that appear only after an earlier answer.
+            We left out consent boxes and known follow-up questions. Branching is often unknown, so these counts do not show one confirmed path through a form.
           </p>
           <p>
             Councils and hubs includes regional services. Adoption agencies work under different rules from fostering
@@ -207,7 +209,7 @@ export default function FormsDiffer({ data }: { data: Data }) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg leading-snug">How many questions each UK enquiry form asks</CardTitle>
+          <CardTitle className="text-lg leading-snug">Recorded questions on the UK forms we could read</CardTitle>
           <CardDescription>Each dot is one form.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">

@@ -6,7 +6,7 @@
 // First-contact forms are counted the same way as "What enquiry forms ask": forms read straight
 // from the live page. A US application is a packet: the documents one service (a state, a county or a
 // tribe, or a private agency) gives applicants, taken together. Every figure is unverified until a person has checked the rows.
-import { askedBy, type Census, type Row } from "@/lib/census"
+import { isCountedQuestion, isKnownFollowUp, askedBy, type Census, type Row } from "@/lib/census"
 import { factsFor } from "@/lib/form-check"
 import { COUNTRIES } from "@/lib/countries"
 import { isSensitive } from "@/lib/sensitive"
@@ -68,7 +68,7 @@ const median = (xs: number[]) => {
 // Questions the person answers: not consent ticks, not fields for staff, and not statements of
 // what to attach or what the office checks itself (input_type "statement").
 const answered = (q: Row) =>
-  q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on && q.input_type !== "statement"
+  isCountedQuestion(q)
 
 export function applications(c: Census): ApplicationsData {
   const asked = askedBy(c)

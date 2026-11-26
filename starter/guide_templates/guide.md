@@ -57,3 +57,40 @@ python3 check.py synthetic.json
 ## Before sharing with the public
 
 Use the name of the team that will read the enquiry and a response time it can meet. Arrange access, retention, deletion and a fallback when nobody is available. Give enquirers the service’s privacy notice and a way to contact a person. Test delivery in an approved test environment, with a separate test destination. Keep test details out of live services and public feedback. Keep the credit and licences when sharing your own version.
+
+## Plan the first reply
+
+Fill in this worksheet with the receiving team. Keep the completed copy in your service. It works with your existing form too.
+
+| Decide | Your service's plan |
+| --- | --- |
+| Arrival | Which queue receives enquiries? Who checks that delivery worked? |
+| Ownership | Which person accepts each enquiry? Who covers absence and out-of-hours arrivals? |
+| Reply promise | What can you promise? Define working hours, holidays and the contact route if a reply is late. |
+| Failed contact | How will the owner see a failed message or unanswered call and agree the next attempt? |
+| Handoff | Who accepts a transfer, including kinship enquiries? The current owner keeps it until the receiving team accepts. |
+| Overdue reply | How does the team see a missed deadline? Who acts and tells the person what happens next? |
+| Stop or return | How will you respect a request to stop? Record an agreed return date only if the person asks. |
+
+Keep these tasks in your service's system. The draft monitoring record does not hold queue, ownership or handoff history.
+
+Record three different events: an automatic acknowledgement, a person's first contact attempt, and the first two-way conversation. A delivered email alone is not a conversation. Leave an unknown event time out. Record `intent_tier` only when the person tells you what would help; never infer it from their answers.
+
+The [worked enquiry](https://github.com/jamiegannaway/kinderform/blob/main/docs/one-enquiry.md) maps these events to the draft monitoring schema. Submission answers and monitoring events are separate records.
+
+## Rehearse before a real enquiry
+
+Use made-up records in your approved test system. Use a separate test destination; do not send anything to a live service inbox.
+
+| Try | Check with the receiving team |
+| --- | --- |
+| Email, phone and text | Each arrives once, has an owner, and uses the selected contact method. |
+| Failed delivery and absent owner | A failure is visible and the cover person takes responsibility. |
+| Kinship handoff | The receiving team accepts it before the original owner lets go. |
+| Missed reply deadline | The overdue case is visible and someone takes the agreed action. |
+| Stop, then return | Contact stops when asked. Recontact uses only the person's agreed date and choice. |
+| Acknowledgement, attempt, conversation | Each has its own time. An automatic message does not count as a personal reply. |
+
+Before a pilot, agree what you will review locally. For **quick**, count all arrivals, overdue and unanswered enquiries, and time to an attempt and conversation. Include cases still waiting. For **kind**, ask whether the person felt respected and could choose how to respond. For **considered**, check that their question reached the right team and got an answer. Record staff time and repeat work too.
+
+Keep real records inside the service. Share only agreed summaries after checking that small counts cannot identify anyone. Faster replies or more submissions alone do not prove better outcomes. This kit provides a rehearsal, not evidence of a completed pilot.

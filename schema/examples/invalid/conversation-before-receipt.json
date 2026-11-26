@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-INITIAL",
+  "received_at": "2026-11-26T12:00:00Z",
+  "channel": "web_form",
+  "status": "conversation_held",
+  "first_contact_made_at": "2026-11-25T12:00:00Z"
+}

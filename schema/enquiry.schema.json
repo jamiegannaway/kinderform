@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/jamiegannaway/kinderform/schema/enquiry.schema.json",
   "title": "Enquiry",
-  "description": "A fostering enquiry as it moves from first contact towards application. v0.1 draft. The record is deliberately pseudonymous: it carries no name, contact details or full postcode, so it can be shared for analysis without identifying the person.",
+  "description": "A fostering enquiry as it moves from first contact towards application. v0.1 draft. This pseudonymous record omits named contact fields but can still identify someone through dates, location, identifiers or free text. Keep real records private. Sharing requires a separate disclosure review. Use validate_enquiry.py as well as JSON Schema to check event order.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -10,7 +10,6 @@
     "enquiry_id",
     "received_at",
     "channel",
-    "intent_tier",
     "status"
   ],
   "properties": {
@@ -34,12 +33,12 @@
       "enum": ["web_form", "phone", "email", "chat", "sms", "event", "social_lead", "referral", "other"]
     },
     "source": {
-      "description": "How the person heard about fostering with this service, in the service's own words or a campaign tag.",
+      "description": "A service-approved source or campaign code, never a name, contact detail or case note. This field is not a guarantee of anonymity.",
       "type": "string",
       "maxLength": 200
     },
     "intent_tier": {
-      "description": "What the person said would help most. Chosen by the enquirer, never inferred.",
+      "description": "What the person said would help most. Optional until the enquirer declares it; omit it if not yet asked or known. Never infer it from interest, contact method or later progress.",
       "enum": ["information", "conversation", "ready_to_apply", "transfer"]
     },
     "fostering_interests": {
@@ -166,6 +165,13 @@
         "required": ["status"]
       },
       "then": { "required": ["first_contact_made_at"] }
+    },
+    {
+      "if": {
+        "properties": { "status": { "const": "contact_attempted" } },
+        "required": ["status"]
+      },
+      "then": { "required": ["first_contact_attempt_at"] }
     }
   ]
 }

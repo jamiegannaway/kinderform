@@ -10,6 +10,8 @@
 
 `findings.json` holds "What we know so far": short findings in plain words, each with its sources and whether a person has checked them against the original (the date, and whether against the full text, the abstract, the key findings or a chart). Use `null` for "not yet checked". Run `python tests/validate_findings.py` after editing it.
 
+Each recorded source check carries `claim_sha256`, binding the finding's title, summary and source URL to that check. If any of those change, clear `checked` and keep the earlier date in a history note. Only a person reviewing the new wording against the source can record a new check. Do not update the hash to make a changed claim pass. The November 2026 audit bound surviving historical checks to their unchanged wording; it did not perform new human reviews. A source check covers that source's part of a finding, not its other sources.
+
 ## The research page
 
 Everything in this folder except this README is published at [kinderform.org/research](https://www.kinderform.org/research). The site is built from these files, so a merged change here updates the page. Links between evidence files become links between pages. Links to other files in the repository become plain text while the repository is private.

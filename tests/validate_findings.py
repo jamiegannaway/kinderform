@@ -14,6 +14,9 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+from evidence_review import check_is_current, claim_digest
+
 PATH = ROOT / "evidence" / "findings.json"
 
 AGAINST = {"full text", "abstract", "key findings", "chart"}
@@ -78,8 +81,19 @@ for f in data.get("findings", []):
             fail(f"{where}: 'checked' must be null or have a date")
         elif c.get("against") not in AGAINST:
             fail(f"{where}: 'against' must be one of {sorted(AGAINST)}")
+        elif not check_is_current(f, s):
+            fail(f"{where}: finding changed since its check; clear checked until this version is reviewed")
         else:
             checked += 1
+
+# A real regression case: adding an unchecked claim to a checked summary must fail.
+fixture = {"title": "Example finding", "summary": "A reviewed sentence."}
+source = {"url": "https://example.org/study", "checked": {"date": "2026-11-14", "against": "full text"}}
+source["checked"]["claim_sha256"] = claim_digest(fixture, source)
+assert check_is_current(fixture, source)
+assert not check_is_current({**fixture, "summary": fixture["summary"] + " A new claim."}, source)
+assert not check_is_current(fixture, {**source, "url": "https://example.org/other-study"})
+assert check_is_current(fixture, {**source, "checked": None})
 
 if errors:
     print("\n".join("FAIL " + e for e in errors))

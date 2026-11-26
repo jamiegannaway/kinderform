@@ -12,7 +12,7 @@
     "title": "Fragen zu Pflegefamilien und Adoption stellen",
     "body": [
       "Mit diesem Formular können Sie eine Frage stellen oder um ein Gespräch bitten. Das dauert etwa 2 Minuten.",
-      "Eine feste Ansprechperson aus dem Pflegekinderdienst antwortet Ihnen spätestens am nächsten Arbeitstag.",
+      "Bei einer echten Stelle sollte Ihnen eine feste Ansprechperson sagen, wann Sie eine Antwort erhalten.",
       "Sie müssen noch nicht wissen, ob ein Pflegekind oder eine Adoption das Richtige für Sie ist.",
       "Wir fragen jetzt noch nicht nach Ihrer Gesundheit, Ihrer Wohnung, Ihrem Geld oder Ihrer Familie."
     ],
@@ -33,7 +33,8 @@
             "spellcheck": false,
             "errors": {
               "required": "Geben Sie Ihren Vor- und Nachnamen ein",
-              "maxLength": "Ihr Name darf höchstens 100 Zeichen lang sein"
+              "maxLength": "Ihr Name darf höchstens 100 Zeichen lang sein",
+              "pattern": "Geben Sie Ihren Vor- und Nachnamen ein"
             }
           }
         },
@@ -320,5 +321,5 @@
     "error_title": "Es gibt ein Problem",
     "error_prefix": "Fehler:"
   },
-  "demo_notice": "Dies ist ein Beispielformular. Geben Sie keine echten Daten ein. Nichts, was Sie eingeben, wird gesendet oder gespeichert."
+  "demo_notice": "Dies ist ein Beispielformular. Geben Sie keine echten Daten ein. Nichts, was Sie eingeben, wird gesendet oder gespeichert. Die Beispieldaten berücksichtigen weder Öffnungszeiten noch Feiertage."
 }

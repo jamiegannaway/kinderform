@@ -15,6 +15,8 @@ from pathlib import Path
 from jsonschema import Draft202012Validator, FormatChecker
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "schema"))
+from validate_enquiry import problems as enquiry_problems
 PAIRS = (
     (ROOT / "schema" / "enquiry.schema.json", ROOT / "schema" / "examples"),
     (ROOT / "schema" / "enquiry-submission.schema.json", ROOT / "schema" / "examples" / "submission"),
@@ -31,14 +33,17 @@ def main() -> int:
         for kind, should_pass in (("valid", True), ("invalid", False)):
             for path in sorted((examples / kind).glob("*.json")):
                 record = json.loads(path.read_text(encoding="utf-8"))
-                errors = list(validator.iter_errors(record))
+                # Monitoring records also need comparisons between timestamps;
+                # JSON Schema alone cannot establish their chronological order.
+                errors = (enquiry_problems(record) if schema_path.name == "enquiry.schema.json"
+                          else list(validator.iter_errors(record)))
                 passed = not errors
                 ok = passed == should_pass
                 print(f"  {'ok  ' if ok else 'FAIL'} {kind}/{path.name}")
                 if not ok:
                     failures += 1
                     for error in errors:
-                        print(f"         {error.message}")
+                        print(f"         {getattr(error, 'message', error)}")
 
     if failures:
         print(f"\n{failures} example(s) did not behave as expected")

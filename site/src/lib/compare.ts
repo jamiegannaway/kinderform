@@ -7,7 +7,7 @@
 import { readFileSync, existsSync } from "node:fs"
 import { resolve } from "node:path"
 
-import { askedBy, loadCensus, parseCsv, type Census, type Row } from "@/lib/census"
+import { isCountedQuestion, isKnownFollowUp, askedBy, loadCensus, parseCsv, type Census, type Row } from "@/lib/census"
 import { APPLICATION_TOPICS } from "@/lib/applications"
 import { TOPIC_ROWS } from "@/lib/countries"
 
@@ -177,7 +177,7 @@ export function formRows(c: Census, dates = loadPageDates()): FormRow[] {
     // Application forms are on /compare/applications.
     if (f.operator_type === "platform_vendor" || f.form_stage === "application") continue
     const all = asked.get(f.form_id) ?? []
-    const qs = all.filter((q) => !q.conditional_on && q.category !== "consent")
+    const qs = all.filter((q) => isCountedQuestion(q))
     const seen = f.fields_observed !== "no" && all.length > 0
     const asks = seen ? TOPIC_ROWS.filter((t) => all.some(t.match)).map((t) => t.label) : []
     const rt = c.guidance.filter((g) => g.form_id === f.form_id && g.guidance_type === "response_time")
@@ -195,7 +195,7 @@ export function formRows(c: Census, dates = loadPageDates()): FormRow[] {
       asks,
       beyond: asks.filter((a) => BEYOND_STANDARD.has(a)),
       reply: rt.find((g) => g.present === "yes")?.value ?? "",
-      replyChecked: rt.length > 0,
+      replyChecked: rt.some((g) => g.present === "yes" || g.present === "no"),
       checked: f.date_checked,
       page: dates.get(link) ?? null,
     })
@@ -389,7 +389,7 @@ function readOf(c: Census, formId: string): Pick<ApplicationRow, "questions" | "
   // The same questions as "What applications ask": not consent ticks, fields for staff, follow-up
   // questions or statements of what to attach.
   const answered = qs.filter(
-    (q) => q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on && q.input_type !== "statement",
+    (q) => isCountedQuestion(q),
   )
   return {
     questions: answered.length,

@@ -6,9 +6,15 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { JsonForms } from "@jsonforms/react"
 import type { JsonFormsRendererRegistryEntry } from "@jsonforms/core"
+import type { ValidateFunction } from "ajv"
 
 import schema from "../../../../schema/enquiry-submission.schema.json"
-import validate from "@/generated/validate-submission.js"
+import compiledValidate from "@/generated/validate-submission.js"
+import { nextReplyDay } from "./reply-day"
+
+// The generated JavaScript is AJV's standalone ValidateFunction, including its
+// error list. Keep that contract when TypeScript infers the generated module.
+const validate = compiledValidate as ValidateFunction
 
 // ---- Types ------------------------------------------------------------------
 
@@ -204,13 +210,6 @@ function errorsFor(page: Page, data: Data, locale: string): Errors {
   return out
 }
 
-function nextWorkingDay(from: Date): Date {
-  const d = new Date(from)
-  do d.setDate(d.getDate() + 1)
-  while (d.getDay() === 0 || d.getDay() === 6)
-  return d
-}
-
 function reference(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
   const bytes = new Uint8Array(6)
@@ -305,6 +304,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
     const next = { ...latest.current }
     for (const c of page.elements) {
       const f = fieldOf(c.scope)
+      if (typeof next[f] === "string") next[f] = (next[f] as string).trim()
       if (c.options?.transform && typeof next[f] === "string") next[f] = transform(c.options.transform, next[f] as string) || undefined
       if (next[f] === "") delete next[f]
     }
@@ -344,7 +344,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
       go({ kind: "page", index: Math.max(0, bad) })
       return
     }
-    go({ kind: "done", reference: reference(), due: nextWorkingDay(new Date()), record })
+    go({ kind: "done", reference: reference(), due: nextReplyDay(new Date(), record), record })
   }
 
   const sectionIndex = (name: string) => Math.max(0, ui.sections.indexOf(name))
@@ -472,27 +472,27 @@ export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
   if (locale === "fr-FR") {
     const how = by === "email" ? "vous écrire par e-mail" : by === "text_message" ? "vous envoyer un SMS" : "vous appeler"
     if (record.knows_child)
-      return `Bonjour ${name}, merci de nous avoir contactés. Comme votre demande concerne un enfant que vous connaissez déjà, nous l'avons transmise à Sam, de ${ui.confirmation.kinship_team}. Sam va ${how} d'ici la fin de la journée du ${day}. Aucune de vos questions ne sera retenue contre vous.`
-    return `Bonjour ${name}, merci de nous avoir contactés. Je m'appelle Camille et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times ? ", à l'un des moments que vous avez choisis" : ""}. Il n'y a pas de mauvaises questions, et aucune de vos questions ne sera retenue contre vous.`
+      return `Bonjour ${name}, merci de nous avoir contactés. Comme votre demande concerne un enfant que vous connaissez déjà, nous l'avons transmise à Sam, de ${ui.confirmation.kinship_team}. Sam va ${how} d'ici la fin de la journée du ${day}. Vous pouvez poser des questions sans vous engager à déposer une candidature.`
+    return `Bonjour ${name}, merci de nous avoir contactés. Je m'appelle Camille et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times ? ", à l'un des moments que vous avez choisis" : ""}. Vous pouvez poser des questions sans vous engager à déposer une candidature.`
   }
   if (isFrench(locale)) {
     const how = by === "email" ? "vous écrire par courriel" : by === "text_message" ? "vous envoyer un message texte" : "vous appeler"
     if (record.knows_child)
-      return `Bonjour ${name}, merci d'avoir communiqué avec nous. Comme votre demande concerne un enfant que vous connaissez déjà, nous l'avons transmise à Sam, de ${ui.confirmation.kinship_team}. Sam va ${how} d'ici la fin de la journée du ${day}. Aucune de vos questions ne sera retenue contre vous.`
-    return `Bonjour ${name}, merci d'avoir communiqué avec nous. Je m'appelle Chantal et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times ? ", à l'un des moments que vous avez choisis" : ""}. Il n'y a pas de mauvaises questions, et aucune de vos questions ne sera retenue contre vous.`
+      return `Bonjour ${name}, merci d'avoir communiqué avec nous. Comme votre demande concerne un enfant que vous connaissez déjà, nous l'avons transmise à Sam, de ${ui.confirmation.kinship_team}. Sam va ${how} d'ici la fin de la journée du ${day}. Vous pouvez poser des questions sans vous engager à déposer une candidature.`
+    return `Bonjour ${name}, merci d'avoir communiqué avec nous. Je m'appelle Chantal et je fais partie de ${ui.confirmation.team}. Je vais ${how} d'ici la fin de la journée du ${day}${times ? ", à l'un des moments que vous avez choisis" : ""}. Vous pouvez poser des questions sans vous engager à déposer une candidature.`
   }
   if (locale.startsWith("de")) {
     const how = by === "email" ? "Ihnen eine E-Mail schreiben" : by === "text_message" ? "Ihnen eine SMS schicken" : "Sie anrufen"
     if (record.knows_child)
-      return `Hallo ${name}, vielen Dank für Ihre Nachricht. Weil Sie nach einem Kind fragen, das Sie schon kennen, haben wir Ihre Nachricht an Sam von ${ui.confirmation.kinship_team} weitergegeben. Sam wird ${how}, spätestens am ${day}. Keine Ihrer Fragen wird gegen Sie verwendet.`
-    return `Hallo ${name}, vielen Dank für Ihre Nachricht. Ich bin Lena von ${ui.confirmation.team}. Ich werde ${how}, spätestens am ${day}${times ? ", zu einer der Zeiten, die Sie gewählt haben" : ""}. Es gibt keine falschen Fragen, und keine Ihrer Fragen wird gegen Sie verwendet.`
+      return `Hallo ${name}, vielen Dank für Ihre Nachricht. Weil Sie nach einem Kind fragen, das Sie schon kennen, haben wir Ihre Nachricht an Sam von ${ui.confirmation.kinship_team} weitergegeben. Sam wird ${how}, spätestens am ${day}. Sie können Fragen stellen, ohne sich zu einer Bewerbung zu verpflichten.`
+    return `Hallo ${name}, vielen Dank für Ihre Nachricht. Ich bin Lena von ${ui.confirmation.team}. Ich werde ${how}, spätestens am ${day}${times ? ", zu einer der Zeiten, die Sie gewählt haben" : ""}. Sie können Fragen stellen, ohne sich zu einer Bewerbung zu verpflichten.`
   }
   if (locale.startsWith("nl")) {
     // Dutch foster care providers address people as "je".
     const how = by === "email" ? "je een e-mail sturen" : by === "text_message" ? "je een sms sturen" : "je bellen"
     if (record.knows_child)
-      return `Hoi ${name}, bedankt voor je bericht. Je vraagt naar een kind dat je al kent. Daarom hebben we je bericht doorgestuurd naar Sam van ${ui.confirmation.kinship_team}. Sam gaat ${how}, uiterlijk op ${day}. Geen enkele vraag wordt tegen je gebruikt.`
-    return `Hoi ${name}, bedankt voor je bericht. Ik ben Sanne van ${ui.confirmation.team}. Ik ga ${how}, uiterlijk op ${day}${times ? ", op een van de momenten die je hebt gekozen" : ""}. Er zijn geen domme vragen, en geen enkele vraag wordt tegen je gebruikt.`
+      return `Hoi ${name}, bedankt voor je bericht. Je vraagt naar een kind dat je al kent. Daarom hebben we je bericht doorgestuurd naar Sam van ${ui.confirmation.kinship_team}. Sam gaat ${how}, uiterlijk op ${day}. Je kunt vragen stellen zonder dat je je vastlegt op een aanvraag.`
+    return `Hoi ${name}, bedankt voor je bericht. Ik ben Sanne van ${ui.confirmation.team}. Ik ga ${how}, uiterlijk op ${day}${times ? ", op een van de momenten die je hebt gekozen" : ""}. Je kunt vragen stellen zonder dat je je vastlegt op een aanvraag.`
   }
   if (locale.startsWith("es")) {
     // "I will" for the named worker, "Sam will" for the kinship team.
@@ -503,14 +503,14 @@ export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
           ? ["le enviaré un SMS", "le enviará un SMS"]
           : ["le llamaré", "le llamará"]
     if (record.knows_child)
-      return `Hola, ${name}. Gracias por ponerse en contacto. Como pregunta por un niño o una niña que ya conoce, hemos pasado su mensaje a Sam, de ${ui.confirmation.kinship_team}. Sam ${sam} antes del final del ${day}. Ninguna de sus preguntas contará en su contra.`
-    return `Hola, ${name}. Gracias por ponerse en contacto. Soy Lucía, de ${ui.confirmation.team}, y ${me} antes del final del ${day}${times ? ", en uno de los momentos que ha elegido" : ""}. No hay preguntas equivocadas, y ninguna de sus preguntas contará en su contra.`
+      return `Hola, ${name}. Gracias por ponerse en contacto. Como pregunta por un niño o una niña que ya conoce, hemos pasado su mensaje a Sam, de ${ui.confirmation.kinship_team}. Sam ${sam} antes del final del ${day}. Puede hacer preguntas sin comprometerse a presentar una solicitud.`
+    return `Hola, ${name}. Gracias por ponerse en contacto. Soy Lucía, de ${ui.confirmation.team}, y ${me} antes del final del ${day}${times ? ", en uno de los momentos que ha elegido" : ""}. Puede hacer preguntas sin comprometerse a presentar una solicitud.`
   }
   const sender: Record<string, string> = {
     "en-US": "Maria", "en-CA": "Chantal", "en-AU": "Mia", "en-IE": "Aoife", "en-NZ": "Aroha", "en-SG": "Mei",
   }
   const how = by === "email" ? "email you" : by === "text_message" ? "text you" : "call you"
   if (record.knows_child)
-    return `Hi ${name}, thank you for getting in touch. Because you're asking about a child you already know, we've passed your message to Sam in ${ui.confirmation.kinship_team}. Sam will ${how} by the end of ${day}. Nothing you ask counts against you.`
-  return `Hi ${name}, thank you for getting in touch. I'm ${sender[locale] ?? "Priya"} from ${ui.confirmation.team}. I'll ${how} by the end of ${day}${times ? ", at one of the times you chose" : ""}. There are no wrong questions, and nothing you ask counts against you.`
+    return `Hi ${name}, thank you for getting in touch. Because you're asking about a child you already know, we've passed your message to Sam in ${ui.confirmation.kinship_team}. Sam will ${how} by the end of ${day}. You can ask questions without committing to an application.`
+  return `Hi ${name}, thank you for getting in touch. I'm ${sender[locale] ?? "Priya"} from ${ui.confirmation.team}. I'll ${how} by the end of ${day}${times ? ", at one of the times you chose" : ""}. You can ask questions without committing to an application.`
 }

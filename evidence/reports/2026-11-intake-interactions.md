@@ -1,4 +1,4 @@
-# Fostering and adoption intake interactions: what the evidence says works, and a refined Kinderform open standard
+# Fostering and adoption intake interactions: evidence and proposals for Kinderform
 
 > **Status:** desk review, version 1, 14 November 2026. An AI-assisted research tool produced it. See [how we made this](https://www.kinderform.org/about#how). Everything we propose is for discussion and is not yet part of the Kinderform standard. See [how we made this review](#how-we-made-this-review).
 
@@ -15,9 +15,9 @@ The review covers first replies, calls, follow-ups, information events, home vis
    - one named person who keeps in touch
    - early contact with experienced carers or adopters
    - honest information about the process
-2. **Speed matters most for the very first reply. After that, keeping in touch matters more.** People hoping to foster or adopt describe the first enquiry as the moment that decides whether they feel welcome. Not being followed up is a documented reason for dropping out. In one Australian study, a quarter of people who enquired and did not go on never got a follow-up.
-3. **Speed on its own is not enough.** England's hubs are groups of councils that recruit foster carers together. They became much faster at initial visits, the first home visit from a social worker. But in a controlled comparison, they did not lead to more approvals than areas without hubs.
-   - Foster with North East is a "pathfinder" hub, set up early to test the approach. Its share of initial visits held within 5 days rose from 29% to 50%. Yet its controlled evaluation found no measurable gain in applications or approvals.
+2. **People report that both the first reply and keeping in touch matter.** People hoping to foster or adopt describe the first enquiry as the moment that decides whether they feel welcome. Not being followed up is a documented reason for dropping out. In one Australian study, a quarter of people who enquired and did not go on never got a follow-up.
+3. **A whole-hub study did not establish a gain in approvals.** England's hubs are groups of councils that recruit foster carers together. They became much faster at initial visits, the first home visit from a social worker. A controlled comparison found no statistically significant gain in approvals against areas without hubs. This does not show that the true effect is zero.
+   - Foster with North East is a "pathfinder" hub, set up early to test the approach. Its share of initial visits held within 5 days rose from 29% to 50%. Its controlled evaluation found no statistically significant gain in applications or approvals. It did not isolate the effect of reply speed.
 4. **The weak points now are hand-offs, gaps in contact during assessment, and expectations that do not match reality.** A hand-off is when one team passes a person on to another.
 5. **The approaches most likely to work here are personal and two-way.** They include a named worker, follow-up calls, "a safe space to ask questions", and contact with other carers and adopters. They also include messages that say "I have done something for you".
    - In a Behavioural Insights Team (BIT) trial, text messages from a named adviser raised attendance from 10.5% to 26.8%. The messages mentioned an appointment booked for the person.
@@ -26,7 +26,7 @@ The review covers first replies, calls, follow-ups, information events, home vis
 **How sure we are.**
 
 - We found no randomised or quasi-experimental study of any single step after an enquiry in fostering or adoption. These would be grade A, our strongest grade (see [how we grade the evidence](#how-we-grade-the-evidence)).
-- The strongest controlled study looked at a whole hub model, not single steps, and found no gain in approvals.
+- The strongest controlled study looked at a whole hub model. It found no statistically significant gain in approvals, rather than proving no effect.
 - The only other grade A evidence comes from tests of message wording, which measured intentions, and from fields such as jobcentres and sales.
 - Several widely quoted figures on drop-out come from studies from 1990 to 2008.
 - A person checked a few citations by hand on 14 November 2026.
@@ -39,7 +39,7 @@ The review covers first replies, calls, follow-ups, information events, home vis
 - Add a regular "keeping in touch" rhythm during assessment.
 - Offer contact with an experienced carer or adopter at the first conversation.
 - Record every contact as an `Interaction` event, so services can measure what they cannot measure now.
-- Then run an open trial of the follow-up and hand-off rules, with its plan published before it starts. We suggest this because there is no randomised evidence on intake interactions in fostering or adoption.
+- Then run an open trial of the follow-up and hand-off rules, with its plan published before it starts. Our desk search found no randomised evidence on these steps in fostering or adoption.
 
 ## How we grade the evidence
 
@@ -618,6 +618,8 @@ The online enquiry form itself is out of scope, and we only refer to it.
 
 A separate check looked at US research, and at older research on why people drop out.
 
+This was not a systematic review. The original tool did not save search strings, databases, screening decisions or language coverage. We cannot reconstruct those details. A search finding no studies does not prove that none exist.
+
 **The main limit.** We found no randomised or quasi-experimental study of any specific step after an enquiry in fostering or adoption. Examples would be call timing, the number of attempts, or how often to follow up. Grade A evidence comes only from:
 
 - the hub evaluation, which tested a change to the whole model, not single steps
@@ -626,7 +628,7 @@ A separate check looked at US research, and at older research on why people drop
 
 ## What we are less sure about
 
-- The strongest controlled evidence found that a hub with faster first steps did not lead to more approvals. It is not yet proven that speed alone gets more people to approval.
+- The strongest controlled study did not establish a gain in approvals from a whole hub model. It does not isolate speed or prove no effect.
 - Several widely quoted drop-out figures (80%, 70–95%, under 2%, 96%) come from studies from 1990 to 2008, which we found through Sebba's review.
 - A vendor linked to one of the authors supplied the Harvard Business Review data.
 - Kantar's trial measured intentions in a research panel, not real enquiries.

@@ -1,20 +1,21 @@
 ---
-// Named results. Built for private previews only, never for production.
+// Named results are available only in explicitly enabled local development.
+// Static builds (including previews) must never publish this draft review page.
 import Base from "@/layouts/Base.astro";
 import FormCheckNamed from "@/components/form-check-named";
 import { loadCensus } from "@/lib/census";
 import { ranked } from "@/lib/form-check";
-import { builtOn, isProduction } from "@/lib/build-env";
+import { builtOn, showNamedResults } from "@/lib/build-env";
 
 export function getStaticPaths() {
-  return isProduction ? [] : [{ params: { view: "named" } }];
+  return showNamedResults ? [{ params: { view: "named" } }] : [];
 }
 
 const groups = ranked(loadCensus());
 ---
 <Base
-  title="Form check: named results (private preview) | Kinderform"
-  description="Private preview. Not for publication."
+  title="Form check: named results (local review) | Kinderform"
+  description="Local review. Not for publication."
   noindex
 >
   <FormCheckNamed groups={groups} built={builtOn} />

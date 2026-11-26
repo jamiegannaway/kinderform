@@ -106,6 +106,38 @@ export function askedBy(c: Census): Map<string, Row[]> {
   return m
 }
 
+// Blank conditional_on never establishes that a question is always shown. Unknown
+// branching remains in recorded-question counts, and is reported separately.
+export const isKnownFollowUp = (q: Row): boolean => !!q.conditional_on || q.branching_status === "conditional"
+export const isCountedQuestion = (q: Row): boolean =>
+  q.category !== "consent" && q.category !== "staff_recorded" && q.input_type !== "statement" && !isKnownFollowUp(q)
+export const hasUnknownBranching = (q: Row): boolean =>
+  !isKnownFollowUp(q) && q.branching_status !== "unconditional"
+
+// One statistical unit per country, stage and exact form URL (ignoring fragments
+// and a trailing slash). Keep query parameters: they may select a different form.
+// The original service-location rows and their sources stay in the census.
+export function formKey(f: Row): string {
+  const source = f.form_url || f.source_url
+  let url = source
+  try {
+    const parsed = new URL(source)
+    parsed.hash = ""
+    parsed.pathname = parsed.pathname.replace(/\/$/, "") || "/"
+    url = parsed.toString()
+  } catch { /* Rows without a usable URL retain their individual identity. */ }
+  return `${f.country}|${f.form_stage}|${url || f.form_id}`
+}
+
+export function uniqueForms(forms: Row[]): Row[] {
+  const byUrl = new Map<string, Row>()
+  const preferred = (a: Row, b: Row) =>
+    Number(b.observed === "direct_fetch") - Number(a.observed === "direct_fetch") ||
+    b.date_checked.localeCompare(a.date_checked) || a.form_id.localeCompare(b.form_id)
+  for (const f of [...forms].sort(preferred)) if (!byUrl.has(formKey(f))) byUrl.set(formKey(f), f)
+  return [...byUrl.values()]
+}
+
 export const MIN_QUESTIONS = 3
 
 // A primary form whose questions we have seen well enough to describe.

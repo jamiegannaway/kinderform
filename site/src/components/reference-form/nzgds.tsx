@@ -35,7 +35,7 @@ const WORDS = {
   who: (team: string, how: string) => `A named person from ${team} will ${how}`,
   times: ", at one of the times you chose",
   talk: "When you talk.",
-  talkBody: "Ask anything. There are no wrong questions, and nothing you ask counts against you.",
+  talkBody: "You can ask questions without committing to an application.",
   notSure: " We will talk you through caregiving, adoption and other ways to help.",
   plans: "If your plans change, that's fine. You can tell us at any time.",
   record: "Show the record",

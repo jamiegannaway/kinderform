@@ -9,7 +9,7 @@ Grades: A = randomised or strong quasi-experimental; B = controlled comparison o
 1. **Research on fostering and adoption agrees on where people are lost.** The first call or reply, the wait between steps, and how the service communicates come up again and again.
 2. **Shorter is not always better.** In the largest study from another field (222,772 job applicants), people who quit an assessment mostly did so in the first 20 minutes, and length did not predict quitting. Honest time estimates went with fewer people leaving.
 3. **Waiting is the clearer risk.** Several fields show more people dropping away as the gap before the next step grows.
-4. **Who gets a reply is not always equal.** Field experiments in the US, UK, Sweden and Germany show public bodies sometimes reply less often, or less warmly, depending on the sender's name. Nobody has tested this for fostering enquiries.
+4. **Who gets a reply is not always equal.** Field experiments in the US, UK, Sweden and Germany show public bodies sometimes reply less often, or less warmly, depending on the sender's name. Our search found no test of this for fostering enquiries.
 5. **Honest information makes some people withdraw, and that is fine.** It supports informed decisions, which is the project's aim.
 
 ## 1. Research on fostering and adoption
@@ -54,7 +54,7 @@ None of this is fostering evidence.
 | US cities of over 50,000 people answered 54% of email requests. | Epstein and others, 2021 | B |
 | Sweden: no clear gap in reply rates, but replies to Arabic-sounding names were less friendly. Germany: very limited effects. | Adman and Jansson, 2016; Grohs and others, 2015 | A |
 
-*Does it carry over?* The question does; the answer is unknown. No study has tested fostering enquiries. **A caution:** these studies send made-up emails without consent. A hidden test of fostering teams would harm trust. This evidence supports recording reply times fairly for everyone, not secret tests.
+*Does it carry over?* The question does; the answer is unknown. Our search found no test of fostering enquiries. **A caution:** these studies send made-up emails without consent. A hidden test of fostering teams would harm trust. This evidence supports recording reply times fairly for everyone, not secret tests.
 
 ### Taking up family services
 
@@ -96,7 +96,7 @@ None of this is fostering evidence.
 ## 5. Gaps and limits
 
 - The paper search stopped part-way. Not yet searched: kinship carers' first contact with services, living donors and Shared Lives carers, teacher and nurse recruitment, adult social care front doors, and completion figures for GOV.UK forms.
-- No fostering study counts who starts an enquiry form and does not finish it.
+- Our search found no fostering study counting people who start an enquiry form and do not finish it.
 - Several fostering studies are 20 or more years old.
 
 ## Sources
