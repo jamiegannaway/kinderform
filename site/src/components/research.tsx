@@ -295,7 +295,7 @@ export default function ResearchIndex({
           <H2 id="help">We want to hear about research we have missed</H2>
           <p className="leading-7">
             Please also tell us if a claim here does not match its source. We would most like to hear about studies from
-            Scotland, Wales, Northern Ireland and the other countries we cover, including studies not written in English.
+            Scotland, Wales, Northern Ireland and the other countries we cover. Studies not written in English are welcome.
           </p>
           <Button asChild>
             <a href="/#get-involved">Get in touch</a>
