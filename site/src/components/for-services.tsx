@@ -143,6 +143,10 @@ export function ForServices({
               <a href="/research#first-contact-feeling" className={link}>
                 How the first contact feels
               </a>
+              . In other fields, forms with few questions per page that work on a phone lose fewer people.{" "}
+              <a href="/research#progress-bars" className={link}>
+                What helps people finish a form
+              </a>
             </>
           ),
         },
@@ -277,6 +281,10 @@ export function ForServices({
               Some people give up because of how a service replied, or because contact stopped.{" "}
               <a href="/research#put-off" className={link}>
                 How replies put people off
+              </a>
+              . When a call ends without a clear next step, the caller has to push for one.{" "}
+              <a href="/research#next-step" className={link}>
+                Ending with the next step
               </a>
             </>
           ),

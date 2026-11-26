@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25",
+  "updated": "2026-11-26",
   "about": "What we know so far about the first step, from someone getting in touch to their application. Shown at kinderform.org/research. Each source says whether a person has checked the claim against the original, when, and against what. Use null for 'not yet checked'. Edit by pull request; tests/validate_findings.py checks the format.",
   "findings": [
     {
@@ -183,16 +183,98 @@
       ]
     },
     {
+      "id": "progress-bars",
+      "stage": "First contact",
+      "title": "Progress bars do not reliably help people finish a form, but honest and simple forms do",
+      "summary": "A review of 32 experiments with online surveys looked at progress bars. A bar moving at a steady speed did not reliably stop people giving up. A bar that looked slow at first made it worse. In another experiment, fewer people started a survey when told it would take longer. Pages with few questions and designs made for phones lost fewer people. This research is about surveys, not fostering. Someone offering to foster may have stronger reasons to finish.",
+      "sources": [
+        {
+          "title": "Where am I? A meta-analysis of experiments on the effects of progress indicators for web surveys",
+          "by": "Villar, Callegaro and Yang, Social Science Computer Review",
+          "year": "2013",
+          "url": "https://doi.org/10.1177/0894439313497468",
+          "checked": null
+        },
+        {
+          "title": "Effects of questionnaire length on participation and indicators of response quality in a web survey",
+          "by": "Galesic and Bosnjak, Public Opinion Quarterly",
+          "year": "2009",
+          "url": "https://doi.org/10.1093/poq/nfp031",
+          "checked": null
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "next-step",
+      "stage": "First contact",
+      "title": "When a call ends without a clear next step, the work falls on the caller",
+      "summary": "A study of 447 recorded calls to three English GP surgeries found two moments when callers had to push for what they needed. One was when no alternative was offered. The other was when the call ended without a summary of what happens next. This happened most at the surgery with the lowest patient satisfaction. It is one study of three surgeries, and it shows a link, not a cause. It is not about fostering, but every first call about fostering has the same two moments.",
+      "sources": [
+        {
+          "title": "Calling the GP surgery: patient burden, patient satisfaction, and implications for training",
+          "by": "Stokoe, Sikveland and Symonds, British Journal of General Practice",
+          "year": "2016",
+          "url": "https://doi.org/10.3399/bjgp16X686653",
+          "checked": null,
+          "note": "Liz Stokoe advises Jamie Gannaway's company. Jamie Gannaway runs Kinderform."
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "help-to-finish",
+      "stage": "First contact",
+      "title": "Help from a person to finish an application does more than information or reminders",
+      "summary": "In a US trial, low-income families were offered help to complete a student aid form. College enrolment among school leavers rose by 8.1 percentage points, from 34.2%. Information alone made no difference. Other trials sent reminders to people who had left an application unfinished, and they added only 1 to 3 points. For fostering, the closest step is offering a call to finish an enquiry together. None of these trials is about fostering.",
+      "sources": [
+        {
+          "title": "The role of application assistance and information in college decisions: results from the H&R Block FAFSA experiment",
+          "by": "Bettinger, Long, Oreopoulos and Sanbonmatsu, Quarterly Journal of Economics",
+          "year": "2012",
+          "url": "https://doi.org/10.1093/qje/qjs017",
+          "checked": null
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
+          "checked": null
+        }
+      ]
+    },
+    {
       "id": "no-trials",
       "stage": "Gap",
       "title": "No one has yet tested follow-up with real people who enquire",
-      "summary": "We looked for experiments that test reply times, attempts to make contact, how often services follow up, contact with experienced carers or hand-offs. We found none, in any country, with real people asking about fostering or adoption. The closest is the 2022 online test of message wording, which measured only what people said they would do. Kinderform hopes to help close this gap, openly and with services' agreement.",
+      "summary": "We looked for experiments that test reply times, attempts to make contact, how often services follow up, contact with experienced carers or hand-offs. We found none, in any country, with real people asking about fostering or adoption. The closest is the 2022 online test of message wording, which measured only what people said they would do. A later search found no study of how first calls or replies about fostering are worded. It also found no published figures on enquiry forms started but not sent. Kinderform hopes to help close this gap, openly and with services' agreement.",
       "sources": [
         {
           "title": "Fostering and adoption intake interactions: what the evidence says works",
           "by": "Kinderform desk review",
           "year": "2026",
           "url": "/research/reports/2026-11-intake-interactions",
+          "checked": null,
+          "note": "This is about what our search did not find, in November 2026."
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
           "checked": null,
           "note": "This is about what our search did not find, in November 2026."
         }
