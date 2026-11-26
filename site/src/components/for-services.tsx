@@ -378,6 +378,11 @@ export function ForServices({
               <a href="/research#hand-offs" className={link}>
                 Hand-offs
               </a>
+              . Carers stay when the service supports them reliably, and research for The Fostering Network
+              recommends one trusted relationship from the enquiry onwards.{" "}
+              <a href="/research#relationship" className={link}>
+                Why carers stay
+              </a>
             </>
           ),
         },

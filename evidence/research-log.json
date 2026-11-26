@@ -155,6 +155,30 @@
     "Help to finish an application did far more than information. Reminders added only a point or two.",
     "Showing the real work done for people builds trust, but only when the service is really doing it."
    ]
+  },
+  {
+   "id": "retention",
+   "date": "2026-11-26",
+   "title": "Why foster carers stop, and what helps them stay",
+   "report": "reports/2026-11-why-carers-stop-and-stay.md",
+   "question": "Why do approved foster carers stop, and what helps them stay?",
+   "looked_at": [
+    "Ofsted's figures on households that stop fostering",
+    "Surveys of current and former carers in the UK",
+    "Studies of why carers stay in the US, Australia and Sweden",
+    "Mockingbird and other programmes",
+    "How allegations against carers are handled",
+    "Keeping new teachers, nurses and Shared Lives carers"
+   ],
+   "how": "A desk review made with an AI-assisted research tool. Most of it is about carers already approved, after the first step.",
+   "checked": "A first draft. Not yet checked by a person. The main Ofsted figures for 2025–26 were matched to Ofsted's own page by computer.",
+   "learned": [
+    "About 1 in 8 approved mainstream households in England stops each year. Much of that is retirement or adopting the child.",
+    "Carers stay when the service supports them reliably, treats them as equals, gives dependable breaks and handles allegations fairly.",
+    "Leaving within two years of approval is the clearest link to the first step.",
+    "Mockingbird households had much lower odds of stopping, but it was not tested in a trial.",
+    "No study links a good assessment to a longer fostering career."
+   ]
   }
  ],
  "meanings": [
@@ -281,7 +305,8 @@
    "why": "Kidney donor services that named a role without defining it ended up with very uneven practice.",
    "from": [
     "giving",
-    "intake-interactions"
+    "intake-interactions",
+    "retention"
    ]
   },
   {
@@ -337,7 +362,8 @@
    "from": [
     "reminders",
     "giving",
-    "first-replies"
+    "first-replies",
+    "retention"
    ]
   },
   {
@@ -434,7 +460,8 @@
    "idea": "Do not publish tables that rank services by the share of enquiries that end in approval.",
    "why": "The figures are not comparable, and a low rate can show people choosing with care. Research for DfE warned that comparisons could raise tensions between services.",
    "from": [
-    "international"
+    "international",
+    "retention"
    ]
   },
   {
@@ -632,6 +659,118 @@
    "why": "Police negotiator training was built this way. Recordings of first calls hold sensitive family details, so they need consent and care.",
    "from": [
     "first-replies"
+   ]
+  },
+  {
+   "id": "same-promise",
+   "part": "After approval",
+   "kind": "add",
+   "idea": "Keep the promise of a quick, kind and considered reply after the enquiry too. That means during the assessment, at the first match, on the first hard night and during any allegation.",
+   "why": "Carers stay when the service supports them reliably. Carers satisfied with their recruitment worker were more likely to plan to continue.",
+   "from": [
+    "retention",
+    "engagement"
+   ]
+  },
+  {
+   "id": "first-year-contacts",
+   "part": "After approval",
+   "kind": "add",
+   "idea": "The service keeps a record of its own planned contacts with each new household in the first year. It reports only totals, such as the share of planned contacts that happened, and never flags a carer.",
+   "why": "Support, breaks and help out of hours are what carers name most often as reasons to stay or stop.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "allegation-support",
+   "part": "After approval",
+   "kind": "add",
+   "idea": "During an allegation, keep in touch, offer independent support from day one, and give time to take back notice to stop. This sits alongside a thorough investigation, never instead of it.",
+   "why": "About a third of carers facing an allegation do not plan to continue, and many got no independent support. Children's safety comes first.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "preview-forward",
+   "part": "After approval",
+   "kind": "add",
+   "idea": "At approval and at the first match, go back to what the person was told at enquiry. Say what we said, what it is really like, and what we will do.",
+   "why": "Honest previews reduce later mismatch, and in 2024–25 a fifth of applicants who withdrew said the process was not as expected.",
+   "from": [
+    "retention",
+    "engagement"
+   ]
+  },
+  {
+   "id": "carer-feedback",
+   "part": "Open questions",
+   "kind": "test",
+   "idea": "Try three to five short, anonymous questions to carers about the service, at set points in the first year. Report only for groups of 10 or more.",
+   "why": "Being treated as an equal and knowing who to call are things a service can measure about itself.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "peer-contact",
+   "part": "Open questions",
+   "kind": "test",
+   "idea": "Try offering every newly approved household an introduction to an experienced carer or a support group in the first month.",
+   "why": "Carers often say peer support matters, but no study tests its effect on staying.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "exit-reasons",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "Offer everyone who stops an optional conversation. Sort what they say into life reasons and service reasons, under Ofsted's own categories.",
+   "why": "Ofsted's reasons say what happened, not why. 'Ceasing to foster' and 'personal circumstances' cover half of all leaving.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "early-leaving",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "Count households that stop within two years of approval, as a share of approvals, in totals only.",
+   "why": "In 2020–21, 30% of households that stopped did so within two years. It is the clearest link between the first step and staying.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "good-endings",
+   "part": "How we measure",
+   "kind": "avoid",
+   "idea": "Do not count every carer who stops as a failure. Adopting the child, special guardianship and retirement are good or natural endings.",
+   "why": "Carers aged 60 or over were 35% of those who stopped in 2025–26. A measure that counts all leaving as failure would discourage good endings.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "no-leaver-models",
+   "part": "What we will not use",
+   "kind": "avoid",
+   "idea": "No models that predict which carers will stop.",
+   "why": "They label people, may come true by themselves and use sensitive data. The evidence says the reasons lie in how services behave.",
+   "from": [
+    "retention"
+   ]
+  },
+  {
+   "id": "mockingbird-claims",
+   "part": "How we talk about evidence",
+   "kind": "add",
+   "idea": "When citing Mockingbird, say 'lower odds of stopping' and 'not randomised'. Do not say '82% less likely'.",
+   "why": "The headline figure treats an odds ratio as a risk, and the households in it differed from those compared.",
+   "from": [
+    "retention"
    ]
   }
  ]
