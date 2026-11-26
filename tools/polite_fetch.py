@@ -283,6 +283,21 @@ class PageParser(HTMLParser):
                 field["options"] = [o for o in field["options"] if o][:15]
 
 
+def ascii_url(url: str) -> str:
+    """Encode an address with accented letters (an IRI) so urllib can send it: the host as IDNA,
+    the rest percent-encoded. Addresses already in ASCII come back unchanged."""
+    if url.isascii():
+        return url
+    parts = urllib.parse.urlsplit(url)
+    host = parts.hostname or ""
+    netloc = host.encode("idna").decode("ascii") if not host.isascii() else host
+    if parts.port:
+        netloc += f":{parts.port}"
+    safe = "/:@!$&'()*+,;=-._~%?"
+    return urllib.parse.urlunsplit((parts.scheme, netloc, urllib.parse.quote(parts.path, safe=safe),
+                                    urllib.parse.quote(parts.query, safe=safe), urllib.parse.quote(parts.fragment, safe=safe)))
+
+
 class RobotsBlocked(Exception):
     """A redirect led to an address that robots.txt does not let us read."""
 
@@ -296,6 +311,7 @@ class CheckRedirects(urllib.request.HTTPRedirectHandler):
         self.polite = polite
 
     def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: N802 (urllib's name)
+        newurl = ascii_url(newurl)
         if not self.polite.allowed(newurl):
             raise RobotsBlocked(newurl)
         self.polite._wait(urllib.parse.urlsplit(newurl).netloc.lower())
@@ -384,6 +400,7 @@ class Polite:
 
     def fetch(self, key: str, url: str) -> dict:
         record = {"key": key, "url": url, "fetched_at": time.strftime("%Y-%m-%d")}
+        url = ascii_url(url)
         host = urllib.parse.urlsplit(url).netloc.lower()
         with self._lock(host):
             try:

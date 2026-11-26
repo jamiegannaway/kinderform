@@ -8,7 +8,7 @@ Data lives in [`register/us/`](../register/us/). Column definitions are in its [
 
 ## At a glance
 
-*Counted from the files in [`register/us/`](../register/us/) on 2026-11-24. Every row is a lead to check until a person has verified it. Charts follow your light or dark theme; each has a table view.*
+*Counted from the files in [`register/us/`](../register/us/) on 2026-11-26. Every row is a lead to check until a person has verified it. Charts follow your light or dark theme; each has a table view.*
 
 <p align="center"><img src="img/us/headline.svg" alt="Headline numbers for the US survey" width="760"></p>
 
@@ -52,7 +52,7 @@ Black: done. Grey: first pass, unverified. Light, dashed: not started.
 | Data set | Rows | Page or form opened | Verified |
 |---|---:|---:|---:|
 | States | 51 | 0 | 0 |
-| Front doors | 1257 | 406 | 0 |
+| Front doors | 1299 | 448 | 0 |
 | Policy rules | 663 | 0 | 0 |
 | Application forms | 236 | 62 | 0 |
 | Enquiry questions | 552 | 552 | 0 |
@@ -72,12 +72,12 @@ Black: done. Grey: first pass, unverified. Light, dashed: not started.
 | Group | Front doors |
 |---|---:|
 | County | 678 |
-| Regional | 316 |
-| State | 129 |
+| Regional | 347 |
+| State | 140 |
 | Tribal | 89 |
 | City | 45 |
 | Public | 800 |
-| Private non-profit | 360 |
+| Private non-profit | 402 |
 | Tribal | 89 |
 | Private for-profit | 8 |
 
@@ -88,7 +88,7 @@ Black: done. Grey: first pass, unverified. Light, dashed: not started.
 Neutral counts across front doors and states. No front door is scored or ranked, and every figure rests on unverified rows, so read these as early patterns to check, not findings.
 
 - **Enquiry forms mostly ask for contact details.** All 68 first-contact forms read ask for a name and an email address. 76% ask for a phone number, 26% for a street address and 7% for a date of birth or age.
-- **Few front doors publish a reply time.** 15 of the 406 front-door pages opened state one, from 1 to 14 days.
+- **Few front doors publish a reply time.** 15 of the 448 front-door pages opened state one, from 1 to 14 days.
 - **The usual minimum age is 21.** 40 of 48 jurisdictions with a recorded figure set it; the others set 18 or 19.
 - **The most common pre-service training is 20-29 hours** (14 of 37 jurisdictions with a figure).
 - **Application forms ask far more than enquiry forms.** 88% of the 17 fillable forms read ask for a date of birth, and most ask about relationships, work, education and who lives in the home.

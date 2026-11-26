@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "about": "A log of each piece of research the project has done, and what it could mean for our work. Every idea here is for discussion until we decide it in the open.",
  "entries": [
   {
@@ -70,7 +70,7 @@
    "date": "2026-11-25",
    "title": "What other countries count, and what cutting paperwork has done",
    "report": "reports/2026-11-drop-out-and-paperwork-international.md",
-   "question": "How many people who get in touch go on to be approved in other countries, and has making the process simpler or faster led to more carers?",
+   "question": "How many people who get in touch go on to be approved in other countries? Has a simpler or faster process led to more carers?",
    "looked_at": [
     "Global and European bodies",
     "15 countries",
@@ -131,6 +131,30 @@
     "An automated front door can add work if it only adds another way in.",
     "Automated judgements about people have caused serious harm in benefits systems."
    ]
+  },
+  {
+   "id": "first-replies",
+   "date": "2026-11-26",
+   "title": "First replies and unfinished forms",
+   "report": "reports/2026-11-first-replies-and-unfinished-forms.md",
+   "question": "How should a first reply be worded, and what helps people finish an enquiry form they have started?",
+   "looked_at": [
+    "Recorded calls to mediation services, GP surgeries and helplines",
+    "Experiments on progress bars and stated length in online surveys",
+    "Surveys and forms on phones",
+    "Help and reminders for unfinished applications",
+    "Showing people the work done for them"
+   ],
+   "how": "A desk review made with an AI-assisted research tool. None of the evidence is about fostering enquiries.",
+   "checked": "A first draft. Not yet checked by a person. Several figures were read secondhand or from abstracts. Liz Stokoe, whose research it cites most, advises Jamie Gannaway's company.",
+   "learned": [
+    "Callers took up a service more often when invited with a plain yes or no question, and less often after abstract explanations.",
+    "Callers had to push for a next step most at the GP surgery where satisfaction was lowest.",
+    "Progress bars do not reliably stop people giving up a form. Bars that look slow at first make it worse.",
+    "Honest time estimates, few questions per page and designs that work on a phone matter more.",
+    "Help to finish an application did far more than information. Reminders added only a point or two.",
+    "Showing the real work done for people builds trust, but only when the service is really doing it."
+   ]
   }
  ],
  "meanings": [
@@ -153,7 +177,8 @@
    "idea": "Say what the acknowledgement must contain: what it is, who will be in touch and when, and what happens next. It also says every step is the person's choice.",
    "why": "A plainer court form in New York cut missed dates. A named sender and a clear next step have the best support.",
    "from": [
-    "reminders"
+    "reminders",
+    "first-replies"
    ]
   },
   {
@@ -287,7 +312,8 @@
    "why": "Those messages work by making people feel they owe something. Our first review listed them as a strength, and the newer review disagrees.",
    "from": [
     "reminders",
-    "intake-interactions"
+    "intake-interactions",
+    "first-replies"
    ]
   },
   {
@@ -298,7 +324,8 @@
    "why": "These raise attendance by pressure, and several failed or backfired when tested. Our aim is a well-informed choice.",
    "from": [
     "reminders",
-    "giving"
+    "giving",
+    "first-replies"
    ]
   },
   {
@@ -309,7 +336,8 @@
    "why": "Registers and health services do build such scores. Our rules forbid scoring people who enquire.",
    "from": [
     "reminders",
-    "giving"
+    "giving",
+    "first-replies"
    ]
   },
   {
@@ -320,7 +348,8 @@
    "why": "Texts only reach people whose details are right. Questions asked with no reason put off some groups more than others.",
    "from": [
     "reminders",
-    "giving"
+    "giving",
+    "first-replies"
    ]
   },
   {
@@ -341,7 +370,8 @@
    "idea": "When we say what a reminder or message might gain, say a few percentage points at most and that local results vary.",
    "why": "Published effects were about six times larger than the effects government teams saw at scale.",
    "from": [
-    "reminders"
+    "reminders",
+    "first-replies"
    ]
   },
   {
@@ -402,7 +432,7 @@
    "part": "What we will not use",
    "kind": "avoid",
    "idea": "Do not publish tables that rank services by the share of enquiries that end in approval.",
-   "why": "The figures are not comparable, a low rate can show people choosing with care, and research for DfE warned that comparisons could raise tensions between services.",
+   "why": "The figures are not comparable, and a low rate can show people choosing with care. Research for DfE warned that comparisons could raise tensions between services.",
    "from": [
     "international"
    ]
@@ -424,7 +454,8 @@
    "idea": "In 'what happens next', say honestly how long each step usually takes, using the service's own figures.",
    "why": "In a study of 222,772 job applicants, processes that gave longer, more cautious time estimates lost fewer people.",
    "from": [
-    "engagement"
+    "engagement",
+    "first-replies"
    ]
   },
   {
@@ -474,7 +505,7 @@
    "id": "automation-rules",
    "part": "Automation",
    "kind": "add",
-   "idea": "Four rules: say when a message is automated and always offer a person; nobody has to use a chatbot to enquire; automation never closes an enquiry; count staff time returned and less chasing, not enquiries handled without a person.",
+   "idea": "Four rules. Say when a message is automated, and always offer a person. Nobody has to use a chatbot to enquire. Automation never closes an enquiry. Count staff time returned and less chasing, not enquiries handled without a person.",
    "why": "An automated front door can add work if it settles nothing, and people still look for a person to talk to.",
    "from": [
     "automation"
@@ -484,10 +515,123 @@
    "id": "automation-record",
    "part": "Enquiry record",
    "kind": "test",
-   "idea": "Try recording whether the acknowledgement was automated and whether the first contact was made by a person, so a check can stop a first conversation being recorded as automated.",
+   "idea": "Try recording whether the acknowledgement was automated, and whether a person made the first contact. A check can then stop a first conversation being recorded as automated.",
    "why": "A rule written only in words is easy to lose. The record already keeps the time of each of these steps.",
    "from": [
     "automation"
+   ]
+  },
+  {
+   "id": "invite-not-lecture",
+   "part": "First reply",
+   "kind": "add",
+   "idea": "In a first call or reply, welcome the offer first. Describe the next step in concrete terms, and invite it with a plain yes or no question the person can turn down.",
+   "why": "In UK mediation calls, abstract explanations went with more refusals and a plain invitation with more agreement. This describes what happened (grade C) and is untested in fostering.",
+   "from": [
+    "first-replies"
+   ]
+  },
+  {
+   "id": "next-step-close",
+   "part": "First reply",
+   "kind": "tighten",
+   "idea": "End every first call and reply with the next step: what happens, who does it and by when. If the person's request cannot be met, offer another way straight away.",
+   "why": "In calls to three GP surgeries, callers had to push for a next step most at the surgery where satisfaction was lowest.",
+   "from": [
+    "first-replies",
+    "intake-interactions"
+   ]
+  },
+  {
+   "id": "show-real-work",
+   "part": "First reply",
+   "kind": "add",
+   "idea": "In the acknowledgement and 'what happens next', show the real work done and planned, with dates. If a date is missed, send a short, honest update.",
+   "why": "In experiments, showing people the work done for them raised trust. Showing a service that did nothing gained nothing.",
+   "from": [
+    "first-replies"
+   ]
+  },
+  {
+   "id": "form-progress",
+   "part": "Reference form",
+   "kind": "change",
+   "idea": "Take progress bars off the reference form. Keep 'Question 3 of 5' only where the count stays true on every route through the form.",
+   "why": "Across 32 experiments, a steady progress bar did not reliably stop people giving up, and one that looked slow at first made it worse. A GOV.UK team removed them and saw no change.",
+   "from": [
+    "first-replies"
+   ]
+  },
+  {
+   "id": "form-time",
+   "part": "Reference form",
+   "kind": "add",
+   "idea": "Say honestly how long the form takes, and check it with real users. Keep few questions per page, use plain boxes and radio buttons, and offer a call on every page.",
+   "why": "A longer stated time put people off starting. Designs made for phones and simple pages lost fewer people. Help from a person did more than information.",
+   "from": [
+    "first-replies",
+    "engagement"
+   ]
+  },
+  {
+   "id": "one-follow-up",
+   "part": "Keeping in touch",
+   "kind": "add",
+   "idea": "If someone stops part-way and agreed to be contacted, send one kind follow-up within a few days, offering help by phone. Then stop.",
+   "why": "Reminders about unfinished applications added only 1 to 3 points, and most people who finished did so within a week. Help to finish did far more.",
+   "from": [
+    "first-replies",
+    "reminders"
+   ]
+  },
+  {
+   "id": "starts-and-sends",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "Count forms started against forms sent, and the page where unfinished forms stop, as weekly totals. Never identify or follow anyone.",
+   "why": "No English figures exist on unfinished fostering forms. Counting pages, not people, keeps it private.",
+   "from": [
+    "first-replies"
+   ]
+  },
+  {
+   "id": "one-definition",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "Use one definition of an enquiry: Ofsted's 'actionable' one, which gives names and contact details and is counted per household.",
+   "why": "Services count an enquiry in different ways, from a website visit to a first conversation, so their figures do not compare.",
+   "from": [
+    "first-replies"
+   ]
+  },
+  {
+   "id": "no-scripts",
+   "part": "What we will not use",
+   "kind": "avoid",
+   "idea": "No single words from research turned into scripts to win agreement. No progress bars that mislead, and no fake 'processing' screens.",
+   "why": "The words come from other settings and could feel like sales tactics. Bars that run fast first cut quitting only by misleading people.",
+   "from": [
+    "first-replies"
+   ]
+  },
+  {
+   "id": "something-else",
+   "part": "Open questions",
+   "kind": "test",
+   "idea": "Try asking 'Is there something else you'd like to ask?' near the end of a first call, and see whether it helps.",
+   "why": "A US trial found 'something else' drew out more concerns than 'anything else'. A UK study found no difference.",
+   "from": [
+    "first-replies"
+   ]
+  },
+  {
+   "id": "recorded-calls",
+   "part": "Open questions",
+   "kind": "test",
+   "idea": "Build first-call guidance from recordings of what good staff already do, made with consent. Keep recordings few, short-lived and secure.",
+   "why": "Police negotiator training was built this way. Recordings of first calls hold sensitive family details, so they need consent and care.",
+   "from": [
+    "first-replies"
    ]
   }
  ]
