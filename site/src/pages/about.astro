@@ -1,6 +1,6 @@
 ---
-// Who made Kinderform and how far to trust it. This page holds the one statement that most
-// figures on the site are not yet checked by a person; the banner on every page links here.
+// Who made Kinderform and how. This page holds the one statement of how the site was made and
+// how much a person has checked so far; the banner on every page links here.
 import Base from "@/layouts/Base.astro";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,8 @@ const link = "font-medium underline underline-offset-4";
 const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
 ---
 <Base
-  title="About Kinderform: who made it and how far to trust it"
-  description="Kinderform is a free side project by Jamie Gannaway, who builds forms and intake systems. He is not an expert in fostering or adoption, and most figures are not yet checked by a person."
+  title="About Kinderform: who made it and how"
+  description="Kinderform is a free side project by Jamie Gannaway, who builds forms and intake systems. It combines AI research with human review and his knowledge of forms and intake."
 >
   <SiteHeader current="/about" />
   <main id="main" class="mx-auto max-w-6xl px-6 pb-16">
@@ -46,21 +46,29 @@ const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
         </p>
       </section>
 
-      <section aria-labelledby="trust" class="space-y-4">
-        <h2 id="trust" class={h2}>How far to trust this</h2>
+      <section aria-labelledby="how" class="space-y-4">
+        <h2 id="how" class={h2}>How this was made</h2>
         <p class="leading-7">
-          This site is a first draft. I made most of it with AI tools. They read public forms, gathered research
-          and wrote first versions of these pages.
-        </p>
-        <p class="leading-7">
-          <strong>Most facts and figures here are not yet checked by a person against the original source.</strong>
-          Some research was read from a summary only, not the full paper.
+          Kinderform combines three things: AI research, human review, and what I know about forms and intake.
         </p>
         <ul class="ml-5 list-disc space-y-2 leading-7">
-          <li>Where a person has checked something, the page says so and gives the date.</li>
-          <li>Every fact has a link to its source. Please check the source before you quote anything.</li>
-          <li>Nothing here is a decision. I will decide each idea in the open, with people who do this work.</li>
+          <li>
+            <strong>AI research.</strong> AI tools read hundreds of public forms and gathered the research. That is
+            how one person could cover 11 countries.
+          </li>
+          <li>
+            <strong>Human review.</strong> A person checks facts against their source. This work is under way and
+            not finished. Where a fact has been checked, the page says so and gives the date.
+          </li>
+          <li>
+            <strong>Knowledge of forms.</strong> I decide what the findings mean for a form, from 10 years of
+            building them.
+          </li>
         </ul>
+        <p class="leading-7">
+          Every fact has a link to its source, so you can check it yourself before you quote it. Nothing here is a
+          decision. I will decide each idea in the open, with people who do this work.
+        </p>
       </section>
 
       <section aria-labelledby="help" class="space-y-4">

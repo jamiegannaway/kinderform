@@ -76,14 +76,14 @@ function NavLinks({ current, stacked = false }: { current: string; stacked?: boo
 
 // A strip above the header on every page, in the blue tag colours (a draft or information), saying
 // that the site is a first draft. It links to the About page, which says who made the site, how
-// far to trust it and where to send comments.
+// it was made and where to send comments.
 function DraftBanner() {
   return (
     <div className="bg-tag-blue text-tag-blue-foreground">
       <p className="mx-auto max-w-6xl px-6 py-2 text-center text-sm font-medium">
         First draft – feedback welcome.{" "}
         <a href="/about" className="underline underline-offset-4">
-          Who made this, and how far to trust it
+          Who made this, and how
         </a>
       </p>
     </div>
@@ -155,7 +155,7 @@ export function SiteFooter() {
           <a href="/about" className="font-medium text-foreground underline underline-offset-4">
             About
           </a>
-          : who made this, and how far to trust it.
+          : who made this, and how.
         </p>
         <p>
           <a href="/research/log" className="font-medium text-foreground underline underline-offset-4">

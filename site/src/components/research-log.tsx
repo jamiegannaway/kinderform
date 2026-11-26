@@ -49,8 +49,8 @@ export default function ResearchLog({
             <AlertDescription>
               <p>
                 We made each review with an AI-assisted research tool.{" "}
-                <a href="/about#trust" className="font-medium underline underline-offset-4">
-                  How far to trust this
+                <a href="/about#how" className="font-medium underline underline-offset-4">
+                  How we made this site
                 </a>
                 .
               </p>

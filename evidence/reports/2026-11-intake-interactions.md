@@ -1,6 +1,6 @@
 # Fostering and adoption intake interactions: what the evidence says works, and a refined Kinderform open standard
 
-> **Status:** desk review, version 1, 14 November 2026. An AI-assisted research tool produced it. Read [how far to trust this](https://www.kinderform.org/about#trust) before you rely on it. Everything we propose is for discussion and is not yet part of the Kinderform standard. See [how we made this review](#how-we-made-this-review).
+> **Status:** desk review, version 1, 14 November 2026. An AI-assisted research tool produced it. See [how we made this](https://www.kinderform.org/about#how). Everything we propose is for discussion and is not yet part of the Kinderform standard. See [how we made this review](#how-we-made-this-review).
 
 ## Summary
 

@@ -29,7 +29,7 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 
 // One line per source, each with its check status (CLAUDE.md, hard rule 6): the date a person
 // checked it, and "abstract" when the check was against the abstract alone. A source nobody has
-// checked gets no tag: the About page says once how far to trust the rest.
+// checked gets no tag: the About page says once how the site was made.
 function SourceItem({ s }: { s: Source }) {
   return (
     <li className="space-y-1">
@@ -183,8 +183,8 @@ export default function ResearchIndex({
             <p className="leading-7">
               A person has checked {fullText} of the {unique.length} sources against the full text
               {otherCheck ? `, and ${otherCheck} more against the abstract only` : ""}.{" "}
-              <a href="/about#trust" className="font-medium underline underline-offset-4">
-                How far to trust the rest
+              <a href="/about#how" className="font-medium underline underline-offset-4">
+                How we made this site
               </a>
               .
             </p>
