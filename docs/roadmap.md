@@ -85,6 +85,13 @@ Western Europe first, with the two Asia-Pacific countries asked for. Each has on
 - [ ] Next: Norway (Designsystemet, MIT), Denmark (Det Fælles Designsystem, MIT), Sweden (no national system; the Social Insurance Agency's, MIT) and Finland (Suomi.fi, MIT). Then Japan (the Digital Agency's design system, MIT) and Italy (Bootstrap Italia, BSD-3-Clause). Belgium could share the Dutch and French wording
 - [ ] Later, once an open design system that non-government sites may use is found: Portugal, Austria and Switzerland
 
+## Now: services the registers missed
+
+- [x] A company database search (Clay), for organisations only, found 173 services the registers lacked. Each was read on its own website before it was added (unverified): 107 independent and voluntary agencies in the UK, 42 private agencies in the US, and 24 more across Canada, Australia, Germany, Spain, the Netherlands and France
+- [x] 51 UK census forms are now linked to their register rows
+- [ ] Read the new agencies' enquiry forms into the census, and decide how the research pages show councils and independent agencies side by side
+- [ ] Check by hand the sites that refused our reader, and the Canadian row for Brant, now Child and Family Services of Grand Erie
+
 ## Now: after first contact (first pass)
 
 - [x] The census can hold application forms (`form_stage` "application"), tagged with the same topics as first-contact forms; `tools/applications_to_census.py` adds them
