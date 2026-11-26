@@ -10,8 +10,8 @@ import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 import type { UsPicture as UsPictureData } from "@/lib/us-register"
 import { Illustration } from "@/components/illustration"
 import { Tag } from "@/components/tag"
-import { StepCards, StepsTheme } from "@/components/steps"
-import { groups, steps } from "@/lib/steps"
+import { StepIntro, StepPath, StepsTheme } from "@/components/steps"
+import { THREAD, groups, steps } from "@/lib/steps"
 
 export type Checked = { date: string; against: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
@@ -136,7 +136,7 @@ export default function ResearchIndex({
   const stepList = steps(
     world && world.allForms > 0 ? { forms: world.allForms, countries: world.countries.length } : undefined,
   )
-  const found = (name: string) => findings.filter((f) => f.stage === name).length
+  const stepOf = new Map([...stepList, THREAD].map((x) => [x.id, x]))
   const named = new Set(groups().map((g) => g.name))
   const grouped = [
     ...groups().map((g) => ({ id: g.id, label: g.label, findings: findings.filter((f) => f.stage === g.name) })),
@@ -198,7 +198,7 @@ export default function ResearchIndex({
             <H2 id="steps">What the research says, step by step</H2>
             <StepsTheme />
           </div>
-          <StepCards steps={stepList} found={found} />
+          <StepPath steps={stepList} />
         </section>
 
         <section aria-labelledby="known" className="space-y-6">
@@ -222,9 +222,13 @@ export default function ResearchIndex({
           </div>
           {grouped.map((g) => (
             <div key={g.id} className="space-y-4">
-              <h3 id={`step-${g.id}`} className="scroll-m-20 text-xl font-semibold tracking-tight">
-                {g.label}
-              </h3>
+              <div className="flex items-center gap-4">
+                {stepOf.has(g.id) && <Illustration name={stepOf.get(g.id)!.art} className="w-14 shrink-0" />}
+                <h3 id={`step-${g.id}`} className="scroll-m-20 text-xl font-semibold tracking-tight">
+                  {g.label}
+                </h3>
+              </div>
+              {stepOf.has(g.id) && <StepIntro step={stepOf.get(g.id)!} />}
               <div className="grid gap-6 md:grid-cols-2">
                 {g.findings.map((f) => (
                   <FindingCard key={f.id} f={f} />

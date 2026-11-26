@@ -1,10 +1,9 @@
-// "What the research says, step by step": the steps from src/lib/steps.ts. On /research they are
-// shadcn/ui Cards, each linking to its findings. On the home page they are a short list. Plain
+// "What the research says, step by step": the steps from src/lib/steps.ts, as a picture. Each step
+// has a drawing, a number, a name and one short line, joined by a line on wide screens. The detail
+// for a step sits beside its findings on /research (StepIntro), so the picture stays light. Plain
 // HTML: no client JavaScript.
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { CAVEAT, THEME, THREAD, type Step } from "@/lib/steps"
-
-const link = "font-medium text-foreground underline underline-offset-4"
+import { Illustration } from "@/components/illustration"
+import { CAVEAT, LEVELS, THEME, THREAD, type Level, type Step } from "@/lib/steps"
 
 // The theme, with its caveat always beside it.
 export function StepsTheme() {
@@ -16,98 +15,84 @@ export function StepsTheme() {
   )
 }
 
-// On the muted card the text stays in the main colour: the muted text colour on the muted
-// background does not pass 4.5:1 contrast in the light theme.
-function Evidence({ step, onMuted = false }: { step: Step; onMuted?: boolean }) {
-  const dd = onMuted ? "" : "text-muted-foreground"
+// How strong the evidence is: three small bars, with the words beside them. Neutral colours, as
+// for charts. The bars are decoration; the words carry the meaning.
+// `stacked` puts the words under the bars on a phone, where a step's tile is narrow.
+export function EvidenceMeter({
+  level,
+  stacked = false,
+  className = "",
+}: {
+  level: Level
+  stacked?: boolean
+  className?: string
+}) {
+  const layout = stacked ? "flex-col items-start gap-1 md:flex-row md:items-center md:gap-2" : "items-center gap-2"
   return (
-    <dl className="space-y-3 text-sm leading-6">
-      <div>
-        <dt className="font-medium">What the research says</dt>
-        <dd className={dd}>{step.says}</dd>
-      </div>
-      <div>
-        <dt className="font-medium">How strong the evidence is</dt>
-        <dd className={dd}>{step.strength}</dd>
-      </div>
-    </dl>
+    <span className={`inline-flex font-medium text-foreground ${layout} ${className}`}>
+      <span aria-hidden="true" className="inline-flex gap-0.5">
+        {[1, 2, 3].map((n) => (
+          <span key={n} className={`h-2 w-4 rounded-sm ${n <= level ? "bg-primary" : "bg-muted-foreground/25"}`} />
+        ))}
+      </span>
+      {LEVELS[level]}
+    </span>
   )
 }
 
-const seeFindings = (n: number) => (n === 1 ? "See the 1 finding" : `See the ${n} findings`)
-
-// For /research. `found` gives the number of findings for each step, by step name.
-export function StepCards({ steps, found }: { steps: Step[]; found: (name: string) => number }) {
+// The picture of the steps, for the home page and the top of /research. `base` is the page the
+// step names link to: "" on /research itself, "/research" elsewhere.
+export function StepPath({ steps, base = "" }: { steps: Step[]; base?: string }) {
   return (
-    <div className="space-y-6">
-      <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="space-y-4 lg:space-y-8">
+      <ol className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0">
         {steps.map((s, i) => (
-          <li key={s.id} className="flex">
-            <Card className="w-full gap-4">
-              <CardHeader>
-                <CardDescription className="tabular-nums">Step {i + 1}</CardDescription>
-                <CardTitle className="text-xl">{s.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="leading-7">{s.does}</p>
-                <Evidence step={s} />
-              </CardContent>
-              {found(s.name) > 0 && (
-                <CardFooter className="mt-auto text-sm">
-                  <a href={`#step-${s.id}`} className={link}>
-                    {seeFindings(found(s.name))}
-                    <span className="sr-only"> for {s.name}</span>
-                  </a>
-                </CardFooter>
-              )}
-            </Card>
+          <li
+            key={s.id}
+            className="flex flex-col rounded-xl border bg-card p-4 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0"
+          >
+            <Illustration name={s.art} className="w-16 lg:w-24" />
+            <div className="mt-3 flex items-center">
+              <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground tabular-nums">
+                {i + 1}
+              </span>
+              {i < steps.length - 1 && <span aria-hidden="true" className="mx-2 hidden h-px flex-1 bg-border lg:block" />}
+            </div>
+            <a
+              href={`${base}#step-${s.id}`}
+              className="mt-3 text-lg font-semibold underline underline-offset-4 lg:pr-4"
+            >
+              {s.name}
+            </a>
+            <p className="mt-1 text-sm leading-6 text-muted-foreground lg:pr-4">{s.short}</p>
+            <EvidenceMeter level={s.level} stacked className="mt-auto pt-3 text-xs" />
           </li>
         ))}
       </ol>
-      <Card className="gap-4 bg-muted">
-        <CardHeader>
-          <CardDescription className="text-foreground">Between every step</CardDescription>
-          <CardTitle className="text-xl">{THREAD.name}</CardTitle>
-        </CardHeader>
-        <CardContent className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-8">
-          <p className="leading-7">{THREAD.does}</p>
-          <Evidence step={THREAD} onMuted />
-        </CardContent>
-        {found(THREAD.name) > 0 && (
-          <CardFooter className="text-sm">
-            <a href={`#step-${THREAD.id}`} className={link}>
-              {seeFindings(found(THREAD.name))}
-              <span className="sr-only"> for {THREAD.name}</span>
-            </a>
-          </CardFooter>
-        )}
-      </Card>
+      <div className="flex items-center gap-4 rounded-xl bg-muted p-4 md:px-6">
+        <Illustration name={THREAD.art} className="w-14 shrink-0 md:w-16" />
+        <p className="leading-7">
+          <a href={`${base}#step-${THREAD.id}`} className="font-semibold underline underline-offset-4">
+            {THREAD.name}
+          </a>{" "}
+          between every step. {THREAD.short}
+        </p>
+      </div>
     </div>
   )
 }
 
-// For the home page: each step in two short lines.
-export function StepList({ steps }: { steps: Step[] }) {
+// For /research: what a step means and how strong its evidence is, beside the step's findings.
+export function StepIntro({ step }: { step: Step }) {
   return (
-    <ol className="grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-      {steps.map((s, i) => (
-        <li key={s.id} className="border-l-2 pl-4">
-          <p className="font-medium">
-            <span className="tabular-nums text-muted-foreground">{i + 1}.</span> {s.name}
-          </p>
-          <p className="mt-1 leading-7">{s.does}</p>
-          <p className="mt-1 text-sm leading-6 text-muted-foreground">{s.says}</p>
-        </li>
-      ))}
-    </ol>
-  )
-}
-
-// The thread, for the home page, in one short paragraph.
-export function ThreadLine() {
-  return (
-    <p className="max-w-2xl leading-7">
-      <span className="font-medium">{THREAD.name}</span> is not a step. {THREAD.does}
-    </p>
+    <div className="max-w-3xl space-y-2">
+      <p className="leading-7">
+        {step.does} <span className="text-muted-foreground">{step.says}</span>
+      </p>
+      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm leading-6 text-muted-foreground">
+        <EvidenceMeter level={step.level} />
+        <span>{step.strength}</span>
+      </p>
+    </div>
   )
 }

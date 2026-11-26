@@ -17,7 +17,7 @@ import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import { Illustration, type IllustrationName } from "@/components/illustration"
 import { Tag } from "@/components/tag"
-import { StepList, StepsTheme, ThreadLine } from "@/components/steps"
+import { StepPath, StepsTheme } from "@/components/steps"
 import { COUNTRY_ORDER, countryList } from "@/lib/compare"
 import { steps } from "@/lib/steps"
 
@@ -301,8 +301,7 @@ export default function Landing() {
               <div className="max-w-2xl space-y-4">
                 <StepsTheme />
               </div>
-              <StepList steps={steps()} />
-              <ThreadLine />
+              <StepPath steps={steps()} base="/research" />
               <Button asChild variant="outline">
                 <a href="/research#steps">See the research for each step</a>
               </Button>
