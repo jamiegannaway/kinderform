@@ -94,7 +94,8 @@ function FactsNotice() {
           <a href={`${CORRECT}Correction%20to%20the%20compare%20tables`} className={LINK}>
             Email jamie.gannaway@gmail.com
           </a>{" "}
-          with the row and its source. Leave out personal details.
+          with the row and its source. Is a service, form or rule missing? Tell us that too. Leave out personal
+          details.
         </p>
       </AlertDescription>
     </Alert>

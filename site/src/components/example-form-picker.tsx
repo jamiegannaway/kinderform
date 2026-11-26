@@ -130,6 +130,14 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
           </a>
           <span aria-hidden="true"> · </span>
           No cookies and no tracking.
+          <span aria-hidden="true"> · </span>
+          Does a form read well in your language?{" "}
+          <a
+            href="mailto:jamie.gannaway@gmail.com?subject=Example%20form%20wording"
+            className="font-medium text-foreground underline underline-offset-4"
+          >
+            Tell us
+          </a>
         </p>
         <noscript>
           <p className="text-sm">These examples need JavaScript. A real form built to the Kinderform standard should work without it.</p>
