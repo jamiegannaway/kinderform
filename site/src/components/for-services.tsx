@@ -143,6 +143,10 @@ export function ForServices({
               <a href="/research#first-contact-feeling" className={link}>
                 How the first contact feels
               </a>
+              . In other fields, forms with few questions per page that work on a phone lose fewer people.{" "}
+              <a href="/research#progress-bars" className={link}>
+                What helps people finish a form
+              </a>
             </>
           ),
         },
@@ -278,6 +282,10 @@ export function ForServices({
               <a href="/research#put-off" className={link}>
                 How replies put people off
               </a>
+              . When a call ends without a clear next step, the caller has to push for one.{" "}
+              <a href="/research#next-step" className={link}>
+                Ending with the next step
+              </a>
             </>
           ),
         },
@@ -369,6 +377,11 @@ export function ForServices({
               In one hub&rsquo;s evaluation, some people who withdrew said contact stopped after a hand-over.{" "}
               <a href="/research#hand-offs" className={link}>
                 Hand-offs
+              </a>
+              . Carers who answered surveys valued reliable support, and research for The Fostering Network
+              recommends one trusted relationship from the enquiry onwards.{" "}
+              <a href="/research#relationship" className={link}>
+                Why carers stay
               </a>
             </>
           ),

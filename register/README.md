@@ -6,6 +6,8 @@
 
 The register holds neutral facts only. It contains no scores or judgements.
 
+**Rows found through a company database.** On 26 November 2026 we searched a company database (Clay) for fostering and adoption services the registers had missed, in every country we cover. We searched for organisations only, never for people. We kept only each organisation's name and website. We then read each one on its own website, and that page is the row's source. Rows found this way say so in `notes`. The search added 173 rows: 107 independent fostering agencies and voluntary adoption agencies in the UK, 42 private agencies in the US, 11 in Canada, 2 in Australia, 5 in Germany, 3 in Spain, 2 in the Netherlands and 1 in France.
+
 The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/), Australia's in [`au/`](au/), Germany's in [`de/`](de/), France's in [`fr/`](fr/), Spain's in [`es/`](es/), Ireland's in [`ie/`](ie/), the Netherlands' in [`nl/`](nl/), New Zealand's in [`nz/`](nz/) and Singapore's in [`sg/`](sg/). The US rows are checked by `tests/validate_us_register.py`. The other nine country folders are checked by `tests/validate_world_register.py`.
 
 For Germany, France and Spain:

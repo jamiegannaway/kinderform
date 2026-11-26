@@ -184,8 +184,16 @@
       "id": "relationship",
       "stage": "Staying",
       "title": "The relationship with the service shapes whether carers stay",
-      "summary": "A review of 49 studies looked at why carers keep fostering. It found that the relationship with the agency and support from professionals stand out among the reasons. A Scottish study looked at carers who had stopped fostering. Almost 3 in 5 had stopped because they were unhappy with some part of their fostering service. This is why we treat the first reply as the start of support, not a separate task.",
+      "summary": "A review of 49 studies looked at why carers keep fostering. It found that the relationship with the agency and support from professionals stand out among the reasons. A Scottish study looked at carers who had stopped fostering. Almost 3 in 5 had stopped because they were unhappy with some part of their fostering service. A 2024 UK survey asked carers if their supervising social worker treated them as an equal. 76% of current carers said yes, against 51% of former carers. This is why we treat the first reply as the start of support, not a separate task.",
       "sources": [
+        {
+          "title": "State of the Nations' Foster Care 2024",
+          "by": "The Fostering Network",
+          "year": "2024",
+          "url": "https://www.thefosteringnetwork.org.uk/media/fbldiwhh/sotn24-full-report.pdf",
+          "checked": null,
+          "note": "A survey of 2,883 current and 169 former carers who chose to take part."
+        },
         {
           "title": "Foster families: a systematic review of intention and retention factors",
           "by": "Gouveia and others, Journal of Child and Family Studies",
@@ -203,16 +211,151 @@
       ]
     },
     {
+      "id": "carers-stop",
+      "stage": "Staying",
+      "title": "About 1 in 8 approved fostering households in England de-registered in 2025–26, including transfers",
+      "summary": "In 2025–26, 4,440 of 37,890 mainstream households approved at some point in England de-registered: 12%. Of those 4,440, 3,675 were leavers, 700 transferred and 65 were other. Carers aged 60 or over were 35% of carers who de-registered. Their age alone does not tell us why they left. Among those under 50, 19% left to adopt the child. So de-registration does not always mean a service failed or a household stopped fostering. Early de-registration is one question for a first-step pilot. In 2020–21, 30% of households that de-registered did so within two years of approval.",
+      "sources": [
+        {
+          "title": "Main findings: fostering in England, 1 April 2025 to 31 March 2026",
+          "by": "Ofsted",
+          "year": "2026",
+          "url": "https://www.gov.uk/government/statistics/fostering-in-england-1-april-2025-to-31-march-2026/main-findings-fostering-in-england-1-april-2025-to-31-march-2026",
+          "checked": null,
+          "note": "Matched to this page by computer, 26 November 2026."
+        },
+        {
+          "title": "The recruitment and retention of foster carers (CDP-2022-0080)",
+          "by": "House of Commons Library",
+          "year": "2022",
+          "url": "https://commonslibrary.parliament.uk/research-briefings/cdp-2022-0080/",
+          "checked": null,
+          "note": "The source of the 30% figure for 2020–21, summarising Ofsted."
+        },
+        {
+          "title": "Why foster carers stop, and what helps them stay",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-why-carers-stop-and-stay",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "mockingbird",
+      "stage": "Staying",
+      "title": "Households in Mockingbird stopped less often, but it has not been tested in a trial",
+      "summary": "Mockingbird groups foster homes around an experienced carer who offers support and breaks. In an English evaluation of 11 areas from 2016 to 2019, 6% of Mockingbird households stopped (16 of 288). Among similar households, 23% stopped (689 of 2,968). Their odds of stopping were about a fifth as high. It was not a randomised trial, and the households differed: fewer Mockingbird households were newly approved. A later evaluation has published no results that we could find.",
+      "sources": [
+        {
+          "title": "The Mockingbird programme: independent evaluation report",
+          "by": "Ott and others, Rees Centre, for the Department for Education",
+          "year": "2020",
+          "url": "https://assets.publishing.service.gov.uk/media/5fa412dfd3bf7f03a40fe598/Fostering_Network_Mockingbird.pdf",
+          "checked": null
+        },
+        {
+          "title": "Why foster carers stop, and what helps them stay",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-why-carers-stop-and-stay",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "progress-bars",
+      "stage": "First contact",
+      "title": "A review of online surveys found mixed effects from progress bars",
+      "summary": "A review of 32 experiments with online surveys looked at progress bars. A bar moving at a steady speed did not reliably stop people giving up. A bar that looked slow at first made it worse. In another experiment, fewer people started a survey when told it would take longer. Pages with few questions and designs made for phones lost fewer people. This research is about surveys, not fostering. Someone offering to foster may have stronger reasons to finish.",
+      "sources": [
+        {
+          "title": "Where am I? A meta-analysis of experiments on the effects of progress indicators for web surveys",
+          "by": "Villar, Callegaro and Yang, Social Science Computer Review",
+          "year": "2013",
+          "url": "https://doi.org/10.1177/0894439313497468",
+          "checked": null
+        },
+        {
+          "title": "Effects of questionnaire length on participation and indicators of response quality in a web survey",
+          "by": "Galesic and Bosnjak, Public Opinion Quarterly",
+          "year": "2009",
+          "url": "https://doi.org/10.1093/poq/nfp031",
+          "checked": null
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "next-step",
+      "stage": "First contact",
+      "title": "One GP call study links unclear next steps with extra work for callers",
+      "summary": "A study of 447 recorded calls to three English GP surgeries found two moments when callers had to push for what they needed. One was when no alternative was offered. The other was when the call ended without a summary of what happens next. This happened most at the surgery with the lowest patient satisfaction. It is one study of three surgeries, and it shows a link, not a cause. It is not about fostering. These moments may also arise in fostering calls; that transfer still needs testing.",
+      "sources": [
+        {
+          "title": "Calling the GP surgery: patient burden, patient satisfaction, and implications for training",
+          "by": "Stokoe, Sikveland and Symonds, British Journal of General Practice",
+          "year": "2016",
+          "url": "https://doi.org/10.3399/bjgp16X686653",
+          "checked": null,
+          "note": "Liz Stokoe advises Jamie Gannaway's company. Jamie Gannaway runs Kinderform."
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "help-to-finish",
+      "stage": "First contact",
+      "title": "Hands-on help improved college enrolment in one US student-aid trial",
+      "summary": "In a US trial, low-income families were offered help to complete a student aid form. College enrolment among school leavers rose by 8.1 percentage points, from 34.2%. Information alone made no difference. Other application studies found reminder effects of 1 to 3 points. They used different settings and outcomes, so their effect sizes cannot be compared directly. For fostering, the closest step is offering a call to finish an enquiry together. None of these trials is about fostering.",
+      "sources": [
+        {
+          "title": "The role of application assistance and information in college decisions: results from the H&R Block FAFSA experiment",
+          "by": "Bettinger, Long, Oreopoulos and Sanbonmatsu, Quarterly Journal of Economics",
+          "year": "2012",
+          "url": "https://doi.org/10.1093/qje/qjs017",
+          "checked": null
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
+          "checked": null
+        }
+      ]
+    },
+    {
       "id": "no-trials",
       "stage": "Gap",
       "title": "Our desk search found no trials of follow-up after a real enquiry",
-      "summary": "Our November 2026 desk search looked for experiments on reply times, contact attempts, follow-up, contact with experienced carers and hand-offs. We found none with real people asking about fostering or adoption. The search was not a systematic review, so it may have missed studies. The closest study we found was a 2022 online test of message wording. It measured what people said they would do. Kinderform hopes to test these ideas openly, with services' agreement.",
+      "summary": "Our November 2026 desk search looked for experiments on reply times, contact attempts, follow-up, contact with experienced carers and hand-offs. We found none with real people asking about fostering or adoption. The search was not a systematic review, so it may have missed studies. The closest study we found was a 2022 online test of message wording. It measured what people said they would do. Kinderform hopes to test these ideas openly, with services' agreement. A later desk search also found no study of wording in first fostering calls or replies. It found no published figures on forms started but not sent. These are search results, not proof that none exist.",
       "sources": [
         {
           "title": "Fostering and adoption intake interactions: what the evidence says works",
           "by": "Kinderform desk review",
           "year": "2026",
           "url": "/research/reports/2026-11-intake-interactions",
+          "checked": null,
+          "note": "This is about what our search did not find, in November 2026."
+        },
+        {
+          "title": "First replies and unfinished forms: what the evidence says",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-first-replies-and-unfinished-forms",
           "checked": null,
           "note": "This is about what our search did not find, in November 2026."
         }
