@@ -1,5 +1,5 @@
 // The steps we sort the research by: the home page, /research and /for-services all read them
-// from here. The names are drafts. Change a name here and every page follows.
+// from here. The names can still change after feedback. Change a name here and every page follows.
 //
 // A finding in evidence/findings.json carries one of these names in "stage". The test
 // tests/validate_findings.py reads the names from this file, so keep each name and its text on
