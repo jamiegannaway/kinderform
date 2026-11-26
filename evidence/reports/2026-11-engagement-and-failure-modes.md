@@ -1,6 +1,6 @@
 # Where people are lost: fostering research and lessons from other fields
 
-> **Status: first draft.** Quick scan, 25 November 2026. This is not a full review. It was made with an AI-assisted search of peer-reviewed papers and the web. **Every finding below was read from an abstract or a search summary only, and none has been checked by a person against the full paper.** Check the source before you quote anything. Where the evidence is not about fostering, every view on what carries over is our own. Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
+> **Status: first draft.** Quick scan, 25 November 2026. This is not a full review. It was made with an AI-assisted search of peer-reviewed papers and the web. Read [how far to trust this](https://www.kinderform.org/about#trust) before you rely on it. Where the evidence is not about fostering, every view on what carries over is our own. Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
 
 Grades: A = randomised or strong quasi-experimental; B = controlled comparison or robust official statistics; C = descriptive, survey or qualitative; D = anecdote, single site or secondhand.
 

@@ -177,7 +177,7 @@ export default function FormsDiffer({ data }: { data: Data }) {
         </p>
         <p className="leading-7 text-muted-foreground">
           We read {d.read} forms on the live web pages of UK fostering and adoption services. The latest read was on{" "}
-          {longDate(d.checked)}. These results are not yet checked by a person.
+          {longDate(d.checked)}.
         </p>
         <HowWeDidThis>
           <p>

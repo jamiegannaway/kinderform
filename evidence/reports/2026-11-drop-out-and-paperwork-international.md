@@ -1,6 +1,6 @@
 # Dropping out on the way to fostering: what other countries count, and what cutting paperwork has done
 
-> **Status: first draft.** Desk review, 25 November 2026. It looks at global bodies, 15 countries and their states or regions. An AI-assisted research tool produced it. The figures have **not yet been checked by a person** against the original sources. Several were read from a summary or a search result only, and some are old or secondhand; each is marked. Check the source before you quote anything, starting with the list under "Check before public use". Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
+> **Status: first draft.** Desk review, 25 November 2026. It looks at global bodies, 15 countries and their states or regions. An AI-assisted research tool produced it. Some figures are old or secondhand; each is marked. Read [how far to trust this](https://www.kinderform.org/about#trust) before you rely on it. Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
 
 Grades: A = randomised or strong quasi-experimental; B = controlled comparison or robust official statistics; C = descriptive, survey or qualitative; D = anecdote, single site or secondhand.
 

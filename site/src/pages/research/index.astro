@@ -106,8 +106,8 @@ if (appCard && ukApps) {
       href: hrefOf(r.id),
       title: titleOf(r.body).replace(/,? and a refined Kinderform open standard$/i, ""),
       when: monthOf(r.id),
-      // Each report's card asks the question from its entry in the research log. The section
-      // says once that most figures are not yet checked by a person.
+      // Each report's card asks the question from its entry in the research log. The About
+      // page says once how far to trust the figures.
       blurb: questionFor(r.id) ?? "A review of existing research.",
     }))}
     updates={updates.map((u) => ({ href: hrefOf(u.id), title: titleOf(u.body), when: monthOf(u.id) }))}

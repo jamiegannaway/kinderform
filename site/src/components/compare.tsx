@@ -88,7 +88,7 @@ function FactsNotice() {
     <Alert className="max-w-3xl">
       <AlertTitle>Facts, not scores</AlertTitle>
       <AlertDescription>
-        <p>These tables do not rate or rank anyone. The rows are not yet checked by a person.</p>
+        <p>These tables do not rate or rank anyone.</p>
         <p>
           Is a row wrong?{" "}
           <a href={`${CORRECT}Correction%20to%20the%20compare%20tables`} className={LINK}>
