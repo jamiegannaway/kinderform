@@ -223,7 +223,7 @@ export function ForServices({
                     {others.length > 0 && (
                       <>
                         {" "}
-                        Elsewhere, these forms ask topics our map records in the assessment, such as ethnicity:{" "}
+                        Elsewhere, forms also ask assessment topics, such as ethnicity. In our sample:{" "}
                         {others.map((n) => `${n.name} ${of(n.enquiry.share)}`).join(", ")}.
                       </>
                     )}
