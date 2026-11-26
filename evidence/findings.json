@@ -318,6 +318,137 @@
       ]
     },
     {
+      "id": "kinship-door",
+      "stage": "First contact",
+      "title": "Relatives and friends can arrive at a general fostering form, and the UK forms we read do not ask",
+      "summary": "Most kinship carers do not apply to foster. They step in for a child they know, and the child's social worker usually gets in touch with them. But GOV.UK tells people who want to look after a child in care to ask their council about fostering a child they know. So some relatives and friends reach a general fostering enquiry form. In November 2026 we searched the 48 UK fostering enquiry forms we had read. None asks whether the person already knows the child. Ofsted collects no enquiry figures for kinship households, so nobody knows how many people arrive this way.",
+      "sources": [
+        {
+          "title": "Looking after someone else's child",
+          "by": "GOV.UK",
+          "year": "2025",
+          "url": "https://www.gov.uk/looking-after-someone-elses-child",
+          "checked": null,
+          "note": "Matched to this page by computer, 26 November 2026."
+        },
+        {
+          "title": "Every enquiry form we have read",
+          "by": "Kinderform",
+          "year": "2026",
+          "url": "https://www.kinderform.org/compare/forms",
+          "checked": null,
+          "note": "Our count is a word search of the questions, hints and answer choices we recorded. A person has not checked it."
+        },
+        {
+          "title": "Ofsted annual fostering data collection",
+          "by": "Ofsted",
+          "year": "2026",
+          "url": "https://www.gov.uk/government/publications/ofsted-annual-fostering-data-collection",
+          "checked": null,
+          "note": "The guidance for the 2025–26 return says to leave enquiry fields blank for family and friends households."
+        },
+        {
+          "title": "Relatives and friends who get in touch: kinship carers and the first reply",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-kinship-and-the-first-reply",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "kinship-information",
+      "stage": "First contact",
+      "title": "Most kinship carers say they did not know their legal options when they took on the child",
+      "summary": "A 2019 survey asked 845 kinship carers about the time they took on the child. Three-quarters said they did not have enough information about their legal options. In a 2022 survey, it was 82%. In a 2025 survey of 1,929 kinship carers, 13% had seen their council's kinship local offer. The legal route affects the support a carer can get. Since June 2026, councils in England must publish a kinship local offer. Statutory guidance says families should get clear information about their legal options at the outset. The surveys come from charities that campaign, and carers chose to take part.",
+      "sources": [
+        {
+          "title": "Handle With Care: annual survey of kinship carers",
+          "by": "Kinship",
+          "year": "2025",
+          "url": "https://kinship.org.uk/our-work-and-impact/policy-and-influencing/reports-and-publications/handle-with-care/",
+          "checked": null,
+          "note": "Matched to the report by computer, 26 November 2026."
+        },
+        {
+          "title": "The highs and lows of kinship care: analysis of a comprehensive survey of kinship carers 2019",
+          "by": "Family Rights Group",
+          "year": "2019",
+          "url": "https://frg.org.uk/publications/the-highs-and-lows-of-kinship-care-analysis-of-a-comprehensive-survey-of-kinship-carers-2019/",
+          "checked": null,
+          "note": "Read from a search engine's copy. The charity's website refused our reader."
+        },
+        {
+          "title": "News report of Lost in the legal labyrinth, the report of the All-Party Parliamentary Group on Kinship Care",
+          "by": "Local Government Lawyer",
+          "year": "2022",
+          "url": "https://www.localgovernmentlawyer.co.uk/child-protection/392-children-protection-news/50541-council-efforts-to-plug-gaps-in-legal-support-for-kinship-carers-inconsistent-amid-funding-challenges-report",
+          "checked": null,
+          "note": "The source of the 82%. We could not read the report itself."
+        },
+        {
+          "title": "Children's Wellbeing and Schools Act 2026, section 5",
+          "by": "legislation.gov.uk",
+          "year": "2026",
+          "url": "https://www.legislation.gov.uk/ukpga/2026/21/section/5",
+          "checked": null,
+          "note": "Matched to this page by computer, 26 November 2026. In force since 29 June 2026."
+        },
+        {
+          "title": "Kinship care: statutory guidance",
+          "by": "Department for Education",
+          "year": "2026",
+          "url": "https://www.gov.uk/government/publications/kinship-care-guidance-for-local-authorities",
+          "checked": null,
+          "note": "The October 2026 version, which includes the national kinship standards."
+        },
+        {
+          "title": "Relatives and friends who get in touch: kinship carers and the first reply",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-kinship-and-the-first-reply",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "kinship-navigators",
+      "stage": "First contact",
+      "title": "For kinship carers, the best-evidenced help is a person who guides them",
+      "summary": "A navigator is a person who helps a kinship carer find and get support. In November 2026, a federal clearinghouse in the United States rated nine navigator programmes as promising or better. In Washington State, carers in a fuller version of the programme reported better overall wellbeing than carers in the usual service. That study compared two versions of the programme, and carers reported their own wellbeing. England's practice guide for councils recommends specialist support of the same kind. In a 2025 survey, 40% of kinship carers had a named contact at their council. No one has tested a way of handling first contact with kinship carers in England.",
+      "sources": [
+        {
+          "title": "Washington State Kinship Navigator Program",
+          "by": "Title IV-E Prevention Services Clearinghouse",
+          "year": "2024",
+          "url": "https://preventionservices.acf.hhs.gov/programs/914/show",
+          "checked": null,
+          "note": "Matched to this page by computer, 26 November 2026."
+        },
+        {
+          "title": "Kinship care practice guide",
+          "by": "Foundations",
+          "year": "2024",
+          "url": "https://foundations.org.uk/toolkit/practice-guides/kinship-care/",
+          "checked": null
+        },
+        {
+          "title": "Handle With Care: annual survey of kinship carers",
+          "by": "Kinship",
+          "year": "2025",
+          "url": "https://kinship.org.uk/our-work-and-impact/policy-and-influencing/reports-and-publications/handle-with-care/",
+          "checked": null
+        },
+        {
+          "title": "Relatives and friends who get in touch: kinship carers and the first reply",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-kinship-and-the-first-reply",
+          "checked": null
+        }
+      ]
+    },
+    {
       "id": "no-trials",
       "stage": "Gap",
       "title": "No one has yet tested follow-up with real people who enquire",

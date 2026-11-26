@@ -84,7 +84,8 @@ function Insight({
               <dd className="text-sm leading-6 text-muted-foreground">{p.body}</dd>
             </div>
           ))}
-          <div className="space-y-2 rounded-lg bg-muted p-4">
+          {/* With three parts above it, "Try this" takes the full row, so it does not sit alone in one column. */}
+          <div className={`space-y-2 rounded-lg bg-muted p-4 ${parts.length === 3 ? "md:col-span-3" : ""}`}>
             <dt>
               <Tag tone="green">Try this</Tag>
             </dt>

@@ -184,10 +184,10 @@
    "id": "kinship",
    "date": "2026-11-26",
    "title": "Relatives and friends who get in touch: kinship carers and the first reply",
-   "report": "reports/2026-11-kinship-first-contact.md",
+   "report": "reports/2026-11-kinship-and-the-first-reply.md",
    "question": "What happens when a relative or friend of a child gets in touch, and what should the first reply do?",
    "looked_at": [
-    "The law and guidance on kinship care in England",
+    "The law, statutory guidance and national kinship standards in England",
     "Ofsted and census figures on kinship care",
     "Surveys of kinship carers and research on their first contact with services",
     "Council pages, advice lines and kinship local offers",
@@ -195,14 +195,14 @@
     "Kinship navigator programmes in the United States"
    ],
    "how": "A desk review made with an AI-assisted research tool, plus a word search of our own census of enquiry forms.",
-   "checked": "A first draft. Not yet checked by a person. The laws and figures are still being matched to their sources.",
+   "checked": "A first draft. Not yet checked by a person. On 26 November 2026 the laws, official figures and most survey figures were matched to their sources by computer. Some charity reports could be read only secondhand.",
    "learned": [
-    "Most kinship carers are contacted by the child's social worker, but GOV.UK also sends relatives to councils to ask about fostering a child they know.",
+    "Most kinship carers are contacted by the child's social worker. But GOV.UK also sends relatives to councils to ask about fostering a child they know.",
     "None of the 48 UK fostering enquiry forms we read asks if the person already knows the child.",
     "Most kinship carers in surveys said they did not know their legal options when they took on the child.",
     "Councils in England must now publish a kinship local offer. In a 2025 survey, 13% of kinship carers had seen theirs.",
-    "We found no published standard for how fast a kinship team should first reply.",
-    "The best-rated programmes abroad give each carer a named person, with legal and money information early."
+    "Statutory guidance, updated in October 2026, says families should get clear information about their legal options at the outset. It sets no time for a first reply.",
+    "In the United States, nine programmes that give kinship carers a person to guide them are rated promising or better. England's practice guide recommends the same kind of help."
    ]
   }
  ],
@@ -813,8 +813,8 @@
    "id": "kinship-same-day",
    "part": "First reply",
    "kind": "tighten",
-   "idea": "A person replies to a kinship enquiry the same working day where possible, and by the end of the next working day at the latest.",
-   "why": "Many of these arrangements start with no notice. We found no published reply time for kinship teams, so this one is reasoned, not from evidence.",
+   "idea": "A person replies to a kinship enquiry the same working day where possible. The latest is the end of the next working day.",
+   "why": "Statutory guidance says kinship care often starts in an emergency. It sets no reply time, and we found none elsewhere, so this one is reasoned, not from evidence.",
    "from": [
     "kinship",
     "intake-interactions"
@@ -835,7 +835,7 @@
    "part": "First reply",
    "kind": "add",
    "idea": "The first reply names the ways to care for a child in the family without ranking them. It says each has different legal and money effects, and never gives money as a reason to choose one.",
-   "why": "Carers commit to arrangements that limit their support without knowing it. Half of kinship foster carers said they would change arrangement if the allowance were the same.",
+   "why": "Carers commit to arrangements that limit their support without knowing it. Half of kinship foster carers said they would change arrangement if the allowance were at least the same.",
    "from": [
     "kinship"
    ]
@@ -845,7 +845,7 @@
    "part": "First reply",
    "kind": "add",
    "idea": "The first reply gives at least two free, independent advice services and a link to the council's kinship local offer. It offers a paper copy.",
-   "why": "Most kinship carers said they did not know their legal options. Few had seen the local offer, and one advice line says it can answer only 4 in 10 callers.",
+   "why": "Most kinship carers said they did not know their legal options, and few had seen the local offer. One advice line has said it cannot answer every caller.",
    "from": [
     "kinship"
    ]
@@ -866,7 +866,7 @@
    "part": "Named guide",
    "kind": "add",
    "idea": "The reply says which team will get in touch next. The record holds only whether the hand-over was confirmed, and nothing about the child.",
-   "why": "A named person is what the best-rated programmes abroad share. In a 2025 survey, about 2 in 5 kinship carers had a named contact at their council.",
+   "why": "Navigator programmes give each carer a person to guide them, and the national kinship standards expect an identified practitioner. In a 2025 survey, 2 in 5 kinship carers had a named contact at their council.",
    "from": [
     "kinship"
    ]
@@ -885,7 +885,7 @@
    "id": "kinship-measures",
    "part": "How we measure",
    "kind": "add",
-   "idea": "For kinship enquiries, measure the service: time to a person's reply, the share sent any recruitment message (the aim is none), and the share of replies with the local offer link and two advice services.",
+   "idea": "For kinship enquiries, measure the service. Count the time to a person's reply, and the share sent any recruitment message, where the aim is none. Count the share of replies with the local offer link and two advice services.",
    "why": "These are things a service can check about itself. None of them scores a relative or friend.",
    "from": [
     "kinship"
