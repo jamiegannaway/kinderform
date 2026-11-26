@@ -164,8 +164,16 @@
       "id": "relationship",
       "stage": "Staying",
       "title": "The relationship with the service shapes whether carers stay",
-      "summary": "A review of 49 studies looked at why carers keep fostering. It found that the relationship with the agency and support from professionals stand out among the reasons. A Scottish study looked at carers who had stopped fostering. Almost 3 in 5 had stopped because they were unhappy with some part of their fostering service. This is why we treat the first reply as the start of support, not a separate task.",
+      "summary": "A review of 49 studies looked at why carers keep fostering. It found that the relationship with the agency and support from professionals stand out among the reasons. A Scottish study looked at carers who had stopped fostering. Almost 3 in 5 had stopped because they were unhappy with some part of their fostering service. A 2024 UK survey asked carers if their supervising social worker treated them as an equal. 76% of current carers said yes, against 51% of former carers. This is why we treat the first reply as the start of support, not a separate task.",
       "sources": [
+        {
+          "title": "State of the Nations' Foster Care 2024",
+          "by": "The Fostering Network",
+          "year": "2024",
+          "url": "https://www.thefosteringnetwork.org.uk/media/fbldiwhh/sotn24-full-report.pdf",
+          "checked": null,
+          "note": "A survey of 2,883 current and 169 former carers who chose to take part."
+        },
         {
           "title": "Foster families: a systematic review of intention and retention factors",
           "by": "Gouveia and others, Journal of Child and Family Studies",
@@ -178,6 +186,59 @@
           "by": "Triseliotis, Borland and Hill, Adoption & Fostering",
           "year": "1998",
           "url": "https://consensus.app/papers/details/w:9fc07a41-6f34-44c8-804c-4c82d0337a73/",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "carers-stop",
+      "stage": "Staying",
+      "title": "About 1 in 8 approved fostering households in England stops each year, and much of it is natural",
+      "summary": "In 2025–26, 4,440 of 37,890 approved mainstream households in England stopped fostering: 12%. Carers aged 60 or over were 35% of the carers who stopped. Among those under 50, 19% stopped so they could adopt the child. So a carer who stops is not always a carer the service failed. Leaving early is the clearest link to the first step. In 2020–21, 30% of households that stopped did so within two years of approval.",
+      "sources": [
+        {
+          "title": "Main findings: fostering in England, 1 April 2025 to 31 March 2026",
+          "by": "Ofsted",
+          "year": "2026",
+          "url": "https://www.gov.uk/government/statistics/fostering-in-england-1-april-2025-to-31-march-2026/main-findings-fostering-in-england-1-april-2025-to-31-march-2026",
+          "checked": null,
+          "note": "Matched to this page by computer, 26 November 2026."
+        },
+        {
+          "title": "The recruitment and retention of foster carers (CDP-2022-0080)",
+          "by": "House of Commons Library",
+          "year": "2022",
+          "url": "https://commonslibrary.parliament.uk/research-briefings/cdp-2022-0080/",
+          "checked": null,
+          "note": "The source of the 30% figure for 2020–21, summarising Ofsted."
+        },
+        {
+          "title": "Why foster carers stop, and what helps them stay",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-why-carers-stop-and-stay",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "mockingbird",
+      "stage": "Staying",
+      "title": "Households in Mockingbird stopped less often, but it has not been tested in a trial",
+      "summary": "Mockingbird groups foster homes around an experienced carer who offers support and breaks. In an English evaluation of 11 areas from 2016 to 2019, 6% of Mockingbird households stopped (16 of 288). Among similar households, 23% stopped (689 of 2,968). Their odds of stopping were about a fifth as high. It was not a randomised trial, and the households differed: fewer Mockingbird households were newly approved. A later evaluation has published no results that we could find.",
+      "sources": [
+        {
+          "title": "The Mockingbird programme: independent evaluation report",
+          "by": "Ott and others, Rees Centre, for the Department for Education",
+          "year": "2020",
+          "url": "https://assets.publishing.service.gov.uk/media/5fa412dfd3bf7f03a40fe598/Fostering_Network_Mockingbird.pdf",
+          "checked": null
+        },
+        {
+          "title": "Why foster carers stop, and what helps them stay",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-why-carers-stop-and-stay",
           "checked": null
         }
       ]
