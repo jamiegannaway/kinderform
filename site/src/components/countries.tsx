@@ -123,7 +123,7 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
                 .{" "}
                 {withdrawals.source.checked
                   ? `A person checked it on ${longDate(withdrawals.source.checked)}.`
-                  : "Not yet checked by a person."}
+                  : ""}
               </p>
             }
           >
@@ -146,7 +146,7 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
       <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
         The first 3 figures come from {data.allForms} enquiry forms in {nCountries}{" "}
         {nCountries === 1 ? "country" : "countries"}. We read them on their live web pages
-        {data.checked ? `, most recently on ${longDate(data.checked)}` : ""}. They are not yet checked by a person. The{" "}
+        {data.checked ? `, most recently on ${longDate(data.checked)}` : ""}. The{" "}
         <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
           compare page
         </a>{" "}
@@ -215,7 +215,7 @@ export default function Countries({ data }: { data: CountriesData }) {
           forms in {listNames(data.countries.map((c) => (/^(?:United |Netherlands)/.test(c.name) ? `the ${c.name}` : c.name)))}.
         </p>
         <p className="leading-7 text-muted-foreground">
-          These results are not yet checked by a person. The{" "}
+          The{" "}
           <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
             compare page
           </a>{" "}

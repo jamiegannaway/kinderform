@@ -1,6 +1,6 @@
 # Automate the admin, keep the conversation human
 
-> **Status: first draft.** Quick scan and a design principle, 25 November 2026. Jamie Gannaway accepted the principle; its wording is a draft for discussion with fostering services. The evidence was found with an AI-assisted web search and read from summaries, press releases and abstracts. None of it is about fostering enquiries, and **none has been checked by a person** against the full source. Check the source before you quote anything, starting with the list under "Check before public use". The [research log](../research-log.json) says what each review could mean for the project.
+> **Status: first draft.** Quick scan and a design principle, 25 November 2026. Jamie Gannaway accepted the principle; its wording is a draft for discussion with fostering services. The evidence was found with an AI-assisted web search and read from summaries, press releases and abstracts. None of it is about fostering enquiries. See [how we made this](https://www.kinderform.org/about#how). The [research log](../research-log.json) says what each review could mean for the project.
 
 Grades: A = randomised or strong quasi-experimental; B = controlled comparison or robust official statistics; C = descriptive, survey or qualitative; D = anecdote, single site, self-reported or secondhand.
 

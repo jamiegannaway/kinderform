@@ -10,6 +10,8 @@ Exceptions, which keep their own licences:
 
 - the illustrations in `site/public/illustrations/`, which are used under a paid
   licence and are not open (see the `LICENCE.md` there)
+- the photograph in `site/public/images/`, which belongs to Jamie Gannaway and is
+  not open (see the `LICENCE.md` there)
 - the fonts in `site/public/fonts/` and the other third-party work listed in
   [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
 

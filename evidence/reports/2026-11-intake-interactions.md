@@ -1,6 +1,6 @@
 # Fostering and adoption intake interactions: what the evidence says works, and a refined Kinderform open standard
 
-> **Status:** desk review, version 1, 14 November 2026. An AI-assisted research tool produced it. Most figures have **not yet been checked by a person** against the original sources, so check the source before you quote anything. Everything we propose is for discussion and is not yet part of the Kinderform standard. See [how we made this review](#how-we-made-this-review).
+> **Status:** desk review, version 1, 14 November 2026. An AI-assisted research tool produced it. See [how we made this](https://www.kinderform.org/about#how). Everything we propose is for discussion and is not yet part of the Kinderform standard. See [how we made this review](#how-we-made-this-review).
 
 ## Summary
 
@@ -29,7 +29,7 @@ The review covers first replies, calls, follow-ups, information events, home vis
 - The strongest controlled study looked at a whole hub model, not single steps, and found no gain in approvals.
 - The only other grade A evidence comes from tests of message wording, which measured intentions, and from fields such as jobcentres and sales.
 - Several widely quoted figures on drop-out come from studies from 1990 to 2008.
-- A person checked a few citations by hand on 14 November 2026. Most figures have not yet been checked by a person against the original source.
+- A person checked a few citations by hand on 14 November 2026.
 
 **What we suggest.** The Kinderform draft standard should keep its rules on fast first replies, and add rules on continuity, hand-offs and honesty:
 

@@ -48,8 +48,11 @@ export default function ResearchLog({
             <AlertTitle>These are ideas for discussion, not decisions</AlertTitle>
             <AlertDescription>
               <p>
-                We made each review with an AI-assisted research tool. Most figures are not yet checked by a person. We
-                will decide each idea in the open.
+                We made each review with an AI-assisted research tool.{" "}
+                <a href="/about#how" className="font-medium underline underline-offset-4">
+                  How we made this site
+                </a>
+                .
               </p>
             </AlertDescription>
           </Alert>
@@ -67,7 +70,7 @@ export default function ResearchLog({
                 <TableHead scope="col">Research</TableHead>
                 <TableHead scope="col">Where we looked</TableHead>
                 <TableHead scope="col">What we learned</TableHead>
-                <TableHead scope="col">Checked by a person?</TableHead>
+                <TableHead scope="col">Checked by a person</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -94,7 +97,9 @@ export default function ResearchLog({
                       ))}
                     </ul>
                   </TableCell>
-                  <TableCell className={`${cell} w-[18%] text-muted-foreground`}>{e.checked}</TableCell>
+                  <TableCell className={`${cell} w-[18%] text-muted-foreground`}>
+                    {/^A person checked/.test(e.checked) ? e.checked.replace(/ The rest are not yet checked by a person\.$/, "") : "–"}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

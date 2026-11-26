@@ -54,7 +54,7 @@ export function Applications({ data }: { data: ApplicationsData }) {
           <a href="/compare/applications" className="font-medium text-foreground underline underline-offset-4">
             compare page
           </a>{" "}
-          lists each form with its link. These results are not yet checked by a person.
+          lists each form with its link.
         </p>
         <HowWeDidThis>
           <p>

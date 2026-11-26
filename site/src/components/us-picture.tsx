@@ -105,7 +105,7 @@ export default function UsPicture({ data }: { data: Data }) {
         <p className="leading-7 text-muted-foreground">
           {data.verified
             ? `A person has checked ${fmt(data.verified)} of the ${fmt(data.totalRows)} rows so far.`
-            : "These results are not yet checked by a person."}{" "}
+            : ""}{" "}
           The data is open in the{" "}
           <a
             href="https://github.com/jamiegannaway/kinderform/tree/main/register/us"

@@ -1,0 +1,100 @@
+---
+// Who made Kinderform and how. This page holds the one statement of how the site was made and
+// how much a person has checked so far; the banner on every page links here.
+import Base from "@/layouts/Base.astro";
+import { SiteFooter, SiteHeader } from "@/components/site-header";
+import { Button } from "@/components/ui/button";
+
+const link = "font-medium underline underline-offset-4";
+const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
+---
+<Base
+  title="About Kinderform: who made it and how"
+  description="Kinderform is a free side project by Jamie Gannaway, who builds forms and intake systems. It combines AI research with human review and his knowledge of forms and intake."
+>
+  <SiteHeader current="/about" />
+  <main id="main" class="mx-auto max-w-6xl px-6 pb-16">
+    <div class="max-w-2xl space-y-12 py-10 md:py-14">
+      <header class="space-y-6">
+        <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">About Kinderform</h1>
+        <p class="text-xl leading-8 text-muted-foreground">
+          Everyone who offers to care for a child deserves a quick, kind and considered reply.
+        </p>
+      </header>
+
+      <section aria-labelledby="who" class="space-y-4">
+        <img
+          src="/images/jamie-gannaway.jpg"
+          alt="Jamie Gannaway taking a photo of himself with his two children, all three smiling"
+          width="960"
+          height="720"
+          class="h-auto w-full rounded-xl border"
+        />
+        <h2 id="who" class={h2}>I’m Jamie Gannaway</h2>
+        <p class="leading-7">
+          For more than 10 years I have built forms and intake systems for large companies. Intake is the first
+          questions someone answers, and what happens to their answers next. It is my job at
+          <a href="https://www.deployed.co" class={link}>Deployed</a> and
+          <a href="https://www.addtriage.com" class={link}>Triage</a>.
+        </p>
+        <p class="leading-7">
+          <strong>I know forms and intake well. I am not an expert in fostering or adoption.</strong> I have never
+          worked in a fostering or adoption service, and I am not a social worker.
+        </p>
+        <p class="leading-7">
+          Kinderform is a side project. It is free. Nobody pays me for it, and it sells nothing.
+        </p>
+      </section>
+
+      <section aria-labelledby="how" class="space-y-4">
+        <h2 id="how" class={h2}>How this was made</h2>
+        <p class="leading-7">
+          Kinderform combines three things: AI research, human review, and what I know about forms and intake.
+        </p>
+        <ul class="ml-5 list-disc space-y-2 leading-7">
+          <li>
+            <strong>AI research.</strong> AI tools read hundreds of public forms and gathered the research. That is
+            how one person could cover 11 countries.
+          </li>
+          <li>
+            <strong>Human review.</strong> A person checks facts against their source. This work is under way and
+            not finished. Where a fact has been checked, the page says so and gives the date.
+          </li>
+          <li>
+            <strong>Knowledge of forms.</strong> I decide what the findings mean for a form, from 10 years of
+            building them.
+          </li>
+        </ul>
+        <p class="leading-7">
+          Every fact has a link to its source, so you can check it yourself before you quote it. Nothing here is a
+          decision. I will decide each idea in the open, with people who do this work.
+        </p>
+      </section>
+
+      <section aria-labelledby="help" class="space-y-4">
+        <h2 id="help" class={h2}>Tell me what I have got wrong</h2>
+        <p class="leading-7">
+          If you foster, have adopted, have been in care or work in a recruitment team, you know what I do not.
+          Tell me what is wrong or missing. Two lines is plenty.
+        </p>
+        <p class="flex flex-wrap items-center gap-4">
+          <Button asChild>
+            <a href="mailto:jamie.gannaway@gmail.com">Email jamie.gannaway@gmail.com</a>
+          </Button>
+          <a href="https://www.linkedin.com/in/jamiegannaway/" class={link}>Jamie on LinkedIn</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="rules" class="space-y-4">
+        <h2 id="rules" class={h2}>What Kinderform will not do</h2>
+        <ul class="ml-5 list-disc space-y-2 leading-7">
+          <li>It holds no information about children, and makes no decisions about them.</li>
+          <li>It does not score, rank or predict people who offer to care.</li>
+          <li>It looks at pages and forms, never at the staff behind them.</li>
+          <li>It will not publish a score for a named service before that service has seen it and replied.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <SiteFooter />
+</Base>
