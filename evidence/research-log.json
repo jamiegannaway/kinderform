@@ -179,6 +179,31 @@
     "Mockingbird households had much lower odds of stopping, but it was not tested in a trial.",
     "No study links a good assessment to a longer fostering career."
    ]
+  },
+  {
+   "id": "kinship",
+   "date": "2026-11-26",
+   "title": "Relatives and friends who get in touch: kinship carers and the first reply",
+   "report": "reports/2026-11-kinship-first-contact.md",
+   "question": "What happens when a relative or friend of a child gets in touch, and what should the first reply do?",
+   "looked_at": [
+    "The law and guidance on kinship care in England",
+    "Ofsted and census figures on kinship care",
+    "Surveys of kinship carers and research on their first contact with services",
+    "Council pages, advice lines and kinship local offers",
+    "Our own census of enquiry forms",
+    "Kinship navigator programmes in the United States"
+   ],
+   "how": "A desk review made with an AI-assisted research tool, plus a word search of our own census of enquiry forms.",
+   "checked": "A first draft. Not yet checked by a person. The laws and figures are still being matched to their sources.",
+   "learned": [
+    "Most kinship carers are contacted by the child's social worker, but GOV.UK also sends relatives to councils to ask about fostering a child they know.",
+    "None of the 48 UK fostering enquiry forms we read asks if the person already knows the child.",
+    "Most kinship carers in surveys said they did not know their legal options when they took on the child.",
+    "Councils in England must now publish a kinship local offer. In a 2025 survey, 13% of kinship carers had seen theirs.",
+    "We found no published standard for how fast a kinship team should first reply.",
+    "The best-rated programmes abroad give each carer a named person, with legal and money information early."
+   ]
   }
  ],
  "meanings": [
@@ -437,9 +462,10 @@
    "part": "How we measure",
    "kind": "keep",
    "idea": "Keep kinship enquiries on their own route and count them apart from general fostering.",
-   "why": "Mixing the two changed the totals in the Netherlands and Florida. Slow approval falls hardest on kinship carers in New Zealand and Ireland.",
+   "why": "Mixing the two changed the totals in the Netherlands and Florida. Slow approval falls hardest on kinship carers in New Zealand and Ireland. Ofsted counts kinship households apart from mainstream ones.",
    "from": [
-    "international"
+    "international",
+    "kinship"
    ]
   },
   {
@@ -771,6 +797,138 @@
    "why": "The headline figure treats an odds ratio as a risk, and the households in it differed from those compared.",
    "from": [
     "retention"
+   ]
+  },
+  {
+   "id": "known-child-question",
+   "part": "Reference form",
+   "kind": "keep",
+   "idea": "Keep one plain question on every form: 'Are you asking about a child you already know?' Use everyday words, not only the word 'kinship'.",
+   "why": "GOV.UK sends relatives to councils to ask about fostering a child they know. None of the 48 UK fostering enquiry forms we read asks this.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-same-day",
+   "part": "First reply",
+   "kind": "tighten",
+   "idea": "A person replies to a kinship enquiry the same working day where possible, and by the end of the next working day at the latest.",
+   "why": "Many of these arrangements start with no notice. We found no published reply time for kinship teams, so this one is reasoned, not from evidence.",
+   "from": [
+    "kinship",
+    "intake-interactions"
+   ]
+  },
+  {
+   "id": "kinship-help-today",
+   "part": "First reply",
+   "kind": "add",
+   "idea": "The automatic reply to every kinship enquiry gives the council's children's services number and its out-of-hours number. The form asks nothing about the child.",
+   "why": "Some people need help today. Giving the numbers to everyone who answers yes means nobody has to describe the child's situation on a form.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-options",
+   "part": "First reply",
+   "kind": "add",
+   "idea": "The first reply names the ways to care for a child in the family without ranking them. It says each has different legal and money effects, and never gives money as a reason to choose one.",
+   "why": "Carers commit to arrangements that limit their support without knowing it. Half of kinship foster carers said they would change arrangement if the allowance were the same.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-advice",
+   "part": "First reply",
+   "kind": "add",
+   "idea": "The first reply gives at least two free, independent advice services and a link to the council's kinship local offer. It offers a paper copy.",
+   "why": "Most kinship carers said they did not know their legal options. Few had seen the local offer, and one advice line says it can answer only 4 in 10 callers.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-no-recruitment",
+   "part": "Keeping in touch",
+   "kind": "add",
+   "idea": "Never add a kinship enquiry to recruitment, reminder, event or marketing messages. Make it a setting that campaign software cannot override.",
+   "why": "A grandparent in a crisis is not a recruit. Approval is for one child, and Ofsted counts these households apart.",
+   "from": [
+    "kinship",
+    "intake-interactions"
+   ]
+  },
+  {
+   "id": "kinship-handover",
+   "part": "Named guide",
+   "kind": "add",
+   "idea": "The reply says which team will get in touch next. The record holds only whether the hand-over was confirmed, and nothing about the child.",
+   "why": "A named person is what the best-rated programmes abroad share. In a 2025 survey, about 2 in 5 kinship carers had a named contact at their council.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-friends",
+   "part": "Fairness",
+   "kind": "add",
+   "idea": "The kinship route covers friends and people already caring informally, not only relatives. Offer a phone call, paper and other languages.",
+   "why": "Many kinship carers are grandparents. Online-only routes and the word 'kinship' can shut out older and minority ethnic carers.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-measures",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "For kinship enquiries, measure the service: time to a person's reply, the share sent any recruitment message (the aim is none), and the share of replies with the local offer link and two advice services.",
+   "why": "These are things a service can check about itself. None of them scores a relative or friend.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "known-child-census",
+   "part": "How we measure",
+   "kind": "add",
+   "idea": "Record in our census whether each enquiry form asks about a child the person already knows, and have a person check it.",
+   "why": "Our first count is a word search. No research has looked at kinship carers who arrive at general fostering forms.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "no-kinship-screening",
+   "part": "What we will not use",
+   "kind": "avoid",
+   "idea": "Nothing that scores, ranks or predicts relatives and friends. Nothing that copies, fills in ahead or screens for the council's assessment of them.",
+   "why": "That assessment is social work set out in law, and the usual form for it is licensed. Kinderform acknowledges, informs and hands over.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-claims",
+   "part": "How we talk about evidence",
+   "kind": "add",
+   "idea": "Say that the kinship surveys come from charities that campaign, and that carers chose to take part. Say our reply time is reasoned, not from evidence.",
+   "why": "The surveys are large and agree with independent research, but they are not samples of all kinship carers.",
+   "from": [
+    "kinship"
+   ]
+  },
+  {
+   "id": "kinship-wording-test",
+   "part": "Open questions",
+   "kind": "test",
+   "idea": "Test the wording of the question and the first reply with kinship carers before either goes into the standard.",
+   "why": "No one has tested a way of handling first contact with kinship carers in England.",
+   "from": [
+    "kinship"
    ]
   }
  ]

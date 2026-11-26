@@ -48,6 +48,9 @@ export type InsightsData = {
   allSensitive: Share
   reply: { uk: Share; us: Share; all: Share }
   spareRoom: { agencies: Share; councils: Share }
+  // UK enquiry forms for fostering that ask whether the person already knows the child, or offer
+  // care by relatives and friends (kinship care) as a choice.
+  knownChild: Share
   app: {
     all: { units: number; countries: number }
     uk: { median: number; forms: number; health: Share; partners: Share; criminal: Share } | null
@@ -68,6 +71,13 @@ export type InsightsData = {
 }
 
 export type Early = { share: Share; top: string[] }
+
+// Words that show a form recognises kinship care: it asks whether the person already knows the
+// child, or offers care by relatives and friends as a choice. Matched against our paraphrased
+// labels, hints and answer options. "How did you hear about us" is left out, because "a friend or
+// relative" there is not about the child.
+const KNOWN_CHILD =
+  /kinship|family and friends|friends and family|connected person|relative (?:foster|adopt|care)|child (?:you|i|they) (?:already )?know/i
 
 // Stage 2 topics worth flagging when asked early. An open "about you" box and interest in early
 // permanence are left out: asking them early is not intrusive. The spare room has its own idea.
@@ -130,6 +140,18 @@ export function insights(c: Census): InsightsData {
   const byGroup = (g: string): Share => {
     const xs = ukFirst.filter((f) => groupOf(f.form) === g)
     return { yes: xs.filter((f) => f.spareRoom).length, of: xs.length }
+  }
+
+  // Kinship care on UK enquiry forms for fostering (adoption-only forms are left out).
+  const optionText = new Map<string, string>()
+  for (const o of c.options) optionText.set(o.question_id, `${optionText.get(o.question_id) ?? ""} ${o.option_label}`)
+  const asksKnownChild = (q: Row) =>
+    q.topic !== "how_heard" &&
+    KNOWN_CHILD.test(`${q.label_paraphrased} ${q.hint_paraphrased} ${optionText.get(q.question_id) ?? ""}`)
+  const ukFostering = ukFirst.filter((f) => f.form.service_type !== "adoption")
+  const knownChild: Share = {
+    yes: ukFostering.filter((f) => (asked.get(f.form.form_id) ?? []).some(asksKnownChild)).length,
+    of: ukFostering.length,
   }
 
   // The law map. The stage-2 check below uses England; the table shows every nation.
@@ -251,6 +273,7 @@ export function insights(c: Census): InsightsData {
       all: world.reply,
     },
     spareRoom: { agencies: byGroup("Independent agencies"), councils: byGroup("Councils and hubs") },
+    knownChild,
     app: {
       all: { units: apps.countries.reduce((n, a) => n + a.apps, 0), countries: apps.countries.length },
       uk: ukApp
