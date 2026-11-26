@@ -59,7 +59,8 @@ export default function rehypeResearch() {
         }
         if (child.type === "element" && child.tagName === "table") {
           walk(child)
-          return [{ type: "element", tagName: "div", properties: { className: ["kf-table"] }, children: [child] }]
+          // The wrapper scrolls sideways on a phone, so the keyboard must be able to reach it.
+          return [{ type: "element", tagName: "div", properties: { className: ["kf-table"], tabIndex: 0 }, children: [child] }]
         }
         walk(child)
         return [child]

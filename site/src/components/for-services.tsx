@@ -84,7 +84,8 @@ function Insight({
               <dd className="text-sm leading-6 text-muted-foreground">{p.body}</dd>
             </div>
           ))}
-          <div className="space-y-2 rounded-lg bg-muted p-4">
+          {/* With three parts above it, "Try this" takes the full row, so it does not sit alone in one column. */}
+          <div className={`space-y-2 rounded-lg bg-muted p-4 ${parts.length === 3 ? "md:col-span-3" : ""}`}>
             <dt>
               <Tag tone="green">Try this</Tag>
             </dt>
@@ -403,6 +404,71 @@ export function ForServices({
         <>
           Give each person one named contact. If you cannot reach someone, record it and try another way. We suggest
           doing that within 1 working day.
+        </>
+      ),
+    },
+    {
+      id: "known-child",
+      art: "paper-airplane" as IllustrationName,
+      title: "Ask if the enquiry is about a child the person already knows",
+      parts: [
+        {
+          label: "We found",
+          body: (
+            <>
+              {d.knownChild.yes === 0
+                ? `None of the ${d.knownChild.of} UK fostering enquiry forms we read asks this,`
+                : `${of(d.knownChild)} UK fostering enquiry forms we read ask this,`}{" "}
+              or offers care by relatives and friends as a choice.
+            </>
+          ),
+        },
+        {
+          label: "The law",
+          body: (
+            <>
+              Since June 2026, every council in England must publish a kinship local offer. It must take reasonable
+              steps so that kinship carers get the information that applies to them.{" "}
+              <a href="https://www.legislation.gov.uk/ukpga/2026/21/section/5" className={link}>
+                Children&rsquo;s Wellbeing and Schools Act 2026, section 5
+              </a>
+              . Statutory guidance says families should get clear information about their legal options at the
+              outset.{" "}
+              <a
+                href="https://www.gov.uk/government/publications/kinship-care-guidance-for-local-authorities"
+                className={link}
+              >
+                Kinship care guidance
+              </a>
+            </>
+          ),
+        },
+        {
+          label: "Research",
+          body: (
+            <>
+              GOV.UK tells people who want to look after a child in care to ask their council about fostering a
+              child they know. So some relatives and friends reach a general fostering form.{" "}
+              <a href="/research#kinship-door" className={link}>
+                Relatives and friends at the front door
+              </a>
+              . In surveys, most kinship carers said they did not know their legal options when they took on the
+              child.{" "}
+              <a href="/research#kinship-information" className={link}>
+                What kinship carers were told
+              </a>
+            </>
+          ),
+        },
+      ] satisfies Part[],
+      tryThis: (
+        <>
+          Add one plain question: &ldquo;Are you asking about a child you already know?&rdquo; If yes, pass the
+          enquiry to your kinship team the same working day, and send no recruitment messages. Link to your kinship
+          local offer and to free, independent advice. Ask nothing about the child.{" "}
+          <a href="/example-form/uk" className={link}>
+            See the question on our example form
+          </a>
         </>
       ),
     },

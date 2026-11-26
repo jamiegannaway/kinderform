@@ -227,7 +227,7 @@
     @apply my-10;
   }
   .kf-prose .kf-table {
-    @apply my-6 w-full overflow-x-auto;
+    @apply my-6 w-full overflow-x-auto rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50;
   }
   .kf-prose table {
     @apply w-full text-sm;
