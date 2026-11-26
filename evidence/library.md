@@ -37,7 +37,7 @@ Stage: assessment, retention · Type: longitudinal · Place: United States · [S
 
 ## What happens after someone gets in touch, and what helps?
 
-We added these entries in November 2026 from our [review of intake interactions](reports/2026-11-intake-interactions.md). Intake is everything that happens between someone's first enquiry and their formal application. Unless an entry says otherwise, its summary comes from that review. Those summaries are not yet checked by a person against the original sources.
+We added these entries in November 2026 from our [review of intake interactions](reports/2026-11-intake-interactions.md). Intake is everything that happens between someone's first enquiry and their formal application. Unless an entry says otherwise, its summary comes from that review.
 
 **Ipsos and CEI for DfE (2026). Evaluation of Foster with North East Pathfinder Hub: year 3 report.**\
 The share of people who had an initial visit within 5 days rose from 29% to 50%. Councils led the visits in 2024, and the hub led most of them in 2025. The evaluation used Ofsted data to compare change over time in the hub's area with change in similar areas. This method is called staggered difference-in-differences. It found no statistically significant positive effect on applications, households approved or carers approved. In 2023–24 the measured effects for Foster with North East were negative and significant. In 2024–25 none were significant. The hand-off from the hub to the council was a point of friction. Some people who withdrew said communication "ceased or diminished". This is the strongest controlled test so far of a faster start for people who get in touch. It is also a warning that speed alone is not enough.\

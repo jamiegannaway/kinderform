@@ -378,7 +378,7 @@ export function ForServices({
           body: (
             <>
               Our review of blood and stem cell donation found the biggest loss comes right after the first form,
-              when nobody reaches the person. Not yet checked by a person.{" "}
+              when nobody reaches the person.{" "}
               <a href="/research/log" className={link}>
                 Research log
               </a>
@@ -442,7 +442,7 @@ export function ForServices({
             name="details"
             className="mb-6 block w-36 lg:absolute lg:top-8 lg:right-0 lg:mb-0 lg:w-56 xl:w-64"
           />
-          <Tag tone="amber">First look, not yet checked by a person</Tag>
+          <Tag tone="blue">First draft</Tag>
           <h1 id="fs-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             What services can do
           </h1>

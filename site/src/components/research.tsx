@@ -28,7 +28,8 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 }
 
 // One line per source, each with its check status (CLAUDE.md, hard rule 6): the date a person
-// checked it, and "abstract" when the check was against the abstract alone, or "Not yet checked".
+// checked it, and "abstract" when the check was against the abstract alone. A source nobody has
+// checked gets no tag: the About page says once how the site was made.
 function SourceItem({ s }: { s: Source }) {
   return (
     <li className="space-y-1">
@@ -44,11 +45,7 @@ function SourceItem({ s }: { s: Source }) {
             Checked {longDate(s.checked.date)}
             {s.checked.against === "full text" ? "" : `, against the ${s.checked.against}`}
           </Tag>
-        ) : (
-          <Tag tone="amber" className="whitespace-normal">
-            Not yet checked
-          </Tag>
-        )}
+        ) : null}
       </p>
     </li>
   )
@@ -102,7 +99,6 @@ const WORDS: [string, string][] = [
   ["Checklist", "Our draft list of what a good enquiry form and first reply do."],
   ["Typical", "The middle value: half of the forms ask more, and half ask fewer."],
   ["Sensitive question", "A question about date of birth, health, a criminal record, ethnicity, faith, immigration status or past partners."],
-  ["Not yet checked by a person", "A computer program or one person collected it, and nobody has checked it since."],
 ]
 
 export default function ResearchIndex({
@@ -186,8 +182,11 @@ export default function ResearchIndex({
             <H2 id="known">Research and our own reading give {findings.length} findings so far</H2>
             <p className="leading-7">
               A person has checked {fullText} of the {unique.length} sources against the full text
-              {otherCheck ? `, and ${otherCheck} more against the abstract only` : ""}. The rest are not yet checked by a
-              person, so check them before you quote them.
+              {otherCheck ? `, and ${otherCheck} more against the abstract only` : ""}.{" "}
+              <a href="/about#how" className="font-medium underline underline-offset-4">
+                How we made this site
+              </a>
+              .
             </p>
             <HowWeDidThis>
               <p>
@@ -232,7 +231,7 @@ export default function ResearchIndex({
                 research log
               </a>{" "}
               shows what each review found and what it could mean for the project. We made each review with an
-              AI-assisted research tool. Most of their figures are not yet checked by a person.
+              AI-assisted research tool.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">

@@ -108,8 +108,7 @@ export default function FormCheckPublic({
           <H2 id="fc-patterns">What we found so far</H2>
           <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
             These counts use the {p.readable} UK enquiry forms a person recorded in {checked}, which we wrote the
-            checklist from. The research page also counts forms a computer program read, so its numbers differ. The
-            counts are not yet checked by a person.
+            checklist from. The research page also counts forms a computer program read, so its numbers differ.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Stat value={String(p.readable)} label="UK enquiry forms read" />

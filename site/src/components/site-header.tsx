@@ -74,6 +74,22 @@ function NavLinks({ current, stacked = false }: { current: string; stacked?: boo
   )
 }
 
+// A strip above the header on every page, in the blue tag colours (a draft or information), saying
+// that the site is a first draft. It links to the About page, which says who made the site, how
+// it was made and where to send comments.
+function DraftBanner() {
+  return (
+    <div className="bg-tag-blue text-tag-blue-foreground">
+      <p className="mx-auto max-w-6xl px-6 py-2 text-center text-sm font-medium">
+        First draft – feedback welcome.{" "}
+        <a href="/about" className="underline underline-offset-4">
+          Who made this, and how
+        </a>
+      </p>
+    </div>
+  )
+}
+
 // One row at every width. From the xl width the links sit in the row. Below it they open from a
 // Menu button, built on <details> so it works without JavaScript, in the shadcn/ui dropdown look.
 export function SiteHeader({ current }: { current: string }) {
@@ -85,6 +101,7 @@ export function SiteHeader({ current }: { current: string }) {
       >
         Skip to content
       </a>
+      <DraftBanner />
       <header className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-4">
         <a
           href="/"
@@ -134,6 +151,12 @@ export function SiteFooter() {
   return (
     <footer className="border-t">
       <div className="mx-auto max-w-6xl space-y-2 px-6 py-8 text-sm text-muted-foreground">
+        <p>
+          <a href="/about" className="font-medium text-foreground underline underline-offset-4">
+            About
+          </a>
+          : who made this, and how.
+        </p>
         <p>
           <a href="/research/log" className="font-medium text-foreground underline underline-offset-4">
             Research log
