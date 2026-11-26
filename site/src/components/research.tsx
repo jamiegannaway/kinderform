@@ -10,6 +10,8 @@ import type { FormsDiffer as FormsDifferData } from "@/lib/forms-differ"
 import type { UsPicture as UsPictureData } from "@/lib/us-register"
 import { Illustration } from "@/components/illustration"
 import { Tag } from "@/components/tag"
+import { StepIntro, StepPath, StepsTheme } from "@/components/steps"
+import { THREAD, groups, steps } from "@/lib/steps"
 
 export type Checked = { date: string; against: string; note?: string } | null
 export type Source = { title: string; by: string; year: string; url: string; checked: Checked; note?: string }
@@ -125,8 +127,22 @@ export default function ResearchIndex({
   withdrawals?: Withdrawals
 }) {
   const sources = findings.flatMap((f) => f.sources)
-  // Each source once, even when two findings cite it.
-  const unique = [...new Map(sources.map((s) => [s.url, s])).values()]
+  // Each source once, even when two findings cite it. A source counts as checked when a person
+  // checked it for any finding.
+  const byUrl = new Map<string, Source>()
+  for (const src of sources) if (!byUrl.get(src.url)?.checked) byUrl.set(src.url, src)
+  const unique = [...byUrl.values()]
+  // The steps we sort the findings by (src/lib/steps.ts), and the findings under each.
+  const stepList = steps(
+    world && world.allForms > 0 ? { forms: world.allForms, countries: world.countries.length } : undefined,
+  )
+  const stepOf = new Map([...stepList, THREAD].map((x) => [x.id, x]))
+  const named = new Set(groups().map((g) => g.name))
+  const grouped = [
+    ...groups().map((g) => ({ id: g.id, label: g.label, findings: findings.filter((f) => f.stage === g.name) })),
+    // A finding with a stage we do not know still shows, at the end.
+    { id: "other", label: "Other findings", findings: findings.filter((f) => !named.has(f.stage)) },
+  ].filter((g) => g.findings.length > 0)
   const fullText = unique.filter((s) => s.checked && s.checked.against === "full text").length
   const otherCheck = unique.filter((s) => s.checked && s.checked.against !== "full text").length
   return (
@@ -177,6 +193,14 @@ export default function ResearchIndex({
           </section>
         )}
 
+        <section aria-labelledby="steps" className="space-y-6">
+          <div className="max-w-3xl space-y-4">
+            <H2 id="steps">What the research says, step by step</H2>
+            <StepsTheme />
+          </div>
+          <StepPath steps={stepList} />
+        </section>
+
         <section aria-labelledby="known" className="space-y-6">
           <div className="max-w-3xl space-y-4">
             <H2 id="known">Research and our own reading give {findings.length} findings so far</H2>
@@ -196,11 +220,22 @@ export default function ResearchIndex({
               </p>
             </HowWeDidThis>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {findings.map((f) => (
-              <FindingCard key={f.id} f={f} />
-            ))}
-          </div>
+          {grouped.map((g) => (
+            <div key={g.id} className="space-y-4">
+              <div className="flex items-center gap-4">
+                {stepOf.has(g.id) && <Illustration name={stepOf.get(g.id)!.art} className="w-14 shrink-0" />}
+                <h3 id={`step-${g.id}`} className="scroll-m-20 text-xl font-semibold tracking-tight">
+                  {g.label}
+                </h3>
+              </div>
+              {stepOf.has(g.id) && <StepIntro step={stepOf.get(g.id)!} />}
+              <div className="grid gap-6 md:grid-cols-2">
+                {g.findings.map((f) => (
+                  <FindingCard key={f.id} f={f} />
+                ))}
+              </div>
+            </div>
+          ))}
         </section>
 
         {formsDiffer && formsDiffer.read > 0 && <FormsDiffer data={formsDiffer} />}

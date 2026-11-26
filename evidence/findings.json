@@ -4,7 +4,7 @@
   "findings": [
     {
       "id": "speed-alone",
-      "stage": "First contact",
+      "stage": "Reply",
       "title": "Quicker first visits helped, but on their own did not lead to more approvals",
       "summary": "In the North East of England, councils recruit foster carers together through a regional hub. The hub raised the share of people who had a first visit within 5 days, from 29% in 2024 to 50% in 2025. But a comparison with similar areas found no statistically significant gain in applications or approvals. Any rise could be down to chance. In the hub's first year, the measured effects were negative. Quick replies still matter, but they are not enough on their own.",
       "sources": [
@@ -19,7 +19,7 @@
     },
     {
       "id": "hand-offs",
-      "stage": "Hand-offs",
+      "stage": "Route",
       "title": "Some people drop out when one service hands them on to another",
       "summary": "The same evaluation found that the hand-over from the hub to the council was a weak point. Some people who withdrew said communication stopped or dropped off, and it was not clear who should answer their questions. The Department for Education now expects hubs that run the whole journey to give each person a named \"journey guide\" from enquiry to approval.",
       "sources": [
@@ -41,7 +41,7 @@
     },
     {
       "id": "applications-ask-more",
-      "stage": "Application",
+      "stage": "Prepare",
       "title": "Applications ask far more than enquiry forms, and most UK application forms are not public",
       "summary": "In November 2026 we read 52 application forms and packets in 7 countries. A typical UK application form asked 58 questions, against 8 on a typical UK enquiry form. Every UK application form we read asked about health, but none of the 57 UK enquiry forms did. Most UK application forms are not public: of 41 we found, we could read 6. France's national form asks nothing about health or convictions. A medical certificate goes with it, and the council asks for the criminal record itself.",
       "sources": [
@@ -57,7 +57,7 @@
     },
     {
       "id": "withdrawals",
-      "stage": "Application",
+      "stage": "Apply",
       "title": "Most fostering applications that finish end in withdrawal, not approval",
       "summary": "In England, fostering services received 8,290 applications in the year to 31 March 2025. Of the 5,370 applications that finished that year, services approved 2,050 and 3,290 ended in withdrawal. Applicants withdrew 2,175 of these and services withdrew 1,115. That is 61% of finished applications, not of all applications received. Where the applicant withdrew, 20% said the process was not what they expected.",
       "sources": [
@@ -72,7 +72,7 @@
     },
     {
       "id": "first-contact-feeling",
-      "stage": "First contact",
+      "stage": "Reply",
       "title": "How the first contact feels is what people remember",
       "summary": "In research for the Department for Education, people mentioned how their first contact felt more than anything else. Many saw getting in touch as the start of an application, and worried about asking \"the wrong question\". In an online experiment, every redesigned message did better than typical recruitment wording. But that experiment measured what people said they would do, not what they did.",
       "sources": [
@@ -87,7 +87,7 @@
     },
     {
       "id": "forms-differ",
-      "stage": "First contact",
+      "stage": "Ask",
       "title": "Enquiry forms differ a lot in what they ask and what they promise",
       "summary": "In November 2026 we read 57 enquiry forms from councils, hubs, independent agencies and adoption agencies across the UK. The shortest asked 3 questions and the longest asked 19. Asking about a spare room depended on the type of service. 8 of the 11 independent agency forms asked about a spare room, but none of the 37 council and hub forms did. Only 7 of the 56 forms where we looked for a reply time said when you would hear back.",
       "sources": [
@@ -103,7 +103,7 @@
     },
     {
       "id": "named-messages",
-      "stage": "First contact",
+      "stage": "Reply",
       "title": "A named, personal message can change what people do",
       "summary": "In a trial at a jobcentre in Bedford, 1,224 jobseekers got a text inviting them to a recruitment event. When the text named their adviser and said a place was booked for them, 26.8% went, against 10.5% for the plainest text. The trial was not about fostering, so the idea needs testing in fostering and adoption before anyone relies on it.",
       "sources": [
@@ -118,7 +118,7 @@
     },
     {
       "id": "being-asked",
-      "stage": "Before getting in touch",
+      "stage": "Before the first step",
       "title": "Knowing a carer, or simply being asked, starts many people thinking about fostering",
       "summary": "A review of research from around the world looked at why people foster. It found that meeting or knowing foster carers is what most often leads people to consider fostering. In an Australian survey of 756 adults, almost 1 in 3 had never considered fostering. They said this was because no one had ever asked them.",
       "sources": [
@@ -140,7 +140,7 @@
     },
     {
       "id": "put-off",
-      "stage": "First contact",
+      "stage": "Reply",
       "title": "Some people who go no further say the way the service replied put them off",
       "summary": "An Australian study followed up 91 people who had asked about fostering. Only 4% had become carers. The rest split roughly evenly between changes in their own lives and being put off by how the agency responded. The study is old and small, so treat it as a pointer. In the United States, a study of 300 families hoping to adopt from foster care looked at the barriers they met. The families most often reported 3 kinds: the practical steps of the process, how the agency communicated and responded, and emotional support.",
       "sources": [
@@ -162,7 +162,7 @@
     },
     {
       "id": "relationship",
-      "stage": "Staying",
+      "stage": "Stay",
       "title": "The relationship with the service shapes whether carers stay",
       "summary": "A review of 49 studies looked at why carers keep fostering. It found that the relationship with the agency and support from professionals stand out among the reasons. A Scottish study looked at carers who had stopped fostering. Almost 3 in 5 had stopped because they were unhappy with some part of their fostering service. A 2024 UK survey asked carers if their supervising social worker treated them as an equal. 76% of current carers said yes, against 51% of former carers. This is why we treat the first reply as the start of support, not a separate task.",
       "sources": [
@@ -192,7 +192,7 @@
     },
     {
       "id": "carers-stop",
-      "stage": "Staying",
+      "stage": "Stay",
       "title": "About 1 in 8 approved fostering households in England stops each year, and much of it is natural",
       "summary": "In 2025–26, 4,440 of 37,890 approved mainstream households in England stopped fostering: 12%. Carers aged 60 or over were 35% of the carers who stopped. Among those under 50, 19% stopped so they could adopt the child. So a carer who stops is not always a carer the service failed. Leaving early is the clearest link to the first step. In 2020–21, 30% of households that stopped did so within two years of approval.",
       "sources": [
@@ -223,7 +223,7 @@
     },
     {
       "id": "mockingbird",
-      "stage": "Staying",
+      "stage": "Stay",
       "title": "Households in Mockingbird stopped less often, but it has not been tested in a trial",
       "summary": "Mockingbird groups foster homes around an experienced carer who offers support and breaks. In an English evaluation of 11 areas from 2016 to 2019, 6% of Mockingbird households stopped (16 of 288). Among similar households, 23% stopped (689 of 2,968). Their odds of stopping were about a fifth as high. It was not a randomised trial, and the households differed: fewer Mockingbird households were newly approved. A later evaluation has published no results that we could find.",
       "sources": [
@@ -245,7 +245,7 @@
     },
     {
       "id": "progress-bars",
-      "stage": "First contact",
+      "stage": "Ask",
       "title": "Progress bars do not reliably help people finish a form, but honest and simple forms do",
       "summary": "A review of 32 experiments with online surveys looked at progress bars. A bar moving at a steady speed did not reliably stop people giving up. A bar that looked slow at first made it worse. In another experiment, fewer people started a survey when told it would take longer. Pages with few questions and designs made for phones lost fewer people. This research is about surveys, not fostering. Someone offering to foster may have stronger reasons to finish.",
       "sources": [
@@ -274,7 +274,7 @@
     },
     {
       "id": "next-step",
-      "stage": "First contact",
+      "stage": "Reply",
       "title": "When a call ends without a clear next step, the work falls on the caller",
       "summary": "A study of 447 recorded calls to three English GP surgeries found two moments when callers had to push for what they needed. One was when no alternative was offered. The other was when the call ended without a summary of what happens next. This happened most at the surgery with the lowest patient satisfaction. It is one study of three surgeries, and it shows a link, not a cause. It is not about fostering, but every first call about fostering has the same two moments.",
       "sources": [
@@ -296,8 +296,54 @@
       ]
     },
     {
+      "id": "gaps",
+      "stage": "Keep in touch",
+      "title": "People are most often lost between steps, when contact lapses or nobody reaches them",
+      "summary": "Our reviews keep finding the same pattern. In the North East of England, some people who withdrew said communication stopped after the hub handed them to the council. At a kidney donor centre in the United States, the largest loss came straight after the first form. The main reason was that the person did not answer the follow-up call. In a study of 157,154 accepted job offers, longer gaps before the start date went with more people never starting. Most of this evidence comes from other fields, or describes what happened without testing a cause. No one has tested it with people who enquire about fostering.",
+      "sources": [
+        {
+          "title": "Evaluation of Foster with North East Pathfinder Hub: year 3 report",
+          "by": "Ipsos and the Centre for Evidence and Implementation (CEI) for the Department for Education",
+          "year": "2026",
+          "url": "https://assets.publishing.service.gov.uk/media/6aa8195b1a63d2d2be90460e/Evaluation_of_Foster_with_North_East_Pathfinder_Hub_year_3_report.pdf",
+          "checked": null,
+          "note": "A person checked this report for another finding, not this one."
+        },
+        {
+          "title": "Characteristics of potential and actual living kidney donors: a single-center experience",
+          "by": "Cholin and others, Transplantation",
+          "year": "2022",
+          "url": "https://consensus.app/papers/details/w:6baa6682-0f01-4c80-a62d-9a86cd416f39/",
+          "checked": null,
+          "note": "The source of the kidney donor figures. We took the title from a public index of papers and have not yet checked it against the paper."
+        },
+        {
+          "title": "Kept promises outperform persuasion in giving",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-high-commitment-giving",
+          "checked": null
+        },
+        {
+          "title": "Where people are lost: fostering research and lessons from other fields",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-engagement-and-failure-modes",
+          "checked": null,
+          "note": "The source of the job offers study (Speer and others, 2026)."
+        },
+        {
+          "title": "Fostering and adoption intake interactions: what the evidence says works",
+          "by": "Kinderform desk review",
+          "year": "2026",
+          "url": "/research/reports/2026-11-intake-interactions",
+          "checked": null
+        }
+      ]
+    },
+    {
       "id": "help-to-finish",
-      "stage": "First contact",
+      "stage": "Keep in touch",
       "title": "Help from a person to finish an application does more than information or reminders",
       "summary": "In a US trial, low-income families were offered help to complete a student aid form. College enrolment among school leavers rose by 8.1 percentage points, from 34.2%. Information alone made no difference. Other trials sent reminders to people who had left an application unfinished, and they added only 1 to 3 points. For fostering, the closest step is offering a call to finish an enquiry together. None of these trials is about fostering.",
       "sources": [
@@ -319,7 +365,7 @@
     },
     {
       "id": "kinship-door",
-      "stage": "First contact",
+      "stage": "Route",
       "title": "Relatives and friends can arrive at a general fostering form, and the UK forms we read do not ask",
       "summary": "Most kinship carers do not apply to foster. They step in for a child they know, and the child's social worker usually gets in touch with them. But GOV.UK tells people who want to look after a child in care to ask their council about fostering a child they know. So some relatives and friends reach a general fostering enquiry form. In November 2026 we searched the 48 UK fostering enquiry forms we had read. None asks whether the person already knows the child. Ofsted collects no enquiry figures for kinship households, so nobody knows how many people arrive this way.",
       "sources": [
@@ -358,7 +404,7 @@
     },
     {
       "id": "kinship-information",
-      "stage": "First contact",
+      "stage": "Reply",
       "title": "Most kinship carers say they did not know their legal options when they took on the child",
       "summary": "A 2019 survey asked 845 kinship carers about the time they took on the child. Three-quarters said they did not have enough information about their legal options. In a 2022 survey, it was 82%. In a 2025 survey of 1,929 kinship carers, 13% had seen their council's kinship local offer. The legal route affects the support a carer can get. Since June 2026, councils in England must publish a kinship local offer. Statutory guidance says families should get clear information about their legal options at the outset. The surveys come from charities that campaign, and carers chose to take part.",
       "sources": [
@@ -413,7 +459,7 @@
     },
     {
       "id": "kinship-navigators",
-      "stage": "First contact",
+      "stage": "Route",
       "title": "For kinship carers, the best-evidenced help is a person who guides them",
       "summary": "A navigator is a person who helps a kinship carer find and get support. In November 2026, a federal clearinghouse in the United States rated nine navigator programmes as promising or better. In Washington State, carers in a fuller version of the programme reported better overall wellbeing than carers in the usual service. That study compared two versions of the programme, and carers reported their own wellbeing. England's practice guide for councils recommends specialist support of the same kind. In a 2025 survey, 40% of kinship carers had a named contact at their council. No one has tested a way of handling first contact with kinship carers in England.",
       "sources": [
@@ -450,7 +496,7 @@
     },
     {
       "id": "no-trials",
-      "stage": "Gap",
+      "stage": "Not yet tested",
       "title": "No one has yet tested follow-up with real people who enquire",
       "summary": "We looked for experiments that test reply times, attempts to make contact, how often services follow up, contact with experienced carers or hand-offs. We found none, in any country, with real people asking about fostering or adoption. The closest is the 2022 online test of message wording, which measured only what people said they would do. A later search found no study of how first calls or replies about fostering are worded. It also found no published figures on enquiry forms started but not sent. Kinderform hopes to help close this gap, openly and with services' agreement.",
       "sources": [

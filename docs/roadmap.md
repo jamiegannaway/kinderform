@@ -18,6 +18,9 @@
 - [x] Rewrite the two reviews of other fields in plain language (20 November 2026): no sentences of 25 words or more, and terms explained
 - [x] Three more reviews (26 November 2026, first drafts, not yet checked by a person): first replies and unfinished forms; why foster carers stop and what helps them stay; and relatives and friends who get in touch (kinship care)
 - [x] `/for-services` counts UK fostering enquiry forms that ask whether the person already knows the child (a word search of the census; a person has not checked it)
+- [x] Sort the research by step (`site/src/lib/steps.ts`): Ask, Reply, Route, Prepare, Apply and Stay, with "Keep in touch" between every step. Shown on the home page, `/research` and `/for-services` (26 November 2026)
+- [x] The project's owner agreed to publish the steps under these names (26 November 2026). They can still change after feedback
+- [ ] Use the same step names in the research log and the enquiry standard
 - [ ] Work through the two reviews' "Check before public use" lists, and add their key sources to the library
 - [ ] Decide each idea in the research log in the open, starting with the time limits, reciprocity and the 2-week keeping-in-touch rule
 - [ ] Test the home, research and form check pages with readers from each group in the plain language guide

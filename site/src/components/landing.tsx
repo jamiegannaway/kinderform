@@ -17,7 +17,9 @@ import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import { Illustration, type IllustrationName } from "@/components/illustration"
 import { Tag } from "@/components/tag"
+import { StepPath, StepsTheme } from "@/components/steps"
 import { COUNTRY_ORDER, countryList } from "@/lib/compare"
+import { steps } from "@/lib/steps"
 
 const SOURCE_URL =
   "https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf"
@@ -289,6 +291,20 @@ export default function Landing() {
                 </a>
                 , February 2026, page 14. Checked 24 November 2026.
               </p>
+            </div>
+          </Section>
+
+          <Separator />
+
+          <Section id="research-steps" title="What the research says, step by step">
+            <div className="space-y-8">
+              <div className="max-w-2xl space-y-4">
+                <StepsTheme />
+              </div>
+              <StepPath steps={steps()} base="/research" />
+              <Button asChild variant="outline">
+                <a href="/research#steps">See the research for each step</a>
+              </Button>
             </div>
           </Section>
 
