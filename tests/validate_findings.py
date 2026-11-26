@@ -3,6 +3,8 @@
 Every finding needs at least one source with a link, and every source must say
 whether a person has checked it (a date and what it was checked against) or not
 (null). Public wording must avoid market language about carers and children.
+Each finding's "stage" must be one of the step names in site/src/lib/steps.ts,
+which the site sorts the findings by.
 
 Run: python tests/validate_findings.py
 """
@@ -15,6 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PATH = ROOT / "evidence" / "findings.json"
+STEPS = ROOT / "site" / "src" / "lib" / "steps.ts"
 
 AGAINST = {"full text", "abstract", "key findings", "chart"}
 # "leads" as a noun for people; "leads to" and "leads people" are ordinary verbs.
@@ -26,6 +29,11 @@ FINDING_KEYS = {"id", "stage", "title", "summary", "sources"}
 SOURCE_KEYS = {"title", "by", "year", "url", "checked"}
 
 errors: list[str] = []
+
+# The step names live in one place, the site's steps file: each is written as name: "...".
+STAGES = set(re.findall(r'\bname: "([^"]+)"', STEPS.read_text(encoding="utf-8")))
+if len(STAGES) < 6:
+    errors.append(f"cannot read the step names from {STEPS.relative_to(ROOT)}")
 
 
 def fail(msg: str) -> None:
@@ -55,6 +63,8 @@ for f in data.get("findings", []):
     if fid in ids:
         fail(f"{fid}: duplicate id")
     ids.add(fid)
+    if STAGES and f["stage"] not in STAGES:
+        fail(f"{fid}: stage '{f['stage']}' is not a step name; use one of {sorted(STAGES)}")
     for field in ("title", "summary"):
         m = MARKET.search(f[field])
         if m:

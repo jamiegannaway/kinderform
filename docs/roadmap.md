@@ -16,6 +16,8 @@
 - [x] Reviews of other fields (November 2026): reminders and missed appointments, and giving blood, stem cells and kidneys (not yet checked by a person)
 - [x] Research log on the site (`/research/log`, linked from the footer), built from `evidence/research-log.json`: each review and what it could mean for the project, as tables
 - [x] Rewrite the two reviews of other fields in plain language (20 November 2026): no sentences of 25 words or more, and terms explained
+- [x] Draft: sort the research by step (`site/src/lib/steps.ts`): Ask, Reply, Route, Prepare, Apply and Stay, with "Keep in touch" between every step. Shown on the home page, `/research` and `/for-services` (26 November 2026)
+- [ ] Decide the step names with the project's owner, then use the same names in the research log and the enquiry standard
 - [ ] Work through the two reviews' "Check before public use" lists, and add their key sources to the library
 - [ ] Decide each idea in the research log in the open, starting with the time limits, reciprocity and the 2-week keeping-in-touch rule
 - [ ] Test the home, research and form check pages with readers from each group in the plain language guide
