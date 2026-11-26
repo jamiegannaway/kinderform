@@ -76,17 +76,18 @@ function NavLinks({ current, stacked = false }: { current: string; stacked?: boo
 
 // A strip above the header on every page, in the blue tag colours (a draft or information), saying
 // that the site is a first draft. It links to the About page, which says who made the site, how
-// it was made and where to send comments.
+// it was made and where to send comments. It is an <aside> with a name, so screen readers find it
+// as a landmark and no content sits outside one.
 function DraftBanner() {
   return (
-    <div className="bg-tag-blue text-tag-blue-foreground">
+    <aside aria-label="About this draft" className="bg-tag-blue text-tag-blue-foreground">
       <p className="mx-auto max-w-6xl px-6 py-2 text-center text-sm font-medium">
         First draft – feedback welcome.{" "}
         <a href="/about" className="underline underline-offset-4">
           Who made this, and how
         </a>
       </p>
-    </div>
+    </aside>
   )
 }
 

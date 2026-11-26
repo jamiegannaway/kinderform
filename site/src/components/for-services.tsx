@@ -16,6 +16,7 @@ import { Illustration, type IllustrationName } from "@/components/illustration"
 import { Tag, type Tone } from "@/components/tag"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import { NATIONS, type InsightsData, type RuleQuote, type Share } from "@/lib/insights"
+import { EVERY_STEP, THREAD, steps } from "@/lib/steps"
 
 export type Withdrawals = { share: number; notExpected: number; year: string } | null
 
@@ -52,6 +53,7 @@ const toneOf = (label: string): Tone => (/law|rules/i.test(label) ? "teal" : /fo
 
 function Insight({
   n,
+  step,
   id,
   title,
   art,
@@ -59,6 +61,7 @@ function Insight({
   tryThis,
 }: {
   n: number
+  step: string
   id: string
   title: string
   art: IllustrationName
@@ -68,7 +71,9 @@ function Insight({
   return (
     <Card id={id} className="scroll-m-20">
       <CardHeader>
-        <CardDescription className="tabular-nums">{n}</CardDescription>
+        <CardDescription>
+          <span className="tabular-nums">{n}</span> <span aria-hidden="true">&middot;</span> {step}
+        </CardDescription>
         <CardTitle className="text-xl leading-snug">{title}</CardTitle>
         <CardAction>
           <Illustration name={art} className="w-16 md:w-20" />
@@ -120,9 +125,13 @@ export function ForServices({
   const law = d.lawRows > 0
   // Wales, Scotland and Northern Ireland, where we have read enquiry forms.
   const others = (d.early?.nations ?? []).filter((n) => n.code !== "ENG" && n.enquiry.share.of > 0 && n.link)
+  // The step each idea belongs to (src/lib/steps.ts). The ideas below are in step order.
+  const stepName = (id: string) => steps().find((x) => x.id === id)?.name ?? ""
+  const [ASK, REPLY, ROUTE, PREPARE] = ["ask", "reply", "route", "prepare"].map(stepName)
   const insights = [
     {
       id: "ask-less",
+      step: ASK,
       art: "faqs" as IllustrationName,
       title: "Ask only what you need to reply",
       parts: [
@@ -165,6 +174,7 @@ export function ForServices({
     },
     {
       id: "sensitive-later",
+      step: ASK,
       art: "call" as IllustrationName,
       title: "Save sensitive questions until after a conversation",
       parts: [
@@ -212,6 +222,7 @@ export function ForServices({
       ? [
           {
             id: "law-stages",
+            step: ASK,
       art: "crossroad" as IllustrationName,
             title: "Ask each question at the stage the law sets",
             parts: [
@@ -261,8 +272,42 @@ export function ForServices({
           },
         ]
       : []),
+    ...(england
+      ? [
+          {
+            id: "spare-room",
+            step: ASK,
+      art: "studying" as IllustrationName,
+            title: "If you ask about a spare room, explain the rule",
+            parts: [
+              {
+                label: "We found",
+                body: (
+                  <>
+                    {of(d.spareRoom.agencies)} UK enquiry forms from independent agencies ask about a spare room,
+                    against {of(d.spareRoom.councils)} from councils and hubs.
+                  </>
+                ),
+              },
+              {
+                label: "The rules",
+                body: (
+                  <>
+                    England: {england.rule}{" "}
+                    <a href={england.url} className={link}>
+                      {england.source}
+                    </a>
+                  </>
+                ),
+              },
+            ] satisfies Part[],
+            tryThis: <>Say when children can share a room, so people who could foster do not rule themselves out.</>,
+          },
+        ]
+      : []),
     {
       id: "say-when",
+      step: REPLY,
       art: "calendar" as IllustrationName,
       title: "Say when you will reply, and who from",
       parts: [
@@ -293,122 +338,9 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: <>On the form and in the automatic reply, say when you will reply, who from, and what happens next.</>,
     },
-    ...(england
-      ? [
-          {
-            id: "spare-room",
-      art: "studying" as IllustrationName,
-            title: "If you ask about a spare room, explain the rule",
-            parts: [
-              {
-                label: "We found",
-                body: (
-                  <>
-                    {of(d.spareRoom.agencies)} UK enquiry forms from independent agencies ask about a spare room,
-                    against {of(d.spareRoom.councils)} from councils and hubs.
-                  </>
-                ),
-              },
-              {
-                label: "The rules",
-                body: (
-                  <>
-                    England: {england.rule}{" "}
-                    <a href={england.url} className={link}>
-                      {england.source}
-                    </a>
-                  </>
-                ),
-              },
-            ] satisfies Part[],
-            tryThis: <>Say when children can share a room, so people who could foster do not rule themselves out.</>,
-          },
-        ]
-      : []),
-    {
-      id: "preview-application",
-      art: "check" as IllustrationName,
-      title: "Tell people early what the application will ask",
-      parts: [
-        {
-          label: "We found",
-          body: d.app.uk ? (
-            <>
-              A typical UK application form asks {d.app.uk.median} questions, against {d.ukFirst.median} on an enquiry
-              form.
-            </>
-          ) : (
-            <>We have not yet read enough application forms.</>
-          ),
-        },
-        {
-          label: "Research",
-          body: withdrawals ? (
-            <>
-              In England in {withdrawals.year}, {withdrawals.share}% of finished fostering applications ended in
-              withdrawal. Of the applicants who withdrew, {withdrawals.notExpected}% said the process was not what they
-              expected.{" "}
-              <a href="/research#withdrawals" className={link}>
-                Withdrawals
-              </a>
-            </>
-          ) : (
-            <>
-              Most fostering applications that finish end in withdrawal, not approval.{" "}
-              <a href="/research#withdrawals" className={link}>
-                Withdrawals
-              </a>
-            </>
-          ),
-        },
-      ] satisfies Part[],
-      tryThis: (
-        <>At the first conversation, share a plain list of what the application and assessment will ask, and why.</>
-      ),
-    },
-    {
-      id: "one-contact",
-      art: "peace" as IllustrationName,
-      title: "Keep one person in touch from enquiry to application",
-      parts: [
-        {
-          label: "Research",
-          body: (
-            <>
-              In one hub&rsquo;s evaluation, some people who withdrew said contact stopped after a hand-over.{" "}
-              <a href="/research#hand-offs" className={link}>
-                Hand-offs
-              </a>
-              . Carers stay when the service supports them reliably, and research for The Fostering Network
-              recommends one trusted relationship from the enquiry onwards.{" "}
-              <a href="/research#relationship" className={link}>
-                Why carers stay
-              </a>
-            </>
-          ),
-        },
-        {
-          label: "Other fields",
-          body: (
-            <>
-              Our review of blood and stem cell donation found the biggest loss comes right after the first form,
-              when nobody reaches the person.{" "}
-              <a href="/research/log" className={link}>
-                Research log
-              </a>
-            </>
-          ),
-        },
-      ] satisfies Part[],
-      tryThis: (
-        <>
-          Give each person one named contact. If you cannot reach someone, record it and try another way. We suggest
-          doing that within 1 working day.
-        </>
-      ),
-    },
     {
       id: "known-child",
+      step: ROUTE,
       art: "paper-airplane" as IllustrationName,
       title: "Ask if the enquiry is about a child the person already knows",
       parts: [
@@ -473,7 +405,92 @@ export function ForServices({
       ),
     },
     {
+      id: "preview-application",
+      step: PREPARE,
+      art: "check" as IllustrationName,
+      title: "Tell people early what the application will ask",
+      parts: [
+        {
+          label: "We found",
+          body: d.app.uk ? (
+            <>
+              A typical UK application form asks {d.app.uk.median} questions, against {d.ukFirst.median} on an enquiry
+              form.
+            </>
+          ) : (
+            <>We have not yet read enough application forms.</>
+          ),
+        },
+        {
+          label: "Research",
+          body: withdrawals ? (
+            <>
+              In England in {withdrawals.year}, {withdrawals.share}% of finished fostering applications ended in
+              withdrawal. Of the applicants who withdrew, {withdrawals.notExpected}% said the process was not what they
+              expected.{" "}
+              <a href="/research#withdrawals" className={link}>
+                Withdrawals
+              </a>
+            </>
+          ) : (
+            <>
+              Most fostering applications that finish end in withdrawal, not approval.{" "}
+              <a href="/research#withdrawals" className={link}>
+                Withdrawals
+              </a>
+            </>
+          ),
+        },
+      ] satisfies Part[],
+      tryThis: (
+        <>At the first conversation, share a plain list of what the application and assessment will ask, and why.</>
+      ),
+    },
+    {
+      id: "one-contact",
+      step: THREAD.name,
+      art: "peace" as IllustrationName,
+      title: "Keep one person in touch from enquiry to application",
+      parts: [
+        {
+          label: "Research",
+          body: (
+            <>
+              In one hub&rsquo;s evaluation, some people who withdrew said contact stopped after a hand-over.{" "}
+              <a href="/research#hand-offs" className={link}>
+                Hand-offs
+              </a>
+              . Carers stay when the service supports them reliably, and research for The Fostering Network
+              recommends one trusted relationship from the enquiry onwards.{" "}
+              <a href="/research#relationship" className={link}>
+                Why carers stay
+              </a>
+            </>
+          ),
+        },
+        {
+          label: "Other fields",
+          body: (
+            <>
+              Our review of blood and stem cell donation found the biggest loss comes right after the first form,
+              when nobody reaches the person.{" "}
+              <a href="/research/log" className={link}>
+                Research log
+              </a>
+            </>
+          ),
+        },
+      ] satisfies Part[],
+      tryThis: (
+        <>
+          Give each person one named contact. If you cannot reach someone, record it and try another way. We suggest
+          doing that within 1 working day.
+        </>
+      ),
+    },
+    {
       id: "test",
+      step: EVERY_STEP,
       art: "chart" as IllustrationName,
       title: "Test one change at a time, and share what you learn",
       parts: [
@@ -552,7 +569,16 @@ export function ForServices({
         <section aria-labelledby="fs-ideas" className="space-y-6 pb-12">
           <H2 id="fs-ideas">{insights.length} things to try</H2>
           {insights.map((x, i) => (
-            <Insight key={x.id} n={i + 1} id={x.id} title={x.title} art={x.art} parts={x.parts} tryThis={x.tryThis} />
+            <Insight
+              key={x.id}
+              n={i + 1}
+              step={x.step}
+              id={x.id}
+              title={x.title}
+              art={x.art}
+              parts={x.parts}
+              tryThis={x.tryThis}
+            />
           ))}
         </section>
 

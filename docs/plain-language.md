@@ -80,6 +80,10 @@ Use the words on the left. Explain the term the first time it appears on a page.
 | enquiry | The first time someone gets in touch to ask about fostering or adopting | lead, prospect, referral |
 | enquiry form | The form someone fills in to make an enquiry | first-contact form, intake form |
 | first reply | The first answer a person gets after they enquire | response, contact |
+| route the enquiry | Get an enquiry to the right team. We route the enquiry, never the person | triage, screen |
+| prepare | A first conversation and an honest picture of what the application asks | onboard, onboarding |
+| keep in touch | The service gets back in touch itself between steps, so nobody has to chase for news | nurture, drip, follow-up sequence |
+| step | One of the steps we sort the research by: ask, reply, route, prepare, apply, stay (`site/src/lib/steps.ts`) | stage of the funnel, pipeline stage |
 | where people get in touch | The page, form, phone line or email address someone uses to enquire | front door (if you must use it, explain it) |
 | checklist | Our draft list of what a good enquiry form and first reply do | rubric, audit framework |
 | sensitive question | A question about date of birth or age, ID numbers, past partners, health, a criminal record, past contact with child protection, ethnicity, gender, sexuality or faith, immigration status, or the person's own childhood. Our checklist says these should wait until after a conversation. The site counts them one way everywhere (`site/src/lib/sensitive.ts`) | personal question, special category (outside the law) |
