@@ -17,6 +17,7 @@ import { Separator } from "@/components/ui/separator"
 import { SiteFooter, SiteHeader } from "@/components/site-header"
 import { Illustration, type IllustrationName } from "@/components/illustration"
 import { Tag } from "@/components/tag"
+import { COUNTRY_ORDER, countryList } from "@/lib/compare"
 
 const SOURCE_URL =
   "https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf"
@@ -359,16 +360,27 @@ export default function Landing() {
                   Get involved
                 </CardTitle>
                 <CardDescription className="text-base">
-                  We’d like to hear from:
+                  We look at the first step in {COUNTRY_ORDER.length} countries. We’d like to hear from anyone who
+                  knows it:
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <ul className="ml-5 list-disc space-y-2 leading-7">
-                  <li>foster carers and adopters</li>
+                  <li>people thinking about fostering or adoption, and people who got in touch but did not go on</li>
+                  <li>foster carers, kinship carers and adopters</li>
                   <li>people who have been in care</li>
-                  <li>recruitment teams</li>
-                  <li>developers of public service forms</li>
+                  <li>recruitment and assessment teams in councils, agencies and charities</li>
+                  <li>researchers, regulators and policy teams</li>
+                  <li>people who build public service forms</li>
+                  <li>
+                    native speakers who can check our Dutch, French, German or Spanish wording, or the te reo Māori in the
+                    New Zealand form
+                  </li>
                 </ul>
+                <p className="leading-7">
+                  Tell us about a service, rule or study we have missed, or a fact we got wrong. We cover{" "}
+                  {countryList(COUNTRY_ORDER)}. Please leave out personal details about anyone else.
+                </p>
               </CardContent>
               <CardFooter>
                 <Button asChild>

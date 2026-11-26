@@ -71,7 +71,7 @@ What the law in each UK nation says a fostering or adoption assessment must cove
 |---|---|
 | `front_door_id` | Short stable identifier, lower case with hyphens |
 | `name` | Public name of the front door |
-| `type` | `regional_hub`, `single_authority`, `national_brand`, `regional_service`, `regional_adoption_agency` |
+| `type` | `regional_hub`, `single_authority`, `national_brand`, `regional_service`, `regional_adoption_agency`; for services that are not councils, `independent_fostering_agency` (a charity or company that recruits foster carers) and `voluntary_adoption_agency` (a charity that approves adopters), the same names the census uses |
 | `nation` | England, Wales, Scotland or Northern Ireland |
 | `coverage` | Authorities covered, in words |
 | `website` | Home page |

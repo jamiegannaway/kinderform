@@ -277,6 +277,12 @@ const STEP = (p: number) => {
 }
 // In dark mode the light primary makes /50 a mid grey on which no text passes, so it drops to /40.
 const SHADE = (p: number) => `bg-primary/${STEP(p)}${STEP(p) === 50 ? " dark:bg-primary/40" : ""}`
+// Each column needs about 2.9rem, so "100%" fits; the topic column takes 8rem on small screens.
+// A grid wider than the screen scrolls sideways, with the topics pinned on the left. Written out
+// in full so Tailwind generates the classes (the Content-Security-Policy rules out inline styles).
+const gridWidth = (n: number) =>
+  n <= 4 ? "min-w-[20rem]" : n <= 7 ? "min-w-[30rem]" : n <= 11 ? "min-w-[40rem]" : "min-w-[50rem]"
+
 export function HeatGrid({
   columns,
   rows,
@@ -291,16 +297,18 @@ export function HeatGrid({
   shortOnly?: boolean
 }) {
   return (
-    <div
-      tabIndex={0}
-      className="overflow-x-auto rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
-    >
-      <table
-        className={`w-full table-fixed border-separate border-spacing-1 text-sm ${shortOnly ? "min-w-[46rem]" : "min-w-[18rem]"}`}
+    <div>
+      <div
+        tabIndex={0}
+        className="overflow-x-auto rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
+        <table className={`w-full table-fixed border-separate border-spacing-1 text-sm ${gridWidth(columns.length)}`}>
         <thead>
           <tr>
-            <th scope="col" className="w-[36%] text-left font-medium text-muted-foreground">
+            <th
+              scope="col"
+              className="sticky left-0 z-10 w-32 bg-card text-left font-medium text-muted-foreground sm:w-[30%]"
+            >
               <span className="sr-only">Topic</span>
             </th>
             {columns.map((c) => (
@@ -330,7 +338,7 @@ export function HeatGrid({
         <tbody>
           {rows.map((r) => (
             <tr key={r.label}>
-              <th scope="row" className="pr-2 text-left font-normal">
+              <th scope="row" className="sticky left-0 z-10 bg-card pr-2 text-left font-normal">
                 {r.label}
                 {r.note && <span className="ml-1 text-xs text-muted-foreground">{r.note}</span>}
               </th>
@@ -354,7 +362,11 @@ export function HeatGrid({
             </tr>
           ))}
         </tbody>
-      </table>
+        </table>
+      </div>
+      {columns.length > 5 && (
+        <p className="mt-2 text-xs text-muted-foreground sm:hidden">Swipe the table sideways to see every column.</p>
+      )}
     </div>
   )
 }
