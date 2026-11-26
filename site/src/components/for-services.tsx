@@ -423,6 +423,26 @@ export function ForServices({
           ),
         },
         {
+          label: "The law",
+          body: (
+            <>
+              Since June 2026, every council in England must publish a kinship local offer. It must take reasonable
+              steps so that kinship carers get the information that applies to them.{" "}
+              <a href="https://www.legislation.gov.uk/ukpga/2026/21/section/5" className={link}>
+                Children&rsquo;s Wellbeing and Schools Act 2026, section 5
+              </a>
+              . Statutory guidance says families should get clear information about their legal options at the
+              outset.{" "}
+              <a
+                href="https://www.gov.uk/government/publications/kinship-care-guidance-for-local-authorities"
+                className={link}
+              >
+                Kinship care guidance
+              </a>
+            </>
+          ),
+        },
+        {
           label: "Research",
           body: (
             <>

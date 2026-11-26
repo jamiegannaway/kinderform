@@ -19,8 +19,8 @@ This review is about the adult who gets in touch. It records nothing about any c
 2. **But some do reach a general fostering form.** GOV.UK tells people who want to look after a child in care to ask their council about "fostering a child you know". None of the 48 UK fostering enquiry forms we read asks if the person already knows the child (grade D, our own count).
 3. **Most say they did not know their legal options.** In one survey, three-quarters of kinship carers said they did not know enough about their legal options when they took on the child. In another, it was 82% (grade C).
 4. **The legal choice affects money, and people commit without knowing it.** So a first reply must name the options without ranking them, and point to independent advice.
-5. **Councils in England now have a legal duty to publish a kinship local offer.** In a 2025 survey, 13% of kinship carers had seen their council's offer (grade C).
-6. **We found no published standard for how fast a kinship team should first reply.** The time we suggest is reasoned, not taken from evidence.
+5. **Councils in England now have a legal duty to publish a kinship local offer.** The duty began on 29 June 2026. In a 2025 survey, 13% of kinship carers had seen their council's offer (grade C).
+6. **We found no published standard for how fast a kinship team should first reply.** The statutory guidance, updated in October 2026, sets no time. The time we suggest is reasoned, not taken from evidence.
 7. **The best-rated support abroad is a person, not a form.** Two kinship navigator programmes in the United States are rated "supported". Both give carers someone to talk to, with legal and money information early (grade B).
 
 ## 1. The words and the rules in England
@@ -29,18 +29,19 @@ We take the words from official sources. Scotland, Wales and Northern Ireland ha
 
 | Item | What it means when someone first gets in touch | Source |
 |---|---|---|
-| The national kinship care strategy | Sets the direction: more support for kinship families, a trial of allowances, and better information. It says more than 130,000 children live in kinship care in England. It adds no duty about first contact. | Department for Education, *Championing kinship care*, December 2023 |
-| Statutory guidance on kinship care | Says each council should have a kinship local offer that is "clearly expressed, regularly updated, made freely and widely available". It should set out who can get financial support and how kinship foster carers are assessed and approved. | Department for Education, October 2024 |
-| The kinship local offer in law | Each council must publish how it supports children in kinship care and their carers. That includes information on financial support, and on services for health, relationships, education and housing. It must take "such steps as are reasonably practicable" so that carers receive the information that applies to them. It must consult kinship carers before publishing. | Children Act 1989, sections 22H and 22I, added by the Children's Wellbeing and Schools Act 2026 |
-| Family group decision-making | Before a council applies to court for a care or supervision order, it must offer the parents a family meeting, unless that is not in the child's interests. Relatives and friends can be part of the family network. This is often how a relative first hears about a child's situation. | Children Act 1989, section 31ZA, added by the 2026 Act |
-| Temporary approval of a connected person | A council can place a child it looks after with a relative or friend straight away, after a first assessment. The approval lasts up to 16 weeks, and the full fostering assessment must be done in that time. It can be extended by up to 8 weeks. | Care Planning, Placement and Case Review (England) Regulations 2010, regulations 24 and 25 |
+| The national kinship care strategy | Sets the direction: more support for kinship families, a trial of allowances, and better information. It says more than 130,000 children lived in kinship care in England in 2021. It adds no duty about first contact. | Department for Education, *Championing kinship care*, December 2023 |
+| Statutory guidance on kinship care | Says a kinship local offer should be "clearly expressed, regularly updated, made freely and widely available". It was first published in October 2024. The October 2026 version adds the new legal duties and six national kinship standards. It says a senior manager should be responsible for the local offer. It sets no time for a first reply. | Department for Education, *Kinship care: statutory guidance*, October 2026 |
+| The national kinship standards | One standard says families get "clear information about financial support, legal options, rights and entitlements, and service pathways at the outset". It says information should come in several formats, in print as well as online. Another says an "identified practitioner" links the services and helps the family find its way. | The same guidance, chapter 2 |
+| The kinship local offer in law | Each council must publish how it supports children in kinship care and their carers. That includes information on financial support, and on services for health, relationships, education and housing. It must take "such steps as are reasonably practicable" so that carers receive the information that applies to them. Before publishing, it must consult children in kinship care, kinship carers and people who speak for them. The duty has applied to councils in England since 29 June 2026. | Children Act 1989, sections 22H and 22I, added by section 5 of the Children's Wellbeing and Schools Act 2026 |
+| Family group decision-making | Before a council applies to court for a care or supervision order, it must offer the parents a family meeting, unless that is not in the child's interests. Relatives and friends can be part of the family network. This is often how a relative first hears about a child's situation. In force since 15 July 2026. | Children Act 1989, section 31ZA, added by section 1 of the 2026 Act |
+| Temporary approval of a connected person | A council can place a child it looks after with a relative or friend straight away, once it has assessed that the person is suitable. The approval lasts up to 16 weeks, and the full fostering assessment must be done in that time. It can be extended once, by up to 8 weeks. | Care Planning, Placement and Case Review (England) Regulations 2010, regulations 24 and 25 |
 | The kinship assessment form | CoramBAAF publishes the form that social workers use to assess kinship carers. We note only that it exists. Kinderform will not copy it, fill it in ahead or screen people against it. | CoramBAAF |
 | Special guardianship order | A court order that gives the carer parental responsibility until the child is 18. Support depends on the council, and on whether the council looked after the child before. | Children Act 1989, sections 14A to 14G |
 | Child arrangements order | A court order that says where a child lives. Financial support is up to the council. | Children Act 1989, section 8 |
 | Informal care and private fostering | Most kinship care is an informal family arrangement that the council may not know about. When someone who is not a close relative cares for a child for 28 days or more, it is private fostering, and the council must be told. | GOV.UK, *Looking after someone else's child* |
-| The allowance trial | Seven areas are testing an allowance for kinship carers, from April 2026. The Department for Education says it will support around 5,000 children. | Department for Education, 27 February 2026 |
-| How Ofsted counts kinship | Ofsted counts "kinship care arrangements" apart from "mainstream" fostering households. | Ofsted, *Fostering in England 2025–26* |
-| Reviews still to come | The National Kinship Care Ambassador said national kinship standards would follow in 2026. The Law Commission is reviewing kinship care law. Either could change this picture. | Department for Education, February 2026; Law Commission, 2026 |
+| The allowance trial | Seven areas are testing an allowance for kinship carers, from 1 April 2026, for up to three and a half years. It is paid at the same rate as the national minimum fostering allowance and is not means-tested. It is for special guardians, and for some carers with a child arrangements order. The Department for Education says it will support around 5,000 children. | Department for Education, news story of 27 February 2026 and the programme specification |
+| How Ofsted counts kinship | Ofsted counts "kinship care arrangements" apart from "mainstream" fostering households. It collects no enquiry or recruitment figures for kinship households. | Ofsted, *Fostering in England 2025–26*, and its guidance for the 2025–26 data return |
+| A review still to come | The Law Commission consulted on kinship care law from July to October 2026. Its final report could change this picture. | Law Commission, Consultation Paper 278, July 2026 |
 
 ## 2. Official figures
 
@@ -49,10 +50,11 @@ We take the words from official sources. Scotland, Wales and Northern Ireland ha
 | 9,230 kinship care households were approved in England at 31 March 2026. That is 22% of all 42,680 fostering households. | Ofsted, *Fostering in England, April 2025 to March 2026* | B | Up 18% since 2022. All are council households. |
 | 5,770 kinship households were newly approved in 2025–26, and 4,960 left the register. | As above | B | Ofsted says turnover is high because households are approved and removed "based on need and the plan for the child". Leaving often follows a move to special guardianship. Do not compare it with mainstream carers who stop. |
 | 8,345 applications to foster were received in 2025–26. Of those finished in the year, 2,080 were approved and 3,195 were withdrawn. | As above | B | These are mainstream figures. Kinship is not in them. |
-| About 141,000 children lived in kinship care in England and Wales in 2021. | Office for National Statistics, Census 2021, published September 2023 | B | The Office for National Statistics calls this a rough estimate. |
-| 59.2% of children in kinship care lived with at least one grandparent: about 72,000 children. | As above | B | Many carers are older. |
-| About 12,500 children were in family and friends foster care in England. About 74,000 were in mostly informal arrangements. | Department for Education, *Improving the Kinship Local Offer*, February 2026 | B and C | A modelled estimate. More than half of children in kinship care are out of the state's view. |
-| The share of looked-after children placed in kinship foster care ranges from 4% to 39% between councils. | Foundations, as cited in the report above | B, read secondhand | Councils use kinship fostering very differently. |
+| About 141,000 children lived in kinship care in England and Wales in 2021. | Office for National Statistics, Census 2021, published September 2023 | B | The Office for National Statistics calls this "only a rough estimate". It counted 121,000 children in households of five or fewer people, and estimated the rest. It counts relatives only, not family friends. |
+| 59.2% of the 121,000 children counted lived with at least one grandparent: about 72,000 children. | As above | B | Many carers are older. |
+| In 25.3% of kinship households, at least one person's health limited them a lot. In households with parents, it was 10.0%. | As above | B | A share of households, not of carers. |
+| About 12,500 children were in family and friends foster care in England. About 74,000 were in mostly informal arrangements. | National Kinship Care Ambassador, *Improving the kinship local offer and approach to kinship care*, February 2026 | B and C | A modelled estimate. The report says more than half of children in kinship care are "largely hidden from the view of the state". |
+| The share of looked-after children placed in kinship foster care ranges from 4% to 39% between councils. | Foundations, as cited in the report above | B, read secondhand | Councils use kinship fostering very differently. We did not open the Foundations report. |
 
 ## 3. What relatives and friends say about first contact
 
@@ -68,13 +70,13 @@ We take the words from official sources. Scotland, Wales and Northern Ireland ha
 | Some special guardians "had to resort to Google to get basic information". Hard experiences during assessment put them off asking the council for help later. | Nuffield Family Justice Observatory, evidence reviews on special guardianship, 2019 | C | High. Early experience shapes later trust. |
 | Fear of "failing the assessment" left some carers feeling unable to complain. | Hunt, *Two decades of UK research on kinship care*, 2020 | C | Medium. Offer a way to raise concerns that sits outside the assessment. |
 | Most Black and Asian kinship carers felt they had no choice, and decided under pressure without enough information. Professionals assumed their wider family would help. | Tah and Selwyn, *Raised by Relatives*, Rees Centre with Kinship, 2025: 37 carers | C | High for fairness. |
-| Many arrangements start with no notice, in an emergency. Some families do not see themselves as "kinship" families. One carer said the local offer was hard to find on the council's website. | Department for Education, *Improving the Kinship Local Offer*, February 2026 | C and D | High. Use everyday words about the situation. |
+| "As many as one in two placements are arranged without notice as a result of an emergency." Some families do not see themselves as "kinship" families. One carer said finding the local offer "is the first challenge we all face". | National Kinship Care Ambassador, *Improving the kinship local offer and approach to kinship care*, February 2026: 12 councils, 10 voluntary organisations, carers and children | C and D | High. Use everyday words about the situation. The "one in two" comes from a 2019 charity survey that we did not open. |
 
 ## 4. Front doors, advice lines and local offers
 
 | Route | What we found | Grade | What carries over |
 |---|---|---|---|
-| GOV.UK | It tells people who want to look after a child in care to ask their council about "fostering a child you know". So national advice sends relatives towards "fostering" in general. | D | High. General fostering forms must be ready for them. |
+| GOV.UK | "If a child is currently in care and you want to look after them, you must first be approved as a foster carer. You can contact your local council for information about fostering a child you know." So national advice sends relatives towards "fostering" in general. | D | High. General fostering forms must be ready for them. |
 | Council pages about kinship fostering | The pages we read say the child's social worker starts the process, not the carer. Some sit beside a general fostering enquiry form. | D, a small sample | High. Relatives and friends can reach a general form. |
 | Our own census of enquiry forms | None of the 48 UK fostering enquiry forms we read asks if the person already knows the child, or offers kinship as a choice. Across 192 forms in 11 countries, 2 do, both in the United States. | D, our own count | High. See the method below. |
 | Councils' published kinship policies | Family Rights Group read the policies of 154 councils in England. 36% had no policy that was up to date and free to read online. Of 105 policies read in detail, three-quarters used a supplier's standard text. | C | High. Link to the local offer, but do not assume it answers the person's questions. |
@@ -101,6 +103,8 @@ A federal clearinghouse rates programmes for kinship carers. Many of its measure
 ## 6. What it could mean for the Kinderform standard
 
 All of this is for discussion. Our earlier review suggested one rule: send a kinship enquiry to the kinship team within 1 working day, with no follow-up messages. This review points to a fuller version.
+
+It fits the national kinship standards. They say families should get clear information about their legal options "at the outset". For someone who arrives through a form, the first reply is the outset.
 
 ### A route for relatives and friends, in five parts
 
@@ -167,10 +171,11 @@ A person writes it, from a template. It should:
 
 - **We found no research on kinship carers who use general fostering enquiry forms.** Our own count is a first step. It is a word search, and a person has not checked it.
 - **We found no published reply-time standard** for councils' kinship teams, or for the advice lines.
-- **It is not clear whether Ofsted counts kinship enquiries as "initial enquiries".** Its guidance does not say.
+- **Ofsted collects no enquiry figures for kinship households.** Its guidance does not say how to count a relative or friend who uses a general fostering form.
 - **Wales, Northern Ireland, Ireland, New Zealand and most of Australia** were not reviewed in depth. Scotland was covered only for its advice line.
 - **The core studies are old.** Hunt and others (2008) came before the 2024 guidance and the 2026 Act.
 - **No one has tested a way of handling first contact with kinship carers in England.** Every idea here needs testing, ideally with kinship carers helping to write the words.
-- **The rules may change.** National kinship standards and the Law Commission's review are still to come.
+- **The rules may change again.** The Law Commission's final report is still to come.
+- **Read secondhand:** the 4% to 39% range and the "one in two" figure, which we took from the Ambassador's report.
 
 ## 9. Sources
