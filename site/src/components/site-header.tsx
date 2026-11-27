@@ -3,6 +3,9 @@ import { CodeXml, Menu, Moon, Sun, X } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 
 export const REPO_URL = "https://github.com/jamiegannaway/kinderform"
+// The project's WhatsApp community, where services and carers can say what they need. A plain link:
+// the site loads nothing from WhatsApp.
+export const COMMUNITY_URL = "https://chat.whatsapp.com/D7JeyNvLvtT8QIUAetXgzY"
 
 // The main pages, in the order a service would want them. The logo is the link home.
 const TABS = [
@@ -152,6 +155,12 @@ export function SiteFooter() {
   return (
     <footer className="border-t">
       <div className="mx-auto max-w-6xl space-y-2 px-6 py-8 text-sm text-muted-foreground">
+        <p>
+          <a href={COMMUNITY_URL} className="font-medium text-foreground underline underline-offset-4">
+            What do you really need?
+          </a>{" "}
+          Tell us in our WhatsApp community. The link opens WhatsApp.
+        </p>
         <p>
           <a href="/about" className="font-medium text-foreground underline underline-offset-4">
             About
