@@ -45,3 +45,16 @@ python3 schema/validate_enquiry.py schema/examples/valid/conversation-timezones.
 The [local adapter](enquiry_adapter.py) creates an initial fostering record from a valid submission. It copies only allowed monitoring fields. Your service supplies a new random identifier and the actual arrival time. Intent stays absent unless the person declares it. The adapter rejects adoption and undecided interest; this monitoring slice covers fostering only.
 
 Run `python3 tests/validate_enquiry_adapter.py` for the synthetic mapping and event trace. These checks do not make real records anonymous or suitable for sharing.
+
+## Data handling layer (v0.1 draft)
+
+These files help a service store enquiry data correctly in its own systems. Read the [developer guide](../docs/data-handling.md) first.
+
+- [`data-handling.json`](data-handling.json) tags every field with its sensitivity, purposes, retention class and AI use. `python3 tests/validate_data_handling.py` checks it.
+- The enquiry schema has four optional retention fields. [`validate_enquiry.py`](validate_enquiry.py) checks their dates.
+- [`interaction.schema.json`](interaction.schema.json) describes one event in an append-only log. `python3 schema/validate_interactions.py log.jsonl` checks a log. `python3 tests/validate_interactions.py` checks the made-up logs in `examples/interaction/`.
+- `python3 tools/interaction_log.py append|verify`, `tools/webhook_sign.py` and `tools/export_csv.py` are the connection tools. `python3 tests/validate_connection_tools.py` tests them.
+- `examples/untrusted-text/cases.json` holds made-up submissions for testing an AI tool. `tools/untrusted_text.py` marks typed text as data.
+- [`profiles/`](profiles/README.md) holds the unverified UK profile.
+
+Do not change `enquiry-submission.schema.json` for this layer: released starter kits hold a copy.
