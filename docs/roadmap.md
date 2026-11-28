@@ -26,7 +26,7 @@ See the [developer guide](data-handling.md). Everything here is a draft, not leg
 - [x] Publish the retention fields as monitoring schema version 0.2 and keep version 0.1 as first published (28 November 2026). A published schema address keeps its content; `starter/pack.py` lists each address
 - [x] Lock the log while `tools/interaction_log.py` adds an event, so two programs writing at once cannot break the chain (28 November 2026)
 - [x] Add a workflow that tags each kit release, so the source link in each kit's credits works (`tools/tag_releases.py`, `.github/workflows/tag-releases.yml`, 28 November 2026). It runs when a release archive lands on main
-- [ ] Run the "tag kit releases" workflow once by hand, to tag v0.1.0-draft.3 to draft.6 (commits `fb90489`, `61dc993`, `6b730f8` and `b40d8db`)
+- [x] Run the "tag kit releases" workflow once, to tag v0.1.0-draft.3 to draft.6 (28 November 2026; commits `fb90489`, `61dc993`, `6b730f8` and `b40d8db`)
 - [ ] Add adoption to the monitoring record: agree the events, then test adoption, undecided interest, kinship routes and a later change of interest. Today the record and its adapter cover fostering only
 - [x] Add the interaction log schema, validator and made-up logs: hash chain, segments, corrections, reverts and deletion in every system
 - [x] Add the connection tools: log append and verify, webhook signing, purpose-limited CSV export
