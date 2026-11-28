@@ -1,6 +1,7 @@
-import { CodeXml, Menu, MessageCircle, Moon, Sparkles, Sun, X } from "lucide-react"
+import { CodeXml, Menu, MessageCircle, Moon, Sun, X } from "lucide-react"
 
 import { Button, buttonVariants } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 
 export const REPO_URL = "https://github.com/jamiegannaway/kinderform"
 // The project's WhatsApp community, where services and carers can say what they need. A plain link:
@@ -14,21 +15,25 @@ export const NOTEBOOK_URL = "https://notebook.google.com/notebook/7990cbcd-38ea-
 const TABS = [
   { href: "/for-services", label: "For services" },
   { href: "/example-form", label: "Example forms" },
-  { href: "/build", label: "Build a form" },
   { href: "/form-check", label: "Form check" },
   { href: "/research", label: "Research" },
   { href: "/compare", label: "Compare" },
 ]
+// The one main action, with the same words as the home page's main button. On wide screens it is
+// the only solid button in the bar; in the Menu on smaller screens it is the first item.
+const ACTION = { href: "/build", label: "Get the starter kit" }
 const CONTACT = { href: "/#get-involved", label: "Get in touch" }
 
-// Light or dark, in the shadcn/ui toggle group look. public/theme.js does the switching and
-// sets aria-pressed. Which button looks selected comes from <html data-theme>, which that
-// script sets before the page is drawn, so the control never shows the wrong state. It stays
+// Light or dark, in the shadcn/ui toggle group look: the chosen one has the quiet accent
+// background, so the switch does not compete with the main action. public/theme.js does the
+// switching and sets aria-pressed. Which button looks selected comes from <html data-theme>, which
+// that script sets before the page is drawn, so the control never shows the wrong state. It stays
 // hidden when JavaScript is off (<html data-js> is missing), because it could not work.
-// The words "Light" and "Dark" show from the 2xl width; below that the icons carry them.
+// The icons carry the choice; the words "Light" and "Dark" are there for screen readers and as the
+// tooltip, so the bar has room for the main action.
 const THEMES = [
-  { value: "light", label: "Light", Icon: Sun, on: "bg-primary text-primary-foreground dark:bg-transparent dark:text-muted-foreground" },
-  { value: "dark", label: "Dark", Icon: Moon, on: "dark:bg-primary dark:text-primary-foreground" },
+  { value: "light", label: "Light", Icon: Sun, on: "bg-accent text-accent-foreground dark:bg-transparent dark:text-muted-foreground" },
+  { value: "dark", label: "Dark", Icon: Moon, on: "dark:bg-accent dark:text-accent-foreground" },
 ] as const
 
 export function ThemeSwitch({ className = "" }: { className?: string }) {
@@ -36,7 +41,7 @@ export function ThemeSwitch({ className = "" }: { className?: string }) {
     <div
       role="group"
       aria-label="Colour theme"
-      className={`hidden items-center gap-0.5 rounded-md border bg-background p-0.5 shadow-xs [html[data-js]_&]:inline-flex ${className}`}
+      className={`hidden items-center gap-0.5 rounded-md border bg-background p-0.5 [html[data-js]_&]:inline-flex ${className}`}
     >
       {THEMES.map(({ value, label, Icon, on }) => (
         <button
@@ -45,10 +50,10 @@ export function ThemeSwitch({ className = "" }: { className?: string }) {
           data-theme-choice={value}
           aria-pressed={value === "light"}
           title={label}
-          className={`inline-flex h-7 items-center gap-1.5 rounded-sm px-2 text-sm font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 2xl:px-2.5 ${on}`}
+          className={`inline-flex h-7 items-center gap-1.5 rounded-sm px-2 text-sm font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 ${on}`}
         >
           <Icon className="size-4" aria-hidden="true" />
-          <span className="sr-only 2xl:not-sr-only">{label}</span>
+          <span className="sr-only">{label}</span>
         </button>
       ))}
     </div>
@@ -56,7 +61,7 @@ export function ThemeSwitch({ className = "" }: { className?: string }) {
 }
 
 function NavLinks({ current, stacked = false }: { current: string; stacked?: boolean }) {
-  const items = stacked ? [...TABS, CONTACT] : TABS
+  const items = stacked ? [ACTION, ...TABS, CONTACT] : TABS
   return (
     <ul className={stacked ? "grid gap-1" : "flex items-center gap-1"}>
       {items.map((t) => {
@@ -97,7 +102,9 @@ function DraftBanner() {
   )
 }
 
-// One row at every width. From the xl width the links sit in the row. Below it they open from a
+// One row at every width, with a line under it so it reads as a bar. From the xl width it has
+// three parts: the pages on the left, the quiet links (get in touch, GitHub, light or dark) on the
+// right, and after a divider the one main action. Below xl the pages and the action open from a
 // Menu button, built on <details> so it works without JavaScript, in the shadcn/ui dropdown look.
 export function SiteHeader({ current }: { current: string }) {
   return (
@@ -109,173 +116,147 @@ export function SiteHeader({ current }: { current: string }) {
         Skip to content
       </a>
       <DraftBanner />
-      <header className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-4">
-        <a
-          href="/"
-          className="mr-2 text-lg font-semibold tracking-tight"
-          aria-label="Kinderform home"
-          aria-current={current === "/" ? "page" : undefined}
-        >
-          kinderform
-        </a>
-        <nav aria-label="Main" className="hidden xl:block">
-          <NavLinks current={current} />
-        </nav>
-        <div className="ml-auto flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm" className="hidden xl:inline-flex">
-            <a href={CONTACT.href}>{CONTACT.label}</a>
-          </Button>
-          <Button asChild variant="outline" size="sm">
-            <a href={REPO_URL} title="The code, data and research on GitHub">
-              <CodeXml aria-hidden="true" />
-              <span className="sr-only sm:not-sr-only">GitHub</span>
-              <span className="sr-only">: Kinderform's code and data</span>
-            </a>
-          </Button>
-          <ThemeSwitch />
-          <details className="group relative xl:hidden">
-            <summary
-              className={`${buttonVariants({ variant: "outline", size: "sm" })} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}
-            >
-              <Menu className="group-open:hidden" aria-hidden="true" />
-              <X className="hidden group-open:block" aria-hidden="true" />
-              Menu
-            </summary>
-            <nav
-              aria-label="Main"
-              className="absolute top-full right-0 z-50 mt-2 w-56 rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
-            >
-              <NavLinks current={current} stacked />
-            </nav>
-          </details>
+      <header className="border-b">
+        <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-6">
+          <a
+            href="/"
+            className="mr-2 text-lg font-semibold tracking-tight"
+            aria-label="Kinderform home"
+            aria-current={current === "/" ? "page" : undefined}
+          >
+            kinderform
+          </a>
+          <nav aria-label="Main" className="hidden xl:block">
+            <NavLinks current={current} />
+          </nav>
+          <div className="ml-auto flex items-center gap-2">
+            <Button asChild variant="ghost" size="sm" className="hidden text-muted-foreground xl:inline-flex">
+              <a href={CONTACT.href}>{CONTACT.label}</a>
+            </Button>
+            <Button asChild variant="ghost" size="sm" className="text-muted-foreground">
+              <a href={REPO_URL} title="The code, data and research on GitHub">
+                <CodeXml aria-hidden="true" />
+                <span className="sr-only sm:not-sr-only">GitHub</span>
+                <span className="sr-only">: Kinderform's code and data</span>
+              </a>
+            </Button>
+            <ThemeSwitch />
+            <Separator orientation="vertical" className="mx-1 hidden data-[orientation=vertical]:h-5 xl:block" />
+            <Button asChild size="sm" className="hidden xl:inline-flex">
+              <a href={ACTION.href} aria-current={current === ACTION.href ? "page" : undefined}>
+                {ACTION.label}
+              </a>
+            </Button>
+            <details className="group relative xl:hidden">
+              <summary
+                className={`${buttonVariants({ variant: "outline", size: "sm" })} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}
+              >
+                <Menu className="group-open:hidden" aria-hidden="true" />
+                <X className="hidden group-open:block" aria-hidden="true" />
+                Menu
+              </summary>
+              <nav
+                aria-label="Main"
+                className="absolute top-full right-0 z-50 mt-2 w-56 rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
+              >
+                <NavLinks current={current} stacked />
+              </nav>
+            </details>
+          </div>
         </div>
       </header>
     </>
   )
 }
 
-// The footer on every page: the community first, with a QR code for people reading on a computer,
-// then the project's pages and the legal pages. The QR code is a plain SVG made from COMMUNITY_URL
+// The footer on every page, on the light grey of the theme's muted colour so it reads as the end
+// of the page. Three short parts: the community, with a QR code for people reading on a computer;
+// the project's pages and the legal pages as plain lists; and one line on privacy and licences,
+// with the detail left to the pages it links to. The QR code is a plain SVG made from COMMUNITY_URL
 // (public/images/community-qr.svg says how to remake it). It stays dark on white in dark mode, so
 // phones can read it.
+const PROJECT_LINKS = [
+  { href: "/about", label: "About" },
+  { href: "/research/log", label: "Research log" },
+  { href: NOTEBOOK_URL, label: "Ask the research (Google\u2019s AI)" },
+  { href: REPO_URL, label: "Code and data on GitHub" },
+]
+const LEGAL_LINKS = [
+  { href: "/privacy", label: "Privacy policy" },
+  { href: "/terms", label: "Terms of use" },
+  { href: "/licences", label: "Licences" },
+]
+
+function FooterList({ id, title, links }: { id: string; title: string; links: { href: string; label: string }[] }) {
+  return (
+    <nav aria-labelledby={id} className="space-y-3">
+      <h2 id={id} className="font-medium text-foreground">
+        {title}
+      </h2>
+      <ul className="space-y-2">
+        {links.map((l) => (
+          <li key={l.href}>
+            <a href={l.href} className="text-foreground underline-offset-4 hover:underline">
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
 export function SiteFooter() {
   const link = "font-medium text-foreground underline underline-offset-4"
   return (
-    <footer className="border-t">
-      <div className="mx-auto max-w-6xl space-y-10 px-6 py-10 text-sm text-muted-foreground">
-        <section
-          aria-labelledby="footer-community"
-          className="flex flex-col gap-6 rounded-xl border bg-card p-6 text-card-foreground md:flex-row md:items-center md:justify-between"
-        >
-          <div className="max-w-xl space-y-3">
-            <h2 id="footer-community" className="text-lg font-semibold tracking-tight">
-              What do you really need?
-            </h2>
-            <p className="leading-6 text-muted-foreground">
-              Join the Kinderform community on WhatsApp. Tell us what would help, ask a question, and hear what we
-              build next.
-            </p>
-            <p className="text-xs leading-5 text-muted-foreground">
-              Other members may see your phone number. Please share nothing about a child.{" "}
-              <a href="/privacy#whatsapp" className={link}>
-                How we use what you share
-              </a>
-            </p>
-            <Button asChild className="mt-1">
-              <a href={COMMUNITY_URL}>
-                <MessageCircle aria-hidden="true" />
-                Join on WhatsApp
-              </a>
-            </Button>
-          </div>
-          {/* Hidden on phones: you cannot scan the screen you are reading. */}
-          <figure className="hidden shrink-0 text-center md:block">
+    <footer className="border-t bg-muted/50">
+      <div className="mx-auto max-w-6xl space-y-8 px-6 py-10 text-sm text-muted-foreground">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto_auto] md:gap-16">
+          <section aria-labelledby="footer-community" className="flex max-w-md items-start gap-5">
+            {/* Hidden on phones: you cannot scan the screen you are reading. */}
             <img
               src="/images/community-qr.svg"
               alt="QR code that opens the Kinderform community on WhatsApp"
-              width={144}
-              height={144}
-              className="size-36 rounded-md bg-white p-2 ring-1 ring-border"
+              width={96}
+              height={96}
+              className="hidden size-24 shrink-0 rounded-md bg-white p-1.5 ring-1 ring-border md:block"
             />
-            <figcaption className="mt-2 text-xs text-muted-foreground">Scan with your phone&rsquo;s camera</figcaption>
-          </figure>
-        </section>
-
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          <nav aria-labelledby="footer-project" className="space-y-3">
-            <h2 id="footer-project" className="font-medium text-foreground">
-              Kinderform
-            </h2>
-            <ul className="space-y-2">
-              <li>
-                <a href="/about" className={link}>
-                  About
+            <div className="space-y-3">
+              <h2 id="footer-community" className="font-medium text-foreground">
+                What do you really need?
+              </h2>
+              <p className="leading-6">Tell us in the Kinderform community on WhatsApp.</p>
+              <Button asChild size="sm">
+                <a href={COMMUNITY_URL}>
+                  <MessageCircle aria-hidden="true" />
+                  Join on WhatsApp
                 </a>
-                : who made this, and how
-              </li>
-              <li>
-                <a href="/research/log" className={link}>
-                  Research log
+              </Button>
+              <p className="text-xs leading-5">
+                Other members may see your phone number. Please share nothing about a child.{" "}
+                <a href="/privacy#whatsapp" className={link}>
+                  How we use what you share
                 </a>
-                : what each piece of research could mean for the project
-              </li>
-              <li>
-                <a href={NOTEBOOK_URL} className={`inline-flex items-center gap-1.5 ${link}`}>
-                  <Sparkles aria-hidden="true" className="size-4" />
-                  Explore the research in a Gemini Notebook
-                </a>
-                : ask questions about it, using Google&rsquo;s AI
-              </li>
-              <li>
-                <a href={REPO_URL} className={link}>
-                  Kinderform on GitHub
-                </a>
-                : our code, data and research, free for anyone to use
-              </li>
-            </ul>
-          </nav>
-          {/* Legal: the three legal pages, then what the site does and does not do, then the licences in short. */}
-          <nav aria-labelledby="footer-legal" className="space-y-3">
-            <h2 id="footer-legal" className="font-medium text-foreground">
-              Legal
-            </h2>
-            <ul className="space-y-2">
-              <li>
-                <a href="/privacy" className={link}>
-                  Privacy policy
-                </a>
-              </li>
-              <li>
-                <a href="/terms" className={link}>
-                  Terms of use
-                </a>
-              </li>
-              <li>
-                <a href="/licences" className={link}>
-                  Licences
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div className="space-y-3 sm:col-span-2 lg:col-span-1">
-            <h2 className="font-medium text-foreground">This site</h2>
-            <p className="leading-6">
-              This site sets no cookies, does not track you and loads nothing from other sites. A dark mode choice
-              stays on your device.
-            </p>
-            <p className="leading-6">
-              Code: MIT licence. Writing and data:{" "}
-              <a href="https://creativecommons.org/licenses/by/4.0/" className={link}>
-                CC BY 4.0
-              </a>
-              . Design:{" "}
-              <a href="https://ui.shadcn.com" className={link}>
-                shadcn/ui
-              </a>
-              . Drawings: Notioly, under a paid licence, so you cannot reuse them.
-            </p>
-          </div>
+              </p>
+            </div>
+          </section>
+          <FooterList id="footer-project" title="Kinderform" links={PROJECT_LINKS} />
+          <FooterList id="footer-legal" title="Legal" links={LEGAL_LINKS} />
         </div>
+
+        <Separator />
+
+        <p className="text-xs leading-5">
+          No cookies, no tracking and nothing loaded from other sites. Code: MIT. Writing and data:{" "}
+          <a href="https://creativecommons.org/licenses/by/4.0/" className={link}>
+            CC BY 4.0
+          </a>
+          . Design:{" "}
+          <a href="https://ui.shadcn.com" className={link}>
+            shadcn/ui
+          </a>
+          . Drawings: Notioly, not free to reuse.
+        </p>
       </div>
     </footer>
   )
