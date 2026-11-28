@@ -21,8 +21,11 @@ Each example form uses a public-sector design system from its country, without g
 | Ireland | Government of Ireland Design System (`@ogcio/design-system-react` 1.52.0, `@ogcio/theme-govie` 1.21.8) | Tokens and styles ported to `site/src/styles/govie.scss` | MIT, © OGCIO |
 | New Zealand | New Zealand Government Design System, alpha (`@govtnz/ds` 0.2.2) | Styles ported to `site/src/styles/nzgds.scss` | MIT, © Crown copyright, Department of Internal Affairs |
 | Singapore | Singapore Government Design System (`@govtechsg/sgds-web-component` 3.31.0) | Tokens and component styles ported to `site/src/styles/sgds.scss` | MIT, © Government Technology Agency of Singapore. Logos, the state crest, the coat of arms and agency identifiers are outside the grant and are not used |
+| Norway | Designsystemet (`@digdir/designsystemet-css` 1.24.1), with a neutral theme of our own made by its command-line tool (`@digdir/designsystemet` 1.24.1) | Styles ported to `site/src/styles/designsystemet.scss` | MIT, © Digitaliseringsdirektoratet (Digdir) |
+| Denmark | Det Fælles Designsystem (`dkfds` 11.3.0), neutral theme | Styles ported to `site/src/styles/dkfds.scss` | MIT, © Danish Business Authority and Danish Agency for Digitisation. Its icons are Material Symbols (Apache License 2.0) and its font IBM Plex Sans (below) |
+| Finland | Suomi.fi design system (`suomifi-ui-components` 19.0.0, `suomifi-design-tokens` 7.0.0, `suomifi-icons` 8.1.0) | Tokens and component styles ported to `site/src/styles/suomifi.scss` | MIT, © Population Register Centre (now the Digital and Population Data Services Agency, DVV) |
 
-The French form does not use the French State's design system (DSFR), which is reserved for State services on .gouv.fr. The Spanish form does not use the Spanish central government's design system, which is not open. The Irish form leaves out the GOV.IE header, the gov.ie logo and the Harp. The Singapore form leaves out the Official Government Banner, which is for .gov.sg services only. The New Zealand form leaves out the New Zealand Government logo and the coat of arms. The Dutch form does not use the central government's house style (Rijkshuisstijl), which only central government may use, or any city's theme.
+The French form does not use the French State's design system (DSFR), which is reserved for State services on .gouv.fr. The Spanish form does not use the Spanish central government's design system, which is not open. The Irish form leaves out the GOV.IE header, the gov.ie logo and the Harp. The Singapore form leaves out the Official Government Banner, which is for .gov.sg services only. The New Zealand form leaves out the New Zealand Government logo and the coat of arms. The Dutch form does not use the central government's house style (Rijkshuisstijl), which only central government may use, or any city's theme. The Norwegian form uses a plain theme of our own, not Digdir's, Altinn's or any agency's, and has no ID-porten login header or coat of arms. The Danish form uses the neutral theme of Det Fælles Designsystem, not the borger.dk or Virk themes and logos, which belong to those sites. It has no MitID or NemLog-in header and no coat of arms. The Finnish form leaves out the Suomi.fi logo and brand mark, which only the Suomi.fi brand family may use, and the Finnish state lion and coat of arms.
 
 ## Fonts
 
@@ -36,18 +39,20 @@ All fonts are served from this site.
 | Fira Sans | German form, `site/public/fonts/kern/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
 | Roboto Flex | French form, `site/public/fonts/cunningham/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
 | Open Sans | Spanish form, `site/public/fonts/desy/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
-| IBM Plex Sans (`@fontsource/ibm-plex-sans` 5.3.0) | Dutch form, `site/public/fonts/nl-design/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
-| Inter (`@fontsource-variable/inter` 5.3.0) | Singapore form, `site/public/fonts/sgds/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
+| IBM Plex Sans (`@fontsource/ibm-plex-sans` 5.3.0) | Dutch and Danish forms, `site/public/fonts/nl-design/` and `site/public/fonts/dkfds/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
+| Inter (`@fontsource-variable/inter` 5.3.0) | Singapore and Norwegian forms, `site/public/fonts/sgds/` and `site/public/fonts/designsystemet/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
+| Source Sans 3 (`@fontsource-variable/source-sans-3` 5.3.1) | Finnish form, `site/public/fonts/suomifi/` | SIL Open Font License 1.1 (`OFL.txt` beside the files) |
 
 ## Icons
 
 | Icons | Where | Licence |
 |---|---|---|
 | Lucide (`lucide-react`) | The main site | ISC |
-| Material Symbols (inline SVG paths) | French and Irish forms | Apache License 2.0, © Google |
+| Material Symbols (inline SVG paths) | French, Irish and Danish forms | Apache License 2.0, © Google |
 | Material Icons (modified by GSA, from USWDS) | US form | Apache License 2.0 |
 | Tabler Icons 3.35.0 (inline SVG paths) | Dutch form | MIT, © Paweł Kuna |
-| AGDS, GCDS, KERN, NZGDS and SGDS icons (inline SVG paths) | Australian, Canadian, German, New Zealand and Singapore forms | The licence of each design system, above |
+| Aksel icons (`@navikt/aksel-icons` 8.23.2, inline SVG paths) | Norwegian form | MIT, by the package's `package.json`; the package has no licence file |
+| AGDS, GCDS, KERN, NZGDS, SGDS and Suomi.fi icons (inline SVG paths) | Australian, Canadian, German, New Zealand, Singapore and Finnish forms | The licence of each design system, above |
 
 ## Flags
 

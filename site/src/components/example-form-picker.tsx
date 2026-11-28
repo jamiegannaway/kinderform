@@ -69,7 +69,7 @@ function WorldMap() {
             data-country={c.code}
             tabIndex={-1}
             aria-hidden="true"
-            className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground sm:block md:px-3 md:py-1 md:text-sm`}
+            className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground sm:block`}
           >
             {c.name}
           </a>

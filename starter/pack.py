@@ -155,7 +155,7 @@ def snapshot():
     names = {"global": "Any country", "uk": "United Kingdom", "us": "United States",
              "au": "Australia", "ca": "Canada (English)", "ca-fr": "Canada (français)",
              "de": "Deutschland", "fr": "France", "es": "España", "ie": "Ireland", "nl": "Nederland",
-             "nz": "New Zealand", "sg": "Singapore"}
+             "nz": "New Zealand", "sg": "Singapore", "no": "Norge", "dk": "Danmark", "fi": "Suomi"}
     links = []
     for key, wording in locales.items():
         items = kit(key, wording, schema)

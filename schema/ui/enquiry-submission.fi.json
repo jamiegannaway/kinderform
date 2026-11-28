@@ -1,0 +1,327 @@
+{
+  "$comment": "Wording for the reference form (Finland, in plain Finnish, addressing the reader as 'sinä', as Finnish public services do). Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json. Optional questions end with '(vapaaehtoinen)', which the Suomi.fi components show in the regular weight; required ones carry no mark. The location question asks only for the first 3 digits of the postcode (postinumero): enough to find the wellbeing services county (hyvinvointialue) that recruits foster families, or the City of Helsinki, which runs its own services. A full postcode is cut to its first 3 digits. 'team' and 'kinship_team' are in the elative case (-sta, -stä), because they follow a name: 'Aino perhehoidon tiimistä'. Not yet checked by a native speaker.",
+  "locale": "fi-FI",
+  "design_system": "suomifi",
+  "sections": [
+    "Sinusta",
+    "Miten tavoitamme sinut",
+    "Mistä haluat puhua",
+    "Tarkista ja lähetä"
+  ],
+  "start": {
+    "title": "Kysy sijaisperheeksi ryhtymisestä tai adoptiosta",
+    "body": [
+      "Tällä lomakkeella voit kysyä asiaa tai pyytää keskustelua. Lomakkeen täyttäminen vie noin 2 minuuttia.",
+      "Oikeassa palvelussa oman yhteyshenkilön pitäisi kertoa sinulle, milloin saat vastauksen.",
+      "Sinun ei tarvitse vielä tietää, sopiiko sijaisperhe tai adoptio sinulle.",
+      "Emme kysy nyt mitään terveydestäsi, kodistasi, taloudestasi tai perheestäsi."
+    ],
+    "button": "Aloita"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "Sinusta",
+      "title": "Mikä on nimesi?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Etunimi ja sukunimi",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Kirjoita etunimesi ja sukunimesi",
+              "maxLength": "Nimessä voi olla enintään 100 merkkiä",
+              "pattern": "Kirjoita etunimesi ja sukunimesi"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "Millä nimellä voimme puhutella sinua? (vapaaehtoinen)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "Esimerkiksi lyhyempi nimi tai nimi, jota käytät mieluummin.",
+            "errors": {
+              "maxLength": "Tässä nimessä voi olla enintään 50 merkkiä"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "Sinusta",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "Mistä haluat tietää lisää?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Sijaisperheeksi ryhtymisestä",
+              "adoption": "Adoptiosta",
+              "not_sure": "En tiedä vielä"
+            },
+            "optionHints": {
+              "fostering": "Tätä kutsutaan myös perhehoidoksi.",
+              "not_sure": "Se sopii hyvin. Kerromme sinulle molemmista ja muista tavoista auttaa, esimerkiksi tukiperheenä."
+            },
+            "errors": {
+              "required": "Valitse, mistä haluat tietää lisää"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "Sinusta",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Kysytkö lapsesta, jonka tunnet jo?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "Esimerkiksi lapsenlapsesi, sisaruksesi lapsi tai ystäväsi lapsi. Silloin kuulut lapsen läheisverkostoon, esimerkiksi sukulaisena. Sinua auttaa eri tiimi. Älä kirjoita tähän mitään lapsesta.",
+            "optionLabels": {
+              "true": "Kyllä",
+              "false": "Ei"
+            },
+            "errors": {
+              "required": "Valitse ”Kyllä”, jos kysyt lapsesta, jonka tunnet jo"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Miten tavoitamme sinut",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "Miten haluat, että otamme sinuun yhteyttä?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "Sähköpostilla",
+              "phone_call": "Soittamalla",
+              "text_message": "Tekstiviestillä"
+            },
+            "errors": {
+              "required": "Valitse, miten haluat, että otamme sinuun yhteyttä"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Miten tavoitamme sinut",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "Mikä on sähköpostiosoitteesi?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "Käytämme sitä vain, kun vastaamme sinulle.",
+            "errors": {
+              "required": "Kirjoita sähköpostiosoitteesi",
+              "pattern": "Kirjoita sähköpostiosoite muodossa nimi@example.org",
+              "maxLength": "Sähköpostiosoitteessa voi olla enintään 254 merkkiä"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Miten tavoitamme sinut",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "Mikä on puhelinnumerosi?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "Esimerkiksi 040 000 0000.",
+            "errors": {
+              "required": "Kirjoita puhelinnumerosi",
+              "pattern": "Kirjoita puhelinnumero muodossa 040 000 0000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Miten tavoitamme sinut",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "Milloin sinulle voi soittaa? (vapaaehtoinen)",
+          "options": {
+            "asHeading": true,
+            "hint": "Valitse kaikki sopivat. Yritämme soittaa näinä aikoina.",
+            "optionLabels": {
+              "weekday_morning": "Arkiaamuisin",
+              "weekday_afternoon": "Arki-iltapäivisin",
+              "weekday_evening": "Arki-iltaisin",
+              "saturday": "Lauantaisin"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "Miten tavoitamme sinut",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/fi_postcode_area",
+          "label": "Mitkä ovat postinumerosi 3 ensimmäistä numeroa? (vapaaehtoinen)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "off",
+            "inputmode": "numeric",
+            "inputWidth": 4,
+            "transform": "fi_postcode_area",
+            "spellcheck": false,
+            "hint": "Esimerkiksi 001, jos postinumerosi on 00100. Niiden avulla tiedämme, mikä hyvinvointialue hoitaa asiaasi. Emme kysy osoitettasi.",
+            "errors": {
+              "pattern": "Kirjoita vain postinumerosi 3 ensimmäistä numeroa, esimerkiksi 001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Mistä haluat puhua",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "Mistä haluaisit puhua? (vapaaehtoinen)",
+          "options": {
+            "asHeading": true,
+            "hint": "Valitse kaikki sopivat. Voit kertoa niistä myös, kun puhumme. Älä kirjoita tähän henkilökohtaisia tietoja.",
+            "optionLabels": {
+              "eligibility": "Voinko ryhtyä sijaisperheeksi tai adoptoida lapsen",
+              "what_it_involves": "Millaista arki on",
+              "money_and_support": "Raha ja tuki",
+              "process_and_timescales": "Vaiheet ja kuinka kauan ne kestävät",
+              "types_of_care": "Perhehoidon eri muodot, esimerkiksi tukiperhe",
+              "something_else": "Jokin muu asia"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Mistä haluat puhua",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "Mistä kuulit meistä? (vapaaehtoinen)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Ystävältä tai sukulaiselta",
+              "social_media": "Sosiaalisesta mediasta",
+              "search": "Hakukoneesta",
+              "event": "Tilaisuudesta",
+              "advert": "Mainoksesta",
+              "council_or_agency_website": "Hyvinvointialueen tai järjestön verkkosivuilta",
+              "other": "Muualta"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Mistä haluat puhua",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Haluatko uutisia ja kutsuja tilaisuuksiin? (vapaaehtoinen)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Kyllä, haluan uutisia ja kutsuja",
+            "hint": "Lähetämme niitä vain, jos valitset tämän. Voit perua ne milloin tahansa."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Tarkista vastauksesi",
+    "change": "Muuta",
+    "send_heading": "Lähetä kysymyksesi",
+    "send_body": "Kun lähetät tiedot, saamme käyttää niitä, kun vastaamme sinulle.",
+    "button": "Lähetä"
+  },
+  "confirmation": {
+    "title": "Kysymyksesi on lähetetty",
+    "reference": "Viitenumerosi",
+    "next_heading": "Mitä seuraavaksi tapahtuu",
+    "team": "perhehoidon tiimistä",
+    "kinship_team": "läheisverkostotiimistä",
+    "day_word": "arkipäivä",
+    "example_label": "Esimerkki ensimmäisestä vastauksesta (ei lähetetty)",
+    "builders_heading": "Niille, jotka tekevät yhteydenottolomakkeita",
+    "builders_body": "Nämä ovat tiedot, jotka palvelu saisi. Lomake tarkisti ne julkaistulla skeemalla ennen kuin näytti tämän sivun.",
+    "restart": "Aloita alusta"
+  },
+  "progress": {
+    "question": "Kysymys",
+    "of": "/",
+    "back": "Takaisin",
+    "continue": "Jatka",
+    "error_title": "Lomakkeessa on ongelma",
+    "error_prefix": "Virhe:"
+  },
+  "demo_notice": "Tämä on esimerkkilomake. Älä kirjoita oikeita tietoja. Mitään kirjoittamaasi ei lähetetä eikä tallenneta. Esimerkin päivämäärät eivät ota huomioon aukioloaikoja tai juhlapyhiä."
+}

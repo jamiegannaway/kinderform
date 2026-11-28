@@ -172,8 +172,8 @@ export function SiteFooter() {
               What do you really need?
             </h2>
             <p className="leading-6 text-muted-foreground">
-              Join the Kinderform community on WhatsApp. Tell us what would help, ask a question, and hear what we
-              build next.
+              Join our WhatsApp community for people who work in fostering and adoption services. Tell us what
+              would make the first step easier for your team, and hear what we build next.
             </p>
             <p className="text-xs leading-5 text-muted-foreground">
               Other members may see your phone number. Please share nothing about a child.{" "}

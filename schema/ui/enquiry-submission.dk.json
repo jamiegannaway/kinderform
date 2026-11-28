@@ -1,0 +1,328 @@
+{
+  "$comment": "Wording for the reference form (Denmark, in Danish, addressing the reader as 'du'). Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json. Optional questions end with '(frivilligt)', as the Label in Det Fælles Designsystem (dkfds 11.3.0) does. The adoption hint says that nobody can sign up to adopt a child from abroad at present; source: borger.dk, register/dk/policies.csv, rule dk-dk-other-4 (read 2026-11-28, unverified). Not yet checked by a native speaker.",
+  "locale": "da-DK",
+  "design_system": "dkfds",
+  "sections": [
+    "Om dig",
+    "Sådan kontakter vi dig",
+    "Det vil du gerne tale om",
+    "Tjek og send"
+  ],
+  "start": {
+    "title": "Spørg om at blive plejefamilie eller om adoption",
+    "body": [
+      "Her kan du stille et spørgsmål eller bede om en snak. Det tager cirka 2 minutter.",
+      "Hos en rigtig kommune eller organisation bør en fast kontaktperson fortælle dig, hvornår du får svar.",
+      "Du behøver ikke at vide endnu, om plejefamilie eller adoption passer til dig.",
+      "Vi spørger ikke om dit helbred, dit hjem, din økonomi eller din familie nu."
+    ],
+    "button": "Start"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "Om dig",
+      "title": "Hvad hedder du?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Fulde navn",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Skriv dit fulde navn",
+              "maxLength": "Dit navn må højst være 100 tegn",
+              "pattern": "Skriv dit fulde navn"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "Hvad skal vi kalde dig? (frivilligt)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "For eksempel et kortere navn eller et navn, du hellere vil bruge.",
+            "errors": {
+              "maxLength": "Navnet må højst være 50 tegn"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "Om dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "Hvad vil du gerne vide mere om?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "At blive plejefamilie",
+              "adoption": "Adoption",
+              "not_sure": "Det ved jeg ikke endnu"
+            },
+            "optionHints": {
+              "fostering": "Det kan også være som aflastningsfamilie.",
+              "adoption": "Lige nu kan du ikke blive skrevet op til at adoptere et barn fra udlandet. Du kan stadig spørge om adoption.",
+              "not_sure": "Det er helt i orden. Vi kan fortælle dig om begge dele og om andre måder at hjælpe på."
+            },
+            "errors": {
+              "required": "Vælg, hvad du gerne vil vide mere om"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "Om dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Spørger du om et barn, du allerede kender?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "For eksempel et barnebarn, en niece, en nevø eller en vens barn. Så bliver du netværksplejefamilie. Et andet team hjælper med det. Skriv ikke noget om barnet her.",
+            "optionLabels": {
+              "true": "Ja",
+              "false": "Nej"
+            },
+            "errors": {
+              "required": "Vælg ‘Ja’, hvis du spørger om et barn, du allerede kender"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Sådan kontakter vi dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "Hvordan vil du gerne kontaktes?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "E-mail",
+              "phone_call": "Telefonopkald",
+              "text_message": "Sms"
+            },
+            "errors": {
+              "required": "Vælg, hvordan du vil kontaktes"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Sådan kontakter vi dig",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "Hvad er din e-mailadresse?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "Vi bruger den kun til at svare dig.",
+            "errors": {
+              "required": "Skriv din e-mailadresse",
+              "pattern": "Skriv en e-mailadresse som navn@example.org",
+              "maxLength": "Din e-mailadresse må højst være 254 tegn"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Sådan kontakter vi dig",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "Hvad er dit telefonnummer?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "For eksempel 00 00 00 00.",
+            "errors": {
+              "required": "Skriv dit telefonnummer",
+              "pattern": "Skriv et telefonnummer som 00 00 00 00"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Sådan kontakter vi dig",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "Hvornår passer det dig bedst, at vi ringer? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "hint": "Vælg alle, der passer. Vi prøver at ringe på de tidspunkter.",
+            "optionLabels": {
+              "weekday_morning": "Hverdage om formiddagen",
+              "weekday_afternoon": "Hverdage om eftermiddagen",
+              "weekday_evening": "Hverdage om aftenen",
+              "saturday": "Lørdage"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "Sådan kontakter vi dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/dk_postcode",
+          "label": "Hvad er dit postnummer? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "postal-code",
+            "inputmode": "numeric",
+            "inputWidth": 4,
+            "transform": "dk_postcode",
+            "spellcheck": false,
+            "hint": "For eksempel 1234. Så ved vi, hvilket team der dækker dit område. Vi spørger ikke om din adresse.",
+            "errors": {
+              "pattern": "Skriv et postnummer med 4 cifre, som 1234"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Det vil du gerne tale om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "Hvad vil du gerne tale om? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "hint": "Vælg alle, der passer. Du kan også fortælle os det, når vi taler sammen. Skriv ikke noget personligt her.",
+            "optionLabels": {
+              "eligibility": "Om jeg kan blive plejefamilie eller adoptere",
+              "what_it_involves": "Hvordan hverdagen er",
+              "money_and_support": "Penge og støtte",
+              "process_and_timescales": "Forløbet, og hvor lang tid det tager",
+              "types_of_care": "De forskellige slags plejefamilier",
+              "something_else": "Noget andet"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Det vil du gerne tale om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "Hvor har du hørt om os? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Fra venner eller familie",
+              "social_media": "På sociale medier",
+              "search": "Ved at søge på nettet",
+              "event": "Til et arrangement",
+              "advert": "I en annonce",
+              "council_or_agency_website": "På en kommunes eller organisations hjemmeside",
+              "other": "Et andet sted"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Det vil du gerne tale om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Vil du have nyheder og invitationer til arrangementer? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Ja, send mig nyheder og invitationer",
+            "hint": "Vi sender dem kun, hvis du sætter kryds. Du kan altid framelde dig igen."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Tjek dine svar, før du sender",
+    "change": "Redigér",
+    "send_heading": "Send din henvendelse",
+    "send_body": "Når du sender, giver du os lov til at bruge oplysningerne til at svare dig.",
+    "button": "Send"
+  },
+  "confirmation": {
+    "title": "Din henvendelse er sendt",
+    "reference": "Dit referencenummer",
+    "next_heading": "Det sker der nu",
+    "team": "plejefamilieteamet",
+    "kinship_team": "teamet for netværksplejefamilier",
+    "day_word": "hverdag",
+    "example_label": "Eksempel på et første svar (ikke sendt)",
+    "builders_heading": "Til dig, der bygger formularer til henvendelser",
+    "builders_body": "Det er de oplysninger, kommunen eller organisationen ville få. Formularen har tjekket dem mod det offentliggjorte skema, før den viste denne side.",
+    "restart": "Start forfra"
+  },
+  "progress": {
+    "question": "Spørgsmål",
+    "of": "af",
+    "back": "Tilbage",
+    "continue": "Fortsæt",
+    "error_title": "Der er problemer",
+    "error_prefix": "Fejl:"
+  },
+  "demo_notice": "Dette er en eksempelformular. Skriv ikke rigtige oplysninger. Det, du skriver, bliver ikke sendt eller gemt. Datoerne i eksemplet tager ikke højde for åbningstider eller helligdage."
+}

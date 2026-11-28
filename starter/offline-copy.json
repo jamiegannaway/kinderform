@@ -38,5 +38,29 @@
     "details": "Je browser heeft de formuliervelden gecontroleerd. In de handleiding bij het pakket staat hoe je het JSON-bestand controleert met het volledige schema.",
     "export": "JSON-voorbeeld downloaden", "navigation": "Navigatie tussen de vragen", "json": "Voorbeeldgegevens in JSON", "skipped": "Overgeslagen", "issue": "Controleer dit antwoord.",
     "source": "De vragen zijn gebaseerd op de Kinderform-standaard voor eerste aanmeldingen. Teksten en schema vallen onder CC BY 4.0, de code van dit voorbeeld onder de MIT-licentie."
+  },
+  "nb": {
+    "skip": "Gå til skjemaet", "demo": "Eksempel uten nett", "notice": "Bruk oppdiktede opplysninger. Svarene dine blir værende på denne siden. Til slutt kan du laste ned en JSON-fil. Ingenting blir sendt.",
+    "intro": "Prøv spørsmålene og se over svarene dine. Med dette eksempelet kan du ikke kontakte noen tjeneste.",
+    "enable": "Slå på JavaScript for å prøve dette eksempelet uten nett.", "review": "Se over eksempelsvarene dine", "preview": "Vis opplysningene", "done": "Eksempelopplysningene dine",
+    "details": "Nettleseren har sjekket feltene i skjemaet. I veiledningen i pakken står det hvordan du sjekker JSON-filen mot hele JSON-skjemaet.",
+    "export": "Last ned JSON-eksempelet", "navigation": "Navigasjon mellom spørsmålene", "json": "Eksempelopplysninger i JSON", "skipped": "Hoppet over", "issue": "Sjekk dette svaret.",
+    "source": "Spørsmålene bygger på Kinderform-standarden for første henvendelser. Tekstene og JSON-skjemaet har lisensen CC BY 4.0, og koden i dette eksempelet har MIT-lisensen."
+  },
+  "da": {
+    "skip": "Gå til formularen", "demo": "Offline eksempel", "notice": "Brug opdigtede oplysninger. Dine svar bliver på denne side. Til sidst kan du hente en JSON-fil. Der bliver ikke sendt noget.",
+    "intro": "Prøv spørgsmålene, og tjek dine svar. Du kan ikke kontakte nogen gennem dette eksempel.",
+    "enable": "Slå JavaScript til for at prøve dette offline eksempel.", "review": "Tjek dine svar i eksemplet", "preview": "Vis oplysningerne", "done": "Dine oplysninger i eksemplet",
+    "details": "Din browser har tjekket felterne i formularen. I vejledningen i pakken står der, hvordan du tjekker JSON-filen mod hele skemaet.",
+    "export": "Hent eksemplet som JSON", "navigation": "Navigation mellem spørgsmålene", "json": "Eksemplets oplysninger som JSON", "skipped": "Sprunget over", "issue": "Tjek dette svar.",
+    "source": "Spørgsmålene bygger på Kinderforms standard for første henvendelser. Tekster og skema er under CC BY 4.0, og koden i dette eksempel er under MIT-licensen."
+  },
+  "fi": {
+    "skip": "Siirry lomakkeeseen", "demo": "Offline-esimerkki", "notice": "Käytä keksittyjä tietoja. Vastauksesi pysyvät tällä sivulla. Lopuksi voit ladata JSON-tiedoston. Mitään ei lähetetä.",
+    "intro": "Kokeile kysymyksiä ja tarkista vastauksesi. Tämän esimerkin kautta et voi ottaa yhteyttä mihinkään palveluun.",
+    "enable": "Ota JavaScript käyttöön, niin voit kokeilla tätä offline-esimerkkiä.", "review": "Tarkista esimerkin vastaukset", "preview": "Näytä tiedot", "done": "Esimerkin tiedot",
+    "details": "Selain tarkisti lomakkeen kentät. Paketin ohjeissa kerrotaan, miten tarkistat JSON-tiedoston koko skeemalla.",
+    "export": "Lataa esimerkki JSON-tiedostona", "navigation": "Siirtyminen kysymysten välillä", "json": "Esimerkin tiedot JSON-muodossa", "skipped": "Ohitettu", "issue": "Tarkista tämä vastaus.",
+    "source": "Kysymykset perustuvat Kinderformin yhteydenottostandardiin. Tekstit ja skeema on lisensoitu CC BY 4.0 -lisenssillä, tämän esimerkin koodi MIT-lisenssillä."
   }
 }

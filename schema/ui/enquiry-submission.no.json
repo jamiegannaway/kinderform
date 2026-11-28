@@ -1,0 +1,328 @@
+{
+  "$comment": "Wording for the reference form (Norway, in Norwegian Bokmål, addressing the reader as 'du'). Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json. Optional questions end with '(valgfritt)'. Kinship care is 'fosterhjem i slekt og nettverk'. The phone example 400 00 000 is made up. The adoption hint says that adoption from abroad is open from only one country; source: Bufdir, register/no/front-doors.csv (read 2026-11-28, unverified).",
+  "locale": "nb-NO",
+  "design_system": "designsystemet",
+  "sections": [
+    "Om deg",
+    "Slik når vi deg",
+    "Det du vil snakke om",
+    "Se over og send"
+  ],
+  "start": {
+    "title": "Still et spørsmål om fosterhjem eller adopsjon",
+    "body": [
+      "Her kan du stille et spørsmål eller be om en samtale. Det tar omtrent 2 minutter.",
+      "I en ekte tjeneste skal en fast kontaktperson fortelle deg når du får svar.",
+      "Du trenger ikke å vite ennå om fosterhjem eller adopsjon passer for deg.",
+      "Vi spør ikke om helsen din, hjemmet ditt, økonomien din eller familien din nå."
+    ],
+    "button": "Start"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "Om deg",
+      "title": "Hva heter du?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "Fullt navn",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Skriv inn fullt navn",
+              "maxLength": "Navnet kan ha høyst 100 tegn",
+              "pattern": "Skriv inn fullt navn"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "Hva vil du at vi skal kalle deg? (valgfritt)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "For eksempel et kortere navn eller et navn du liker bedre.",
+            "errors": {
+              "maxLength": "Dette navnet kan ha høyst 50 tegn"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "Om deg",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "Hva vil du vite mer om?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Å bli fosterhjem",
+              "adoption": "Adopsjon",
+              "not_sure": "Jeg vet ikke ennå"
+            },
+            "optionHints": {
+              "fostering": "Også beredskapshjem, som tar imot barn på kort varsel.",
+              "adoption": "Nå kan du bare adoptere barn fra ett land utenfor Norge. Du kan likevel stille spørsmål om adopsjon.",
+              "not_sure": "Det går helt fint. Vi kan fortelle deg om begge deler, og om andre måter å hjelpe på."
+            },
+            "errors": {
+              "required": "Velg hva du vil vite mer om"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "Om deg",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Gjelder spørsmålet ditt et barn du allerede kjenner?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "For eksempel et barnebarn, en niese, en nevø eller barnet til en venn. Det kalles fosterhjem i slekt og nettverk. Et annet team hjelper deg med det. Ikke skriv noe om barnet her.",
+            "optionLabels": {
+              "true": "Ja",
+              "false": "Nei"
+            },
+            "errors": {
+              "required": "Velg «Ja» hvis spørsmålet ditt gjelder et barn du allerede kjenner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Slik når vi deg",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "Hvordan vil du at vi skal kontakte deg?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "På e-post",
+              "phone_call": "På telefon",
+              "text_message": "På SMS"
+            },
+            "errors": {
+              "required": "Velg hvordan du vil at vi skal kontakte deg"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Slik når vi deg",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "Hva er e-postadressen din?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "Vi bruker den bare til å svare deg.",
+            "errors": {
+              "required": "Skriv inn e-postadressen din",
+              "pattern": "Skriv inn en e-postadresse som navn@example.org",
+              "maxLength": "E-postadressen kan ha høyst 254 tegn"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Slik når vi deg",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "Hva er telefonnummeret ditt?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "For eksempel 400 00 000.",
+            "errors": {
+              "required": "Skriv inn telefonnummeret ditt",
+              "pattern": "Skriv inn et telefonnummer som 400 00 000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Slik når vi deg",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "Når passer det best at vi ringer? (valgfritt)",
+          "options": {
+            "asHeading": true,
+            "hint": "Velg alt som passer. Vi prøver å ringe deg da.",
+            "optionLabels": {
+              "weekday_morning": "Hverdager på formiddagen",
+              "weekday_afternoon": "Hverdager på ettermiddagen",
+              "weekday_evening": "Hverdager på kvelden",
+              "saturday": "Lørdager"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "Slik når vi deg",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/no_postcode",
+          "label": "Hva er postnummeret ditt? (valgfritt)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "off",
+            "inputmode": "numeric",
+            "inputWidth": 4,
+            "transform": "no_postcode",
+            "spellcheck": false,
+            "hint": "For eksempel 0150. Postnummeret viser oss hvilket kontor som skal svare deg. Vi spør ikke om adressen din.",
+            "errors": {
+              "pattern": "Skriv inn et postnummer med 4 sifre, som 0150"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Det du vil snakke om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "Hva vil du snakke om? (valgfritt)",
+          "options": {
+            "asHeading": true,
+            "hint": "Velg alt som passer. Du kan også si det når vi snakker sammen. Ikke skriv noe personlig her.",
+            "optionLabels": {
+              "eligibility": "Om jeg kan bli fosterhjem eller adoptere",
+              "what_it_involves": "Hvordan hverdagen blir",
+              "money_and_support": "Penger og støtte",
+              "process_and_timescales": "Hva som skjer, og hvor lang tid det tar",
+              "types_of_care": "Ulike typer fosterhjem, som beredskapshjem",
+              "something_else": "Noe annet"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Det du vil snakke om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "Hvordan hørte du om oss? (valgfritt)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Fra venner eller familie",
+              "social_media": "I sosiale medier",
+              "search": "Gjennom et søk på nettet",
+              "event": "På et møte eller et arrangement",
+              "advert": "Fra en annonse",
+              "council_or_agency_website": "På nettsiden til kommunen eller staten",
+              "other": "På en annen måte"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Det du vil snakke om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Vil du ha nyheter og invitasjoner til møter? (valgfritt)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Ja, send meg nyheter og invitasjoner",
+            "hint": "Vi sender dem bare hvis du krysser av. Du kan melde deg av når som helst."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Se over svarene dine",
+    "change": "Endre",
+    "send_heading": "Send spørsmålet ditt",
+    "send_body": "Når du sender, sier du ja til at vi bruker disse opplysningene til å svare deg.",
+    "button": "Send"
+  },
+  "confirmation": {
+    "title": "Spørsmålet ditt er sendt",
+    "reference": "Referansenummeret ditt",
+    "next_heading": "Dette skjer nå",
+    "team": "fosterhjemsteamet vårt",
+    "kinship_team": "teamet vårt for fosterhjem i slekt og nettverk",
+    "day_word": "virkedag",
+    "example_label": "Eksempel på et første svar (ikke sendt)",
+    "builders_heading": "For deg som lager skjemaer",
+    "builders_body": "Dette er opplysningene tjenesten ville fått. Før denne siden ble vist, sjekket skjemaet dem mot det publiserte JSON-skjemaet.",
+    "restart": "Start på nytt"
+  },
+  "progress": {
+    "question": "Spørsmål",
+    "of": "av",
+    "back": "Tilbake",
+    "continue": "Neste",
+    "error_title": "For å gå videre må du rette opp dette:",
+    "error_prefix": "Feil:"
+  },
+  "demo_notice": "Dette er et eksempelskjema. Ikke skriv inn ekte opplysninger. Det du skriver, blir ikke sendt eller lagret. Datoene i eksempelet tar ikke hensyn til åpningstider eller helligdager."
+}
