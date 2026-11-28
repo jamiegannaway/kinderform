@@ -5,7 +5,7 @@
 - **Three more example forms.** Norway, Denmark and Finland each have an example form in their own language, built with an open public-sector design system and no government branding. Norway uses Designsystemet, Denmark uses Det Fælles Designsystem and Finland uses the Suomi.fi design system. All three are MIT. Each has a starter kit in release v0.1.0-draft.5, and each is on the world map.
 - **Sweden waits.** Its Swedish wording is written. Sweden has no open national design system that a non-government site may use, so its form will use the neutral design on the new country pages.
 - **The map.** The European labels are spaced again so none overlap from tablet size up. The labels are now one size at every width.
-- **The community.** The footer says the WhatsApp community is for people who work in fostering and adoption services.
+- **The footer.** It says the WhatsApp community is for people who work in fostering and adoption services. The note on cookies and licences now sits on the right, level with the community note, and both speak directly: "Do not share any information about children" and "We do not use cookies or track you".
 - A native speaker has not yet checked the Norwegian, Danish or Finnish wording.
 
 ## Unreleased · audit remediation (starter candidate v0.1.0-draft.4)
