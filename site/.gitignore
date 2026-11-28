@@ -3,4 +3,5 @@ dist/
 .astro/
 src/generated/
 public/downloads/starter/
+public/downloads/forms/
 public/schema/
