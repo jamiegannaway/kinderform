@@ -25,9 +25,14 @@ See the [developer guide](data-handling.md). Everything here is a draft, not leg
 - [x] Add the connection tools: log append and verify, webhook signing, purpose-limited CSV export
 - [x] Add the AI test pack: made-up submissions with instruction-like names, and a data-block wrapper
 - [x] Add the unverified UK profile
+- [x] Add the site page `/build/data-handling` that explains the layer to technical readers (no research on it)
 - [ ] A qualified reviewer checks the UK profile
 - [ ] Rehearse the log with one willing service, using made-up records
 - [ ] Decide whether `lawful_basis` moves from the enquiry schema to profiles in v0.2
+- [ ] For v0.2, limit `enquiry_id`, `source` and `front_door_id` in the enquiry schema with a pattern. Today they accept any text, and the log's `enquiry_id` is stricter
+- [ ] Decide how a log segment should treat an enquiry that began in an earlier segment (today: the `--continuation` option)
+- [x] Rules for crawlers and AI tools (28 November 2026): `site/public/robots.txt`, a `tdm-reservation` header and section 10 of the terms of use
+- [ ] Have a lawyer review section 10 of the terms. The open licences still allow reuse, so decide whether that is the protection wanted
 
 ## Now: foundations (v0.1)
 
