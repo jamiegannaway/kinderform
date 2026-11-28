@@ -21,6 +21,10 @@ export const COUNTRIES = [
   { code: "NL", name: "Netherlands" },
   { code: "NZ", name: "New Zealand" },
   { code: "SG", name: "Singapore" },
+  { code: "NO", name: "Norway" },
+  { code: "DK", name: "Denmark" },
+  { code: "SE", name: "Sweden" },
+  { code: "FI", name: "Finland" },
 ] as const
 export type CountryCode = (typeof COUNTRIES)[number]["code"]
 

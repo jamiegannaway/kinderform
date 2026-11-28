@@ -26,8 +26,12 @@ export const COUNTRY_NAMES: Record<string, string> = {
   NL: "Netherlands",
   NZ: "New Zealand",
   SG: "Singapore",
+  NO: "Norway",
+  DK: "Denmark",
+  SE: "Sweden",
+  FI: "Finland",
 }
-export const COUNTRY_ORDER = ["UK", "US", "CA", "AU", "DE", "FR", "ES", "IE", "NL", "NZ", "SG"]
+export const COUNTRY_ORDER = ["UK", "US", "CA", "AU", "DE", "FR", "ES", "IE", "NL", "NZ", "SG", "NO", "DK", "SE", "FI"]
 
 // "the UK, the US, Canada and Germany": the countries given, in the usual order.
 export function countryList(codes: Iterable<string>): string {
@@ -36,6 +40,13 @@ export function countryList(codes: Iterable<string>): string {
     c === "UK" || c === "US" ? `the ${c}` : c === "NL" ? "the Netherlands" : COUNTRY_NAMES[c],
   )
   return names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`
+}
+
+// For running text: the list of countries while it is short, otherwise just the count, so a
+// sentence stays under 25 words. Page descriptions keep the full list (see check-country-pages.mjs).
+export function countriesInText(codes: Iterable<string>, most = 8): string {
+  const n = new Set(codes).size
+  return n > most ? `${n} countries` : countryList(codes)
 }
 
 // Place codes in the rules files, by country. Codes repeat across countries (NT is the Northwest
@@ -71,11 +82,15 @@ const PLACES: Record<string, Record<string, string>> = {
     EX: "Extremadura", GA: "Galicia", RI: "La Rioja", MD: "Madrid", MC: "Murcia", NC: "Navarre",
     VC: "Valencian Community", CE: "Ceuta", ML: "Melilla",
   },
-  // Rules in these four countries are national.
+  // Rules in these countries are national.
   IE: { IE: "All of Ireland" },
   NL: { NL: "All of the Netherlands" },
   NZ: { NZ: "All of New Zealand" },
   SG: { SG: "Singapore" },
+  NO: { NO: "All of Norway" },
+  DK: { DK: "All of Denmark" },
+  SE: { SE: "All of Sweden" },
+  FI: { FI: "All of Finland" },
 }
 
 // ---- Page dates ------------------------------------------------------------------
@@ -293,6 +308,14 @@ const MONEY: Record<string, [string, string]> = {
   nzd_per_fortnight: ["NZ$", "a fortnight"],
   sgd_per_month: ["S$", "a month"],
   sgd: ["S$", ""],
+  // Krone and krona: the currency code, as "kr" alone would not say which.
+  nok_per_month: ["NOK ", "a month"],
+  nok: ["NOK ", ""],
+  dkk_per_month: ["DKK ", "a month"],
+  dkk_per_day: ["DKK ", "a day"],
+  dkk_per_year: ["DKK ", "a year"],
+  dkk: ["DKK ", ""],
+  sek_per_month: ["SEK ", "a month"],
 }
 const UNIT_WORDS: Record<string, string> = { working_days: "working days", square_feet: "sq ft", other: "" }
 // "1 child", not "1 children".
@@ -324,6 +347,10 @@ export function ruleRows(dates = loadPageDates()): RuleRow[] {
     ["NL", "register/nl/policies.csv"],
     ["NZ", "register/nz/policies.csv"],
     ["SG", "register/sg/policies.csv"],
+    ["NO", "register/no/policies.csv"],
+    ["DK", "register/dk/policies.csv"],
+    ["SE", "register/se/policies.csv"],
+    ["FI", "register/fi/policies.csv"],
   ]
   const out: RuleRow[] = []
   for (const [country, rel] of files) {

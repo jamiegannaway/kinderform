@@ -46,6 +46,7 @@ FILES = {
     "register/no/policies.csv": ("no", {"NO"}),
     "register/se/policies.csv": ("se", {"SE"}),
     "register/dk/policies.csv": ("dk", {"DK"}),
+    "register/fi/policies.csv": ("fi", {"FI"}),
 }
 TOPICS = set(re.findall(r"^\| `([a-z_]+)` \|", (ROOT / "register/us/policy-topics.md").read_text(encoding="utf-8"), re.M))
 APPLIES = {"fostering", "adoption", "both"}

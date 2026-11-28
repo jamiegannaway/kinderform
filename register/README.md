@@ -8,7 +8,7 @@ The register holds neutral facts only. It contains no scores or judgements.
 
 **Rows found through a company database.** On 26 November 2026 we searched a company database (Clay) for fostering and adoption services the registers had missed, in every country we cover. We searched for organisations only, never for people. We kept only each organisation's name and website. We then read each one on its own website, and that page is the row's source. Rows found this way say so in `notes`. The search added 173 rows: 107 independent fostering agencies and voluntary adoption agencies in the UK, 42 private agencies in the US, 11 in Canada, 2 in Australia, 5 in Germany, 3 in Spain, 2 in the Netherlands and 1 in France.
 
-The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/), Australia's in [`au/`](au/), Germany's in [`de/`](de/), France's in [`fr/`](fr/), Spain's in [`es/`](es/), Ireland's in [`ie/`](ie/), the Netherlands' in [`nl/`](nl/), New Zealand's in [`nz/`](nz/) and Singapore's in [`sg/`](sg/). The US rows are checked by `tests/validate_us_register.py`. The other nine country folders are checked by `tests/validate_world_register.py`.
+The United States register is in [`us/`](us/), with its own column guide. Canada's is in [`ca/`](ca/), Australia's in [`au/`](au/), Germany's in [`de/`](de/), France's in [`fr/`](fr/), Spain's in [`es/`](es/), Ireland's in [`ie/`](ie/), the Netherlands' in [`nl/`](nl/), New Zealand's in [`nz/`](nz/), Singapore's in [`sg/`](sg/), and Norway's, Denmark's, Sweden's and Finland's in [`no/`](no/), [`dk/`](dk/), [`se/`](se/) and [`fi/`](fi/). The US rows are checked by `tests/validate_us_register.py`. The other 13 country folders are checked by `tests/validate_world_register.py`.
 
 For Germany, France and Spain:
 
@@ -22,9 +22,16 @@ For Ireland, the Netherlands, New Zealand and Singapore:
 - The same operator types apply. Iwi and Māori providers in New Zealand are `indigenous_agency`.
 - Their rules are national, so `jurisdiction` is `IE`, `NL`, `NZ` or `SG`.
 
+For Norway, Denmark, Sweden and Finland (first pass, 28 November 2026):
+
+- `region` is a Norwegian county (the 15 from 2024), a Danish region, a Swedish county (län) or a Finnish region, in English where it has one (see the test for the exact names). A row for a whole country uses the country's name. Bufetat's regional offices, Finland's wellbeing services counties and joint council schemes are named in `coverage`.
+- Councils, Denmark's socialtilsyn and Finland's wellbeing services counties are `local_authority`. Bufetat, Socialstyrelsen and the national adoption bodies are `state_agency`.
+- Their rules are national, so `jurisdiction` is `NO`, `DK`, `SE` or `FI`. Rules a single council sets are marked as local practice in `notes`. Money is in the national currency, for example `NOK_per_month`.
+- Several law databases refuse our reader. Norway's laws were read as passed by the Storting, not on Lovdata.
+
 ## Rules: `policies.csv`
 
-The published rules on who can foster and what approval involves, so services can compare their own rules with other places. `policies.csv` here covers the four UK nations. [`ca/policies.csv`](ca/policies.csv) covers Canada's 13 provinces and territories, and [`au/policies.csv`](au/policies.csv) Australia's 8 states and territories. [`de/policies.csv`](de/policies.csv), [`fr/policies.csv`](fr/policies.csv) and [`es/policies.csv`](es/policies.csv) cover Germany, France and Spain: national law, and regional rules where they differ. [`ie/policies.csv`](ie/policies.csv), [`nl/policies.csv`](nl/policies.csv), [`nz/policies.csv`](nz/policies.csv) and [`sg/policies.csv`](sg/policies.csv) cover Ireland, the Netherlands, New Zealand and Singapore, where the rules are national. The US rules are in [`us/policies.csv`](us/policies.csv). One row per rule. A row records what the rule says, where it is written and when we checked it. It never judges the rule.
+The published rules on who can foster and what approval involves, so services can compare their own rules with other places. `policies.csv` here covers the four UK nations. [`ca/policies.csv`](ca/policies.csv) covers Canada's 13 provinces and territories, and [`au/policies.csv`](au/policies.csv) Australia's 8 states and territories. [`de/policies.csv`](de/policies.csv), [`fr/policies.csv`](fr/policies.csv) and [`es/policies.csv`](es/policies.csv) cover Germany, France and Spain: national law, and regional rules where they differ. [`ie/policies.csv`](ie/policies.csv), [`nl/policies.csv`](nl/policies.csv), [`nz/policies.csv`](nz/policies.csv) and [`sg/policies.csv`](sg/policies.csv) cover Ireland, the Netherlands, New Zealand and Singapore, where the rules are national, and so do [`no/policies.csv`](no/policies.csv), [`dk/policies.csv`](dk/policies.csv), [`se/policies.csv`](se/policies.csv) and [`fi/policies.csv`](fi/policies.csv) for Norway, Denmark, Sweden and Finland. The US rules are in [`us/policies.csv`](us/policies.csv). One row per rule. A row records what the rule says, where it is written and when we checked it. It never judges the rule.
 
 | Column | Meaning |
 | --- | --- |

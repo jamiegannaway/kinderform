@@ -65,6 +65,12 @@ COUNTRIES = {
            "Västra Götaland": "o", "Värmland": "s", "Örebro": "t", "Västmanland": "u", "Dalarna": "w",
            "Gävleborg": "x", "Västernorrland": "y", "Jämtland": "z", "Västerbotten": "ac", "Norrbotten": "bd",
            "Sweden": "se"},
+    # Finland: the 19 regions, in English. The wellbeing services counties and Helsinki sit in their region.
+    "fi": {"Uusimaa": "uu", "Southwest Finland": "vs", "Satakunta": "sa", "Kanta-Häme": "kh", "Pirkanmaa": "pi",
+           "Päijät-Häme": "ph", "Kymenlaakso": "ky", "South Karelia": "ek", "South Savo": "es", "North Savo": "ps",
+           "North Karelia": "pk", "Central Finland": "ks", "South Ostrobothnia": "ep", "Ostrobothnia": "po",
+           "Central Ostrobothnia": "kp", "North Ostrobothnia": "pp", "Kainuu": "ka", "Lapland": "la", "Åland": "al",
+           "Finland": "fi"},
     # Denmark: the 5 regions, in English. Municipalities sit in their region.
     "dk": {"Capital Region of Denmark": "h", "Region Zealand": "s", "Region of Southern Denmark": "sd",
            "Central Denmark Region": "m", "North Denmark Region": "n", "Denmark": "dk"},

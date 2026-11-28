@@ -100,7 +100,7 @@ def sentences(blocks: list[str]) -> list[str]:
     for b in blocks:
         # A new sentence starts with a capital, a number or a quotation, or with a site name written
         # in lower case ("nidirect says...", "mygov.scot says...").
-        for s in re.split(r"(?<=[.!?])\s+(?=[A-Z0-9“\"'(]|[a-z][\w-]*\.[a-z]{2,}\b|nidirect\b)", b):
+        for s in re.split(r"(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Þ0-9“\"'(]|[a-z][\w-]*\.[a-z]{2,}\b|nidirect\b)", b):
             # A table cell listing items ("Name, Email address, Phone number, ...") is a list, not a sentence.
             is_list = s.count(",") >= 4 and not re.search(r"[.!?]$", s.strip())
             if len(s.split()) >= 3 and not is_citation(s) and not is_list:

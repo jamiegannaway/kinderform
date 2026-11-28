@@ -4925,3 +4925,72 @@ sg-sg-boys-town-fostering-enquiry:q01,sg-sg-boys-town-fostering-enquiry,1,,Name,
 sg-sg-boys-town-fostering-enquiry:q02,sg-sg-boys-town-fostering-enquiry,2,,Contact Number,contact_identity,phone,yes,tel,no,,unknown,,direct_fetch,2026-11-25
 sg-sg-boys-town-fostering-enquiry:q03,sg-sg-boys-town-fostering-enquiry,3,,Email,contact_identity,email,yes,email,no,,unknown,,direct_fetch,2026-11-25
 sg-sg-boys-town-fostering-enquiry:q04,sg-sg-boys-town-fostering-enquiry,4,,Your Message,free_text,questions,unknown,textarea,no,,unknown,,direct_fetch,2026-11-25
+no-os-bfe-fosterhjem-enquiry:q01,no-os-bfe-fosterhjem-enquiry,1,,Fornavn og etternavn,contact_identity,name,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-os-bfe-fosterhjem-enquiry:q02,no-os-bfe-fosterhjem-enquiry,2,,phone,contact_identity,phone,unknown,tel,no,,unknown,,direct_fetch,2026-11-28
+no-os-bfe-fosterhjem-enquiry:q03,no-os-bfe-fosterhjem-enquiry,3,,zip Code,contact_identity,postcode,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-os-bfe-fosterhjem-enquiry:q04,no-os-bfe-fosterhjem-enquiry,4,,Jeg har lest og forstått personvernserklæringen,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+no-fi-bufetat-nord-enquiry:q01,no-fi-bufetat-nord-enquiry,1,,Fornavn og etternavn,contact_identity,name,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-fi-bufetat-nord-enquiry:q02,no-fi-bufetat-nord-enquiry,2,,phone,contact_identity,phone,unknown,tel,no,,unknown,,direct_fetch,2026-11-28
+no-fi-bufetat-nord-enquiry:q03,no-fi-bufetat-nord-enquiry,3,,zip Code,contact_identity,postcode,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-fi-bufetat-nord-enquiry:q04,no-fi-bufetat-nord-enquiry,4,,Jeg har lest og forstått personvernserklæringen,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+no-tl-bufetat-midt-enquiry:q01,no-tl-bufetat-midt-enquiry,1,,Fornavn og etternavn,contact_identity,name,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-tl-bufetat-midt-enquiry:q02,no-tl-bufetat-midt-enquiry,2,,phone,contact_identity,phone,unknown,tel,no,,unknown,,direct_fetch,2026-11-28
+no-tl-bufetat-midt-enquiry:q03,no-tl-bufetat-midt-enquiry,3,,zip Code,contact_identity,postcode,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-tl-bufetat-midt-enquiry:q04,no-tl-bufetat-midt-enquiry,4,,Jeg har lest og forstått personvernserklæringen,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+no-vl-bufetat-vest-enquiry:q01,no-vl-bufetat-vest-enquiry,1,,Fornavn og etternavn,contact_identity,name,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-vl-bufetat-vest-enquiry:q02,no-vl-bufetat-vest-enquiry,2,,phone,contact_identity,phone,unknown,tel,no,,unknown,,direct_fetch,2026-11-28
+no-vl-bufetat-vest-enquiry:q03,no-vl-bufetat-vest-enquiry,3,,zip Code,contact_identity,postcode,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-vl-bufetat-vest-enquiry:q04,no-vl-bufetat-vest-enquiry,4,,Jeg har lest og forstått personvernserklæringen,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+no-ak-bufetat-ost-enquiry:q01,no-ak-bufetat-ost-enquiry,1,,Fornavn og etternavn,contact_identity,name,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-ak-bufetat-ost-enquiry:q02,no-ak-bufetat-ost-enquiry,2,,phone,contact_identity,phone,unknown,tel,no,,unknown,,direct_fetch,2026-11-28
+no-ak-bufetat-ost-enquiry:q03,no-ak-bufetat-ost-enquiry,3,,zip Code,contact_identity,postcode,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-ak-bufetat-ost-enquiry:q04,no-ak-bufetat-ost-enquiry,4,,Jeg har lest og forstått personvernserklæringen,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+no-vf-bufetat-sor-enquiry:q01,no-vf-bufetat-sor-enquiry,1,,Fornavn og etternavn,contact_identity,name,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-vf-bufetat-sor-enquiry:q02,no-vf-bufetat-sor-enquiry,2,,phone,contact_identity,phone,unknown,tel,no,,unknown,,direct_fetch,2026-11-28
+no-vf-bufetat-sor-enquiry:q03,no-vf-bufetat-sor-enquiry,3,,zip Code,contact_identity,postcode,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+no-vf-bufetat-sor-enquiry:q04,no-vf-bufetat-sor-enquiry,4,,Jeg har lest og forstått personvernserklæringen,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-nykoping-enquiry:q01,se-d-nykoping-enquiry,1,,Namn,contact_identity,name,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+se-d-nykoping-enquiry:q02,se-d-nykoping-enquiry,2,,E-post,contact_identity,email,yes,email,no,,unknown,,direct_fetch,2026-11-28
+se-d-nykoping-enquiry:q03,se-d-nykoping-enquiry,3,,Contact Form Message,free_text,questions,unknown,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-d-nykoping-enquiry:q04,se-d-nykoping-enquiry,4,,Vi behandlar uppgifterna för att kunna ge dig återkoppling u,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q01,se-d-startsteget-enquiry,1,,Namn,contact_identity,name,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q02,se-d-startsteget-enquiry,2,,Födelseår,contact_identity,date_of_birth,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q03,se-d-startsteget-enquiry,3,,Adress,contact_identity,address,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q04,se-d-startsteget-enquiry,4,,Stad,contact_identity,address,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q05,se-d-startsteget-enquiry,5,,Telefon,contact_identity,phone,yes,tel,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q06,se-d-startsteget-enquiry,6,,E-post,contact_identity,email,yes,email,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q07,se-d-startsteget-enquiry,7,,Civilstånd,household,relationships,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q08,se-d-startsteget-enquiry,8,,Antal hemmavarande barn,household,children_in_household,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q09,se-d-startsteget-enquiry,9,,"Typ av boende (lägenhet, hus, storlek, antal rum)",housing,tenure,yes,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q10,se-d-startsteget-enquiry,10,,Finns det ett eget sovrum till det placerade barnet?,housing,spare_bedroom,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q11,se-d-startsteget-enquiry,11,,"Har du möjlighet att avsätta tid från ditt arbete för att närvara vid möten med socialtjänst, skola, etc.?",work,employment_status,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q12,se-d-startsteget-enquiry,12,,Har du kunskap eller erfarenhet av neuropsykiatriska funktionsnedsättningar (NPF) som intellektuell…,experience,childcare_experience,yes,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q13,se-d-startsteget-enquiry,13,,Har du kunskap eller erfarenhet av att bemöta människor med missbruk eller kriminalitet?,experience,childcare_experience,yes,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q14,se-d-startsteget-enquiry,14,,Har du kunskap eller erfarenhet av att hantera självskadebeteende eller ätstörningar?,experience,childcare_experience,yes,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q15,se-d-startsteget-enquiry,15,,Hur väl behärskar du det svenska språket?,other,unclassified,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q16,se-d-startsteget-enquiry,16,,"rsäkringskassans register gällande längre sjukskrivningar, kronofogdens register gällande skulder eller…",consent,declaration_and_checks,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q17,se-d-startsteget-enquiry,17,,Har du/ni tidigare erfarenhet av att ta emot barn och har en färdig utredning som du/ni kan ladda upp?,experience,childcare_experience,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q18,se-d-startsteget-enquiry,18,,Bifoga (ladda upp) tidigare utredning,experience,prior_fostering,unknown,unknown,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q19,se-d-startsteget-enquiry,19,,När vill du helst bli kontaktad av oss?,contact_preference,time,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q20,se-d-startsteget-enquiry,20,,Hur vill du helst bli kontaktad av oss?,contact_preference,method,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-d-startsteget-enquiry:q21,se-d-startsteget-enquiry,21,,Jag godkänner att mina uppgifter sparas enligt GDPR,consent,processing,yes,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-o-boras-enquiry:q01,se-o-boras-enquiry,1,,Namn (obligatorisk),contact_identity,name,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-o-boras-enquiry:q02,se-o-boras-enquiry,2,,Telefonnummer (obligatorisk),contact_identity,phone,yes,tel,no,,unknown,,direct_fetch,2026-11-28
+se-o-boras-enquiry:q03,se-o-boras-enquiry,3,,Mejladress: (obligatorisk),contact_identity,email,yes,email,no,,unknown,,direct_fetch,2026-11-28
+se-o-boras-enquiry:q04,se-o-boras-enquiry,4,,"Choice of: Intresseanmälan gällande, Jourhem, Intresseanmälan gällande, Intresseanmälan gällande…",interest,care_type,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-o-boras-enquiry:q05,se-o-boras-enquiry,5,,Inmatning annat,free_text,questions,unknown,text,no,,conditional,,direct_fetch,2026-11-28
+se-o-boras-enquiry:q06,se-o-boras-enquiry,6,,Övrig information,free_text,questions,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+se-o-boras-enquiry:q07,se-o-boras-enquiry,7,,Jag samtycker till att Borås Stad behandlar de personuppgift,consent,processing,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q01,se-ac-skelleftea-enquiry,1,,För- och efternamn (obligatorisk),contact_identity,name,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q02,se-ac-skelleftea-enquiry,2,,Personnummer (obligatorisk),contact_identity,id_number,yes,text,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q03,se-ac-skelleftea-enquiry,3,,Barn och ålder,household,children_in_household,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q04,se-ac-skelleftea-enquiry,4,,Adress,contact_identity,address,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q05,se-ac-skelleftea-enquiry,5,,Ange postadress,contact_identity,address,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q06,se-ac-skelleftea-enquiry,6,,Telefonnummer (obligatorisk),contact_identity,phone,yes,tel,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q07,se-ac-skelleftea-enquiry,7,,E-post,contact_identity,email,unknown,text,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q08,se-ac-skelleftea-enquiry,8,,Sysselsättning,work,employment_status,unknown,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q09,se-ac-skelleftea-enquiry,9,,Övrigt,free_text,questions,unknown,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q10,se-ac-skelleftea-enquiry,10,,Jag är intresserad av uppdrag/vill veta mer om,interest,care_type,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q11,se-ac-skelleftea-enquiry,11,,Hur fick du reda på att vi söker familjehem/jourfamilj/kontaktfamilj/kontaktperson?,source,how_heard,unknown,textarea,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q12,se-ac-skelleftea-enquiry,12,,Jag samtycker till att utdrag ur socialregistret görs,consent,declaration_and_checks,yes,radio,no,,unknown,,direct_fetch,2026-11-28
+se-ac-skelleftea-enquiry:q13,se-ac-skelleftea-enquiry,13,,Alla uppgifter behandlas i enlighet med dataskyddsförordning,consent,privacy_acknowledgement,unknown,checkbox,no,,unknown,,direct_fetch,2026-11-28

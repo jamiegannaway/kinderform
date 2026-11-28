@@ -218,7 +218,11 @@ export default function Countries({ data }: { data: CountriesData }) {
         </h2>
         <p className="leading-7">
           Only {data.reply.yes} of {data.reply.of} forms say when you will hear back. We read {data.allForms} enquiry
-          forms in {listNames(data.countries.map((c) => (/^(?:United |Netherlands)/.test(c.name) ? `the ${c.name}` : c.name)))}.
+          forms in{" "}
+          {data.countries.length > 8
+            ? `${data.countries.length} countries`
+            : listNames(data.countries.map((c) => (/^(?:United |Netherlands)/.test(c.name) ? `the ${c.name}` : c.name)))}
+          .
           This is not a sample of all services in those countries.
         </p>
         <p className="leading-7 text-muted-foreground">

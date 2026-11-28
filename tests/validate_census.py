@@ -19,7 +19,9 @@ REGISTERS = [ROOT / "register" / "front-doors.csv", ROOT / "register" / "us" / "
              ROOT / "register" / "de" / "front-doors.csv", ROOT / "register" / "fr" / "front-doors.csv",
              ROOT / "register" / "es" / "front-doors.csv", ROOT / "register" / "ie" / "front-doors.csv",
              ROOT / "register" / "nl" / "front-doors.csv", ROOT / "register" / "nz" / "front-doors.csv",
-             ROOT / "register" / "sg" / "front-doors.csv"]
+             ROOT / "register" / "sg" / "front-doors.csv", ROOT / "register" / "no" / "front-doors.csv",
+             ROOT / "register" / "dk" / "front-doors.csv", ROOT / "register" / "se" / "front-doors.csv",
+             ROOT / "register" / "fi" / "front-doors.csv"]
 
 COLUMNS = {
     "forms.csv": ["form_id", "front_door_id", "name", "operator_type", "service_type", "country", "region", "form_stage",
@@ -42,7 +44,8 @@ ALLOWED = {
                                      "state_agency", "county_agency", "private_agency", "child_welfare_agency",
                                      "indigenous_agency", "local_authority", "voluntary_agency"},
     ("forms.csv", "service_type"): {"fostering", "adoption", "fostering_and_adoption"},
-    ("forms.csv", "country"): {"UK", "US", "CA", "AU", "DE", "FR", "ES", "IE", "NL", "NZ", "SG"},
+    ("forms.csv", "country"): {"UK", "US", "CA", "AU", "DE", "FR", "ES", "IE", "NL", "NZ", "SG",
+                                   "NO", "DK", "SE", "FI"},
     ("forms.csv", "form_stage"): {"primary", "secondary", "application"},
     ("forms.csv", "access_route"): {"online_form", "downloadable_form", "phone_conversation", "sent_after_first_contact",
                                     "email_only", "signposting_only", "described_not_public", "council_portal"},
@@ -155,7 +158,8 @@ from validate_world_register import COUNTRIES as WORLD  # noqa: E402
 
 REGIONS = {"UK": UK_REGIONS, "US": US_REGIONS, "CA": CA_REGIONS, "AU": AU_REGIONS,
            "DE": set(WORLD["de"]), "FR": set(WORLD["fr"]), "ES": set(WORLD["es"]),
-           "IE": set(WORLD["ie"]), "NL": set(WORLD["nl"]), "NZ": set(WORLD["nz"]), "SG": set(WORLD["sg"])}
+           "IE": set(WORLD["ie"]), "NL": set(WORLD["nl"]), "NZ": set(WORLD["nz"]), "SG": set(WORLD["sg"]),
+           "NO": set(WORLD["no"]), "DK": set(WORLD["dk"]), "SE": set(WORLD["se"]), "FI": set(WORLD["fi"])}
 for r in forms:
     allowed = REGIONS.get(r["country"], set())
     if r["region"] not in allowed:
