@@ -46,6 +46,8 @@ Agree the source event for each field. Leave missing times out; do not replace t
 
 Developers can use the [local fostering adapter](../schema/enquiry_adapter.py) for an initial record. The [synthetic trace](../tests/validate_enquiry_adapter.py) follows it through acknowledgement, attempt and conversation. Use the [event-order validator](../schema/validate_enquiry.py) alongside JSON Schema.
 
+The monitoring record covers fostering for now. An adoption service can use the form, and keep its own record of these events.
+
 ## What goes in the record used for measurement
 
 The [enquiry schema](../schema/enquiry.schema.json) uses a separate identifier for the record. The team leaves out Sam’s name and contact details. Here is the record after the conversation.

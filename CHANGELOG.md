@@ -1,5 +1,12 @@
 # Kinderform release notes
 
+## Unreleased · schema versions and a safer log
+
+- **Monitoring schema version 0.2.** The four retention fields are now version 0.2, at [`/schema/enquiry/0.2.json`](https://www.kinderform.org/schema/enquiry/0.2.json). Version 0.1 is back as first published. A 0.1 record is still valid under 0.2. A record that uses a retention field must say 0.2.
+- **A published schema keeps its content.** A changed schema gets a new version and a new address. The checks fail if version 0.1 changes.
+- **The log tool locks the file.** Two programs can add to one log at once without breaking the chain. A new check runs 24 at once.
+- **Fostering only, said plainly.** The guides now say that the monitoring record covers fostering for now.
+
 ## Unreleased · country pages and downloads (starter candidate v0.1.0-draft.6)
 
 - **A page for each country.** The map now leads to `/example-form/<country>`, not a pop-up. Each page shows the form and says which design system it uses. It also says who makes that system, its licence and typeface, and what we left out.

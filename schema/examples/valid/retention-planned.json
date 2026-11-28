@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "enquiry_id": "SYN-000010",
   "received_at": "2026-11-16T23:30:00-05:00",
   "channel": "web_form",

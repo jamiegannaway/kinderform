@@ -11,6 +11,8 @@ The [audit note](audits/2026-11-26.md) records the findings, fixes and remaining
 - [ ] Have a qualified reviewer check legal timing advice and the full relevant provisions.
 - [ ] Hold the adult stakeholder and accessibility sessions listed below. Review assurances and the minimum questions needed to reply.
 - [ ] Rehearse the current kit with one willing service, then agree a service-owned pilot. Keep records local and publish only agreed safe aggregates.
+  - The test for the next kit release: give one person the ZIP and an approved test system, and watch without helping. With made-up records they deliver one enquiry exactly once, find its owner, recover from a failed delivery, hand it over with acceptance, honour a stop request, show a deletion and switch back to the old route. Note the kit version and each place the guide left them unsure, then fix the guide there.
+  - Try the form with keyboard and screen-reader users and on a phone, against WCAG 2.2 AA.
 - [ ] Measure useful human replies, clear next steps, informed choice and team workload alongside waiting times.
 
 Prioritise this work before adding more country kits. Each further country needs a local reviewer, a service need and a maintenance owner. The country research below remains a first pass.
@@ -21,6 +23,10 @@ See the [developer guide](data-handling.md). Everything here is a draft, not leg
 
 - [x] Tag every field of the three schemas (`schema/data-handling.json`) and test the tags
 - [x] Add optional retention fields to the enquiry schema, with date checks
+- [x] Publish the retention fields as monitoring schema version 0.2 and keep version 0.1 as first published (28 November 2026). A published schema address keeps its content; `starter/pack.py` lists each address
+- [x] Lock the log while `tools/interaction_log.py` adds an event, so two programs writing at once cannot break the chain (28 November 2026)
+- [ ] Tag kit releases v0.1.0-draft.3 to draft.6, so the source link in each kit's credits works. Each tag goes on the commit that built that release: `fb90489`, `61dc993`, `6b730f8` and `b40d8db`
+- [ ] Add adoption to the monitoring record: agree the events, then test adoption, undecided interest, kinship routes and a later change of interest. Today the record and its adapter cover fostering only
 - [x] Add the interaction log schema, validator and made-up logs: hash chain, segments, corrections, reverts and deletion in every system
 - [x] Add the connection tools: log append and verify, webhook signing, purpose-limited CSV export
 - [x] Add the AI test pack: made-up submissions with instruction-like names, and a data-block wrapper
@@ -28,8 +34,8 @@ See the [developer guide](data-handling.md). Everything here is a draft, not leg
 - [x] Add the site page `/build/data-handling` that explains the layer to technical readers (no research on it)
 - [ ] A qualified reviewer checks the UK profile
 - [ ] Rehearse the log with one willing service, using made-up records
-- [ ] Decide whether `lawful_basis` moves from the enquiry schema to profiles in v0.2
-- [ ] For v0.2, limit `enquiry_id`, `source` and `front_door_id` in the enquiry schema with a pattern. Today they accept any text, and the log's `enquiry_id` is stricter
+- [ ] Decide whether `lawful_basis` moves from the enquiry schema to profiles in the next version
+- [ ] In the next version, limit `enquiry_id`, `source` and `front_door_id` in the enquiry schema with a pattern. Today they accept any text, and the log's `enquiry_id` is stricter
 - [ ] Decide how a log segment should treat an enquiry that began in an earlier segment (today: the `--continuation` option)
 - [x] Rules for crawlers and AI tools (28 November 2026): `site/public/robots.txt`, a `tdm-reservation` header and section 10 of the terms of use
 - [ ] Have a lawyer review section 10 of the terms. The open licences still allow reuse, so decide whether that is the protection wanted
