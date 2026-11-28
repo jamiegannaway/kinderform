@@ -55,6 +55,9 @@ COUNTRIES = {
            "Otago": "ota", "Southland": "stl", "New Zealand": "nz"},
     # Singapore: one city-state.
     "sg": {"Singapore": "sg"},
+    # Denmark: the 5 regions, in English. Municipalities sit in their region.
+    "dk": {"Capital Region of Denmark": "h", "Region Zealand": "s", "Region of Southern Denmark": "sd",
+           "Central Denmark Region": "m", "North Denmark Region": "n", "Denmark": "dk"},
 }
 
 ENUMS = {

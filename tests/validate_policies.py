@@ -43,6 +43,7 @@ FILES = {
     "register/nl/policies.csv": ("nl", {"NL"}),
     "register/nz/policies.csv": ("nz", {"NZ"}),
     "register/sg/policies.csv": ("sg", {"SG"}),
+    "register/dk/policies.csv": ("dk", {"DK"}),
 }
 TOPICS = set(re.findall(r"^\| `([a-z_]+)` \|", (ROOT / "register/us/policy-topics.md").read_text(encoding="utf-8"), re.M))
 APPLIES = {"fostering", "adoption", "both"}
@@ -53,6 +54,7 @@ UNITS = {
     "", "years", "months", "weeks", "days", "percent", "working_days", "hours", "children", "people", "sessions",
     "GBP_per_week", "CAD_per_day", "CAD_per_month", "AUD_per_fortnight", "AUD_per_week",
     "EUR_per_month", "EUR_per_week", "EUR_per_day", "EUR", "NZD_per_week", "NZD_per_fortnight", "SGD_per_month", "SGD",
+    "DKK_per_month", "DKK_per_day", "DKK_per_year", "DKK",
 }
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(
