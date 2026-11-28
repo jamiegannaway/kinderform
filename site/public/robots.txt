@@ -1,17 +1,17 @@
 # kinderform.org: who may read this site by machine.
 # The rules in words: https://www.kinderform.org/terms#automation
 #
-# People and ordinary search engines are welcome.
-# Tools that collect pages to train or run AI systems are not.
+# People, search engines, AI search and AI assistants are welcome.
+# Tools that collect pages to train AI models are not.
 # This file is a request. We may block tools that ignore it.
 
-# Everyone else: read public pages, slowly. No AI training, no AI answers.
+# Everyone else: read public pages, slowly. No AI training.
 User-agent: *
-Content-Signal: search=yes, ai-train=no, ai-input=no
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Crawl-delay: 5
 Allow: /
 
-# 1. Crawlers that collect pages to train AI models or build datasets.
+# Crawlers that collect pages to train AI models or build datasets.
 User-agent: GPTBot
 User-agent: ClaudeBot
 User-agent: anthropic-ai
@@ -38,22 +38,4 @@ User-agent: img2dataset
 User-agent: Kangaroo Bot
 User-agent: ICC-Crawler
 User-agent: Google-CloudVertexBot
-Disallow: /
-
-# 2. Crawlers that index pages for AI search and AI answers.
-#    Delete this group to appear in AI search results.
-User-agent: OAI-SearchBot
-User-agent: Claude-SearchBot
-User-agent: PerplexityBot
-User-agent: YouBot
-User-agent: DuckAssistBot
-Disallow: /
-
-# 3. AI assistants and agents that fetch a page when a person asks them to.
-#    Delete this group to let a person's AI assistant read a page for them.
-User-agent: ChatGPT-User
-User-agent: Claude-User
-User-agent: Perplexity-User
-User-agent: Meta-ExternalFetcher
-User-agent: MistralAI-User
 Disallow: /

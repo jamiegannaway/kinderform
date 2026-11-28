@@ -17,7 +17,7 @@
   - New tools: `tools/interaction_log.py`, `tools/webhook_sign.py`, `tools/export_csv.py` and `tools/untrusted_text.py`, with made-up logs and AI test cases.
   - `schema/profiles/uk.json`: an unverified map of two legal category names.
   - A site page, `/build/data-handling`, explains the layer to technical readers. It is linked from `/build` and the footer only.
-- **Rules for crawlers and AI tools.** `robots.txt` keeps ordinary search engines and turns away crawlers that collect pages to train or run AI systems. Every page sends a `tdm-reservation` header. The terms of use gain section 10, "Automated tools, crawlers and AI". The open licences still apply to reuse. No lawyer has reviewed the wording.
+- **Rules for crawlers and AI tools.** `robots.txt` keeps search engines, AI search and AI assistants, and turns away crawlers that collect pages to train AI models. Every page sends a `tdm-reservation` header. The terms of use gain section 10, "Automated tools, crawlers and AI". The open licences still apply to reuse. No lawyer has reviewed the wording.
 - Preserve the earlier starter archives. The draft.4 candidate contains the revised rules and guide; no service pilot or independent legal review is claimed.
 
 ## v0.1.0-draft.3 · 25 November 2026
