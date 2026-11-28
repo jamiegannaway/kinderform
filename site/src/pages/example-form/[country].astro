@@ -1,21 +1,25 @@
 ---
-// The same map page, with one country's form open. Lets a form be linked to directly.
+// One country's example form, on its own page. ?design=neutral shows the neutral design, and
+// ?lang=fr the French version of a form that has one (Canada).
 import Base from "@/layouts/Base.astro";
-import { ExampleFormPicker } from "@/components/example-form-picker";
-import { FORM_COUNTRIES, type FormCountry } from "@/components/reference-form/countries";
+import { ExampleFormPage } from "@/components/example-form-page";
+import { DESIGN_SYSTEMS } from "@/lib/design-systems";
+import { downloads, exampleForms, type ExampleForm } from "@/lib/example-forms";
 
 export function getStaticPaths() {
-  return FORM_COUNTRIES.map((c) => ({ params: { country: c.code }, props: { code: c.code } }));
+  return exampleForms().map((form) => ({ params: { country: form.code }, props: { form } }));
 }
-const { code } = Astro.props as { code: FormCountry };
-const country = FORM_COUNTRIES.find((c) => c.code === code)!;
+const { form } = Astro.props as { form: ExampleForm };
+const files = Object.fromEntries(form.variants.map((v) => [v.key, downloads(form, v)]));
+const designs = form.system ? `in ${DESIGN_SYSTEMS[form.system].short} and in a neutral design` : "in a neutral design";
 ---
 <Base
-  title={`${country.name}: example enquiry form | Kinderform`}
-  description={`A short, kind example enquiry form for fostering or adoption in ${country.name}. It uses the ${country.system}, without government branding.`}
+  title={`${form.name}: example enquiry form | Kinderform`}
+  description={`Try an example enquiry form for fostering or adoption in ${form.inSentence}, ${designs}. Nothing you enter is sent.`}
 >
-  <ExampleFormPicker open={code} />
+  <script is:inline slot="head" src="/example-form.js"></script>
+  <ExampleFormPage form={form} files={files} />
   <script>
-    import "@/components/reference-form/mount-picker";
+    import "@/components/reference-form/mount-page";
   </script>
 </Base>

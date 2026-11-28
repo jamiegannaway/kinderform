@@ -1,6 +1,6 @@
-// /example-form: a world map with the countries that have an example form. Picking a
-// country opens its form in a dialog (see reference-form/form-dialog.tsx), so the page itself
-// never needs to scroll. Rendered at build time; the links work without JavaScript too.
+// /example-form: a world map with the countries that have an example form. Picking a country
+// goes to its own page, /example-form/<country> (example-form-page.tsx). The map fits the screen,
+// so this page never needs to scroll. Rendered at build time; it ships no JavaScript.
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { FORM_COUNTRIES } from "@/components/reference-form/countries"
@@ -53,7 +53,7 @@ function WorldMap() {
             ) : null,
           )}
           {MAP_COUNTRIES.map((c) => (
-            <a key={c.code} href={href(c.code)} data-country={c.code} tabIndex={-1} aria-hidden="true" className="group">
+            <a key={c.code} href={href(c.code)} tabIndex={-1} aria-hidden="true" className="group">
               <path
                 d={c.d}
                 className="fill-primary/60 stroke-background transition-colors group-hover:fill-primary"
@@ -66,7 +66,7 @@ function WorldMap() {
           <a
             key={c.code}
             href={href(c.code)}
-            data-country={c.code}
+           
             tabIndex={-1}
             aria-hidden="true"
             className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground sm:block`}
@@ -79,7 +79,9 @@ function WorldMap() {
   )
 }
 
-export function ExampleFormPicker({ open }: { open: string | null }) {
+// labels: each country's design system, by country code ("KERN UX", or "Neutral design" for a
+// country with none), from src/lib/design-systems.ts through the page.
+export function ExampleFormPicker({ labels }: { labels: Record<string, string> }) {
   return (
     <div className="flex h-dvh flex-col">
       {/* A wrapper so the header spans the width: in a flex column, its auto margins would shrink it. */}
@@ -95,12 +97,12 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
             </div>
             <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight md:text-4xl">Example enquiry forms</h1>
             <p className="max-w-3xl text-muted-foreground md:text-lg">
-              Pick a country to try its form, styled with that country’s public design system. Nothing you enter
-              is sent or stored.
+              Pick a country to try its form, in that country’s public design system or a neutral design. Nothing
+              you enter is sent or stored.
             </p>
           </div>
           <Button asChild variant="outline">
-            <a href={open ? `/build/${open}` : "/build"}>Use this form in my organisation</a>
+            <a href="/build">Use this form in my organisation</a>
           </Button>
         </div>
 
@@ -112,12 +114,11 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
               <li key={c.code}>
                 <a
                   href={href(c.code)}
-                  data-country={c.code}
-                  aria-current={open === c.code ? "page" : undefined}
+                 
                   className="flex h-full flex-col rounded-lg border bg-card px-3 py-2 transition-colors outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
                   <span className="text-sm font-medium">{c.name}</span>
-                  <span className="text-xs text-muted-foreground">{c.short}</span>
+                  <span className="text-xs text-muted-foreground">{labels[c.code]}</span>
                 </a>
               </li>
             ))}
@@ -125,12 +126,7 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
         </nav>
 
         <p className="shrink-0 text-xs text-muted-foreground">
-          <a href="#how-built" data-about className="font-medium text-foreground underline underline-offset-4">
-            How the forms are built
-          </a>
-          <span aria-hidden="true"> · </span>
-          No cookies and no tracking.
-          <span aria-hidden="true"> · </span>
+          Each country’s page says how its form is built and offers it as a download. No cookies and no tracking.
           Does a form read well in your language?{" "}
           <a
             href="mailto:jamie.gannaway@gmail.com?subject=Example%20form%20wording"
@@ -139,11 +135,7 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
             Tell us
           </a>
         </p>
-        <noscript>
-          <p className="text-sm">These examples need JavaScript. A real form built to the Kinderform standard should work without it.</p>
-        </noscript>
       </main>
-      <div id="kf-dialog-root" data-open={open ?? ""} />
     </div>
   )
 }

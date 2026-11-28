@@ -1,5 +1,12 @@
 # Kinderform release notes
 
+## Unreleased · country pages and downloads (starter candidate v0.1.0-draft.6)
+
+- **A page for each country.** The map now leads to `/example-form/<country>`, not a pop-up. Each page shows the form and says which design system it uses. It also says who makes that system, its licence and typeface, and what we left out.
+- **A neutral design.** Each form also comes in the site's own shadcn/ui look, and a switch on each page moves between the two. Answers are kept when you switch.
+- **Downloads.** Each design of each form downloads as one HTML file. It works offline, sends nothing and keeps the licence notices.
+- **Sweden.** Its form is in plain Swedish and uses only the neutral design, because Sweden has no open national design system that a non-government site may use. It has a starter kit in release v0.1.0-draft.6 and a place on the map.
+
 ## Unreleased · Nordic example forms (starter candidate v0.1.0-draft.5)
 
 - **Three more example forms.** Norway, Denmark and Finland each have an example form in their own language, built with an open public-sector design system and no government branding. Norway uses Designsystemet, Denmark uses Det Fælles Designsystem and Finland uses the Suomi.fi design system. All three are MIT. Each has a starter kit in release v0.1.0-draft.5, and each is on the world map.
