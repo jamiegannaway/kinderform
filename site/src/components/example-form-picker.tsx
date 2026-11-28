@@ -129,7 +129,7 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
             How the forms are built
           </a>
           <span aria-hidden="true"> · </span>
-          No cookies and no tracking.
+          We do not use cookies or track you.
           <span aria-hidden="true"> · </span>
           Does a form read well in your language?{" "}
           <a
