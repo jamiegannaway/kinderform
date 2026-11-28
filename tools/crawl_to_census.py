@@ -241,17 +241,21 @@ for _key, _words in DUTCH.items():
 # kept specific, because each list is tried on forms in every language (so no bare "par", "make" or "eier").
 NORDIC = {
     ("consent", "marketing"): r"nyhetsbrev|nyhedsbrev|uutiskirje",
-    ("consent", "privacy_acknowledgement"): r"personvern|privatlivspolitik|persondatapolitik|databeskyttelse|"
+    ("consent", "privacy_acknowledgement"): r"personvern|privatlivspolitik|persondatapolitik|databeskyttelse|dataskydd|"
+                                            r"behandlar (?:dina |uppgifterna|personuppgifter)|käsittelemme|"
                                             r"integritetspolicy|personuppgifter|tietosuoja",
+    ("consent", "declaration_and_checks"): r"utdrag ur|socialregistret|kronofogden|försäkringskassans register|"
+                                           r"politiattest|børneattest",
     ("consent", "processing"): r"samtykke|samtycke|jag godkänner|godkjenner|suostumu|hyväksyn",
-    ("contact_identity", "email"): r"e-?post\b|sähköposti",
+    ("contact_identity", "email"): r"e-?post\b|e-?postadress|\bmejl|sähköposti",
     ("contact_identity", "id_number"): r"fødselsnummer|personnummer|\bcpr\b|cpr-?nummer|henkilötunnus|\bhetu\b",
-    ("contact_identity", "date_of_birth"): r"fødselsdato|födelsedatum|syntymäaika",
+    ("contact_identity", "date_of_birth"): r"fødselsdato|födelsedatum|syntymäaika|födelseår|fødselsår|syntymävuosi",
     ("eligibility", "age"): r"\balder\b(?! på barnet)|\bålder\b(?! på barnet)|\bikä\b|\bikäsi\b",
     ("contact_identity", "phone"): r"telefon|\bmobil|puhelin|matkapuhelin",
     ("contact_identity", "postcode"): r"postnummer|postnr|postinumero",
     ("routing", "local_authority"): r"kommune|kommun\b|bydel|fylke|\bkunta|hyvinvointialue|stadsdel",
-    ("contact_identity", "address"): r"adresse|\badress\b|gateadresse|postadresse|osoite|poststed|postort|postitoimipaikka",
+    ("contact_identity", "address"): r"adresse|\badress\b|postadress|gatuadress|gateadresse|postadresse|osoite|poststed|"
+                                     r"postort|postitoimipaikka|\bstad\b|\bkaupunki\b",
     ("contact_identity", "name"): r"\bnavn\b|fornavn|etternavn|efternavn|\bnamn\b|förnamn|efternamn|\bnimi\b|etunimi|sukunimi",
     ("source", "how_heard"): r"hørt om|hvor har du|hvordan fikk du|hur fick du|var hörde du|mistä kuulit|miten kuulit|mistä sait",
     ("contact_preference", "time"): r"tidspunkt|når (?:kan|passer)|formiddag|ettermiddag|eftermiddag|\bkveld|\baften\b|"
@@ -262,7 +266,7 @@ NORDIC = {
     ("information_event", "event_dates"): r"informasjonsmøte|informationsmøde|informasjonskveld|informationsmöte|"
                                           r"informationskväll|infotilaisuu|infoilta|tiedotustilaisuu|valmennu",
     ("experience", "own_children"): r"egne barn|egna barn|omat lapset|omia lapsia",
-    ("experience", "prior_fostering"): r"tidligere (?:vært )?fosterhjem|vært fosterhjem|tidligere plejefamilie|"
+    ("experience", "prior_fostering"): r"tidligere (?:vært )?fosterhjem|vært fosterhjem|tidligere plejefamilie|tidigare utredning|"
                                        r"tidigare familjehem|aiemmin (?:ollut )?sijais|aiempaa kokemusta perhehoi",
     ("experience", "childcare_experience"): r"erfaring|erfarenhet|kokemus",
     ("household", "children_in_household"): r"barn i (?:hjemmet|husstanden|hushållet|hemmet)|hjemmeboende|"
@@ -273,7 +277,7 @@ NORDIC = {
     ("household", "household_composition"): r"husstand|hushåll|taloudessa asu|perheenjäsen|vem bor|hvem bor",
     ("household", "pets"): r"kjæledyr|kæledyr|husdjur|lemmikki",
     ("housing", "spare_bedroom"): r"soverom|eget rom|soveværelse|eget værelse|sovrum|eget rum|makuuhuone|oma huone",
-    ("housing", "tenure"): r"selveier|leiebolig|eierbolig|ejerbolig|lejebolig|hyresrätt|bostadsrätt|"
+    ("housing", "tenure"): r"selveier|leiebolig|eierbolig|ejerbolig|lejebolig|hyresrätt|bostadsrätt|typ av boende|boligtype|"
                            r"omistusasunto|vuokra-asunto|asumismuoto|boligform|boform",
     ("housing", "smoking"): r"røyk|ryger|rygning|\brök|tupak",
     ("work", "income"): r"inntekt|indkomst|inkomst|\btulot",
@@ -288,11 +292,12 @@ NORDIC = {
     ("criminal_record", "criminal_record"): r"politiattest|straffeattest|børneattest|belastningsregist|rikosrekisteri",
     ("eligibility", "citizenship"): r"statsborgerskap|statsborgerskab|medborgarskap|kansalaisuus",
     ("interest", "care_type"): r"fosterhjem|beredskapshjem|avlastning|plejefamilie|aflastning|familjehem|jourhem|"
-                               r"kontaktfamilj|sijaisperhe|perhehoi|tukiperhe|weekendhjem",
+                               r"kontaktfamilj|sijaisperhe|perhehoi|tukiperhe|weekendhjem|uppdrag|intresseanmälan gällande",
     ("interest", "child_preferences"): r"alder på barnet|barnets alder|ålder på barnet|søsken|søskende|syskon|sisarukse|lapsen ikä",
     ("free_text", "motivation"): r"hvorfor|motivasjon|varför|\bmiksi|motivaatio",
     ("free_text", "about_you"): r"om deg selv|om dig selv|fortell om|fortæl om|om dig själv|berätta om|kerro itsestä|kerro meille",
-    ("free_text", "questions"): r"melding|beskjed|besked|spørsmål|spørgsmål|meddelande|\bfråg|\bviesti|kysymy|lisätieto|övrigt",
+    ("free_text", "questions"): r"melding|beskjed|besked|spørsmål|spørgsmål|meddelande|\bfråg|\bviesti|kysymy|lisätieto|övrig|"
+                                r"\bannat\b|\bannet\b|\bandet\b",
 }
 for _key, _words in NORDIC.items():
     MORE[_key] = MORE[_key] + "|" + _words if _key in MORE else _words
@@ -312,7 +317,7 @@ JUNK = re.compile(
     r"form handle|form fields field|^(?:website|url|x/twitter|twitter|linkedin|to)$|^[a-z0-9]{10,}$|utm_|gclid|msclkid|"
     r"[gw]braid|fbclid|referr?er|entry ?page|page ?url|form ?type|nelio|sendmail|^project$|^fuction$|quiz|^ad |"
     r"feedback|was this page helpful|leer lassen|laisser (?:ce champ )?vide|dejar (?:en )?blanco|deixa(?:r|u) en blanc|"
-    r"leeg laten|niet invullen|ikke fyll ut|udfyld ikke|fyll inte i|älä täytä", re.I)
+    r"leeg laten|niet invullen|ikke fyll ut|udfyld ikke|fyll inte i|älä täytä|^mail name e-?mail$", re.I)
 PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*|"
                          r"bitte (?:w[äa]hlen|ausw[äa]hlen)|ausw[äa]hlen|seleccion[ae]|elija|escoja|tria|"
                          r"maak een keuze|selecteer|kies|velg|vælg|välj|valitse)\b", re.I)
@@ -321,7 +326,8 @@ NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|job|resume|career|
                          r"spende|ehrenamt|stellenangebot|karriere|donaci|donativo|voluntari|empleo|trabaja con nosotros|"
                          r"ofertas de trabajo|affiche|votre [ée]v[ée]nement|proposer un [ée]v[ée]nement|"
                          r"vacature|werken bij|doneer|donatie|ledige stillinger|lediga jobb|avoimet työpaikat|"
-                         r"\bdonere|\blahjoit", re.I)
+                         r"\bdonere|\blahjoit|göra sidan bättre|var sidan till hjälp|forbedre (?:denne )?siden|"
+                         r"var siden nyttig|palaute sivusta", re.I)
 # A page whose address names an application holds the full application, not a first-contact form.
 # The census covers first contact only; application forms belong in register/us/application-forms.csv.
 APPLICATION_PAGE = re.compile(r"application|how-to-apply|apply-now|/apply/?$", re.I)
@@ -377,8 +383,16 @@ def topic_of(text):
     if re.search(r"(?:age|ages|age groups?).*(?:children|child|young people)|(?:children|child|young people).*age|"
                  r"0[–-]5 years.*12[–-]17 years", text, re.I):
         return "interest", "child_preferences"
-    if re.search(r"choice of:.*phone.*email|preferred.*contact|contact.*method", text, re.I):
+    if re.search(r"choice of:.*phone.*email|preferred.*contact|contact.*method|hur vill du (?:helst )?bli kontaktad|"
+                 r"hvordan (?:vil|ønsker) du (?:helst )?(?:å )?bli kontaktet|miten haluat", text, re.I):
         return "contact_preference", "method"
+    # A birth year can sit in a field the page has misnamed (one Swedish form calls it "email").
+    if re.search(r"födelseår|fødselsår|syntymävuosi", text, re.I):
+        return "contact_identity", "date_of_birth"
+    if re.search(r"civilstånd|sivilstand|civilstand|siviilisääty", text, re.I):
+        return "household", "relationships"
+    if re.search(r"barn och ålder|barnens ålder|barn og alder|barnas alder|lasten iät", text, re.I):
+        return "household", "children_in_household"
     for category, topic, pattern in RULES:
         if pattern.search(text):
             return category, topic
@@ -388,7 +402,7 @@ def topic_of(text):
 # This recognises an explicit follow-up; it does not establish which answer reveals
 # it. Every other automated read stays unknown until the interaction is checked.
 def branching_of(label, condition=""):
-    if condition or re.search(r"^(?:if\b|other\b.*specify|si (?:oui|non)|wenn\b|falls\b|als\b)", label, re.I):
+    if condition or re.search(r"^(?:if\b|other\b.*specify|si (?:oui|non)|wenn\b|falls\b|als\b|inmatning annat)", label, re.I):
         return "conditional"
     return "unknown"
 
@@ -446,13 +460,14 @@ def _items(groups, order):
                 label = legend or plain(field.get("near_text", "")) or name or "Choice"
                 if label in options:
                     label = name or "Choice"
-            if not label or JUNK.search(label):
+            # Spam traps carry a visible label on some sites, so check the field's name too.
+            if not label or JUNK.search(label) or re.search(r"spam|honeypot|captcha", field.get("name", ""), re.I):
                 continue
             yield {"label": label, "text": label + " " + " ".join(options), "input_type": kind,
                    "required": field.get("required"), "options": options, "checked": g["checked"]}
         else:
             label = label_of(field)
-            if not label:
+            if not label or re.search(r"spam|honeypot|captcha", field.get("name", ""), re.I):
                 continue
             options = [o for o in field.get("options", []) if not PLACEHOLDER.search(o)]
             yield {"label": label, "text": label + " " + field.get("name", ""), "input_type": kind,
