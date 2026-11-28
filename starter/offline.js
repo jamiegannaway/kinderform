@@ -67,6 +67,9 @@
     } else if (field === "nl_postcode") {
       const upper = value.toUpperCase().replace(/\s/g, "");
       input.value = /^[0-9]{4}[A-Z]{2}$/.test(upper) ? upper.slice(0, 4) : upper;
+    } else if (field === "se_postcode_area" || field === "fi_postcode_area") {
+      const digits = value.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "");
+      input.value = /^[0-9]{5}$/.test(digits) ? digits.slice(0, 3) : digits;
     } else {
       input.value = value.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "");
       if (field === "au_postcode") input.value = value.replace(/\s+/g, "");

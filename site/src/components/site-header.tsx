@@ -1,4 +1,4 @@
-import { CodeXml, Menu, Moon, Sun, X } from "lucide-react"
+import { CodeXml, Menu, MessageCircle, Moon, Sparkles, Sun, X } from "lucide-react"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 
@@ -6,6 +6,9 @@ export const REPO_URL = "https://github.com/jamiegannaway/kinderform"
 // The project's WhatsApp community, where services and carers can say what they need. A plain link:
 // the site loads nothing from WhatsApp.
 export const COMMUNITY_URL = "https://chat.whatsapp.com/D7JeyNvLvtT8QIUAetXgzY"
+// The project's research, loaded into a Gemini Notebook (Google) so people can ask questions about
+// it. A plain link: the site loads nothing from Google.
+export const NOTEBOOK_URL = "https://notebook.google.com/notebook/7990cbcd-38ea-45a7-b56e-681c86e81e74"
 
 // The main pages, in the order a service would want them. The logo is the link home.
 const TABS = [
@@ -151,75 +154,128 @@ export function SiteHeader({ current }: { current: string }) {
   )
 }
 
+// The footer on every page: the community first, with a QR code for people reading on a computer,
+// then the project's pages and the legal pages. The QR code is a plain SVG made from COMMUNITY_URL
+// (public/images/community-qr.svg says how to remake it). It stays dark on white in dark mode, so
+// phones can read it.
 export function SiteFooter() {
+  const link = "font-medium text-foreground underline underline-offset-4"
   return (
     <footer className="border-t">
-      <div className="mx-auto max-w-6xl space-y-2 px-6 py-8 text-sm text-muted-foreground">
-        <p>
-          <a href={COMMUNITY_URL} className="font-medium text-foreground underline underline-offset-4">
-            What do you really need?
-          </a>{" "}
-          Tell us in our WhatsApp community. The link opens WhatsApp.
-        </p>
-        <p>
-          <a href="/about" className="font-medium text-foreground underline underline-offset-4">
-            About
-          </a>
-          : who made this, and how.
-        </p>
-        <p>
-          <a href="/research/log" className="font-medium text-foreground underline underline-offset-4">
-            Research log
-          </a>
-          : what each piece of research could mean for the project.
-        </p>
-        <p>
-          <a href={REPO_URL} className="font-medium text-foreground underline underline-offset-4">
-            Kinderform on GitHub
-          </a>
-          : our code, data and research, free for anyone to use.
-        </p>
-        {/* Legal: the three legal pages, then what the site does and does not do, then the licences in short. */}
-        <nav aria-labelledby="footer-legal" className="mt-4 space-y-2 border-t pt-4">
-          <h2 id="footer-legal" className="font-medium text-foreground">
-            Legal
-          </h2>
-          <ul className="flex flex-wrap gap-x-5 gap-y-1">
-            <li>
-              <a href="/privacy" className="font-medium text-foreground underline underline-offset-4">
-                Privacy policy
+      <div className="mx-auto max-w-6xl space-y-10 px-6 py-10 text-sm text-muted-foreground">
+        <section
+          aria-labelledby="footer-community"
+          className="flex flex-col gap-6 rounded-xl border bg-card p-6 text-card-foreground md:flex-row md:items-center md:justify-between"
+        >
+          <div className="max-w-xl space-y-3">
+            <h2 id="footer-community" className="text-lg font-semibold tracking-tight">
+              What do you really need?
+            </h2>
+            <p className="leading-6 text-muted-foreground">
+              Join the Kinderform community on WhatsApp. Tell us what would help, ask a question, and hear what we
+              build next.
+            </p>
+            <p className="text-xs leading-5 text-muted-foreground">
+              Other members may see your phone number. Please share nothing about a child.{" "}
+              <a href="/privacy#whatsapp" className={link}>
+                How we use what you share
               </a>
-            </li>
-            <li>
-              <a href="/terms" className="font-medium text-foreground underline underline-offset-4">
-                Terms of use
+            </p>
+            <Button asChild className="mt-1">
+              <a href={COMMUNITY_URL}>
+                <MessageCircle aria-hidden="true" />
+                Join on WhatsApp
               </a>
-            </li>
-            <li>
-              <a href="/licences" className="font-medium text-foreground underline underline-offset-4">
-                Licences
+            </Button>
+          </div>
+          {/* Hidden on phones: you cannot scan the screen you are reading. */}
+          <figure className="hidden shrink-0 text-center md:block">
+            <img
+              src="/images/community-qr.svg"
+              alt="QR code that opens the Kinderform community on WhatsApp"
+              width={144}
+              height={144}
+              className="size-36 rounded-md bg-white p-2 ring-1 ring-border"
+            />
+            <figcaption className="mt-2 text-xs text-muted-foreground">Scan with your phone&rsquo;s camera</figcaption>
+          </figure>
+        </section>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <nav aria-labelledby="footer-project" className="space-y-3">
+            <h2 id="footer-project" className="font-medium text-foreground">
+              Kinderform
+            </h2>
+            <ul className="space-y-2">
+              <li>
+                <a href="/about" className={link}>
+                  About
+                </a>
+                : who made this, and how
+              </li>
+              <li>
+                <a href="/research/log" className={link}>
+                  Research log
+                </a>
+                : what each piece of research could mean for the project
+              </li>
+              <li>
+                <a href={NOTEBOOK_URL} className={`inline-flex items-center gap-1.5 ${link}`}>
+                  <Sparkles aria-hidden="true" className="size-4" />
+                  Explore the research in a Gemini Notebook
+                </a>
+                : ask questions about it, using Google&rsquo;s AI
+              </li>
+              <li>
+                <a href={REPO_URL} className={link}>
+                  Kinderform on GitHub
+                </a>
+                : our code, data and research, free for anyone to use
+              </li>
+            </ul>
+          </nav>
+          {/* Legal: the three legal pages, then what the site does and does not do, then the licences in short. */}
+          <nav aria-labelledby="footer-legal" className="space-y-3">
+            <h2 id="footer-legal" className="font-medium text-foreground">
+              Legal
+            </h2>
+            <ul className="space-y-2">
+              <li>
+                <a href="/privacy" className={link}>
+                  Privacy policy
+                </a>
+              </li>
+              <li>
+                <a href="/terms" className={link}>
+                  Terms of use
+                </a>
+              </li>
+              <li>
+                <a href="/licences" className={link}>
+                  Licences
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div className="space-y-3 sm:col-span-2 lg:col-span-1">
+            <h2 className="font-medium text-foreground">This site</h2>
+            <p className="leading-6">
+              This site sets no cookies, does not track you and loads nothing from other sites. A dark mode choice
+              stays on your device.
+            </p>
+            <p className="leading-6">
+              Code: MIT licence. Writing and data:{" "}
+              <a href="https://creativecommons.org/licenses/by/4.0/" className={link}>
+                CC BY 4.0
               </a>
-            </li>
-          </ul>
-          <p>
-            This site sets no cookies, does not track you and loads nothing from other sites. A dark mode choice
-            stays on your device.
-          </p>
-          <p>
-            Code: MIT licence. Writing and data:{" "}
-            <a
-              href="https://creativecommons.org/licenses/by/4.0/"
-              className="font-medium text-foreground underline underline-offset-4"
-            >
-              CC BY 4.0
-            </a>
-            . Design:{" "}
-            <a href="https://ui.shadcn.com" className="font-medium text-foreground underline underline-offset-4">
-              shadcn/ui
-            </a>
-            . Drawings: Notioly, under a paid licence, so you cannot reuse them.
-          </p>
-        </nav>
+              . Design:{" "}
+              <a href="https://ui.shadcn.com" className={link}>
+                shadcn/ui
+              </a>
+              . Drawings: Notioly, under a paid licence, so you cannot reuse them.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   )

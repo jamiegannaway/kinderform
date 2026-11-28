@@ -45,6 +45,10 @@ export type Control = {
       | "eircode_routing_key"
       | "nl_postcode"
       | "nz_postcode"
+      | "no_postcode"
+      | "dk_postcode"
+      | "se_postcode_area"
+      | "fi_postcode_area"
   }
 }
 export type Page = {
@@ -192,6 +196,13 @@ export function transform(kind: string | undefined, value: string): string {
     return /^[0-9]{4}[A-Z]{2}$/.test(up) ? up.slice(0, 4) : up
   }
   if (kind === "nz_postcode") return v.replace(/\s+/g, "")
+  // Norwegian and Danish postcodes: four digits. Drop spaces and an old country prefix ("DK-8000").
+  if (kind === "no_postcode" || kind === "dk_postcode") return v.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "")
+  // A full Swedish or Finnish postcode, like 411 15 or 00100, keeps only its first 3 digits.
+  if (kind === "se_postcode_area" || kind === "fi_postcode_area") {
+    const digits = v.replace(/^[A-Za-z]{1,2}-/, "").replace(/\s+/g, "")
+    return /^[0-9]{5}$/.test(digits) ? digits.slice(0, 3) : digits
+  }
   return v
 }
 

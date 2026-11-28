@@ -1,8 +1,9 @@
+import { Sparkles } from "lucide-react"
 import { Applications } from "@/components/applications"
 import type { ApplicationsData } from "@/lib/applications"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { SiteFooter, SiteHeader } from "@/components/site-header"
+import { SiteFooter, SiteHeader, NOTEBOOK_URL } from "@/components/site-header"
 import FormsDiffer from "@/components/forms-differ"
 import Countries, { HowWeDidThis, InsightCards, type Withdrawals } from "@/components/countries"
 import type { CountriesData } from "@/lib/countries"
@@ -154,7 +155,7 @@ export default function ResearchIndex({
       <main id="main" className="mx-auto max-w-6xl space-y-16 px-6 pt-6 pb-20 md:pt-10">
         <section className="grid items-center gap-6 md:grid-cols-[minmax(0,48rem)_14rem] md:justify-between md:gap-8">
           <Illustration name="examining" className="w-36 md:order-last md:mx-auto md:w-full" />
-          <div className="space-y-5">
+          <div className="min-w-0 space-y-5">
             <Tag tone="blue">Updated {longDate(updated)}</Tag>
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance md:text-5xl">
               What we know about the first step
@@ -171,6 +172,19 @@ export default function ResearchIndex({
               </a>{" "}
               list each form, with its link.
             </p>
+            {/* The research, loaded into a Gemini Notebook so people can ask questions about it. */}
+            <div className="space-y-2">
+              <Button asChild variant="outline" className="h-auto py-2 text-left whitespace-normal">
+                <a href={NOTEBOOK_URL}>
+                  <Sparkles aria-hidden="true" />
+                  Ask about the research in a Gemini Notebook
+                </a>
+              </Button>
+              <p className="text-sm leading-6 text-muted-foreground">
+                This opens Google&rsquo;s site, where Google&rsquo;s terms apply. Its AI answers can be wrong, so check
+                each one against the source.
+              </p>
+            </div>
             <details id="words" className="scroll-m-20 text-sm leading-6">
               <summary className="cursor-pointer font-medium underline-offset-4 hover:underline">
                 Words we use on this page
