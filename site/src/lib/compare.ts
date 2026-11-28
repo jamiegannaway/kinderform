@@ -42,6 +42,13 @@ export function countryList(codes: Iterable<string>): string {
   return names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`
 }
 
+// For running text: the list of countries while it is short, otherwise just the count, so a
+// sentence stays under 25 words. Page descriptions keep the full list (see check-country-pages.mjs).
+export function countriesInText(codes: Iterable<string>, most = 8): string {
+  const n = new Set(codes).size
+  return n > most ? `${n} countries` : countryList(codes)
+}
+
 // Place codes in the rules files, by country. Codes repeat across countries (NT is the Northwest
 // Territories in Canada and the Northern Territory in Australia), so each country has its own list.
 // US states come from register/us/states.csv.

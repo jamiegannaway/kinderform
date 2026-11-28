@@ -2,7 +2,7 @@
 import Base from "@/layouts/Base.astro";
 import { CompareIndex } from "@/components/compare";
 import { loadCensus } from "@/lib/census";
-import { applicationRows, countryList, formRows, loadTopics, ruleRows } from "@/lib/compare";
+import { applicationRows, countriesInText, countryList, formRows, loadTopics, ruleRows } from "@/lib/compare";
 
 const forms = formRows(loadCensus());
 const rules = ruleRows();
@@ -20,7 +20,7 @@ const ruleCountries = countryList(rules.map((r) => r.country));
     rulePlaces={new Set(rules.map((r) => `${r.country}-${r.place}`)).size}
     topics={loadTopics().filter((t) => used.has(t.code)).length}
     applications={applicationRows().length}
-    formCountries={countryList(forms.map((f) => f.country))}
+    formCountries={countriesInText(forms.map((f) => f.country))}
     ruleCountries={ruleCountries}
   />
 </Base>

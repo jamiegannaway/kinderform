@@ -13,6 +13,7 @@ import { Tag } from "@/components/tag"
 import {
   COUNTRY_NAMES,
   COUNTRY_ORDER,
+  countriesInText,
   countryList,
   shortDate,
   type ApplicationRow,
@@ -479,7 +480,7 @@ export function CompareApplications({ rows }: { rows: ApplicationRow[] }) {
   const us = rows.filter((r) => r.country === "US")
   const others = rows.filter((r) => r.country !== "US")
   const read = rows.filter((r) => r.questions !== null).length
-  const countries = countryList(others.map((r) => r.country))
+  const countries = countriesInText(others.map((r) => r.country))
   return (
     <Page>
       <div>

@@ -1,7 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { CompareRulesIndex } from "@/components/compare";
-import { countryList, loadTopics, ruleRows } from "@/lib/compare";
+import { countriesInText, countryList, loadTopics, ruleRows } from "@/lib/compare";
 
 const rules = ruleRows();
 const topics = loadTopics()
@@ -18,5 +18,5 @@ const countries = countryList(rules.map((r) => r.country));
   title="Rules on who can foster, compared | Kinderform"
   description={`Published rules on who can foster and what approval involves, by topic, across ${countries}.`}
 >
-  <CompareRulesIndex topics={topics} rules={rules.length} places={new Set(rules.map((r) => `${r.country}-${r.place}`)).size} countries={countries} />
+  <CompareRulesIndex topics={topics} rules={rules.length} places={new Set(rules.map((r) => `${r.country}-${r.place}`)).size} countries={countriesInText(rules.map((r) => r.country))} />
 </Base>
