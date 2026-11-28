@@ -13,6 +13,25 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* A small wiggle for the pieces of the home page's picture, played once when the cursor
+   arrives (animate-wiggle). It turns the piece about one degree each way. */
+@theme {
+  --animate-wiggle: wiggle 0.45s ease-in-out;
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      rotate: 0deg;
+    }
+    25% {
+      rotate: -1deg;
+    }
+    75% {
+      rotate: 1deg;
+    }
+  }
+}
+
 @theme inline {
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);

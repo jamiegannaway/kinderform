@@ -1,6 +1,6 @@
 # Get help with Kinderform
 
-Kinderform helps fostering and adoption services improve their first reply. If you want to foster or adopt, contact your local service directly. [Find a service](https://www.kinderform.org/#find-a-service) links to UK guidance. For other countries, [browse listed service pages](https://www.kinderform.org/compare/forms) and check the details on the service’s own website. The [example forms](https://www.kinderform.org/example-form) are demonstrations. They send nothing to a service.
+Kinderform helps fostering and adoption services improve their first reply. If you want to foster or adopt, contact your local service directly. [Find a service](https://www.kinderform.org/about#find-a-service) links to UK guidance. For other countries, [browse listed service pages](https://www.kinderform.org/compare/forms) and check the details on the service’s own website. The [example forms](https://www.kinderform.org/example-form) are demonstrations. They send nothing to a service.
 
 ## What would you like to do?
 

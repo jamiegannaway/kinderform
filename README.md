@@ -6,7 +6,7 @@ Kinderform helps councils, fostering services and adoption agencies give a kinde
 
 | What would you like to do? | First step |
 | --- | --- |
-| Enquire about fostering or adoption | [Find an official service](https://www.kinderform.org/#find-a-service). A real enquiry goes to the service you choose. The Kinderform examples send nothing. |
+| Enquire about fostering or adoption | [Find an official service](https://www.kinderform.org/about#find-a-service). A real enquiry goes to the service you choose. The Kinderform examples send nothing. |
 | Build or update an enquiry form in our own system | [Use Kinderform in your organisation](https://www.kinderform.org/build). Start with the shared questions for any country or use a local version. Download the questions, rules, HTML example and AI prompt for your own form builder. |
 | Improve your service's first form or reply | [See what services can do](https://www.kinderform.org/for-services): ideas that put our reading of public forms next to published research. Then [try an example form for your country](https://www.kinderform.org/example-form) and [review your form with the draft checklist](https://www.kinderform.org/form-check). |
 | Check or correct your service's entry | [Compare forms and published rules](https://www.kinderform.org/compare). For a correction, give the public source, what changed and when you checked. [Get in touch with or without a GitHub account](SUPPORT.md). |

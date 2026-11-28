@@ -177,6 +177,7 @@ export function SiteHeader({ current }: { current: string }) {
 // phones can read it.
 const PROJECT_LINKS = [
   { href: "/about", label: "About" },
+  { href: "/about#find-a-service", label: "Find a fostering or adoption service" },
   { href: "/research/log", label: "Research log" },
   { href: NOTEBOOK_URL, label: "Ask the research (Google\u2019s AI)" },
   { href: REPO_URL, label: "Code and data on GitHub" },
