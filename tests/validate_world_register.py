@@ -59,6 +59,12 @@ COUNTRIES = {
     "no": {"Oslo": "os", "Rogaland": "ro", "Møre og Romsdal": "mr", "Nordland": "nd", "Østfold": "of", "Akershus": "ak",
            "Buskerud": "bu", "Innlandet": "in", "Vestfold": "vf", "Telemark": "te", "Agder": "ag", "Vestland": "vl",
            "Trøndelag": "tl", "Troms": "tr", "Finnmark": "fi", "Norway": "no"},
+    # Sweden: the 21 counties (län), with their letter codes. Councils sit in their county.
+    "se": {"Stockholm": "ab", "Uppsala": "c", "Södermanland": "d", "Östergötland": "e", "Jönköping": "f",
+           "Kronoberg": "g", "Kalmar": "h", "Gotland": "i", "Blekinge": "k", "Skåne": "m", "Halland": "n",
+           "Västra Götaland": "o", "Värmland": "s", "Örebro": "t", "Västmanland": "u", "Dalarna": "w",
+           "Gävleborg": "x", "Västernorrland": "y", "Jämtland": "z", "Västerbotten": "ac", "Norrbotten": "bd",
+           "Sweden": "se"},
     # Denmark: the 5 regions, in English. Municipalities sit in their region.
     "dk": {"Capital Region of Denmark": "h", "Region Zealand": "s", "Region of Southern Denmark": "sd",
            "Central Denmark Region": "m", "North Denmark Region": "n", "Denmark": "dk"},
