@@ -16,6 +16,8 @@
 - Separate assessment requirements from Kinderform's proposed question timing. Mark draft extractions locally and bind recorded checks to the reviewed finding text.
 - Strengthen phone and contact-route validation. Check monitoring event order, allow intent to remain absent until declared, and explain that pseudonymous records remain private.
 - Add a first-reply worksheet, synthetic rehearsal and event-mapping guide to the starter kits. Use bounded reassurance in the reference forms.
+- Home page: the first picture is now a made-up reply that says who will be in touch, when, and what happens next. The made-up form and its record moved down to "What we are making", so nobody takes the home page for a place to enquire.
+- Header and footer: the header is a bar with one main button, "Get the starter kit", and quieter links for GitHub and light or dark. The footer is shorter and sits on light grey, with plain lists of links.
 - Preserve the earlier starter archives. The draft.4 candidate contains the revised rules and guide; no service pilot or independent legal review is claimed.
 
 ## v0.1.0-draft.3 · 25 November 2026

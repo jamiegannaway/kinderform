@@ -1,6 +1,7 @@
-import { ArrowUpRight, Code, FileText, Mail } from "lucide-react"
+import { ArrowUpRight, Code, FileText, Lock, Mail } from "lucide-react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -85,10 +86,10 @@ function Section({
   )
 }
 
-/* The hero: a made-up enquiry form, and the same enquiry as code (the record the Kinderform
-   enquiry standard defines). Readers switch views with two radio buttons styled as shadcn
-   Tabs: the stylesheet shows the chosen view, so it needs no JavaScript and works under the
-   Content-Security-Policy. The form is an illustration: inert, so it cannot be filled in. */
+/* Under "What we are making": a made-up enquiry form, and the same enquiry as code (the record
+   the Kinderform enquiry standard defines). Readers switch views with two radio buttons styled
+   as shadcn Tabs: the stylesheet shows the chosen view, so it needs no JavaScript and works under
+   the Content-Security-Policy. The form is an illustration: inert, so it cannot be filled in. */
 const RECORD = `{
   "full_name": "Sam Example",
   "interest": "not_sure",
@@ -118,16 +119,16 @@ function Choice({ label, checked = false }: { label: string; checked?: boolean }
 
 function FormOrCode() {
   return (
-    <figure aria-labelledby="hero-example-caption" className="group/view w-full max-w-md justify-self-center md:justify-self-end">
+    <figure aria-labelledby="form-example-caption" className="group/view w-full max-w-md justify-self-center md:justify-self-end">
       <fieldset className="mb-3 inline-flex h-9 w-fit items-center rounded-lg bg-muted p-[3px] text-muted-foreground">
         <legend className="sr-only">Show the example as</legend>
         <label className={VIEW_TAB}>
-          <input type="radio" name="hero-view" value="form" defaultChecked className="sr-only" />
+          <input type="radio" name="example-view" value="form" defaultChecked className="sr-only" />
           <FileText aria-hidden="true" className="size-4" />
           Form
         </label>
         <label className={VIEW_TAB}>
-          <input type="radio" name="hero-view" value="code" id="hero-view-code" className="sr-only" />
+          <input type="radio" name="example-view" value="code" id="example-view-code" className="sr-only" />
           <Code aria-hidden="true" className="size-4" />
           Code
         </label>
@@ -136,7 +137,7 @@ function FormOrCode() {
       {/* Both views share one grid cell, so the box keeps the form's size and the page does not jump.
           The view not chosen is invisible (it still takes up its space) rather than removed. */}
       <div className="grid">
-        <Card inert aria-hidden="true" className="col-start-1 row-start-1 min-w-0 gap-4 group-has-[#hero-view-code:checked]/view:invisible">
+        <Card inert aria-hidden="true" className="col-start-1 row-start-1 min-w-0 gap-4 group-has-[#example-view-code:checked]/view:invisible">
           <CardHeader>
             <CardTitle>Ask about fostering or adoption</CardTitle>
             <CardDescription>It takes about 2 minutes</CardDescription>
@@ -181,7 +182,7 @@ function FormOrCode() {
           </CardContent>
         </Card>
 
-        <Card className="invisible col-start-1 row-start-1 min-w-0 gap-0 overflow-hidden py-0 group-has-[#hero-view-code:checked]/view:visible">
+        <Card className="invisible col-start-1 row-start-1 min-w-0 gap-0 overflow-hidden py-0 group-has-[#example-view-code:checked]/view:visible">
           <div className="flex items-center justify-between border-b px-4 py-2 text-xs text-muted-foreground">
             <span className="font-mono">enquiry.json</span>
             <span>Kinderform enquiry standard, draft 0.1</span>
@@ -192,9 +193,72 @@ function FormOrCode() {
         </Card>
       </div>
 
-      <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
+      <figcaption id="form-example-caption" className="mt-4 text-sm text-muted-foreground">
         A made-up enquiry form, and the same enquiry as a record in our open standard. It asks only what a service
         needs to reply. Sam is made up, and this is not a real form.
+      </figcaption>
+    </figure>
+  )
+}
+
+/* The hero: a made-up first reply, shown as an email in a browser window, because the reply is
+   what the page is about. A form here looked like somewhere to enquire, and Kinderform takes no
+   enquiries. The three labelled parts are the Reply step in src/lib/steps.ts ("Say who will be in
+   touch, when, and what happens next"), so the picture adds no new claim. The time stays vague on
+   purpose: what a reply says has better evidence than how fast it arrives. The window frame is
+   decoration, with a made-up address; the email is real text, so a screen reader reads it. */
+const REPLY_PARTS = [
+  ["Who", "I'm Alex, in the fostering and adoption team."],
+  ["When", "I will email you by Thursday."],
+  ["What next", "We will pick a time for a first chat. You do not need to do anything until then."],
+]
+
+function ReplyExample() {
+  return (
+    <figure aria-labelledby="hero-example-caption" className="w-full max-w-md justify-self-center md:justify-self-end">
+      <div className="overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
+        <div aria-hidden="true" className="flex items-center gap-3 border-b bg-muted px-4 py-2.5">
+          <span className="flex gap-1.5">
+            {[1, 2, 3].map((n) => (
+              <span key={n} className="size-2.5 rounded-full bg-muted-foreground/30" />
+            ))}
+          </span>
+          <span className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-background px-3 py-1 text-xs text-muted-foreground">
+            <Lock className="size-3 shrink-0" />
+            <span className="truncate">mail.example.org</span>
+          </span>
+          {/* As wide as the three dots, so the address sits in the middle. */}
+          <span className="w-10.5" />
+        </div>
+
+        <div className="flex items-center gap-3 border-b px-5 py-4">
+          <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-full bg-muted text-xs font-medium">
+            EC
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="leading-snug font-semibold">Your enquiry about fostering or adoption</p>
+            <p className="text-sm text-muted-foreground">Example Council, to Sam. Monday afternoon.</p>
+          </div>
+        </div>
+
+        <div className="grid gap-3 px-5 py-4 text-sm leading-6">
+          <p>Thank you for getting in touch, Sam.</p>
+          <dl className="grid gap-3">
+            {REPLY_PARTS.map(([part, words]) => (
+              <div key={part} className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-start gap-3">
+                <dt>
+                  <Badge variant="secondary">{part}</Badge>
+                </dt>
+                <dd>{words}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+
+      <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
+        A made-up first reply, sent the day Sam asked. It says who will be in touch, when, and what happens next.
+        Sam, Alex and Example Council are not real.
       </figcaption>
     </figure>
   )
@@ -221,12 +285,13 @@ export default function Landing() {
               Everyone who offers to care for a child deserves a quick, kind and considered reply.
             </h1>
             <p className="mt-6 max-w-xl text-xl text-muted-foreground">
-              Kinderform makes free, open tools that help services give that reply. Services are the
-              councils, hubs and agencies that find and approve foster carers and adopters.
+              For services under pressure, Kinderform makes the first step easier, with free code, starter
+              kits and research. Services are the councils, hubs and agencies that find and approve foster
+              carers and adopters.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <a href="/build">Use this form in my organisation</a>
+                <a href="/build">Get the free starter kit</a>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href="/for-services">Ideas for services</a>
@@ -236,7 +301,7 @@ export default function Landing() {
               </Button>
             </div>
           </div>
-          <FormOrCode />
+          <ReplyExample />
         </section>
 
         <div className="mx-auto max-w-6xl px-6">
@@ -323,6 +388,19 @@ export default function Landing() {
                   <CardContent className="text-sm leading-6 text-muted-foreground">{m.body}</CardContent>
                 </Card>
               ))}
+            </div>
+            <div className="mt-12 grid items-start gap-8 md:grid-cols-2 md:gap-12">
+              <div className="max-w-xl space-y-4">
+                <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">One enquiry, as a form and as a record</h3>
+                <p className="leading-7">
+                  The form asks only what a service needs to reply. The record is the same enquiry in our open
+                  standard, so any system can read it.
+                </p>
+                <Button asChild variant="outline">
+                  <a href="/example-form">Try the example form</a>
+                </Button>
+              </div>
+              <FormOrCode />
             </div>
           </Section>
 
