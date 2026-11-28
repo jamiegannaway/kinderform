@@ -1,0 +1,2 @@
+{"actor":{"kind":"automated"},"enquiry_id":"example-900","event_id":"evt-00000401","event_type":"enquiry_received","occurred_at":"2026-11-16T09:00:00Z","prev_hash":null,"schema_version":"0.1","source":"example-council-crm"}
+{"actor":{"kind":"human"},"enquiry_id":"example-900","event_id":"evt-00000401","event_type":"contact_attempted","occurred_at":"2026-11-16T09:10:00Z","prev_hash":"sha256:46a7ebcc21137d2ce388342c88de1e46acb13e8e3c3a0622815576a21f1c50b0","schema_version":"0.1","source":"example-council-crm"}
