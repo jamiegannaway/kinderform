@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-900010",
+  "received_at": "2026-11-03T09:05:00+00:00",
+  "channel": "email",
+  "status": "received",
+  "deletion_requested_at": "2026-11-03T09:04:59+00:00"
+}

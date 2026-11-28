@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-900012",
+  "received_at": "2026-11-03T09:05:00+00:00",
+  "channel": "email",
+  "status": "received",
+  "retention_policy_ref": "keep this one for six years because of a note"
+}

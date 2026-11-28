@@ -11,14 +11,17 @@ Error messages contain field names and rule names, never submitted values.
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
 
 SCHEMA = json.loads(Path(__file__).with_name("enquiry.schema.json").read_text(encoding="utf-8"))
 VALIDATOR = Draft202012Validator(SCHEMA, format_checker=FormatChecker())
-EVENTS = ("acknowledged_at", "first_contact_attempt_at", "first_contact_made_at", "status_updated_at")
+EVENTS = (
+    "acknowledged_at", "first_contact_attempt_at", "first_contact_made_at", "status_updated_at",
+    "deletion_requested_at",
+)
 TIMESTAMP = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]+)?(?:[Zz]|[+-][0-9]{2}:[0-9]{2})")
 
 
@@ -62,6 +65,17 @@ def problems(record):
             errors.append("status_updated_at: must not precede first_contact_attempt_at")
         if made is not None and updated < made:
             errors.append("status_updated_at: must not precede first_contact_made_at")
+
+    # Retention: compare the date as written in received_at, so a record
+    # received late in the evening keeps its own calendar day.
+    if "retain_until" in record:
+        try:
+            retain_until = date.fromisoformat(record["retain_until"])
+        except ValueError:
+            errors.append("retain_until: unsupported date")
+        else:
+            if retain_until < times["received_at"].date():
+                errors.append("retain_until: must not be before the date of received_at")
     return errors
 
 
