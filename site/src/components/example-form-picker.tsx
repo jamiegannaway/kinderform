@@ -1,6 +1,6 @@
-// /example-form: a world map with the countries that have an example form. Picking a
-// country opens its form in a dialog (see reference-form/form-dialog.tsx), so the page itself
-// never needs to scroll. Rendered at build time; the links work without JavaScript too.
+// /example-form: a world map with the countries that have an example form. Picking a country
+// goes to its own page, /example-form/<country> (example-form-page.tsx). The map fits the screen,
+// so this page never needs to scroll. Rendered at build time; it ships no JavaScript.
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { FORM_COUNTRIES } from "@/components/reference-form/countries"
@@ -9,8 +9,10 @@ import { Tag } from "@/components/tag"
 
 const href = (code: string) => `/example-form/${code}`
 
-// Large countries carry their label in the middle. The European countries are too small, so
-// their labels sit out at sea, joined to the country by a thin line (see tools/world_map.mjs).
+// Labels show only when the map is at least 700px wide; on a smaller map they would overlap, and
+// the list under the map is the way in. Large countries carry their label in the middle. The
+// European countries are too small, so their labels sit out at sea, joined to the country by a
+// thin line (see tools/world_map.mjs).
 const LABEL_ALIGN: Record<string, string> = {
   center: "-translate-x-1/2 -translate-y-1/2",
   right: "-translate-x-full -translate-y-1/2",
@@ -29,7 +31,7 @@ function WorldMap() {
   return (
     <div className="relative min-h-0 flex-1 [container-type:size]">
       <p className="sr-only">World map. {names(FORM_COUNTRIES)} are highlighted. Choose a country from the list below.</p>
-      <div className="absolute inset-0 m-auto h-[min(100cqh,calc(100cqw*0.436))] w-[min(100cqw,calc(100cqh/0.436))]">
+      <div className="@container absolute inset-0 m-auto h-[min(100cqh,calc(100cqw*0.436))] w-[min(100cqw,calc(100cqh/0.436))]">
         <svg
           viewBox={`0 0 ${MAP.width} ${MAP.height}`}
           className="size-full"
@@ -53,7 +55,7 @@ function WorldMap() {
             ) : null,
           )}
           {MAP_COUNTRIES.map((c) => (
-            <a key={c.code} href={href(c.code)} data-country={c.code} tabIndex={-1} aria-hidden="true" className="group">
+            <a key={c.code} href={href(c.code)} tabIndex={-1} aria-hidden="true" className="group">
               <path
                 d={c.d}
                 className="fill-primary/60 stroke-background transition-colors group-hover:fill-primary"
@@ -66,10 +68,9 @@ function WorldMap() {
           <a
             key={c.code}
             href={href(c.code)}
-            data-country={c.code}
             tabIndex={-1}
             aria-hidden="true"
-            className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground sm:block md:px-3 md:py-1 md:text-sm`}
+            className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground @min-[700px]:block`}
           >
             {c.name}
           </a>
@@ -79,14 +80,16 @@ function WorldMap() {
   )
 }
 
-export function ExampleFormPicker({ open }: { open: string | null }) {
+// labels: each country's design system, by country code ("KERN UX", or "Neutral design" for a
+// country with none), from src/lib/design-systems.ts through the page.
+export function ExampleFormPicker({ labels }: { labels: Record<string, string> }) {
   return (
     <div className="flex h-dvh flex-col">
       {/* A wrapper so the header spans the width: in a flex column, its auto margins would shrink it. */}
       <div className="shrink-0">
         <SiteHeader current="/example-form" />
       </div>
-      <main id="main" className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col gap-4 px-6 pb-4">
+      <main id="main" className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col gap-4 px-6 pt-6 pb-4">
         <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
           <div className="min-w-0 flex-1 basis-96 space-y-2">
             <div className="flex flex-wrap gap-2">
@@ -95,29 +98,28 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
             </div>
             <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight md:text-4xl">Example enquiry forms</h1>
             <p className="max-w-3xl text-muted-foreground md:text-lg">
-              Pick a country to try its form, styled with that country’s public design system. Nothing you enter
-              is sent or stored.
+              Pick a country to try its form, in that country’s public design system or a neutral design. Nothing
+              you enter is sent or stored.
             </p>
           </div>
           <Button asChild variant="outline">
-            <a href={open ? `/build/${open}` : "/build"}>Use this form in my organisation</a>
+            <a href="/build">Use this form in my organisation</a>
           </Button>
         </div>
 
         <WorldMap />
 
         <nav aria-label="Example forms by country" className="shrink-0">
-          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
+          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
             {FORM_COUNTRIES.map((c) => (
               <li key={c.code}>
                 <a
                   href={href(c.code)}
-                  data-country={c.code}
-                  aria-current={open === c.code ? "page" : undefined}
+                 
                   className="flex h-full flex-col rounded-lg border bg-card px-3 py-2 transition-colors outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
                   <span className="text-sm font-medium">{c.name}</span>
-                  <span className="text-xs text-muted-foreground">{c.short}</span>
+                  <span className="text-xs text-muted-foreground">{labels[c.code]}</span>
                 </a>
               </li>
             ))}
@@ -125,12 +127,8 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
         </nav>
 
         <p className="shrink-0 text-xs text-muted-foreground">
-          <a href="#how-built" data-about className="font-medium text-foreground underline underline-offset-4">
-            How the forms are built
-          </a>
-          <span aria-hidden="true"> · </span>
-          No cookies and no tracking.
-          <span aria-hidden="true"> · </span>
+          Each country’s page says how its form is built and offers it as a download. We do not use cookies or
+          track you.
           Does a form read well in your language?{" "}
           <a
             href="mailto:jamie.gannaway@gmail.com?subject=Example%20form%20wording"
@@ -139,11 +137,7 @@ export function ExampleFormPicker({ open }: { open: string | null }) {
             Tell us
           </a>
         </p>
-        <noscript>
-          <p className="text-sm">These examples need JavaScript. A real form built to the Kinderform standard should work without it.</p>
-        </noscript>
       </main>
-      <div id="kf-dialog-root" data-open={open ?? ""} />
     </div>
   )
 }

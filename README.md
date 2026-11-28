@@ -6,7 +6,7 @@ Kinderform helps councils, fostering services and adoption agencies give a kinde
 
 | What would you like to do? | First step |
 | --- | --- |
-| Enquire about fostering or adoption | [Find an official service](https://www.kinderform.org/#find-a-service). A real enquiry goes to the service you choose. The Kinderform examples send nothing. |
+| Enquire about fostering or adoption | [Find an official service](https://www.kinderform.org/about#find-a-service). A real enquiry goes to the service you choose. The Kinderform examples send nothing. |
 | Build or update an enquiry form in our own system | [Use Kinderform in your organisation](https://www.kinderform.org/build). Start with the shared questions for any country or use a local version. Download the questions, rules, HTML example and AI prompt for your own form builder. |
 | Improve your service's first form or reply | [See what services can do](https://www.kinderform.org/for-services): ideas that put our reading of public forms next to published research. Then [try an example form for your country](https://www.kinderform.org/example-form) and [review your form with the draft checklist](https://www.kinderform.org/form-check). |
 | Check or correct your service's entry | [Compare forms and published rules](https://www.kinderform.org/compare). For a correction, give the public source, what changed and when you checked. [Get in touch with or without a GitHub account](SUPPORT.md). |
@@ -28,7 +28,7 @@ The [26 November 2026 audit note](docs/audits/2026-11-26.md) records the adversa
 | [`census/`](census/) | An inventory of first-contact enquiry forms: every question, answer option and piece of guidance recorded so far | v0.1 draft, not yet checked by a person |
 | [`rubric/`](rubric/) | A rubric for assessing a front door, published for comment before it is used | v0.1 draft |
 | [`evidence/`](evidence/) | A living library of research and policy, published at [kinderform.org/research](https://www.kinderform.org/research) | Growing |
-| [`site/`](site/) | The public site: Astro and shadcn/ui, built and deployed by Vercel using `vercel.json`. Includes example enquiry forms in each country's public-sector design system at `/example-form`, and comparison tables for services at `/compare` | Live |
+| [`site/`](site/) | The public site: Astro and shadcn/ui, built and deployed by Vercel using `vercel.json`. Includes example enquiry forms at `/example-form`, one page per country, in that country's public-sector design system or a neutral design, each also as a single-file download, and comparison tables for services at `/compare` | Live |
 | [`tools/`](tools/) | Helper scripts: the polite crawler, the converters that turn its reads into register and census rows, the page-date reader and the plain-language checker | Working |
 | [`tests/`](tests/) | Checks for the schema, registers, rules, census, form wording and research log | Working |
 | [`docs/`](docs/) | Roadmap, principles, the plain-language guide and working notes | Draft |

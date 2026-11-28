@@ -177,6 +177,7 @@ export function SiteHeader({ current }: { current: string }) {
 // phones can read it.
 const PROJECT_LINKS = [
   { href: "/about", label: "About" },
+  { href: "/about#find-a-service", label: "Find a fostering or adoption service" },
   { href: "/research/log", label: "Research log" },
   { href: NOTEBOOK_URL, label: "Ask the research (Google\u2019s AI)" },
   { href: REPO_URL, label: "Code and data on GitHub" },
@@ -211,8 +212,8 @@ export function SiteFooter() {
   const link = "font-medium text-foreground underline underline-offset-4"
   return (
     <footer className="border-t bg-muted/50">
-      <div className="mx-auto max-w-6xl space-y-8 px-6 py-10 text-sm text-muted-foreground">
-        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto_auto] md:gap-16">
+      <div className="mx-auto max-w-6xl px-6 py-10 text-sm text-muted-foreground">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
           <section aria-labelledby="footer-community" className="flex max-w-md items-start gap-5">
             {/* Hidden on phones: you cannot scan the screen you are reading. */}
             <img
@@ -226,7 +227,10 @@ export function SiteFooter() {
               <h2 id="footer-community" className="font-medium text-foreground">
                 What do you really need?
               </h2>
-              <p className="leading-6">Tell us in the Kinderform community on WhatsApp.</p>
+              <p className="leading-6">
+                Tell us in the Kinderform community on WhatsApp, for people who work in fostering and adoption
+                services.
+              </p>
               <Button asChild size="sm">
                 <a href={COMMUNITY_URL}>
                   <MessageCircle aria-hidden="true" />
@@ -234,30 +238,34 @@ export function SiteFooter() {
                 </a>
               </Button>
               <p className="text-xs leading-5">
-                Other members may see your phone number. Please share nothing about a child.{" "}
+                Other members may see your phone number. Do not share any information about children.{" "}
                 <a href="/privacy#whatsapp" className={link}>
                   How we use what you share
                 </a>
               </p>
             </div>
           </section>
-          <FooterList id="footer-project" title="Kinderform" links={PROJECT_LINKS} />
-          <FooterList id="footer-legal" title="Legal" links={LEGAL_LINKS} />
+          {/* The link lists, with the site note at the bottom, level with the community note. w-0 and
+              min-w-full stop the note from widening the link columns. */}
+          <div className="flex flex-col justify-between gap-8 md:gap-6">
+            <div className="grid gap-8 md:grid-cols-[auto_auto] md:gap-16">
+              <FooterList id="footer-project" title="Kinderform" links={PROJECT_LINKS} />
+              <FooterList id="footer-legal" title="Legal" links={LEGAL_LINKS} />
+            </div>
+            <p className="text-xs leading-5 md:w-0 md:min-w-full">
+              We do not use cookies or track you, and we load nothing from other sites. Code: MIT. Writing and
+              data:{" "}
+              <a href="https://creativecommons.org/licenses/by/4.0/" className={link}>
+                CC BY 4.0
+              </a>
+              . Design:{" "}
+              <a href="https://ui.shadcn.com" className={link}>
+                shadcn/ui
+              </a>
+              . Drawings: Notioly, not free to reuse.
+            </p>
+          </div>
         </div>
-
-        <Separator />
-
-        <p className="text-xs leading-5">
-          No cookies, no tracking and nothing loaded from other sites. Code: MIT. Writing and data:{" "}
-          <a href="https://creativecommons.org/licenses/by/4.0/" className={link}>
-            CC BY 4.0
-          </a>
-          . Design:{" "}
-          <a href="https://ui.shadcn.com" className={link}>
-            shadcn/ui
-          </a>
-          . Drawings: Notioly, not free to reuse.
-        </p>
       </div>
     </footer>
   )
