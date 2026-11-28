@@ -1,6 +1,7 @@
-import { ArrowUpRight, CalendarCheck, Code, FileText, Mail, Send } from "lucide-react"
+import { ArrowUpRight, Code, FileText, Lock, Mail } from "lucide-react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -200,68 +201,64 @@ function FormOrCode() {
   )
 }
 
-/* The hero: a made-up reply, because the reply is what the page is about. A form here looked like
-   somewhere to enquire, and Kinderform takes no enquiries. The three labelled parts are the Reply
-   step in src/lib/steps.ts ("Say who will be in touch, when, and what happens next"), so the
-   picture adds no new claim. The times stay vague on purpose: what a reply says has better
-   evidence than how fast it arrives. Real text, not an image, so a screen reader reads it. */
+/* The hero: a made-up first reply, shown as an email in a browser window, because the reply is
+   what the page is about. A form here looked like somewhere to enquire, and Kinderform takes no
+   enquiries. The three labelled parts are the Reply step in src/lib/steps.ts ("Say who will be in
+   touch, when, and what happens next"), so the picture adds no new claim. The time stays vague on
+   purpose: what a reply says has better evidence than how fast it arrives. The window frame is
+   decoration, with a made-up address; the email is real text, so a screen reader reads it. */
 const REPLY_PARTS = [
-  ["Who", "I'm Alex, in the fostering and adoption team. I will be your contact."],
+  ["Who", "I'm Alex, in the fostering and adoption team."],
   ["When", "I will email you by Thursday."],
-  ["What happens next", "We will pick a time for a first chat. You do not need to do anything until then."],
+  ["What next", "We will pick a time for a first chat. You do not need to do anything until then."],
 ]
-
-function Moment({ icon, what, when }: { icon: React.ReactNode; what: string; when: string }) {
-  return (
-    <li className="flex items-center gap-3 rounded-lg bg-muted px-4 py-3 text-sm">
-      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-background text-muted-foreground [&>svg]:size-4">
-        {icon}
-      </span>
-      <span className="min-w-0">
-        <span className="block font-medium">{what}</span>
-        <span className="block text-muted-foreground">{when}</span>
-      </span>
-    </li>
-  )
-}
-
-// The short line that joins one moment to the next. Decoration only.
-function Join() {
-  return <li aria-hidden="true" className="ml-8 h-5 w-px bg-border" />
-}
 
 function ReplyExample() {
   return (
     <figure aria-labelledby="hero-example-caption" className="w-full max-w-md justify-self-center md:justify-self-end">
-      <ol>
-        <Moment icon={<Send aria-hidden="true" />} what="Sam asks about fostering or adoption" when="Monday morning" />
-        <Join />
-        <li>
-          <Card className="gap-4">
-            <CardHeader>
-              <CardTitle>Example Council replies</CardTitle>
-              <CardDescription>Monday afternoon</CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-              <p className="leading-7">Thank you for getting in touch, Sam.</p>
-              <dl className="grid gap-4">
-                {REPLY_PARTS.map(([part, words]) => (
-                  <div key={part} className="border-l-2 border-primary pl-4">
-                    <dt className="text-xs font-medium text-muted-foreground">{part}</dt>
-                    <dd className="mt-1 leading-7">{words}</dd>
-                  </div>
-                ))}
-              </dl>
-            </CardContent>
-          </Card>
-        </li>
-        <Join />
-        <Moment icon={<CalendarCheck aria-hidden="true" />} what="Alex emails Sam, as promised" when="Thursday" />
-      </ol>
+      <div className="overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
+        <div aria-hidden="true" className="flex items-center gap-3 border-b bg-muted px-4 py-2.5">
+          <span className="flex gap-1.5">
+            {[1, 2, 3].map((n) => (
+              <span key={n} className="size-2.5 rounded-full bg-muted-foreground/30" />
+            ))}
+          </span>
+          <span className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-background px-3 py-1 text-xs text-muted-foreground">
+            <Lock className="size-3 shrink-0" />
+            <span className="truncate">mail.example.org</span>
+          </span>
+          {/* As wide as the three dots, so the address sits in the middle. */}
+          <span className="w-10.5" />
+        </div>
+
+        <div className="flex items-center gap-3 border-b px-5 py-4">
+          <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-full bg-muted text-xs font-medium">
+            EC
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="leading-snug font-semibold">Your enquiry about fostering or adoption</p>
+            <p className="text-sm text-muted-foreground">Example Council, to Sam. Monday afternoon.</p>
+          </div>
+        </div>
+
+        <div className="grid gap-3 px-5 py-4 text-sm leading-6">
+          <p>Thank you for getting in touch, Sam.</p>
+          <dl className="grid gap-3">
+            {REPLY_PARTS.map(([part, words]) => (
+              <div key={part} className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-start gap-3">
+                <dt>
+                  <Badge variant="secondary">{part}</Badge>
+                </dt>
+                <dd>{words}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
 
       <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
-        A made-up reply, to show what we mean. It says who will be in touch, when, and what happens next. Sam, Alex
-        and Example Council are not real.
+        A made-up first reply, sent the day Sam asked. It says who will be in touch, when, and what happens next.
+        Sam, Alex and Example Council are not real.
       </figcaption>
     </figure>
   )
