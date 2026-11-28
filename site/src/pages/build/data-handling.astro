@@ -1,22 +1,54 @@
 ---
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+// The data handling layer, for technical readers. It has the look of a reference page: a spec
+// sheet under the title, a list of the sections that stays in view on wide screens, file paths
+// and field names in monospace, a table of the fields in one event, and the commands to try.
+// Everything is shadcn/ui parts and theme tokens. No client JavaScript and no inline styles.
+//
+// The page says what the layer is and how to use it. The hashes and the tool's replies below are
+// real: they come from running tools/interaction_log.py on these made-up events.
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, X } from "lucide-react";
 import Base from "@/layouts/Base.astro";
 import { SiteHeader, SiteFooter, REPO_URL } from "@/components/site-header";
 import { Tag } from "@/components/tag";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const link = "font-medium text-foreground underline underline-offset-4 hover:decoration-2";
+const mono = "font-mono text-[0.8125rem]";
+const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
 const gh = (path: string) => `${REPO_URL}/blob/main/${path}`;
 const tree = (path: string) => `${REPO_URL}/tree/main/${path}`;
 
+// The sections, for the headings and the "On this page" list.
+const sections = [
+  ["what", "What it is, and what it is not"],
+  ["pieces", "The six pieces"],
+  ["rules", "The rules the layer follows"],
+  ["chain", "How the log links events"],
+  ["event", "One log event"],
+  ["start", "How to start"],
+  ["limits", "Limits"],
+];
+
+const sheet = [
+  ["Status", "Draft v0.1"],
+  ["Runs", "In your own systems"],
+  ["Needs", "Python 3.11 and jsonschema"],
+  ["Examples", "Made-up records only"],
+];
+
+const is = ["A set of specs, checks and small tools.", "Something your service runs inside its own systems."];
+const isNot = ["A database.", "A hosted service.", "Legal advice.", "Proof that a record is anonymous or safe to share."];
+
 const pieces = [
-  { title: "Field tags", does: "Says how sensitive each field is and what it may be used for. Also says how long to keep it, and whether an AI tool may see it.", file: "schema/data-handling.json", href: gh("schema/data-handling.json") },
-  { title: "Retention dates", does: "Puts a keep-until date, a legal hold and a deletion request on the record itself, and checks the dates. These fields are in version 0.2 of the monitoring schema. The record covers fostering for now.", file: "schema/enquiry.schema.json", href: gh("schema/enquiry.schema.json") },
-  { title: "Interaction log", does: "Records what happened to each enquiry. Events are only ever added, and each links to the one before. Values are codes only. It records the kind of actor, never who: a person, an automatic rule, or an AI tool with a person's approval.", file: "schema/interaction.schema.json", href: gh("schema/interaction.schema.json") },
-  { title: "Connection tools", does: "Sign and check webhook messages, and export a CSV limited to one purpose.", file: "tools/", href: tree("tools") },
-  { title: "Made-up test cases for AI tools", does: "Gives you submissions with instruction-like text, so you can check that your assistant treats typed text as data.", file: "schema/examples/untrusted-text/cases.json", href: gh("schema/examples/untrusted-text/cases.json") },
-  { title: "UK profile", does: "Maps two unused sensitivity classes to UK legal category names. A person has not checked it.", file: "schema/profiles/uk.json", href: gh("schema/profiles/uk.json") },
+  { kind: "Tags", title: "Field tags", does: "Says how sensitive each field is and what it may be used for. Also says how long to keep it, and whether an AI tool may see it.", file: "schema/data-handling.json", href: gh("schema/data-handling.json") },
+  { kind: "Schema", title: "Retention dates", does: "Puts a keep-until date, a legal hold and a deletion request on the record itself, and checks the dates. These fields are in version 0.2 of the monitoring schema. The record covers fostering for now.", file: "schema/enquiry.schema.json", href: gh("schema/enquiry.schema.json") },
+  { kind: "Schema", title: "Interaction log", does: "Records what happened to each enquiry. Events are only ever added, and each links to the one before. Values are codes only. It records the kind of actor, never who: a person, an automatic rule, or an AI tool with a person's approval.", file: "schema/interaction.schema.json", href: gh("schema/interaction.schema.json") },
+  { kind: "Tools", title: "Connection tools", does: "Sign and check webhook messages, and export a CSV limited to one purpose.", file: "tools/", href: tree("tools") },
+  { kind: "Test data", title: "Made-up test cases for AI tools", does: "Gives you submissions with instruction-like text, so you can check that your assistant treats typed text as data.", file: "schema/examples/untrusted-text/cases.json", href: gh("schema/examples/untrusted-text/cases.json") },
+  { kind: "Profile", title: "UK profile", does: "Maps two unused sensitivity classes to UK legal category names. A person has not checked it.", file: "schema/profiles/uk.json", href: gh("schema/profiles/uk.json") },
 ];
 
 const rules = [
@@ -34,6 +66,13 @@ const rules = [
   ["Measure the service, never staff.", "Events record the kind of actor only, never a name or staff identifier."],
 ];
 
+// Three made-up events as the log tool linked them. Each prev_hash is the hash of the line before.
+const chain = [
+  { id: "evt-example-0001", type: "enquiry_received", actor: "automated", prev: "null" },
+  { id: "evt-example-0002", type: "acknowledgement_sent", actor: "automated", prev: "sha256:d50bedb5…" },
+  { id: "evt-example-0003", type: "contact_attempted", actor: "human", prev: "sha256:91256c4c…" },
+];
+
 const example = `{
   "schema_version": "0.1",
   "event_id": "evt-example-0001",
@@ -44,16 +83,26 @@ const example = `{
   "actor": { "kind": "automated" },
   "prev_hash": null,
   "data": { "channel": "web_form", "status": "received" }
-}`;
+}`.split("\n");
 
-const parts = [
-  ["event_id and enquiry_id", "name this event and the enquiry it belongs to. They are codes, not names."],
-  ["occurred_at", "is the date and time the event happened."],
-  ["source", "is the system that wrote the event."],
-  ["event_type", "is one value from a fixed list, here the enquiry arriving."],
-  ["actor.kind", "is human, automated or ai_assisted. It never says who."],
-  ["prev_hash", "is the hash of the line before. The first event of a log has none."],
-  ["data", "holds coded values only. It never holds free text."],
+// Field, type, and what it holds. The types follow schema/interaction.schema.json.
+const fields = [
+  ["event_id", "string", "Names this event. A code, not a name."],
+  ["enquiry_id", "string", "Names the enquiry the event belongs to. A code, not a name."],
+  ["occurred_at", "date-time", "The date and time the event happened, with a time zone."],
+  ["source", "string", "The system that wrote the event."],
+  ["event_type", "one of a fixed list", "What happened. Here, the enquiry arriving."],
+  ["actor.kind", "human | automated | ai_assisted", "The kind of actor. It never says who."],
+  ["prev_hash", "sha256 hash | null", "The hash of the line before. The first event of a log has none."],
+  ["data", "object", "Coded values only. It never holds free text."],
+];
+
+// What you type, and what the tool replies. Lines that start with $ are the commands.
+const terminal = [
+  "$ python3 tools/interaction_log.py append log.jsonl event.json",
+  "Added one event. Its hash is sha256:d50bedb5b851b6d7838291ea494db5661a302fecb61a20f87997821cdaae2164",
+  "$ python3 tools/interaction_log.py verify log.jsonl",
+  "The log passes structure, chain and event-order checks. Keep real logs private.",
 ];
 
 const steps = [
@@ -72,94 +121,203 @@ const limits = [
   "Wrapping typed text does not make it safe. Keep a person between an AI tool and any action.",
   "Try the log with made-up records first. No service has rehearsed it yet.",
 ];
+
+const two = (n: number) => String(n).padStart(2, "0");
+const codeBox = "overflow-x-auto bg-muted/50 py-4 font-mono text-[0.8125rem] leading-6 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
 ---
 <Base title="Data handling layer | Kinderform" description="A free, open set of specs, checks and small tools that help a service store enquiry information correctly and safely, including when staff use AI tools.">
   <SiteHeader current="/build" />
-  <main id="main" class="mx-auto max-w-4xl px-6 pt-6 pb-16 sm:pt-8">
+  <main id="main" class="mx-auto max-w-6xl px-6 pt-6 pb-16 sm:pt-8">
     <a href="/build" class="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline"><ArrowLeft aria-hidden="true" className="size-4" /> Build an enquiry form</a>
-    <h1 class="mt-5 max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">Data handling layer</h1>
-    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-      A free, open way for your service to store enquiry information correctly and safely in your own systems, including when staff use AI tools.
-      Kinderform hosts nothing and never receives the information.
-    </p>
-    <div class="mt-4 flex flex-wrap items-center gap-2">
-      <Tag tone="blue">Draft v0.1</Tag>
-      <Tag tone="amber">Not yet checked by a person</Tag>
-    </div>
-    <p class="mt-3 max-w-3xl text-sm text-muted-foreground">This is not legal advice. A person has not checked the UK profile.</p>
 
-    <section aria-labelledby="what-heading" class="mt-12">
-      <h2 id="what-heading" class="text-2xl font-semibold tracking-tight">What it is, and what it is not</h2>
-      <p class="mt-3 max-w-3xl leading-7">It is a set of specs, checks and small tools. Your service runs them inside its own systems.</p>
-      <p class="mt-3 max-w-3xl leading-7">It is not a database. It is not a hosted service. It is not legal advice, and passing a check does not make a record anonymous or safe to share.</p>
-    </section>
-
-    <section aria-labelledby="pieces-heading" class="mt-12">
-      <h2 id="pieces-heading" class="text-2xl font-semibold tracking-tight">The six pieces</h2>
-      <ul class="mt-5 grid gap-4 sm:grid-cols-2">
-        {pieces.map((p, i) => (
-          <li class="min-w-0">
-            <Card className="h-full gap-3 py-5">
-              <CardHeader>
-                <CardTitle className="text-base"><span class="text-muted-foreground">{i + 1}.</span> {p.title}</CardTitle>
-                <CardDescription className="leading-6">{p.does}</CardDescription>
-              </CardHeader>
-              <CardContent className="mt-auto text-sm">
-                <a href={p.href} class={`${link} break-all`}>{p.file}</a>
-              </CardContent>
-            </Card>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section aria-labelledby="rules-heading" class="mt-12">
-      <h2 id="rules-heading" class="text-2xl font-semibold tracking-tight">The rules the layer follows</h2>
-      <ol class="mt-5 max-w-3xl list-decimal space-y-3 pl-6 leading-7 marker:font-semibold">
-        {rules.map(([lead, rest]) => (<li><strong>{lead}</strong> {rest}</li>))}
-      </ol>
-    </section>
-
-    <section aria-labelledby="example-heading" class="mt-12">
-      <h2 id="example-heading" class="text-2xl font-semibold tracking-tight">One log event</h2>
-      <p class="mt-3 max-w-3xl leading-7">Each line of the log is one event like this. Every value here is made up.</p>
-      <Card className="mt-5 min-w-0 gap-0 overflow-hidden py-0">
-        <div class="border-b px-4 py-2 font-mono text-xs text-muted-foreground">log.jsonl, one event</div>
-        <pre tabindex="0" class="overflow-x-auto bg-muted/50 p-4 font-mono text-sm leading-6 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"><code>{example}</code></pre>
-      </Card>
-      <ul class="mt-5 max-w-3xl list-disc space-y-2 pl-6 leading-7">
-        {parts.map(([name, text]) => (<li><code class="rounded bg-muted px-1.5 py-0.5 font-mono text-sm">{name}</code> {text}</li>))}
-      </ul>
-    </section>
-
-    <section aria-labelledby="start-heading" class="mt-12">
-      <h2 id="start-heading" class="text-2xl font-semibold tracking-tight">How to start</h2>
-      <ol class="mt-5 max-w-3xl list-decimal space-y-3 pl-6 leading-7 marker:font-semibold">
-        {steps.map(([lead, rest, href, label]) => (
-          <li><strong>{lead}</strong> {rest}{href && (<>{" "}<a href={href} class={link}>{label}</a>.</>)}</li>
-        ))}
-      </ol>
-      <p class="mt-5 max-w-3xl leading-7">
-        The guide, the schemas and the tools are on GitHub:{" "}
-        <a href={gh("docs/data-handling.md")} class={`${link} inline-flex items-center gap-1`}>developer guide<ArrowUpRight aria-hidden="true" className="size-4" /></a>,{" "}
-        <a href={gh("schema/data-handling.json")} class={link}>field tags</a>,{" "}
-        <a href={gh("schema/interaction.schema.json")} class={link}>interaction schema</a>,{" "}
-        <a href={tree("tools")} class={link}>tools</a> and{" "}
-        <a href={tree("schema/examples")} class={link}>made-up examples</a>.
+    <header class="mt-6 border-b pb-8">
+      <p aria-hidden="true" class="font-mono text-xs text-muted-foreground">build / data-handling</p>
+      <h1 class="mt-2 max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">Data handling layer</h1>
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+        A free, open way for your service to store enquiry information correctly and safely in your own systems, including when staff use AI tools.
+        Kinderform hosts nothing and never receives the information.
       </p>
-    </section>
+      <div class="mt-4 flex flex-wrap items-center gap-2">
+        <Tag tone="blue">Draft v0.1</Tag>
+        <Tag tone="amber">Not yet checked by a person</Tag>
+      </div>
+      <dl class="mt-6 grid max-w-3xl grid-cols-2 overflow-hidden rounded-lg border sm:grid-cols-4">
+        {sheet.map(([label, value]) => (
+          <div class="-mr-px -mb-px border-r border-b px-4 py-3">
+            <dt class="font-mono text-xs text-muted-foreground">{label}</dt>
+            <dd class="mt-1 text-sm font-medium">{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="mt-4 max-w-3xl text-sm text-muted-foreground">This is not legal advice. A person has not checked the UK profile.</p>
+    </header>
 
-    <section aria-labelledby="limits-heading" class="mt-12">
-      <h2 id="limits-heading" class="text-2xl font-semibold tracking-tight">Limits</h2>
-      <ul class="mt-5 max-w-3xl list-disc space-y-2 pl-6 leading-7">
-        {limits.map((l) => (<li>{l}</li>))}
-      </ul>
-    </section>
+    <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-12">
+      <div class="min-w-0">
+        <section aria-labelledby="what" class="mt-10">
+          <h2 id="what" class={h2}>What it is, and what it is not</h2>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-lg border p-5">
+              <h3 class="font-mono text-xs text-muted-foreground">It is</h3>
+              <ul class="mt-3 space-y-2 leading-7">
+                {is.map((text) => (<li class="flex gap-2"><Check aria-hidden="true" className="mt-1.5 size-4 shrink-0" />{text}</li>))}
+              </ul>
+            </div>
+            <div class="rounded-lg border p-5">
+              <h3 class="font-mono text-xs text-muted-foreground">It is not</h3>
+              <ul class="mt-3 space-y-2 leading-7">
+                {isNot.map((text) => (<li class="flex gap-2"><X aria-hidden="true" className="mt-1.5 size-4 shrink-0 text-muted-foreground" />{text}</li>))}
+              </ul>
+            </div>
+          </div>
+        </section>
 
-    <Separator className="mt-12" />
-    <p class="mt-6 max-w-3xl leading-7">
-      Found a mistake, or want to tell us what your team needs? <a href="/#get-involved" class={link}>Get in touch</a>.
-    </p>
+        <section aria-labelledby="pieces" class="mt-12">
+          <h2 id="pieces" class={h2}>The six pieces</h2>
+          <ol class="mt-5 grid gap-4 sm:grid-cols-2">
+            {pieces.map((p, i) => (
+              <li class="min-w-0">
+                <Card className="h-full gap-0 overflow-hidden py-0">
+                  <div class="flex items-center justify-between gap-3 border-b bg-muted/50 px-4 py-2">
+                    <a href={p.href} class="min-w-0 truncate font-mono text-xs underline-offset-4 hover:underline">{p.file}</a>
+                    <Badge variant="outline" className="bg-background font-mono font-normal">{p.kind}</Badge>
+                  </div>
+                  <div class="p-4">
+                    <h3 class="font-semibold"><span aria-hidden="true" class="mr-2 font-mono text-sm font-normal text-muted-foreground">{two(i + 1)}</span>{p.title}</h3>
+                    <p class="mt-2 text-sm leading-6 text-muted-foreground">{p.does}</p>
+                  </div>
+                </Card>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="rules" class="mt-12">
+          <h2 id="rules" class={h2}>The rules the layer follows</h2>
+          <ol class="mt-5 grid overflow-hidden rounded-lg border sm:grid-cols-2">
+            {rules.map(([lead, rest], i) => (
+              <li class="-mr-px -mb-px flex gap-3 border-r border-b p-4 text-sm leading-6">
+                <span aria-hidden="true" class="font-mono text-xs leading-6 text-muted-foreground">{two(i + 1)}</span>
+                <span><strong class="font-semibold">{lead}</strong> <span class="text-muted-foreground">{rest}</span></span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="chain" class="mt-12">
+          <h2 id="chain" class={h2}>How the log links events</h2>
+          <p class="mt-3 max-w-3xl leading-7">
+            Each event carries the hash of the line before. Change or remove a line in the middle, and the check fails.
+            Every value here is made up.
+          </p>
+          <ol class="mt-5 grid items-stretch gap-2 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]">
+            {chain.map((e, i) => (
+              <>
+                {i > 0 && (
+                  <li aria-hidden="true" class="grid place-items-center text-muted-foreground">
+                    <ArrowDown className="size-4 md:hidden" /><ArrowRight className="hidden size-4 md:block" />
+                  </li>
+                )}
+                <li class="min-w-0 rounded-lg border bg-card">
+                  <p class="truncate border-b bg-muted/50 px-3 py-2 font-mono text-xs font-medium">{e.id}</p>
+                  <dl class="space-y-1 px-3 py-3 font-mono text-xs">
+                    <div class="flex justify-between gap-3"><dt class="text-muted-foreground">event_type</dt><dd class="truncate">{e.type}</dd></div>
+                    <div class="flex justify-between gap-3"><dt class="text-muted-foreground">actor.kind</dt><dd>{e.actor}</dd></div>
+                    <div class="flex justify-between gap-3"><dt class="text-muted-foreground">prev_hash</dt><dd class="truncate font-medium">{e.prev}</dd></div>
+                  </dl>
+                </li>
+              </>
+            ))}
+          </ol>
+          <p class="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
+            The chain cannot show that the last lines were cut off. Keep the latest hash somewhere else, and compare it when you check the log.
+          </p>
+        </section>
+
+        <section aria-labelledby="event" class="mt-12">
+          <h2 id="event" class={h2}>One log event</h2>
+          <p class="mt-3 max-w-3xl leading-7">Each line of the log is one event like this. Every value here is made up.</p>
+          <Card className="mt-5 min-w-0 gap-0 overflow-hidden py-0">
+            <div class="flex items-center justify-between border-b px-4 py-2 font-mono text-xs text-muted-foreground"><span>log.jsonl</span><span>one event</span></div>
+            <pre tabindex="0" class={codeBox}><code class="grid">{example.map((line, i) => (<span class="grid grid-cols-[3rem_minmax(0,1fr)]"><span aria-hidden="true" class="pr-4 text-right text-muted-foreground/70 select-none">{i + 1}</span><span class="pr-4 whitespace-pre">{line}</span></span>))}</code></pre>
+          </Card>
+          <div class="mt-5 overflow-hidden rounded-lg border">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
+                  <TableHead>Field</TableHead>
+                  <TableHead className="hidden sm:table-cell">Type</TableHead>
+                  <TableHead>What it holds</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {fields.map(([name, type, text]) => (
+                  <TableRow>
+                    {/* On a phone the type sits under the field name, so the meaning stays on screen. */}
+                    <TableCell className={`${mono} align-top font-medium whitespace-normal sm:whitespace-nowrap`}>
+                      {name}
+                      <span class="mt-1 block font-normal text-muted-foreground sm:hidden">{type}</span>
+                    </TableCell>
+                    <TableCell className={`${mono} hidden align-top text-muted-foreground sm:table-cell`}>{type}</TableCell>
+                    <TableCell className="align-top whitespace-normal sm:min-w-56">{text}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </section>
+
+        <section aria-labelledby="start" class="mt-12">
+          <h2 id="start" class={h2}>How to start</h2>
+          <ol class="mt-5 max-w-3xl list-decimal space-y-3 pl-6 leading-7 marker:font-mono marker:text-sm marker:text-muted-foreground">
+            {steps.map(([lead, rest, href, label]) => (
+              <li><strong>{lead}</strong> {rest}{href && (<>{" "}<a href={href} class={link}>{label}</a>.</>)}</li>
+            ))}
+          </ol>
+          <Card className="mt-6 min-w-0 gap-0 overflow-hidden py-0">
+            <div class="flex items-center justify-between border-b px-4 py-2 font-mono text-xs text-muted-foreground"><span>terminal</span><span>add an event, then check the log</span></div>
+            <pre tabindex="0" class={`${codeBox} px-4`}><code class="grid">{terminal.map((line) => (line.startsWith("$ ")
+              ? <span class="whitespace-pre"><span aria-hidden="true" class="text-muted-foreground select-none">$ </span>{line.slice(2)}</span>
+              : <span class="whitespace-pre text-muted-foreground">{line}</span>))}</code></pre>
+          </Card>
+          <p class="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
+            Give the tool the event without <code class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">prev_hash</code>. It adds the hash, checks the whole log and then adds the line.
+          </p>
+          <p class="mt-5 max-w-3xl leading-7">
+            The guide, the schemas and the tools are on GitHub:{" "}
+            <a href={gh("docs/data-handling.md")} class={`${link} inline-flex items-center gap-1`}>developer guide<ArrowUpRight aria-hidden="true" className="size-4" /></a>,{" "}
+            <a href={gh("schema/data-handling.json")} class={link}>field tags</a>,{" "}
+            <a href={gh("schema/interaction.schema.json")} class={link}>interaction schema</a>,{" "}
+            <a href={tree("tools")} class={link}>tools</a> and{" "}
+            <a href={tree("schema/examples")} class={link}>made-up examples</a>.
+          </p>
+        </section>
+
+        <section aria-labelledby="limits" class="mt-12">
+          <h2 id="limits" class={h2}>Limits</h2>
+          <ul class="mt-5 max-w-3xl divide-y rounded-lg border border-dashed text-sm leading-6">
+            {limits.map((l) => (<li class="px-4 py-3">{l}</li>))}
+          </ul>
+        </section>
+
+        <Separator className="mt-12" />
+        <p class="mt-6 max-w-3xl leading-7">
+          Found a mistake, or want to tell us what your team needs? <a href="/#get-involved" class={link}>Get in touch</a>.
+        </p>
+      </div>
+
+      {/* The list of sections. It stays in view on wide screens; on smaller ones the headings are enough. */}
+      <nav aria-labelledby="on-this-page" class="hidden lg:block">
+        <div class="sticky top-6 mt-10 border-l pl-4">
+          <h2 id="on-this-page" class="font-mono text-xs text-muted-foreground">On this page</h2>
+          <ul class="mt-3 space-y-2 text-sm">
+            {sections.map(([id, title]) => (
+              <li><a href={`#${id}`} class="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">{title}</a></li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+    </div>
   </main>
   <SiteFooter />
 </Base>

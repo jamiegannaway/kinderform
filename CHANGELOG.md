@@ -6,7 +6,8 @@
 - **A published schema keeps its content.** A changed schema gets a new version and a new address. The checks fail if version 0.1 changes.
 - **The log tool locks the file.** Two programs can add to one log at once without breaking the chain. A new check runs 24 at once.
 - **Fostering only, said plainly.** The guides now say that the monitoring record covers fostering for now.
-- **Release tags.** A workflow now tags each kit release when its archive lands on main, so the source link in each kit's credits works. Run it once by hand for draft.3 to draft.6.
+- **Release tags.** A workflow now tags each kit release when its archive lands on main, so the source link in each kit's credits works. Releases draft.3 to draft.6 now have their tags.
+- **A more technical data handling page.** `/build/data-handling` now reads like a reference page: a spec sheet, a list of sections that stays in view, file paths and field names in monospace, a picture of how the log links events, a table of the fields in one event, and the commands to try with the tool's real replies.
 
 ## Unreleased · country pages and downloads (starter candidate v0.1.0-draft.6)
 
