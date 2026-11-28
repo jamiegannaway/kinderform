@@ -145,6 +145,25 @@
       "description": "Date the person asked to be contacted again, if they said 'not now'.",
       "type": "string",
       "format": "date"
+    },
+    "retention_policy_ref": {
+      "description": "Short code that points to the service's own retention policy. It names the policy; it never holds a period or a reason.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+    },
+    "retain_until": {
+      "description": "Date after which the service plans to delete this record, unless a legal hold applies. Must not be before the date of received_at.",
+      "type": "string",
+      "format": "date"
+    },
+    "legal_hold": {
+      "description": "True while the service must keep the record despite retain_until. The reason stays in the service's own system.",
+      "type": "boolean"
+    },
+    "deletion_requested_at": {
+      "description": "When a deletion was asked for, ISO 8601 with time zone. Must not precede received_at.",
+      "type": "string",
+      "format": "date-time"
     }
   },
   "allOf": [

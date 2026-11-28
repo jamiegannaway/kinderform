@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-000011",
+  "received_at": "2026-11-03T09:05:00+00:00",
+  "channel": "email",
+  "status": "closed",
+  "closure_reason_code": "timing_not_right",
+  "status_updated_at": "2026-11-10T10:00:00+00:00",
+  "retention_policy_ref": "example-policy-a",
+  "retain_until": "2027-05-03",
+  "legal_hold": false,
+  "deletion_requested_at": "2026-11-12T08:00:00+00:00"
+}

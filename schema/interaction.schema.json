@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jamiegannaway/kinderform/schema/interaction.schema.json",
+  "title": "Interaction event",
+  "description": "One append-only event about one enquiry, written as one line of a JSON Lines file. v0.1 draft. It records what happened and what kind of actor did it, never who. Every value is coded: there is no free text. Pseudonymous records are still private. Use validate_interactions.py as well as JSON Schema to check the chain and the order of events.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "enquiry_id",
+    "occurred_at",
+    "source",
+    "event_type",
+    "actor",
+    "prev_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Version of this schema the event follows.",
+      "const": "0.1"
+    },
+    "event_id": {
+      "description": "Identifier unique within the log. Must not be derived from personal data.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{8,64}$"
+    },
+    "enquiry_id": {
+      "description": "The enquiry_id of the monitoring record this event belongs to.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,64}$"
+    },
+    "occurred_at": {
+      "description": "When the event happened, ISO 8601 with time zone.",
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:[Zz]|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "source": {
+      "description": "Code of the system that wrote the event. Never a person.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,62}$"
+    },
+    "event_type": {
+      "description": "What happened.",
+      "enum": [
+        "enquiry_received",
+        "acknowledgement_sent",
+        "contact_attempted",
+        "conversation_held",
+        "handoff_made",
+        "handoff_accepted",
+        "not_now_agreed",
+        "withdrawn",
+        "closed",
+        "record_corrected",
+        "event_reverted",
+        "export_made",
+        "deletion_requested",
+        "deletion_completed"
+      ]
+    },
+    "actor": {
+      "description": "The kind of actor, never a name or identifier.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "description": "human: a person did it. automated: a rule did it with no AI. ai_assisted: an AI tool drafted or prepared it and a person approved it.",
+          "enum": [
+            "human",
+            "automated",
+            "ai_assisted"
+          ]
+        }
+      }
+    },
+    "ai": {
+      "description": "Required when actor.kind is ai_assisted, and not allowed otherwise. Records the tool and the approval, never who approved.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "model_version",
+        "prompt_template_id",
+        "human_approved",
+        "approved_at",
+        "edited_before_send"
+      ],
+      "properties": {
+        "tool": {
+          "description": "Code for the AI tool.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+        },
+        "model_version": {
+          "description": "Model version as the tool reports it. No spaces.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$"
+        },
+        "prompt_template_id": {
+          "description": "Code for the fixed prompt template used.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+        },
+        "human_approved": {
+          "description": "A person approved the output before it took effect. Must be true.",
+          "const": true
+        },
+        "approved_at": {
+          "description": "When the approval happened, ISO 8601 with time zone. Not after occurred_at.",
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:[Zz]|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        "edited_before_send": {
+          "description": "True if the person changed the draft before approving it.",
+          "type": "boolean"
+        }
+      }
+    },
+    "supersedes": {
+      "description": "The event_id this event corrects or reverts. Required for record_corrected and event_reverted.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{8,64}$"
+    },
+    "prev_hash": {
+      "description": "null for the first event of a first segment, otherwise sha256: and the hash of the event on the line before. A later segment starts with the last hash of the segment before.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "data": {
+      "description": "Optional coded values for this event. No free text.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "description": "Result of a contact attempt or a send.",
+          "enum": [
+            "no_answer",
+            "left_message",
+            "spoke",
+            "delivered",
+            "failed"
+          ]
+        },
+        "channel": {
+          "description": "How the enquiry arrived.",
+          "enum": [
+            "web_form",
+            "phone",
+            "email",
+            "chat",
+            "sms",
+            "event",
+            "social_lead",
+            "referral",
+            "other"
+          ]
+        },
+        "next_step_due": {
+          "description": "Date the next step is due.",
+          "type": "string",
+          "format": "date"
+        },
+        "status": {
+          "description": "Where the enquiry currently stands.",
+          "enum": [
+            "received",
+            "contact_attempted",
+            "conversation_held",
+            "information_session",
+            "initial_visit",
+            "application_submitted",
+            "paused_by_enquirer",
+            "withdrawn",
+            "closed"
+          ]
+        },
+        "closure_reason_code": {
+          "description": "Why the enquiry ended. Provisional vocabulary; see schema/README.md.",
+          "enum": [
+            "not_reached",
+            "household_circumstances_changed",
+            "financial_circumstances",
+            "process_not_as_expected",
+            "timing_not_right",
+            "chose_another_service",
+            "no_spare_room",
+            "did_not_meet_requirements",
+            "service_decision",
+            "duplicate",
+            "other",
+            "unknown"
+          ]
+        },
+        "recontact_after": {
+          "description": "Date the person asked to be contacted again, if they said 'not now'.",
+          "type": "string",
+          "format": "date"
+        },
+        "system": {
+          "description": "Code of the system that accepted a handoff or completed a deletion.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+        },
+        "reason_code": {
+          "description": "Coded reason for a correction, a revert, an export or a deletion.",
+          "enum": [
+            "requested_by_enquirer",
+            "retention_ended",
+            "entered_in_error",
+            "duplicate",
+            "service_decision"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "conversation_held",
+              "not_now_agreed"
+            ]
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actor": {
+            "properties": {
+              "kind": {
+                "const": "human"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "properties": {
+              "kind": {
+                "const": "ai_assisted"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "required": [
+          "ai"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "ai"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "record_corrected",
+              "event_reverted"
+            ]
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "supersedes"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "deletion_completed"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "required": [
+              "system"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

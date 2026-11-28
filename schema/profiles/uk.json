@@ -1,0 +1,27 @@
+{
+  "profile": "uk",
+  "version": "0.1",
+  "status": "unverified",
+  "description": "Maps the law-neutral Kinderform sensitivity classes to UK legal category names. Draft: not legal advice, not checked by a person.",
+  "sensitivity_classes": {
+    "special_category": {
+      "legal_category": "UK GDPR Article 9",
+      "status": "unverified",
+      "source": "https://www.legislation.gov.uk/eur/2016/679/article/9",
+      "checked": null
+    },
+    "criminal_offence": {
+      "legal_category": "UK GDPR Article 10",
+      "status": "unverified",
+      "source": "https://www.legislation.gov.uk/eur/2016/679/article/10",
+      "checked": null
+    }
+  },
+  "lawful_basis": {
+    "status": "unverified",
+    "source": "https://www.legislation.gov.uk/eur/2016/679/article/6",
+    "checked": null,
+    "values": ["public_task", "legitimate_interests", "consent", "contract", "legal_obligation"],
+    "note": "These are the values of lawful_basis in schema/enquiry.schema.json. lawful_basis is planned to move from the enquiry schema into profiles in v0.2."
+  }
+}

@@ -1,0 +1,780 @@
+{
+  "version": "0.1",
+  "status": "draft",
+  "description": "Tags for every field of every Kinderform schema. A service maps each tag to its own policy. v0.1 draft: not legal advice, not checked by a person.",
+  "sensitivity_classes": {
+    "operational": "Identifiers, times and codes. Still private when combined.",
+    "location_coarse": "A coarse place code, such as the start of a postcode.",
+    "personal": "Something that names or describes a person.",
+    "personal_contact": "A way to reach a person, such as an email address or phone number.",
+    "special_category": "A class of data that law treats as especially sensitive. No Kinderform field uses it.",
+    "criminal_offence": "Data about offences or convictions. No Kinderform field uses it."
+  },
+  "purposes": {
+    "reply": "Used to answer the person.",
+    "route": "Used to send the enquiry to the right team.",
+    "measure_service": "Used to measure how the service replies, never how staff perform.",
+    "keep_in_touch": "Used to contact the person again when they agreed.",
+    "audit": "Used to show what happened and when.",
+    "retention": "Used to decide when to keep or delete the record."
+  },
+  "retention_classes": {
+    "contact_details": "Names and ways to reach a person. Map to the shortest period the service's policy allows.",
+    "enquiry_record": "The monitoring record of an enquiry, without names or contact details.",
+    "event_log": "The append-only interaction log, kept in segments so an old segment can be deleted whole."
+  },
+  "ai_use": {
+    "no": "Never give this field to an AI tool.",
+    "as_data_only": "May be given only inside a marked data block, never as instructions.",
+    "yes": "A coded value that is safe to pass."
+  },
+  "schemas": {
+    "enquiry-submission": {
+      "full_name": {
+        "sensitivity": "personal",
+        "purposes": [
+          "reply",
+          "keep_in_touch"
+        ],
+        "retention": "contact_details",
+        "ai_use": "as_data_only",
+        "untrusted_text": true
+      },
+      "preferred_name": {
+        "sensitivity": "personal",
+        "purposes": [
+          "reply",
+          "keep_in_touch"
+        ],
+        "retention": "contact_details",
+        "ai_use": "as_data_only",
+        "untrusted_text": true
+      },
+      "interest": {
+        "sensitivity": "operational",
+        "purposes": [
+          "reply",
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "knows_child": {
+        "sensitivity": "operational",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "contact_method": {
+        "sensitivity": "operational",
+        "purposes": [
+          "reply"
+        ],
+        "retention": "contact_details",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "email": {
+        "sensitivity": "personal_contact",
+        "purposes": [
+          "reply",
+          "keep_in_touch"
+        ],
+        "retention": "contact_details",
+        "ai_use": "no",
+        "untrusted_text": false
+      },
+      "phone": {
+        "sensitivity": "personal_contact",
+        "purposes": [
+          "reply",
+          "keep_in_touch"
+        ],
+        "retention": "contact_details",
+        "ai_use": "no",
+        "untrusted_text": false
+      },
+      "best_times": {
+        "sensitivity": "operational",
+        "purposes": [
+          "reply"
+        ],
+        "retention": "contact_details",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "contact_language": {
+        "sensitivity": "operational",
+        "purposes": [
+          "reply"
+        ],
+        "retention": "contact_details",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "topics": {
+        "sensitivity": "operational",
+        "purposes": [
+          "reply"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "heard_from": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "updates_opt_in": {
+        "sensitivity": "operational",
+        "purposes": [
+          "keep_in_touch",
+          "audit"
+        ],
+        "retention": "contact_details",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "postcode_area": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "zip_prefix": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "postal_code_fsa": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "au_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "de_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "fr_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "es_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "eircode_routing_key": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "nl_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "nz_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "no_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "dk_postcode": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "se_postcode_area": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "fi_postcode_area": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      }
+    },
+    "enquiry": {
+      "schema_version": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "enquiry_id": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit",
+          "retention"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "as_data_only",
+        "untrusted_text": true
+      },
+      "received_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit",
+          "retention"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "channel": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "source": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "as_data_only",
+        "untrusted_text": true
+      },
+      "intent_tier": {
+        "sensitivity": "operational",
+        "purposes": [
+          "route",
+          "measure_service"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "fostering_interests": {
+        "sensitivity": "operational",
+        "purposes": [
+          "route",
+          "measure_service"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "postcode_outward": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route",
+          "measure_service"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "la_gss_code": {
+        "sensitivity": "location_coarse",
+        "purposes": [
+          "route",
+          "measure_service"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "front_door_id": {
+        "sensitivity": "operational",
+        "purposes": [
+          "route",
+          "measure_service"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "as_data_only",
+        "untrusted_text": true
+      },
+      "preferred_contact_window": {
+        "sensitivity": "operational",
+        "purposes": [
+          "reply"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "lawful_basis": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "marketing_consent": {
+        "sensitivity": "operational",
+        "purposes": [
+          "keep_in_touch",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "marketing_consent.given": {
+        "sensitivity": "operational",
+        "purposes": [
+          "keep_in_touch",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "marketing_consent.recorded_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "keep_in_touch",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "acknowledged_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "first_contact_attempt_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "first_contact_made_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "status": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit",
+          "reply"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "status_updated_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "closure_reason_code": {
+        "sensitivity": "operational",
+        "purposes": [
+          "measure_service",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "recontact_after": {
+        "sensitivity": "operational",
+        "purposes": [
+          "keep_in_touch"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "retention_policy_ref": {
+        "sensitivity": "operational",
+        "purposes": [
+          "retention",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "retain_until": {
+        "sensitivity": "operational",
+        "purposes": [
+          "retention"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "legal_hold": {
+        "sensitivity": "operational",
+        "purposes": [
+          "retention"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "deletion_requested_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "retention",
+          "audit"
+        ],
+        "retention": "enquiry_record",
+        "ai_use": "yes",
+        "untrusted_text": false
+      }
+    },
+    "interaction": {
+      "schema_version": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "event_id": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "enquiry_id": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "occurred_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "source": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "event_type": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "actor": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "actor.kind": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "ai": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "ai.tool": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "ai.model_version": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "ai.prompt_template_id": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "ai.human_approved": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "ai.approved_at": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "ai.edited_before_send": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "supersedes": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "prev_hash": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.outcome": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.channel": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.next_step_due": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.status": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.closure_reason_code": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit",
+          "measure_service"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.recontact_after": {
+        "sensitivity": "operational",
+        "purposes": [
+          "keep_in_touch",
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.system": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      },
+      "data.reason_code": {
+        "sensitivity": "operational",
+        "purposes": [
+          "audit"
+        ],
+        "retention": "event_log",
+        "ai_use": "yes",
+        "untrusted_text": false
+      }
+    }
+  }
+}

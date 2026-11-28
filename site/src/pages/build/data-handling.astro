@@ -1,0 +1,165 @@
+---
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import Base from "@/layouts/Base.astro";
+import { SiteHeader, SiteFooter, REPO_URL } from "@/components/site-header";
+import { Tag } from "@/components/tag";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
+const link = "font-medium text-foreground underline underline-offset-4 hover:decoration-2";
+const gh = (path: string) => `${REPO_URL}/blob/main/${path}`;
+const tree = (path: string) => `${REPO_URL}/tree/main/${path}`;
+
+const pieces = [
+  { title: "Field tags", does: "Says how sensitive each field is and what it may be used for. Also says how long to keep it, and whether an AI tool may see it.", file: "schema/data-handling.json", href: gh("schema/data-handling.json") },
+  { title: "Retention dates", does: "Puts a keep-until date, a legal hold and a deletion request on the record itself, and checks the dates.", file: "schema/enquiry.schema.json", href: gh("schema/enquiry.schema.json") },
+  { title: "Interaction log", does: "Records what happened to each enquiry. Events are only ever added, and each links to the one before. Values are codes only. It records the kind of actor, never who: a person, an automatic rule, or an AI tool with a person's approval.", file: "schema/interaction.schema.json", href: gh("schema/interaction.schema.json") },
+  { title: "Connection tools", does: "Sign and check webhook messages, and export a CSV limited to one purpose.", file: "tools/", href: tree("tools") },
+  { title: "Made-up test cases for AI tools", does: "Gives you submissions with instruction-like text, so you can check that your assistant treats typed text as data.", file: "schema/examples/untrusted-text/cases.json", href: gh("schema/examples/untrusted-text/cases.json") },
+  { title: "UK profile", does: "Maps two unused sensitivity classes to UK legal category names. A person has not checked it.", file: "schema/profiles/uk.json", href: gh("schema/profiles/uk.json") },
+];
+
+const rules = [
+  ["Collect less.", "Ask only for what the reply needs."],
+  ["Keep names and contact details apart.", "They sit in one system. The monitoring record and the log hold neither."],
+  ["No free text in the log.", "Every value is a code, a date or a time."],
+  ["Tag every field.", "A new field needs tags before you use it."],
+  ["Only ever add events.", "Never edit or remove a line of the log."],
+  ["A correction is a new event.", "It points to the event it changes."],
+  ["An AI tool may draft. A person approves.", "Nothing is sent, deleted, exported or changed until a person approves it. The log never records who."],
+  ["Typed text is data, never instructions.", "Pass it to an AI tool only inside a marked data block."],
+  ["One switch turns AI features off.", "Keep a single setting that stops them all, and test it."],
+  ["Retention is a date on the record.", "Map each retention class to your own policy."],
+  ["Deletion reaches every copy.", "Record one completed deletion for each system that held a copy."],
+  ["Measure the service, never staff.", "Events record the kind of actor only, never a name or staff identifier."],
+];
+
+const example = `{
+  "schema_version": "0.1",
+  "event_id": "evt-example-0001",
+  "enquiry_id": "example-001",
+  "occurred_at": "2026-11-16T09:00:00Z",
+  "source": "example-council-crm",
+  "event_type": "enquiry_received",
+  "actor": { "kind": "automated" },
+  "prev_hash": null,
+  "data": { "channel": "web_form", "status": "received" }
+}`;
+
+const parts = [
+  ["event_id and enquiry_id", "name this event and the enquiry it belongs to. They are codes, not names."],
+  ["occurred_at", "is the date and time the event happened."],
+  ["source", "is the system that wrote the event."],
+  ["event_type", "is one value from a fixed list, here the enquiry arriving."],
+  ["actor.kind", "is human, automated or ai_assisted. It never says who."],
+  ["prev_hash", "is the hash of the line before. The first event of a log has none."],
+  ["data", "holds coded values only. It never holds free text."],
+];
+
+const steps = [
+  ["Read the guide.", "It covers every tool and the rules above.", gh("docs/data-handling.md"), "Developer guide"],
+  ["Run the checks on the made-up examples.", "Use the example records and logs in the repository before you use your own.", tree("schema/examples"), "Made-up examples"],
+  ["Map the retention classes to your own policy.", "The layer names three classes. You decide how long each one is kept."],
+  ["Rehearse with made-up records.", "Do this before any real record goes near the log."],
+];
+
+const limits = [
+  "This is a v0.1 draft. A person has not checked it.",
+  "It is not legal advice. It says nothing about what the law requires of your service.",
+  "A person has not checked the UK profile. Every entry has \"checked\": null.",
+  "Passing the checks does not make records anonymous or safe to share. Dates, codes and identifiers can identify a person when combined.",
+  "The log shows what was written. It does not prove that your systems wrote everything.",
+  "Wrapping typed text does not make it safe. Keep a person between an AI tool and any action.",
+  "Try the log with made-up records first. No service has rehearsed it yet.",
+];
+---
+<Base title="Data handling layer | Kinderform" description="A free, open set of specs, checks and small tools that help a service store enquiry information correctly and safely, including when staff use AI tools.">
+  <SiteHeader current="/build" />
+  <main id="main" class="mx-auto max-w-4xl px-6 pt-6 pb-16 sm:pt-8">
+    <a href="/build" class="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline"><ArrowLeft aria-hidden="true" className="size-4" /> Build an enquiry form</a>
+    <h1 class="mt-5 max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">Data handling layer</h1>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+      A free, open way for your service to store enquiry information correctly and safely in your own systems, including when staff use AI tools.
+      Kinderform hosts nothing and never receives the information.
+    </p>
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      <Tag tone="blue">Draft v0.1</Tag>
+      <Tag tone="amber">Not yet checked by a person</Tag>
+    </div>
+    <p class="mt-3 max-w-3xl text-sm text-muted-foreground">This is not legal advice. A person has not checked the UK profile.</p>
+
+    <section aria-labelledby="what-heading" class="mt-12">
+      <h2 id="what-heading" class="text-2xl font-semibold tracking-tight">What it is, and what it is not</h2>
+      <p class="mt-3 max-w-3xl leading-7">It is a set of specs, checks and small tools. Your service runs them inside its own systems.</p>
+      <p class="mt-3 max-w-3xl leading-7">It is not a database. It is not a hosted service. It is not legal advice, and passing a check does not make a record anonymous or safe to share.</p>
+    </section>
+
+    <section aria-labelledby="pieces-heading" class="mt-12">
+      <h2 id="pieces-heading" class="text-2xl font-semibold tracking-tight">The six pieces</h2>
+      <ul class="mt-5 grid gap-4 sm:grid-cols-2">
+        {pieces.map((p, i) => (
+          <li class="min-w-0">
+            <Card className="h-full gap-3 py-5">
+              <CardHeader>
+                <CardTitle className="text-base"><span class="text-muted-foreground">{i + 1}.</span> {p.title}</CardTitle>
+                <CardDescription className="leading-6">{p.does}</CardDescription>
+              </CardHeader>
+              <CardContent className="mt-auto text-sm">
+                <a href={p.href} class={`${link} break-all`}>{p.file}</a>
+              </CardContent>
+            </Card>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="rules-heading" class="mt-12">
+      <h2 id="rules-heading" class="text-2xl font-semibold tracking-tight">The rules the layer follows</h2>
+      <ol class="mt-5 max-w-3xl list-decimal space-y-3 pl-6 leading-7 marker:font-semibold">
+        {rules.map(([lead, rest]) => (<li><strong>{lead}</strong> {rest}</li>))}
+      </ol>
+    </section>
+
+    <section aria-labelledby="example-heading" class="mt-12">
+      <h2 id="example-heading" class="text-2xl font-semibold tracking-tight">One log event</h2>
+      <p class="mt-3 max-w-3xl leading-7">Each line of the log is one event like this. Every value here is made up.</p>
+      <Card className="mt-5 min-w-0 gap-0 overflow-hidden py-0">
+        <div class="border-b px-4 py-2 font-mono text-xs text-muted-foreground">log.jsonl, one event</div>
+        <pre tabindex="0" class="overflow-x-auto bg-muted/50 p-4 font-mono text-sm leading-6 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"><code>{example}</code></pre>
+      </Card>
+      <ul class="mt-5 max-w-3xl list-disc space-y-2 pl-6 leading-7">
+        {parts.map(([name, text]) => (<li><code class="rounded bg-muted px-1.5 py-0.5 font-mono text-sm">{name}</code> {text}</li>))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="start-heading" class="mt-12">
+      <h2 id="start-heading" class="text-2xl font-semibold tracking-tight">How to start</h2>
+      <ol class="mt-5 max-w-3xl list-decimal space-y-3 pl-6 leading-7 marker:font-semibold">
+        {steps.map(([lead, rest, href, label]) => (
+          <li><strong>{lead}</strong> {rest}{href && (<>{" "}<a href={href} class={link}>{label}</a>.</>)}</li>
+        ))}
+      </ol>
+      <p class="mt-5 max-w-3xl leading-7">
+        The guide, the schemas and the tools are on GitHub:{" "}
+        <a href={gh("docs/data-handling.md")} class={`${link} inline-flex items-center gap-1`}>developer guide<ArrowUpRight aria-hidden="true" className="size-4" /></a>,{" "}
+        <a href={gh("schema/data-handling.json")} class={link}>field tags</a>,{" "}
+        <a href={gh("schema/interaction.schema.json")} class={link}>interaction schema</a>,{" "}
+        <a href={tree("tools")} class={link}>tools</a> and{" "}
+        <a href={tree("schema/examples")} class={link}>made-up examples</a>.
+      </p>
+    </section>
+
+    <section aria-labelledby="limits-heading" class="mt-12">
+      <h2 id="limits-heading" class="text-2xl font-semibold tracking-tight">Limits</h2>
+      <ul class="mt-5 max-w-3xl list-disc space-y-2 pl-6 leading-7">
+        {limits.map((l) => (<li>{l}</li>))}
+      </ul>
+    </section>
+
+    <Separator className="mt-12" />
+    <p class="mt-6 max-w-3xl leading-7">
+      Found a mistake, or want to tell us what your team needs? <a href="/#get-involved" class={link}>Get in touch</a>.
+    </p>
+  </main>
+  <SiteFooter />
+</Base>

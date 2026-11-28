@@ -181,6 +181,7 @@ const PROJECT_LINKS = [
   { href: "/research/log", label: "Research log" },
   { href: NOTEBOOK_URL, label: "Ask the research (Google\u2019s AI)" },
   { href: REPO_URL, label: "Code and data on GitHub" },
+  { href: "/build/data-handling", label: "Data handling layer (draft)" },
 ]
 const LEGAL_LINKS = [
   { href: "/privacy", label: "Privacy policy" },
