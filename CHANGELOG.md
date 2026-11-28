@@ -6,6 +6,7 @@
 - **A published schema keeps its content.** A changed schema gets a new version and a new address. The checks fail if version 0.1 changes.
 - **The log tool locks the file.** Two programs can add to one log at once without breaking the chain. A new check runs 24 at once.
 - **Fostering only, said plainly.** The guides now say that the monitoring record covers fostering for now.
+- **Release tags.** A workflow now tags each kit release when its archive lands on main, so the source link in each kit's credits works. Run it once by hand for draft.3 to draft.6.
 
 ## Unreleased · country pages and downloads (starter candidate v0.1.0-draft.6)
 
