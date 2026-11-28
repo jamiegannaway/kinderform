@@ -15,6 +15,20 @@ The [audit note](audits/2026-11-26.md) records the findings, fixes and remaining
 
 Prioritise this work before adding more country kits. Each further country needs a local reviewer, a service need and a maintenance owner. The country research below remains a first pass.
 
+## Now: data handling layer (v0.1 draft)
+
+See the [developer guide](data-handling.md). Everything here is a draft, not legal advice and not checked by a person.
+
+- [x] Tag every field of the three schemas (`schema/data-handling.json`) and test the tags
+- [x] Add optional retention fields to the enquiry schema, with date checks
+- [x] Add the interaction log schema, validator and made-up logs: hash chain, segments, corrections, reverts and deletion in every system
+- [x] Add the connection tools: log append and verify, webhook signing, purpose-limited CSV export
+- [x] Add the AI test pack: made-up submissions with instruction-like names, and a data-block wrapper
+- [x] Add the unverified UK profile
+- [ ] A qualified reviewer checks the UK profile
+- [ ] Rehearse the log with one willing service, using made-up records
+- [ ] Decide whether `lawful_basis` moves from the enquiry schema to profiles in v0.2
+
 ## Now: foundations (v0.1)
 
 - [x] Repository, licences and working rules

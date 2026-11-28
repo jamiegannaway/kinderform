@@ -10,6 +10,12 @@
 - Add a first-reply worksheet, synthetic rehearsal and event-mapping guide to the starter kits. Use bounded reassurance in the reference forms.
 - Home page: the first picture is now a made-up reply that says who will be in touch, when, and what happens next. The made-up form and its record moved down to "What we are making", so nobody takes the home page for a place to enquire.
 - Header and footer: the header is a bar with one main button, "Get the starter kit", and quieter links for GitHub and light or dark. The footer is shorter and sits on light grey, with plain lists of links.
+- **Data handling layer (v0.1 draft).** A technical foundation for storing enquiry data correctly in a service's own systems, including when staff use AI tools. Kinderform hosts nothing and holds no enquirer data. It is not legal advice and a person has not checked it. See `docs/data-handling.md`.
+  - `schema/data-handling.json` tags every field with its sensitivity, purposes, retention class and AI use.
+  - The enquiry schema gains four optional retention fields, with date checks in `schema/validate_enquiry.py`.
+  - `schema/interaction.schema.json` and `schema/validate_interactions.py` describe and check an append-only, hash-chained event log with coded values only and no staff identifiers.
+  - New tools: `tools/interaction_log.py`, `tools/webhook_sign.py`, `tools/export_csv.py` and `tools/untrusted_text.py`, with made-up logs and AI test cases.
+  - `schema/profiles/uk.json`: an unverified map of two legal category names.
 - Preserve the earlier starter archives. The draft.4 candidate contains the revised rules and guide; no service pilot or independent legal review is claimed.
 
 ## v0.1.0-draft.3 · 25 November 2026
