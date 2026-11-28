@@ -6,9 +6,11 @@ A message has three headers:
   webhook-signature  "v1," and the base64 of an HMAC-SHA256, or several of
                      these separated by spaces (so a secret can be rotated)
 The HMAC covers "{id}.{timestamp}.{body}" and uses the raw body bytes. The
-secret is base64, with an optional "whsec_" prefix.
+secret is base64, with an optional "whsec_" prefix, and decodes to 24 to 64
+bytes. Checked against version 1.0.0 of the specification on 28 November 2026.
 
-Verify rejects a timestamp more than 5 minutes from now. A receiver should also
+The specification asks for a time tolerance but sets no number. This tool
+rejects a timestamp more than 5 minutes from now. A receiver should also
 remember recent webhook-id values and refuse a repeat; this tool does not.
 Use TLS as well. Messages never contain the secret or the body.
 
@@ -30,6 +32,7 @@ import time
 from pathlib import Path
 
 TOLERANCE_SECONDS = 300
+MIN_KEY_BYTES, MAX_KEY_BYTES = 24, 64
 PREFIX = "whsec_"
 
 
@@ -46,8 +49,8 @@ def _key(secret):
         key = base64.b64decode(text, validate=True)
     except (binascii.Error, ValueError):
         raise WebhookError("The secret is not base64.") from None
-    if not key:
-        raise WebhookError("The secret is empty.")
+    if not MIN_KEY_BYTES <= len(key) <= MAX_KEY_BYTES:
+        raise WebhookError("The secret must decode to 24 to 64 bytes.")
     return key
 
 
@@ -159,6 +162,9 @@ def main(argv):
         return 0
     except WebhookError as error:
         print(str(error), file=sys.stderr)
+        return 1
+    except ValueError:
+        print("The timestamp is not a whole number.", file=sys.stderr)
         return 1
     except (OSError, UnicodeError):
         print("Could not read a file.", file=sys.stderr)

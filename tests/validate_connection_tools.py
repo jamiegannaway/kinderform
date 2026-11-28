@@ -68,6 +68,8 @@ check(webhook_sign.verify(other, rotated, body, now=now), "rotation: the old sec
 check(webhook_sign.verify([secret, other], headers, body, now=now), "a receiver can hold two secrets")
 check(refused(webhook_sign.signature, secret, "m", now, "text"), "the body must be bytes")
 check(refused(webhook_sign.sign, "not base64!", "m", body), "a bad secret fails")
+check(refused(webhook_sign.sign, base64.b64encode(b"too-short").decode(), "m", body), "a secret under 24 bytes fails")
+check(refused(webhook_sign.sign, base64.b64encode(b"x" * 65).decode(), "m", body), "a secret over 64 bytes fails")
 check(webhook_sign.generate_secret().startswith("whsec_"), "a generated secret has the prefix")
 try:
     webhook_sign.verify(secret, headers, b"tampered", now=now)

@@ -101,7 +101,7 @@ python3 schema/validate_interactions.py schema/examples/interaction/valid/plain-
 
 **Sign and check a webhook**
 
-The tool follows the Standard Webhooks convention: `webhook-id`, `webhook-timestamp` and `webhook-signature` headers, a `v1,` signature, and a base64 secret with an optional `whsec_` prefix. A timestamp more than 5 minutes from now is refused. Several signatures separated by spaces are accepted, so a secret can be rotated. Keep the secret in an environment variable.
+The tool follows the Standard Webhooks convention: `webhook-id`, `webhook-timestamp` and `webhook-signature` headers, a `v1,` signature, and a base64 secret with an optional `whsec_` prefix. The convention sets no time limit, so the tool chooses one: it refuses a timestamp more than 5 minutes from now. The secret must decode to 24 to 64 bytes. Several signatures separated by spaces are accepted, so a secret can be rotated. Keep the secret in an environment variable.
 
 ```sh
 export EXAMPLE_WEBHOOK_SECRET="$(python3 tools/webhook_sign.py generate-secret)"
@@ -144,5 +144,6 @@ for t in tests/*.py; do python3 "$t" || echo "FAILED $t"; done
 - The UK profile is unverified. Every entry has `"checked": null`.
 - Passing the checks does not make records anonymous or safe to share. Dates, codes and identifiers can identify a person when combined.
 - The log shows what was written. It does not prove that your systems wrote everything.
+- The chain shows a changed or removed line in the middle of a log. It cannot show that the last lines were cut off. Keep the latest hash somewhere else, such as a second system, and compare it when you check the log. `append` prints that hash.
 - Wrapping typed text does not make it safe. Keep a person between an AI tool and any action.
 - Try the log with made-up records first. No service has rehearsed it yet.

@@ -27,7 +27,7 @@ FIELD_NAME = re.compile(r"[a-z][a-z0-9_]{0,39}")
 ACTIONS = ("send_message", "export_records", "change_status", "delete_record", "reveal_other_records")
 # Format characters (Cf) cover zero-width, bidirectional and tag characters.
 # Line and paragraph separators become spaces, like tabs and line breaks.
-SPACE_LIKE = {"\t", "\n", "\r", "\x0b", "\x0c", " ", " ", "\x85"}
+SPACE_LIKE = {"\t", "\n", "\r", "\x0b", "\x0c", "\u2028", "\u2029", "\x85"}
 
 
 def clean(value):
