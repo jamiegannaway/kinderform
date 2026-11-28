@@ -288,12 +288,13 @@ export default function Landing() {
               Everyone who offers to care for a child deserves a quick, kind and considered reply.
             </h1>
             <p className="mt-6 max-w-xl text-xl text-muted-foreground">
-              Kinderform makes free, open tools that help services give that reply. Services are the
-              councils, hubs and agencies that find and approve foster carers and adopters.
+              For services under pressure, Kinderform makes the first step easier, with free code, starter
+              kits and research. Services are the councils, hubs and agencies that find and approve foster
+              carers and adopters.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <a href="/build">Use this form in my organisation</a>
+                <a href="/build">Get the free starter kit</a>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href="/for-services">Ideas for services</a>
