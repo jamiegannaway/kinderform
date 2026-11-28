@@ -313,9 +313,9 @@ export default function Landing() {
               Everyone who offers to care for a child deserves a quick, kind and considered reply.
             </h1>
             <p className="mt-6 max-w-xl text-xl text-muted-foreground">
-              For services under pressure, Kinderform makes the first step easier, with free code, starter
-              kits and research. Services are the councils, hubs and agencies that find and approve foster
-              carers and adopters.
+              Services are under pressure. Kinderform makes the first enquiry easier, with free code, starter
+              kits, data safety guides and backing research. Services are the councils, hubs and agencies
+              that find and approve foster carers and adopters.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
