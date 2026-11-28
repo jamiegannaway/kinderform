@@ -30,7 +30,7 @@ jobs:
       - name: Data, schema and wording checks
         run: for t in tests/*.py; do echo "== $t"; python3 "$t" || exit 1; done
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
           cache: npm
