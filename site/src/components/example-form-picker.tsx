@@ -9,8 +9,10 @@ import { Tag } from "@/components/tag"
 
 const href = (code: string) => `/example-form/${code}`
 
-// Large countries carry their label in the middle. The European countries are too small, so
-// their labels sit out at sea, joined to the country by a thin line (see tools/world_map.mjs).
+// Labels show only when the map is at least 700px wide; on a smaller map they would overlap, and
+// the list under the map is the way in. Large countries carry their label in the middle. The
+// European countries are too small, so their labels sit out at sea, joined to the country by a
+// thin line (see tools/world_map.mjs).
 const LABEL_ALIGN: Record<string, string> = {
   center: "-translate-x-1/2 -translate-y-1/2",
   right: "-translate-x-full -translate-y-1/2",
@@ -29,7 +31,7 @@ function WorldMap() {
   return (
     <div className="relative min-h-0 flex-1 [container-type:size]">
       <p className="sr-only">World map. {names(FORM_COUNTRIES)} are highlighted. Choose a country from the list below.</p>
-      <div className="absolute inset-0 m-auto h-[min(100cqh,calc(100cqw*0.436))] w-[min(100cqw,calc(100cqh/0.436))]">
+      <div className="@container absolute inset-0 m-auto h-[min(100cqh,calc(100cqw*0.436))] w-[min(100cqw,calc(100cqh/0.436))]">
         <svg
           viewBox={`0 0 ${MAP.width} ${MAP.height}`}
           className="size-full"
@@ -66,10 +68,9 @@ function WorldMap() {
           <a
             key={c.code}
             href={href(c.code)}
-           
             tabIndex={-1}
             aria-hidden="true"
-            className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground sm:block`}
+            className={`absolute ${c.pos} ${LABEL_ALIGN[c.align]} hidden rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium whitespace-nowrap shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground @min-[700px]:block`}
           >
             {c.name}
           </a>
@@ -88,7 +89,7 @@ export function ExampleFormPicker({ labels }: { labels: Record<string, string> }
       <div className="shrink-0">
         <SiteHeader current="/example-form" />
       </div>
-      <main id="main" className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col gap-4 px-6 pb-4">
+      <main id="main" className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col gap-4 px-6 pt-6 pb-4">
         <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
           <div className="min-w-0 flex-1 basis-96 space-y-2">
             <div className="flex flex-wrap gap-2">
@@ -109,7 +110,7 @@ export function ExampleFormPicker({ labels }: { labels: Record<string, string> }
         <WorldMap />
 
         <nav aria-label="Example forms by country" className="shrink-0">
-          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
+          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
             {FORM_COUNTRIES.map((c) => (
               <li key={c.code}>
                 <a
