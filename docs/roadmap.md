@@ -189,7 +189,11 @@ Western Europe first, with the two Asia-Pacific countries asked for. Each has on
 - [x] Example forms for Canada (GC Design System) and Australia (Australian Government Design System), without government branding, opened from a world map on one screen
 - [x] Example forms work on phones: full screen, with Continue kept in reach on every question
 - [x] Light by default, with a Light/Dark switch in the header (the choice stays on the reader's device)
-- [x] A French version of the Canadian example form (switch between English and French in the form's dialog; answers are kept)
+- [x] A French version of the Canadian example form (switch between English and French on the form's page; answers are kept)
+- [x] Each country's example form on its own page, `/example-form/<country>` (draft, 28 November 2026). The map stays the way in. Each page switches between the country's design system and a neutral design in the site's own look (`?design=neutral`, so a choice can be shared). It says who makes the design system, its licence and typeface, and what we left out. A country with no open national design system (Sweden) gets only the neutral design
+- [x] Each example form as two single HTML files to download, one per design, built with the site (`site/scripts/build-form-downloads.mjs`). Each works offline, loads nothing and keeps the licence notices of its styles
+- [ ] Ask the owner to review the country pages and the downloads before they go live. The downloads are 436 to 532 KB each, mostly React and the form library; the starter kit's plain HTML form stays the small option
+- [ ] Have a native speaker review each form not in English, then remove its "Not yet reviewed" tag
 - [ ] A version of the reference form that works without JavaScript, for services whose platforms cannot run it
 - [ ] Test the reference form with people who have enquired, and with screen reader users
 - [ ] Browser-only funnel tool that reads an export in the schema format; no data leaves the service

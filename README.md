@@ -28,7 +28,7 @@ The [26 November 2026 audit note](docs/audits/2026-11-26.md) records the adversa
 | [`census/`](census/) | An inventory of first-contact enquiry forms: every question, answer option and piece of guidance recorded so far | v0.1 draft, not yet checked by a person |
 | [`rubric/`](rubric/) | A rubric for assessing a front door, published for comment before it is used | v0.1 draft |
 | [`evidence/`](evidence/) | A living library of research and policy, published at [kinderform.org/research](https://www.kinderform.org/research) | Growing |
-| [`site/`](site/) | The public site: Astro and shadcn/ui, built and deployed by Vercel using `vercel.json`. Includes example enquiry forms in each country's public-sector design system at `/example-form`, and comparison tables for services at `/compare` | Live |
+| [`site/`](site/) | The public site: Astro and shadcn/ui, built and deployed by Vercel using `vercel.json`. Includes example enquiry forms at `/example-form`, one page per country, in that country's public-sector design system or a neutral design, each also as a single-file download, and comparison tables for services at `/compare` | Live |
 | [`tools/`](tools/) | Helper scripts: the polite crawler, the converters that turn its reads into register and census rows, the page-date reader and the plain-language checker | Working |
 | [`tests/`](tests/) | Checks for the schema, registers, rules, census, form wording and research log | Working |
 | [`docs/`](docs/) | Roadmap, principles, the plain-language guide and working notes | Draft |
