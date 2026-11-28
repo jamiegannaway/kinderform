@@ -290,7 +290,7 @@ def main():
             "question_id": f"{q['form_id']}-q{n:03d}", "form_id": q["form_id"], "order": str(n),
             "section": q.get("section", ""), "label_paraphrased": label[:200], "category": ct[0], "topic": ct[1],
             "required": q.get("required") or "unknown", "input_type": q.get("input_type") or "unknown",
-            "type_inferred": "no", "conditional_on": "", "hint_paraphrased": "", "observed": "direct_fetch",
+            "type_inferred": "no", "conditional_on": "", "branching_status": "unknown", "hint_paraphrased": "", "observed": "direct_fetch",
             "date_checked": q.get("date_checked") or form_date.get(q["form_id"], ""),
         })
 
@@ -298,6 +298,8 @@ def main():
         for col in fh:
             f.setdefault(col, "")
     write("forms.csv", fh, forms + [{k: f.get(k, "") for k in fh} for f in new_forms])
+    for q in added_q:
+        q["branching_status"] = q.get("branching_status") or ("conditional" if q.get("conditional_on") else "unknown")
     write("questions.csv", qh, questions + [{k: q.get(k, "") for k in qh} for q in added_q])
     unclassified = sum(1 for q in added_q if q["topic"] == "unclassified")
     print(f"application forms: {len(new_forms)}, questions kept: {len(added_q)}, "

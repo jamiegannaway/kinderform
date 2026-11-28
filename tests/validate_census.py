@@ -26,7 +26,7 @@ COLUMNS = {
                   "access_route", "form_url", "platform", "template_group", "fields_observed", "observed",
                   "date_checked", "source_url", "notes"],
     "questions.csv": ["question_id", "form_id", "order", "section", "label_paraphrased", "category", "topic",
-                      "required", "input_type", "type_inferred", "conditional_on", "hint_paraphrased",
+                      "required", "input_type", "type_inferred", "conditional_on", "branching_status", "hint_paraphrased",
                       "observed", "date_checked"],
     "answer_options.csv": ["option_id", "question_id", "order", "option_label", "option_guidance"],
     "guidance.csv": ["guidance_id", "form_id", "guidance_type", "present", "summary_paraphrased", "value",
@@ -51,6 +51,7 @@ ALLOWED = {
     ("questions.csv", "input_type"): {"text", "email", "tel", "textarea", "select", "radio", "checkbox", "date",
                                       "statement", "calendar", "unknown"},
     ("questions.csv", "type_inferred"): {"yes", "no"},
+    ("questions.csv", "branching_status"): {"unknown", "conditional", "unconditional"},
     ("guidance.csv", "present"): {"yes", "no", "unknown"},
     ("guidance.csv", "guidance_type"): {"response_time", "later_step_time", "what_happens_next", "not_an_application",
                                         "eligibility", "privacy_notice_link", "data_controller", "lawful_basis",
@@ -120,6 +121,8 @@ for r in forms:
     if r["front_door_id"] and r["front_door_id"] not in register_ids:
         err(f"forms.csv {r['form_id']}: front_door_id {r['front_door_id']} not in register")
 for r in questions:
+    if r["conditional_on"] and r["branching_status"] != "conditional":
+        err(f"questions.csv {r['question_id']}: a recorded condition needs conditional branching_status")
     if r["form_id"] not in form_ids:
         err(f"questions.csv {r['question_id']}: unknown form_id {r['form_id']}")
     if (r["category"], r["topic"]) not in tax_keys:

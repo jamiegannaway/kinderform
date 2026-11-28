@@ -308,10 +308,26 @@ def shorten(text, limit=110):
 
 
 def topic_of(text):
+    # Specific meaning wins over broad words such as "household", "age" or "email".
+    if re.search(r"religion|religious|faith|belief|konfession|glaube|levensovertuiging", text, re.I):
+        return "equality", "religion"
+    if re.search(r"(?:age|ages|age groups?).*(?:children|child|young people)|(?:children|child|young people).*age|"
+                 r"0[–-]5 years.*12[–-]17 years", text, re.I):
+        return "interest", "child_preferences"
+    if re.search(r"choice of:.*phone.*email|preferred.*contact|contact.*method", text, re.I):
+        return "contact_preference", "method"
     for category, topic, pattern in RULES:
         if pattern.search(text):
             return category, topic
     return "other", "unclassified"
+
+
+# This recognises an explicit follow-up; it does not establish which answer reveals
+# it. Every other automated read stays unknown until the interaction is checked.
+def branching_of(label, condition=""):
+    if condition or re.search(r"^(?:if\b|other\b.*specify|si (?:oui|non)|wenn\b|falls\b|als\b)", label, re.I):
+        return "conditional"
+    return "unknown"
 
 
 def questions_of(form):
@@ -509,7 +525,8 @@ def main():
             new_q.append({
                 "question_id": qid, "form_id": form_id, "order": str(n), "section": "", "label_paraphrased": label,
                 "category": category, "topic": topic, "required": "yes" if q["required"] else "unknown",
-                "input_type": q["input_type"], "type_inferred": "no", "conditional_on": "", "hint_paraphrased": "",
+                "input_type": q["input_type"], "type_inferred": "no", "conditional_on": "",
+                "branching_status": branching_of(label), "hint_paraphrased": "",
                 "observed": "direct_fetch", "date_checked": date,
             })
             for k, option in enumerate(q["options"][:20], start=1):
@@ -547,9 +564,9 @@ def main():
         else:
             add("response_time", "no", "No reply time found on the form page or the front-door page.")
         links = " ".join(f"{h} {t}" for h, t in best_rec.get("links", [])).lower()
-        privacy = bool(re.search(r"privacy|confidentialit|collection notice", links))
-        add("privacy_notice_link", "yes" if privacy else "no",
-            "Links to a privacy notice." if privacy else "No privacy notice link found on the form page.")
+        privacy = bool(re.search(r"privacy|confidentialit|collection notice|datenschutz|privacidad|protecci[oó]n.*datos|privacitat", links))
+        add("privacy_notice_link", "yes" if privacy else "unknown",
+            "Links to a privacy notice." if privacy else "Automated read did not establish whether a privacy notice is linked; needs review.")
         if marketing:
             add("marketing_consent", "yes", "The form has a newsletter or marketing opt-in.", marketing)
         else:

@@ -44,7 +44,7 @@ const DONE = {
   times: ", op een van de momenten die je hebt gekozen",
   talk: "In het gesprek.",
   // The same words as the engine's Dutch example reply.
-  talkBody: "Vraag alles wat je wilt weten. Er zijn geen domme vragen, en geen enkele vraag wordt tegen je gebruikt.",
+  talkBody: "Je kunt vragen stellen zonder dat je je vastlegt op een aanvraag.",
   notSure: " We vertellen je over pleegzorg, adoptie en andere manieren om te helpen.",
   plans: "Veranderen je plannen? Dat is goed. Je kunt het ons altijd laten weten.",
   record: "Gegevens bekijken",

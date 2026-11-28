@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { ChartCard, DotStrips, HeatGrid, HorizontalBars, StackedBars } from "@/components/charts"
 import { type CountriesData } from "@/lib/countries"
+import { Tag } from "@/components/tag"
 
 const pct = (yes: number, of: number) => (of ? Math.round((100 * yes) / of) : 0)
 const listNames = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`)
@@ -67,27 +68,30 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
   const byCountry = (f: (c: CountriesData["countries"][number]) => { yes: number; of: number }) =>
     data.countries
       .filter((c) => f(c).of > 0)
-      .map((c) => ({ label: c.name, value: pct(f(c).yes, f(c).of), display: `${pct(f(c).yes, f(c).of)}%` }))
+      .map((c) => {
+        const s = f(c)
+        return { label: c.name, sampleSize: s.of, value: pct(s.yes, s.of), display: s.of < 10 ? `${s.yes}/${s.of}` : `${pct(s.yes, s.of)}%` }
+      })
   const nCountries = data.countries.length
   return (
     <div className="space-y-4">
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <InsightCard
-          eyebrow="Before anyone has spoken to you"
+          eyebrow="Among the forms we could read"
           figure={`${data.allMedian} questions`}
-          claim="is what a typical enquiry form asks"
-          footer={`Forms ask from ${data.shortest} to ${data.longest} questions.`}
+          claim="is the middle number of recorded questions"
+          footer={`Counts range from ${data.shortest} to ${data.longest}. Known follow-ups are left out; other branches may be included.`}
         >
           <HorizontalBars
             compact
-            data={data.countries.map((c) => ({ label: c.name, value: c.median, display: String(c.median) }))}
+            data={data.countries.map((c) => ({ label: c.name, sampleSize: c.forms, value: c.median, display: String(c.median) }))}
             labelWidth="grid-cols-[7.5rem_minmax(0,1fr)]"
           />
         </InsightCard>
         <InsightCard
           eyebrow="Sensitive questions, early"
           figure={oneIn(data.asksSensitive.yes, data.asksSensitive.of)}
-          claim="enquiry forms ask something sensitive, most often date of birth or ethnicity"
+          claim="of forms we could read ask something sensitive"
         >
           <HorizontalBars
             compact
@@ -99,7 +103,7 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
         <InsightCard
           eyebrow="Knowing what happens next"
           figure={oneIn(data.reply.yes, data.reply.of)}
-          claim="enquiry forms say when you will hear back"
+          claim="of forms we could read give a reply time"
           footer={`Of ${data.reply.of} forms where we looked for a reply time.`}
         >
           <HorizontalBars
@@ -123,7 +127,7 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
                 .{" "}
                 {withdrawals.source.checked
                   ? `A person checked it on ${longDate(withdrawals.source.checked)}.`
-                  : ""}
+                  : "Draft extraction; needs review."}
               </p>
             }
           >
@@ -144,13 +148,15 @@ export function InsightCards({ data, withdrawals }: { data: CountriesData; withd
         )}
       </div>
       <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-        The first 3 figures come from {data.allForms} enquiry forms in {nCountries}{" "}
+        <Tag tone="amber" className="mr-2">Draft extraction</Tag>
+        The first 3 figures come from {data.allForms} unique form addresses in {nCountries}{" "}
         {nCountries === 1 ? "country" : "countries"}. We read them on their live web pages
         {data.checked ? `, most recently on ${longDate(data.checked)}` : ""}. The{" "}
         <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">
           compare page
         </a>{" "}
-        lists every form.
+        lists service locations; several may share one form. These figures describe the pages we could read, not all services in a country.
+        On each chart, n is the number of forms counted.
       </p>
     </div>
   )
@@ -208,11 +214,12 @@ export default function Countries({ data }: { data: CountriesData }) {
     <section aria-labelledby="countries" className="space-y-8">
       <div className="max-w-3xl space-y-4">
         <h2 id="countries" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          In {n} {n === 1 ? "country" : "countries"}, a typical enquiry form asks {data.allMedian} questions
+          Among forms we could read, the middle count is {data.allMedian} questions
         </h2>
         <p className="leading-7">
           Only {data.reply.yes} of {data.reply.of} forms say when you will hear back. We read {data.allForms} enquiry
           forms in {listNames(data.countries.map((c) => (/^(?:United |Netherlands)/.test(c.name) ? `the ${c.name}` : c.name)))}.
+          This is not a sample of all services in those countries.
         </p>
         <p className="leading-7 text-muted-foreground">
           The{" "}
@@ -223,19 +230,20 @@ export default function Countries({ data }: { data: CountriesData }) {
         </p>
         <HowWeDidThis>
           <p>
-            A computer program read each form on its live web page. It counted the questions and sorted each one into a
-            topic. It also noted what kind of answer each question wants, and whether the form says when you will hear
-            back. We measured every form the same way.
+            A computer program read public pages and sorted recorded questions into topics. People still need to check its work.
+            We count each unique form address once per country, even when several locations use it.
+            Known follow-ups are left out. Branching is unknown for {data.branchingUnknownQuestions} questions on {data.branchingUnknownForms} forms.
+            These counts do not show one confirmed path through every form.
           </p>
         </HowWeDidThis>
       </div>
 
       <ChartCard
-        title="How many questions each enquiry form asks"
-        description="Each dot is one form"
+        title="How many recorded questions each form has"
+        description="Each dot is one unique form address we could read"
         footer={{
-          lead: `A typical form asks ${data.allMedian} questions`,
-          note: `The ${data.allForms} forms ask from ${data.shortest} to ${data.longest}.`,
+          lead: `The middle count is ${data.allMedian} recorded questions`,
+          note: `The ${data.allForms} forms have ${data.shortest} to ${data.longest}. Branching is often unknown.`,
         }}
       >
         <DotStrips

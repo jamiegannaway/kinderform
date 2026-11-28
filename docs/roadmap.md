@@ -1,5 +1,19 @@
 # Roadmap
 
+## Next priority: respond to the 26 November audit
+
+The [audit note](audits/2026-11-26.md) records the findings, fixes and remaining checks. Code changes do not establish legal approval, source verification or better replies.
+
+- [x] Prepare fixes for inconsistent measures, uncertain extraction, draft review labels, named-score publication and enquiry validation.
+- [x] Add a first-reply operating worksheet and synthetic rehearsal to the starter candidate.
+- [ ] Have an independent reviewer check a small set of complete forms, including branches and missing questions, and record disagreements.
+- [ ] Have a qualified reviewer check legal timing advice and the full relevant provisions.
+- [ ] Hold the adult stakeholder and accessibility sessions listed below. Review assurances and the minimum questions needed to reply.
+- [ ] Rehearse the current kit with one willing service, then agree a service-owned pilot. Keep records local and publish only agreed safe aggregates.
+- [ ] Measure useful human replies, clear next steps, informed choice and team workload alongside waiting times.
+
+Prioritise this work before adding more country kits. Each further country needs a local reviewer, a service need and a maintenance owner. The country research below remains a first pass.
+
 ## Now: foundations (v0.1)
 
 - [x] Repository, licences and working rules
@@ -125,7 +139,7 @@ Western Europe first, with the two Asia-Pacific countries asked for. Each has on
 - [x] A topic-by-topic table, with a CSV download, so a service can check its own enquiry form against enquiry forms and applications
 - [x] Show where the law in England puts each topic in the assessment, beside what forms ask
 - [x] Show the other three UK nations the same way: a table of where the law in each nation puts each topic, for fostering and adoption
-- [x] "Ask each question at the stage the law sets" covers Wales, Scotland and Northern Ireland: enquiry forms that ask what the law leaves to the assessment
+- [x] Compare topics on enquiry forms with required assessment content in each UK nation. This does not establish the earliest lawful time to ask.
 - [ ] Read the law not yet covered: England's Schedule 4A and the Adoption and Children Act 2002 rules on age and residence, Scotland's 2010 adoption amendments and 2011 guidance
 - [ ] Ask recruitment teams which ideas help, and which are wrong, before adding more
 
@@ -146,7 +160,7 @@ Western Europe first, with the two Asia-Pacific countries asked for. Each has on
 - [ ] Publish the rubric for comment and revise it
 - [x] Intake-form census v0.1: fostering and adoption forms, questions, answer options and guidance (`census/`, unverified)
 - [ ] Check census rows by hand in a browser, starting with the forms that would not render
-- [x] Form check tab on the site: public method and patterns without names; named draft scores in private previews only
+- [x] Form check tab on the site: public method and patterns without names. Named draft scores are excluded from all static builds; explicit local development review only.
 - [x] Census as evidence on the research page (`/research#how-forms-differ`): forms read from the live page, no names, each measure shown on its own so no form can be traced across them
 - [x] US census first pass from the crawler: 54 enquiry forms (unverified)
 - [ ] US census: forms the crawler could not read, state agencies first, then counties where counties run child welfare

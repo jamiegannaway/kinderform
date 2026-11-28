@@ -8,7 +8,7 @@
 import { existsSync, readFileSync } from "node:fs"
 import { resolve } from "node:path"
 
-import { askedBy, groupOf, parseCsv, type Census, type Row } from "@/lib/census"
+import { isCountedQuestion, isKnownFollowUp, askedBy, groupOf, parseCsv, type Census, type Row } from "@/lib/census"
 import { APPLICATION_TOPICS, applications } from "@/lib/applications"
 import { countries } from "@/lib/countries"
 import { factsFor } from "@/lib/form-check"
@@ -58,8 +58,9 @@ export type InsightsData = {
   }
   topics: TopicCheck[]
   lawRows: number // rows read from register/assessment.csv
-  // Questions the law leaves until later, asked earlier. Where the law has two stages (England,
-  // adoption in Wales), "later" means stage 2; where it has one assessment, it means the assessment.
+  // Topics also recorded in assessment requirements. Where the map has two stages (England,
+  // adoption in Wales), this selects stage 2; elsewhere it selects the assessment.
+  // This overlap is not an earliest-collection rule or a finding of unlawful practice.
   // Applications count only in England: elsewhere the application starts the assessment.
   // Null until register/assessment.csv exists.
   early: {
@@ -131,7 +132,7 @@ export function insights(c: Census): InsightsData {
   const firstQs = (country?: string) =>
     first.filter((f) => !country || f.form.country === country).map((f) => asked.get(f.form.form_id) ?? [])
   const shareOf = (sets: Row[][], match: (q: Row) => boolean): Share => ({
-    yes: sets.filter((qs) => qs.some((q) => !q.conditional_on && match(q))).length,
+    yes: sets.filter((qs) => qs.some((q) => !isKnownFollowUp(q) && match(q))).length,
     of: sets.length,
   })
 
@@ -162,8 +163,8 @@ export function insights(c: Census): InsightsData {
       .sort((a, b) => STAGE_ORDER.indexOf(a) - STAGE_ORDER.indexOf(b))
       .map((x) => STAGE_NAMES[x] ?? x)
 
-  // Topics the law leaves until later, for each nation and service. Where the law has two stages,
-  // topics it names only in stage 2; where it has one assessment, topics it names in the assessment.
+  // Assessment-topic overlap, not a legal restriction on earlier questions. Select topics
+  // mapped only to stage 2, or to the single assessment, for each nation and service.
   const later = new Map<string, Set<string>>()
   const laterTopics = (nation: string, service: string) => {
     const key = `${nation}|${service}`
@@ -195,7 +196,7 @@ export function insights(c: Census): InsightsData {
         : new Set([...fostering].filter((k) => adoption.has(k)))
   }
   const answered = (q: Row) =>
-    q.category !== "consent" && q.category !== "staff_recorded" && !q.conditional_on && q.input_type !== "statement"
+    isCountedQuestion(q)
   const earlyIn = (forms: Row[]) => {
     const hits = forms.map((f) => {
       const s2 = s2For(f)

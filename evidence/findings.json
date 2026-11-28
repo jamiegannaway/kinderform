@@ -1,19 +1,20 @@
 {
   "updated": "2026-11-26",
-  "about": "What we know so far about the first step, from someone getting in touch to their application. Shown at kinderform.org/research. Each source says whether a person has checked the claim against the original, when, and against what. Use null for 'not yet checked'. Edit by pull request; tests/validate_findings.py checks the format.",
+  "about": "What we know so far about the first step, from someone getting in touch to their application. Shown at kinderform.org/research. Each source says whether a person has checked the claim against the original, when, and against what. Use null for 'not yet checked'. Edit by pull request; tests/validate_findings.py checks the format. A surviving historical check is bound to the unchanged title, summary and source URL by claim_sha256. This guard does not establish a new human review. Clear checked after editing a claim until a person reviews it again.",
   "findings": [
     {
       "id": "speed-alone",
       "stage": "Reply",
-      "title": "Quicker first visits helped, but on their own did not lead to more approvals",
-      "summary": "In the North East of England, councils recruit foster carers together through a regional hub. The hub raised the share of people who had a first visit within 5 days, from 29% in 2024 to 50% in 2025. But a comparison with similar areas found no statistically significant gain in applications or approvals. Any rise could be down to chance. In the hub's first year, the measured effects were negative. Quick replies still matter, but they are not enough on their own.",
+      "title": "One hub study found quicker visits, without a clear gain in approvals",
+      "summary": "In the North East of England, councils recruit foster carers together through a regional hub. The reported share with a first visit within 5 days rose from 29% in 2024 to 50% in 2025. A comparison with similar areas found no statistically significant gain in applications or approvals. This does not show that the true effect is zero. The study assessed a whole hub model; it does not isolate reply speed.",
       "sources": [
         {
           "title": "Evaluation of Foster with North East Pathfinder Hub: year 3 report",
           "by": "Ipsos and the Centre for Evidence and Implementation (CEI) for the Department for Education",
           "year": "2026",
           "url": "https://assets.publishing.service.gov.uk/media/6aa8195b1a63d2d2be90460e/Evaluation_of_Foster_with_North_East_Pathfinder_Hub_year_3_report.pdf",
-          "checked": { "date": "2026-11-14", "against": "full text", "note": "Executive summary and impact results, about pages 12, 42 and 50." }
+          "checked": null,
+          "note": "The earlier summary had a full-text check recorded on 14 November 2026, around pages 12, 42 and 50. The wording changed on 26 November 2026. This version needs review; no new source check is claimed."
         }
       ]
     },
@@ -28,7 +29,12 @@
           "by": "Ipsos and the Centre for Evidence and Implementation (CEI) for the Department for Education",
           "year": "2026",
           "url": "https://assets.publishing.service.gov.uk/media/6aa8195b1a63d2d2be90460e/Evaluation_of_Foster_with_North_East_Pathfinder_Hub_year_3_report.pdf",
-          "checked": { "date": "2026-11-14", "against": "full text", "note": "Executive summary, about page 12." }
+          "checked": {
+            "date": "2026-11-14",
+            "against": "full text",
+            "note": "Executive summary, about page 12.",
+            "claim_sha256": "c68aadd0f343befe1ef6e35625aebc1a2bffda2d987a0b89c60e3d464596f189"
+          }
         },
         {
           "title": "Fostering Recruitment and Retention Programme: end-to-end programme booklet",
@@ -43,7 +49,7 @@
       "id": "applications-ask-more",
       "stage": "Prepare",
       "title": "Applications ask far more than enquiry forms, and most UK application forms are not public",
-      "summary": "In November 2026 we read 52 application forms and packets in 7 countries. A typical UK application form asked 58 questions, against 8 on a typical UK enquiry form. Every UK application form we read asked about health, but none of the 57 UK enquiry forms did. Most UK application forms are not public: of 41 we found, we could read 6. France's national form asks nothing about health or convictions. A medical certificate goes with it, and the council asks for the criminal record itself.",
+      "summary": "In November 2026 we read 52 application forms and packets in 7 countries. A typical UK application form asked 54 questions, against 8 on a typical UK enquiry form. Every UK application form we read asked about health, but none of the 57 UK enquiry forms did. Most UK application forms are not public: of 41 we found, we could read 6. France's national form asks nothing about health or convictions. A medical certificate goes with it, and the council asks for the criminal record itself.",
       "sources": [
         {
           "title": "What applications ask (Kinderform record of application forms, first pass)",
@@ -51,7 +57,7 @@
           "year": "2026",
           "url": "/research#applications",
           "checked": null,
-          "note": "Our own reading of public forms, not published research. A computer program and an AI tool read the forms between 17 and 24 November 2026. Nobody has checked them yet. Services are not named here; the forms are listed on the compare page."
+          "note": "Our own reading of public forms, not published research. A program and an AI tool read the forms in November 2026. Known follow-ups are left out; other branching may be unknown. The counts and tags still need review."
         }
       ]
     },
@@ -66,7 +72,8 @@
           "by": "Ofsted",
           "year": "2025",
           "url": "https://www.gov.uk/government/statistics/fostering-in-england-1-april-2024-to-31-march-2025/main-findings-fostering-in-england-1-april-2024-to-31-march-2025",
-          "checked": { "date": "2026-11-14", "against": "full text", "note": "Published 26 November 2025. The split between applicants and services was added on 25 November 2026 from the same page, and a person has not yet checked it." }
+          "checked": null,
+          "note": "The earlier totals had a full-text check recorded on 14 November 2026. The applicant/service split was added on 25 November without a further check. The current summary needs review; the older check does not cover every claim."
         }
       ]
     },
@@ -89,7 +96,7 @@
       "id": "forms-differ",
       "stage": "Ask",
       "title": "Enquiry forms differ a lot in what they ask and what they promise",
-      "summary": "In November 2026 we read 57 enquiry forms from councils, hubs, independent agencies and adoption agencies across the UK. The shortest asked 3 questions and the longest asked 19. Asking about a spare room depended on the type of service. 8 of the 11 independent agency forms asked about a spare room, but none of the 37 council and hub forms did. Only 7 of the 56 forms where we looked for a reply time said when you would hear back.",
+      "summary": "In November 2026 we read 57 enquiry forms from councils, hubs, independent agencies and adoption agencies across the UK. The shortest asked 3 questions and the longest asked 17. Asking about a spare room depended on the type of service. 8 of the 11 independent agency forms asked about a spare room, but none of the 37 council and hub forms did. Only 7 of the 56 forms where we looked for a reply time said when you would hear back.",
       "sources": [
         {
           "title": "UK enquiry forms differ a lot in what they ask and what they promise (Kinderform record of enquiry forms, first pass)",
@@ -97,7 +104,7 @@
           "year": "2026",
           "url": "/research#how-forms-differ",
           "checked": null,
-          "note": "Our own reading of public pages, not published research. A person recorded some forms and a computer program read the rest, between 14 and 25 November 2026. Nobody has checked them yet. Services are not named."
+          "note": "Our own reading of public pages, not published research. People recorded some forms and a program read the rest in November 2026. Known follow-ups are left out; other branching may be unknown. The counts and tags still need review."
         }
       ]
     },
@@ -112,7 +119,12 @@
           "by": "Behavioural Insights Team",
           "year": "2015",
           "url": "https://www.bi.team/wp-content/uploads/2015/08/BIT_Update-Report-Final-2013-2015.pdf",
-          "checked": { "date": "2026-11-14", "against": "full text", "note": "Figure 1.4, page 9. Which rate belongs to which message is read from the chart." }
+          "checked": {
+            "date": "2026-11-14",
+            "against": "full text",
+            "note": "Figure 1.4, page 9. Which rate belongs to which message is read from the chart.",
+            "claim_sha256": "8f5e5f4c3d5948ae6d8a5b19c7fbe163ba3d95942a41c56c4c212fb0fb7264ed"
+          }
         }
       ]
     },
@@ -134,7 +146,11 @@
           "by": "Randle, Miller, Dolnicar and Ciarrochi, Child & Family Social Work",
           "year": "2014",
           "url": "https://doi.org/10.1111/j.1365-2206.2012.00881.x",
-          "checked": { "date": "2026-11-14", "against": "abstract" }
+          "checked": {
+            "date": "2026-11-14",
+            "against": "abstract",
+            "claim_sha256": "b70c1e7cf74cbf3486684b9db8f92d339e930dc169516b6c070337ff92d3089b"
+          }
         }
       ]
     },
@@ -156,7 +172,11 @@
           "by": "Madden and others, Adoption Quarterly",
           "year": "2017",
           "url": "https://doi.org/10.1080/10926755.2015.1121187",
-          "checked": { "date": "2026-11-14", "against": "abstract" }
+          "checked": {
+            "date": "2026-11-14",
+            "against": "abstract",
+            "claim_sha256": "db5e16f2ebc3d99d47f9cb11c52ec99faf41fbc62b3d984bdce376d1359f55ed"
+          }
         }
       ]
     },
@@ -193,8 +213,8 @@
     {
       "id": "carers-stop",
       "stage": "Stay",
-      "title": "About 1 in 8 approved fostering households in England stops each year, and much of it is natural",
-      "summary": "In 2025–26, 4,440 of 37,890 approved mainstream households in England stopped fostering: 12%. Carers aged 60 or over were 35% of the carers who stopped. Among those under 50, 19% stopped so they could adopt the child. So a carer who stops is not always a carer the service failed. Leaving early is the clearest link to the first step. In 2020–21, 30% of households that stopped did so within two years of approval.",
+      "title": "About 1 in 8 approved fostering households in England de-registered in 2025–26, including transfers",
+      "summary": "In 2025–26, 4,440 of 37,890 mainstream households approved at some point in England de-registered: 12%. Of those 4,440, 3,675 were leavers, 700 transferred and 65 were other. Carers aged 60 or over were 35% of carers who de-registered. Their age alone does not tell us why they left. Among those under 50, 19% left to adopt the child. So de-registration does not always mean a service failed or a household stopped fostering. Early de-registration is one question for a first-step pilot. In 2020–21, 30% of households that de-registered did so within two years of approval.",
       "sources": [
         {
           "title": "Main findings: fostering in England, 1 April 2025 to 31 March 2026",
@@ -246,7 +266,7 @@
     {
       "id": "progress-bars",
       "stage": "Ask",
-      "title": "Progress bars do not reliably help people finish a form, but honest and simple forms do",
+      "title": "A review of online surveys found mixed effects from progress bars",
       "summary": "A review of 32 experiments with online surveys looked at progress bars. A bar moving at a steady speed did not reliably stop people giving up. A bar that looked slow at first made it worse. In another experiment, fewer people started a survey when told it would take longer. Pages with few questions and designs made for phones lost fewer people. This research is about surveys, not fostering. Someone offering to foster may have stronger reasons to finish.",
       "sources": [
         {
@@ -275,8 +295,8 @@
     {
       "id": "next-step",
       "stage": "Reply",
-      "title": "When a call ends without a clear next step, the work falls on the caller",
-      "summary": "A study of 447 recorded calls to three English GP surgeries found two moments when callers had to push for what they needed. One was when no alternative was offered. The other was when the call ended without a summary of what happens next. This happened most at the surgery with the lowest patient satisfaction. It is one study of three surgeries, and it shows a link, not a cause. It is not about fostering, but every first call about fostering has the same two moments.",
+      "title": "One GP call study links unclear next steps with extra work for callers",
+      "summary": "A study of 447 recorded calls to three English GP surgeries found two moments when callers had to push for what they needed. One was when no alternative was offered. The other was when the call ended without a summary of what happens next. This happened most at the surgery with the lowest patient satisfaction. It is one study of three surgeries, and it shows a link, not a cause. It is not about fostering. These moments may also arise in fostering calls; that transfer still needs testing.",
       "sources": [
         {
           "title": "Calling the GP surgery: patient burden, patient satisfaction, and implications for training",
@@ -344,8 +364,8 @@
     {
       "id": "help-to-finish",
       "stage": "Keep in touch",
-      "title": "Help from a person to finish an application does more than information or reminders",
-      "summary": "In a US trial, low-income families were offered help to complete a student aid form. College enrolment among school leavers rose by 8.1 percentage points, from 34.2%. Information alone made no difference. Other trials sent reminders to people who had left an application unfinished, and they added only 1 to 3 points. For fostering, the closest step is offering a call to finish an enquiry together. None of these trials is about fostering.",
+      "title": "Hands-on help improved college enrolment in one US student-aid trial",
+      "summary": "In a US trial, low-income families were offered help to complete a student aid form. College enrolment among school leavers rose by 8.1 percentage points, from 34.2%. Information alone made no difference. Other application studies found reminder effects of 1 to 3 points. They used different settings and outcomes, so their effect sizes cannot be compared directly. For fostering, the closest step is offering a call to finish an enquiry together. None of these trials is about fostering.",
       "sources": [
         {
           "title": "The role of application assistance and information in college decisions: results from the H&R Block FAFSA experiment",
@@ -497,8 +517,8 @@
     {
       "id": "no-trials",
       "stage": "Not yet tested",
-      "title": "No one has yet tested follow-up with real people who enquire",
-      "summary": "We looked for experiments that test reply times, attempts to make contact, how often services follow up, contact with experienced carers or hand-offs. We found none, in any country, with real people asking about fostering or adoption. The closest is the 2022 online test of message wording, which measured only what people said they would do. A later search found no study of how first calls or replies about fostering are worded. It also found no published figures on enquiry forms started but not sent. Kinderform hopes to help close this gap, openly and with services' agreement.",
+      "title": "Our desk search found no trials of follow-up after a real enquiry",
+      "summary": "Our November 2026 desk search looked for experiments on reply times, contact attempts, follow-up, contact with experienced carers and hand-offs. We found none with real people asking about fostering or adoption. The search was not a systematic review, so it may have missed studies. The closest study we found was a 2022 online test of message wording. It measured what people said they would do. Kinderform hopes to test these ideas openly, with services' agreement. A later desk search also found no study of wording in first fostering calls or replies. It found no published figures on forms started but not sent. These are search results, not proof that none exist.",
       "sources": [
         {
           "title": "Fostering and adoption intake interactions: what the evidence says works",

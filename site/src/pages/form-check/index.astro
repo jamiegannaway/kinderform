@@ -3,7 +3,7 @@ import Base from "@/layouts/Base.astro";
 import FormCheckPublic from "@/components/form-check-public";
 import { loadCensus } from "@/lib/census";
 import { coverage, patterns } from "@/lib/form-check";
-import { isProduction } from "@/lib/build-env";
+import { showNamedResults } from "@/lib/build-env";
 
 const census = loadCensus();
 ---
@@ -15,6 +15,6 @@ const census = loadCensus();
     patterns={patterns(census)}
     coverage={coverage(census)}
     checked="November 2026"
-    privatePreview={!isProduction}
+    privatePreview={showNamedResults}
   />
 </Base>

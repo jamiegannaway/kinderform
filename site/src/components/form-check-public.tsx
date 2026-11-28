@@ -98,7 +98,7 @@ export default function FormCheckPublic({
           {privatePreview && (
             <p className="mt-4 text-sm">
               <a href="/form-check/named" className="font-medium underline underline-offset-4">
-                Private preview: named results
+                Local review: named results
               </a>
             </p>
           )}

@@ -36,7 +36,7 @@ const DONE = {
   who: (team: string, how: string) => `Una persona de ${team} ${how}`,
   times: ", en uno de los momentos que ha elegido",
   talk: "Cuando hablemos.",
-  talkBody: "Pregunte lo que quiera. No hay preguntas equivocadas, y ninguna de sus preguntas contará en su contra.",
+  talkBody: "Puede hacer preguntas sin comprometerse a presentar una solicitud.",
   notSure: " Le explicaremos el acogimiento familiar, la adopción y otras formas de ayudar.",
   plans: "Si sus planes cambian, no pasa nada. Puede decírnoslo en cualquier momento.",
   record: "Mostrar los datos",

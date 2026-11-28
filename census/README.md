@@ -1,6 +1,6 @@
 # Intake-form census (v0.1, November 2026)
 
-A list of fostering and adoption intake forms in the UK, the US, Canada, Australia, Germany, France and Spain. It records what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
+A list of fostering and adoption intake forms in the UK, the US, Canada, Australia, Germany, France, Spain, Ireland, the Netherlands, New Zealand and Singapore. It records what each form asks, what answers it offers, and what guidance sits around it. It covers **primary** forms (the first thing someone fills in) and **secondary** forms (anything after first contact and before assessment starts).
 
 > **Status: draft for analysis. Every row is unverified.** The data describes public pages and processes. It is not a score, and nothing here should be published as a named comparison until the method has been consulted on and each service has seen its own rows privately, with a right of reply.
 
@@ -27,10 +27,10 @@ IDs link the files: `questions.form_id` → `forms.form_id`, `answer_options.que
 | `form_id` | Short ID, unique in this file |
 | `front_door_id` | Register ID, if the front door is in the register |
 | `operator_type` | UK: `regional_hub`, `single_authority`, `council`, `council_consortium`, `national_brand_council`, `regional_service`, `regional_adoption_agency`, `voluntary_adoption_agency`, `independent_fostering_agency`. US, Canada and Australia: `state_agency` (state, provincial or territorial government), `county_agency` (US counties and cities), `child_welfare_agency` (a mandated or delegated body that runs statutory child welfare, such as an Ontario Children's Aid Society), `indigenous_agency` (tribal, First Nations, Métis, Inuit or Aboriginal community-controlled), `private_agency` (licensed or accredited non-government agency). Germany, France and Spain also use `local_authority` and `voluntary_agency`. Any country can use `platform_vendor`. |
-| `country` | `UK` (United Kingdom), `US` (United States), `CA` (Canada), `AU` (Australia), `DE` (Germany), `FR` (France) or `ES` (Spain) |
+| `country` | `UK`, `US`, `CA`, `AU`, `DE`, `FR`, `ES`, `IE`, `NL`, `NZ` or `SG`; see the country registers for coverage. |
 | `region` | A UK nation (`England`, `Wales`, `Scotland`, `Northern Ireland`), a US state or `District of Columbia`, a Canadian province or territory, an Australian state or territory, a German Land, a French region or a Spanish autonomous community or city. Names are written in full |
 | `service_type` | `fostering`, `adoption` or `fostering_and_adoption` |
-| `form_stage` | `primary` (first contact) or `secondary` (after first contact, before assessment) |
+| `form_stage` | `primary` (first contact), `secondary` (after first contact, before assessment) or `application` (the application stage) |
 | `access_route` | `online_form`, `downloadable_form`, `phone_conversation`, `sent_after_first_contact`, `email_only`, `signposting_only`, `described_not_public`, `council_portal` |
 | `template_group` | Forms that share one template. Questions are recorded once, on one form in the group |
 | `fields_observed` | `yes` (fields read), `partial` (some fields, or topics described), `no` (guidance only) |
@@ -48,7 +48,8 @@ IDs link the files: `questions.form_id` → `forms.form_id`, `answer_options.que
 | `required` | `yes`, `no`, `unknown` or `n/a` (a statement, not a question) |
 | `input_type` | `text`, `email`, `tel`, `textarea`, `select`, `radio`, `checkbox`, `date`, `statement`, `calendar`, `unknown` |
 | `type_inferred` | `yes` if the input type was worked out from the layout rather than seen in the page |
-| `conditional_on` | When the question only appears after another answer, for example `q09=Website` |
+| `conditional_on` | A recorded trigger, for example `q09=Website`. Blank means no trigger was recorded, not proof that the question always appears. |
+| `branching_status` | `conditional`, `unconditional` or `unknown`. Only record `unconditional` after checking the interaction. An explicit "If yes" or "If other" label establishes a follow-up even if its exact trigger is unknown. Historical blank conditions are `unknown`. |
 | `hint_paraphrased` | Any help text shown with the question, in plain words |
 
 ### answer_options.csv
@@ -92,6 +93,14 @@ A form with no row for a guidance type was not checked for it. That is different
 No forms were submitted. No test enquiries were made. Where a site's robots.txt asked automated readers to stay out, it was not read. That applies to Aberdeen City, the Foster for East Midlands form app, adoption.wales, Scotland's Adoption, Adopt Thames Valley and the Adopt North East portal. Bot checks, forms that load in the browser and council portals stopped several more.
 
 Labels, hints and guidance are paraphrased, to keep the dataset short and to avoid copying services' wording wholesale.
+
+## What the site counts
+
+The research charts count one exact form URL per country and stage. Fragments and a trailing slash do not make a different form; query parameters are preserved because they may select one. Several service-location entries can point to that same form. The source rows and links stay in the census and the comparison table, but they do not give that form extra weight in the charts. Similar forms at different addresses are not assumed to be one template.
+
+Question totals describe the questions recorded, not a verified shortest path through the form. They omit consent, staff fields, statements and known follow-ups. Questions whose branching is unknown remain counted, with the uncertainty reported beside the charts. The historical reads have not established any question as always shown. Country topic measures and sensitive-question totals use this same path rule; newsletter questions remain visible in the topic table although consent ticks are outside the question total.
+
+The audit correction on 26 November 2026 reclassified the Lifestyle Solutions child-age choices as child preferences and the TAIHS religion/belief question as religion, using the recorded labels and choices. It marked explicit follow-up labels conditional and all other untested branches unknown. These are corrections to the extraction, not fresh page visits or human verification. Automated privacy-notice negatives now say unknown: the reader did not establish absence. Original source and observation dates are retained.
 
 ## Coverage and gaps
 

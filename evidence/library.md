@@ -11,7 +11,7 @@ Last updated: 2026-11-14
 - **Hand-offs are a weak point.** A hand-off is when one organisation passes a person on to another. In the same evaluation, the hand-off from the hub to the council was a point of friction.
 - **The relationship with the service matters for whether carers stay.** Two reviews of many studies point to the relationship with the agency as a key factor.
 - **Knowing a carer, or being asked, matters.** Meeting or knowing other foster carers is what most often leads people to consider fostering. In one survey, almost one-third had never considered it because no one had ever asked them.
-- **Big gaps remain.** No experiment has yet tested follow-up with real people who enquire. There are no national figures on how quickly services reply.
+- **Big gaps remain.** Our desk search found no experiments on follow-up with real enquirers, or national figures on reply speed.
 
 The details and sources are in the entries below. Most summaries are based on the abstract, not the full text, so check the original before you quote it. [How to read an entry](#how-to-read-an-entry) explains the labels and notes.
 
@@ -162,12 +162,12 @@ These are official statistics, policy papers and guidance. The Ofsted figures fo
 
 ## What the research does not tell us yet
 
-These are the gaps we know about.
+These are gaps in our November 2026 desk search, not proof that no work exists. The search was not a systematic review.
 
-- No experiment has tested follow-up with real people who enquire about fostering or adoption. No experiment has tested how fast services reply, how many times they try to make contact, or when and how often they follow up. None has tested peer contact, meaning contact with experienced carers or adopters, or hand-offs. The closest is the Department for Education and Kantar's 2022 online test of message wording. It measured only what people said they intended to do. In November 2026 we found no trial by Foundations or Nesta on following up enquiries.
-- There are no national figures on how quickly services reply. There are none on how people who enquire experience that first contact.
-- No published analysis looks at whether early closures affect some groups of people more than others.
-- No one has published an evaluation of chatbots or other artificial intelligence (AI) tools used in fostering or adoption intake.
+- Our search found no experiment testing follow-up with real people asking about fostering or adoption. It found none on reply speed, contact attempts, peer contact or hand-offs. The closest is the Department for Education and Kantar's 2022 online test of message wording. It measured only what people said they intended to do. In November 2026 we found no trial by Foundations or Nesta on following up enquiries.
+- We found no national figures on reply speed or how people experience first contact.
+- We found no published analysis of whether early closures affect some groups more than others.
+- We found no published evaluation of chatbots or other artificial intelligence (AI) tools used in fostering or adoption intake.
 - There is little recent peer-reviewed work from the UK on the enquiry stage itself. Peer-reviewed work is checked by other researchers before it is published. Most of what exists is grey literature: reports published outside academic journals, for example by government or charities.
 - Our November 2026 review did not find standards for how services respond at intake in Scotland, Northern Ireland, Ireland or New Zealand. It did not find evidence from these places either.
 - There is little evidence from Spain and the rest of Europe on how people move from enquiry to approval. A 2022 Spanish review calls for this stage to be evaluated. It also calls for exit interviews with families who stop.

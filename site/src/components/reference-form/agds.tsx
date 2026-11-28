@@ -538,8 +538,7 @@ export const agdsTheme: Theme = {
               {r.best_times ? ", at one of the times you chose" : ""}.
             </li>
             <li>
-              <strong>When you talk.</strong> Ask anything. There are no wrong questions, and nothing you ask counts
-              against you.
+              <strong>When you talk.</strong> You can ask questions without committing to an application.
               {r.interest === "not_sure" && !r.knows_child ? " We will talk you through fostering, adoption and other ways to help." : ""}
             </li>
           </ol>
