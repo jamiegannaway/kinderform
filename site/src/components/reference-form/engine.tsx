@@ -1,7 +1,8 @@
 // The reference enquiry form.
 // Questions and rules come from schema/enquiry-submission.schema.json; wording comes from the
 // UI schema (schema/ui/enquiry-submission.<locale>.json). JSON Forms renders each page with the
-// renderers of the chosen design system (GOV.UK Frontend or USWDS).
+// renderers of the chosen design system: the country's own (govuk.tsx, kern.tsx and so on) or the
+// neutral one (neutral.tsx).
 // Nothing is sent or stored: the "record" shown at the end stays in the browser.
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { JsonForms } from "@jsonforms/react"
@@ -60,7 +61,9 @@ export type Page = {
 }
 export type UiConfig = {
   locale: string
-  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy" | "govie" | "nl-design" | "nzgds" | "sgds" | "designsystemet" | "dkfds" | "suomifi"
+  // "neutral": the country has no national design system that the form can use, so it comes
+  // only in the neutral design (neutral.tsx), the site's own shadcn/ui look.
+  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy" | "govie" | "nl-design" | "nzgds" | "sgds" | "designsystemet" | "dkfds" | "suomifi" | "neutral"
   sections: string[]
   start: { title: string; body: string[]; button: string }
   pages: Page[]
@@ -267,6 +270,8 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
   const firstRender = useRef(true)
 
   const visible = useMemo(() => ui.pages.filter((p) => isVisible(p, data)), [ui.pages, data])
+  // Wording a renderer may need inside a field: the hidden "Error:" before an error message.
+  const config = useMemo(() => ({ errorPrefix: ui.progress.error_prefix }), [ui.progress.error_prefix])
   const page = step.kind === "page" ? visible[step.index] : null
 
   // Make each move between steps obvious: scroll to the form, update the tab title,
@@ -394,6 +399,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                     data={data}
                     renderers={T.renderers}
                     cells={[]}
+                    config={config}
                     validationMode="NoValidation"
                     // Every field reports to onValue as it is set, so latest is always the newest copy.
                     // The library's own copy can lag a change behind, so it is not saved back.
@@ -473,6 +479,7 @@ const PHRASES = {
   nb: { check: "Sjekk dette svaret", notGiven: "Ikke svart", yes: "Ja", no: "Nei", example: "Kinderform-eksempel" },
   da: { check: "Tjek dette svar", notGiven: "Ikke udfyldt", yes: "Ja", no: "Nej", example: "Kinderform-eksempel" },
   fi: { check: "Tarkista tämä vastaus", notGiven: "Ei vastausta", yes: "Kyllä", no: "Ei", example: "Kinderform-esimerkki" },
+  sv: { check: "Kontrollera det här svaret", notGiven: "Inte ifyllt", yes: "Ja", no: "Nej", example: "Exempel från Kinderform" },
 }
 export const phrases = (locale: string) =>
   PHRASES[locale.slice(0, 2).toLowerCase() as keyof typeof PHRASES] ?? PHRASES.en
@@ -536,6 +543,13 @@ export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
     if (record.knows_child)
       return `Hei ${name}, kiitos viestistäsi. Kysyt lapsesta, jonka tunnet jo. Siksi välitimme viestisi Samille ${ui.confirmation.kinship_team}. Sam ${sam} viimeistään ${on}. Sam kertoo sinulle vaihtoehdoista ja siitä, mistä saat puolueetonta neuvontaa.`
     return `Hei ${name}, kiitos viestistäsi. Olen Aino ${ui.confirmation.team}. ${me} viimeistään ${on}${times ? " jonakin valitsemanasi aikana" : ""}. Voit kysyä mitä haluat. Kysyminen ei sido sinua mihinkään.`
+  }
+  if (locale.startsWith("sv")) {
+    // Swedish municipalities address people as "du". The verb is the same for "I" and "Sam".
+    const how = by === "email" ? "mejlar dig" : by === "text_message" ? "skickar ett sms till dig" : "ringer dig"
+    if (record.knows_child)
+      return `Hej ${name}, tack för att du hörde av dig. Du frågar om ett barn som du redan känner. Därför har vi skickat ditt meddelande till Sam i ${ui.confirmation.kinship_team}. Sam ${how} senast ${day}. Sam kan berätta vilka möjligheter som finns och var du kan få oberoende råd.`
+    return `Hej ${name}, tack för att du hörde av dig. Jag heter Elin och arbetar på ${ui.confirmation.team}. Jag ${how} senast ${day}${times ? ", vid en av de tider som du har valt" : ""}. Du kan ställa frågor utan att binda dig för något.`
   }
   if (locale.startsWith("es")) {
     // "I will" for the named worker, "Sam will" for the kinship team.

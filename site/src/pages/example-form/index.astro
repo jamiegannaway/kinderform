@@ -3,15 +3,17 @@ import Base from "@/layouts/Base.astro";
 import { ExampleFormPicker } from "@/components/example-form-picker";
 import { FORM_COUNTRIES } from "@/components/reference-form/countries";
 import { countryList } from "@/lib/compare";
+import { DESIGN_SYSTEMS } from "@/lib/design-systems";
+import { exampleForms } from "@/lib/example-forms";
 
 const countries = countryList(FORM_COUNTRIES.map(({ code }) => code.toUpperCase()));
+const labels = Object.fromEntries(
+  exampleForms().map((f) => [f.code, f.system ? DESIGN_SYSTEMS[f.system].short : "Neutral design"]),
+);
 ---
 <Base
   title="Example enquiry forms | Kinderform"
   description={`Try example enquiry forms for fostering and adoption in ${countries}. Nothing you enter is sent.`}
 >
-  <ExampleFormPicker open={null} />
-  <script>
-    import "@/components/reference-form/mount-picker";
-  </script>
+  <ExampleFormPicker labels={labels} />
 </Base>

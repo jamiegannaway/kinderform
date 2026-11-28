@@ -1,0 +1,9 @@
+/* The one rule the neutral design (neutral.tsx) needs beyond its Tailwind classes, under
+   .kf-neutral. On phones, Continue sits in a bar at the bottom of the screen (kf-form.css): give
+   it the site's theme colours instead of plain white, so it follows light and dark. */
+@media (max-width: 639.98px) {
+  .kf-neutral .kf-actions {
+    background: var(--card);
+    border-top-color: var(--border);
+  }
+}

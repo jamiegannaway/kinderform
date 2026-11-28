@@ -27,6 +27,7 @@ const email = "jamie@kinderform.org";
         <li>Facts can be wrong or out of date. Check the source and date before you rely on one.</li>
         <li>If your service uses our kits, you are responsible for your own form and the data it collects.</li>
         <li>You can reuse our code, writing and data under open licences. Some things are not open.</li>
+        <li>Automated tools must follow our robots.txt file. Do not collect this site to train AI systems.</li>
       </ul>
     </div>
   </div>
@@ -106,7 +107,7 @@ const email = "jamie@kinderform.org";
   </section>
 
   <section aria-labelledby="kits" class="space-y-4">
-    <h2 id="kits" class={h2}>5. Using the starter kits, schema and AI prompt in your service</h2>
+    <h2 id="kits" class={h2}>5. Using the starter kits, schemas, data tools and AI prompt in your service</h2>
     <p class={p}>
       You may use them to build or improve your own enquiry form. If you do, your organisation is responsible for:
     </p>
@@ -115,6 +116,7 @@ const email = "jamie@kinderform.org";
       <li>following the law where you work, including data protection, equality and accessibility law</li>
       <li>the personal information your form collects, as its controller, with your own privacy notice</li>
       <li>checking anything an AI tool writes for you before you use it</li>
+      <li>any AI tool you connect to enquiry information, and what you let it do</li>
       <li>testing the form with made-up details before real people use it</li>
     </ul>
     <p class={p}>
@@ -122,6 +124,9 @@ const email = "jamie@kinderform.org";
     </p>
     <p class={p}>
       Never put real personal information into an example form, a test record or the GitHub repository.
+    </p>
+    <p class={p}>
+      The made-up test cases for AI tools are for testing your own tools. Do not use them against anyone else's system.
     </p>
   </section>
 
@@ -174,6 +179,7 @@ const email = "jamie@kinderform.org";
     <ul class={ul}>
       <li>break the law, or help someone else break it</li>
       <li>try to get round the site's security, or harm, overload or disrupt it</li>
+      <li>use automated tools on the site in a way section 10 does not allow</li>
       <li>upload viruses or other harmful code</li>
       <li>send or post real personal information about anyone else, especially a child</li>
       <li>pretend to be a service, a government body or someone else</li>
@@ -187,8 +193,56 @@ const email = "jamie@kinderform.org";
     </p>
   </section>
 
+  <section aria-labelledby="automation" class="space-y-4">
+    <h2 id="automation" class={h2}>10. Automated tools, crawlers and AI</h2>
+    <p class={p}>
+      Kinderform is written for people. Search engines may read and list its public pages, so people can find it.
+    </p>
+    <p class={p}>
+      AI search services may list the site too. An AI assistant may read a page when a person asks it to.
+    </p>
+    <p class={p}>
+      Our <a href="/robots.txt" class={link}>robots.txt file</a> says which automated tools may read the site. If you
+      run an automated tool here, it must follow that file.
+    </p>
+    <p class={p}>
+      Unless we agree in writing, you must not use an automated tool to:
+    </p>
+    <ul class={ul}>
+      <li>collect pages or downloads from the site to train, test or improve an AI system</li>
+      <li>copy the site in bulk, or keep fetching it on a schedule</li>
+      <li>fill in or send any form on the site</li>
+      <li>hide what it is, or get round a block we have set</li>
+    </ul>
+    <p class={p}>
+      You may still download the starter kits, schemas and data files we publish for download, by hand or by script.
+    </p>
+    <p class={p}>
+      Any automated reader we do allow must say honestly what it is, read public pages only and wait a few seconds
+      between requests.
+    </p>
+    <p class={p}>
+      As far as the law allows, we reserve the right to stop text and data mining of this site. This does not apply
+      where this section allows a use. The site says so in a form machines can read: the robots.txt file and a
+      "tdm-reservation" header.
+    </p>
+    <p class={p}>
+      <strong>The open licences still apply.</strong> This section is about how you collect from our site. It does not
+      take away any right an open licence gives you. If you reuse our work in an AI system, you must still follow the
+      licence, including giving credit.
+    </p>
+    <p class={p}>
+      We may slow down or block any tool that ignores these rules.
+    </p>
+    <p class={p}>
+      <strong>Our own reader follows the same rules.</strong> A computer program reads the public pages of services for
+      our registers. It follows each site's robots.txt file, says who it is and waits between requests. It reads
+      public pages only and never sends a form.
+    </p>
+  </section>
+
   <section aria-labelledby="reply" class="space-y-4">
-    <h2 id="reply" class={h2}>10. Corrections and the right of reply</h2>
+    <h2 id="reply" class={h2}>11. Corrections and the right of reply</h2>
     <p class={p}>
       If something about your service is wrong, tell us. Give the public page, what changed and the date you checked.
     </p>
@@ -199,7 +253,7 @@ const email = "jamie@kinderform.org";
   </section>
 
   <section aria-labelledby="links" class="space-y-4">
-    <h2 id="links" class={h2}>11. Other websites</h2>
+    <h2 id="links" class={h2}>12. Other websites</h2>
     <p class={p}>
       We link to services, research and other sites. We do not control them and are not responsible for what they say
       or do.
@@ -207,7 +261,7 @@ const email = "jamie@kinderform.org";
   </section>
 
   <section aria-labelledby="change" class="space-y-4">
-    <h2 id="change" class={h2}>12. We may change or stop Kinderform</h2>
+    <h2 id="change" class={h2}>13. We may change or stop Kinderform</h2>
     <p class={p}>
       Kinderform is free and run by one person. We may change, pause or stop any part of it at any time, without
       notice.
@@ -219,7 +273,7 @@ const email = "jamie@kinderform.org";
   </section>
 
   <section aria-labelledby="liability" class="space-y-4">
-    <h2 id="liability" class={h2}>13. Our responsibility to you</h2>
+    <h2 id="liability" class={h2}>14. Our responsibility to you</h2>
     <p class={p}>
       We provide Kinderform free and "as is". As far as the law allows, we give no promises about it beyond those in
       these terms.
@@ -247,7 +301,7 @@ const email = "jamie@kinderform.org";
   </section>
 
   <section aria-labelledby="law" class="space-y-4">
-    <h2 id="law" class={h2}>14. Which law applies</h2>
+    <h2 id="law" class={h2}>15. Which law applies</h2>
     <p class={p}>
       The law of England and Wales applies to these terms and to any dispute about Kinderform. The courts of England
       and Wales can decide disputes.
@@ -262,7 +316,7 @@ const email = "jamie@kinderform.org";
   </section>
 
   <section aria-labelledby="general" class="space-y-4">
-    <h2 id="general" class={h2}>15. Other legal points</h2>
+    <h2 id="general" class={h2}>16. Other legal points</h2>
     <ul class={ul}>
       <li>If a court decides part of these terms cannot be enforced, the rest still applies.</li>
       <li>If we do not enforce a term straight away, we can still enforce it later.</li>
@@ -272,7 +326,7 @@ const email = "jamie@kinderform.org";
   </section>
 
   <section aria-labelledby="updates" class="space-y-4">
-    <h2 id="updates" class={h2}>16. Changes to these terms</h2>
+    <h2 id="updates" class={h2}>17. Changes to these terms</h2>
     <p class={p}>
       We may update these terms. We will change the date at the top, and every past version stays public on GitHub.
     </p>

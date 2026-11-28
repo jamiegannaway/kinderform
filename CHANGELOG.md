@@ -1,5 +1,12 @@
 # Kinderform release notes
 
+## Unreleased · country pages and downloads (starter candidate v0.1.0-draft.6)
+
+- **A page for each country.** The map now leads to `/example-form/<country>`, not a pop-up. Each page shows the form and says which design system it uses. It also says who makes that system, its licence and typeface, and what we left out.
+- **A neutral design.** Each form also comes in the site's own shadcn/ui look, and a switch on each page moves between the two. Answers are kept when you switch.
+- **Downloads.** Each design of each form downloads as one HTML file. It works offline, sends nothing and keeps the licence notices.
+- **Sweden.** Its form is in plain Swedish and uses only the neutral design, because Sweden has no open national design system that a non-government site may use. It has a starter kit in release v0.1.0-draft.6 and a place on the map.
+
 ## Unreleased · Nordic example forms (starter candidate v0.1.0-draft.5)
 
 - **Three more example forms.** Norway, Denmark and Finland each have an example form in their own language, built with an open public-sector design system and no government branding. Norway uses Designsystemet, Denmark uses Det Fælles Designsystem and Finland uses the Suomi.fi design system. All three are MIT. Each has a starter kit in release v0.1.0-draft.5, and each is on the world map.
@@ -18,6 +25,14 @@
 - Add a first-reply worksheet, synthetic rehearsal and event-mapping guide to the starter kits. Use bounded reassurance in the reference forms.
 - Home page: the first picture is now a made-up reply that says who will be in touch, when, and what happens next. The made-up form and its record moved down to "What we are making", so nobody takes the home page for a place to enquire.
 - Header and footer: the header is a bar with one main button, "Get the starter kit", and quieter links for GitHub and light or dark. The footer is shorter and sits on light grey, with plain lists of links.
+- **Data handling layer (v0.1 draft).** A technical foundation for storing enquiry data correctly in a service's own systems, including when staff use AI tools. Kinderform hosts nothing and holds no enquirer data. It is not legal advice and a person has not checked it. See `docs/data-handling.md`.
+  - `schema/data-handling.json` tags every field with its sensitivity, purposes, retention class and AI use.
+  - The enquiry schema gains four optional retention fields, with date checks in `schema/validate_enquiry.py`.
+  - `schema/interaction.schema.json` and `schema/validate_interactions.py` describe and check an append-only, hash-chained event log with coded values only and no staff identifiers.
+  - New tools: `tools/interaction_log.py`, `tools/webhook_sign.py`, `tools/export_csv.py` and `tools/untrusted_text.py`, with made-up logs and AI test cases.
+  - `schema/profiles/uk.json`: an unverified map of two legal category names.
+  - A site page, `/build/data-handling`, explains the layer to technical readers. It is linked from `/build` and the footer only.
+- **Rules for crawlers and AI tools.** `robots.txt` keeps search engines, AI search and AI assistants, and turns away crawlers that collect pages to train AI models. Every page sends a `tdm-reservation` header. The terms of use gain section 10, "Automated tools, crawlers and AI". The open licences still apply to reuse. No lawyer has reviewed the wording.
 - Preserve the earlier starter archives. The draft.4 candidate contains the revised rules and guide; no service pilot or independent legal review is claimed.
 
 ## v0.1.0-draft.3 · 25 November 2026
