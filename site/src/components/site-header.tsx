@@ -183,6 +183,21 @@ export function SiteFooter() {
           This site sets no cookies, does not track you and loads nothing from other sites. A dark mode choice
           stays on your device.
         </p>
+        <nav aria-label="Legal">
+          <p>
+            <a href="/privacy" className="font-medium text-foreground underline underline-offset-4">
+              Privacy policy
+            </a>
+            {" · "}
+            <a href="/terms" className="font-medium text-foreground underline underline-offset-4">
+              Terms of use
+            </a>
+            {" · "}
+            <a href="/licences" className="font-medium text-foreground underline underline-offset-4">
+              Licences
+            </a>
+          </p>
+        </nav>
         <p>
           Code: MIT licence. Writing and data:{" "}
           <a

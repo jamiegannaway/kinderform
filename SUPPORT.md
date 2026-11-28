@@ -18,6 +18,6 @@ You can contact Jamie without a GitHub account. Email [jamie.gannaway@gmail.com]
 
 ## Report a privacy or security problem privately
 
-If you find personal data, a named worker or a security problem, email Jamie and follow the [private reporting guide](SECURITY.md). Give the page or file location. Leave out the personal details, screenshots and case records. GitHub issues are public.
+If you find personal data, a named worker or a security problem, email [jamie@kinderform.org](mailto:jamie@kinderform.org) and follow the [private reporting guide](SECURITY.md). Give the page or file location. Leave out the personal details, screenshots and case records. GitHub issues are public. To see, correct or delete what Kinderform holds about you, read the [privacy policy](https://www.kinderform.org/privacy).
 
 To offer a change to the files, see [how to contribute](CONTRIBUTING.md).

@@ -1,0 +1,148 @@
+---
+// What people may reuse from Kinderform, and under which licence. Keep in step with README.md,
+// LICENSE, LICENSE-CONTENT.md and THIRD_PARTY_NOTICES.md.
+import Legal from "@/layouts/Legal.astro";
+
+const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
+const p = "leading-7";
+const ul = "ml-5 list-disc space-y-2 leading-7";
+const link = "font-medium underline underline-offset-4";
+const table = "w-full border-collapse text-left text-sm";
+const th = "border-b px-2 py-2 align-top font-semibold";
+const td = "border-b px-2 py-2 align-top leading-6";
+const repo = "https://github.com/jamiegannaway/kinderform/blob/main";
+const email = "jamie@kinderform.org";
+---
+<Legal
+  title="Licences: what you can reuse from Kinderform"
+  heading="Licences"
+  description="Kinderform's code is under the MIT licence and its writing and data under CC BY 4.0. The drawings, Jamie's photograph and the Kinderform name are not open."
+  current="/licences"
+  updated="28 November 2026"
+>
+  <div slot="summary" class="space-y-4">
+    <p class="text-xl leading-8 text-muted-foreground">
+      You can reuse almost everything Kinderform makes, for free, for any purpose. Just give credit.
+    </p>
+  </div>
+
+  <section aria-labelledby="open" class="space-y-4">
+    <h2 id="open" class={h2}>What you can reuse</h2>
+    <div class="overflow-x-auto">
+      <table class={table}>
+        <thead>
+          <tr>
+            <th scope="col" class={th}>What</th>
+            <th scope="col" class={th}>Licence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class={td}>Code, including the site, the tools, the tests and the code in the starter kits</td>
+            <td class={td}><a href={`${repo}/LICENSE`} class={link}>MIT licence</a></td>
+          </tr>
+          <tr>
+            <td class={td}>
+              Writing and data: the enquiry standard (schema), the form wording, the registers, the census, the
+              checklist, the research notes and the guides
+            </td>
+            <td class={td}>
+              <a href="https://creativecommons.org/licenses/by/4.0/" class={link}>Creative Commons Attribution 4.0
+              (CC BY 4.0)</a>
+            </td>
+          </tr>
+          <tr>
+            <td class={td}>Styles ported from KERN UX, DESY and NL Design System for the example forms</td>
+            <td class={td}><a href={`${repo}/LICENSE-EUPL-1.2.txt`} class={link}>EUPL-1.2</a>, as their sources are</td>
+          </tr>
+          <tr>
+            <td class={td}>Fonts, icons, flags, the map and the design systems</td>
+            <td class={td}>
+              Their own open licences, listed in
+              <a href={`${repo}/THIRD_PARTY_NOTICES.md`} class={link}>third-party notices</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class={p}>
+      Under these licences, you can copy, change and share the work, including for commercial use. You must give credit
+      and keep the licence notice.
+    </p>
+  </section>
+
+  <section aria-labelledby="credit" class="space-y-4">
+    <h2 id="credit" class={h2}>How to give credit</h2>
+    <p class={p}>
+      When you share our writing or data, or your changed version of it, write:
+    </p>
+    <p class="rounded-lg border p-4 leading-7">
+      "Based on Kinderform (kinderform.org) by Jamie Gannaway and Kinderform contributors, CC BY 4.0." Say if you changed
+      it.
+    </p>
+    <p class={p}>
+      When you share our code, keep the MIT licence notice with it.
+    </p>
+  </section>
+
+  <section aria-labelledby="forms" class="space-y-4">
+    <h2 id="forms" class={h2}>Your service's live enquiry form needs no credit</h2>
+    <p class={p}>
+      If your service builds a live enquiry form with our wording, you do not need to show a credit on the form itself.
+      Jamie gives this extra permission for the work he owns.
+    </p>
+    <p class={p}>
+      Keep the credit when you share a kit, the wording or your changed version with other people or services.
+    </p>
+  </section>
+
+  <section aria-labelledby="closed" class="space-y-4">
+    <h2 id="closed" class={h2}>What you cannot reuse</h2>
+    <ul class={ul}>
+      <li>
+        <strong>The drawings.</strong> They come from Notioly and we use them under a paid licence. Do not copy them.
+        Buy your own licence from Notioly.
+      </li>
+      <li>
+        <strong>Jamie's photograph</strong> on the About page. It shows him and his family. It belongs to him, and all
+        rights are reserved.
+      </li>
+      <li>
+        <strong>The Kinderform name and logo.</strong> You can use the name to give credit. Do not use it to suggest we
+        made, approved or support your work.
+      </li>
+      <li>
+        <strong>Other people's work we quote or link to</strong>, such as research reports and services' own pages. It
+        belongs to its owners.
+      </li>
+      <li>
+        <strong>Government branding.</strong> The example forms leave out crests, logos and official banners. Do not add
+        them back unless you are allowed to use them.
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="facts" class="space-y-4">
+    <h2 id="facts" class={h2}>Facts about services</h2>
+    <p class={p}>
+      Our registers record facts from services' public pages, with links. Our way of collecting and arranging them is
+      under CC BY 4.0. The services' own words and pages stay theirs.
+    </p>
+  </section>
+
+  <section aria-labelledby="warranty" class="space-y-4">
+    <h2 id="warranty" class={h2}>No guarantee</h2>
+    <p class={p}>
+      Everything is offered "as is", without any guarantee, as each licence says. Read our
+      <a href="/terms" class={link}>terms of use</a> before you rely on it.
+    </p>
+  </section>
+
+  <section aria-labelledby="ask" class="space-y-4">
+    <h2 id="ask" class={h2}>Questions</h2>
+    <p class={p}>
+      If you are not sure whether you can reuse something, email
+      <a href={`mailto:${email}`} class={link}>{email}</a>.
+    </p>
+  </section>
+</Legal>

@@ -26,6 +26,10 @@ Thank you for helping. You do not need to write code or have a GitHub account to
 - Schema first: change the schema, then add a valid and an invalid example in `schema/examples/`, then change the code.
 - Describe what changed and why in the pull request description.
 
+## Licence for what you contribute
+
+When you send code, writing, data or corrections, you agree that code is licensed under the [MIT licence](LICENSE) and everything else under [CC BY 4.0](LICENSE-CONTENT.md). You confirm you have the right to give it under those licences, and that it holds no real personal data. See section 8 of the [terms of use](https://www.kinderform.org/terms).
+
 ## Conduct
 
 Everyone taking part is expected to follow the [code of conduct](CODE_OF_CONDUCT.md).
