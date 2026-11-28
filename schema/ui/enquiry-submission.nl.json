@@ -12,7 +12,7 @@
     "title": "Stel een vraag over pleegzorg of adoptie",
     "body": [
       "Met dit formulier stel je een vraag of vraag je om een gesprek. Het invullen duurt ongeveer 2 minuten.",
-      "Een vaste contactpersoon van ons pleegzorgteam antwoordt je binnen 1 werkdag.",
+      "Bij een echte organisatie hoort een vaste contactpersoon je te vertellen wanneer je antwoord krijgt.",
       "Je hoeft nog niet te weten of pleegzorg of adoptie bij je past.",
       "We vragen nu nog niets over je gezondheid, je huis, je geld of je gezin."
     ],
@@ -33,7 +33,8 @@
             "spellcheck": false,
             "errors": {
               "required": "Vul je voornaam en achternaam in",
-              "maxLength": "Je naam mag niet langer zijn dan 100 tekens"
+              "maxLength": "Je naam mag niet langer zijn dan 100 tekens",
+              "pattern": "Vul je voornaam en achternaam in"
             }
           }
         },
@@ -322,5 +323,5 @@
     "error_title": "Er is iets niet goed ingevuld",
     "error_prefix": "Fout:"
   },
-  "demo_notice": "Dit is een voorbeeldformulier. Vul geen echte gegevens in. Wat je invult, wordt niet verstuurd of bewaard."
+  "demo_notice": "Dit is een voorbeeldformulier. Vul geen echte gegevens in. Wat je invult, wordt niet verstuurd of bewaard. De voorbeelddatums houden geen rekening met openingstijden of feestdagen."
 }

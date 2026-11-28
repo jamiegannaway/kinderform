@@ -4,6 +4,7 @@
 import { ChartCard, HeatGrid, StatCard } from "@/components/charts"
 import { HowWeDidThis } from "@/components/countries"
 import type { ApplicationsData } from "@/lib/applications"
+import { Tag } from "@/components/tag"
 
 const pct = (yes: number, of: number) => (of ? Math.round((100 * yes) / of) : 0)
 
@@ -38,17 +39,17 @@ export function Applications({ data }: { data: ApplicationsData }) {
     <section aria-labelledby="applications" className="space-y-8">
       <div className="max-w-3xl space-y-4">
         <h2 id="applications" className="scroll-m-20 text-2xl font-semibold tracking-tight md:text-3xl">
-          Applications ask far more than enquiry forms
+          The applications we could read have more recorded questions
         </h2>
         <p className="leading-7">
-          In {the(lead.name)}, a typical application asks {lead.appMedian} questions, against {lead.firstMedian} on a
-          typical enquiry form. Most services send the application after the first enquiry.
+          Among {lead.apps} applications we could read in {the(lead.name)}, the middle count is {lead.appMedian} questions.
+          It is {lead.firstMedian} among {lead.first} enquiry forms. Known follow-ups are left out; other branches may be included.
         </p>
         <p className="leading-7">
-          A service must check health, criminal records and the home before it approves anyone. What matters is when it
-          asks, and whether someone has talked to the person first.
+          Applications and assessments cover more than first enquiries. Our draft proposes a conversation before sensitive questions, with an explanation of why each is needed.
         </p>
         <p className="leading-7 text-muted-foreground">
+          <Tag tone="amber" className="mr-2">Draft extraction</Tag>
           We read {data.appForms} application documents in {n} {n === 1 ? "country" : "countries"}, making up{" "}
           {data.countries.reduce((t, c) => t + c.apps, 0)} applications (a US packet of several documents counts once). The{" "}
           <a href="/compare/applications" className="font-medium text-foreground underline underline-offset-4">
@@ -58,11 +59,12 @@ export function Applications({ data }: { data: ApplicationsData }) {
         </p>
         <HowWeDidThis>
           <p>
-            A computer read the forms and sorted every question into the same topics as the enquiry forms. It could not
+            A computer read the forms and sorted recorded questions into the same topics as the enquiry forms. The counts and tags still need review. It could not
             sort {unsorted}% of the application questions.
           </p>
           <p>
             We did not count documents to attach, or checks the service runs itself.
+            We left out known follow-ups. Branching is often unknown; these are recorded questions, not one confirmed path through each form.
             {packets.length > 0 && (
               <>
                 {" "}
@@ -90,9 +92,9 @@ export function Applications({ data }: { data: ApplicationsData }) {
         {data.countries.map((c) => (
           <StatCard
             key={c.code}
-            label={`${c.name}: a typical application`}
+            label={`${c.name}: middle of ${c.apps} ${c.unit === "forms" ? "applications" : "packets"} read`}
             value={`${c.appMedian} questions`}
-            note={`A typical enquiry form asks ${c.firstMedian}. Ask something sensitive: ${c.sensitiveFirst.yes} of ${c.sensitiveFirst.of} enquiry forms and ${c.sensitiveApp.yes} of ${c.sensitiveApp.of} ${c.unit === "forms" ? "applications" : "packets"}.`}
+            note={`Middle of ${c.first} enquiry forms read: ${c.firstMedian} recorded questions. Sensitive topics: ${c.sensitiveFirst.yes} of ${c.sensitiveFirst.of} enquiry forms and ${c.sensitiveApp.yes} of ${c.sensitiveApp.of} ${c.unit === "forms" ? "applications" : "packets"}.`}
           />
         ))}
       </div>
@@ -104,7 +106,7 @@ export function Applications({ data }: { data: ApplicationsData }) {
           lead: data.countries.every(
             (c) => pct(c.sensitiveFirst.yes, c.sensitiveFirst.of) <= 30 && pct(c.sensitiveApp.yes, c.sensitiveApp.of) >= 50,
           )
-            ? "In every country, few enquiry forms ask a sensitive question, and most applications do."
+            ? "Among the forms read in each country, few enquiry forms ask a sensitive question and most applications do."
             : "How many forms ask a sensitive question differs by country. Each country's card gives the counts.",
         }}
       >

@@ -1,4 +1,4 @@
-# Kept promises outperform persuasion in giving
+# What giving can teach us about kept promises and choice
 
 > **Status:** desk review, version 1, 19 November 2026. It looks at blood donation, stem cell registers and the assessment of people who offer to donate a kidney. An AI-assisted research tool produced it. None of the evidence is about fostering, so every view on what carries over is our own. See [how we made this](https://www.kinderform.org/about#how). Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
 
@@ -10,9 +10,9 @@ Three things are well supported:
 - Long silences go hand in hand with losing touch.
 - In a long assessment, the largest loss comes right after the first form, when nobody manages to speak to the person.
 
-Three things are not supported. No study in these fields tests a 5-minute acknowledgement, a first contact within 1 working day or a 2-week rhythm for keeping in touch. So those figures are reasonable promises, not findings.
+Three things are not supported. Our search found no study testing a 5-minute acknowledgement, human contact within 1 working day or a 2-week keeping-in-touch rhythm. So those figures are reasonable promises, not findings.
 
-A named guide is firmly established in guidance and valued in interviews. Yet no trial has tested it from the volunteer's side. And the United States experience shows that naming a role without defining it produces very uneven practice.
+A named guide is firmly established in guidance and valued in interviews. Our search found no trial testing it from the volunteer's side. And the United States experience shows that naming a role without defining it produces very uneven practice.
 
 In stem cell registers, ambivalence (mixed feelings about going ahead) is the strongest known predictor of stepping back. That is exactly why Kinderform must treat it as a normal part of a large decision. Kinderform must never measure it to score, rank or predict anyone.
 
@@ -204,7 +204,7 @@ BOUnD names support for people who do not go ahead as a priority. It recommends 
 4. Offer a route to a review.
 5. Get in touch again afterwards, because the reaction comes later.
 
-No trial has tested any of the 5. Naming other real ways to help answers the loss of identity that people describe. But the Dutch null result means it should be offered as a kindness, not counted on to keep the fostering offer alive. It should never be used as a brush-off.
+Our search found no trial testing any of the 5. Naming other real ways to help answers the loss of identity that people describe. But the Dutch null result means it should be offered as a kindness, not counted on to keep the fostering offer alive. It should never be used as a brush-off.
 
 ## A named guide is established practice with no trial behind it
 
@@ -365,10 +365,10 @@ Every row is a **Recommendation (Kinderform)**. "Basis" names the strongest evid
 |---|---|---|---|
 | Acknowledge within 5 minutes | Confirm, and label honestly | Keep. State in the standard that this is a courtesy promise with no trial behind it. The acknowledgement should say what happens next, when, and that enquiring commits the person to nothing | Principle. Nearest evidence: silent loss after the first form (B) |
 | A person makes first contact within 1 working day | Tighten | Keep the promise. Add 3 things. Make more than one attempt, at different times and by the channel the person chose. Record "not yet reached" as its own outcome. Start the first conversation by listening | Largest loss is the unreached follow-up call (B). Phone at least as good as text or email (A). Listening call +10.7 points (A, blood). The one-day figure is untested |
-| "Not now" with a chosen date of 3, 6 or 12 months | Tighten | The person picks any date, with 3, 6 and 12 months as suggestions. The pause is agreed in conversation where possible, not by email alone. The service makes contact about a week before the date, in plain factual words. That message offers 3 equal options: talk now, pause again, remove me. Record how many times a person has paused or been asked to wait. Treat a returning person as a priority | Reminder a week before, plain tone (A). Conversation works; email alone does not (A). Longer waits and repeated deferrals do worse (B). Returners are fragile (B). Many lapses are unintended (C). No study tests a self-chosen pause |
+| "Not now" with a chosen date of 3, 6 or 12 months | Tighten | The person picks any date, with 3, 6 and 12 months as suggestions. The pause is agreed in conversation where possible, not by email alone. The service makes contact about a week before the date, in plain factual words. That message offers 3 equal options: talk now, pause again, remove me. Record how many times a person has paused or been asked to wait. Treat a returning person as a priority | Reminder a week before, plain tone (A). Conversation works; email alone does not (A). Longer waits and repeated deferrals do worse (B). Returners are fragile (B). Many lapses are unintended (C). No study found tests a self-chosen pause |
 | "Not now" asked by the service | Add | When the service asks someone to wait, it says so by voice. It gives the reason, what would need to change, a date and who will call. The service publishes known blockers before enquiry, as information for the person | Deferral evidence (A and B); pre-screening (B); "suspended status" (C) |
 | Named journey guide | Tighten | Define the guide by duties: first conversation, agreed rhythm of contact, explaining each step and each wait, and cover when away. Add a stated duty to support the person's decision either way. Offer a peer who fosters where one is available. Do not claim an evidence base it lacks | Guidance (D); interviews (C); role drift without definition (B); peer mentor trial null (A) |
-| Keeping in touch at least every 2 weeks, expression of interest to panel | Change | Replace the fixed rule with 3 things. First, a rhythm agreed with the person, with 2 weeks as the default longest silence during active assessment. Second, every contact says something real, including "nothing has moved, and the wait is on X, not you". Third, the person can change the rhythm at any time. Report the time that has passed from the person's side | Silence associated with harm (C). Thin staff contact associated with opting out (B). Waits driven by third parties (B). No study supports 2 weeks over any other interval, and none measures opt-outs |
+| Keeping in touch at least every 2 weeks, expression of interest to panel | Change | Replace the fixed rule with 3 things. First, a rhythm agreed with the person, with 2 weeks as the default longest silence during active assessment. Second, every contact says something real, including "nothing has moved, and the wait is on X, not you". Third, the person can change the rhythm at any time. Report the time that has passed from the person's side | Silence associated with harm (C). Thin staff contact associated with opting out (B). Waits driven by third parties (B). No study found supports 2 weeks over another interval, or measures opt-outs |
 | Check-ins over long gaps | Add | For anyone paused longer than 6 months, a light two-way check at least yearly. It asks: are your details right, and is this still something you are thinking about? It offers pause or remove. Never read a reply or a silence as a mark of commitment | Recency of contact (B); DKMS check-in (A); intention question (A) |
 | Warm hand-off | Confirm | Keep. Add that the person is told who is taking over and why, and does not have to repeat their story | Principle. Nearest evidence: quality of staff contact (C). No direct test |
 | One-question withdrawal survey, door left open | Tighten | Make it optional and say that no reason is needed and stepping back is not a failure. Use one plain direct question. Offer a call a few weeks later. Agree a neutral form of words the person can use with others | Withdraw without explanation (D); direct question found what scales missed (B/C); 23% wanted a follow-up call (C) |
@@ -415,14 +415,14 @@ Every row is a **Recommendation (Kinderform)**. "Basis" names the strongest evid
 ## Gaps
 
 - No fostering evidence is in these notes. Every transfer judgement is an inference.
-- No study tests how fast a first reply must be, or how often to keep in touch during a long assessment.
-- No study measures opt-outs, complaints or harm from frequent contact.
+- Our search found no study testing first-reply speed or how often to keep in touch during a long assessment.
+- We found no study measuring opt-outs, complaints or harm from frequent contact.
 - No randomised trial of a personal call at the end of a waiting period. No test of a stated date without a reminder. No test of a pause the person chose themselves.
-- No trial of a coordinator, advocate or named guide measured from the volunteer's side. No UK evaluation of peer buddy schemes for potential donors.
-- No trial of any way of giving a refusal or of follow-up afterwards. Almost nothing on people who withdrew of their own accord.
+- We found no trial of a coordinator, advocate or named guide measured from the volunteer's side. We found no UK evaluation of donor buddy schemes.
+- We found no trial of how to give a refusal, or of follow-up afterwards. Almost nothing on people who withdrew of their own accord.
 - No register study of people stood down: asked, and then told they were not needed.
 - No evaluation of a cooling-off period or of any work on ambivalence in registers.
-- No study relating the length of gaps in contact to withdrawal.
+- We found no study relating gaps in contact to withdrawal.
 - No England figures for return after deferral, for first-time donors giving again, or for how many people come forward as potential living donors.
 - No evaluation showing any measure that closed an ethnic gap in availability or progression.
 - No evidence on whether telling people at the outset that they may stop without explanation changes what they do or how they feel.

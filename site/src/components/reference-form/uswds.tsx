@@ -369,7 +369,7 @@ export const uswdsTheme: Theme = {
           <li className="usa-process-list__item">
             <h3 className="usa-process-list__heading">When you talk</h3>
             <p>
-              Ask anything. There are no wrong questions, and nothing you ask counts against you.
+              You can ask questions without committing to an application.
               {r.interest === "not_sure" && !r.knows_child ? " We'll talk you through foster care, adoption and other ways to help." : ""}
             </p>
           </li>

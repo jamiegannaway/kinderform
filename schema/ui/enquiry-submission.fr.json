@@ -12,7 +12,7 @@
     "title": "Se renseigner pour devenir famille d'accueil ou adopter",
     "body": [
       "Utilisez ce formulaire pour poser une question ou demander un échange. Cela prend environ 2 minutes.",
-      "Une personne de l'équipe d'accueil familial vous répondra sous 1 jour ouvré. Elle vous dira son nom.",
+      "Dans un vrai service, une personne doit vous dire quand elle vous répondra.",
       "Vous n'avez pas besoin de savoir déjà si vous voulez accueillir un enfant ou adopter.",
       "À ce stade, nous ne vous poserons aucune question sur votre santé, votre logement, vos revenus ou votre famille."
     ],
@@ -33,7 +33,8 @@
             "spellcheck": false,
             "errors": {
               "required": "Indiquez votre prénom et votre nom",
-              "maxLength": "Votre prénom et votre nom doivent faire 100 caractères au maximum"
+              "maxLength": "Votre prénom et votre nom doivent faire 100 caractères au maximum",
+              "pattern": "Indiquez votre prénom et votre nom"
             }
           }
         },
@@ -321,5 +322,5 @@
     "error_title": "Il y a un problème",
     "error_prefix": "Erreur :"
   },
-  "demo_notice": "Ceci est un exemple de formulaire. N'indiquez pas de vraies informations. Rien de ce que vous saisissez n'est envoyé ni conservé."
+  "demo_notice": "Ceci est un exemple de formulaire. N'indiquez pas de vraies informations. Rien de ce que vous saisissez n'est envoyé ni conservé. Les dates de cet exemple ne tiennent pas compte des horaires du service ni des jours fériés."
 }

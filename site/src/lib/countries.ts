@@ -6,9 +6,8 @@
 // service or URL is passed to the page. Only forms read straight from the live page
 // are counted (observed = direct_fetch), the same rule as "How first-contact forms
 // differ". Every figure is unverified until a person has checked the rows.
-import { askedBy, type Census, type Row } from "@/lib/census"
+import { askedBy, isKnownFollowUp, isCountedQuestion, type Census, type Row } from "@/lib/census"
 import { factsFor, type FormFacts } from "@/lib/form-check"
-import { isSensitive } from "@/lib/sensitive"
 
 export const COUNTRIES = [
   { code: "UK", name: "United Kingdom" },
@@ -59,7 +58,10 @@ export const TOPIC_ROWS: { label: string; match: (q: Row) => boolean; sensitive?
 export type CountryStats = {
   code: CountryCode
   name: string
-  forms: number // forms counted
+  forms: number // unique form URLs counted
+  formLocations: number
+  branchingUnknownQuestions: number
+  branchingUnknownForms: number
   questions: number[] // questions per form, sorted
   median: number
   answerKinds: Record<AnswerKind, number> // questions of each kind, all forms together
@@ -74,6 +76,10 @@ export type CountryStats = {
 export type CountriesData = {
   countries: CountryStats[] // only countries with at least one form
   allForms: number
+  formLocations: number
+  duplicateFormLocations: number
+  branchingUnknownQuestions: number
+  branchingUnknownForms: number
   allMedian: number
   shortest: number
   longest: number
@@ -100,21 +106,20 @@ const hours = (v: string) => {
 
 export function countries(c: Census): CountriesData {
   const asked = askedBy(c)
-  // The site's one definition of a sensitive question (src/lib/sensitive.ts).
-  const asksSensitive = (formId: string) => (asked.get(formId) ?? []).some((q) => !q.conditional_on && isSensitive(q))
+  const asksSensitive = (f: FormFacts) => f.sensitive.length > 0
   const facts = factsFor(c, COUNTRIES.map((x) => x.code), true).filter((f) => f.form.observed === "direct_fetch")
   const stats: CountryStats[] = []
   for (const { code, name } of COUNTRIES) {
     const mine: FormFacts[] = facts.filter((f) => f.form.country === code)
     if (!mine.length) continue
-    const qs = mine.flatMap((f) => (asked.get(f.form.form_id) ?? []).filter((q) => !q.conditional_on))
+    const qs = mine.flatMap((f) => (asked.get(f.form.form_id) ?? []).filter((q) => !isKnownFollowUp(q)))
     const kinds = Object.fromEntries(ANSWER_KINDS.map((k) => [k.key, 0])) as Record<AnswerKind, number>
     for (const q of qs) {
       const kind = ANSWER_KINDS.find((k) => (k.types as readonly string[]).includes(q.input_type))?.key ?? "unknown"
       kinds[kind]++
     }
     const marking = mine.filter((f) => f.requiredKnown)
-    const markingQs = marking.flatMap((f) => (asked.get(f.form.form_id) ?? []).filter((q) => q.category !== "consent"))
+    const markingQs = marking.flatMap((f) => (asked.get(f.form.form_id) ?? []).filter(isCountedQuestion))
     const replyChecked = mine.filter((f) => f.replyChecked)
     const replies = [...new Set(mine.map((f) => f.replyPromise).filter((v): v is string => !!v))].sort(
       (a, b) => hours(a) - hours(b),
@@ -123,6 +128,9 @@ export function countries(c: Census): CountriesData {
       code,
       name,
       forms: mine.length,
+      formLocations: mine.reduce((n, f) => n + f.locations, 0),
+      branchingUnknownQuestions: mine.reduce((n, f) => n + f.branchingUnknownQuestions, 0),
+      branchingUnknownForms: mine.filter((f) => f.branchingUnknownQuestions > 0).length,
       questions: mine.map((f) => f.questions).sort((a, b) => a - b),
       median: median(mine.map((f) => f.questions)),
       answerKinds: kinds,
@@ -130,11 +138,11 @@ export function countries(c: Census): CountriesData {
       required: { yes: markingQs.filter((q) => q.required === "yes").length, of: markingQs.length },
       topics: TOPIC_ROWS.map((t) => ({
         label: t.label,
-        yes: mine.filter((f) => (asked.get(f.form.form_id) ?? []).some(t.match)).length,
+        yes: mine.filter((f) => (asked.get(f.form.form_id) ?? []).filter((q) => !isKnownFollowUp(q)).some(t.match)).length,
         of: mine.length,
         sensitive: !!t.sensitive,
       })),
-      asksSensitive: mine.filter((f) => asksSensitive(f.form.form_id)).length,
+      asksSensitive: mine.filter(asksSensitive).length,
       reply: { stated: replyChecked.filter((f) => f.replyPromise).length, of: replyChecked.length },
       replyRange: replies,
     })
@@ -144,10 +152,14 @@ export function countries(c: Census): CountriesData {
   return {
     countries: stats,
     allForms: facts.length,
+    formLocations: facts.reduce((n, f) => n + f.locations, 0),
+    duplicateFormLocations: facts.reduce((n, f) => n + f.locations - 1, 0),
+    branchingUnknownQuestions: facts.reduce((n, f) => n + f.branchingUnknownQuestions, 0),
+    branchingUnknownForms: facts.filter((f) => f.branchingUnknownQuestions > 0).length,
     allMedian: median(all),
     shortest: all.length ? Math.min(...all) : 0,
     longest: all.length ? Math.max(...all) : 0,
-    asksSensitive: { yes: facts.filter((f) => asksSensitive(f.form.form_id)).length, of: facts.length },
+    asksSensitive: { yes: facts.filter(asksSensitive).length, of: facts.length },
     reply: { yes: replyChecked.filter((f) => f.replyPromise).length, of: replyChecked.length },
     checked: facts.map((f) => f.form.date_checked).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort().at(-1) ?? "",
   }

@@ -1,11 +1,15 @@
 // Form check: what we can say about each primary form from the census.
-// The draft partial score is computed at build time for private previews only.
-// It is never written to the repository and never built into production.
+// The draft partial score is computed only for explicitly enabled local review.
+// It is never written to the repository or included in a static build.
 import {
   askedBy,
   groupOf,
   guidanceFor,
   isReadable,
+  formKey,
+  uniqueForms,
+  isCountedQuestion,
+  hasUnknownBranching,
   type Census,
   type Group,
   type Row,
@@ -41,11 +45,11 @@ export const CAPS = [
   "An old form still online next to the current one",
 ]
 
-const SENSITIVE = new Set(["special_category", "criminal_offence", "immigration", "health_related"])
-
 export type FormFacts = {
   form: Row
   group: Group
+  locations: number // source service-location entries sharing this form URL
+  branchingUnknownQuestions: number
   questions: number
   required: number
   requiredKnown: boolean
@@ -73,36 +77,41 @@ export function factsFor(c: Census, countries: string[] = ["UK"], includeCrawler
   const asked = askedBy(c)
   const tax = new Map(c.taxonomy.map((t) => [`${t.category}/${t.topic}`, t]))
   const out: FormFacts[] = []
-  for (const f of c.forms) {
-    const group = groupOf(f)
-    if (!group || f.form_stage !== "primary" || !countries.includes(f.country) || !isReadable(f, asked)) continue
-    if (!includeCrawler && f.notes.startsWith(CRAWLER_NOTE)) continue
-    const qs = (asked.get(f.form_id) ?? []).filter((q) => !q.conditional_on && q.category !== "consent")
-    const all = asked.get(f.form_id) ?? []
+  const eligible = c.forms.filter((f) => groupOf(f) && countries.includes(f.country) && isReadable(f, asked) &&
+    (includeCrawler || !f.notes.startsWith(CRAWLER_NOTE)))
+  for (const f of uniqueForms(eligible)) {
+    const group = groupOf(f)!
+    const qs = (asked.get(f.form_id) ?? []).filter(isCountedQuestion)
     const g = guidanceFor(c, f.form_id)
     const has = (type: string) => g.filter((x) => x.guidance_type === type)
     const sensitive = new Set<string>()
-    for (const q of all) {
+    for (const q of qs.filter(isSensitive)) {
       const t = tax.get(`${q.category}/${q.topic}`)
-      if (t && SENSITIVE.has(t.sensitivity)) sensitive.add(t.description)
+      sensitive.add(t?.description ?? q.topic)
     }
     const rt = has("response_time")
     const mk = has("marketing_consent")
     const pn = has("privacy_notice_link")
-    const flag = (type: string) => (has(type).length ? has(type).some((x) => x.present === "yes") : null)
+    const flag = (type: string): boolean | null => {
+      const rows = has(type)
+      if (rows.some((x) => x.present === "yes")) return true
+      return rows.some((x) => x.present === "no") ? false : null
+    }
     out.push({
       form: f,
       group,
+      locations: eligible.filter((row) => formKey(row) === formKey(f)).length,
+      branchingUnknownQuestions: qs.filter(hasUnknownBranching).length,
       questions: qs.length,
       required: qs.filter((q) => q.required === "yes").length,
       requiredKnown: qs.some((q) => q.required === "yes"),
       sensitive: [...sensitive],
-      dateOfBirth: all.some((q) => q.topic === "date_of_birth" && !q.conditional_on),
-      spareRoom: all.some((q) => q.topic === "spare_bedroom"),
+      dateOfBirth: qs.some((q) => q.topic === "date_of_birth"),
+      spareRoom: qs.some((q) => q.topic === "spare_bedroom"),
       replyPromise: rt.find((x) => x.present === "yes")?.value || null,
-      replyChecked: rt.length > 0,
-      marketing: mk[0]?.value || (mk.length ? "none" : "not checked"),
-      privacyNotice: pn.length ? (pn.some((x) => x.present === "yes") ? "yes" : "no") : "not checked",
+      replyChecked: rt.some((x) => x.present === "yes" || x.present === "no"),
+      marketing: mk.find((x) => x.present === "yes")?.value || (mk.some((x) => x.present === "no") ? "none" : "not checked"),
+      privacyNotice: pn.some((x) => x.present === "yes") ? "yes" : pn.some((x) => x.present === "no") ? "no" : "not checked",
       whatNext: has("what_happens_next").some((x) => x.present === "yes"),
       accessibility: flag("accessibility_statement"),
       channels: flag("alternative_contact") ?? flag("opening_hours"),
@@ -128,7 +137,6 @@ export function score(x: FormFacts): Scored {
   const n = x.requiredKnown ? x.required : x.questions
   d.push({ id: "ease", s: n <= 6 ? 3 : n <= 8 ? 2 : n <= 11 ? 1 : 0 })
   let m = 3
-  if (x.dateOfBirth) m -= 1
   m -= x.sensitive.length
   if (["bundled_on_submit", "required_choice", "required_checkbox_ambiguous"].includes(x.marketing)) m -= 1
   if (x.privacyNotice === "no") m -= 1
@@ -179,8 +187,7 @@ export function ranked(c: Census): Record<Group, Ranking> {
 // (src/lib/sensitive.ts).
 export function patterns(c: Census) {
   const facts = factsFor(c)
-  const asked = askedBy(c)
-  const sensitive = (x: FormFacts) => (asked.get(x.form.form_id) ?? []).some((q) => !q.conditional_on && isSensitive(q))
+  const sensitive = (x: FormFacts) => x.sensitive.length > 0
   const checked = facts.filter((x) => x.replyChecked)
   return {
     readable: facts.length,

@@ -136,11 +136,11 @@ export function ForServices({
       title: "Ask only what you need to reply",
       parts: [
         {
-          label: "We found",
+          label: "Forms we could read",
           body: (
             <>
-              A typical UK enquiry form asks {d.ukFirst.median} questions: half ask more, half ask fewer. Across{" "}
-              {d.first.countries} countries, forms ask {d.first.shortest} to {d.first.longest}.
+              The middle UK form has {d.ukFirst.median} recorded questions: half have more, half fewer. Across{" "}
+              {d.first.countries} countries, the forms we could read have {d.first.shortest} to {d.first.longest}.
             </>
           ),
         },
@@ -189,11 +189,11 @@ export function ForServices({
         },
         law && d.lawLinks
           ? {
-              label: "The law",
+              label: "Assessment rules (draft)",
               body: (
                 <>
-                  In England, the fostering assessment has 2 stages, and both start after someone applies. Stage 1
-                  covers checks, such as health, past relationships and the criminal record.{" "}
+                  Our reading of England's rules puts health, past relationships and criminal-record checks in stage 1
+                  of the fostering assessment.{" "}
                   <a href={d.lawLinks.fostering} className={link}>
                     Fostering Services (England) Regulations 2011, Schedule 3
                   </a>
@@ -214,7 +214,7 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Ask sensitive questions in the application, after a conversation, and say why you need each one.
+          Our draft proposes leaving sensitive questions until after a conversation. Check the purpose and local rules, and explain why each question is needed.
         </>
       ),
     },
@@ -224,18 +224,18 @@ export function ForServices({
             id: "law-stages",
             step: ASK,
       art: "crossroad" as IllustrationName,
-            title: "Ask each question at the stage the law sets",
+            title: "Separate assessment requirements from first questions",
             parts: [
               {
                 label: "We found",
                 body: (
                   <>
-                    In England, {of(d.early.application.share)} application forms and {of(d.early.enquiry.share)}{" "}
-                    enquiry forms ask something the law leaves to stage 2.
+                    In England, these forms ask topics our map records in stage 2:
+                    applications {of(d.early.application.share)}; enquiries {of(d.early.enquiry.share)}.
                     {others.length > 0 && (
                       <>
                         {" "}
-                        Elsewhere, the law has one assessment. Forms that ask its topics, such as ethnicity:{" "}
+                        Elsewhere, forms also ask assessment topics, such as ethnicity. In our sample:{" "}
                         {others.map((n) => `${n.name} ${of(n.enquiry.share)}`).join(", ")}.
                       </>
                     )}
@@ -243,15 +243,15 @@ export function ForServices({
                 ),
               },
               {
-                label: "The law",
+                label: "Assessment rules (draft)",
                 body: (
                   <>
-                    In England, stage 2 covers personality, religion, ethnicity, work and experience.{" "}
+                    Our map records personality, religion, ethnicity, work and experience in England's stage 2.{" "}
                     <a href={d.lawLinks.fostering} className={link}>
                       Schedule 3
                     </a>
-                    . Adoption agencies must not refuse a registration of interest, the first form for adoption,
-                    because of ethnicity, age, health, sexual orientation or religion.{" "}
+                    . A requirement to cover a topic in assessment does not itself ban an earlier question.
+                    Our map also records rules on accepting an adoption registration of interest.{" "}
                     <a href={d.lawLinks.adoptionGuidance} className={link}>
                       Adoption statutory guidance, paragraphs 3.13 to 3.15
                     </a>
@@ -261,11 +261,11 @@ export function ForServices({
             ] satisfies Part[],
             tryThis: (
               <>
-                Check each question against the{" "}
+                Check the purpose of each question alongside the{" "}
                 <a href="#law-by-nation" className={link}>
                   law in your nation
                 </a>
-                , and move later questions to the assessment. If you monitor ethnicity or religion, make it optional
+                . Ask your legal or practice lead to review the timing. If you monitor ethnicity or religion, make it optional
                 and keep it apart from the decision.
               </>
             ),
@@ -324,7 +324,7 @@ export function ForServices({
           label: "Research",
           body: (
             <>
-              Some people give up because of how a service replied, or because contact stopped.{" "}
+              Some people who stopped said the reply or a break in contact put them off.{" "}
               <a href="/research#put-off" className={link}>
                 How replies put people off
               </a>
@@ -460,7 +460,7 @@ export function ForServices({
               <a href="/research#hand-offs" className={link}>
                 Hand-offs
               </a>
-              . Carers stay when the service supports them reliably, and research for The Fostering Network
+              . Carers who answered surveys valued reliable support, and research for The Fostering Network
               recommends one trusted relationship from the enquiry onwards.{" "}
               <a href="/research#relationship" className={link}>
                 Why carers stay
@@ -498,7 +498,7 @@ export function ForServices({
           label: "Research",
           body: (
             <>
-              We found no trial of follow-up with real people who enquire, in any country.{" "}
+              Our November 2026 desk search found no trial of follow-up with real people who enquire.{" "}
               <a href="/research#no-trials" className={link}>
                 The gap
               </a>
@@ -509,7 +509,7 @@ export function ForServices({
           label: "A warning",
           body: (
             <>
-              One regional hub made first visits much quicker, but approvals did not rise.{" "}
+              One hub study found quicker first visits, without a clear measured gain in approvals.{" "}
               <a href="/research#speed-alone" className={link}>
                 Speed alone
               </a>
@@ -519,7 +519,9 @@ export function ForServices({
       ] satisfies Part[],
       tryThis: (
         <>
-          Compare the months before and after one change, and{" "}
+          Compare groups who enquire before and after one change, over the same length of time. Record missing data, campaigns and staffing changes.
+          Treat this as an early check, not proof of cause. A group making no change at the same time can help.
+          Then{" "}
           <a href="/#get-involved" className={link}>
             tell us what you find
           </a>
@@ -538,7 +540,7 @@ export function ForServices({
             name="details"
             className="mb-6 block w-36 lg:absolute lg:top-8 lg:right-0 lg:mb-0 lg:w-56 xl:w-64"
           />
-          <Tag tone="blue">First draft</Tag>
+          <Tag tone="amber">Draft extraction</Tag>
           <h1 id="fs-title" className="mt-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             What services can do
           </h1>
@@ -551,6 +553,10 @@ export function ForServices({
               research page
             </a>{" "}
             gives the source and date of each finding.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+            These are forms we could read, not a sample of all services. Counts are recorded questions; follow-ups are left out where known.
+            Often the page does not tell us which questions appear next.
           </p>
           <Alert className="mt-8 max-w-3xl">
             <AlertTitle>Nothing here names or scores a service</AlertTitle>
@@ -647,7 +653,8 @@ export function ForServices({
           <>
             <Separator />
             <section aria-labelledby="law-by-nation" className="py-12">
-              <H2 id="law-by-nation">Where the law puts each topic, in each UK nation</H2>
+              <H2 id="law-by-nation">What our law map records for each UK nation</H2>
+              <Tag tone="amber" className="mt-4">Draft interpretation: legal review needed</Tag>
               <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
                 England, and adoption in Wales, split the assessment into 2 stages.{" "}
                 {others.length > 0 ? (
@@ -669,9 +676,9 @@ export function ForServices({
               </p>
               <Table className="mt-6 min-w-[44rem]">
                 <TableCaption className="text-left">
-                  Stage 1 or Stage 2: the stage where the law puts the topic. Assessment: the assessment covers it. Check: a
-                  check the service must make. A dash: that nation&rsquo;s law does not name it. Topics no nation&rsquo;s law names, such as ID
-                  numbers, are left out.
+                  Stage 1 or Stage 2: the stage recorded in our map. Assessment: a topic it records for assessment. Check: a required check.
+                  A dash means our map has no matching row; a requirement may still exist.
+                  This table does not show the earliest point a question may be asked.
                 </TableCaption>
                 <TableHeader>
                   <TableRow>

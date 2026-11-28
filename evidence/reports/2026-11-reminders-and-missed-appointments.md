@@ -1,8 +1,8 @@
-# Clear, kind replies outperform clever nudges
+# What other fields suggest about clear, kind replies
 
 > **Status:** desk review, version 1, 19 November 2026. It looks at reminders, first replies and missed appointments in health, courts, jobcentres, education, talking therapies and volunteering. An AI-assisted research tool produced it. None of the evidence is about fostering, so every view on what carries over is our own. See [how we made this](https://www.kinderform.org/about#how). Everything we propose is for discussion. It is not yet part of the Kinderform standard, the open standard that the project behind kinderform.org is drafting. The [research log](../research-log.json) says what each review could mean for the project.
 
-The evidence from health, courts, jobcentres, education, talking therapies and volunteering supports the direction of all 3 Kinderform rules. It contradicts none of them. But it does not test any of the 3 time limits. We found no study in any field that compares:
+The evidence from health, courts, jobcentres, education, talking therapies and volunteering supports the direction of all 3 Kinderform rules. It contradicts none of them. But it does not test any of the 3 time limits. Our desk search found no study in the fields covered that compares:
 
 - a 5-minute acknowledgement (the message that says an enquiry has arrived) with a slower one
 - first contact from a person within 1 working day with contact within 2 or 3 days
@@ -10,7 +10,7 @@ The evidence from health, courts, jobcentres, education, talking therapies and v
 
 What the evidence does show is this:
 
-- What a first message says, and who it is from, matter more than how fast it arrives.
+- We found more direct evidence about message wording and sender than about reply speed. This is not a head-to-head comparison.
 - Reminders for a booked event are worth a few percentage points, not a transformation.
 - The people a service most easily loses are lost through silence, wrong contact details and quiet closure, not through lack of interest.
 
@@ -67,15 +67,15 @@ Every claim carries one of 3 labels:
 
 | Kinderform draft rule | Verdict | What the evidence says | Strongest grade behind the direction |
 |---|---|---|---|
-| Acknowledge within 5 minutes | Not contradicted; untested | No trial of acknowledgement speed exists in any field searched. Evidence on first messages is about what they say and who they are from. | None for speed; A for content and sender |
+| Acknowledge within 5 minutes | Not contradicted; untested | Our search found no trial of acknowledgement speed. Evidence on first messages is about what they say and who they are from. | None for speed; A for content and sender |
 | A person makes first contact within 1 working day | Direction supported; threshold untested | Shorter waits go with higher attendance in large NHS datasets. In 2 small trials, very fast first appointments pointed the same way. The results were not statistically significant. Nothing supports a longer wait. | B (A, weak and inconclusive) |
 | Call within 2 working days of a missed event, offering a one-to-one | Direction supported; threshold untested | Guidance and qualitative research favour prompt, active, supportive follow-up and oppose automatic closure. We found no trial of a recovery call, a second offer or any follow-up window. | D and C |
 
 **Recommendation (Kinderform).** Keep all 3 limits. In the standard, describe them as "service commitments in line with the evidence on direction". Do not describe any of them as proven. Claiming more than the evidence shows would be exactly the kind of thing that harms trust with the sector.
 
-## Nobody has tested a five-minute reply, but what the reply says is well evidenced
+## Our search found evidence on message wording, but not a five-minute reply
 
-**Evidence (none found).** No study in health, courts, welfare, education or volunteering tests an instant acknowledgement against a slower one. None tests whether people read an automated instant reply as cold. Wherever Kinderform writes about these 2 claims, it should mark them as not backed by evidence.
+**Evidence (none found).** Our search found no study comparing instant and slower acknowledgements in these fields. It found none testing whether an instant reply feels cold. Wherever Kinderform writes about these 2 claims, it should mark them as not backed by evidence.
 
 **Evidence (A, quasi-experimental; USA, 2020).** The best evidence on a first written message is the redesign of the New York City court summons. The redesign moved the date and place to the top. It gave the form a plain heading that said what it was. It brought the key information to the front. Across 323,922 summonses, this cut missed court dates by **6.2 pp from a starting rate of about 47%** ([Fishbane, Ouss and Shah, 2020](https://psych.wustl.edu/files/psych/fishbane20.pdf)). It cost nothing extra to print.
 
@@ -362,11 +362,11 @@ The notes flag the following items. Check each one against the original source b
 
 ## Gaps
 
-- No study tests acknowledgement speed. None tests whether an instant automated reply feels cold.
-- No trial tests any follow-up after a missed first appointment, or any follow-up window. None tests closing after one miss against a more tolerant policy.
+- Our search found no study of acknowledgement speed, or whether an instant automated reply feels cold.
+- We found no trial of follow-up after a missed first appointment, or of closing after one miss against a more tolerant policy.
 - No head-to-head trial compares reminder timings, self-booked with allocated slots, or evening and weekend availability.
-- No trial reports reminder effects by deprivation, ethnicity, language or disability.
-- No trial measures trust, felt respect or felt pressure as an outcome. None follows people who attended after a reminder and later withdrew. So whether reminders bring in people who were not ready is unknown.
+- We found no trial reporting reminder effects by deprivation, ethnicity, language or disability.
+- We found no trial measuring trust, felt respect or felt pressure. None we found follows attendance after a reminder through to later withdrawal. So whether reminders bring in people who were not ready is unknown.
 - We found no evidence on how many reminders become unwelcome.
 - We found nothing citable on Samaritans, Girlguiding or school governor enquiries, or on Get Into Teaching adviser outcomes. Nor did we find anything citable on DWP appointment reminders, or on screening and vaccination reminders.
 

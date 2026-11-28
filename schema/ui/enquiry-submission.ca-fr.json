@@ -12,7 +12,7 @@
     "title": "Se renseigner sur la famille d'accueil ou l'adoption",
     "body": [
       "Utilisez ce formulaire pour poser une question ou demander à discuter. Cela prend environ 2 minutes.",
-      "Une personne de l'équipe des familles d'accueil vous répondra d'ici 1 jour ouvrable et vous dira son nom.",
+      "Dans un vrai service, une personne doit vous dire quand elle vous répondra.",
       "Vous n'avez pas besoin de savoir déjà si la famille d'accueil ou l'adoption vous convient.",
       "À cette étape, nous ne vous poserons aucune question sur votre santé, votre logement, vos finances ou votre famille."
     ],
@@ -33,7 +33,8 @@
             "spellcheck": false,
             "errors": {
               "required": "Entrez votre nom complet",
-              "maxLength": "Votre nom complet doit compter 100 caractères ou moins"
+              "maxLength": "Votre nom complet doit compter 100 caractères ou moins",
+              "pattern": "Entrez votre nom complet"
             }
           }
         },
@@ -339,5 +340,5 @@
     "error_title": "Il y a eu un problème",
     "error_prefix": "Erreur :"
   },
-  "demo_notice": "Ceci est un exemple de formulaire. N'entrez pas de vrais renseignements. Rien de ce que vous entrez n'est envoyé ni conservé."
+  "demo_notice": "Ceci est un exemple de formulaire. N'entrez pas de vrais renseignements. Rien de ce que vous entrez n'est envoyé ni conservé. Les dates de cet exemple ne tiennent pas compte des horaires du service ni des jours fériés."
 }

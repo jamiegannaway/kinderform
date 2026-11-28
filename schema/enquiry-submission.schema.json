@@ -10,6 +10,7 @@
     "full_name": {
       "type": "string",
       "minLength": 1,
+      "pattern": "\\S",
       "maxLength": 100,
       "description": "One field, so the reply can be personal."
     },
@@ -38,7 +39,8 @@
     },
     "phone": {
       "type": "string",
-      "pattern": "^\\+?[0-9()\\-\\s]{7,20}$"
+      "description": "7 to 15 digits, with an optional leading plus and spaces, brackets or hyphens. Formatting alone is not a phone number; this check does not prove reachability.",
+      "pattern": "^(?=(?:[^0-9]*[0-9]){7,15}[^0-9]*$)\\+?[0-9() \\-]{7,30}$"
     },
     "best_times": {
       "type": "array",
@@ -122,11 +124,15 @@
   "allOf": [
     {
       "if": { "properties": { "contact_method": { "const": "email" } }, "required": ["contact_method"] },
-      "then": { "required": ["email"] }
+      "then": { "required": ["email"], "properties": { "phone": false, "best_times": false } }
     },
     {
       "if": { "properties": { "contact_method": { "enum": ["phone_call", "text_message"] } }, "required": ["contact_method"] },
-      "then": { "required": ["phone"] }
+      "then": { "required": ["phone"], "properties": { "email": false } }
+    },
+    {
+      "if": { "properties": { "contact_method": { "const": "text_message" } }, "required": ["contact_method"] },
+      "then": { "properties": { "best_times": false } }
     },
     {
       "$comment": "At most one location field: each belongs to one country.",

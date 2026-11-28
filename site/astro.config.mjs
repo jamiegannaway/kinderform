@@ -3,13 +3,14 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import rehypeResearch from "./src/lib/rehype-research.mjs";
+import { publicationBoundary } from "./config/publication.mjs";
 
 // Static site. React components (shadcn/ui) render to HTML at build time;
 // no component uses a client directive, so the page ships no JavaScript.
 export default defineConfig({
   site: "https://www.kinderform.org",
   output: "static",
-  integrations: [react()],
+  integrations: [react(), publicationBoundary()],
   build: { inlineStylesheets: "never" },
   // Research pages are Markdown from evidence/. No syntax highlighting: it would add
   // inline styles, which the content security policy blocks.

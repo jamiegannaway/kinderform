@@ -12,7 +12,7 @@
     "title": "Pregunte por el acogimiento familiar o la adopción",
     "body": [
       "Use este formulario para hacer una pregunta o pedir una conversación. Se tarda unos 2 minutos.",
-      "Una persona del equipo de acogimiento familiar le responderá en 1 día laborable y le dirá su nombre.",
+      "En un servicio real, una persona debe decirle cuándo le responderá.",
       "No hace falta que sepa todavía si prefiere el acogimiento familiar o la adopción.",
       "Por ahora no le preguntaremos por su salud, su casa, su dinero ni su familia."
     ],
@@ -33,7 +33,8 @@
             "spellcheck": false,
             "errors": {
               "required": "Escriba su nombre y apellidos",
-              "maxLength": "El nombre y apellidos deben tener 100 caracteres como máximo"
+              "maxLength": "El nombre y apellidos deben tener 100 caracteres como máximo",
+              "pattern": "Escriba su nombre y apellidos"
             }
           }
         },
@@ -320,5 +321,5 @@
     "error_title": "Hay un problema",
     "error_prefix": "Error:"
   },
-  "demo_notice": "Este formulario es un ejemplo. No escriba datos reales. No se envía ni se guarda nada de lo que escriba."
+  "demo_notice": "Este formulario es un ejemplo. No escriba datos reales. No se envía ni se guarda nada de lo que escriba. Las fechas de este ejemplo no tienen en cuenta los horarios del servicio ni los días festivos."
 }

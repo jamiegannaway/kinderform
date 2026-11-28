@@ -18,6 +18,7 @@ const file = (path: string) => `${base}/${path}`;
 const linkStyle = "font-medium text-foreground underline underline-offset-4 hover:decoration-2";
 const summaryStyle = "cursor-pointer font-medium underline-offset-4 hover:underline";
 const resources = [
+  { file: "guide.md", title: "Setup and first-reply plan", type: "Markdown", detail: "A worksheet and made-up rehearsal for the receiving team." },
   { file: "questions.md", title: "Questions and answer choices", type: "Markdown", detail: "In the order the form asks them." },
   { file: "field-map.csv", title: "Field map", type: "CSV", detail: "Matches each question to a field in your system." },
   { file: "wording.json", title: "Form wording for software", type: "JSON", detail: "Labels, hints, answers and when to show each question." },
@@ -52,14 +53,18 @@ const resources = [
         <p class="mt-3 leading-7">Set up a draft form in 3 steps.</p>
         <ol class="mt-4 list-decimal space-y-3 pl-5 leading-7 marker:font-semibold">
           <li>Copy the <a href={file("questions.md")} class={linkStyle}>questions and answers</a>. Use the <a href={file("field-map.csv")} class={linkStyle}>field map</a> to set required answers and follow-up questions.</li>
-          <li>Choose who gets each enquiry. Add your contact details, privacy notice and a reply time you can meet.</li>
-          <li>Try the <a href={file("test-cases.json")} class={linkStyle}>made-up test cases</a> before you go live. Check the thank-you message, who gets the enquiry and your reply.</li>
+          <li>Agree who owns each enquiry, who covers absence, and what happens when a reply is late. Add your privacy notice and a reply time you can meet.</li>
+          <li>Try the <a href={file("test-cases.json")} class={linkStyle}>made-up test cases</a>. Rehearse failed delivery, a handoff and an overdue reply with the receiving team.</li>
         </ol>
         <details class="mt-4 leading-7">
           <summary class={summaryStyle}>If your form builder cannot hide questions</summary>
           <p class="mt-2">Offer separate email, phone and text versions. Each asks only for the contact detail it needs.</p>
         </details>
         <a class={`${linkStyle} mt-4 inline-flex items-center gap-2`} href={file("guide.md")} download>Download the full setup guide <ArrowRight aria-hidden="true" className="size-4" /></a>
+        <p class="mt-3 leading-7">
+          The guide includes a first-reply worksheet for your team. You can use it with your existing form.
+          Follow <a href="https://github.com/jamiegannaway/kinderform/blob/main/docs/one-enquiry.md" class={linkStyle}>one made-up enquiry</a> to see what to measure.
+        </p>
         <section class="mt-7 border-t pt-6" aria-labelledby="other-tools">
           <h2 id="other-tools" class="text-xl font-semibold tracking-tight">Other ways to build it</h2>
           <ul class="mt-3 space-y-3 leading-7">

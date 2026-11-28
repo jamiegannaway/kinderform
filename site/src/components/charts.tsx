@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 const W = (p: number) => `w-[${Math.max(0, Math.min(100, Math.round(p)))}%]`
 const H = (p: number) => `h-[${Math.max(0, Math.min(100, Math.round(p)))}%]`
 
-export type BarDatum = { label: string; value: number; display?: string }
+export type BarDatum = { label: string; value: number; display?: string; sampleSize?: number }
 export type Footer = { lead: string; note?: string }
 
 export function ChartFooter({ footer }: { footer?: Footer }) {
@@ -73,10 +73,11 @@ export function HorizontalBars({
         const shown = d.display ?? d.value.toLocaleString("en-GB")
         return (
           <li key={d.label} className={`grid grid-cols-1 items-center gap-x-3 gap-y-1 text-sm ${labelWidth}`}>
-            <span className="truncate text-muted-foreground sm:text-right" title={d.label}>
-              {d.label}
+            <span className="min-w-0 text-muted-foreground sm:text-right" title={d.label}>
+              <span className="block truncate">{d.label}</span>
+              {d.sampleSize !== undefined && <span className="block text-xs">n={d.sampleSize}</span>}
             </span>
-            <span className="flex items-center gap-2" role="img" aria-label={`${d.label}: ${shown}`}>
+            <span className="flex items-center gap-2" role="img" aria-label={`${d.label}: ${shown}${d.sampleSize !== undefined ? `; ${d.sampleSize} forms counted` : ""}`}>
               <span className={`relative flex-1 ${barHeight}`}>
                 <span className={`absolute inset-y-0 left-0 rounded-r-[4px] bg-chart-2 ${W((100 * d.value) / top)} ${d.value ? "min-w-1" : ""}`} />
               </span>

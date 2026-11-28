@@ -12,7 +12,7 @@
     "title": "Ask about fostering or adoption",
     "body": [
       "Use this form to ask a question or set up a chat. It takes about 2 minutes.",
-      "A named person from the fostering team will reply within 1 working day.",
+      "In a real service, a named person should tell you when they will reply.",
       "You do not need to know yet whether fostering or adoption is right for you.",
       "We will not ask about your health, your home, your money or your family at this stage."
     ],
@@ -33,7 +33,8 @@
             "spellcheck": false,
             "errors": {
               "required": "Enter your full name",
-              "maxLength": "Full name must be 100 characters or fewer"
+              "maxLength": "Full name must be 100 characters or fewer",
+              "pattern": "Enter your full name"
             }
           }
         },
@@ -297,5 +298,5 @@
     "error_title": "There is a problem",
     "error_prefix": "Error:"
   },
-  "demo_notice": "This is an example form. Do not enter real details. Nothing you enter is sent or stored."
+  "demo_notice": "This is an example form. Do not enter real details. Nothing you enter is sent or stored. Dates in this example do not account for service hours or public holidays."
 }

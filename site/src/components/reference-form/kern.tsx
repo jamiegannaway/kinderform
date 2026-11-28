@@ -34,7 +34,7 @@ const DONE = {
   who: (team: string, how: string) => `Eine feste Ansprechperson von ${team} wird ${how}`,
   times: ", zu einer der Zeiten, die Sie gewählt haben",
   talk: "Im Gespräch.",
-  talkBody: "Fragen Sie alles, was Sie wissen möchten. Es gibt keine falschen Fragen, und keine Ihrer Fragen wird gegen Sie verwendet.",
+  talkBody: "Sie können Fragen stellen, ohne sich zu einer Bewerbung zu verpflichten.",
   notSure: " Wir erklären Ihnen Pflegefamilie, Adoption und andere Wege, wie Sie helfen können.",
   plans: "Wenn sich Ihre Pläne ändern, ist das in Ordnung. Sie können es uns jederzeit sagen.",
   record: "Datensatz anzeigen",

@@ -16,6 +16,8 @@ Kinderform helps councils, fostering services and adoption agencies give a kinde
 
 The enquiry standard and checklist are drafts for comment. The comparison tables describe public pages. Check the source and date on a row before using it to make a decision.
 
+The [26 November 2026 audit note](docs/audits/2026-11-26.md) records the adversarial review, the repairs and the independent checks still needed.
+
 ## What is in this repository
 
 | Folder | What it holds | Status |
@@ -53,6 +55,12 @@ npm ci --prefix site && npm run build --prefix site
 
 ```bash
 python3 tools/plain_check.py site/dist
+```
+
+Run the analytical and form-runtime regressions too:
+
+```bash
+npm test --prefix site
 ```
 
 [`CLAUDE.md`](CLAUDE.md) holds the working rules for this repository, including the hard rules below.

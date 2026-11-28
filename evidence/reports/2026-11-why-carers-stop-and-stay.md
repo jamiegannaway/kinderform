@@ -11,9 +11,9 @@ Grades:
 
 ## In short
 
-1. **About 1 in 8 approved mainstream fostering households stops each year in England.** In 2025–26, 4,440 of 37,890 households de-registered: 12% (grade B).
-2. **Much of that leaving is a normal part of life.** Carers aged 60 or over were 35% of carers who de-registered. Among carers under 50 who de-registered, 19% did so to adopt the child. So "carers who stop" does not mean "carers the service failed".
-3. **Carers stay when the service supports them reliably.** The same things come up in England, the US, Australia and Sweden:
+1. **About 1 in 8 approved mainstream fostering households de-registered in England in 2025–26.** That is 4,440 of 37,890 households: 12% (grade B). The 4,440 includes 3,675 leavers, 700 transfers and 65 other.
+2. **De-registration has different meanings.** Carers aged 60 or over were 35% of carers who de-registered. Age alone does not show why they left. Among those under 50 who de-registered, 19% did so to adopt the child. So de-registration does not always mean stopping fostering or a service failing.
+3. **Carers who answered surveys valued reliable support.** The same things come up in England, the US, Australia and Sweden:
    - a good relationship with the service
    - being treated as an equal member of the team
    - dependable breaks and help out of hours
@@ -24,7 +24,7 @@ Grades:
 4. **Early leaving is the clearest link to the first step.** In 2020–21, 30% of households that de-registered did so within two years of approval (grade B).
 5. **Mockingbird is the best-evidenced way to keep carers, but it was not tested in a trial.** Households in it had much lower odds of de-registering than similar households (grade B).
 6. **Training alone has weak evidence.** A trial of a training course in Wales found no difference on its main measure at 12 months (grade A).
-7. **No study links a good assessment to a longer fostering career.** We treat that link as an idea to test, not a finding.
+7. **Our search found no study linking a good assessment to a longer fostering career.** We treat that link as an idea to test, not a finding.
 
 ## 1. How many carers stop, in the official figures
 
@@ -46,7 +46,7 @@ What the words mean:
 | Households that de-registered had been registered for just over 7.5 years with councils and 5.5 years with independent agencies, on average. | Ofsted, 2024–25 and 2025–26 | B | Ofsted says these averages are steady. |
 | 4,690 mainstream households de-registered in 2024–25: 12% of 38,125. | Ofsted, *Fostering in England, April 2024 to March 2025*, 26 November 2025 | B | 3,985 leavers, 645 transfers and 65 other. |
 | There were 56,145 mainstream foster carers in March 2026, against 63,890 in 2021. | Ofsted, 2024–25 and 2025–26 | B | Counted by carer, not household. |
-| Around a third of approved mainstream carers are aged 60 or over. Five years earlier it was around a quarter. | Ofsted, 2024–25 and 2025–26 | B | More carers will retire whatever services do. |
+| Around a third of approved mainstream carers are aged 60 or over. Five years earlier it was around a quarter. | Ofsted, 2024–25 and 2025–26 | B | Age alone does not establish retirement as the reason for leaving. |
 | 30% of households that de-registered in 2020–21 (1,470) did so within two years of approval. | Ofsted, 2020–21, as summarised by the House of Commons Library, 2022 | B, read secondhand | We have not checked whether later releases still give this figure. |
 | 2,860 allegations of abuse were made against foster carers in 2024–25. About 30% went to the fostering panel, and 52% ended with no further action. The Department for Education estimates that 800 to 1,000 carers de-register after an allegation each year. | Department for Education, consultation on the assessment and handling of allegations, February 2026 | B and C | The 800 to 1,000 is an estimate, not a count. |
 | Scotland: 334 households de-registered in 2025, the lowest in five years. 2,681 households were left at the end of 2025. | Care Inspectorate, fostering and adoption statistics 2025/26 | B, read from a search result | Counted by calendar year. The page could not be read. |
@@ -142,7 +142,7 @@ All of this is for discussion. Each idea is about what a service measures about 
 
 ## 7. Gaps and limits
 
-- **No study links the assessment experience to how long people foster.** This is the biggest gap for Kinderform, and a natural question for a pilot that services agree to.
+- **Our search found no study linking assessment experience to how long people foster.** This is the biggest gap for Kinderform, and a natural question for a pilot that services agree to.
 - **Ofsted's reasons are recorded by services and are broad.** We did not take the full 2025–26 reasons, the split between councils and independent agencies, or time since approval from Ofsted's data tables.
 - **Wales and Northern Ireland have no comparable yearly figures.** The Scottish figures come from a search result.
 - **Mockingbird's later evaluation:** we could not confirm its status, and found no results.

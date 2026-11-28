@@ -39,5 +39,26 @@ jobs:
       - name: Build the site
         run: npm ci --prefix site && npm run build --prefix site
 
+      - name: Analytical and form runtime regressions
+        run: npm test --prefix site
+
+      - name: Preview build cannot publish named scores, even with local opt-in
+        env:
+          VERCEL_ENV: preview
+          KINDERFORM_PRIVATE_NAMED_RESULTS: "true"
+        run: npm run build --prefix site
+
+      - name: Production build cannot publish named scores, even with local opt-in
+        env:
+          VERCEL_ENV: production
+          KINDERFORM_PRIVATE_NAMED_RESULTS: "true"
+        run: npm run build --prefix site
+
+      - name: A development NODE_ENV cannot turn a build into local review
+        env:
+          NODE_ENV: development
+          KINDERFORM_PRIVATE_NAMED_RESULTS: "true"
+        run: npm run build --prefix site
+
       - name: Plain-language check (report only)
         run: python3 tools/plain_check.py site/dist | grep -v ' 0 of 25+ words, 0 avoided words' || true

@@ -2,7 +2,11 @@
 
 [Choose a starter](https://www.kinderform.org/build) or [start with the shared questions for any country](https://www.kinderform.org/build/global). Each kit works with any tool that lets you create questions manually. It also offers a standalone HTML example, an AI prompt, and optional setup notes for Tally and Typeform.
 
-Unzip a kit and open **START-HERE.html**. A service can keep its existing system, change a copy of its form, try the three reply methods with fictional data, then check the receiving team's handoff. The CSV field map gives the display labels, stored answer values and rules together. Scoped wording also describes errors, hints and when follow-up questions apply.
+Unzip a kit and open **START-HERE.html**. Keep your existing system and change a copy of its form. Try the three reply methods with fictional data, then check the receiving team's handoff. The CSV field map gives the display labels, stored answer values and rules together. Scoped wording also describes errors, hints and when follow-up questions apply.
+
+The setup guide includes a first-reply worksheet and a synthetic rehearsal. Agree ownership, cover, failed contact, accepted handoffs, overdue replies and requests to stop or return. Use it with an existing form too. Keep the completed plan and real records inside the service.
+
+[Follow one made-up enquiry](../docs/one-enquiry.md) to map an acknowledgement, a personal attempt and a two-way conversation to the draft monitoring record. The form does not ask for `intent_tier`. Omit it until the person tells you what would help; never infer it. The monitoring schema remains a v0.1 draft.
 
 ## Maintaining downloads
 
