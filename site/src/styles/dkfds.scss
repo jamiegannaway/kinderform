@@ -1,0 +1,1042 @@
+// Det Fælles Designsystem (DKFDS) for the Danish reference form only.
+//
+// Ported from the dkfds npm package 11.3.0 (https://www.npmjs.com/package/dkfds): its neutral
+// theme (dist/css/dkfds.css, built from src/stylesheets/dkfds.scss) and the markup of its
+// Nunjucks components (src/components). Source: https://github.com/detfaellesdesignsystem/dkfds-components
+// Docs: https://designsystem.dk
+//
+// Licence, from LICENSE.md in the package. The styles and markup are under the MIT licence:
+//
+//   Copyright 2021 Danish Business Authority & Danish Agency for Digitisation
+//
+//   Permission is hereby granted, free of charge, to any person obtaining a copy of this
+//   software and associated documentation files (the "Software"), to deal in the Software
+//   without restriction, including without limitation the rights to use, copy, modify, merge,
+//   publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+//   to whom the Software is furnished to do so, subject to the following conditions:
+//
+//   The above copyright notice and this permission notice shall be included in all copies or
+//   substantial portions of the Software.
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+//   INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+//   PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+//   FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+//   OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+//   DEALINGS IN THE SOFTWARE.
+//
+// The package's icons (src/img/svg-icons) are Material Symbols under the Apache License 2.0;
+// the few used here (check-white, chevron-down, chevron-up) are data URIs below. Its font is
+// IBM Plex Sans, under the SIL Open Font License 1.1.
+//
+// Which theme: the neutral one ("no virkdk or borgerdk specific stuff", says the package), with
+// dark grey as its main colour. The borger.dk (green) and Virk (blue) themes, their logos and
+// the portal header belong to those portals and are not used. Nor are a MitID or NemLog-in
+// header, an authority's logo or the coat of arms. Kinderform is not a government service.
+//
+// Why a port: the published CSS styles html, body and every element, sets the root font size to
+// 62.5% (so 1rem is 10px) and loads a JavaScript bundle. Here only the components the form uses
+// are kept, everything sits under .dkfds-form, and sizes given in DKFDS rem are turned into rem
+// of the site's own 16px root (rem() below), so text still follows the reader's font size. It is
+// all unlayered, so Tailwind's preflight (in @layer base) cannot undo it. DKFDS's JavaScript is
+// not loaded: the form needs none of it, and the engine moves focus itself. The form keeps
+// DKFDS's light colours in both site themes, like the other countries' forms.
+//
+// What is kept, by DKFDS name: colour and type values, the base reset the components assume,
+// typography (headings, paragraph, lead, links, lists), focus, form group, label, hint text,
+// error message and error state, text input with its widths, radio buttons, checkboxes, buttons
+// (primary and secondary), back link, alerts (which the error summary is built from), details,
+// table with the structured list, and the simple step indicator's subheading. Changes from the
+// original: scoped under .dkfds-form, rem converted, icon files as data URIs, and the form
+// template rules at the end (ours), including support for forced colours, which DKFDS lacks.
+//
+// Fonts: IBM Plex Sans 400, 600 and 700. The 400 and 700 files are the ones the Dutch form
+// already self-hosts (site/public/fonts/nl-design/), so a reader who opens both loads them once.
+// DKFDS also uses 600 for labels, subheadings and buttons; that file is in
+// site/public/fonts/dkfds/ with OFL.txt. All are the Latin subsets from
+// @fontsource/ibm-plex-sans 5.3.0, unchanged (Danish æ, ø and å are in the Latin subset).
+
+@use "sass:math";
+
+// ---- Fonts ----------------------------------------------------------------------------------
+
+$latin: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+  U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+$latin-ext: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+  U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+
+@mixin face($weight, $subset, $range, $folder) {
+  @font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-display: swap;
+    font-weight: $weight;
+    src: url("/fonts/#{$folder}/ibm-plex-sans-#{$subset}-#{$weight}-normal.woff2") format("woff2");
+    unicode-range: $range;
+  }
+}
+@include face(400, "latin", $latin, "nl-design");
+@include face(600, "latin", $latin, "dkfds");
+@include face(700, "latin", $latin, "nl-design");
+// Answers are shown in 400, so names with letters beyond basic Latin (ł, ş, ğ) keep the font.
+@include face(400, "latin-ext", $latin-ext, "nl-design");
+
+// ---- Values (src/stylesheets/values, neutral theme) -----------------------------------------
+
+// DKFDS sizes are in rem of a 10px root. rem(16px) is 1rem of the site's 16px root.
+@function rem($px) {
+  @return math.div($px, 16px) * 1rem;
+}
+
+$gray-100: #f5f5f5;
+$gray-200: #dcdcdc;
+$gray-300: #bfbfbf;
+$gray-400: #8e8e8e;
+$gray-500: #707070;
+$gray-600: #454545;
+$gray-900: #1a1a1a;
+$green-100: #ddf7ce;
+$green-700: #358000;
+$orange-100: #ffeecc;
+$orange-700: #febb30;
+$red-100: #ffe0e0;
+$red-700: #cc0000;
+$blue-100: #e2f2fb;
+$blue-700: #1b86c3;
+$blue-800: #004d99;
+$purple-700: #800080;
+
+// Theme colours of the neutral theme (variables/_theme-colors.scss).
+$primary: $gray-600;
+$primary-dark: $gray-900;
+$ink: $gray-900;
+$ink-light: $gray-500;
+$link: $blue-800;
+$link-hover: $gray-900;
+$link-visited: $purple-700;
+$focus-color: $gray-600;
+
+$font-family: "IBM Plex Sans", system-ui, sans-serif;
+$normal: 400;
+$semibold: 600;
+$bold: 700;
+$radius: 8px; // border-radius("medium") on inputs, buttons and alerts
+$checkbox-radius: 4px;
+
+// Breakpoints (variables/_responsive-breakpoint.scss).
+$md: 768px;
+$lg: 992px;
+
+// Icons (src/img/svg-icons, Material Symbols, Apache License 2.0) as data URIs.
+$icon-check-white: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%23FFFFFF'%3E%3Cpath d='M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z'/%3E%3C/svg%3E");
+$icon-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%231a1a1a'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E");
+$icon-chevron-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%231a1a1a'%3E%3Cpath d='M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z'/%3E%3C/svg%3E");
+
+// ---- Mixins -----------------------------------------------------------------------------------
+
+// mixins.focus: a 3px solid outline in the focus colour, 1px away.
+@mixin focus {
+  outline: 3px solid $focus-color;
+  outline-offset: 1px;
+}
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  border: 0;
+  user-select: none;
+  white-space: nowrap;
+}
+
+// ---- Root: surface and type (core/_typography.scss: html and body) ---------------------------
+
+.dkfds-form {
+  // The form brings its own light surface, text colour and font. It sets no padding or margin:
+  // the dialog around it does, and an unlayered padding here would beat Tailwind's p-* classes.
+  color-scheme: light;
+  box-sizing: border-box;
+  // Contains the visually hidden (position: absolute) text. Without it, inside a fixed dialog
+  // that text would overflow the dialog box and scrollIntoView would shift the dialog.
+  position: relative;
+  // On phones the dialog's scroll area has a fixed height: fill it, so the surface has no edge.
+  min-block-size: 100%;
+  background-color: white;
+  color: $ink;
+  font-family: $font-family;
+  font-size: rem(16px);
+  line-height: 1.5;
+  text-align: left;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern";
+  font-kerning: normal;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+
+  // ---- Base (core/_base.scss): only the resets the components assume ------------------------
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  .sr-only {
+    @include sr-only;
+  }
+  button,
+  input {
+    appearance: none;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.5;
+    margin: 0;
+    overflow: visible;
+  }
+  button {
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    text-transform: none;
+  }
+  fieldset {
+    position: relative;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  legend {
+    padding: 0;
+  }
+  pre {
+    font-family: monospace, monospace;
+    font-size: inherit;
+    overflow: auto;
+  }
+  b,
+  strong {
+    font-weight: $bold;
+  }
+
+  // ---- Focus (core/_focus.scss) --------------------------------------------------------------
+
+  a:focus,
+  button:focus,
+  input:focus,
+  pre:focus {
+    @include focus;
+  }
+
+  // ---- Typography (core/_typography.scss) -----------------------------------------------------
+  // The level class sets the look and the element sets the level, so an h1 can look like h2.
+
+  h1,
+  .h1 {
+    letter-spacing: normal;
+    font-weight: $bold;
+    color: $ink;
+    text-transform: none;
+    word-break: break-word;
+    font-size: rem(32px);
+    line-height: 1.25;
+    margin-top: 0;
+    margin-bottom: rem(16px);
+    @media (min-width: $md) {
+      font-size: rem(40px);
+      line-height: 1.2;
+    }
+    @media (min-width: $lg) {
+      font-size: rem(48px);
+      line-height: 1.1666666667;
+    }
+  }
+  h2,
+  .h2 {
+    letter-spacing: normal;
+    font-weight: $semibold;
+    color: $ink;
+    text-transform: none;
+    font-size: rem(24px);
+    line-height: 1.3333333333;
+    margin-top: rem(32px);
+    margin-bottom: rem(16px);
+    @media (min-width: $md) {
+      font-size: rem(28px);
+      line-height: 1.2857142857;
+      margin-top: rem(40px);
+    }
+    @media (min-width: $lg) {
+      font-size: rem(32px);
+      line-height: 1.25;
+    }
+  }
+  h3,
+  .h3 {
+    letter-spacing: normal;
+    font-weight: $semibold;
+    color: $ink;
+    text-transform: none;
+    font-size: rem(22px);
+    line-height: 1.2727272727;
+    margin-top: rem(32px);
+    margin-bottom: rem(16px);
+    @media (min-width: $md) {
+      font-size: rem(24px);
+      line-height: 1.3333333333;
+      margin-top: rem(40px);
+    }
+  }
+  h4,
+  .h4 {
+    letter-spacing: normal;
+    font-weight: $semibold;
+    color: $ink;
+    text-transform: none;
+    font-size: rem(18px);
+    line-height: 1.3333333333;
+    margin-top: rem(24px);
+    margin-bottom: rem(16px);
+    @media (min-width: $md) {
+      font-size: rem(20px);
+      line-height: 1.4;
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    max-width: 66ch;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  p {
+    font-size: rem(16px);
+    line-height: rem(24px);
+    font-weight: $normal;
+    color: $ink;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-top: rem(16px);
+    margin-bottom: rem(16px);
+    max-width: 66ch;
+  }
+  .font-lead {
+    font-size: rem(20px);
+    font-weight: $normal;
+    line-height: rem(32px);
+    max-width: 66ch;
+    color: $ink;
+    letter-spacing: normal;
+    margin-top: rem(24px);
+    margin-bottom: rem(16px);
+  }
+  .weight-normal {
+    font-weight: $normal;
+  }
+
+  // Links. Tailwind's preflight takes away the browser's underline, so it is set here.
+  a {
+    color: $link;
+    text-decoration: underline;
+    &:visited {
+      color: $link-visited;
+    }
+    &:hover {
+      color: $link-hover;
+    }
+    &:not(.button) {
+      max-width: 66ch;
+    }
+  }
+
+  // ---- Lists (elements/_list.scss) -------------------------------------------------------------
+  // DKFDS keeps the browser's 1em above and below a list; preflight takes it away, so it is here.
+
+  ul,
+  ol {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  ul {
+    padding-left: 0;
+    list-style-type: none;
+    color: $ink;
+    font-size: rem(16px);
+    line-height: rem(24px);
+    max-width: 66ch;
+    > li {
+      margin-top: 8px;
+      list-style-type: none;
+      position: relative;
+      padding-left: rem(16px);
+      line-height: rem(24px);
+      &::before {
+        content: "\2022";
+        position: absolute;
+        left: 0;
+        top: -1px;
+        font-size: rem(20px);
+      }
+    }
+  }
+  ol {
+    // Preflight takes away the numbers too.
+    list-style-type: decimal;
+    padding-left: 28px;
+    max-width: 66ch;
+    li {
+      margin-top: 8px;
+      line-height: rem(24px);
+    }
+  }
+  .nobullet-list {
+    list-style-type: none;
+    padding-left: 0;
+    > li {
+      padding-left: 0;
+      &::before {
+        content: "" !important;
+        padding-right: 0 !important;
+      }
+    }
+  }
+
+  // ---- Icons (elements/_icons.scss) ------------------------------------------------------------
+
+  .icon-svg {
+    // Preflight makes every svg a block.
+    display: inline-block;
+    height: rem(24px);
+    width: rem(24px);
+    vertical-align: middle;
+    fill: currentColor;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // ---- Form group, label, hint and error (elements/_inputs.scss, _forms.scss) ---------------
+
+  .form-group {
+    margin-top: 24px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  .form-hint {
+    display: block;
+    color: $ink-light;
+    font-size: rem(16px);
+    line-height: rem(24px);
+    letter-spacing: normal;
+    font-weight: $normal;
+    overflow-wrap: break-word;
+    max-width: 66ch;
+  }
+  .form-label {
+    display: inline-block;
+    font-size: rem(16px);
+    line-height: rem(24px);
+    font-weight: $semibold;
+    color: $ink;
+    text-transform: none;
+    max-width: 66ch;
+  }
+  .form-group.form-error {
+    border-left: 4px solid $red-700;
+    padding-left: calc(16px - 4px);
+  }
+  .form-error-message {
+    display: block;
+    font-size: rem(16px);
+    line-height: rem(24px);
+    font-weight: $semibold;
+    color: $red-700;
+    text-transform: none;
+    margin-top: 4px;
+    max-width: 66ch;
+  }
+  legend h1,
+  legend .h1,
+  legend h2,
+  legend .h2 {
+    margin-bottom: 0;
+  }
+
+  // ---- Text input -------------------------------------------------------------------------------
+
+  .form-input {
+    appearance: none;
+    display: block;
+    border-radius: $radius;
+    width: 100%;
+    max-width: rem(320px);
+    margin-top: 8px;
+    text-align: left;
+    border: 1px solid $gray-400;
+    background-color: white;
+    color: $ink;
+    font-size: rem(16px);
+    line-height: rem(24px);
+    padding: calc(8px - 1px) calc(16px - 1px);
+    &:focus {
+      @include focus;
+    }
+  }
+  .form-group.form-error > .form-input {
+    border: 2px solid $red-700;
+    padding: calc(8px - 2px) calc(16px - 2px);
+  }
+  // Widths (core/utilities/_width.scss).
+  input.input-width-s {
+    max-width: rem(240px);
+    width: 100%;
+  }
+  @each $n in (4, 8, 11) {
+    input.input-char-#{$n} {
+      max-width: calc(34px + #{$n}ch);
+      width: 100%;
+    }
+  }
+
+  // ---- Radio buttons and checkboxes (elements/_inputs.scss) ------------------------------------
+  // The native input is invisible on top of the box that the label's ::before draws.
+
+  .form-group-checkbox,
+  .form-group-radio {
+    margin-top: 8px;
+    position: relative;
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+  legend + .form-group-checkbox:first-of-type,
+  legend + .form-group-radio:first-of-type,
+  .form-error-message + .form-group-checkbox:first-of-type,
+  .form-error-message + .form-group-radio:first-of-type,
+  .form-hint + .form-group-checkbox:first-of-type,
+  .form-hint + .form-group-radio:first-of-type {
+    margin-top: 8px;
+  }
+  .form-checkbox,
+  .form-radio {
+    position: absolute;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    z-index: 1;
+    margin: 0;
+    opacity: 0;
+    height: 24px;
+    width: 24px;
+    margin-top: calc(#{rem(12px)} - 12px + 4px);
+  }
+  .form-checkbox + label,
+  .form-radio + label {
+    cursor: pointer;
+    font-weight: $normal;
+    line-height: rem(24px);
+    display: inline-block;
+    outline: none;
+    color: $ink;
+    padding-left: 32px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    max-width: 66ch;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-sizing: border-box;
+      display: inherit;
+      background-color: white;
+      border: 2px solid $ink;
+      margin-right: 8px;
+      height: 24px;
+      width: 24px;
+      margin-top: calc(#{rem(12px)} - 12px + 4px);
+    }
+  }
+  .form-checkbox + label::before {
+    border-radius: $checkbox-radius;
+  }
+  .form-radio + label::before {
+    border-radius: 100%;
+  }
+  .form-checkbox:checked + label::before {
+    background-color: $ink;
+    border: 2px solid $ink;
+    background-image: $icon-check-white;
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .form-radio:checked + label::before {
+    background-color: white;
+    border: 2px solid $ink;
+  }
+  .form-radio:checked + label::after {
+    content: "";
+    position: absolute;
+    display: inherit;
+    height: 12px;
+    width: 12px;
+    left: 6px;
+    top: 6px;
+    background-color: $ink;
+    border-radius: 100%;
+    margin-top: calc(#{rem(12px)} - 12px + 4px);
+  }
+  .form-checkbox:focus + label::before,
+  .form-radio:focus + label::before {
+    @include focus;
+  }
+  .form-checkbox + label + .form-hint,
+  .form-radio + label + .form-hint {
+    padding-left: 32px;
+    margin-top: -4px;
+  }
+
+  // ---- Buttons (components/_buttons.scss): primary and secondary ------------------------------
+
+  .button {
+    color: inherit;
+    background-color: transparent;
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    font-weight: inherit;
+    font-size: inherit;
+    min-height: auto;
+    padding: 0;
+    border: 0;
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+  .button.button-primary,
+  .button.button-secondary {
+    font-weight: $semibold;
+    font-size: rem(16px);
+    min-height: 40px;
+    padding: 6px 14px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: $radius;
+  }
+  .button.button-primary {
+    border-color: $primary;
+    color: white;
+    background-color: $primary;
+    &:hover,
+    &:active {
+      border-color: $primary-dark;
+      color: white;
+      background-color: $primary-dark;
+    }
+  }
+  .button.button-secondary {
+    border-color: $primary;
+    color: $ink;
+    background-color: white;
+    &:hover {
+      background-color: $gray-100;
+    }
+    &:active {
+      background-color: $gray-200;
+    }
+  }
+
+  // ---- Back link (components/_back-link.scss) ---------------------------------------------------
+
+  .back-link {
+    color: $ink;
+    text-decoration: underline;
+    display: inline-block;
+    margin-bottom: 24px;
+    padding: 0;
+    padding-left: rem(16px);
+    line-height: rem(24px);
+    background-color: transparent;
+    position: relative;
+    text-align: left;
+    cursor: pointer;
+    @media (min-width: $lg) {
+      margin-bottom: 32px;
+    }
+    &:visited,
+    &:hover,
+    &:active {
+      color: $ink;
+    }
+    .icon-svg {
+      position: absolute;
+      left: rem(-8px);
+      top: rem(1px);
+    }
+  }
+
+  // ---- Alerts (components/_alerts.scss) ---------------------------------------------------------
+
+  .alert {
+    background-color: $gray-100;
+    background-image: linear-gradient(to right, $gray-400 4px, transparent 4px);
+    background-repeat: no-repeat;
+    padding: rem(16px);
+    padding-left: rem(52px);
+    position: relative;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border-radius: $radius;
+    &:first-child {
+      margin-top: 0;
+    }
+    .alert-icon {
+      position: absolute;
+      left: rem(20px);
+    }
+    .alert-heading {
+      font-size: rem(16px);
+      line-height: 1.5;
+      margin-top: 0;
+      margin-bottom: 0;
+      font-weight: $semibold;
+      color: $ink;
+      overflow-wrap: break-word;
+    }
+    .alert-text {
+      margin-bottom: 0;
+      margin-top: 0;
+      color: $ink;
+      max-width: 66ch;
+      a,
+      a:link,
+      a:active,
+      a:visited,
+      a:hover {
+        color: $ink;
+      }
+    }
+  }
+  .alert-success {
+    background-color: $green-100;
+    background-image: linear-gradient(to right, $green-700 4px, transparent 4px);
+  }
+  .alert-warning {
+    background-color: $orange-100;
+    background-image: linear-gradient(to right, $orange-700 4px, transparent 4px);
+  }
+  .alert-error {
+    background-color: $red-100;
+    background-image: linear-gradient(to right, $red-700 4px, transparent 4px);
+  }
+  .alert-info {
+    background-color: $blue-100;
+    background-image: linear-gradient(to right, $blue-700 4px, transparent 4px);
+  }
+  .alert + .alert {
+    margin-top: 16px;
+  }
+
+  // ---- Details (components/_details.scss) -------------------------------------------------------
+
+  .details {
+    display: block;
+    margin-bottom: 0;
+    .details-summary {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      text-decoration: underline;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      // The marker is the chevron below.
+      list-style: none;
+      &::marker,
+      &::-webkit-details-marker {
+        display: none;
+      }
+      &::before {
+        content: "";
+        display: inline-block;
+        background-image: $icon-chevron-down;
+        background-size: rem(24px);
+        background-repeat: no-repeat;
+        width: rem(24px);
+        min-width: rem(24px);
+        height: rem(24px);
+        margin-right: 4px;
+        vertical-align: bottom;
+      }
+      &:focus {
+        @include focus;
+      }
+    }
+    &[open] .details-summary {
+      margin-bottom: 8px;
+      &::before {
+        background-image: $icon-chevron-up;
+      }
+    }
+    .details-text {
+      padding: 16px 16px 16px calc(#{rem(12px)} + 2px);
+      margin-left: calc(#{rem(12px)} - 2px);
+      border-left: 4px solid $gray-300;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      p {
+        margin-top: 0;
+        margin-bottom: rem(16px);
+      }
+      > :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // ---- Table and structured list (components/_table.scss) -----------------------------------
+
+  .table {
+    margin: 0;
+    line-height: rem(24px);
+    width: 100%;
+    color: $ink;
+    font-size: rem(16px);
+    border-collapse: separate;
+    border-spacing: 0;
+    td,
+    th {
+      padding: 16px 16px 15px 16px;
+      border-bottom: 1px solid $gray-300;
+      background-color: inherit;
+      vertical-align: top;
+      text-align: left;
+    }
+    tbody th {
+      font-weight: $semibold;
+    }
+    tbody tr td:first-child,
+    tbody tr th:first-child {
+      padding-left: 15px;
+    }
+  }
+  // The structured list: no outer border, a line above the first row and under every row.
+  .table.structured-list {
+    border: 0;
+    tbody tr:first-child td,
+    tbody tr:first-child th {
+      border-top: 1px solid $gray-300;
+    }
+  }
+  // table-sm-responsive-headers: below 768px each row becomes a block, question over answer.
+  @media screen and (max-width: ($md - 1px)) {
+    .table.table-sm-responsive-headers {
+      display: block;
+      tbody,
+      tr {
+        display: block;
+      }
+      tr {
+        border-bottom: 1px solid $gray-300;
+      }
+      td,
+      th {
+        display: block;
+        border: 0;
+        padding: 16px 16px;
+      }
+      td:last-child,
+      th:last-child {
+        padding-bottom: 15px;
+      }
+      &.structured-list tr:first-child th:first-child {
+        border-top: 1px solid $gray-300;
+      }
+      &.structured-list tbody tr:first-child td {
+        border-top: 0;
+      }
+      &.structured-list tbody tr th {
+        padding-bottom: 0;
+      }
+      &.structured-list tbody tr td:first-of-type {
+        padding-top: 0;
+      }
+    }
+  }
+
+  // ---- Step indicator: the simple version's subheading (components/_step-indicator.scss) ------
+
+  .step-subheading {
+    font-size: rem(14px);
+    font-weight: $normal;
+    line-height: rem(16px);
+    color: $ink-light;
+    letter-spacing: 1px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  // ---- The form template (ours, not from DKFDS) ----------------------------------------------
+  // Last, so these placements win over the component rules above. Spacing uses DKFDS's 8px units.
+
+  // Headings inside the dialog: page headings are h1 in the h2 look, section headings h2 in the
+  // h3 or h4 look. DKFDS's h1 is 48px on large screens, which is too big for a dialog.
+  // An h1 in the h2 look keeps the h1's spacing: nothing above, 16px below.
+  h1.h2 {
+    margin-top: 0;
+    margin-bottom: rem(16px);
+  }
+  .h3,
+  .h4 {
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  // Back link, then the step subheading, then the error summary, above the question.
+  .dkfds-form__progress {
+    margin-bottom: 8px;
+    line-height: rem(20px);
+  }
+  .dkfds-form__progress-count {
+    white-space: nowrap;
+  }
+  .dkfds-form__error-summary {
+    margin-bottom: 24px;
+    .nobullet-list {
+      margin: 8px 0 0;
+      > li:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  // A question that is the page heading: the label or legend holds the heading.
+  .dkfds-form__heading {
+    margin-top: 0;
+    margin-bottom: 16px;
+    .form-label {
+      font: inherit;
+      color: inherit;
+      max-width: none;
+    }
+  }
+  legend .dkfds-form__heading {
+    margin-bottom: 8px;
+  }
+  // "(frivilligt)" keeps the heading's size, in the regular weight.
+  .dkfds-form__heading .weight-normal {
+    font-weight: $normal;
+  }
+
+  // The button at the end of each step.
+  .kf-actions,
+  .dkfds-form__buttons {
+    margin-top: 40px;
+  }
+
+  // Start page: the lead paragraph sits closer to the heading.
+  .dkfds-form__lead {
+    margin-top: 0;
+  }
+
+  // Check page: question, answer and change link. The answer can be long (an email address).
+  .dkfds-form__summary {
+    margin-top: 0;
+    th {
+      width: 40%;
+    }
+    td {
+      overflow-wrap: anywhere;
+    }
+    .dkfds-form__summary-action {
+      text-align: right;
+      white-space: nowrap;
+      width: 1%;
+    }
+  }
+  @media screen and (max-width: ($md - 1px)) {
+    .dkfds-form__summary {
+      th,
+      .dkfds-form__summary-action {
+        width: auto;
+        text-align: left;
+      }
+      // The change link sits right under the answer, not a whole row below it.
+      td.dkfds-form__summary-action {
+        padding-top: 0;
+      }
+    }
+  }
+
+  // Confirmation page.
+  .dkfds-form__reference {
+    font-size: rem(20px);
+    font-weight: $bold;
+    white-space: nowrap;
+  }
+  ol.dkfds-form__next > li:first-child {
+    margin-top: 0;
+  }
+  .kf-code {
+    margin: 0;
+    background: $gray-100;
+    border-radius: $radius;
+    color: $ink;
+    font-size: rem(14px);
+  }
+
+  // Forced colours (ours: DKFDS draws the radio's dot and the checkbox's tick with background
+  // colours, which forced colours remove).
+  @media (forced-colors: active) {
+    .form-radio:checked + label::after {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+    }
+    .form-checkbox:checked + label::before {
+      forced-color-adjust: none;
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+    .alert {
+      border: 1px solid CanvasText;
+    }
+  }
+
+  // On phones the engine keeps the button in a bar at the bottom (kf-form.css). Give it the
+  // form's surface and DKFDS's light border, with the button the full width.
+  .kf-actions {
+    @media (max-width: 639.98px) {
+      margin-top: 32px;
+      background: white;
+      border-top-color: $gray-300;
+      .button {
+        width: 100%;
+      }
+    }
+  }
+}

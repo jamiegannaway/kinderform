@@ -21,18 +21,25 @@ if (!out) throw new Error("Give the output path, for example site/src/lib/world-
 // that: their labels sit out at sea ("callout"), joined to a point inside the country ("target")
 // by a thin line. "align" says which side of the label touches the callout point.
 const COUNTRIES = [
-  { code: "uk", id: "826", name: "United Kingdom", label: [-24, 67], target: [-2, 54], align: "right" },
+  { code: "uk", id: "826", name: "United Kingdom", label: [-24, 66], target: [-2, 54], align: "right" },
   { code: "us", id: "840", name: "United States", label: [-99, 37.5] },
-  { code: "ca", id: "124", name: "Canada", label: [-106, 61] },
+  { code: "ca", id: "124", name: "Canada", label: [-112, 60] },
   { code: "au", id: "036", name: "Australia", label: [134, -25.5] },
-  { code: "de", id: "276", name: "Germany", label: [24, 54], target: [10.4, 51.2], align: "left" },
+  { code: "de", id: "276", name: "Germany", label: [36, 35], target: [10.4, 51.2], align: "left" },
   { code: "fr", id: "250", name: "France", label: [-24, 44.5], target: [2.4, 46.8], align: "right" },
   { code: "es", id: "724", name: "Spain", label: [-24, 33], target: [-3.7, 40.2], align: "right" },
-  { code: "ie", id: "372", name: "Ireland", label: [-24, 56], target: [-8, 53.2], align: "right" },
-  { code: "nl", id: "528", name: "Netherlands", label: [14, 66], target: [5.5, 52.3], align: "left" },
+  { code: "ie", id: "372", name: "Ireland", label: [-24, 55], target: [-8, 53.2], align: "right" },
+  // The Netherlands is reached down the North Sea, so its line crosses no other highlighted country.
+  { code: "nl", id: "528", name: "Netherlands", label: [-4, 79], target: [5.5, 52.3], align: "right" },
   { code: "nz", id: "554", name: "New Zealand", label: [160, -50], target: [172.5, -42], align: "right" },
   // Singapore is too small for the 1:110m map, so it is drawn as a dot at "dot".
   { code: "sg", id: "702", name: "Singapore", label: [96, -12], target: [103.8, 1.35], align: "right", dot: [103.8, 1.35] },
+  // The Nordic labels sit in a column over Russia, 10 to 13 degrees apart, with Germany at the
+  // bottom. Each line reaches its country without crossing another highlighted one. Sweden's
+  // place, when it joins: label [36, 56.5], target [15.5, 60].
+  { code: "no", id: "578", name: "Norway", label: [36, 80], target: [15, 67.5], align: "left" },
+  { code: "fi", id: "246", name: "Finland", label: [36, 67], target: [26, 63.5], align: "left" },
+  { code: "dk", id: "208", name: "Denmark", label: [36, 46], target: [10, 56.3], align: "left" },
 ]
 
 const all = topojson.feature(world, world.objects.countries).features.filter((f) => f.id !== "010") // no Antarctica

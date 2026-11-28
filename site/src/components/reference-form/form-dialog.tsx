@@ -33,6 +33,9 @@ const LOADERS: Record<FormCountry, () => Promise<{ default: Loaded }>> = {
   nl: () => import("./load-nl"),
   nz: () => import("./load-nz"),
   sg: () => import("./load-sg"),
+  no: () => import("./load-no"),
+  dk: () => import("./load-dk"),
+  fi: () => import("./load-fi"),
 }
 
 const BASE = "/example-form"
@@ -180,6 +183,17 @@ export function FormDialog({ initial, pageTitle }: { initial: FormCountry | null
               France's State design system may only be used by State services. So the French form uses Cunningham,
               an open design system from the French State's digital office. Spain's central system is not open, so the
               Spanish form uses DESY, the open design system of the Government of Aragon.
+            </li>
+            <li>
+              The Norwegian form uses Designsystemet, the open design system that Norway&rsquo;s digital agency runs
+              for the public sector. It has a plain theme of our own, not an agency&rsquo;s.
+            </li>
+            <li>
+              The Danish form uses Det Fælles Designsystem, the shared design system of Danish public bodies, with its
+              neutral theme. The borger.dk and Virk themes belong to those two sites.
+            </li>
+            <li>
+              The Finnish form uses the Suomi.fi design system without its logo, which only Suomi.fi services may use.
             </li>
             <li>None of the forms carries government branding, because Kinderform is not a government service.</li>
             <li>

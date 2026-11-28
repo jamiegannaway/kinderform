@@ -27,6 +27,9 @@ const local: Record<FormCountry, { language: string; location: string }> = {
   nz: { language: "English", location: "a 4-digit New Zealand postcode" },
   // Singapore's fostering scheme is national, so its form does not ask where someone lives.
   sg: { language: "English", location: "" },
+  no: { language: "Norwegian (Bokmål)", location: "a 4-digit Norwegian postcode" },
+  dk: { language: "Danish", location: "a 4-digit Danish postcode" },
+  fi: { language: "Finnish", location: "the first 3 digits of a Finnish postcode" },
 }
 
 export const LOCAL_STARTERS: Starter[] = FORM_COUNTRIES.flatMap(({ code, name }) => {

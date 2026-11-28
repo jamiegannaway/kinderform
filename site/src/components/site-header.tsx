@@ -225,7 +225,10 @@ export function SiteFooter() {
               <h2 id="footer-community" className="font-medium text-foreground">
                 What do you really need?
               </h2>
-              <p className="leading-6">Tell us in the Kinderform community on WhatsApp.</p>
+              <p className="leading-6">
+                Tell us in the Kinderform community on WhatsApp, for people who work in fostering and adoption
+                services.
+              </p>
               <Button asChild size="sm">
                 <a href={COMMUNITY_URL}>
                   <MessageCircle aria-hidden="true" />

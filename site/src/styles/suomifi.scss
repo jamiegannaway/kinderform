@@ -1,0 +1,1018 @@
+// Suomi.fi design system for the Finnish reference form only, without the Suomi.fi brand.
+//
+// Ported from these packages by the Digital and Population Data Services Agency (DVV), which
+// was called the Population Register Centre when the licences were written:
+//   - suomifi-ui-components 19.0.0 (https://github.com/vrk-kpa/suomifi-ui-components)
+//   - suomifi-design-tokens 7.0.0 (https://github.com/vrk-kpa/suomifi-design-tokens), the
+//     version suomifi-ui-components 19.0.0 depends on
+//   - suomifi-icons 8.1.0 (https://github.com/vrk-kpa/suomifi-icons), drawn as inline SVG by
+//     site/src/components/reference-form/suomifi.tsx
+// Each package is under the MIT License, as its LICENSE file says:
+//
+//   MIT License
+//
+//   Copyright (c) 2018 Population Register Centre (suomifi-ui-components)
+//   Copyright (c) 2019 Population Register Centre (suomifi-design-tokens)
+//   Copyright (c) 2022 Population Register Centre (suomifi-icons)
+//
+//   Permission is hereby granted, free of charge, to any person obtaining a copy
+//   of this software and associated documentation files (the "Software"), to deal
+//   in the Software without restriction, including without limitation the rights
+//   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//   copies of the Software, and to permit persons to whom the Software is
+//   furnished to do so, subject to the following conditions:
+//
+//   The above copyright notice and this permission notice shall be included in all
+//   copies or substantial portions of the Software.
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//   SOFTWARE.
+//
+// (suomifi-ui-components' LICENSE also carries the MIT notice of React Training LLC, for code
+// of theirs it includes. None of that code is used here.)
+//
+// No Suomi.fi branding: no Suomi.fi logo or brand mark, whose use is limited to the Suomi.fi
+// brand family, no Finnish state lion or coat of arms, and no Suomi.fi header or login. Only the
+// components' look is used. Kinderform is not a government service.
+//
+// Why a port: the React components are built with styled-components, which writes their CSS
+// into the page at runtime. The Content-Security-Policy blocks that. So the form is plain HTML
+// with the components' own class names (site/src/components/reference-form/suomifi.tsx), and the
+// rules below are the CSS that styled-components produces for each component with the default
+// Suomi.fi theme, read from a server render of the 19.0.0 components and rewritten with the
+// design tokens as custom properties. Taken from the package: Heading, Paragraph, Text, Link,
+// Button, Label, HintText, StatusText, TextInput, RadioButtonGroup and RadioButton,
+// CheckboxGroup and Checkbox, InlineAlert, ErrorSummary, Details and VisuallyHidden, with the
+// parts of their reset styles that matter here. Everything, tokens included, sits under
+// .suomifi-form, so nothing reaches the rest of the site (Tailwind and shadcn/ui), and it is
+// unlayered, so Tailwind's preflight (in @layer base) cannot undo it. The form keeps Suomi.fi's
+// light colours in both site themes, like the other countries' forms.
+//
+// Changes from the original:
+//   - The components take a smallScreen prop; here the small-screen sizes apply below 640px,
+//     where the form fills the screen.
+//   - Hint text for a radio or checkbox group sits after the legend, not inside it, so the
+//     group's name stays the question alone; the hint is linked with aria-describedby.
+//   - The checkbox group's legend text is a span, not a label pointing at the group.
+//   - A question that is the page heading puts the label or legend inside an h1.
+//   - The form template rules at the end are ours.
+//
+// Font: Source Sans 3 (SIL Open Font License 1.1), the Suomi.fi typeface, self-hosted in
+// site/public/fonts/suomifi/ with OFL.txt: the Latin and Latin Extended variable files from
+// @fontsource-variable/source-sans-3 5.3.1. Suomi.fi serves the font from its own site; this
+// site loads nothing from other sites.
+
+// ---- Font -----------------------------------------------------------------------------------
+
+@mixin face($subset, $range) {
+  @font-face {
+    font-family: "Source Sans 3";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 200 900;
+    src: url("/fonts/suomifi/source-sans-3-#{$subset}-wght-normal.woff2") format("woff2-variations");
+    unicode-range: $range;
+  }
+}
+@include face(
+  "latin",
+  (U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD)
+);
+// Names with letters beyond basic Latin (š, ž, ł) keep the font.
+@include face(
+  "latin-ext",
+  (U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F,
+    U+A720-A7FF)
+);
+
+// ---- Typography (the text mixins of suomifi-design-tokens) -----------------------------------
+
+// What every Suomi.fi text style starts with (the components' font base).
+@mixin font-base {
+  letter-spacing: 0;
+  text-decoration: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--fi-font-family);
+}
+@mixin text($size, $line-height, $weight) {
+  @include font-base;
+  font-size: $size;
+  line-height: $line-height;
+  font-weight: $weight;
+}
+// fi-text-body-text, fi-text-body-semi-bold, -small, fi-text-action-element-inner-text(-bold)
+@mixin body-text {
+  @include text(18px, 1.5, 400);
+}
+@mixin body-semi-bold {
+  @include text(18px, 1.5, 600);
+}
+@mixin body-text-small {
+  @include text(16px, 1.5, 400);
+}
+@mixin body-semi-bold-small {
+  @include text(16px, 1.5, 600);
+}
+
+// fi-focus-absolute-focus: the focus ring drawn by an ::after box.
+@mixin absolute-focus {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border-radius: var(--fi-radius-focus);
+  background-color: transparent;
+  border: 0 solid var(--fi-color-white-base);
+  box-sizing: border-box;
+  box-shadow: var(--fi-focus-ring);
+  z-index: 9999;
+}
+
+$small-screen: "(max-width: 639.98px)";
+
+.suomifi-form {
+  // ---- Tokens (suomifi-design-tokens 7.0.0) -------------------------------------------------
+
+  --fi-color-white-base: hsl(0, 0%, 100%);
+  --fi-color-black-base: hsl(0, 0%, 13%);
+  --fi-color-black-light1: hsl(0, 0%, 42%);
+  --fi-color-brand-base: hsl(214, 100%, 24%);
+  --fi-color-depth-dark1: hsl(202, 7%, 40%);
+  --fi-color-depth-dark2: hsl(201, 7%, 46%);
+  --fi-color-depth-dark3: hsl(201, 7%, 58%);
+  --fi-color-depth-base: hsl(202, 7%, 67%);
+  --fi-color-depth-light1: hsl(202, 7%, 80%);
+  --fi-color-depth-light2: hsl(202, 7%, 93%);
+  --fi-color-depth-light3: hsl(202, 7%, 97%);
+  --fi-color-depth-secondary: hsl(215, 100%, 97%);
+  --fi-color-depth-secondary-dark1: hsl(215, 100%, 95%);
+  --fi-color-highlight-dark1: hsl(212, 63%, 37%);
+  --fi-color-highlight-base: hsl(212, 63%, 45%);
+  --fi-color-highlight-light1: hsl(212, 63%, 49%);
+  --fi-color-highlight-light2: hsl(212, 63%, 90%);
+  --fi-color-highlight-light3: hsl(212, 63%, 95%);
+  --fi-color-highlight-light4: hsl(212, 63%, 98%);
+  --fi-color-accent-base: hsl(23, 82%, 50%);
+  --fi-color-accent-secondary: hsl(196, 77%, 44%);
+  --fi-color-accent-tertiary-dark1: hsl(284, 36%, 45%);
+  --fi-color-success-base: hsl(166, 90%, 34%);
+  --fi-color-warning-base: hsl(42, 93%, 50%);
+  --fi-color-warning-light1: hsl(42, 100%, 94%);
+  --fi-color-alert-base: hsl(3, 59%, 43%);
+  --fi-color-alert-light1: hsl(0, 59%, 96%);
+  --fi-color-info-base: hsl(215, 86%, 51%);
+  --fi-color-info-light1: hsl(216, 100%, 96%);
+
+  --fi-spacing-xxs: 5px;
+  --fi-spacing-xs: 10px;
+  --fi-spacing-s: 15px;
+  --fi-spacing-m: 20px;
+  --fi-spacing-l: 25px;
+  --fi-spacing-xl: 30px;
+  --fi-spacing-xxl: 40px;
+  --fi-spacing-xxxl: 60px;
+  --fi-spacing-inset-s: 6px;
+  --fi-spacing-inset-m: 8px;
+  --fi-spacing-inset-l: 10px;
+  --fi-spacing-inset-xl: 16px;
+
+  --fi-radius-basic: 2px;
+  --fi-radius-focus: 2px;
+
+  --fi-gradient-highlight-base-to-highlight-dark1: linear-gradient(
+    0deg,
+    hsl(212, 63%, 37%) 0%,
+    hsl(212, 63%, 45%) 100%
+  );
+  --fi-gradient-highlight-light1-to-highlight-base: linear-gradient(
+    0deg,
+    hsl(212, 63%, 45%) 0%,
+    hsl(212, 63%, 49%) 100%
+  );
+  --fi-gradient-white-base-to-depth-light2: linear-gradient(-180deg, hsl(202, 7%, 93%) 0%, hsla(0, 0%, 100%, 0) 100%);
+  --fi-shadow-invert-text-shadow: 0 1px 1px hsla(214, 100%, 24%, 0.5);
+
+  // fi-focus-box-shadow-focus: a 2px ring in the secondary accent colour.
+  --fi-focus-ring: 0 0 0 2px hsl(196, 77%, 44%);
+
+  --fi-font-family: "Source Sans 3", "Helvetica Neue", "Arial", sans-serif;
+
+  // ---- Base (the components' reset, and the body text) --------------------------------------
+
+  @include body-text;
+  color: var(--fi-color-black-base);
+
+  :where(h1, h2, h3, p, ul, ol, dl, dd, fieldset, legend, figure, pre) {
+    margin: 0;
+    padding: 0;
+  }
+  :where(fieldset) {
+    border: 0;
+    min-width: 0;
+  }
+  :where(input, button) {
+    font: inherit;
+    color: inherit;
+  }
+  :where(button) {
+    background: none;
+    border: 0;
+  }
+
+  // ---- Icon (suomifi-icons) -----------------------------------------------------------------
+
+  .fi-icon {
+    display: inline-block;
+    vertical-align: baseline;
+    width: 1em;
+    height: 1em;
+  }
+  .fi-icon .fi-icon-base-fill {
+    fill: currentColor;
+  }
+
+  // ---- VisuallyHidden -----------------------------------------------------------------------
+
+  .fi-visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  // ---- Heading ------------------------------------------------------------------------------
+
+  .fi-heading {
+    @include body-text;
+    color: var(--fi-color-black-base);
+  }
+  .fi-heading--h1 {
+    @include text(40px, 48px, 300);
+  }
+  .fi-heading--h2 {
+    @include text(28px, 34px, 600);
+  }
+  .fi-heading--h3 {
+    @include text(22px, 28px, 600);
+  }
+  .fi-heading--h4 {
+    @include text(18px, 24px, 600);
+  }
+  @media #{$small-screen} {
+    .fi-heading--h1 {
+      @include text(32px, 38px, 300);
+    }
+    .fi-heading--h2 {
+      @include text(26px, 32px, 600);
+    }
+    .fi-heading--h3 {
+      @include text(20px, 26px, 600);
+    }
+    .fi-heading--h4 {
+      @include text(16px, 20px, 600);
+    }
+  }
+
+  // ---- Paragraph and Text -------------------------------------------------------------------
+
+  .fi-paragraph {
+    @include body-text;
+    color: var(--fi-color-black-base);
+    margin: 0;
+  }
+  .fi-text {
+    @include body-text;
+    color: var(--fi-color-black-base);
+  }
+  .fi-text--bold {
+    @include body-semi-bold;
+  }
+  .fi-text--lead {
+    @include text(22px, 1.5, 400);
+  }
+  .fi-text--small-screen {
+    @include body-text-small;
+  }
+  .fi-text--small-screen.fi-text--bold {
+    @include body-semi-bold-small;
+  }
+  @media #{$small-screen} {
+    .fi-text--lead {
+      @include text(20px, 1.5, 400);
+    }
+  }
+
+  // ---- Link ---------------------------------------------------------------------------------
+
+  .fi-link {
+    @include body-text;
+    color: var(--fi-color-highlight-base);
+    text-decoration: none;
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-within {
+      color: var(--fi-color-highlight-base);
+    }
+    &:focus,
+    &:focus-within {
+      text-decoration: none;
+    }
+    &:focus {
+      border-radius: var(--fi-radius-focus);
+      box-shadow: var(--fi-focus-ring);
+      outline: 3px solid transparent;
+    }
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: var(--fi-color-accent-tertiary-dark1);
+    }
+  }
+  .fi-link--small {
+    font-size: 16px;
+  }
+
+  // ---- Button: primary and secondary --------------------------------------------------------
+
+  .fi-button {
+    @include text(14px, 20px, 600);
+    display: inline-block;
+    max-width: 100%;
+    padding: 9px 20px;
+    min-height: 40px;
+    color: var(--fi-color-white-base);
+    background: var(--fi-gradient-highlight-base-to-highlight-dark1);
+    border-radius: var(--fi-radius-basic);
+    text-align: center;
+    text-shadow: var(--fi-shadow-invert-text-shadow);
+    cursor: pointer;
+    border: 1px solid transparent;
+    &:focus {
+      position: relative;
+      outline: 3px solid transparent;
+    }
+    &:focus::after {
+      @include absolute-focus;
+    }
+    &:hover {
+      background: var(--fi-gradient-highlight-light1-to-highlight-base);
+      outline: 2px solid transparent;
+    }
+    &:active {
+      background: var(--fi-color-highlight-dark1);
+    }
+  }
+  .fi-button--secondary {
+    color: var(--fi-color-highlight-base);
+    background: none;
+    background-color: var(--fi-color-white-base);
+    border: 1px solid var(--fi-color-highlight-base);
+    text-shadow: none;
+    &:hover {
+      background: var(--fi-gradient-white-base-to-depth-light2);
+    }
+    &:active {
+      background: none;
+      background-color: var(--fi-color-depth-light2);
+    }
+  }
+  .fi-button--fullwidth {
+    display: block;
+    width: 100%;
+  }
+  .fi-button_icon {
+    display: inline-block;
+  }
+  .fi-button > .fi-button_icon > .fi-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+    transform: translateY(-0.1em);
+  }
+  .fi-button > .fi-button_icon--right > .fi-icon {
+    margin-right: 0;
+    margin-left: 8px;
+  }
+
+  // ---- Label, HintText and StatusText -------------------------------------------------------
+
+  .fi-label .fi-label_label-span {
+    @include body-semi-bold-small;
+    display: inline-block;
+    vertical-align: middle;
+    color: var(--fi-color-black-base);
+  }
+  .fi-label .fi-label_optional-text {
+    font-family: var(--fi-font-family);
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .fi-hint-text {
+    @include body-text-small;
+    display: block;
+    color: var(--fi-color-black-base);
+  }
+  .fi-status-text {
+    @include text(14px, 20px, 600);
+    display: block;
+    color: var(--fi-color-black-base);
+    .fi-icon {
+      vertical-align: middle;
+      transform: translateY(-0.1em);
+      margin-right: 5px;
+    }
+  }
+  .fi-status-text--error {
+    color: var(--fi-color-alert-base);
+  }
+
+  // ---- TextInput ----------------------------------------------------------------------------
+
+  .fi-text-input {
+    width: 290px;
+    max-width: 100%;
+    // :where keeps these as weak as the component's own spacing rules below, which win by order.
+    :where(.fi-label, .fi-hint-text, .fi-status-text) {
+      margin: 0;
+    }
+  }
+  .fi-text-input--full-width {
+    width: 100%;
+  }
+  .fi-text-input_wrapper {
+    display: block;
+    width: 100%;
+  }
+  .fi-text-input_label--visible {
+    margin-bottom: var(--fi-spacing-xs);
+  }
+  .fi-text-input_wrapper .fi-hint-text {
+    margin-bottom: var(--fi-spacing-xs);
+  }
+  .fi-text-input_bottom-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .fi-text-input_statusText--has-content {
+    margin-top: var(--fi-spacing-xxs);
+  }
+  .fi-text-input_input-element-container {
+    display: block;
+    &:focus-within {
+      position: relative;
+      outline: 3px solid transparent;
+    }
+    &:focus-within::after {
+      @include absolute-focus;
+    }
+  }
+  .fi-text-input_input {
+    @include body-text-small;
+    color: var(--fi-color-black-base);
+    display: inline-block;
+    min-width: 40px;
+    width: 100%;
+    max-width: 100%;
+    min-height: 40px;
+    margin: 0;
+    padding: 6px 16px 6px 10px;
+    border: 1px solid var(--fi-color-depth-dark3);
+    border-radius: var(--fi-radius-basic);
+    line-height: 1;
+    background-color: var(--fi-color-white-base);
+    &:focus {
+      outline: none;
+    }
+  }
+  .fi-text-input--error .fi-text-input_input {
+    border: 2px solid var(--fi-color-alert-base);
+    padding-left: 9px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  // ---- RadioButtonGroup and RadioButton -----------------------------------------------------
+
+  .fi-radio-button-group {
+    @include body-text;
+    color: var(--fi-color-black-base);
+    // :where keeps these as weak as the component's own spacing rules below, which win by order.
+    :where(.fi-label, .fi-hint-text, .fi-status-text) {
+      margin: 0;
+    }
+    .fi-status-text {
+      line-height: 18px;
+    }
+  }
+  .fi-radio-button-group_legend--with-margin,
+  .fi-checkbox-group_legend--with-margin {
+    margin-bottom: var(--fi-spacing-xs);
+  }
+  .fi-radio-button-group_statusText--has-content,
+  .fi-checkbox-group_statusText--has-content {
+    margin-top: var(--fi-spacing-xxs);
+    padding-left: 3px;
+  }
+  .fi-radio-button-group_container > .fi-radio-button {
+    margin: 0 0 var(--fi-spacing-xs);
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .fi-radio-button {
+    @include body-text;
+    color: var(--fi-color-black-base);
+    position: relative;
+  }
+  .fi-radio-button_hintText {
+    @include body-text-small;
+    display: block;
+    padding-left: 26px;
+    color: var(--fi-color-depth-dark1);
+  }
+  .fi-radio-button_label {
+    display: block;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+    line-height: 27px;
+    padding-left: 26px;
+  }
+  .fi-radio-button_input {
+    opacity: 0;
+    position: absolute;
+    z-index: -9999;
+    height: 18px;
+    width: 18px;
+    top: 5px;
+    left: 2px;
+    margin: 0;
+  }
+  .fi-radio-button_icon_wrapper {
+    position: absolute;
+    top: 0.1em;
+    left: 0;
+    margin: 2px;
+    height: 18px;
+    width: 18px;
+    line-height: 0;
+    pointer-events: none;
+    .fi-radio-button_icon {
+      width: 18px;
+      height: 18px;
+    }
+    .fi-icon-radio-base {
+      stroke: var(--fi-color-depth-dark3);
+      fill: var(--fi-color-white-base);
+    }
+  }
+  .fi-radio-button_input:checked + .fi-radio-button_icon_wrapper {
+    .fi-icon-radio-checked {
+      fill: var(--fi-color-highlight-base);
+    }
+    .fi-icon-radio-base {
+      stroke: var(--fi-color-highlight-base);
+    }
+  }
+  .fi-radio-button_input:focus + .fi-radio-button_icon_wrapper::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    top: -1px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-sizing: border-box;
+    box-shadow: var(--fi-focus-ring);
+    z-index: 9999;
+    outline: 2px solid transparent;
+  }
+  .fi-radio-button_input:focus:not(:focus-visible) + .fi-radio-button_icon_wrapper::after {
+    box-shadow: none;
+  }
+  .fi-radio-button--error .fi-radio-button_input + .fi-radio-button_icon_wrapper .fi-icon-radio-base {
+    stroke: var(--fi-color-alert-base);
+  }
+  .fi-radio-button--error .fi-radio-button_input:checked + .fi-radio-button_icon_wrapper .fi-icon-radio-checked {
+    fill: var(--fi-color-alert-base);
+  }
+
+  // ---- CheckboxGroup and Checkbox -----------------------------------------------------------
+
+  .fi-checkbox-group {
+    color: var(--fi-color-black-base);
+    .fi-status-text {
+      line-height: 18px;
+    }
+  }
+  .fi-checkbox-group_container > .fi-checkbox {
+    margin-bottom: var(--fi-spacing-xs);
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .fi-checkbox_container {
+    @include body-text-small;
+    color: var(--fi-color-black-base);
+    position: relative;
+    // :where keeps these as weak as the component's own spacing rules below, which win by order.
+    :where(.fi-label, .fi-hint-text, .fi-status-text) {
+      margin: 0;
+    }
+    .fi-hint-text {
+      padding-left: 25px;
+      color: var(--fi-color-depth-dark1);
+    }
+  }
+  .fi-checkbox_label {
+    position: relative;
+    display: block;
+    padding-left: 25px;
+    cursor: pointer;
+    line-height: 27px;
+    min-height: 18px;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.25em;
+      box-sizing: border-box;
+      height: 18px;
+      width: 18px;
+      border: 1px solid var(--fi-color-depth-dark3);
+      border-radius: var(--fi-radius-basic);
+      background-color: var(--fi-color-white-base);
+    }
+  }
+  .fi-checkbox_icon {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    left: 4px;
+    top: 9px;
+  }
+  .fi-checkbox_container:focus-within .fi-checkbox_label::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    top: calc(0.25em - 1px);
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--fi-radius-focus);
+    background-color: transparent;
+    box-sizing: border-box;
+    box-shadow: var(--fi-focus-ring);
+    z-index: 9999;
+    outline: 2px solid transparent;
+  }
+  .fi-checkbox_input {
+    position: absolute;
+    opacity: 0;
+    z-index: -9999;
+    margin: 0;
+  }
+  .fi-checkbox--checked .fi-checkbox_label::before {
+    border-color: var(--fi-color-highlight-base);
+    background-color: var(--fi-color-highlight-base);
+  }
+  .fi-checkbox--checked .fi-checkbox_label > .fi-checkbox_icon .fi-icon-base-fill {
+    fill: var(--fi-color-white-base);
+  }
+  .fi-checkbox--error .fi-checkbox_label::before {
+    border-color: var(--fi-color-alert-base);
+    border-width: 2px;
+  }
+  .fi-checkbox--checked.fi-checkbox--error .fi-checkbox_label::before {
+    border-color: var(--fi-color-alert-base);
+    background-color: var(--fi-color-alert-base);
+  }
+
+  // ---- InlineAlert: neutral and warning -----------------------------------------------------
+
+  .fi-inline-alert {
+    @include body-text-small;
+    color: var(--fi-color-black-base);
+    width: 100%;
+    padding: 5px 0 4px;
+    border: 1px solid;
+  }
+  .fi-inline-alert_style-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  .fi-inline-alert_icon {
+    margin-left: 20px;
+    margin-top: 16px;
+    min-height: 24px;
+    min-width: 24px;
+    height: 24px;
+    width: 24px;
+  }
+  .fi-inline-alert_text-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 15px;
+    margin: 15px 0;
+  }
+  .fi-inline-alert_label {
+    @include body-semi-bold;
+    margin-bottom: 5px;
+  }
+  .fi-inline-alert_content {
+    @include body-text-small;
+    vertical-align: middle;
+  }
+  .fi-inline-alert--neutral {
+    background-color: var(--fi-color-info-light1);
+    border-color: rgba(23, 112, 238, 0.2);
+    border-left: 4px solid var(--fi-color-info-base);
+    .fi-inline-alert_text-content-wrapper {
+      padding-left: 20px;
+    }
+  }
+  .fi-inline-alert--warning {
+    background-color: var(--fi-color-warning-light1);
+    border-color: rgba(246, 175, 9, 0.2);
+    border-left: 4px solid var(--fi-color-warning-base);
+    .fi-inline-alert_icon .fi-icon-base-fill {
+      fill: var(--fi-color-black-base);
+    }
+  }
+  @media #{$small-screen} {
+    .fi-inline-alert_icon {
+      margin-left: 15px;
+    }
+    .fi-inline-alert_text-content-wrapper,
+    .fi-inline-alert--neutral .fi-inline-alert_text-content-wrapper {
+      padding: 0 10px;
+    }
+  }
+
+  // ---- ErrorSummary -------------------------------------------------------------------------
+
+  .fi-error-summary {
+    @include body-text-small;
+    color: var(--fi-color-black-base);
+    width: 100%;
+    padding: 5px 0 4px;
+    border: 1px solid rgba(174, 51, 45, 0.2);
+    background-color: var(--fi-color-alert-light1);
+    border-left: 4px solid var(--fi-color-alert-base);
+  }
+  .fi-error-summary_style-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  .fi-error-summary_icon {
+    margin-left: 20px;
+    margin-top: 16px;
+    min-height: 24px;
+    min-width: 24px;
+    height: 24px;
+    width: 24px;
+    .fi-icon-base-fill {
+      fill: var(--fi-color-alert-base);
+    }
+  }
+  .fi-error-summary_text-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 15px;
+    margin: 15px 0;
+  }
+  .fi-error-summary_heading {
+    @include body-semi-bold;
+    margin-bottom: 5px;
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+  }
+  .fi-error-summary_content {
+    @include body-text-small;
+    vertical-align: middle;
+    // The bullets hang in the padding, as in Suomi.fi (Tailwind's preflight removes them).
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: disc;
+    }
+  }
+  @media #{$small-screen} {
+    .fi-error-summary_icon {
+      margin-left: 15px;
+    }
+    .fi-error-summary_text-content-wrapper {
+      padding: 0 10px;
+    }
+  }
+
+  // ---- Details ------------------------------------------------------------------------------
+
+  .fi-details {
+    @include body-text;
+    color: var(--fi-color-black-base);
+  }
+  .fi-details_summary {
+    @include body-text-small;
+    color: var(--fi-color-highlight-base);
+    cursor: pointer;
+    &:focus-visible {
+      position: relative;
+      outline: 3px solid transparent;
+    }
+    &:focus-visible::after {
+      @include absolute-focus;
+    }
+  }
+  .fi-details_content {
+    border-left: 2px solid var(--fi-color-highlight-base);
+    padding: 10px 0 5px 15px;
+    margin-left: 4px;
+  }
+
+  // ---- The form template (ours, not from Suomi.fi) ------------------------------------------
+  // Last, so these placements win over the component rules above. Spacing uses the Suomi.fi
+  // spacing tokens.
+
+  // Each step stacks its parts 30px apart, and parts inside a block 10px apart.
+  .suomifi-form__stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--fi-spacing-xl);
+    > .fi-inline-alert,
+    > .suomifi-form__wide {
+      align-self: stretch;
+    }
+  }
+  .suomifi-form__stack-sm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fi-spacing-xs);
+  }
+  // The fields of each question page, 30px apart, then Continue 40px below the last field.
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fi-spacing-xl);
+    > .kf-actions {
+      margin-top: var(--fi-spacing-xs);
+    }
+  }
+
+  // Back link, progress and error summary sit above the form in the engine's step.
+  .suomifi-form__back {
+    margin-bottom: var(--fi-spacing-m);
+    .fi-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      vertical-align: middle;
+      transform: translateY(-0.1em);
+    }
+  }
+  .suomifi-form__progress {
+    color: var(--fi-color-depth-dark1);
+    margin-bottom: var(--fi-spacing-xs);
+  }
+  .suomifi-form__error {
+    margin-bottom: var(--fi-spacing-xl);
+  }
+  // The engine moves focus to the error summary; kf-form.css removes the outline of elements
+  // with tabindex="-1". Draw Suomi.fi's focus ring there instead, so the move is visible.
+  .fi-error-summary[tabindex="-1"]:focus {
+    outline: 3px solid transparent;
+    box-shadow: var(--fi-focus-ring);
+  }
+
+  // A question that is the page heading: the label or legend holds an h1 in the Heading h1 look.
+  .suomifi-form__heading .fi-label_label-span,
+  .suomifi-form__heading .fi-label_optional-text {
+    display: inline;
+    color: inherit;
+    font: inherit;
+  }
+  // A group's legend is an ordinary box, so its margin holds; then the hint, 10px above the
+  // options, as in Suomi.fi (where the hint sits inside the legend).
+  .fi-radio-button-group fieldset > legend,
+  .fi-checkbox-group fieldset > legend {
+    float: left;
+    width: 100%;
+    + * {
+      clear: both;
+    }
+  }
+  .suomifi-form__group-hint {
+    margin: 0 0 var(--fi-spacing-xs);
+  }
+
+  // Short answers get a narrower box: a few digits.
+  .suomifi-form__input--narrow {
+    width: 120px;
+  }
+
+  // Check page: a block for each section, then each question, answer and change link. Question
+  // and change link side by side, the answer under them; on wider screens all three in a row.
+  .suomifi-form__summary {
+    border-top: 1px solid var(--fi-color-depth-light1);
+  }
+  .suomifi-form__summary-item {
+    display: grid;
+    grid-template-areas: "key action" "value value";
+    grid-template-columns: 1fr auto;
+    column-gap: var(--fi-spacing-m);
+    padding: var(--fi-spacing-s) 0;
+    border-bottom: 1px solid var(--fi-color-depth-light1);
+  }
+  .suomifi-form__summary-key {
+    @include body-semi-bold-small;
+    grid-area: key;
+  }
+  .suomifi-form__summary-value {
+    @include body-text-small;
+    grid-area: value;
+    margin-top: var(--fi-spacing-xxs);
+  }
+  .suomifi-form__summary-action {
+    grid-area: action;
+    text-align: right;
+  }
+  @media (min-width: 640px) {
+    .suomifi-form__summary-item {
+      grid-template-areas: "key value action";
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto;
+    }
+    .suomifi-form__summary-value {
+      margin-top: 0;
+    }
+  }
+
+  // Confirmation page.
+  .suomifi-form__reference {
+    @include text(22px, 28px, 600);
+    white-space: nowrap;
+  }
+  .suomifi-form__list {
+    list-style: decimal;
+    padding-left: 1.4em;
+    li + li {
+      margin-top: var(--fi-spacing-xs);
+    }
+  }
+  // The example reply's label is a heading; it keeps the InlineAlert label look.
+  .fi-inline-alert_label:is(h2, h3) {
+    margin: 0 0 5px;
+  }
+
+  // The record on the confirmation page.
+  .kf-code {
+    border-radius: var(--fi-radius-basic);
+    background: var(--fi-color-depth-light3);
+    border: 1px solid var(--fi-color-depth-light2);
+    color: var(--fi-color-black-base);
+    font-size: 14px;
+    margin-top: var(--fi-spacing-xs);
+  }
+
+  // On phones the engine keeps Continue in a bar at the bottom (kf-form.css). Give it Suomi.fi's
+  // light border, and a full-width button.
+  .kf-actions {
+    @media (max-width: 639.98px) {
+      background: var(--fi-color-white-base);
+      border-top-color: var(--fi-color-depth-light1);
+      .fi-button {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

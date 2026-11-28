@@ -113,7 +113,9 @@ Western Europe first, with the two Asia-Pacific countries asked for. Each has on
 - [ ] Add their enquiry forms to the census, then to the compare tables and the comparison across countries
 - [ ] Read the laws directly where the official sites refused our reader: Lovdata (Norway) and the Swedish and Finnish agencies' pages
 - [ ] Read by hand the forms behind a national login (BankID, MitID, ID-porten, Suomi.fi) or drawn by script
-- [ ] Decide on example forms and starter kits. The audit asks for a local reviewer for each new country first. Design systems found: Norway's Designsystemet (MIT, licence file read), Denmark's Det Fælles Designsystem (free to use; licence not confirmed), Sweden has no national one (the Social Insurance Agency's is MIT by the EU catalogue), Finland's Suomi.fi (MIT by a search result only). None of their government logos or login headers would be used
+- [x] Example forms and starter kits (28 November 2026): Norway with Designsystemet, Denmark with Det Fælles Designsystem and Finland with Suomi.fi, each in its own language. Licence files read: all three are MIT. No government logos, brand themes or login headers. Starter kits in release v0.1.0-draft.5
+- [ ] Sweden: the wording is written, but Sweden has no open national design system a non-government site may use. Its form waits for the neutral design on the new country pages
+- [ ] A native speaker checks the Norwegian, Danish and Finnish wording, and a service in each country checks the location question and the team names
 - [ ] Later, once an open design system that non-government sites may use is found: Portugal, Austria and Switzerland
 
 ## Now: services the registers missed

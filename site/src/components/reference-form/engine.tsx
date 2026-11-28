@@ -60,7 +60,7 @@ export type Page = {
 }
 export type UiConfig = {
   locale: string
-  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy" | "govie" | "nl-design" | "nzgds" | "sgds"
+  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy" | "govie" | "nl-design" | "nzgds" | "sgds" | "designsystemet" | "dkfds" | "suomifi"
   sections: string[]
   start: { title: string; body: string[]; button: string }
   pages: Page[]
@@ -420,7 +420,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                 rows={visible.flatMap((p, pageIndex) =>
                   p.elements.map((c) => ({
                     key: fieldOf(c.scope),
-                    label: c.label.replace(/\s*\((optional|facultatif|opcional|niet verplicht)\)$/i, ""),
+                    label: c.label.replace(/\s*\((optional|facultatif|opcional|niet verplicht|valgfritt|frivilligt|vapaaehtoinen)\)$/i, ""),
                     value: displayValue(c, data[fieldOf(c.scope)], ui.locale),
                     pageIndex,
                   })),
@@ -469,6 +469,10 @@ const PHRASES = {
   de: { check: "Bitte prüfen Sie diese Angabe", notGiven: "Nicht angegeben", yes: "Ja", no: "Nein", example: "Kinderform-Beispiel" },
   es: { check: "Revise esta respuesta", notGiven: "No indicado", yes: "Sí", no: "No", example: "Ejemplo de Kinderform" },
   nl: { check: "Controleer dit antwoord", notGiven: "Niet ingevuld", yes: "Ja", no: "Nee", example: "Kinderform-voorbeeld" },
+  // Norwegian Bokmål (nb-NO).
+  nb: { check: "Sjekk dette svaret", notGiven: "Ikke svart", yes: "Ja", no: "Nei", example: "Kinderform-eksempel" },
+  da: { check: "Tjek dette svar", notGiven: "Ikke udfyldt", yes: "Ja", no: "Nej", example: "Kinderform-eksempel" },
+  fi: { check: "Tarkista tämä vastaus", notGiven: "Ei vastausta", yes: "Kyllä", no: "Ei", example: "Kinderform-esimerkki" },
 }
 export const phrases = (locale: string) =>
   PHRASES[locale.slice(0, 2).toLowerCase() as keyof typeof PHRASES] ?? PHRASES.en
@@ -504,6 +508,34 @@ export function exampleMessage(ui: UiConfig, record: Data, due: Date) {
     if (record.knows_child)
       return `Hoi ${name}, bedankt voor je bericht. Je vraagt naar een kind dat je al kent. Daarom hebben we je bericht doorgestuurd naar Sam van ${ui.confirmation.kinship_team}. Sam gaat ${how}, uiterlijk op ${day}. Sam kan je de mogelijkheden uitleggen en vertellen waar je onafhankelijk advies vindt.`
     return `Hoi ${name}, bedankt voor je bericht. Ik ben Sanne van ${ui.confirmation.team}. Ik ga ${how}, uiterlijk op ${day}${times ? ", op een van de momenten die je hebt gekozen" : ""}. Je kunt vragen stellen zonder dat je je vastlegt op een aanvraag.`
+  }
+  if (locale.startsWith("nb")) {
+    // Norwegian Bokmål, addressing the reader as "du".
+    const how = by === "email" ? "sende deg en e-post" : by === "text_message" ? "sende deg en SMS" : "ringe deg"
+    if (record.knows_child)
+      return `Hei, ${name}! Takk for at du tok kontakt. Du spør om et barn du allerede kjenner. Derfor har vi sendt meldingen din videre til Sam i ${ui.confirmation.kinship_team}. Sam skal ${how} senest ${day}. Sam kan forklare mulighetene og fortelle deg hvor du kan få uavhengige råd.`
+    return `Hei, ${name}! Takk for at du tok kontakt. Jeg heter Kari og jobber i ${ui.confirmation.team}. Jeg skal ${how} senest ${day}${times ? ", på et av tidspunktene du valgte" : ""}. Du kan stille spørsmål uten å forplikte deg til å søke.`
+  }
+  if (locale.startsWith("da")) {
+    // Danish public bodies address people as "du".
+    const how = by === "email" ? "skrive til dig" : by === "text_message" ? "sende dig en sms" : "ringe til dig"
+    if (record.knows_child)
+      return `Hej ${name}. Tak for din henvendelse. Du spørger om et barn, du allerede kender. Derfor har vi sendt din besked videre til Sam fra ${ui.confirmation.kinship_team}. Sam vil ${how} senest ${day}. Sam kan fortælle dig om mulighederne, og hvor du kan få uafhængig rådgivning.`
+    return `Hej ${name}. Tak for din henvendelse. Jeg hedder Mette og er fra ${ui.confirmation.team}. Jeg vil ${how} senest ${day}${times ? " på et af de tidspunkter, du har valgt" : ""}. Du kan stille spørgsmål uden at forpligte dig til at søge.`
+  }
+  if (locale.startsWith("fi")) {
+    // Finnish services address people as "sinä". The team names are in the elative case
+    // ("perhehoidon tiimistä"), and the day takes -na: "maanantaina 30. marraskuuta".
+    const on = day.replace(/^(\S+)/, "$1na")
+    const [me, sam] =
+      by === "email"
+        ? ["Lähetän sinulle sähköpostia", "lähettää sinulle sähköpostia"]
+        : by === "text_message"
+          ? ["Lähetän sinulle tekstiviestin", "lähettää sinulle tekstiviestin"]
+          : ["Soitan sinulle", "soittaa sinulle"]
+    if (record.knows_child)
+      return `Hei ${name}, kiitos viestistäsi. Kysyt lapsesta, jonka tunnet jo. Siksi välitimme viestisi Samille ${ui.confirmation.kinship_team}. Sam ${sam} viimeistään ${on}. Sam kertoo sinulle vaihtoehdoista ja siitä, mistä saat puolueetonta neuvontaa.`
+    return `Hei ${name}, kiitos viestistäsi. Olen Aino ${ui.confirmation.team}. ${me} viimeistään ${on}${times ? " jonakin valitsemanasi aikana" : ""}. Voit kysyä mitä haluat. Kysyminen ei sido sinua mihinkään.`
   }
   if (locale.startsWith("es")) {
     // "I will" for the named worker, "Sam will" for the kinship team.

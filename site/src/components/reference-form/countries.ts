@@ -12,6 +12,10 @@ export const FORM_COUNTRIES = [
   { code: "nl", name: "Netherlands", system: "NL Design System", short: "NL Design System" },
   { code: "nz", name: "New Zealand", system: "New Zealand Government Design System", short: "NZ Government Design System" },
   { code: "sg", name: "Singapore", system: "Singapore Government Design System", short: "SGDS" },
+  { code: "no", name: "Norway", system: "Designsystemet design system", short: "Designsystemet" },
+  // "Built with the …": the English name first, so the sentence does not read "the Det …".
+  { code: "dk", name: "Denmark", system: "Danish Common Design System (Det Fælles Designsystem)", short: "DKFDS" },
+  { code: "fi", name: "Finland", system: "Suomi.fi design system", short: "Suomi.fi" },
 ] as const
 export type FormCountry = (typeof FORM_COUNTRIES)[number]["code"]
 
