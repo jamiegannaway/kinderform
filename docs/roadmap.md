@@ -102,7 +102,18 @@ Western Europe first, with the two Asia-Pacific countries asked for. Each has on
 - [x] Example forms, without government branding, on the map: Ireland in the Government of Ireland Design System (MIT), the Netherlands in NL Design System components with its neutral Start theme (EUPL-1.2; never the Rijkshuisstijl), New Zealand in the NZ Government Design System (MIT, alpha), Singapore in the Singapore Government Design System (MIT; never the official government banner)
 - [x] Starter kits and flags for each, in kit release v0.1.0-draft.3
 - [ ] Have native speakers review the Dutch wording, and check the te reo Māori in the New Zealand form
-- [ ] Next: Norway (Designsystemet, MIT), Denmark (Det Fælles Designsystem, MIT), Sweden (no national system; the Social Insurance Agency's, MIT) and Finland (Suomi.fi, MIT). Then Japan (the Digital Agency's design system, MIT) and Italy (Bootstrap Italia, BSD-3-Clause). Belgium could share the Dutch and French wording
+- [ ] Next: Japan (the Digital Agency's design system, MIT) and Italy (Bootstrap Italia, BSD-3-Clause). Belgium could share the Dutch and French wording
+
+## Now: Norway, Denmark, Sweden and Finland (first pass)
+
+- [x] Front-door registers (28 November 2026): Norway 33, Denmark 37, Sweden 46, Finland 40 (unverified)
+- [x] Rules registers: Norway 78, Denmark 59, Sweden 62, Finland 68, with the same topics as the other countries (unverified)
+- [x] The question tagger reads Norwegian, Danish, Swedish and Finnish, and flags national ID numbers (personnummer, fødselsnummer, CPR, henkilötunnus)
+- [x] The compare tables include the four countries' rules
+- [ ] Add their enquiry forms to the census, then to the compare tables and the comparison across countries
+- [ ] Read the laws directly where the official sites refused our reader: Lovdata (Norway) and the Swedish and Finnish agencies' pages
+- [ ] Read by hand the forms behind a national login (BankID, MitID, ID-porten, Suomi.fi) or drawn by script
+- [ ] Decide on example forms and starter kits. The audit asks for a local reviewer for each new country first. Design systems found: Norway's Designsystemet (MIT, licence file read), Denmark's Det Fælles Designsystem (free to use; licence not confirmed), Sweden has no national one (the Social Insurance Agency's is MIT by the EU catalogue), Finland's Suomi.fi (MIT by a search result only). None of their government logos or login headers would be used
 - [ ] Later, once an open design system that non-government sites may use is found: Portugal, Austria and Switzerland
 
 ## Now: services the registers missed

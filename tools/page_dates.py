@@ -42,6 +42,10 @@ SOURCES = [
     ("register/nl/policies.csv", ["source_url"]),
     ("register/nz/policies.csv", ["source_url"]),
     ("register/sg/policies.csv", ["source_url"]),
+    ("register/no/policies.csv", ["source_url"]),
+    ("register/dk/policies.csv", ["source_url"]),
+    ("register/se/policies.csv", ["source_url"]),
+    ("register/fi/policies.csv", ["source_url"]),
 ]
 
 

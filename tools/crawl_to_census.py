@@ -51,6 +51,7 @@ RULES = [
     ("consent", "processing", r"consent|i agree|i understand|i accept|data protection|permission to store|process my data|"
                               r"j.accepte|consens"),
     ("contact_identity", "email", r"e-?mail|courriel"),
+    ("contact_identity", "id_number", r"social security|\bssn\b|national insurance|passport number"),
     ("contact_identity", "date_of_birth", r"date of birth|birth ?date|birthday|\bdob\b|date de naissance"),
     ("eligibility", "age", r"\bage\b|\bâge\b|over 1[89]|over 2[15]|years old|\b(?:18|21|25) (?:years|or)"),
     ("contact_identity", "phone", r"phone|mobile|\bcell|telephone|t[ée]l[ée]phone|\bfax\b|\btel\b|contact (?:number|no)"),
@@ -236,6 +237,65 @@ DUTCH = {
 }
 for _key, _words in DUTCH.items():
     MORE[_key] = MORE[_key] + "|" + _words if _key in MORE else _words
+# Norwegian, Danish, Swedish and Finnish, added with the Nordic registers on 28 November 2026. Words are
+# kept specific, because each list is tried on forms in every language (so no bare "par", "make" or "eier").
+NORDIC = {
+    ("consent", "marketing"): r"nyhetsbrev|nyhedsbrev|uutiskirje",
+    ("consent", "privacy_acknowledgement"): r"personvern|privatlivspolitik|persondatapolitik|databeskyttelse|"
+                                            r"integritetspolicy|personuppgifter|tietosuoja",
+    ("consent", "processing"): r"samtykke|samtycke|jag godkänner|godkjenner|suostumu|hyväksyn",
+    ("contact_identity", "email"): r"e-?post\b|sähköposti",
+    ("contact_identity", "id_number"): r"fødselsnummer|personnummer|\bcpr\b|cpr-?nummer|henkilötunnus|\bhetu\b",
+    ("contact_identity", "date_of_birth"): r"fødselsdato|födelsedatum|syntymäaika",
+    ("eligibility", "age"): r"\balder\b(?! på barnet)|\bålder\b(?! på barnet)|\bikä\b|\bikäsi\b",
+    ("contact_identity", "phone"): r"telefon|\bmobil|puhelin|matkapuhelin",
+    ("contact_identity", "postcode"): r"postnummer|postnr|postinumero",
+    ("routing", "local_authority"): r"kommune|kommun\b|bydel|fylke|\bkunta|hyvinvointialue|stadsdel",
+    ("contact_identity", "address"): r"adresse|\badress\b|gateadresse|postadresse|osoite|poststed|postort|postitoimipaikka",
+    ("contact_identity", "name"): r"\bnavn\b|fornavn|etternavn|efternavn|\bnamn\b|förnamn|efternamn|\bnimi\b|etunimi|sukunimi",
+    ("source", "how_heard"): r"hørt om|hvor har du|hvordan fikk du|hur fick du|var hörde du|mistä kuulit|miten kuulit|mistä sait",
+    ("contact_preference", "time"): r"tidspunkt|når (?:kan|passer)|formiddag|ettermiddag|eftermiddag|\bkveld|\baften\b|"
+                                    r"förmiddag|\bkväll|aamupäivä|iltapäivä|mandag|tirsdag|onsdag|torsdag|fredag|måndag|"
+                                    r"tisdag|maanantai|tiistai|keskiviikko|torstai|perjantai",
+    ("contact_preference", "method"): r"hvordan vil du|hvordan ønsker du|bli kontaktet|kontaktes|hur vill du|"
+                                      r"yhteydenottotapa|miten haluat",
+    ("information_event", "event_dates"): r"informasjonsmøte|informationsmøde|informasjonskveld|informationsmöte|"
+                                          r"informationskväll|infotilaisuu|infoilta|tiedotustilaisuu|valmennu",
+    ("experience", "own_children"): r"egne barn|egna barn|omat lapset|omia lapsia",
+    ("experience", "prior_fostering"): r"tidligere (?:vært )?fosterhjem|vært fosterhjem|tidligere plejefamilie|"
+                                       r"tidigare familjehem|aiemmin (?:ollut )?sijais|aiempaa kokemusta perhehoi",
+    ("experience", "childcare_experience"): r"erfaring|erfarenhet|kokemus",
+    ("household", "children_in_household"): r"barn i (?:hjemmet|husstanden|hushållet|hemmet)|hjemmeboende|"
+                                            r"hemmavarande|lapsia (?:kotona|taloudessa)",
+    ("household", "partner"): r"ektefelle|samboer|ægtefælle|samlever|make/maka|\bmaka\b|\bsambo\b|puoliso",
+    ("household", "applicant_type"): r"enslig|ensamstående|yksin vai|pariskunta",
+    ("household", "relationships"): r"sivilstand|sivilstatus|civilstand|civilstånd|siviilisääty",
+    ("household", "household_composition"): r"husstand|hushåll|taloudessa asu|perheenjäsen|vem bor|hvem bor",
+    ("household", "pets"): r"kjæledyr|kæledyr|husdjur|lemmikki",
+    ("housing", "spare_bedroom"): r"soverom|eget rom|soveværelse|eget værelse|sovrum|eget rum|makuuhuone|oma huone",
+    ("housing", "tenure"): r"selveier|leiebolig|eierbolig|ejerbolig|lejebolig|hyresrätt|bostadsrätt|"
+                           r"omistusasunto|vuokra-asunto|asumismuoto|boligform|boform",
+    ("housing", "smoking"): r"røyk|ryger|rygning|\brök|tupak",
+    ("work", "income"): r"inntekt|indkomst|inkomst|\btulot",
+    ("work", "driving_licence"): r"førerkort|kørekort|körkort|ajokortti",
+    ("work", "employment_history"): r"utdanning|uddannelse|utbildning|koulutus",
+    ("work", "occupation"): r"\byrke|erhverv|\bammatti",
+    ("work", "employment_status"): r"\barbeid|\bjobb|arbejde|\barbete|sysselsättning|työtilanne|työssä",
+    ("equality", "gender"): r"kjønn|\bkøn\b|\bkön\b|sukupuoli",
+    ("equality", "religion"): r"livssyn|trosretning|uskonto",
+    ("health", "disability"): r"funksjonsnedsettelse|funktionsnedsättning|\bvamma",
+    ("health", "health"): r"\bhelse|helbred|\bhälsa|terveys",
+    ("criminal_record", "criminal_record"): r"politiattest|straffeattest|børneattest|belastningsregist|rikosrekisteri",
+    ("eligibility", "citizenship"): r"statsborgerskap|statsborgerskab|medborgarskap|kansalaisuus",
+    ("interest", "care_type"): r"fosterhjem|beredskapshjem|avlastning|plejefamilie|aflastning|familjehem|jourhem|"
+                               r"kontaktfamilj|sijaisperhe|perhehoi|tukiperhe|weekendhjem",
+    ("interest", "child_preferences"): r"alder på barnet|barnets alder|ålder på barnet|søsken|søskende|syskon|sisarukse|lapsen ikä",
+    ("free_text", "motivation"): r"hvorfor|motivasjon|varför|\bmiksi|motivaatio",
+    ("free_text", "about_you"): r"om deg selv|om dig selv|fortell om|fortæl om|om dig själv|berätta om|kerro itsestä|kerro meille",
+    ("free_text", "questions"): r"melding|beskjed|besked|spørsmål|spørgsmål|meddelande|\bfråg|\bviesti|kysymy|lisätieto|övrigt",
+}
+for _key, _words in NORDIC.items():
+    MORE[_key] = MORE[_key] + "|" + _words if _key in MORE else _words
 _seen = set()
 _rules = []
 for c, t, p in RULES:
@@ -252,15 +312,16 @@ JUNK = re.compile(
     r"form handle|form fields field|^(?:website|url|x/twitter|twitter|linkedin|to)$|^[a-z0-9]{10,}$|utm_|gclid|msclkid|"
     r"[gw]braid|fbclid|referr?er|entry ?page|page ?url|form ?type|nelio|sendmail|^project$|^fuction$|quiz|^ad |"
     r"feedback|was this page helpful|leer lassen|laisser (?:ce champ )?vide|dejar (?:en )?blanco|deixa(?:r|u) en blanc|"
-    r"leeg laten|niet invullen", re.I)
+    r"leeg laten|niet invullen|ikke fyll ut|udfyld ikke|fyll inte i|älä täytä", re.I)
 PLACEHOLDER = re.compile(r"^(?:-+|please (?:select|choose)|select|choose|choisir|s[ée]lectionner|--.*|"
                          r"bitte (?:w[äa]hlen|ausw[äa]hlen)|ausw[äa]hlen|seleccion[ae]|elija|escoja|tria|"
-                         r"maak een keuze|selecteer|kies)\b", re.I)
+                         r"maak een keuze|selecteer|kies|velg|vælg|välj|valitse)\b", re.I)
 NOT_ENQUIRY = re.compile(r"donat|volunteer|event registration|job|resume|career|password|log ?in|sign ?in|"
                          r"upload|type your signature|newsletter only|search|access record|subject access|records request|"
                          r"spende|ehrenamt|stellenangebot|karriere|donaci|donativo|voluntari|empleo|trabaja con nosotros|"
                          r"ofertas de trabajo|affiche|votre [ée]v[ée]nement|proposer un [ée]v[ée]nement|"
-                         r"vacature|werken bij|doneer|donatie", re.I)
+                         r"vacature|werken bij|doneer|donatie|ledige stillinger|lediga jobb|avoimet työpaikat|"
+                         r"\bdonere|\blahjoit", re.I)
 # A page whose address names an application holds the full application, not a first-contact form.
 # The census covers first contact only; application forms belong in register/us/application-forms.csv.
 APPLICATION_PAGE = re.compile(r"application|how-to-apply|apply-now|/apply/?$", re.I)
@@ -271,13 +332,15 @@ APPLICATION_FIELDS = re.compile(r"\biban\b|bank account|sort code|schulden|konto
                                 r"burgerservicenummer|\bbsn\b", re.I)
 # Pages about childminding or elderly care, which share words with fostering in German and French.
 NOT_TOPIC = re.compile(r"kindertagespflege|tagesmutter|tagesv[äa]ter|altenpflege|seniorenpflege|"
-                       r"assistant(?:e)?s? maternel|gastouder|kinderopvang", re.I)
+                       r"assistant(?:e)?s? maternel|gastouder|kinderopvang|\bdagpleje|dagmamma|perhepäivähoi", re.I)
 # Words that show a page or form is about fostering or adoption. Bare "accueil" (French for the home
 # page) and bare "pflege" (also childminding and elderly care) are too broad, so only longer forms count.
 TOPIC_PAGE = re.compile(r"foster|adopt|carer|famille d.accueil|famille d.adoption|accueil familial|out-of-home care|kinship|"
                         r"assistant(?:e)?s? familia|pflegefamilie|pflegeeltern|pflegekind|pflegestelle|vollzeitpflege|"
                         r"bereitschaftspflege|pflegeverh[äa]ltnis|adopci|acogi|acolli|pleegzorg|pleegouder|pleegkind|"
-                        r"pleeggezin|pleegfamilie|gezinshuis|caregiv|whānau care|whanau care", re.I)
+                        r"pleeggezin|pleegfamilie|gezinshuis|caregiv|whānau care|whanau care|fosterhjem|beredskapshjem|"
+                        r"plejefamilie|plejeforæld|familjehem|jourhem|sijaisperhe|sijaisvanhem|perhehoi|perhekoti|"
+                        r"adopsjon|adoptio", re.I)
 INPUT = {"text": "text", "email": "email", "tel": "tel", "textarea": "textarea", "select": "select",
          "radio": "radio", "checkbox": "checkbox", "date": "date", "number": "text", "url": "text"}
 
