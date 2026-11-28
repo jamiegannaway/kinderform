@@ -1,4 +1,4 @@
-import { ArrowUpRight, Code, FileText, Mail } from "lucide-react"
+import { ArrowUpRight, CalendarCheck, Code, FileText, Mail, Send } from "lucide-react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -85,10 +85,10 @@ function Section({
   )
 }
 
-/* The hero: a made-up enquiry form, and the same enquiry as code (the record the Kinderform
-   enquiry standard defines). Readers switch views with two radio buttons styled as shadcn
-   Tabs: the stylesheet shows the chosen view, so it needs no JavaScript and works under the
-   Content-Security-Policy. The form is an illustration: inert, so it cannot be filled in. */
+/* Under "What we are making": a made-up enquiry form, and the same enquiry as code (the record
+   the Kinderform enquiry standard defines). Readers switch views with two radio buttons styled
+   as shadcn Tabs: the stylesheet shows the chosen view, so it needs no JavaScript and works under
+   the Content-Security-Policy. The form is an illustration: inert, so it cannot be filled in. */
 const RECORD = `{
   "full_name": "Sam Example",
   "interest": "not_sure",
@@ -118,16 +118,16 @@ function Choice({ label, checked = false }: { label: string; checked?: boolean }
 
 function FormOrCode() {
   return (
-    <figure aria-labelledby="hero-example-caption" className="group/view w-full max-w-md justify-self-center md:justify-self-end">
+    <figure aria-labelledby="form-example-caption" className="group/view w-full max-w-md justify-self-center md:justify-self-end">
       <fieldset className="mb-3 inline-flex h-9 w-fit items-center rounded-lg bg-muted p-[3px] text-muted-foreground">
         <legend className="sr-only">Show the example as</legend>
         <label className={VIEW_TAB}>
-          <input type="radio" name="hero-view" value="form" defaultChecked className="sr-only" />
+          <input type="radio" name="example-view" value="form" defaultChecked className="sr-only" />
           <FileText aria-hidden="true" className="size-4" />
           Form
         </label>
         <label className={VIEW_TAB}>
-          <input type="radio" name="hero-view" value="code" id="hero-view-code" className="sr-only" />
+          <input type="radio" name="example-view" value="code" id="example-view-code" className="sr-only" />
           <Code aria-hidden="true" className="size-4" />
           Code
         </label>
@@ -136,7 +136,7 @@ function FormOrCode() {
       {/* Both views share one grid cell, so the box keeps the form's size and the page does not jump.
           The view not chosen is invisible (it still takes up its space) rather than removed. */}
       <div className="grid">
-        <Card inert aria-hidden="true" className="col-start-1 row-start-1 min-w-0 gap-4 group-has-[#hero-view-code:checked]/view:invisible">
+        <Card inert aria-hidden="true" className="col-start-1 row-start-1 min-w-0 gap-4 group-has-[#example-view-code:checked]/view:invisible">
           <CardHeader>
             <CardTitle>Ask about fostering or adoption</CardTitle>
             <CardDescription>It takes about 2 minutes</CardDescription>
@@ -181,7 +181,7 @@ function FormOrCode() {
           </CardContent>
         </Card>
 
-        <Card className="invisible col-start-1 row-start-1 min-w-0 gap-0 overflow-hidden py-0 group-has-[#hero-view-code:checked]/view:visible">
+        <Card className="invisible col-start-1 row-start-1 min-w-0 gap-0 overflow-hidden py-0 group-has-[#example-view-code:checked]/view:visible">
           <div className="flex items-center justify-between border-b px-4 py-2 text-xs text-muted-foreground">
             <span className="font-mono">enquiry.json</span>
             <span>Kinderform enquiry standard, draft 0.1</span>
@@ -192,9 +192,76 @@ function FormOrCode() {
         </Card>
       </div>
 
-      <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
+      <figcaption id="form-example-caption" className="mt-4 text-sm text-muted-foreground">
         A made-up enquiry form, and the same enquiry as a record in our open standard. It asks only what a service
         needs to reply. Sam is made up, and this is not a real form.
+      </figcaption>
+    </figure>
+  )
+}
+
+/* The hero: a made-up reply, because the reply is what the page is about. A form here looked like
+   somewhere to enquire, and Kinderform takes no enquiries. The three labelled parts are the Reply
+   step in src/lib/steps.ts ("Say who will be in touch, when, and what happens next"), so the
+   picture adds no new claim. The times stay vague on purpose: what a reply says has better
+   evidence than how fast it arrives. Real text, not an image, so a screen reader reads it. */
+const REPLY_PARTS = [
+  ["Who", "I'm Alex, in the fostering and adoption team. I will be your contact."],
+  ["When", "I will email you by Thursday."],
+  ["What happens next", "We will pick a time for a first chat. You do not need to do anything until then."],
+]
+
+function Moment({ icon, what, when }: { icon: React.ReactNode; what: string; when: string }) {
+  return (
+    <li className="flex items-center gap-3 rounded-lg bg-muted px-4 py-3 text-sm">
+      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-background text-muted-foreground [&>svg]:size-4">
+        {icon}
+      </span>
+      <span className="min-w-0">
+        <span className="block font-medium">{what}</span>
+        <span className="block text-muted-foreground">{when}</span>
+      </span>
+    </li>
+  )
+}
+
+// The short line that joins one moment to the next. Decoration only.
+function Join() {
+  return <li aria-hidden="true" className="ml-8 h-5 w-px bg-border" />
+}
+
+function ReplyExample() {
+  return (
+    <figure aria-labelledby="hero-example-caption" className="w-full max-w-md justify-self-center md:justify-self-end">
+      <ol>
+        <Moment icon={<Send aria-hidden="true" />} what="Sam asks about fostering or adoption" when="Monday morning" />
+        <Join />
+        <li>
+          <Card className="gap-4">
+            <CardHeader>
+              <CardTitle>Example Council replies</CardTitle>
+              <CardDescription>Monday afternoon</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+              <p className="leading-7">Thank you for getting in touch, Sam.</p>
+              <dl className="grid gap-4">
+                {REPLY_PARTS.map(([part, words]) => (
+                  <div key={part} className="border-l-2 border-primary pl-4">
+                    <dt className="text-xs font-medium text-muted-foreground">{part}</dt>
+                    <dd className="mt-1 leading-7">{words}</dd>
+                  </div>
+                ))}
+              </dl>
+            </CardContent>
+          </Card>
+        </li>
+        <Join />
+        <Moment icon={<CalendarCheck aria-hidden="true" />} what="Alex emails Sam, as promised" when="Thursday" />
+      </ol>
+
+      <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
+        A made-up reply, to show what we mean. It says who will be in touch, when, and what happens next. Sam, Alex
+        and Example Council are not real.
       </figcaption>
     </figure>
   )
@@ -236,7 +303,7 @@ export default function Landing() {
               </Button>
             </div>
           </div>
-          <FormOrCode />
+          <ReplyExample />
         </section>
 
         <div className="mx-auto max-w-6xl px-6">
@@ -323,6 +390,19 @@ export default function Landing() {
                   <CardContent className="text-sm leading-6 text-muted-foreground">{m.body}</CardContent>
                 </Card>
               ))}
+            </div>
+            <div className="mt-12 grid items-start gap-8 md:grid-cols-2 md:gap-12">
+              <div className="max-w-xl space-y-4">
+                <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">One enquiry, as a form and as a record</h3>
+                <p className="leading-7">
+                  The form asks only what a service needs to reply. The record is the same enquiry in our open
+                  standard, so any system can read it.
+                </p>
+                <Button asChild variant="outline">
+                  <a href="/example-form">Try the example form</a>
+                </Button>
+              </div>
+              <FormOrCode />
             </div>
           </Section>
 
