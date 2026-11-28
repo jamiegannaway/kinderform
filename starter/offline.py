@@ -11,7 +11,8 @@ ASSETS = Path(__file__).parent
 REGION = {"uk": "United Kingdom", "us": "United States", "ca": "Canada", "ca-fr": "Canada",
           "au": "Australia", "de": "Deutschland", "fr": "France", "es": "España", "ie": "Ireland",
           "nl": "Nederland", "nz": "New Zealand", "sg": "Singapore", "no": "Norge",
-          "dk": "Danmark", "fi": "Suomi", "global": "Global"}
+          "dk": "Danmark", "fi": "Suomi", "se": "Sverige",
+          "global": "Global"}
 
 
 def _question(page, schema):

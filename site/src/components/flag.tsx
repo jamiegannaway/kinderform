@@ -19,6 +19,7 @@ const FLAG: Record<Exclude<StarterKey, "global">, string> = {
   no: "no",
   dk: "dk",
   fi: "fi",
+  se: "se",
 }
 
 // A small round flag in the shadcn/ui Avatar look: the classes of its Avatar, AvatarImage and
