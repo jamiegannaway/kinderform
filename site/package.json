@@ -10,7 +10,7 @@
     "prebuild": "python3 ../starter/pack.py publish",
     "build": "npm run validators && astro build",
     "postbuild": "node scripts/check-country-pages.mjs && node scripts/check-publication.mjs",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "astro sync && tsc --noEmit",
     "test": "npm run validators && npm run typecheck && node scripts/check-census-metrics.mjs && node scripts/check-enquiry-runtime.mjs && node scripts/check-publication-config.mjs",
     "preview": "astro preview"
   },

@@ -6,6 +6,7 @@ The [audit note](audits/2026-11-26.md) records the findings, fixes and remaining
 
 - [x] Prepare fixes for inconsistent measures, uncertain extraction, draft review labels, named-score publication and enquiry validation.
 - [x] Add a first-reply operating worksheet and synthetic rehearsal to the starter candidate.
+- [x] Bring the audit fixes into the current main (28 November 2026), with the kinship review, the steps and the footer link. Counts each form once in the kinship review too. The kinship example reply points to the options and independent advice, not an application. `npm test` now runs on a fresh copy before a build.
 - [ ] Have an independent reviewer check a small set of complete forms, including branches and missing questions, and record disagreements.
 - [ ] Have a qualified reviewer check legal timing advice and the full relevant provisions.
 - [ ] Hold the adult stakeholder and accessibility sessions listed below. Review assurances and the minimum questions needed to reply.

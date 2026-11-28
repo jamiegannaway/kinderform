@@ -25,9 +25,9 @@ export type Step = {
 
 // What our reviews keep finding, and the limits of it. The caveat goes wherever the theme goes.
 export const THEME =
-  "People are most often lost in the gaps between steps, when contact lapses or nobody reaches them. What seems to help is a named person, a clear next step and no long silence."
+  "In the studies we read, people are most often lost in the gaps between steps, when contact lapses or nobody reaches them. What seems to help is a named person, a clear next step and no long silence."
 export const CAVEAT =
-  "This is our way of sorting what we found. Nobody has tested these steps together. In the one place that measured it, quicker first visits alone did not lead to more approvals."
+  "This is our way of sorting what we found. The bars show how much evidence there is for each pattern, not proof that a change works. Nobody has tested these steps together. In the one place that measured it, quicker first visits alone did not lead to more approvals."
 
 // Counts from the census, so the text never states a number the data does not give.
 export type StepCounts = { forms: number; countries: number }
@@ -45,7 +45,7 @@ export function steps(counts?: StepCounts): Step[] {
       short: "Ask only what you need to reply.",
       level: 2,
       does: "The enquiry form asks only what is needed to reply.",
-      says: "Enquiry forms differ a lot in what they ask. Pages with few questions, made for phones, lost fewer people.",
+      says: "Enquiry forms differ a lot in what they ask. In online surveys, pages with few questions, made for phones, lost fewer people.",
       strength: `${read}, plus experiments with online surveys.`,
     },
     {
@@ -109,7 +109,7 @@ export const THREAD: Step = {
   short: "Nobody should have to chase for news.",
   level: 2,
   does: "Between every step, the service gets back in touch itself. Nobody should have to chase for news.",
-  says: "Long silences go with losing touch. Help from a person did more than information or reminders.",
+  says: "Long silences go with losing touch. In one trial, help from a person did more than information or reminders.",
   strength: "Mostly from other fields, such as giving blood and stem cells. Some of it comes from trials.",
 }
 
