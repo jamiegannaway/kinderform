@@ -95,6 +95,8 @@ This project is open source.
   - The self-hosted fonts in `site/public/fonts/` keep their own licences, which sit beside them.
   - The illustrations in `site/public/illustrations/` are used under a paid licence and are **not** open. Do not reuse them (see the `LICENCE.md` there).
 
+The site's [licences page](https://www.kinderform.org/licences) explains what you can reuse, how to give credit and what is not open. Using the site is covered by the [terms of use](https://www.kinderform.org/terms) and the [privacy policy](https://www.kinderform.org/privacy).
+
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) lists the design systems, fonts, icons and map data the site uses, with their licences.
 
 ## Contributing

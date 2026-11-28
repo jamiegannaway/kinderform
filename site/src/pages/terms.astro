@@ -1,0 +1,283 @@
+---
+// Terms of use for kinderform.org. English law. Keep in step with /privacy and /licences.
+import Legal from "@/layouts/Legal.astro";
+
+const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
+const p = "leading-7";
+const ul = "ml-5 list-disc space-y-2 leading-7";
+const link = "font-medium underline underline-offset-4";
+const email = "jamie@kinderform.org";
+---
+<Legal
+  title="Terms of use: Kinderform"
+  heading="Terms of use"
+  description="The rules for using kinderform.org, its starter kits, data and research. Kinderform is free, is not a fostering or adoption service and gives no professional advice."
+  current="/terms"
+  updated="28 November 2026"
+>
+  <div slot="summary" class="space-y-4">
+    <p class="text-xl leading-8 text-muted-foreground">
+      Kinderform is free to use. These terms explain what it is, what it is not, and who is responsible for what.
+    </p>
+    <div class="rounded-lg border p-4">
+      <h2 class="text-base font-semibold">The short version</h2>
+      <ul class={`${ul} mt-2`}>
+        <li>Kinderform is not a fostering or adoption service. It does not pass on enquiries.</li>
+        <li>Nothing here is legal, social work or other professional advice.</li>
+        <li>Facts can be wrong or out of date. Check the source and date before you rely on one.</li>
+        <li>If your service uses our kits, you are responsible for your own form and the data it collects.</li>
+        <li>You can reuse our code, writing and data under open licences. Some things are not open.</li>
+      </ul>
+    </div>
+  </div>
+
+  <section aria-labelledby="who" class="space-y-4">
+    <h2 id="who" class={h2}>1. Who runs Kinderform</h2>
+    <p class={p}>
+      Kinderform (kinderform.org) is a free, non-commercial project run by Jamie Gannaway, a private individual who
+      lives in Barcelona, Spain. It is not a company, a charity or a government body.
+    </p>
+    <p class={p}>
+      In these terms, "we" and "us" mean Jamie. "You" means anyone who uses the site, its downloads or its repository
+      on GitHub.
+    </p>
+    <p class={p}>
+      Contact: <a href={`mailto:${email}`} class={link}>{email}</a>.
+    </p>
+  </section>
+
+  <section aria-labelledby="agree" class="space-y-4">
+    <h2 id="agree" class={h2}>2. Agreeing to these terms</h2>
+    <p class={p}>
+      By using Kinderform, you agree to these terms. If you do not agree, please do not use it.
+    </p>
+    <p class={p}>
+      If you use Kinderform for an organisation, you confirm you may accept these terms for it. "You" then includes
+      that organisation.
+    </p>
+    <p class={p}>
+      These terms, the <a href="/privacy" class={link}>privacy policy</a> and the
+      <a href="/licences" class={link}>licences</a> are the whole agreement between you and us about Kinderform.
+    </p>
+  </section>
+
+  <section aria-labelledby="what" class="space-y-4">
+    <h2 id="what" class={h2}>3. What Kinderform is, and what it is not</h2>
+    <p class={p}>
+      Kinderform offers research, data, draft standards, example forms and starter kits. They help fostering and
+      adoption services give a kinder first reply to people who enquire.
+    </p>
+    <ul class={ul}>
+      <li>
+        <strong>It is not a fostering or adoption service.</strong> It does not take, judge or pass on enquiries. The
+        example forms send nothing.
+      </li>
+      <li>
+        <strong>It is not linked to any government.</strong> The example forms use public design systems, but no
+        government made, approved or supports Kinderform.
+      </li>
+      <li>
+        <strong>It is not endorsed by the services it describes.</strong> Naming a service does not mean it agrees with
+        or supports Kinderform.
+      </li>
+      <li>
+        <strong>It gives no professional advice.</strong> Nothing here is legal, social work, data protection, medical
+        or other professional advice. Get your own advice before acting.
+      </li>
+    </ul>
+    <p class={p}>
+      If you want to foster or adopt, contact a service directly.
+    </p>
+  </section>
+
+  <section aria-labelledby="accuracy" class="space-y-4">
+    <h2 id="accuracy" class={h2}>4. Information can be wrong or out of date</h2>
+    <p class={p}>
+      We build our research with AI tools and check it by hand. That checking is not finished. Each page says what a
+      person has checked and when.
+    </p>
+    <p class={p}>
+      Services change their pages and rules often. Our tables describe public pages on the date we read them.
+    </p>
+    <p class={p}>
+      Check the original source and date before you rely on a fact or quote it. The standard, the checklist and the
+      kits are drafts and may change.
+    </p>
+  </section>
+
+  <section aria-labelledby="kits" class="space-y-4">
+    <h2 id="kits" class={h2}>5. Using the starter kits, schema and AI prompt in your service</h2>
+    <p class={p}>
+      You may use them to build or improve your own enquiry form. If you do, your organisation is responsible for:
+    </p>
+    <ul class={ul}>
+      <li>the form, its wording and the replies it sends</li>
+      <li>following the law where you work, including data protection, equality and accessibility law</li>
+      <li>the personal information your form collects, as its controller, with your own privacy notice</li>
+      <li>checking anything an AI tool writes for you before you use it</li>
+      <li>testing the form with made-up details before real people use it</li>
+    </ul>
+    <p class={p}>
+      Kinderform never receives or handles the information people put into your form. We are not your data processor.
+    </p>
+    <p class={p}>
+      Never put real personal information into an example form, a test record or the GitHub repository.
+    </p>
+  </section>
+
+  <section aria-labelledby="licences" class="space-y-4">
+    <h2 id="licences" class={h2}>6. Reusing our work</h2>
+    <p class={p}>
+      Our code is under the MIT licence. Our writing and data are under Creative Commons Attribution 4.0 (CC BY 4.0).
+      You can reuse them for any purpose, including commercial use, if you follow the licence.
+    </p>
+    <p class={p}>
+      Some things are not open, including the drawings, Jamie's photograph and the Kinderform name. The
+      <a href="/licences" class={link}>licences page</a> lists what you can and cannot reuse.
+    </p>
+    <p class={p}>
+      If a licence and these terms disagree about reusing material, the licence wins.
+    </p>
+  </section>
+
+  <section aria-labelledby="name" class="space-y-4">
+    <h2 id="name" class={h2}>7. The Kinderform name</h2>
+    <p class={p}>
+      The open licences do not cover the Kinderform name or logo. You may use the name to credit us, or to say your work
+      is based on Kinderform.
+    </p>
+    <p class={p}>
+      Do not use the name or logo to suggest we made, approved or support your form, product or service. The exception
+      is when we agree in writing.
+    </p>
+  </section>
+
+  <section aria-labelledby="contribute" class="space-y-4">
+    <h2 id="contribute" class={h2}>8. Contributing</h2>
+    <p class={p}>
+      When you send code, writing, data or corrections to Kinderform, you agree that:
+    </p>
+    <ul class={ul}>
+      <li>code you send is licensed under the MIT licence, and anything else under CC BY 4.0</li>
+      <li>you have the right to give it under those licences</li>
+      <li>it holds no real personal information and copies no licensed form</li>
+      <li>we may edit it, use it, credit you for it, or decide not to use it</li>
+    </ul>
+    <p class={p}>
+      Ideas and feedback you send are free for us to use. We will only quote you, even without your name, if you say we
+      may.
+    </p>
+  </section>
+
+  <section aria-labelledby="use" class="space-y-4">
+    <h2 id="use" class={h2}>9. Things you must not do</h2>
+    <ul class={ul}>
+      <li>break the law, or help someone else break it</li>
+      <li>try to get round the site's security, or harm, overload or disrupt it</li>
+      <li>upload viruses or other harmful code</li>
+      <li>send or post real personal information about anyone else, especially a child</li>
+      <li>pretend to be a service, a government body or someone else</li>
+      <li>harass, threaten or abuse anyone, including service staff</li>
+      <li>use Kinderform to score, rank or screen people who offer to care, or to treat them unfairly</li>
+    </ul>
+    <p class={p}>
+      Our GitHub repository and WhatsApp community also follow our
+      <a href="https://github.com/jamiegannaway/kinderform/blob/main/CODE_OF_CONDUCT.md" class={link}>code of conduct</a>.
+      We may remove posts or people who break these rules.
+    </p>
+  </section>
+
+  <section aria-labelledby="reply" class="space-y-4">
+    <h2 id="reply" class={h2}>10. Corrections and the right of reply</h2>
+    <p class={p}>
+      If something about your service is wrong, tell us. Give the public page, what changed and the date you checked.
+    </p>
+    <p class={p}>
+      We look at every correction and tell you what we did. Before we publish a score for a named service, that service
+      can see it privately and reply.
+    </p>
+  </section>
+
+  <section aria-labelledby="links" class="space-y-4">
+    <h2 id="links" class={h2}>11. Other websites</h2>
+    <p class={p}>
+      We link to services, research and other sites. We do not control them and are not responsible for what they say
+      or do.
+    </p>
+  </section>
+
+  <section aria-labelledby="change" class="space-y-4">
+    <h2 id="change" class={h2}>12. We may change or stop Kinderform</h2>
+    <p class={p}>
+      Kinderform is free and run by one person. We may change, pause or stop any part of it at any time, without
+      notice.
+    </p>
+    <p class={p}>
+      We cannot promise the site will always be available or free of errors. Downloads you already have stay under
+      their licences.
+    </p>
+  </section>
+
+  <section aria-labelledby="liability" class="space-y-4">
+    <h2 id="liability" class={h2}>13. Our responsibility to you</h2>
+    <p class={p}>
+      We provide Kinderform free and "as is". As far as the law allows, we give no promises about it beyond those in
+      these terms.
+    </p>
+    <p class={p}>
+      As far as the law allows, we are not responsible for any loss caused by using or relying on Kinderform. The same
+      applies if you cannot use it.
+    </p>
+    <p class={p}>
+      If you use Kinderform for an organisation, we are not responsible for lost profit, revenue, data, contracts or
+      goodwill. We are also not responsible for any indirect loss.
+    </p>
+    <p class={p}>
+      If we are found responsible to an organisation in any case, our total responsibility is limited to £100.
+    </p>
+    <p class={p}>
+      <strong>Some responsibility cannot be limited.</strong> Nothing in these terms limits our responsibility for
+      death or personal injury caused by our negligence, or for fraud. It also does not limit anything else the law
+      does not allow us to limit.
+    </p>
+    <p class={p}>
+      If you use Kinderform as a private person, you keep all the rights the law gives you that cannot be removed by
+      agreement.
+    </p>
+  </section>
+
+  <section aria-labelledby="law" class="space-y-4">
+    <h2 id="law" class={h2}>14. Which law applies</h2>
+    <p class={p}>
+      The law of England and Wales applies to these terms and to any dispute about Kinderform. The courts of England
+      and Wales can decide disputes.
+    </p>
+    <p class={p}>
+      If you are a private person, you keep the protection of the law where you live. You can also bring a claim in the
+      courts where you live.
+    </p>
+    <p class={p}>
+      Please talk to us first. Most problems can be fixed with an email.
+    </p>
+  </section>
+
+  <section aria-labelledby="general" class="space-y-4">
+    <h2 id="general" class={h2}>15. Other legal points</h2>
+    <ul class={ul}>
+      <li>If a court decides part of these terms cannot be enforced, the rest still applies.</li>
+      <li>If we do not enforce a term straight away, we can still enforce it later.</li>
+      <li>Only you and we can enforce these terms. Nobody else has rights under them.</li>
+      <li>You may not pass your rights under these terms to anyone else.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="updates" class="space-y-4">
+    <h2 id="updates" class={h2}>16. Changes to these terms</h2>
+    <p class={p}>
+      We may update these terms. We will change the date at the top, and every past version stays public on GitHub.
+    </p>
+    <p class={p}>
+      If you keep using Kinderform after a change, the new terms apply to you from then on.
+    </p>
+  </section>
+</Legal>

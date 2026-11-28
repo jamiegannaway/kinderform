@@ -1,0 +1,48 @@
+---
+// Shared frame for the legal pages: /privacy, /terms and /licences.
+// Legal pages use Arial (a system font, so nothing loads from other sites) and never use em dashes.
+// Change the date in `updated` whenever the words of a page change.
+import Base from "@/layouts/Base.astro";
+import { SiteFooter, SiteHeader } from "@/components/site-header";
+
+interface Props {
+  title: string;
+  heading: string;
+  description: string;
+  current: string;
+  updated: string;
+}
+const { title, heading, description, current, updated } = Astro.props;
+
+const others = [
+  { href: "/privacy", label: "Privacy policy" },
+  { href: "/terms", label: "Terms of use" },
+  { href: "/licences", label: "Licences" },
+].filter((page) => page.href !== current);
+---
+<Base title={title} description={description}>
+  <SiteHeader current={current} />
+  <main id="main" class="mx-auto max-w-6xl px-6 pb-16">
+    <article class="legal max-w-2xl space-y-10 py-10 font-[Arial,Helvetica,sans-serif] md:py-14">
+      <header class="space-y-4">
+        <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">{heading}</h1>
+        <p class="text-sm text-muted-foreground">Last updated: {updated}</p>
+        <slot name="summary" />
+      </header>
+      <slot />
+      <aside aria-label="Other legal pages" class="border-t pt-6 text-sm text-muted-foreground">
+        <p>
+          Also read:{" "}
+          {others.map((page, i) => (
+            <>
+              {i > 0 && " and "}
+              <a href={page.href} class="font-medium text-foreground underline underline-offset-4">{page.label}</a>
+            </>
+          ))}
+          .
+        </p>
+      </aside>
+    </article>
+  </main>
+  <SiteFooter />
+</Base>

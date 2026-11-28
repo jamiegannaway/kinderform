@@ -1,0 +1,466 @@
+---
+// Privacy policy for kinderform.org. Covers what the site does today and the features it may add.
+// Before switching on any feature in "Things we may add", update the table there and the date below.
+import Legal from "@/layouts/Legal.astro";
+
+const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
+const h3 = "scroll-m-20 text-lg font-semibold tracking-tight";
+const p = "leading-7";
+const ul = "ml-5 list-disc space-y-2 leading-7";
+const link = "font-medium underline underline-offset-4";
+const table = "w-full border-collapse text-left text-sm";
+const th = "border-b px-2 py-2 align-top font-semibold";
+const td = "border-b px-2 py-2 align-top leading-6";
+const email = "jamie@kinderform.org";
+---
+<Legal
+  title="Privacy policy: Kinderform"
+  heading="Privacy policy"
+  description="How Kinderform uses personal information, why, how long we keep it and your rights. The site sets no cookies and does not track you."
+  current="/privacy"
+  updated="28 November 2026"
+>
+  <div slot="summary" class="space-y-4">
+    <p class="text-xl leading-8 text-muted-foreground">
+      Kinderform collects as little about you as it can. Today the site sets no cookies and does not track you.
+    </p>
+    <div class="rounded-lg border p-4">
+      <h2 class="text-base font-semibold">The short version</h2>
+      <ul class={`${ul} mt-2`}>
+        <li>The example forms send nothing and store nothing. What you type stays in your browser.</li>
+        <li>We only get your details if you email us, write on GitHub or join the WhatsApp community.</li>
+        <li>We never sell your information, and we never use it to score, rank or screen anyone.</li>
+        <li>Kinderform holds no information about children.</li>
+        <li>You can ask to see, correct or delete what we hold. Email <a href={`mailto:${email}`} class={link}>{email}</a>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <section aria-labelledby="who" class="space-y-4">
+    <h2 id="who" class={h2}>Who is responsible for your information</h2>
+    <p class={p}>
+      Kinderform is a free, non-commercial project run by Jamie Gannaway, a private individual who lives in Spain.
+      It is not a company or a charity.
+    </p>
+    <p class={p}>
+      Jamie decides how your personal information is used. In data protection law, that makes him the
+      "controller". In this policy, "we" and "us" mean Jamie.
+    </p>
+    <p class={p}>
+      Contact: <a href={`mailto:${email}`} class={link}>{email}</a>. Kinderform does not have a data protection
+      officer, because the law does not require one for a project of this size.
+    </p>
+    <p class={p}>
+      This policy follows the EU General Data Protection Regulation (GDPR) and Spanish data protection law. For people
+      in the UK, it also follows the UK GDPR and the Data Protection Act 2018.
+    </p>
+  </section>
+
+  <section aria-labelledby="not" class="space-y-4">
+    <h2 id="not" class={h2}>Kinderform is not a fostering or adoption service</h2>
+    <p class={p}>
+      We do not take enquiries about fostering or adopting, and we do not pass them on. The example forms are
+      demonstrations. They send nothing to a service or to us.
+    </p>
+    <p class={p}>
+      If you want to foster or adopt, contact a service directly. That service's own privacy notice covers what you
+      send it.
+    </p>
+  </section>
+
+  <section aria-labelledby="now" class="space-y-6">
+    <h2 id="now" class={h2}>What we collect today, and why</h2>
+    <p class={p}>
+      The law asks us to give a legal reason, called a "lawful basis", for each use. We give it for each item below.
+    </p>
+
+    <div class="space-y-3">
+      <h3 class={h3}>When you visit the site</h3>
+      <p class={p}>
+        Our host, Vercel, keeps short technical records of each visit. They include your IP address, the page you asked
+        for, the time and your browser type.
+      </p>
+      <p class={p}>
+        We use these records only to keep the site working and safe, for example to stop attacks. We do not use them
+        to find out who you are.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> our legitimate interest in running a safe, working website.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>Your light or dark mode choice</h3>
+      <p class={p}>
+        If you pick dark mode, your browser stores that choice on your device. We never see it. It is not a cookie, and
+        it does not track you.
+      </p>
+      <p class={p}>
+        The law lets sites store this kind of setting without asking first, because you asked for it. You can remove it
+        by clearing your browser's site data.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>The example forms and the form check</h3>
+      <p class={p}>
+        What you type into an example form stays in your browser. It is not sent to us or anyone else, and it is gone
+        when you close the page.
+      </p>
+      <p class={p}>
+        Please type made-up details only. The forms are for trying out, not for real enquiries.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>When you email us</h3>
+      <p class={p}>
+        We get your email address, your name if you give it, and what you write. We use it to reply, to fix what you
+        report and to improve Kinderform.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> our legitimate interest in answering you and improving the project.
+      </p>
+      <p class={p}>
+        We will only quote you on the site or in research, even without your name, if you say we may.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>If you tell us about your own life</h3>
+      <p class={p}>
+        Some people share their experience of fostering, adoption or care. Please leave out names, case details and
+        anything that could identify a child.
+      </p>
+      <p class={p}>
+        Your message may include details the law treats as extra sensitive. Examples are your health, faith,
+        sexuality or ethnic background.
+      </p>
+      <p class={p}>
+        If it does, we will ask whether we may keep those details. If you agree, we keep them with your explicit
+        consent. If you do not agree or do not answer within 30 days, we delete them.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> your explicit consent. You can withdraw it at any time by emailing us.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>When a service replies or asks for a correction</h3>
+      <p class={p}>
+        Staff at fostering and adoption services may write to us about their service. We get their name, work email
+        and what they write.
+      </p>
+      <p class={p}>
+        We use this to correct our records and to give each service a right of reply. We never name individual staff
+        on the site.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> our legitimate interest in publishing accurate, fair information.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>When you use GitHub</h3>
+      <p class={p}>
+        Our code, data and research are on GitHub. Issues, comments and changes you post there are public. GitHub shows
+        your username with them.
+      </p>
+      <p class={p}>
+        GitHub runs its own service and is responsible for your GitHub account. We read and act on what you post.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> our legitimate interest in running an open project.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>When you join our WhatsApp community</h3>
+      <p class={p}>
+        As the community's admin, Jamie can see your phone number, your WhatsApp name and what you post. WhatsApp may
+        also show your number to other members, depending on your settings.
+      </p>
+      <p class={p}>
+        WhatsApp (Meta) runs its own service and is responsible for your WhatsApp account. You can leave the community
+        at any time.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> our legitimate interest in hearing from people the project is for.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>The facts we publish about services</h3>
+      <p class={p}>
+        Our registers and tables describe services and their public web pages. A computer program reads those pages.
+        A person checks what it finds, and that checking is not finished.
+      </p>
+      <p class={p}>
+        We record the service, not its staff. If a public page names a person, we leave the name out. If you find one,
+        tell us and we will remove it straight away.
+      </p>
+    </div>
+  </section>
+
+  <section aria-labelledby="never" class="space-y-4">
+    <h2 id="never" class={h2}>What we never do</h2>
+    <ul class={ul}>
+      <li>We never sell, rent or trade your information.</li>
+      <li>We never use it for advertising.</li>
+      <li>We never score, rank, screen or predict people, and we make no automated decisions about you.</li>
+      <li>We never collect information about children.</li>
+      <li>We never add you to a mailing list unless you ask to join.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="share" class="space-y-4">
+    <h2 id="share" class={h2}>Who else handles your information</h2>
+    <p class={p}>
+      Jamie is the only person who reads your messages. These companies store or carry information for us:
+    </p>
+    <div class="overflow-x-auto">
+      <table class={table}>
+        <thead>
+          <tr>
+            <th scope="col" class={th}>Company</th>
+            <th scope="col" class={th}>What it does</th>
+            <th scope="col" class={th}>Where</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class={td}>Vercel Inc.</td>
+            <td class={td}>Hosts the website and keeps its technical records</td>
+            <td class={td}>United States and worldwide</td>
+          </tr>
+          <tr>
+            <td class={td}>Our email provider</td>
+            <td class={td}>Receives and stores email sent to {email}</td>
+            <td class={td}>We will name it here and say where it stores email</td>
+          </tr>
+          <tr>
+            <td class={td}>GitHub, Inc.</td>
+            <td class={td}>Hosts our public code, data and discussions</td>
+            <td class={td}>United States</td>
+          </tr>
+          <tr>
+            <td class={td}>WhatsApp (Meta)</td>
+            <td class={td}>Runs the community chat</td>
+            <td class={td}>European Union and worldwide</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class={p}>
+      We may also share information if the law requires it, or to protect someone's safety.
+    </p>
+  </section>
+
+  <section aria-labelledby="abroad" class="space-y-4">
+    <h2 id="abroad" class={h2}>When your information leaves Europe</h2>
+    <p class={p}>
+      Some of these companies store information in the United States or elsewhere outside the European Economic Area
+      and the UK.
+    </p>
+    <p class={p}>
+      When that happens, we rely on legal protections. One is an official finding that the country protects data well
+      enough. The other is standard contract terms approved by the European Commission and the UK.
+    </p>
+    <p class={p}>
+      Email us for a copy of the protections that apply.
+    </p>
+  </section>
+
+  <section aria-labelledby="keep" class="space-y-4">
+    <h2 id="keep" class={h2}>How long we keep it</h2>
+    <div class="overflow-x-auto">
+      <table class={table}>
+        <thead>
+          <tr>
+            <th scope="col" class={th}>Information</th>
+            <th scope="col" class={th}>How long</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class={td}>Technical records of visits</td>
+            <td class={td}>Vercel deletes them after a short time, usually days</td>
+          </tr>
+          <tr>
+            <td class={td}>Emails</td>
+            <td class={td}>2 years after our last message to each other, then we delete them</td>
+          </tr>
+          <tr>
+            <td class={td}>Sensitive details you agreed we could keep</td>
+            <td class={td}>Until you withdraw consent, and no longer than 2 years after our last contact</td>
+          </tr>
+          <tr>
+            <td class={td}>Corrections and replies from services</td>
+            <td class={td}>While the related fact is on the site, and 2 years after that</td>
+          </tr>
+          <tr>
+            <td class={td}>GitHub posts and WhatsApp messages</td>
+            <td class={td}>Until you delete them, or we close the project or community</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="later" class="space-y-4">
+    <h2 id="later" class={h2}>Things we may add, and the promises that come with them</h2>
+    <p class={p}>
+      None of these are switched on today. We list them so you know our rules before we start.
+    </p>
+    <p class={p}>
+      Before we switch one on, we will update this page and name the company that runs it. Where the law asks for
+      your consent, we will ask first.
+    </p>
+
+    <div class="space-y-3">
+      <h3 class={h3}>Visitor counts without cookies</h3>
+      <p class={p}>
+        We may count visits to each page with a tool that sets no cookies and does not follow you across sites. It
+        would not store your full IP address.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> our legitimate interest in knowing which pages help people. You can object at
+        any time.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>Analytics that use cookies, such as Google Analytics</h3>
+      <p class={p}>
+        We would only load these if you say yes first. "No" will be as easy to choose as "Yes". The site works the same
+        either way.
+      </p>
+      <p class={p}>
+        You could change your mind at any time from a link at the bottom of every page. We would keep analytics data
+        for no more than 14 months.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> your consent.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>A mailing list for updates</h3>
+      <p class={p}>
+        You would only join if you sign up and confirm by email. Every email would have a link to leave the list.
+      </p>
+      <p class={p}>
+        We would keep your address until you leave, then delete it within 30 days.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> your consent.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>Accounts for services</h3>
+      <p class={p}>
+        Services might sign in to check or reply to their own entries. We would keep their name, work email and sign-in
+        details.
+      </p>
+      <p class={p}>
+        Accounts would be for adults at services only. We would delete an account within 30 days of a request to close
+        it.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis:</strong> to provide the account you asked for.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <h3 class={h3}>Forms that send us feedback or corrections</h3>
+      <p class={p}>
+        A form would send what you type to us, stored by a form company. Each form would say what it collects before
+        you send it.
+      </p>
+      <p class={p}>
+        <strong>Lawful basis and how long:</strong> the same as for emails, above.
+      </p>
+    </div>
+  </section>
+
+  <section aria-labelledby="rights" class="space-y-4">
+    <h2 id="rights" class={h2}>Your rights</h2>
+    <p class={p}>You have the right to:</p>
+    <ul class={ul}>
+      <li>get a copy of the personal information we hold about you</li>
+      <li>have it corrected if it is wrong</li>
+      <li>have it deleted</li>
+      <li>ask us to limit how we use it</li>
+      <li>object to how we use it, when we rely on our legitimate interests</li>
+      <li>get it in a format you can move to someone else</li>
+      <li>withdraw your consent at any time, where we rely on it</li>
+    </ul>
+    <p class={p}>
+      Email <a href={`mailto:${email}`} class={link}>{email}</a>. We will reply within 1 month. We may ask you to
+      confirm who you are. Using your rights is free.
+    </p>
+    <p class={p}>
+      Withdrawing consent does not make earlier use unlawful. Some rights have limits in law, and we will explain if
+      one applies.
+    </p>
+  </section>
+
+  <section aria-labelledby="complain" class="space-y-4">
+    <h2 id="complain" class={h2}>If you are unhappy</h2>
+    <p class={p}>
+      Please tell us first, so we can put it right. You can also complain to a data protection authority:
+    </p>
+    <ul class={ul}>
+      <li>
+        in Spain, the <a href="https://www.aepd.es" class={link}>Spanish Data Protection Agency (AEPD)</a>, which
+        oversees this project
+      </li>
+      <li>
+        in the UK, the <a href="https://ico.org.uk/make-a-complaint/" class={link}>Information Commissioner's Office</a>
+      </li>
+      <li>in another EU country, the authority where you live or work</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="safe" class="space-y-4">
+    <h2 id="safe" class={h2}>How we keep it safe</h2>
+    <p class={p}>
+      The site uses an encrypted connection. Its security settings stop it loading code or content from other sites.
+    </p>
+    <p class={p}>
+      Only Jamie can read messages sent to us. If something goes wrong that puts your information at risk, we will
+      tell the authority within 72 hours where the law requires. We will tell you if the risk to you is high.
+    </p>
+  </section>
+
+  <section aria-labelledby="children" class="space-y-4">
+    <h2 id="children" class={h2}>Children</h2>
+    <p class={p}>
+      Kinderform is for adults. It is not meant for children, and we do not knowingly collect information from anyone
+      under 18.
+    </p>
+    <p class={p}>
+      If you think a child has sent us information, tell us and we will delete it.
+    </p>
+  </section>
+
+  <section aria-labelledby="links" class="space-y-4">
+    <h2 id="links" class={h2}>Other websites</h2>
+    <p class={p}>
+      We link to services, research and other sites. They have their own privacy policies. We are not responsible for
+      what they do with your information.
+    </p>
+  </section>
+
+  <section aria-labelledby="changes" class="space-y-4">
+    <h2 id="changes" class={h2}>Changes to this policy</h2>
+    <p class={p}>
+      We will update this page when anything changes, and change the date at the top. Every past version stays public
+      in the project's history on GitHub.
+    </p>
+    <p class={p}>
+      If a change means we would use your information in a new way, we will tell you before it starts, where we can.
+    </p>
+  </section>
+</Legal>
