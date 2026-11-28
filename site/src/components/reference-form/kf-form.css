@@ -12,8 +12,8 @@
   .kf-step { animation: none; }
 }
 
-/* On phones, keep Continue in reach: a white bar fixed to the bottom of the form's scroll
-   area, the full width of the dialog (whose padding is 1.25rem below 640px). */
+/* On phones, keep Continue in reach: a white bar that sticks to the bottom of the screen, the
+   full width of the form's frame (whose padding is 1.25rem below 640px). */
 @media (max-width: 639.98px) {
   .kf-actions {
     position: sticky;

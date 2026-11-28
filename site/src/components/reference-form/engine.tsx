@@ -1,7 +1,8 @@
 // The reference enquiry form.
 // Questions and rules come from schema/enquiry-submission.schema.json; wording comes from the
 // UI schema (schema/ui/enquiry-submission.<locale>.json). JSON Forms renders each page with the
-// renderers of the chosen design system (GOV.UK Frontend or USWDS).
+// renderers of the chosen design system: the country's own (govuk.tsx, kern.tsx and so on) or the
+// neutral one (neutral.tsx).
 // Nothing is sent or stored: the "record" shown at the end stays in the browser.
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { JsonForms } from "@jsonforms/react"
@@ -60,7 +61,9 @@ export type Page = {
 }
 export type UiConfig = {
   locale: string
-  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy" | "govie" | "nl-design" | "nzgds" | "sgds"
+  // "neutral": the country has no national design system that the form can use, so it comes
+  // only in the neutral design (neutral.tsx), the site's own shadcn/ui look.
+  design_system: "govuk" | "uswds" | "gcds" | "agds" | "kern" | "cunningham" | "desy" | "govie" | "nl-design" | "nzgds" | "sgds" | "neutral"
   sections: string[]
   start: { title: string; body: string[]; button: string }
   pages: Page[]
@@ -267,6 +270,8 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
   const firstRender = useRef(true)
 
   const visible = useMemo(() => ui.pages.filter((p) => isVisible(p, data)), [ui.pages, data])
+  // Wording a renderer may need inside a field: the hidden "Error:" before an error message.
+  const config = useMemo(() => ({ errorPrefix: ui.progress.error_prefix }), [ui.progress.error_prefix])
   const page = step.kind === "page" ? visible[step.index] : null
 
   // Make each move between steps obvious: scroll to the form, update the tab title,
@@ -394,6 +399,7 @@ export function ReferenceForm({ ui, theme }: { ui: UiConfig; theme: Theme }) {
                     data={data}
                     renderers={T.renderers}
                     cells={[]}
+                    config={config}
                     validationMode="NoValidation"
                     // Every field reports to onValue as it is set, so latest is always the newest copy.
                     // The library's own copy can lag a change behind, so it is not saved back.

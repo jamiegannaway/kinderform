@@ -6,10 +6,11 @@
   "scripts": {
     "validators": "node scripts/compile-validators.mjs",
     "predev": "python3 ../starter/pack.py publish",
-    "dev": "npm run validators && astro dev",
+    "dev": "npm run validators && npm run downloads && astro dev",
     "prebuild": "python3 ../starter/pack.py publish",
-    "build": "npm run validators && astro build",
-    "postbuild": "node scripts/check-country-pages.mjs && node scripts/check-publication.mjs",
+    "downloads": "node scripts/build-form-downloads.mjs",
+    "build": "npm run validators && npm run downloads && astro build",
+    "postbuild": "node scripts/check-country-pages.mjs && node scripts/check-form-downloads.mjs && node scripts/check-publication.mjs",
     "typecheck": "astro sync && tsc --noEmit",
     "test": "npm run validators && npm run typecheck && node scripts/check-census-metrics.mjs && node scripts/check-enquiry-runtime.mjs && node scripts/check-publication-config.mjs",
     "preview": "astro preview"

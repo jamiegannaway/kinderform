@@ -1,5 +1,6 @@
-// The example form in each country, and the design system it is built with. Shared by the map
-// page (rendered at build time) and the dialog that opens each form (in the browser).
+// The countries with an example form, for the map page and the country pages (src/lib/example-forms.ts).
+// The pages take each design system's name and facts from src/lib/design-systems.ts, through the
+// "design_system" value in the country's wording file; "system" and "short" here are not shown.
 export const FORM_COUNTRIES = [
   { code: "uk", name: "United Kingdom", system: "GOV.UK Design System", short: "GOV.UK Frontend" },
   { code: "us", name: "United States", system: "U.S. Web Design System", short: "USWDS" },
