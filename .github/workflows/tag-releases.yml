@@ -1,0 +1,32 @@
+# Gives each starter kit release a Git tag. Every kit's CREDITS.txt links to the source at
+# /tree/<version>, and that link only works when the tag exists.
+#
+# Runs when a release archive lands on main, and by hand: Actions, "tag kit releases",
+# "Run workflow". It only adds tags that are missing. It never moves or removes one.
+name: tag kit releases
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["starter/releases/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # Every commit and tag: the tool looks up the commit behind each archive.
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Tag each release that has no tag
+        run: |
+          python3 tools/tag_releases.py --create > new-tags.txt
+          cat new-tags.txt
+          if [ -s new-tags.txt ]; then xargs git push origin < new-tags.txt; fi

@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1",
+  "enquiry_id": "SYN-000013",
+  "received_at": "2026-11-16T09:00:00Z",
+  "channel": "web_form",
+  "status": "received",
+  "retention_policy_ref": "example-policy-a",
+  "retain_until": "2027-11-16"
+}

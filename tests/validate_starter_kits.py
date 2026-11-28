@@ -1,5 +1,6 @@
 """Check the frozen starter release and its extracted URLs without publishing or sending data."""
 import csv
+import hashlib
 import io
 import json
 import sys
@@ -14,7 +15,7 @@ from jsonschema import Draft202012Validator
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "starter"))
 from check import problems
-from pack import ARCHIVE, SCHEMAS, STARTER, VERSION, publish, read_json
+from pack import ARCHIVE, SCHEMA_ADDRESSES, SCHEMAS, STARTER, VERSION, publish, read_json
 
 
 class Links(HTMLParser):
@@ -73,6 +74,9 @@ if __name__ == "__main__":
         dest = Path(tmp)
         publish(dest)
         count, tested = validate(dest / "downloads/starter" / VERSION)
-        for file in ("enquiry-submission", "enquiry"):
-            assert (dest / "schema" / file / "0.1.json").read_bytes() == (SCHEMAS / f"{file}.schema.json").read_bytes()
+        for source, address in SCHEMA_ADDRESSES.items():
+            assert (dest / "schema" / address).read_bytes() == (SCHEMAS / source).read_bytes(), address
+        # Monitoring version 0.1 keeps the bytes it was published with.
+        frozen = hashlib.sha256((dest / "schema/enquiry/0.1.json").read_bytes()).hexdigest()
+        assert frozen == "6c28fe217901a244bccd200b11ff38f0dbdc6a510bb52406ad5b4ec0784ca032", "enquiry/0.1.json changed"
     print(f"OK: {count} starter kits, {tested} submission cases, archive links and canonical schema downloads")

@@ -127,6 +127,25 @@ with tempfile.TemporaryDirectory() as folder:
     carried = append(segment, {**base[0], "event_id": "evt-test-0030", "enquiry_id": "example-t9"}, prev_hash=event_hash(second))
     check(carried["prev_hash"] == event_hash(second) and not problems(read_events(segment)), "append can start a segment from a carried hash")
 
+    # Many programs adding to one log at once: each waits for the lock, so no event is lost and
+    # the chain holds. Without the lock, two of them read the same last line and the chain breaks.
+    import subprocess
+    shared = Path(folder) / "shared.jsonl"
+    writers = 24
+    running = []
+    for n in range(writers):
+        event = {**base[0], "event_id": f"evt-test-1{n:03d}", "enquiry_id": f"example-w{n:03d}"}
+        process = subprocess.Popen(
+            [sys.executable, str(ROOT / "tools" / "interaction_log.py"), "append", str(shared), "-"],
+            stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, text=True)
+        process.stdin.write(json.dumps(event))
+        process.stdin.close()
+        running.append(process)
+    codes = [process.wait() for process in running]
+    written = read_events(shared)
+    check(codes == [0] * writers and len(written) == writers, f"{writers} programs writing at once all add their event")
+    check(not problems(written), "the log they wrote together passes")
+
 if failures:
     print(f"\n{failures} check(s) did not behave as expected")
     sys.exit(1)

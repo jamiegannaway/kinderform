@@ -12,7 +12,7 @@ const tree = (path: string) => `${REPO_URL}/tree/main/${path}`;
 
 const pieces = [
   { title: "Field tags", does: "Says how sensitive each field is and what it may be used for. Also says how long to keep it, and whether an AI tool may see it.", file: "schema/data-handling.json", href: gh("schema/data-handling.json") },
-  { title: "Retention dates", does: "Puts a keep-until date, a legal hold and a deletion request on the record itself, and checks the dates.", file: "schema/enquiry.schema.json", href: gh("schema/enquiry.schema.json") },
+  { title: "Retention dates", does: "Puts a keep-until date, a legal hold and a deletion request on the record itself, and checks the dates. These fields are in version 0.2 of the monitoring schema. The record covers fostering for now.", file: "schema/enquiry.schema.json", href: gh("schema/enquiry.schema.json") },
   { title: "Interaction log", does: "Records what happened to each enquiry. Events are only ever added, and each links to the one before. Values are codes only. It records the kind of actor, never who: a person, an automatic rule, or an AI tool with a person's approval.", file: "schema/interaction.schema.json", href: gh("schema/interaction.schema.json") },
   { title: "Connection tools", does: "Sign and check webhook messages, and export a CSV limited to one purpose.", file: "tools/", href: tree("tools") },
   { title: "Made-up test cases for AI tools", does: "Gives you submissions with instruction-like text, so you can check that your assistant treats typed text as data.", file: "schema/examples/untrusted-text/cases.json", href: gh("schema/examples/untrusted-text/cases.json") },

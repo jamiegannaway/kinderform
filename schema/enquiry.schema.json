@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/jamiegannaway/kinderform/schema/enquiry.schema.json",
   "title": "Enquiry",
-  "description": "A fostering enquiry as it moves from first contact towards application. v0.1 draft. This pseudonymous record omits named contact fields but can still identify someone through dates, location, identifiers or free text. Keep real records private. Sharing requires a separate disclosure review. Use validate_enquiry.py as well as JSON Schema to check event order.",
+  "description": "A fostering enquiry as it moves from first contact towards application. v0.2 draft: version 0.1 plus four optional retention fields. This pseudonymous record omits named contact fields but can still identify someone through dates, location, identifiers or free text. Keep real records private. Sharing requires a separate disclosure review. Use validate_enquiry.py as well as JSON Schema to check event order.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -14,8 +14,8 @@
   ],
   "properties": {
     "schema_version": {
-      "description": "Version of this schema the record follows.",
-      "const": "0.1"
+      "description": "Version of this schema the record follows. A 0.1 record is still valid. A record that uses a retention field must say 0.2, so a system that only knows 0.1 refuses it on the version.",
+      "enum": ["0.1", "0.2"]
     },
     "enquiry_id": {
       "description": "Identifier unique within the publishing service. Must not be derived from personal data.",
@@ -167,6 +167,18 @@
     }
   },
   "allOf": [
+    {
+      "$comment": "The four retention fields arrived in version 0.2.",
+      "if": {
+        "anyOf": [
+          { "required": ["retention_policy_ref"] },
+          { "required": ["retain_until"] },
+          { "required": ["legal_hold"] },
+          { "required": ["deletion_requested_at"] }
+        ]
+      },
+      "then": { "properties": { "schema_version": { "const": "0.2" } } }
+    },
     {
       "if": {
         "properties": { "status": { "enum": ["withdrawn", "closed"] } },

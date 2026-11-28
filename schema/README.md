@@ -1,4 +1,4 @@
-# Enquiry schema (v0.1 draft)
+# Enquiry schema (v0.2 draft)
 
 `enquiry.schema.json` describes one fostering enquiry as it moves from first contact towards application. It is the first slice of a wider open standard for the carer pipeline; later slices will cover application, assessment, approval and leaving.
 
@@ -7,7 +7,17 @@
 If your team wants a working form, [choose a starter](https://www.kinderform.org/build). The [any-country version](https://www.kinderform.org/build/global) uses the shared questions and leaves location open for your service to decide. Each kit includes wording, answer choices and branching rules for any form builder.
 
 - [Submission schema, version 0.1](https://www.kinderform.org/schema/enquiry-submission/0.1.json). Use this to validate the answers a person gives to the service. The kit’s wording file adds the rules for when to ask each question.
-- [Monitoring schema, version 0.1](https://www.kinderform.org/schema/enquiry/0.1.json). Use this for the service's own events after an enquiry arrives. The record excludes the person's name and contact details.
+- [Monitoring schema, version 0.2](https://www.kinderform.org/schema/enquiry/0.2.json). Use this for the service's own events after an enquiry arrives. The record excludes the person's name and contact details.
+- [Monitoring schema, version 0.1](https://www.kinderform.org/schema/enquiry/0.1.json) stays as first published.
+
+### Versions of the monitoring schema
+
+A published address keeps its content. A changed schema gets a new version number and a new address.
+
+- **0.2** is 0.1 plus four optional retention fields: `retention_policy_ref`, `retain_until`, `legal_hold` and `deletion_requested_at`.
+- A 0.1 record is valid under 0.2 with no change.
+- A record that uses a retention field must say `"schema_version": "0.2"`. A system that only knows 0.1 then refuses it on the version.
+- `enquiry.schema.json` in this folder is the working copy of the newest version. `versions/` holds each earlier version as published. `starter/pack.py` lists the address of each.
 
 [Follow one made-up enquiry](../docs/one-enquiry.md) for an event map and a synthetic rehearsal. The kit's setup guide includes a first-reply worksheet. Keep ownership, cover and handoff history in the service's own system; those are not fields in this draft record.
 

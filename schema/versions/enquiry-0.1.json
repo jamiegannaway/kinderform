@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jamiegannaway/kinderform/schema/enquiry.schema.json",
+  "title": "Enquiry",
+  "description": "A fostering enquiry as it moves from first contact towards application. v0.1 draft. This pseudonymous record omits named contact fields but can still identify someone through dates, location, identifiers or free text. Keep real records private. Sharing requires a separate disclosure review. Use validate_enquiry.py as well as JSON Schema to check event order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "enquiry_id",
+    "received_at",
+    "channel",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Version of this schema the record follows.",
+      "const": "0.1"
+    },
+    "enquiry_id": {
+      "description": "Identifier unique within the publishing service. Must not be derived from personal data.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "received_at": {
+      "description": "When the enquiry was received, ISO 8601 with time zone.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "channel": {
+      "description": "How the enquiry arrived.",
+      "enum": ["web_form", "phone", "email", "chat", "sms", "event", "social_lead", "referral", "other"]
+    },
+    "source": {
+      "description": "A service-approved source or campaign code, never a name, contact detail or case note. This field is not a guarantee of anonymity.",
+      "type": "string",
+      "maxLength": 200
+    },
+    "intent_tier": {
+      "description": "What the person said would help most. Optional until the enquirer declares it; omit it if not yet asked or known. Never infer it from interest, contact method or later progress.",
+      "enum": ["information", "conversation", "ready_to_apply", "transfer"]
+    },
+    "fostering_interests": {
+      "description": "Types of fostering the person asked about, if any.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "short_term",
+          "long_term",
+          "emergency",
+          "short_breaks",
+          "parent_and_child",
+          "supported_lodgings",
+          "unaccompanied_children",
+          "specialist",
+          "not_sure"
+        ]
+      }
+    },
+    "postcode_outward": {
+      "description": "Outward part of the UK postcode only (for example 'M14'). The full postcode is never stored in this record.",
+      "type": "string",
+      "pattern": "^[A-Z]{1,2}[0-9][0-9A-Z]?$"
+    },
+    "la_gss_code": {
+      "description": "ONS GSS code of the local authority the enquiry was routed to.",
+      "type": "string",
+      "pattern": "^[ENSW][0-9]{8}$"
+    },
+    "front_door_id": {
+      "description": "Identifier of the front door that received the enquiry, from register/front-doors.csv.",
+      "type": "string"
+    },
+    "preferred_contact_window": {
+      "description": "When the person asked to be contacted.",
+      "enum": ["morning", "afternoon", "evening", "weekend", "any"]
+    },
+    "lawful_basis": {
+      "description": "UK GDPR lawful basis the service relies on to handle the enquiry.",
+      "enum": ["public_task", "legitimate_interests", "consent", "contract", "legal_obligation"]
+    },
+    "marketing_consent": {
+      "description": "Separate, optional consent to newsletters or marketing. Never a condition of enquiring.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["given"],
+      "properties": {
+        "given": { "type": "boolean" },
+        "recorded_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "acknowledged_at": {
+      "description": "When an acknowledgement (on screen, email or SMS) was sent.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "first_contact_attempt_at": {
+      "description": "When a person at the service first tried to reach the enquirer.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "first_contact_made_at": {
+      "description": "When a two-way conversation first took place. An enquiry with this field set is a 'qualified enquiry'.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "Where the enquiry currently stands.",
+      "enum": [
+        "received",
+        "contact_attempted",
+        "conversation_held",
+        "information_session",
+        "initial_visit",
+        "application_submitted",
+        "paused_by_enquirer",
+        "withdrawn",
+        "closed"
+      ]
+    },
+    "status_updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "closure_reason_code": {
+      "description": "Why the enquiry ended. Provisional vocabulary; see schema/README.md.",
+      "enum": [
+        "not_reached",
+        "household_circumstances_changed",
+        "financial_circumstances",
+        "process_not_as_expected",
+        "timing_not_right",
+        "chose_another_service",
+        "no_spare_room",
+        "did_not_meet_requirements",
+        "service_decision",
+        "duplicate",
+        "other",
+        "unknown"
+      ]
+    },
+    "recontact_after": {
+      "description": "Date the person asked to be contacted again, if they said 'not now'.",
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "enum": ["withdrawn", "closed"] } },
+        "required": ["status"]
+      },
+      "then": { "required": ["closure_reason_code"] }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": ["conversation_held", "information_session", "initial_visit", "application_submitted"]
+          }
+        },
+        "required": ["status"]
+      },
+      "then": { "required": ["first_contact_made_at"] }
+    },
+    {
+      "if": {
+        "properties": { "status": { "const": "contact_attempted" } },
+        "required": ["status"]
+      },
+      "then": { "required": ["first_contact_attempt_at"] }
+    }
+  ]
+}

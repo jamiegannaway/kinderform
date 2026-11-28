@@ -10,11 +10,26 @@ the order rules in schema/validate_interactions.py, and then adds the line.
 Give append an event without prev_hash. A new, empty log starts with prev_hash
 null. To start a later segment, give the last hash of the segment before with
 --prev-hash. Messages never contain submitted values. Keep real logs private.
+
+Two programs may add to one log at the same time. append holds a lock on the
+file while it reads the last hash and writes the new line, so each waits its
+turn and the chain stays whole. The lock is the operating system's advisory
+file lock: it works between programs that use this tool, on one machine. It
+does not stop a program that writes to the file without it. On a network drive
+file locks are not dependable, so keep one writer there.
 """
 
 import json
+import os
 import sys
+from contextlib import contextmanager
 from pathlib import Path
+
+try:
+    import fcntl
+except ImportError:  # Windows
+    fcntl = None
+    import msvcrt
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "schema"))
 from validate_interactions import event_hash, problems, read_events  # noqa: E402
@@ -30,26 +45,53 @@ def link(events, prev_hash=None):
     return linked
 
 
+@contextmanager
+def _locked(path):
+    """Open the log for adding and hold an exclusive lock until the block ends.
+
+    Another program that calls this waits here. The file is made if it is
+    missing, and is never removed: a waiting program may already hold it open.
+    """
+    with path.open("a", encoding="utf-8", newline="\n") as handle:
+        if fcntl:
+            fcntl.flock(handle, fcntl.LOCK_EX)
+        else:  # Windows: lock the first byte. msvcrt waits about 10 seconds, then raises OSError.
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+        try:
+            yield handle
+        finally:
+            if fcntl:
+                fcntl.flock(handle, fcntl.LOCK_UN)
+            else:
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+
+
 def append(path, event, prev_hash=None, continuation=False):
     """Add one event to the log at path. Raises ValueError with content-free text.
 
     prev_hash is used only when the log is new or empty (a later segment).
+    The log is read, checked and added to under one lock, so two programs
+    cannot both link to the same last event.
     """
     if not isinstance(event, dict) or "prev_hash" in event:
         raise ValueError("Give an event object without prev_hash.")
     path = Path(path)
-    existing = read_events(path) if path.exists() and path.stat().st_size else []
-    if existing:
-        if prev_hash is not None:
-            raise ValueError("--prev-hash is only for the first event of a new segment.")
-        prev_hash = event_hash(existing[-1])
-    event = {**event, "prev_hash": prev_hash}
-    errors = problems([*existing, event], continuation=continuation)
-    if errors:
-        raise ValueError("The event does not fit the log:\n" + "\n".join(errors[-5:]))
-    line = json.dumps(event, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    with path.open("a", encoding="utf-8", newline="\n") as handle:
+    with _locked(path) as handle:
+        existing = read_events(path) if path.stat().st_size else []
+        if existing:
+            if prev_hash is not None:
+                raise ValueError("--prev-hash is only for the first event of a new segment.")
+            prev_hash = event_hash(existing[-1])
+        event = {**event, "prev_hash": prev_hash}
+        errors = problems([*existing, event], continuation=continuation)
+        if errors:
+            raise ValueError("The event does not fit the log:\n" + "\n".join(errors[-5:]))
+        line = json.dumps(event, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
         handle.write(line + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())  # on disk before the lock is released
     return event
 
 

@@ -11,7 +11,9 @@ It is not a database, a service or a legal opinion. Passing a check does not mak
 ## The six pieces
 
 1. **Field tags.** `schema/data-handling.json` tags every field of the three schemas with its sensitivity, purposes, retention class and AI use. It says which fields are untrusted text.
-2. **Retention fields.** `schema/enquiry.schema.json` has four optional fields: `retention_policy_ref`, `retain_until`, `legal_hold` and `deletion_requested_at`. `schema/validate_enquiry.py` checks their dates.
+2. **Retention fields.** `schema/enquiry.schema.json` has four optional fields: `retention_policy_ref`, `retain_until`, `legal_hold` and `deletion_requested_at`. `schema/validate_enquiry.py` checks their dates. These fields arrived in version 0.2 of the monitoring schema. A record that uses one says `"schema_version": "0.2"`. Version 0.1 stays published as it was.
+
+   The monitoring record covers fostering for now. An adoption service can use the form, and keep its own record.
 3. **Interaction log.** `schema/interaction.schema.json` describes one event. `schema/validate_interactions.py` checks a whole log. The log is a JSON Lines file with one event on each line.
 4. **Connection tools.** `tools/interaction_log.py` adds events and checks a log. `tools/webhook_sign.py` signs and checks webhook messages. `tools/export_csv.py` exports only the fields tagged for one purpose.
 5. **AI test pack.** `schema/examples/untrusted-text/cases.json` holds made-up submissions with instruction-like names. `tools/untrusted_text.py` marks typed text as data and checks an assistant's output against a case.
@@ -97,7 +99,7 @@ python3 tools/interaction_log.py append next-segment.jsonl event.json --prev-has
 python3 schema/validate_interactions.py schema/examples/interaction/valid/plain-human-journey.jsonl
 ```
 
-`append` reads the event from a file, or from standard input with `-`. It adds `prev_hash`, checks the whole log and adds the line only if the log still passes. Use `--continuation` for a later segment that holds enquiries begun earlier. The made-up logs are in `schema/examples/interaction/valid/` and `schema/examples/interaction/invalid/`.
+`append` reads the event from a file, or from standard input with `-`. Two programs can add to one log on the same machine: `append` holds a file lock while it reads the last hash and writes the line. File locks are not dependable on a network drive, so keep one writer there. It adds `prev_hash`, checks the whole log and adds the line only if the log still passes. Use `--continuation` for a later segment that holds enquiries begun earlier. The made-up logs are in `schema/examples/interaction/valid/` and `schema/examples/interaction/invalid/`.
 
 **Sign and check a webhook**
 

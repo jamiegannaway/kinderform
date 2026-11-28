@@ -109,6 +109,14 @@ def test_cases(key):
     return [{"name": n, "valid": valid, "record": r} for n, valid, r in cases]
 
 
+# Where each schema is published on the site: source file under schema/ -> address under /schema/.
+SCHEMA_ADDRESSES = {
+    "enquiry-submission.schema.json": "enquiry-submission/0.1.json",
+    "versions/enquiry-0.1.json": "enquiry/0.1.json",
+    "enquiry.schema.json": "enquiry/0.2.json",
+}
+
+
 def zip_bytes(files):
     buf = io.BytesIO()
     with ZipFile(buf, "w") as archive:
@@ -192,10 +200,12 @@ def publish(destination):
                 (output / f"kinderform-{key}-starter.zip").write_bytes(zip_bytes(files))
     if not (destination / "downloads/starter" / VERSION / ARCHIVE).exists():
         raise FileNotFoundError("Build the starter snapshot before publishing.")
-    for name in ["enquiry", "enquiry-submission"]:
-        dest = destination / "schema" / name / "0.1.json"
+    # A published schema address keeps its bytes for good. A changed schema gets a new version:
+    # freeze the old one in schema/versions/ and add a line here.
+    for source, address in SCHEMA_ADDRESSES.items():
+        dest = destination / "schema" / address
         dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(SCHEMAS / f"{name}.schema.json", dest)
+        shutil.copyfile(SCHEMAS / source, dest)
 
 
 if __name__ == "__main__":
