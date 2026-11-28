@@ -62,5 +62,13 @@
     "details": "Selain tarkisti lomakkeen kentät. Paketin ohjeissa kerrotaan, miten tarkistat JSON-tiedoston koko skeemalla.",
     "export": "Lataa esimerkki JSON-tiedostona", "navigation": "Siirtyminen kysymysten välillä", "json": "Esimerkin tiedot JSON-muodossa", "skipped": "Ohitettu", "issue": "Tarkista tämä vastaus.",
     "source": "Kysymykset perustuvat Kinderformin yhteydenottostandardiin. Tekstit ja skeema on lisensoitu CC BY 4.0 -lisenssillä, tämän esimerkin koodi MIT-lisenssillä."
+  },
+  "sv": {
+    "skip": "Till formuläret", "demo": "Offlineexempel", "notice": "Använd påhittade uppgifter. Dina svar stannar på den här sidan. I slutet kan du ladda ner en JSON-fil. Ingenting skickas.",
+    "intro": "Prova frågorna och kontrollera dina svar. Med det här exemplet kan du inte kontakta någon kommun.",
+    "enable": "Slå på JavaScript för att prova det här offlineexemplet.", "review": "Kontrollera dina exempeluppgifter", "preview": "Visa uppgifterna", "done": "Dina exempeluppgifter",
+    "details": "Webbläsaren har kontrollerat fälten i formuläret. I handledningen i paketet står det hur du kontrollerar JSON-filen mot hela schemat.",
+    "export": "Ladda ner JSON-exemplet", "navigation": "Navigering mellan frågorna", "json": "Exempeluppgifter i JSON", "skipped": "Inget svar", "issue": "Kontrollera det här svaret.",
+    "source": "Frågorna bygger på Kinderforms standard för intresseanmälningar. Texter och schema har licensen CC BY 4.0. Koden i det här exemplet har MIT-licensen."
   }
 }

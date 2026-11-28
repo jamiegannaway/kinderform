@@ -1,0 +1,327 @@
+{
+  "$comment": "Wording for the reference form (Sweden, in plain Swedish (klarspråk), addressing the reader as 'du'). Change wording, hints and error messages here, not in code. Field rules live in ../enquiry-submission.schema.json. Optional questions end with '(frivilligt)'. Sweden has no open national design system that a non-government site may use, so this form uses Kinderform's neutral design. The location question asks only for the first 3 digits of the postcode. In Sweden people ask their municipality (kommun) about fostering, and apply to its social services first to adopt; sources: Socialstyrelsen's Min insats and MFoF, register/se/front-doors.csv (read 2026-11-28, unverified).",
+  "locale": "sv-SE",
+  "design_system": "neutral",
+  "sections": [
+    "Om dig",
+    "Hur vi når dig",
+    "Vad du vill prata om",
+    "Kontrollera och skicka"
+  ],
+  "start": {
+    "title": "Fråga om familjehem eller adoption",
+    "body": [
+      "Här kan du ställa en fråga eller be om ett samtal. Det tar ungefär 2 minuter.",
+      "När du kontaktar en kommun på riktigt ska en namngiven person berätta när du får svar.",
+      "Du behöver inte veta ännu om familjehem eller adoption passar dig.",
+      "Just nu frågar vi inget om din hälsa, ditt hem, din ekonomi eller din familj."
+    ],
+    "button": "Börja"
+  },
+  "pages": [
+    {
+      "id": "name",
+      "section": "Om dig",
+      "title": "Vad heter du?",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/full_name",
+          "label": "För- och efternamn",
+          "options": {
+            "autocomplete": "name",
+            "spellcheck": false,
+            "errors": {
+              "required": "Skriv ditt för- och efternamn",
+              "maxLength": "Namnet får vara högst 100 tecken",
+              "pattern": "Skriv ditt för- och efternamn"
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/preferred_name",
+          "label": "Vad vill du att vi kallar dig? (frivilligt)",
+          "options": {
+            "autocomplete": "nickname",
+            "inputWidth": 20,
+            "hint": "Till exempel ett kortare namn eller ett namn som du hellre använder.",
+            "errors": {
+              "maxLength": "Namnet får vara högst 50 tecken"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "interest",
+      "section": "Om dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/interest",
+          "label": "Vad vill du veta mer om?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "fostering": "Att bli familjehem",
+              "adoption": "Att adoptera",
+              "not_sure": "Jag vet inte ännu"
+            },
+            "optionHints": {
+              "fostering": "Ett barn bor hos dig en kortare eller längre tid. Hit hör också jourhem, som tar emot barn med kort varsel.",
+              "not_sure": "Det går bra. Vi berättar om båda och om andra sätt att hjälpa barn, till exempel som kontaktfamilj."
+            },
+            "errors": {
+              "required": "Välj vad du vill veta mer om"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "knows_child",
+      "section": "Om dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/knows_child",
+          "label": "Gäller din fråga ett barn som du redan känner?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "hint": "Till exempel ett barnbarn, ett syskonbarn eller ett barn till vänner. När ett barn flyttar till någon i sin släkt eller sitt nätverk kallas det nätverkshem. Ett annat team hjälper dig med det. Skriv inget om barnet här.",
+            "optionLabels": {
+              "true": "Ja",
+              "false": "Nej"
+            },
+            "errors": {
+              "required": "Välj ”Ja” om din fråga gäller ett barn som du redan känner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact_method",
+      "section": "Hur vi når dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/contact_method",
+          "label": "Hur vill du att vi kontaktar dig?",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "email": "E-post",
+              "phone_call": "Telefonsamtal",
+              "text_message": "Sms"
+            },
+            "errors": {
+              "required": "Välj hur du vill att vi kontaktar dig"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "section": "Hur vi når dig",
+      "showIf": {
+        "contact_method": [
+          "email"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/email",
+          "label": "Vad är din e-postadress?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "email",
+            "inputmode": "email",
+            "spellcheck": false,
+            "hint": "Vi använder den bara för att svara dig.",
+            "errors": {
+              "required": "Skriv din e-postadress",
+              "pattern": "Skriv en e-postadress i rätt form, till exempel namn@example.org",
+              "maxLength": "E-postadressen får vara högst 254 tecken"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "section": "Hur vi når dig",
+      "showIf": {
+        "contact_method": [
+          "phone_call",
+          "text_message"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/phone",
+          "label": "Vad är ditt telefonnummer?",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "tel",
+            "inputmode": "tel",
+            "inputWidth": 20,
+            "hint": "Till exempel 070-000 00 00.",
+            "errors": {
+              "required": "Skriv ditt telefonnummer",
+              "pattern": "Skriv ett telefonnummer i rätt form, till exempel 070-000 00 00"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "best_times",
+      "section": "Hur vi når dig",
+      "showIf": {
+        "contact_method": [
+          "phone_call"
+        ]
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/best_times",
+          "label": "När passar det bäst att vi ringer? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "hint": "Välj alla tider som passar. Vi försöker ringa dig då.",
+            "optionLabels": {
+              "weekday_morning": "Vardagar på förmiddagen",
+              "weekday_afternoon": "Vardagar på eftermiddagen",
+              "weekday_evening": "Vardagar på kvällen",
+              "saturday": "Lördagar"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "postcode",
+      "section": "Hur vi når dig",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/se_postcode_area",
+          "label": "Vilka är de 3 första siffrorna i ditt postnummer? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "autocomplete": "off",
+            "inputmode": "numeric",
+            "inputWidth": 4,
+            "transform": "se_postcode_area",
+            "spellcheck": false,
+            "hint": "Till exempel 411. Då ser vi ungefär var du bor och vem som kan hjälpa dig. Du behöver inte skriva hela postnumret. Vi frågar inte efter din adress.",
+            "errors": {
+              "pattern": "Skriv bara de 3 första siffrorna i ditt postnummer, till exempel 411"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "section": "Vad du vill prata om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/topics",
+          "label": "Vad vill du prata om? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "hint": "Välj allt som passar. Du kan också berätta när vi pratar. Skriv inget personligt här.",
+            "optionLabels": {
+              "eligibility": "Om jag kan bli familjehem eller adoptera",
+              "what_it_involves": "Hur vardagen ser ut",
+              "money_and_support": "Ersättning och stöd",
+              "process_and_timescales": "Stegen och hur lång tid de tar",
+              "types_of_care": "Olika sätt att vara familjehem",
+              "something_else": "Något annat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "heard_from",
+      "section": "Vad du vill prata om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heard_from",
+          "label": "Hur fick du höra talas om oss? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "format": "radio",
+            "optionLabels": {
+              "friend_or_family": "Av vänner eller familj",
+              "social_media": "I sociala medier",
+              "search": "När jag sökte på nätet",
+              "event": "På en informationsträff",
+              "advert": "I en annons",
+              "council_or_agency_website": "På kommunens webbplats",
+              "other": "På något annat sätt"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "section": "Vad du vill prata om",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/updates_opt_in",
+          "label": "Vill du få nyheter och inbjudningar till träffar? (frivilligt)",
+          "options": {
+            "asHeading": true,
+            "format": "checkbox",
+            "checkboxLabel": "Ja, skicka nyheter och inbjudningar till mig",
+            "hint": "Vi skickar dem bara om du kryssar i rutan. Du kan sluta få dem när du vill."
+          }
+        }
+      ]
+    }
+  ],
+  "check": {
+    "title": "Kontrollera dina svar",
+    "change": "Ändra",
+    "send_heading": "Skicka din fråga",
+    "send_body": "När du skickar godkänner du att vi använder uppgifterna för att svara dig.",
+    "button": "Skicka"
+  },
+  "confirmation": {
+    "title": "Din fråga är skickad",
+    "reference": "Ditt referensnummer",
+    "next_heading": "Vad händer nu?",
+    "team": "familjehemsenheten",
+    "kinship_team": "teamet för nätverkshem",
+    "day_word": "arbetsdag",
+    "example_label": "Exempel på ett första svar (skickas inte)",
+    "builders_heading": "För dig som bygger formulär för intresseanmälan",
+    "builders_body": "Det här är de uppgifter som kommunen skulle få. Formuläret kontrollerade dem mot det publicerade schemat innan den här sidan visades.",
+    "restart": "Börja om"
+  },
+  "progress": {
+    "question": "Fråga",
+    "of": "av",
+    "back": "Tillbaka",
+    "continue": "Fortsätt",
+    "error_title": "Något är inte rätt ifyllt",
+    "error_prefix": "Fel:"
+  },
+  "demo_notice": "Det här är ett exempelformulär. Skriv inga riktiga uppgifter. Det du skriver skickas inte och sparas inte. Datumen i exemplet tar inte hänsyn till öppettider eller helgdagar."
+}

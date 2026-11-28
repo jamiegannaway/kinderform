@@ -30,6 +30,7 @@ const local: Record<FormCountry, { language: string; location: string }> = {
   no: { language: "Norwegian (Bokmål)", location: "a 4-digit Norwegian postcode" },
   dk: { language: "Danish", location: "a 4-digit Danish postcode" },
   fi: { language: "Finnish", location: "the first 3 digits of a Finnish postcode" },
+  se: { language: "Swedish", location: "the first 3 digits of a Swedish postcode" },
 }
 
 export const LOCAL_STARTERS: Starter[] = FORM_COUNTRIES.flatMap(({ code, name }) => {

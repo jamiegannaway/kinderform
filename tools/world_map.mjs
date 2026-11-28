@@ -35,10 +35,10 @@ const COUNTRIES = [
   // Singapore is too small for the 1:110m map, so it is drawn as a dot at "dot".
   { code: "sg", id: "702", name: "Singapore", label: [96, -12], target: [103.8, 1.35], align: "right", dot: [103.8, 1.35] },
   // The Nordic labels sit in a column over Russia, 10 to 13 degrees apart, with Germany at the
-  // bottom. Each line reaches its country without crossing another highlighted one. Sweden's
-  // place, when it joins: label [36, 56.5], target [15.5, 60].
+  // bottom. Each line reaches its country without crossing another highlighted one.
   { code: "no", id: "578", name: "Norway", label: [36, 80], target: [15, 67.5], align: "left" },
   { code: "fi", id: "246", name: "Finland", label: [36, 67], target: [26, 63.5], align: "left" },
+  { code: "se", id: "752", name: "Sweden", label: [36, 56.5], target: [15.5, 60], align: "left" },
   { code: "dk", id: "208", name: "Denmark", label: [36, 46], target: [10, 56.3], align: "left" },
 ]
 
