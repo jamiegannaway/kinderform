@@ -6,6 +6,14 @@ import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 
 const link = "font-medium underline underline-offset-4";
+
+// Where to enquire in each UK nation. Kinderform takes no enquiries, so this page points to those who do.
+const nations = [
+  { name: "England", href: "https://www.gov.uk/apply-foster-child-council" },
+  { name: "Wales", href: "https://fosterwales.gov.wales/" },
+  { name: "Scotland", href: "https://www.mygov.scot/foster-care/become-foster-carer" },
+  { name: "Northern Ireland", href: "https://adoptionandfostercare.hscni.net/" },
+];
 const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
 ---
 <Base
@@ -73,6 +81,22 @@ const h2 = "scroll-m-20 text-2xl font-semibold tracking-tight";
         <p class="leading-7">
           Every fact has a link to its source, so you can check it yourself before you quote it. Nothing here is a
           decision. I will decide each idea in the open, with people who do this work.
+        </p>
+      </section>
+
+      <section aria-labelledby="find-a-service" class="space-y-4">
+        <h2 id="find-a-service" class={h2}>Thinking of fostering or adopting?</h2>
+        <p class="leading-7">Kinderform cannot take enquiries. Contact a service where you live:</p>
+        <ul class="ml-5 list-disc space-y-2 leading-7">
+          {nations.map((n) => (
+            <li><a href={n.href} class={link}>{n.name}</a></li>
+          ))}
+          <li>
+            <a href="https://www.gov.uk/child-adoption/early-stages-of-adoption" class={link}>How to contact an adoption agency</a>
+          </li>
+        </ul>
+        <p class="leading-7">
+          Outside the UK, see our <a href="/compare/forms" class={link}>list of enquiry forms</a>.
         </p>
       </section>
 

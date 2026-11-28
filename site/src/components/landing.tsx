@@ -1,6 +1,5 @@
-import { ArrowUpRight, Code, FileText, Lock, Mail } from "lucide-react"
+import { CalendarCheck, Code, FileText, Lock, Mail, Send } from "lucide-react"
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -24,13 +23,6 @@ import { steps } from "@/lib/steps"
 
 const SOURCE_URL =
   "https://assets.publishing.service.gov.uk/media/6982286fe833d031a3158ff1/Renewing_Fostering_-_homes_for_10_000_more_children_-_February_2026_Print_ready.pdf"
-
-const nations = [
-  { name: "England", href: "https://www.gov.uk/apply-foster-child-council" },
-  { name: "Wales", href: "https://fosterwales.gov.wales/" },
-  { name: "Scotland", href: "https://www.mygov.scot/foster-care/become-foster-carer" },
-  { name: "Northern Ireland", href: "https://adoptionandfostercare.hscni.net/" },
-]
 
 const making = [
   {
@@ -201,64 +193,100 @@ function FormOrCode() {
   )
 }
 
-/* The hero: a made-up first reply, shown as an email in a browser window, because the reply is
-   what the page is about. A form here looked like somewhere to enquire, and Kinderform takes no
-   enquiries. The three labelled parts are the Reply step in src/lib/steps.ts ("Say who will be in
-   touch, when, and what happens next"), so the picture adds no new claim. The time stays vague on
-   purpose: what a reply says has better evidence than how fast it arrives. The window frame is
-   decoration, with a made-up address; the email is real text, so a screen reader reads it. */
+/* The hero: a made-up enquiry, the first reply and the promise kept, because the reply is what
+   the page is about. A form here looked like somewhere to enquire, and Kinderform takes no
+   enquiries. The reply is an email in a browser window, and its three labelled parts are the Reply
+   step in src/lib/steps.ts ("Say who will be in touch, when, and what happens next"), so the
+   picture adds no new claim. The times stay vague on purpose: what a reply says has better
+   evidence than how fast it arrives. The window frame is decoration, with a made-up address; the
+   words are real text, so a screen reader reads them. The caption is for screen readers only:
+   "Example Council" and example.org show readers who can see it that the example is made up.
+
+   Each piece lifts and wiggles a little under the cursor (the wiggle is in globals.css). The
+   list item is what the cursor is over and its child is what moves, so a piece cannot slip out
+   from under the cursor and flicker. Readers who ask for less motion get the shadow only. */
 const REPLY_PARTS = [
   ["Who", "I'm Alex, in the fostering and adoption team."],
   ["When", "I will email you by Thursday."],
   ["What next", "We will pick a time for a first chat. You do not need to do anything until then."],
 ]
 
+const PIECE =
+  "transition-[translate,box-shadow] duration-200 group-hover/piece:shadow-md motion-safe:group-hover/piece:-translate-y-0.5 motion-safe:group-hover/piece:animate-wiggle"
+
+function Moment({ icon, what, when }: { icon: React.ReactNode; what: string; when: string }) {
+  return (
+    <li className="group/piece">
+      <div className={`flex items-center gap-3 rounded-lg bg-muted px-4 py-3 text-sm ${PIECE}`}>
+        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-background text-muted-foreground [&>svg]:size-4">
+          {icon}
+        </span>
+        <span className="min-w-0">
+          <span className="block font-medium">{what}</span>
+          <span className="block text-muted-foreground">{when}</span>
+        </span>
+      </div>
+    </li>
+  )
+}
+
+// The short line that joins one piece to the next. Decoration only.
+function Join() {
+  return <li aria-hidden="true" className="ml-8 h-4 w-px bg-border" />
+}
+
 function ReplyExample() {
   return (
     <figure aria-labelledby="hero-example-caption" className="w-full max-w-md justify-self-center md:justify-self-end">
-      <div className="overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
-        <div aria-hidden="true" className="flex items-center gap-3 border-b bg-muted px-4 py-2.5">
-          <span className="flex gap-1.5">
-            {[1, 2, 3].map((n) => (
-              <span key={n} className="size-2.5 rounded-full bg-muted-foreground/30" />
-            ))}
-          </span>
-          <span className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-background px-3 py-1 text-xs text-muted-foreground">
-            <Lock className="size-3 shrink-0" />
-            <span className="truncate">mail.example.org</span>
-          </span>
-          {/* As wide as the three dots, so the address sits in the middle. */}
-          <span className="w-10.5" />
-        </div>
+      <ol>
+        <Moment icon={<Send aria-hidden="true" />} what="Sam asks about fostering or adoption" when="Monday morning" />
+        <Join />
+        <li className="group/piece">
+          <div className={`overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm ${PIECE}`}>
+            <div aria-hidden="true" className="flex items-center gap-3 border-b bg-muted px-4 py-2.5">
+              <span className="flex gap-1.5">
+                {[1, 2, 3].map((n) => (
+                  <span key={n} className="size-2.5 rounded-full bg-muted-foreground/30" />
+                ))}
+              </span>
+              <span className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-background px-3 py-1 text-xs text-muted-foreground">
+                <Lock className="size-3 shrink-0" />
+                <span className="truncate">mail.example.org</span>
+              </span>
+              {/* As wide as the three dots, so the address sits in the middle. */}
+              <span className="w-10.5" />
+            </div>
 
-        <div className="flex items-center gap-3 border-b px-5 py-4">
-          <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-full bg-muted text-xs font-medium">
-            EC
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="leading-snug font-semibold">Your enquiry about fostering or adoption</p>
-            <p className="text-sm text-muted-foreground">Example Council, to Sam. Monday afternoon.</p>
-          </div>
-        </div>
-
-        <div className="grid gap-3 px-5 py-4 text-sm leading-6">
-          <p>Thank you for getting in touch, Sam.</p>
-          <dl className="grid gap-3">
-            {REPLY_PARTS.map(([part, words]) => (
-              <div key={part} className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-start gap-3">
-                <dt>
-                  <Badge variant="secondary">{part}</Badge>
-                </dt>
-                <dd>{words}</dd>
+            <div className="flex items-center gap-3 border-b px-5 py-4">
+              <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-full bg-muted text-xs font-medium">
+                EC
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="leading-snug font-semibold">Your enquiry about fostering or adoption</p>
+                <p className="text-sm text-muted-foreground">Example Council, to Sam. Monday afternoon.</p>
               </div>
-            ))}
-          </dl>
-        </div>
-      </div>
+            </div>
 
-      <figcaption id="hero-example-caption" className="mt-4 text-sm text-muted-foreground">
-        A made-up first reply, sent the day Sam asked. It says who will be in touch, when, and what happens next.
-        Sam, Alex and Example Council are not real.
+            <div className="grid gap-3 px-5 py-4 text-sm leading-6">
+              <p>Thank you for getting in touch, Sam.</p>
+              <dl className="grid gap-3">
+                {REPLY_PARTS.map(([part, words]) => (
+                  <div key={part} className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-start gap-3">
+                    <dt>
+                      <Badge variant="secondary">{part}</Badge>
+                    </dt>
+                    <dd>{words}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </li>
+        <Join />
+        <Moment icon={<CalendarCheck aria-hidden="true" />} what="Alex emails Sam, as promised" when="Thursday" />
+      </ol>
+      <figcaption id="hero-example-caption" className="sr-only">
+        A made-up example: an enquiry, the first reply and the promise kept.
       </figcaption>
     </figure>
   )
@@ -303,37 +331,6 @@ export default function Landing() {
           </div>
           <ReplyExample />
         </section>
-
-        <div className="mx-auto max-w-6xl px-6">
-          <Alert id="find-a-service">
-            <AlertTitle>Thinking of fostering or adopting?</AlertTitle>
-            <AlertDescription>
-              <p>Kinderform cannot take enquiries. Contact a service where you live:</p>
-              <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
-                {nations.map((n) => (
-                  <li key={n.name}>
-                    <a
-                      href={n.href}
-                      className="inline-flex items-center gap-1 font-medium text-foreground underline underline-offset-4"
-                    >
-                      {n.name}
-                      <ArrowUpRight className="size-3.5" aria-hidden="true" />
-                    </a>
-                  </li>
-                ))}
-                <li>
-                  <a href="https://www.gov.uk/child-adoption/early-stages-of-adoption" className="font-medium text-foreground underline underline-offset-4">
-                    How to contact an adoption agency
-                  </a>
-                </li>
-              </ul>
-              <p>
-                Outside the UK, see our{" "}
-                <a href="/compare/forms" className="font-medium text-foreground underline underline-offset-4">list of enquiry forms</a>.
-              </p>
-            </AlertDescription>
-          </Alert>
-        </div>
 
         <div className="mx-auto max-w-6xl px-6">
           <Section id="why-title" title="Interest is not the problem" art="clock-is-ticking">
