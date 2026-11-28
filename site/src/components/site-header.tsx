@@ -179,39 +179,47 @@ export function SiteFooter() {
           </a>
           : our code, data and research, free for anyone to use.
         </p>
-        <p>
-          This site sets no cookies, does not track you and loads nothing from other sites. A dark mode choice
-          stays on your device.
-        </p>
-        <nav aria-label="Legal">
+        {/* Legal: the three legal pages, then what the site does and does not do, then the licences in short. */}
+        <nav aria-labelledby="footer-legal" className="mt-4 space-y-2 border-t pt-4">
+          <h2 id="footer-legal" className="font-medium text-foreground">
+            Legal
+          </h2>
+          <ul className="flex flex-wrap gap-x-5 gap-y-1">
+            <li>
+              <a href="/privacy" className="font-medium text-foreground underline underline-offset-4">
+                Privacy policy
+              </a>
+            </li>
+            <li>
+              <a href="/terms" className="font-medium text-foreground underline underline-offset-4">
+                Terms of use
+              </a>
+            </li>
+            <li>
+              <a href="/licences" className="font-medium text-foreground underline underline-offset-4">
+                Licences
+              </a>
+            </li>
+          </ul>
           <p>
-            <a href="/privacy" className="font-medium text-foreground underline underline-offset-4">
-              Privacy policy
+            This site sets no cookies, does not track you and loads nothing from other sites. A dark mode choice
+            stays on your device.
+          </p>
+          <p>
+            Code: MIT licence. Writing and data:{" "}
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              className="font-medium text-foreground underline underline-offset-4"
+            >
+              CC BY 4.0
             </a>
-            {" · "}
-            <a href="/terms" className="font-medium text-foreground underline underline-offset-4">
-              Terms of use
+            . Design:{" "}
+            <a href="https://ui.shadcn.com" className="font-medium text-foreground underline underline-offset-4">
+              shadcn/ui
             </a>
-            {" · "}
-            <a href="/licences" className="font-medium text-foreground underline underline-offset-4">
-              Licences
-            </a>
+            . Drawings: Notioly, under a paid licence, so you cannot reuse them.
           </p>
         </nav>
-        <p>
-          Code: MIT licence. Writing and data:{" "}
-          <a
-            href="https://creativecommons.org/licenses/by/4.0/"
-            className="font-medium text-foreground underline underline-offset-4"
-          >
-            CC BY 4.0
-          </a>
-          . Design:{" "}
-          <a href="https://ui.shadcn.com" className="font-medium text-foreground underline underline-offset-4">
-            shadcn/ui
-          </a>
-          . Drawings: Notioly, under a paid licence, so you cannot reuse them.
-        </p>
       </div>
     </footer>
   )
